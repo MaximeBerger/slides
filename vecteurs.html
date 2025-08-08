@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Vecteurs — Séquence n°1 · Révisions</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <!-- Font awesome is required for the chalkboard plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+<!-- Chalkboard plugin -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+</head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Titre -->
+        <section>
+          <h2>Séquence n°1 – Révisions</h2>
+          <h3>Vecteurs</h3>
+          <p class="fragment">Comprendre l'usage des vecteurs et réactiver la géométrie comme support à l'abstraction.</p>
+        </section>
+
+        <!-- Prérequis -->
+        <section>
+          <h3>Prérequis</h3>
+          <ul>
+            <li class="fragment">Dessiner le plan et l'espace</li>
+            <li class="fragment">Représenter un vecteur à partir de ses coordonnées</li>
+            <li class="fragment">Addition de vecteurs, multiplication scalaire</li>
+            <li class="fragment">Produit scalaire, produit vectoriel, produit mixte</li>
+          </ul>
+        </section>
+
+        <!-- Objectif -->
+        <section>
+          <h3>Objectif pédagogique</h3>
+          <p><strong>But :</strong> comprendre ce que les vecteurs peuvent représenter et pourquoi \(\R^2\) ou \(\R^3\) ne suffisent pas toujours.</p>
+          <p class="fragment">Réactiver la géométrie des vecteurs pour servir de support à l’abstraction.</p>
+        </section>
+
+        <!-- Accroche / Problématique -->
+        <section>
+          <h3>Problématique / Accroche</h3>
+          <ul>
+            <li class="fragment">Modéliser une recette de gâteau : œufs, sucre, farine → dimensions d’un vecteur</li>
+            <li class="fragment">IA : génération d'image/texte par vecteurs (espace latent)</li>
+            <li class="fragment">Modéliser des mots, des idées, des images par des vecteurs</li>
+            <li class="fragment">Ex. « avoir un chapeau » ≈ un vecteur dans l’espace latent</li>
+          </ul>
+        </section>
+
+        <!-- Monde linéaire -->
+        <section>
+          <h3>Entrer dans le monde linéaire</h3>
+          <p>Tout n’est pas linéaire (croissance exponentielle, chaos, discontinuité),</p>
+          <p class="fragment">mais localement on peut souvent approcher un phénomène par une relation linéaire.</p>
+        </section>
+
+        <!-- Contenu réduit (plan) avec sous-slides verticaux -->
+        <section>
+          <section>
+            <h3>Plan du contenu</h3>
+            <ol>
+              <li>Vecteurs dans \(\R^2\), \(\R^3\)</li>
+              <li>Norme et angle</li>
+              <li>Produit scalaire</li>
+              <li>Projections (droite, plan)</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>Vecteurs dans \(\R^2\), \(\R^3\)</h3>
+            <p>Représentation, addition, multiplication par un scalaire.</p>
+            <p class="fragment">Ex. \(\vec u = (u_1,u_2),\; \vec v=(v_1,v_2)\Rightarrow\; \vec u+\vec v=(u_1+v_1,\,u_2+v_2)\).</p>
+          </section>
+
+          <section>
+            <h3>Norme et angle</h3>
+            <p>\(\lVert \vec u\rVert = \sqrt{\sum_i u_i^2}\)</p>
+            <p class="fragment">\(\cos\theta = \dfrac{\vec u\cdot\vec v}{\lVert\vec u\rVert\,\lVert\vec v\rVert}\)</p>
+          </section>
+
+          <section>
+            <h3>Produit scalaire</h3>
+            <p>\(\vec u\cdot\vec v = \sum_i u_i v_i = \lVert\vec u\rVert\,\lVert\vec v\rVert\cos\theta\).</p>
+            <p class="fragment">Signe de \(\vec u\cdot\vec v\) ↔ angle aigu/obtus/rectangle.</p>
+          </section>
+
+          <section>
+            <h3>Projection orthogonale</h3>
+            <p>Sur la droite engendrée par \(\vec u\) :<br>
+              \[\operatorname{proj}_{\langle \vec u\rangle}(\vec v) = \frac{\vec v\cdot\vec u}{\vec u\cdot\vec u}\,\vec u\]
+            </p>
+            <p class="fragment">Sur le plan engendré par \(\vec u,\vec w\) (colonnes de \(A\)) :<br>
+              \[\operatorname{proj}_{\operatorname{span}(\vec u,\vec w)}(\vec v) = A\,(A^{\mathsf T}A)^{-1}A^{\mathsf T}\,\vec v\]
+            </p>
+            <p class="fragment">La projection est la « meilleure » approximation au sens des moindres carrés.</p>
+          </section>
+        </section>
+
+        <!-- Schéma / Visualisation -->
+        <section>
+          <h3>Visualisation (idées)</h3>
+          <ul>
+            <li class="fragment">Faire bouger des vecteurs en \(\R^2\) ou \(\R^3\)</li>
+            <li class="fragment">Afficher la projection et l’angle (via produit scalaire)</li>
+            <li class="fragment">Colinéarité, produit vectoriel (aire/orientation)</li>
+          </ul>
+        </section>
+
+        <!-- Exemples clés -->
+        <section>
+          <h3>Exemples clés</h3>
+          <p>Espace \(\R^n\) : un vecteur peut modéliser une image, un texte, une recette…</p>
+        </section>
+
+        <!-- Activité pédagogique interactive (QCM/Guidé) -->
+        <section>
+          <h3>Activité interactive</h3>
+          <ul>
+            <li><strong>QCM</strong> : signe du produit scalaire, angle, colinéarité</li>
+            <li><strong>Application</strong> : projeter \(\vec v\) sur la droite engendrée par \(\vec u\)</li>
+            <li><strong>Formats</strong> : QCM, pair programming, calcul guidé, GeoGebra, etc.</li>
+            <li><strong>Objectif</strong> : diagnostiquer, appliquer, introduire une intuition</li>
+            <li><strong>Matériel</strong> : feuille, GeoGebra, notebook Python…</li>
+          </ul>
+          <hr>
+          <p><em>QCM d’exemple</em> (à l’oral / ardoise) :</p>
+          <ol>
+            <li>Si \(\vec u\cdot\vec v &gt; 0\) alors l’angle est… <span class="fragment highlight-green">aigu</span></li>
+            <li>Si \(\vec u\cdot\vec v = 0\) alors les vecteurs sont… <span class="fragment highlight-green">orthogonaux</span></li>
+            <li>\(\operatorname{proj}_{\langle \vec u\rangle}(\vec v) = \) <span class="fragment">\(\dfrac{\vec v\cdot\vec u}{\lVert\vec u\rVert^2}\,\vec u\)</span></li>
+          </ol>
+        </section>
+
+        <!-- Pièges fréquents -->
+        <section>
+          <h3>Pièges fréquents</h3>
+          <ul>
+            <li class="fragment">Confondre « scalaire » et « coordonnées »</li>
+            <li class="fragment">Oublier la normalisation dans les projections</li>
+            <li class="fragment">Ignorer l’interprétation géométrique du signe de \(\vec u\cdot\vec v\)</li>
+          </ul>
+        </section>
+
+        <!-- Trace distribuée (PDF) -->
+        <section>
+          <h3>Trace distribuée (pour PDF)</h3>
+          <ul>
+            <li><strong>À savoir (rappels)</strong> : \(\lVert\vec u\rVert\), \(\vec u\cdot\vec v\), \(\operatorname{proj}_{\langle \vec u\rangle}(\vec v)\)</li>
+            <li><strong>À faire</strong> : calculer la projection sur une droite/plan</li>
+            <li><strong>Exemple vu ensemble</strong> : vecteur projeté d’un \(\vec v\) sur \(\langle \vec u\rangle\)</li>
+            <li><strong>Mini‑exercice</strong> : donner \(\operatorname{proj}_{\langle (1,2)\rangle}((3,4))\)</li>
+          </ul>
+          <aside class="notes">
+            Mini‑exercice solution attendue : \(\dfrac{3\cdot1+4\cdot2}{1^2+2^2}(1,2) = \dfrac{11}{5}(1,2)\).
+          </aside>
+        </section>
+
+        <!-- Fin -->
+        <section style="text-align: left;">
+          <h2>Fin</h2>
+          <p>Questions / points à clarifier ?</p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        mathjax2: {
+          config: 'TeX-AMS_HTML-full',
+          TeX: {
+            Macros: {
+              R: '\\mathbb{R}',
+              norm: ['\\left\\lVert #1 \\right\\rVert', 1],
+              vec: ['\\mathbf{#1}', 1]
+            }
+          }
+        },
+        customcontrols: {
+        controls: [
+          {
+            icon: '<i class="fa fa-pen-square"></i>',
+            title: 'Toggle chalkboard (B)',
+            action: 'RevealChalkboard.toggleChalkboard();'
+          },
+          {
+            icon: '<i class="fa fa-pen"></i>',
+            title: 'Toggle notes canvas (C)',
+            action: 'RevealChalkboard.toggleNotesCanvas();'
+          }
+        ]
+      },
+
+      chalkboard: {
+        theme: "whiteboard", // ou chalkboard
+        color: "rgba(0,0,0,1)", // couleur du stylo
+        background: ["rgba(255,255,255,0)"], // transparent si overlay
+        boardmarkerWidth: 4,
+        chalkWidth: 4
+      },
+        plugins: [
+          RevealZoom,
+          RevealCustomControls,
+          RevealChalkboard,
+          RevealNotes,
+          RevealSearch,
+          RevealMarkdown,
+          RevealHighlight,
+          RevealMath.MathJax2
+        ]
+      });
+    </script>
+  </body>
+  </html>
+
+
