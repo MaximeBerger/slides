@@ -13,7 +13,33 @@
       background: transparent;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     }
-    .page { display: flex; align-items: center; gap: 20px; padding: 16px; background: transparent; }
+    .page { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      gap: 20px; 
+      padding: 16px; 
+      background: transparent; 
+    }
+    
+    .title-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .title-container h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 
     #container {
       position: relative;
@@ -41,25 +67,30 @@
 </head>
 <body>
   <div class="page">
-    <div id="container" aria-label="Plan sucre-farine, origine en bas à gauche">
-      <div id="hint">Cliquer-glisser la pointe. Échelle : 1 px = 1 g.</div>
+    <div class="title-container">
+      <h1>Vector – sucre/farine</h1>
     </div>
+    <div class="content">
+      <div id="container" aria-label="Plan sucre-farine, origine en bas à gauche">
+        <div id="hint">Cliquer-glisser la pointe. Échelle : 1 px = 1 g.</div>
+      </div>
 
-    <aside id="recipe" class="card" aria-live="polite">
+      <aside id="recipe" class="card" aria-live="polite">
       <h2>Recette</h2>
       <dl>
         <dt>Sucre</dt><dd><span id="sugar">0</span> g</dd>
         <dt>Farine</dt><dd><span id="flour">0</span> g</dd>
-        <dt>Max</dt><dd><span id="maxg">0</span> g</dd>
+        <!-- <dt>Max</dt><dd><span id="maxg">0</span> g</dd> -->
       </dl>
       <p class="muted">Les valeurs reflètent les coordonnées du vecteur (1 px = 1 g).</p>
     </aside>
+  </div>
   </div>
 
   <script>
     const sugarEl = document.getElementById('sugar');
     const flourEl = document.getElementById('flour');
-    const maxgEl  = document.getElementById('maxg');
+    // const maxgEl  = document.getElementById('maxg');
 
     let head;
     let dragging = false;
@@ -72,7 +103,7 @@
       const holder = document.getElementById('container');
       W = holder.clientWidth;
       H = holder.clientHeight;
-      maxgEl.textContent = String(Math.max(W, H));
+      // maxgEl.textContent = String(Math.max(W, H));
 
       const cnv = createCanvas(W, H);
       cnv.parent(holder);
@@ -187,7 +218,7 @@
     function updateRecipe() {
       sugarEl.textContent = String(Math.round(head.x));
       flourEl.textContent = String(Math.round(head.y));
-      maxgEl.textContent = String(Math.max(W, H));
+      // maxgEl.textContent = String(Math.max(W, H));
     }
   </script>
 </body>

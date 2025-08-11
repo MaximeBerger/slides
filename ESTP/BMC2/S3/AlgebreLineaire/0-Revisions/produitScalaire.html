@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plan, produit scalaire et projection</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: transparent; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    .page { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      gap: 20px; 
+      padding: 16px; 
+      background: transparent; 
+    }
+    
+    .title-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .title-container h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    
+    .content {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    /* Zone dessin p5.js */
+    #container {
+      position: relative;
+      width: 800px;  /* canvas = 800x600 comme demandé */
+      height: 600px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: transparent;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Panneau latéral séparé, ne recouvre plus le canvas */
+    #panel {
+      width: 300px;
+      height: 600px;
+      padding: 12px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      overflow: auto;
+    }
+    #panel h2 { margin: 0 0 8px 0; font-size: 15px; font-weight: 700; letter-spacing: .2px; }
+    #panel .section { margin: 16px 0; padding: 12px; background: rgba(248,250,252,0.8); border-radius: 8px; border-left: 3px solid #e2e8f0; }
+    #panel .section-title { font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    #panel .row { margin: 4px 0; font-size: 13px; }
+    #panel .row.result { margin-left: 16px; color: #059669; font-weight: 500; }
+    #panel code { padding: 2px 4px; background: #f6f7f9; border-radius: 6px; }
+    #panel .small { font-size: 12px; color: #555; }
+    #panel .val { font-variant-numeric: tabular-nums; color: #059669; font-weight: 600; }
+    #panel button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #d0d7de;
+      background: #f0f3f7;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #panel button.active { background: #e7f5ee; border-color: #8dd3b4; }
+    .chip { display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; border:1px solid #e1e4e8; background:#fff; margin-right:6px; font-size:12px;}
+    .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="title-container">
+      <h1>Plan, produit scalaire et projection</h1>
+    </div>
+    <div class="content">
+      <div id="container"></div>
+
+      <aside id="panel">
+      <h2>Produit scalaire et angle</h2>
+      <div class="row small">Cliquez-glissez les extrémités de <span style="color:#2063f7">u</span> et <span style="color:#ff6b6b">v</span>. Double-clic pour réinitialiser.</div>
+      <div id="readout" class="row"></div>
+      <button id="btnW" type="button">Afficher le vecteur w</button>
+      <div class="row small">w est la projection orthogonale de <span style="color:#ff6b6b">v</span> sur la droite engendrée par <span style="color:#2063f7">u</span>.</div>
+      <div class="row" style="margin-top:10px;">
+        <span class="chip"><span class="dot" style="background:#2063f7"></span>u</span>
+        <span class="chip"><span class="dot" style="background:#ff6b6b"></span>v</span>
+        <span class="chip"><span class="dot" style="background:#2ecc71"></span>w = proj<sub>u</sub>(v)</span>
+                 <span class="chip"><span class="dot" style="background:#8e44ad"></span>θ</span>
+       </div>
+     </aside>
+   </div>
+   </div>
+
+  <!-- p5.js -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script>
+    // --- État ---
+    let u = new p5.Vector(220, 80);
+    let v = new p5.Vector(120, 200);
+    let dragging = null; // 'u' | 'v' | null
+    const HANDLE_R = 10;
+    const MARGIN = 30;
+    const AXIS_COLOR = '#c9ced6';
+    const GRID_COLOR = '#eef1f5';
+    const U_COLOR = '#2063f7';
+    const V_COLOR = '#ff6b6b';
+    const W_COLOR = '#2ecc71';
+    const ANGL_COLOR = '#8e44ad';
+    let showW = true;
+
+    // DOM panneau
+    let readout, btnW;
+
+    function setup() {
+      const c = createCanvas(800, 600);
+      c.parent('container');
+      pixelDensity(1);
+
+      readout = document.getElementById('readout');
+      btnW = document.getElementById('btnW');
+      updateWButton();
+      btnW.addEventListener('click', () => { showW = !showW; updateWButton(); });
+    }
+
+    function updateWButton() {
+      if (!btnW) return;
+      btnW.textContent = (showW ? 'Masquer' : 'Afficher') + ' le vecteur w';
+      btnW.classList.toggle('active', showW);
+    }
+
+    function draw() {
+      clear();
+      drawGrid();
+      drawAxes();
+
+      const rMax = min(width, height)/2 - MARGIN;
+      clampVec(u, rMax);
+      clampVec(v, rMax);
+
+      const nu2 = u.x*u.x + u.y*u.y;
+      const dotUV = u.x*v.x + u.y*v.y;
+      let w = null;
+      if (nu2 > 1e-9) {
+        const s = dotUV / nu2;
+        w = p5.Vector.mult(u, s);
+      }
+
+      drawArrow(createVector(0,0), u, U_COLOR, 'u');
+      drawArrow(createVector(0,0), v, V_COLOR, 'v');
+
+      let theta = NaN;
+      const nu = mag(u), nv = mag(v);
+      if (nu > 1e-9 && nv > 1e-9) {
+        theta = p5.Vector.angleBetween(u, v);
+        drawThetaArc(u, v, 64);
+      }
+
+      if (showW && w) {
+        drawArrow(createVector(0,0), w, W_COLOR, 'w');
+        drawSegment(worldToScreen(v.x, v.y), worldToScreen(w.x, w.y), '#6fcf97', 1.5, [6,4]);
+        drawRightAngleMarker(w, v);
+      }
+
+    //   drawHandle(u, U_COLOR);
+    //   drawHandle(v, V_COLOR);
+
+      updatePanel(dotUV, nu, nv, theta, w);
+    }
+
+    // --- Utilitaires géométrie et dessin ---
+    function mag(vec) { return Math.hypot(vec.x, vec.y); }
+
+    function clampVec(vec, rMax) {
+      const m = mag(vec);
+      if (m > rMax) vec.mult(rMax / m);
+    }
+
+    function worldToScreen(x, y) { return { x: width/2 + x, y: height/2 - y }; }
+    function screenToWorld(px, py) { return { x: px - width/2, y: height/2 - py }; }
+
+    function drawGrid() {
+      stroke(GRID_COLOR); strokeWeight(1);
+      for (let x = width/2 % 50; x <= width; x += 50) line(x, 0, x, height);
+      for (let y = height/2 % 50; y <= height; y += 50) line(0, y, width, y);
+    }
+
+    function drawAxes() {
+      stroke(AXIS_COLOR); strokeWeight(2);
+      line(0, height/2, width, height/2);
+      line(width/2, 0, width/2, height);
+      drawArrowHead({x: width-12, y: height/2}, {x: width, y: height/2}, AXIS_COLOR);
+      drawArrowHead({x: width/2, y: 12}, {x: width/2, y: 0}, AXIS_COLOR);
+      noStroke(); fill('#6b7280');
+      textAlign(LEFT, BOTTOM); text('x', width-16, height/2-6);
+      textAlign(LEFT, TOP); text('y', width/2+6, 4);
+    }
+
+    function drawArrow(from, to, color, label) {
+      const A = worldToScreen(from.x, from.y);
+      const B = worldToScreen(to.x, to.y);
+      stroke(color); strokeWeight(3);
+      line(A.x, A.y, B.x, B.y);
+      drawArrowHead(A, B, color);
+      noStroke(); fill(color); textAlign(LEFT, CENTER);
+      text(label, B.x + 6, B.y);
+    }
+
+    function drawArrowHead(A, B, color) {
+      const angle = Math.atan2(B.y - A.y, B.x - A.x);
+      const len = 12, wid = 7;
+      push(); translate(B.x, B.y); rotate(angle);
+      noStroke(); fill(color);
+      beginShape(); vertex(0,0); vertex(-len,+wid); vertex(-len,-wid); endShape(CLOSE);
+      pop();
+    }
+
+    function drawHandle(vec, color) {
+      const P = worldToScreen(vec.x, vec.y);
+      noStroke(); fill(color); circle(P.x, P.y, HANDLE_R*2);
+      stroke(255); strokeWeight(2); noFill(); circle(P.x, P.y, HANDLE_R*2 + 4);
+    }
+
+    function drawSegment(A, B, color, w=2, dash=null) {
+      push(); stroke(color); strokeWeight(w);
+      if (dash) drawingContext.setLineDash(dash);
+      line(A.x, A.y, B.x, B.y);
+      drawingContext.setLineDash([]); pop();
+    }
+
+    function angleOf(vec) { return Math.atan2(vec.y, vec.x); }
+    function normAngle(a) { while (a <= -Math.PI) a += 2*Math.PI; while (a > Math.PI) a -= 2*Math.PI; return a; }
+
+    function drawThetaArc(u, v, steps=48) {
+      const au = angleOf(u), av = angleOf(v);
+      let d = normAngle(av - au);
+      const C = { x: width/2, y: height/2 };
+      const R = 60;
+      const start = -au, stop = -(au + d);
+      noFill(); stroke(ANGL_COLOR); strokeWeight(3);
+      const N = max(12, floor(steps * Math.abs(d)/Math.PI));
+      let prev = null;
+      for (let i=0; i<=N; i++) {
+        const t = i/N;
+        const a = start + t*(stop - start);
+        const x = C.x + R*Math.cos(a), y = C.y + R*Math.sin(a);
+        if (prev) line(prev.x, prev.y, x, y);
+        prev = {x,y};
+      }
+      noStroke(); fill(ANGL_COLOR);
+      const amid = start + 0.5*(stop - start);
+      const lx = C.x + (R+16)*Math.cos(amid), ly = C.y + (R+16)*Math.sin(amid);
+      const deg = degrees(Math.abs(d)).toFixed(2);
+      textAlign(CENTER, CENTER); text('θ = ' + deg + '°', lx, ly);
+    }
+
+    function drawRightAngleMarker(w, v) {
+      const Pw = worldToScreen(w.x, w.y);
+      const a = angleOf(u);
+      const ux = Math.cos(-a), uy = Math.sin(-a);
+      const px = -uy, py = ux;
+      const s = 10;
+      push(); stroke('#6fcf97'); strokeWeight(2); noFill();
+      line(Pw.x, Pw.y, Pw.x + ux*s, Pw.y + uy*s);
+      line(Pw.x, Pw.y, Pw.x + px*s, Pw.y + py*s);
+      pop();
+    }
+
+    // --- Interaction ---
+    function mousePressed() {
+      const mu = worldToScreen(u.x, u.y);
+      const mv = worldToScreen(v.x, v.y);
+      const dU = dist(mouseX, mouseY, mu.x, mu.y);
+      const dV = dist(mouseX, mouseY, mv.x, mv.y);
+      if (dU <= HANDLE_R + 4 && dU <= dV) dragging = 'u';
+      else if (dV <= HANDLE_R + 4) dragging = 'v';
+      else dragging = null;
+    }
+    function mouseDragged() {
+      if (!dragging) return;
+      const { x, y } = screenToWorld(mouseX, mouseY);
+      if (dragging === 'u') { u.x = x; u.y = y; }
+      else { v.x = x; v.y = y; }
+    }
+    function mouseReleased() { dragging = null; }
+    function doubleClicked() { u.set(220, 80); v.set(120, 200); }
+
+    // --- Panneau valeurs ---
+    function updatePanel(dotUV, nu, nv, theta, w) {
+      const thetaDeg = isFinite(theta) ? degrees(theta).toFixed(4) : 'n/d';
+      const cosTheta = isFinite(theta) ? Math.cos(theta) : NaN;
+      const cosTxt = isFinite(cosTheta) ? cosTheta.toFixed(6) : 'n/d';
+      const dotByComp = (u.x*v.x + u.y*v.y).toFixed(4);
+      const dotByNorm = (isFinite(theta) ? (nu*nv*Math.cos(theta)).toFixed(4) : 'n/d');
+      const wTxt = (w && isFinite(w.x) && isFinite(w.y))
+        ? `w = ( ${fmt(w.x)}, ${fmt(w.y)} )`
+        : `w indéfini si u = (0,0)`;
+
+      readout.innerHTML = [
+        `<div class="section">
+          <div class="section-title">Vecteurs</div>
+          <div class="row"><code>u = ( ${fmt(u.x)}, ${fmt(u.y)} )</code></div>
+          <div class="row"><code>v = ( ${fmt(v.x)}, ${fmt(v.y)} )</code></div>
+        </div>`,
+        `<div class="section">
+          <div class="section-title">Angle</div>
+          <div class="row"><span class="val">θ = ${thetaDeg}°</span></div>
+        </div>`,
+        `<div class="section">
+          <div class="section-title">Produit scalaire</div>
+          <div class="row"><code>u·v = u_x v_x + u_y v_y</code></div>
+          <div class="row result">= <span class="val">${dotByComp}</span></div>
+          <div class="row"><code>u·v = ||u|| · ||v|| · cos(θ)</code></div>
+          <div class="row result">= <span class="val">${dotByNorm}</span></div>
+        </div>`,
+        `<div class="section">
+          <div class="section-title">Normes et cosinus</div>
+          <div class="row small">||u|| = <span class="val">${nu.toFixed(4)}</span></div>
+          <div class="row small">||v|| = <span class="val">${nv.toFixed(4)}</span></div>
+          <div class="row small">cos(θ) = <span class="val">${cosTxt}</span></div>
+        </div>`,
+        `<div class="section">
+          <div class="section-title">Projection</div>
+          <div class="row"><code>${wTxt}</code></div>
+        </div>`
+      ].join('');
+    }
+
+    function fmt(x) { return nf(x, 1, 3); }
+  </script>
+</body>
+</html>
