@@ -1,7 +1,5 @@
 <!--
     This example shows how to use the chalkboard plugin with the simplemenu plugin and the multimodal plugin.
-    It also shows how to load a chalkboard from a json file.
-    Fonctionne pas en local mais sur github pages ok. 
 -->
 <!doctype html>
 <html lang="en">
@@ -77,6 +75,8 @@
                 </section>
                 <section>
                     <h2>Fin du cours</h2>
+                    <p>exporter les annotations :</p>
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
                 </section>
             </div>
 		</div>
@@ -85,6 +85,7 @@
         <script src="../plugin/simplemenu/simplemenu.js"></script>
         <script src="../plugin/multimodal/multimodal.js"></script>
         <script src="../plugin/math/math.js"></script>
+
 
 		<script>
 			Reveal.initialize({
@@ -96,12 +97,16 @@
                     }
                 },
                 customcontrols: {
+                    controls: [
+                                { icon: '<i class="fa fa-pen"></i>',
+                                    title: 'Toggle notes canvas (C)',
+                                    action: 'RevealChalkboard.toggleNotesCanvas();'
+                                }
+                            ]
                 },
-                
                 chalkboard: {
-                    // add configuration here
                     src: 'chalkboard.json'
-                },
+                },  
                 mathjax2: {
 					config: 'TeX-AMS_HTML-full',
 					TeX: {
@@ -115,7 +120,6 @@
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal, RevealMath.MathJax2 ]
 			});
-            
 		</script>
 	</body>
 </html>

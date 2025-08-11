@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vector – sucre/farine</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: flex;              /* centre le bloc global */
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    .page { display: flex; align-items: center; gap: 20px; padding: 16px; }
+
+    #container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    #recipe.card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px 14px; width: 260px; }
+    #recipe h2 { margin: 0 0 8px 0; font-size: 18px; }
+    #recipe dt { font-weight: 600; }
+    #recipe dd { margin: 0 0 8px 0; }
+    .muted { color: #6b7280; font-size: 12px; }
+
+    #hint {
+      position: absolute; left: 8px; bottom: 8px; font-size: 12px; color: #6b7280;
+      background: rgba(255,255,255,0.9); padding: 4px 6px; border-radius: 6px;
+      border: 1px solid #e5e7eb; pointer-events: none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div id="container" aria-label="Plan sucre-farine, origine en bas à gauche">
+      <div id="hint">Cliquer-glisser la pointe. Échelle : 1 px = 1 g.</div>
+    </div>
+
+    <aside id="recipe" class="card" aria-live="polite">
+      <h2>Recette</h2>
+      <dl>
+        <dt>Sucre</dt><dd><span id="sugar">0</span> g</dd>
+        <dt>Farine</dt><dd><span id="flour">0</span> g</dd>
+        <dt>Max</dt><dd><span id="maxg">0</span> g</dd>
+      </dl>
+      <p class="muted">Les valeurs reflètent les coordonnées du vecteur (1 px = 1 g).</p>
+    </aside>
+  </div>
+
+  <script>
+    const sugarEl = document.getElementById('sugar');
+    const flourEl = document.getElementById('flour');
+    const maxgEl  = document.getElementById('maxg');
+
+    let head;
+    let dragging = false;
+    let W = 0, H = 0;
+
+    function toScreen(xw, yw) { return { x: xw, y: H - yw }; }
+    function toWorld(xs, ys)  { return { x: xs, y: H - ys }; }
+
+    function setup() {
+      const holder = document.getElementById('container');
+      W = holder.clientWidth;
+      H = holder.clientHeight;
+      maxgEl.textContent = String(Math.max(W, H));
+
+      const cnv = createCanvas(W, H);
+      cnv.parent(holder);
+      head = { x: Math.round(W * 0.6), y: Math.round(H * 0.4) };
+      updateRecipe();
+      noLoop();
+      redraw();
+    }
+
+    function draw() {
+      background(255);
+      drawGrid();
+      drawAxes();
+      drawVector();
+    }
+
+    function drawGrid() {
+      stroke(235);
+      strokeWeight(1);
+      const step = 50;
+      for (let x = 0; x <= W; x += step) {
+        const s0 = toScreen(x, 0); const s1 = toScreen(x, H);
+        line(s0.x, s0.y, s1.x, s1.y);
+      }
+      for (let y = 0; y <= H; y += step) {
+        const s0 = toScreen(0, y); const s1 = toScreen(W, y);
+        line(s0.x, s0.y, s1.x, s1.y);
+      }
+    }
+
+    function drawAxes() {
+      stroke(0); strokeWeight(2);
+      const O = toScreen(0, 0);
+      const Xend = toScreen(W, 0);
+      const Yend = toScreen(0, H);
+      line(O.x, O.y, Xend.x, Xend.y);
+      line(O.x, O.y, Yend.x, Yend.y);
+      noStroke(); fill(0);
+      drawArrowHead(O.x, O.y, Xend.x, Xend.y, 14, 9);
+      drawArrowHead(O.x, O.y, Yend.x, Yend.y, 14, 9);
+
+      textFont('system-ui'); textSize(12); noStroke(); fill(30);
+      const step = 50;
+      for (let x = step; x <= W; x += step) {
+        const s = toScreen(x, 0);
+        stroke(0); line(s.x, s.y, s.x, s.y + 6); noStroke();
+        textAlign(CENTER, TOP); text(x, s.x, s.y + 8);
+      }
+      for (let y = step; y <= H; y += step) {
+        const s = toScreen(0, y);
+        stroke(0); line(s.x - 6, s.y, s.x, s.y); noStroke();
+        textAlign(RIGHT, CENTER); text(y, s.x - 8, s.y);
+      }
+      const lx = toScreen(W * 0.5, 0);
+      textAlign(CENTER, TOP); text('sucre (g)', lx.x, lx.y - 24);
+      textAlign(CENTER, TOP); text('Sucre', lx.x, lx.y + 40);
+      push(); translate(12, toScreen(0, H * 0.5).y); rotate(-HALF_PI);
+      textAlign(CENTER, TOP); text('farine (g)', 0, 0); pop();
+    }
+
+    function drawVector() {
+      const O = toScreen(0, 0);
+      const P = toScreen(head.x, head.y);
+      stroke(0, 120, 255); strokeWeight(3);
+      line(O.x, O.y, P.x, P.y);
+      stroke(0, 120, 255); fill(255); circle(P.x, P.y, 12);
+      noStroke(); fill(0, 120, 255); drawArrowHead(O.x, O.y, P.x, P.y, 18, 10);
+
+      fill(20); textSize(13); textAlign(LEFT, BOTTOM);
+      const label = `(${Math.round(head.x)} g sucre, ${Math.round(head.y)} g farine)`;
+      text(label, Math.min(P.x + 8, W - 10), Math.max(P.y - 8, 14));
+    }
+
+    function drawArrowHead(x0, y0, x1, y1, size, baseW) {
+      const ang = Math.atan2(y1 - y0, x1 - x0);
+      const bx = x1 - size * Math.cos(ang);
+      const by = y1 - size * Math.sin(ang);
+      const w = baseW ?? size * 0.6;
+      const lx = bx + (w / 2) * Math.sin(ang);
+      const ly = by - (w / 2) * Math.cos(ang);
+      const rx = bx - (w / 2) * Math.sin(ang);
+      const ry = by + (w / 2) * Math.cos(ang);
+      triangle(x1, y1, lx, ly, rx, ry);
+    }
+
+    function mousePressed() {
+      const P = toScreen(head.x, head.y);
+      const d = dist(mouseX, mouseY, P.x, P.y);
+      if (d < 14) {
+        dragging = true;
+      } else {
+        const wpos = toWorld(constrain(mouseX, 0, W), constrain(mouseY, 0, H));
+        head.x = Math.round(constrain(wpos.x, 0, W));
+        head.y = Math.round(constrain(wpos.y, 0, H));
+        updateRecipe(); dragging = true; redraw();
+      }
+      return false;
+    }
+
+    function mouseDragged() {
+      if (!dragging) return false;
+      const wpos = toWorld(constrain(mouseX, 0, W), constrain(mouseY, 0, H));
+      head.x = Math.round(constrain(wpos.x, 0, W));
+      head.y = Math.round(constrain(wpos.y, 0, H));
+      updateRecipe(); redraw();
+      return false;
+    }
+
+    function mouseReleased() { dragging = false; return false; }
+
+    function updateRecipe() {
+      sugarEl.textContent = String(Math.round(head.x));
+      flourEl.textContent = String(Math.round(head.y));
+      maxgEl.textContent = String(Math.max(W, H));
+    }
+  </script>
+</body>
+</html>
