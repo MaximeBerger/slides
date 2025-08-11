@@ -1,3 +1,6 @@
+<!--
+    This example shows how to use the chalkboard plugin with the simplemenu plugin and the multimodal plugin.
+-->
 <!doctype html>
 <html lang="en">
 	<head>
@@ -57,15 +60,37 @@
                         <h4>It's easy to set up</h4>
                     </section>
                 </section>    
+                <section data-name="Multimodal">
+                    <section>3 exemples d'intégration :<br>
+                        <a href="#" data-modal-type="image" data-modal-url="https://picsum.photos/200/300">a data-modal-url</a><br>
+    
+                        <a href="https://picsum.photos/200/300" data-modal-type="image">an href attribute</a><br>
+    
+                        <a href="#" data-modal-type="image" data-modal-url="https://picsum.photos/200/300">a data-modal-url</a><br>
+                    </section>
+                    <section data-modal-type="image" data-modal-url="https://picsum.photos/200/300">
+                        <h2>Pour ouvrir automatiquement un modal quand on arrive sur cette slide</h2>
+                        <!-- Slide content here -->
+                    </section>
+                </section>
+                <section>
+                    <h2>Fin du cours</h2>
+                    <p>exporter les annotations :</p>
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
             </div>
 		</div>
 
 		<script src="../dist/reveal.js"></script>
         <script src="../plugin/simplemenu/simplemenu.js"></script>
+        <script src="../plugin/multimodal/multimodal.js"></script>
+        <script src="../plugin/math/math.js"></script>
+
 
 		<script>
 			Reveal.initialize({
 				hash: true,
+
                 simplemenu: {
                     barhtml: {
                         header: "<div class='menubar'><ul class='menu'></ul></div>"
@@ -73,10 +98,6 @@
                 },
                 customcontrols: {
                     controls: [
-                                { icon: '<i class="fa fa-pen-square"></i>',
-                                    title: 'Toggle chalkboard (B)',
-                                    action: 'RevealChalkboard.toggleChalkboard();'
-                                },
                                 { icon: '<i class="fa fa-pen"></i>',
                                     title: 'Toggle notes canvas (C)',
                                     action: 'RevealChalkboard.toggleNotesCanvas();'
@@ -86,9 +107,18 @@
                 chalkboard: {
                     // add configuration here
                 },
+                mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu ]
+				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal, RevealMath.MathJax2 ]
 			});
 		</script>
 	</body>

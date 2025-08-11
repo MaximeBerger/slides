@@ -1,3 +1,6 @@
+<!--
+    This example shows how to use the chalkboard plugin with the simplemenu plugin and the multimodal plugin.
+-->
 <!doctype html>
 <html lang="en">
 	<head>
@@ -49,7 +52,7 @@
                         </ul>
                     </section>
                     <section class="center">
-                        <p class="small">Menu items can only be regular horizontal slides or vertical stacks.</p><img data-src="img/simplemenusetup.svg">
+                        <p class="small">Menu items can only be regular horizontal slides or vertical stacks.</p>
                     </section>
                 </section>
                 <section data-name="Set it up">
@@ -81,10 +84,13 @@
 		<script src="../dist/reveal.js"></script>
         <script src="../plugin/simplemenu/simplemenu.js"></script>
         <script src="../plugin/multimodal/multimodal.js"></script>
+        <script src="../plugin/math/math.js"></script>
+
 
 		<script>
 			Reveal.initialize({
 				hash: true,
+
                 simplemenu: {
                     barhtml: {
                         header: "<div class='menubar'><ul class='menu'></ul></div>"
@@ -92,10 +98,6 @@
                 },
                 customcontrols: {
                     controls: [
-                                { icon: '<i class="fa fa-pen-square"></i>',
-                                    title: 'Toggle chalkboard (B)',
-                                    action: 'RevealChalkboard.toggleChalkboard();'
-                                },
                                 { icon: '<i class="fa fa-pen"></i>',
                                     title: 'Toggle notes canvas (C)',
                                     action: 'RevealChalkboard.toggleNotesCanvas();'
@@ -105,9 +107,18 @@
                 chalkboard: {
                     // add configuration here
                 },
+                mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal ]
+				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal,  ]
 			});
 		</script>
 	</body>
