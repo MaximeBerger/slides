@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/beige.css">
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>3 exemples d'intégration :<br>
+                    <a href="#" data-modal-type="image" data-modal-url="https://picsum.photos/200/300">a data-modal-url</a><br>
+
+                    <a href="https://picsum.photos/200/300" data-modal-type="image">an href attribute</a><br>
+
+                    <a href="#" data-modal-type="image" data-modal-url="https://picsum.photos/200/300">a data-modal-url</a><br>
+                </section>
+				<section data-modal-type="image" data-modal-url="https://picsum.photos/200/300">
+                    <h2>Pour ouvrir automatiquement un modal quand on arrive sur cette slide</h2>
+                    <!-- Slide content here -->
+                </section>
+			</div>
+		</div>
+
+        <script src="../plugin/multimodal/multimodal.js"></script>
+		<script src="../dist/reveal.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ Multimodal ]
+			});
+		</script>
+	</body>
+</html>
