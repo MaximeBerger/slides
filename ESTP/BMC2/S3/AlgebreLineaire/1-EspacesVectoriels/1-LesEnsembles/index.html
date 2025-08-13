@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<section>
+						<h2>Algèbre linéaire</h2>
+						<h4>1 - Les ensembles et la notion de structure</h4>
+					</section>
+					<section>
+						<p>À la fin de ce cours, vous serez capable de&nbsp;:</p>
+						<ul>
+							<li class="fragment">Distinguer ensemble, opérations, axiomes et corps de scalaires</li>
+							<li class="fragment">Identifier une structure algébrique à partir de ses données</li>
+						</ul>
+                        <p>Comprendre la notion de <strong>structure</strong>&nbsp;: un <em>ensemble</em> + des <em>opérations</em> + des <em>axiomes</em> + un <em>corps</em> de scalaires.</p>
+
+					</section>
+				</section>
+				<section class="center" data-name="TOC" data-sm="false">
+					<h4>Menu</h4>
+					<ul class="menu"></ul>
+				</section>
+				<section>
+					<section>
+						<h4>Prérequis</h4>
+						<ul>
+							<li class="fragment">\(\R^2\), \(\R^3\)</li>
+							<li class="fragment">Opérations de base sur les vecteurs</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Retour sur \(\R^n\)">
+					<section>
+                        <p>Pourquoi \(\R^n\) «&nbsp;marche si bien&nbsp;» ?</p>
+						<ul>
+							<li class="fragment">Parce qu’il n’est pas qu’un ensemble de points&nbsp;: 
+                                il a une addition, 
+                                une multiplication par des scalaires (venant de \(\R\)), 
+                                des coordonnées, 
+                                parfois un produit scalaire.</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Deux multiplications à distinguer</h4>
+						<ul>
+							<li class="fragment">Multiplication <strong>entre réels</strong> dans \(\R\) (interne au corps)</li>
+							<li class="fragment">Multiplication <strong>scalaire × vecteur</strong> dans \(\R^n\) (externe, action du corps sur l’ensemble)</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Notions et vocabulaire">
+					<section>
+						<p>Notation&nbsp;: \(u,v\) vecteurs quelconques, \(\lambda,\mu\) scalaires.</p>
+						<ul>
+							<li class="fragment"><strong>Vocabulaire</strong>&nbsp;: Ensemble, loi interne (ex&nbsp;: \(+\) sur \(V\)), loi externe (ex&nbsp;: \(K\times V\to V\)).</li>
+							<li class="fragment"><strong>Corps</strong> \((K,+,\times)\) (admis), neutres \(0,1\), inverses.</li>
+							<li class="fragment"><strong>Structure</strong> = données (ensemble, opérations) satisfaisant des règles (axiomes).</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Schéma global / Visualisation</h4>
+						<p>Visualiser comme dans \(\R^2\) mais penser \(\R^n\) ou l’ensemble des polynômes.</p>
+					</section>
+				</section>
+				<section data-name="D'autres exemples">
+					<section>
+						<h4>Exemples de structures</h4>
+						<ul>
+							<li class="fragment">\(\R^2\) avec \((x,y)+(x',y')=(x+x',y+y')\) et \(\lambda(x,y)=(\lambda x,\lambda y)\)</li>
+							<li class="fragment">Polynômes \(\mathcal P_n\)&nbsp;: addition coefficient à coefficient; \(\lambda P\) multiplie tous les coefficients</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Activité pédagogique interactive</h4>
+						<p>Tri d’exemples&nbsp;: par binômes, déterminer ce qui manque pour obtenir une structure.</p>
+						<ul>
+							<li class="fragment">6 fiches «&nbsp;(ensemble, opérations)&nbsp;»</li>
+							<li class="fragment">Dire si la loi est bien définie, associative, s’il existe un neutre</li>
+							<li class="fragment">Préciser <em>interne</em> vs <em>externe</em></li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Pièges fréquents</h4>
+						<ul>
+							<li class="fragment">Confondre «&nbsp;×&nbsp;» du corps et «&nbsp;⋅&nbsp;» (scalaire sur vecteur)</li>
+							<li class="fragment">Oublier la <strong>fermeture</strong> (le résultat doit rester dans l’ensemble)</li>
+							<li class="fragment">Prendre «&nbsp;partie de \(\R^n\) » pour «&nbsp;sous-espace&nbsp;» par défaut</li>
+						</ul>
+					</section>
+				</section>
+				
+				<section>
+					<h2>Fin.</h2>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+            </div>
+		</div>
+
+		<script src="../../../../../../dist/reveal.js"></script>
+		<script src="../../../../../../plugin/simplemenu/simplemenu.js"></script>
+		<script src="../../../../../../plugin/multimodal/multimodal.js"></script>
+		<script src="../../../../../../plugin/math/math.js"></script>
+
+
+		<script>
+			Reveal.initialize({
+				hash: true,
+                fragmentInURL: false,
+                hashOneBasedIndex: true,
+                navigationMode: 'linear',
+
+                simplemenu: {
+                    barhtml: {
+                        header: "<div class='menubar'><ul class='menu'></ul></div>"
+                    }
+                },
+                customcontrols: {
+                    controls: [
+                                { icon: '<i class="fa fa-pen-square"></i>',
+                                    title: 'Toggle chalkboard (B)',
+                                    action: 'RevealChalkboard.toggleChalkboard();'
+                                },
+                                { icon: '<i class="fa fa-pen"></i>',
+                                    title: 'Toggle notes canvas (C)',
+                                    action: 'RevealChalkboard.toggleNotesCanvas();'
+                                }
+                            ]
+                },
+                chalkboard: {
+                    src: 'chalkboard.json'
+                },  
+                mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal, RevealMath.MathJax2 ]
+			});
+		</script>
+	</body>
+</html>

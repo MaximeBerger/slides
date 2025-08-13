@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QCM</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: transparent; }
+    body {
+      display: flex; justify-content: center; align-items: center;
+      background: transparent;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    .page { display:flex; flex-direction:column; align-items:center; gap:20px; padding:16px; background:transparent; }
+    .title-container { text-align:center; margin-bottom:20px; }
+    .title-container h1 { font-size:28px; font-weight:700; color:#1f2937; margin:0; letter-spacing:-0.5px; }
+    .content { display:flex; align-items:flex-start; gap:20px; }
+
+    #container {
+      position: relative; width: 800px; height: 626px; overflow: hidden;
+      border: 1px solid #ccc; border-radius: 8px; background: transparent;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    #panel {
+      width: 300px; height: 600px; padding: 12px; border-radius: 10px; background: transparent;
+      border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 6px 18px rgba(0,0,0,0.12); overflow: auto;
+    }
+
+    #questionOverlay {
+      position:absolute;
+      left: 40px; /* margin(24) + 16 */
+      top: 40px;  /* margin(24) + 16 */
+      width: 720px; /* 800 - 2*24 - 32 */
+      height: 128px; /* headerH(160) - 32 */
+      display:flex; align-items:center; justify-content:center;
+      text-align:center;
+      font-size:28px; line-height:1.1; font-weight:600;
+      color:#111827;
+      pointer-events:none;
+    }
+
+    /* Overlay des réponses pour rendu MathJax */
+    #answersOverlay {
+      position:absolute; inset:0; pointer-events:none;
+    }
+    #answersOverlay .answerItem {
+      position:absolute; left:0; top:0; width:0; height:0;
+      display:flex; align-items:center; /* centrer verticalement */
+      font-size:24px; color:#1f2937; /* un peu moins grand que l'énoncé */
+      padding-left:14px; /* même padding que le canvas */
+    }
+
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid #e5e7eb; border-radius:10px; padding:8px 12px; cursor:pointer;
+      background:#fff; font-weight:600; transition:transform .05s ease, box-shadow .15s ease;
+      user-select:none; margin-right:8px; margin-bottom:8px;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-row { display:flex; flex-wrap:wrap; margin-bottom:10px; }
+
+    .modal-backdrop {
+      position:absolute; inset:0; background:rgba(0,0,0,0.35);
+      display:none; align-items:center; justify-content:center; z-index:10;
+    }
+    .modal {
+      width:min(560px,90%); background:#fff; border-radius:12px; padding:16px 18px;
+      box-shadow:0 12px 38px rgba(0,0,0,0.25); border:1px solid #e5e7eb;
+    }
+    .modal h3 { margin:0 0 8px 0; font-size:18px; color:#111827; }
+    .modal p { margin:0 0 12px 0; color:#374151; line-height:1.45; }
+    .modal .actions { display:flex; justify-content:flex-end; gap:8px; }
+
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid #e5e7eb; color:#374151; background:#f9fafb; }
+    .legend { font-size:12px; color:#6b7280; }
+
+    /* Mise en forme du panneau de droite */
+    #panel .panel-section { margin: 12px 4px 4px; }
+    #panel .section-title {
+      font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+      color:#6b7280; margin: 0 0 8px 2px;
+    }
+    #panel .stat-card {
+      background:#fff; border:1px solid #e5e7eb; border-radius:10px;
+      padding:10px 12px; display:grid; gap:10px;
+    }
+    #panel .stat { display:flex; align-items:baseline; justify-content:space-between; }
+    #panel .stat-label { color:#6b7280; font-size:12px; }
+    #panel .stat-value { color:#111827; font-weight:600; font-size:16px; }
+
+    /* Espacement autour des formules MathJax */
+    /* Formules affichées (block) */
+    mjx-container[display="true"] {
+      margin: 1em 0; /* espace au-dessus et au-dessous */
+    }
+    /* Formules en ligne */
+    mjx-container:not([display="true"]) {
+      margin: 0.1em 0.3em; /* espace avant et après dans la ligne */
+    }
+  </style>
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="title-container">
+      <h1>Question à choix multiples</h1>
+    </div>
+    <div class="content">
+      <div id="container">
+        <div id="modalOverlay" class="modal-backdrop" aria-hidden="true">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Remédiation</h3>
+            <p id="modalBody"></p>
+            <div class="actions">
+              <button class="btn" id="btnClose">Fermer</button>
+            </div>
+          </div>
+        </div>
+        <div id="questionOverlay"></div>
+        <div id="answersOverlay" aria-hidden="true"></div>
+      </div>
+
+      <div id="panel">
+        <div class="btn-row">
+          <button class="btn" id="btnReset" title="Réinitialiser le quiz">Réinitialiser</button>
+          <button class="btn" id="btnReveal" title="Afficher la solution">Solution</button>
+          <button class="btn" id="btnNext" title="Passer à la question suivante">Suivante</button>
+        </div>
+
+        <div class="panel-section">
+          <div class="section-title">Statistiques</div>
+          <div class="stat-card">
+            <div class="stat">
+              <div class="stat-label">Question</div>
+              <div class="stat-value"><span id="statIndex">1</span>/<span id="statTotal">1</span></div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Tentatives (question)</div>
+              <div class="stat-value"><span id="statTries">0</span></div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Erreurs cumulées</div>
+              <div class="stat-value"><span id="statErrors">0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- JSON QUIZ : plusieurs questions, réponses mélangées à chaque affichage ---
+    const quiz = [
+      {
+        question: "Dans $\\mathbb{R}^2$, quelle est la norme du vecteur $\\mathbf{v}=(3,4)$ ?",
+        answers: [
+          { text: "$5$", correct: true },
+          { text: "$7$", correct: false, remediation: "Utilise $\\lVert(x,y)\\rVert = \\sqrt{x^2+y^2}=\\sqrt{9+16}=5$." },
+          { text: "$25$", correct: false, remediation: "Ceci est $\\lVert v\\rVert^2$. La norme vaut $\\sqrt{25}=5$." },
+          { text: "$\\sqrt{7}$", correct: false, remediation: "Additionne les carrés puis prends la racine." }
+        ]
+      },
+      {
+        question: "Le produit scalaire de $\\,(1,2)\\,$ et $\\,(3,4)\\,$ vaut :",
+        answers: [
+          { text: "$7$", correct: false, remediation: "Calcule $1\\cdot3 + 2\\cdot4 $." },
+          { text: "$11$", correct: true },
+          { text: "$5$", correct: false, remediation: "Confusion avec une norme. Reprends la définition du produit scalaire." },
+          { text: "$\\sqrt{11}$", correct: false, remediation: "Le produit scalaire n’implique pas de racine." }
+        ]
+      },
+      {
+        question: "La projection orthogonale de $\\,(2,1)\\,$ sur l’axe $x$ est :",
+        answers: [
+          { text: "$(2,0)$", correct: true },
+          { text: "$(0,1)$", correct: false, remediation: "Garde $x$ et annule $y$ sur l’axe $x$." },
+          { text: "$(1,0)$", correct: false, remediation: "Tu as remplacé $x$ par $y$. Conserve $x=2$, mets $y=0$." },
+          { text: "$(2,1)$", correct: false, remediation: "La projection annule la composante perpendiculaire, donc $y=0$." }
+        ]
+      }
+    ];
+
+    // État
+    let qIndex = 0;
+    let tries = 0;
+    let success = 0;
+    let errors = 0;
+
+    // Cartes courantes et suivantes pour l’animation
+    let cards = [];
+    let nextCards = null;
+
+    // Animation de défilement vertical
+    let transitioning = false;
+    let t0 = 0;
+    const duration = 450; // ms
+    const autoAdvanceDelay = 700; // ms après bonne réponse
+    let pendingNextIndex = null;
+
+    let locked = false;
+    let hoverIndex = -1;
+    let modalOpen = false;
+
+    // DOM
+    const statIndex = document.getElementById('statIndex');
+    const statTotal = document.getElementById('statTotal');
+    const statTries = document.getElementById('statTries');
+    const statErrors = document.getElementById('statErrors');
+
+    const overlay = document.getElementById('modalOverlay');
+    const modalBody = document.getElementById('modalBody');
+    const btnClose = document.getElementById('btnClose');
+    const questionOverlay = document.getElementById('questionOverlay');
+    const answersOverlay = document.getElementById('answersOverlay');
+
+    function openModal(html, title="Remédiation") {
+      document.getElementById('modalTitle').textContent = title;
+      modalBody.innerHTML = html;
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden', 'false');
+      modalOpen = true;
+      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([modalBody]);
+    }
+    function closeModal() { overlay.style.display = 'none'; overlay.setAttribute('aria-hidden','true'); modalBody.innerHTML=''; modalOpen = false; }
+    btnClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+    // Boutons
+    document.getElementById('btnReset').addEventListener('click', resetQuiz);
+    document.getElementById('btnReveal').addEventListener('click', () => { locked = true; cards.forEach(c => c.state = c.correct ? 'right' : 'idle'); });
+    document.getElementById('btnNext').addEventListener('click', () => goToNextWithAnimation());
+
+
+    // Utils
+    function shuffleArray(a) { for (let i=a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
+    function labelize(answers) {
+      const labels = ["A","B","C","D","E","F"];
+      answers.forEach((a,i)=> a.id = labels[i] || String(i+1));
+    }
+    function shuffleAnswers(q) { shuffleArray(q.answers); labelize(q.answers); }
+
+    function refreshPanel() {
+      statIndex.textContent = String(qIndex + 1);
+      statTotal.textContent = String(quiz.length);
+      statTries.textContent = String(tries);
+      statErrors.textContent = String(errors);
+    }
+
+    function refreshQuestionOverlay() {
+      if (!questionOverlay) return;
+      questionOverlay.innerHTML = quiz[qIndex].question;
+      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([questionOverlay]);
+    }
+
+    function refreshAnswersOverlay(list) {
+      if (!answersOverlay) return;
+      answersOverlay.innerHTML = '';
+      for (let i = 0; i < list.length; i++) {
+        const c = list[i];
+        const div = document.createElement('div');
+        div.className = 'answerItem';
+        // Positionner via style inline selon la carte p5
+        div.style.left = (c.x) + 'px';
+        div.style.top = (c.y) + 'px';
+        div.style.width = (c.w) + 'px';
+        div.style.height = (c.h) + 'px';
+        div.innerHTML = (c.id ? `<strong>${c.id} — </strong>` : '') + c.text;
+        answersOverlay.appendChild(div);
+      }
+      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([answersOverlay]);
+    }
+
+    function prepareQuestion(idx) {
+      const q = quiz[idx];
+      shuffleAnswers(q); // toujours mélanger à l’affichage
+      return q.answers.map(a => ({
+        id: a.id, text: a.text, correct: !!a.correct,
+        remediation: a.remediation || "", state:'idle', x:0, y:0, w:0, h:0
+      }));
+    }
+
+    function loadQuestion(idx) {
+      qIndex = idx;
+      tries = 0;
+      locked = false;
+      cards = prepareQuestion(qIndex);
+      layoutCards();
+      refreshPanel();
+      refreshQuestionOverlay();
+      refreshAnswersOverlay(cards);
+    }
+
+    function nextIndex() { return (qIndex + 1 < quiz.length) ? qIndex + 1 : null; }
+
+    function goToNextWithAnimation() {
+      if (transitioning) return;
+      const ni = nextIndex();
+      if (ni === null) {
+        openModal(`<strong>Quiz terminé.</strong><br/>Score : ${success}/${quiz.length}.<br/><br/>Clique « Fermer » pour recommencer.`, "Fin du quiz");
+        const onClose = () => { btnClose.removeEventListener('click', onClose); overlay.removeEventListener('click', edge); resetQuiz(); };
+        const edge = (e) => { if (e.target === overlay) onClose(); };
+        btnClose.addEventListener('click', onClose); overlay.addEventListener('click', edge);
+        return;
+      }
+      // Prépare cartes suivantes mélangées
+      nextCards = prepareQuestion(ni);
+      pendingNextIndex = ni;
+      // Lance animation
+      transitioning = true;
+      t0 = performance.now();
+    }
+
+    // p5
+    const sketch = (p) => {
+      const W = 800, H = 600;
+      const margin = 24;
+
+      function easeInOutCubic(u){ return u<0.5 ? 4*u*u*u : 1 - Math.pow(-2*u+2,3)/2; }
+
+      p.setup = function() {
+        const c = p.createCanvas(W, H); c.parent('container');
+        p.textFont('system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif');
+        // init
+        quiz.forEach(q => shuffleAnswers(q));
+        loadQuestion(0);
+      };
+
+      p.draw = function() {
+        p.clear();
+        const headerH = 160;
+
+        // calc animation offsets
+        let offsetCurY = 0, offsetNextY = 0, animating = transitioning;
+        if (transitioning) {
+          const u = Math.min(1, (performance.now() - t0) / duration);
+          const e = easeInOutCubic(u);
+          offsetCurY = -e * H;       // le courant défile vers le haut
+          offsetNextY = (1 - e) * H; // le suivant arrive par le bas
+          if (u >= 1) {
+            // Commit
+            transitioning = false;
+            cards = nextCards;
+            nextCards = null;
+            qIndex = pendingNextIndex;
+            pendingNextIndex = null;
+            tries = 0;
+            locked = false;
+            layoutCards(); // recalc positions à l’état final
+            refreshPanel();
+            refreshQuestionOverlay();
+            refreshAnswersOverlay(cards);
+          }
+        }
+
+        // Dessin bandeau question courante
+        p.push();
+        p.translate(0, offsetCurY);
+        drawQuestionView(p, W, H, margin, headerH, qIndex, cards);
+        p.pop();
+
+        // Dessin bandeau question suivante pendant la transition
+        if (animating && nextCards) {
+          p.push();
+          p.translate(0, offsetNextY);
+          const ni = pendingNextIndex;
+          drawQuestionView(p, W, H, margin, headerH, ni, nextCards);
+          p.pop();
+        }
+      };
+
+      function drawQuestionView(p, W, H, margin, headerH, indexToShow, cardsToDraw){
+        // Bandeau
+        p.noStroke(); p.fill(255);
+        p.rect(margin, margin, W - 2*margin, headerH, 12);
+        p.stroke(230); p.noFill();
+        p.rect(margin, margin, W - 2*margin, headerH, 12);
+        // Le texte de la question est affiché via l'overlay HTML (#questionOverlay)
+
+        // Réponses
+        hoverIndex = -1;
+        for (let i = 0; i < cardsToDraw.length; i++) {
+          const c = cardsToDraw[i];
+          const isHover = !transitioning && p.mouseX >= c.x && p.mouseX <= c.x + c.w && p.mouseY >= c.y && p.mouseY <= c.y + c.h;
+          if (isHover && cardsToDraw === cards) hoverIndex = i;
+
+          let bg = p.color(255), border = p.color(229), txt = p.color(31,41,55);
+          if (c.state === 'idle' && isHover && !locked) { bg = p.color(249); border = p.color(209); }
+          if (c.state === 'wrong') { bg = p.color(254,242,242); border = p.color(252,165,165); txt = p.color(153,27,27); }
+          if (c.state === 'right') { bg = p.color(240,253,244); border = p.color(134,239,172); txt = p.color(22,101,52); }
+
+          p.noStroke(); p.fill(bg);
+          p.rect(c.x, c.y, c.w, c.h, 10);
+          p.stroke(border); p.noFill();
+          p.rect(c.x, c.y, c.w, c.h, 10);
+
+          p.noStroke(); p.fill(txt);
+          p.textSize(24); p.textAlign(p.LEFT, p.CENTER);
+          // Le texte est rendu par l'overlay HTML (#answersOverlay)
+        }
+
+        p.noStroke(); p.fill(107,114,128); p.textSize(12); p.textAlign(p.LEFT, p.BASELINE);
+      }
+
+      p.mousePressed = function() {
+        if (locked || transitioning || modalOpen) return;
+        const i = hitIndex(p.mouseX, p.mouseY, cards);
+        if (i === -1) return;
+        tries++;
+        const c = cards[i];
+        if (c.correct) {
+          c.state = 'right';
+          locked = true;
+          success++;
+          refreshPanel();
+          setTimeout(goToNextWithAnimation, autoAdvanceDelay);
+        } else {
+          c.state = 'wrong';
+          openModal(c.remediation || "Ce n'est pas la bonne réponse.");
+          const revert = () => { if (!c.correct) c.state = 'idle'; btnClose.removeEventListener('click', revert); overlay.removeEventListener('click', edge); };
+          const edge = (e) => { if (e.target === overlay) revert(); };
+          btnClose.addEventListener('click', revert); overlay.addEventListener('click', edge);
+          errors++;
+          refreshPanel();
+        }
+      };
+
+      function hitIndex(mx, my, list) {
+        for (let i=0;i<list.length;i++){ const c=list[i]; if (mx>=c.x && mx<=c.x+c.w && my>=c.y && my<=c.y+c.h) return i; }
+        return -1;
+      }
+
+      window.layoutCards = function() {
+        const startY = 200;
+        const Hc = 68, gap = 12, Wc = W - 48, x = 24;
+        const total = cards.length * Hc + (cards.length - 1) * gap;
+        let y = startY + Math.max(0, (H - startY - 40 - total)/2);
+        for (const c of cards) { c.x = x; c.y = y; c.w = Wc; c.h = Hc; y += Hc + gap; }
+        if (nextCards) {
+          let y2 = startY + Math.max(0, (H - startY - 40 - total)/2);
+          for (const c of nextCards) { c.x = x; c.y = y2; c.w = Wc; c.h = Hc; y2 += Hc + gap; }
+        }
+        refreshAnswersOverlay(cards);
+      };
+    };
+
+    new p5(sketch);
+
+    function resetQuiz() {
+      success = 0;
+      errors = 0;
+      // Mélanger l’ordre des questions
+      shuffleArray(quiz);
+      // Mélanger réponses pour chaque question au départ
+      quiz.forEach(q => shuffleAnswers(q));
+      // Charger première question
+      loadQuestion(0);
+    }
+
+    // Premier affichage panneau et JSON
+    (function init(){
+      statTotal.textContent = String(quiz.length);
+      resetQuiz();
+    })();
+  </script>
+</body>
+</html>

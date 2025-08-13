@@ -1,0 +1,178 @@
+% =====================================================================
+% Template LaTeX – Traces distribuées aux étudiants
+% Auteur : (à compléter)
+% Compilation : pdflatex/xelatex (pdflatex recommandé ici)
+% =====================================================================
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[6pt]\MakeUppercase{Séquence~\thechapter}}
+  {1ex}
+  {\filright}
+  [\vspace{0.5ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Trace distribuée}}
+\fancyfoot[L]{\color{Gray}\small Auteur~: \textit{(à compléter)}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+
+
+% Tcolorboxes stylisées
+\tcbset{tracebox/.style={breakable,enhanced,sharp corners,boxrule=0pt,frame hidden,arc=2mm,
+  colback=white,coltitle=black,fonttitle=\bfseries\large,
+  borderline west={2mm}{0pt}{Theme},
+  before skip=8pt,after skip=8pt,drop fuzzy shadow}}
+
+\newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé}}
+\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir (rappels utiles)}}
+\newtcolorbox{competencesBox}{tracebox,title={\faCheckCircle\quad Ce que je dois comprendre / savoir faire}}
+\newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple vu ensemble}}
+\newtcolorbox{exerciceBox}{tracebox,title={\faPenFancy\quad Mini-exercice à refaire chez moi}}
+
+% Encadré « Formules & illustrations »
+\newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
+
+% Astuce : puces clean
+\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
+
+% Raccourci pour une « Trace » complète
+% Usage : \TraceSection{Titre}{Objectif court}
+\newcommand{\TraceSection}[2]{%
+  \section*{#1}\addcontentsline{toc}{section}{#1}
+  \begin{resumeBox}
+    \textbf{Objectif en une phrase :} #2\\[0.25em]
+    \emph{À retenir dans une semaine :} listez 3 idées clés ci-dessous.
+    \begin{niceitemize}
+      \item Idée clé 1.
+      \item Idée clé 2.
+      \item Idée clé 3.
+    \end{niceitemize}
+  \end{resumeBox}
+  \begin{formulesBox}
+    % Placez ici vos formules, figures TikZ ou images.
+    % Exemple : $F(\omega)=\int_{-\infty}^{+\infty} f(t)\,e^{-i\omega t}\,dt$
+    % \begin{center}\includegraphics[width=.8\linewidth]{exemple.jpg}\end{center}
+  \end{formulesBox}
+  \begin{rappelsBox}
+    \begin{niceitemize}
+      \item Définition / notation utile A.
+      \item Propriété ou théorème B.
+      \item Piège classique à éviter.
+    \end{niceitemize}
+  \end{rappelsBox}
+  \begin{competencesBox}
+    \begin{niceitemize}
+      \item Savoir expliquer ...
+      \item Savoir calculer ...
+      \item Savoir modéliser ...
+    \end{niceitemize}
+  \end{competencesBox}
+  \begin{exempleBox}
+    \textbf{Énoncé.} ...\\
+    \textbf{Solution (esquisse).} ...
+  \end{exempleBox}
+  \begin{exerciceBox}
+    \textbf{Consigne.} ...\\
+    \textit{Indice.} ...\\
+    \textit{Réponse attendue (à compléter par l'étudiant).}
+  \end{exerciceBox}
+}
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini‑exercices)}
+\author{(Votre nom) — (UE / Promo)}
+\date{\today}
+
+% -------------------- Document ----------------------------
+\begin{document}
+
+% Page d'introduction
+\chapter*{Introduction générale}
+Ce document rassemble les traces écrites de chaque séquence de cours. Il vise à :
+\begin{niceitemize}
+    \item Offrir un résumé clair de ce qui a été vu en cours.
+    \item Souligner les formules et méthodes clés.
+    \item Proposer des exemples concrets et des mini‑exercices pour réactiver les connaissances.
+\end{niceitemize}
+\section*{Philosophie du cours}
+Le cours met l’accent sur la compréhension des concepts, la capacité à les appliquer dans des situations concrètes et la mémorisation active par la pratique.
+\section*{Objets étudiés}
+Les notions abordées incluent : vecteurs, tenseurs, produits scalaires et tensoriels, transformations linéaires, ainsi que leurs applications en mécanique et physique appliquée.
+\section*{Objectifs pédagogiques}
+À l’issue du cours, l’étudiant saura :
+\begin{niceitemize}
+    \item Identifier et utiliser les notations et concepts fondamentaux.
+    \item Appliquer les méthodes vues pour résoudre des problèmes concrets.
+    \item Relier les formules mathématiques aux interprétations physiques.
+\end{niceitemize}
+\section*{Compétences visées}
+\begin{niceitemize}
+    \item Raisonnement mathématique structuré.
+    \item Capacité d’abstraction et de modélisation.
+    \item Utilisation d’outils numériques et graphiques.
+\end{niceitemize}
+\section*{Rôle des exercices}
+Les exercices sont pensés pour consolider la compréhension, révéler les erreurs fréquentes et développer l’autonomie dans la résolution de problèmes.
+\clearpage
+
+\tableofcontents
+\clearpage
+
+
+% ================== Séquence 1 ==================
+\section*{Les vecteurs de $\mathbb{R}^n$}
+\input{0-Revisions/resume.tex}
+% ================== Séquence 2 ==================
+\chapter*{Séquence 2 — Tenseurs}\addcontentsline{toc}{chapter}{Séquence 2 — Tenseurs}
+\TraceSection{Représentations matricielles}{Passage base/tenseur et opérations}
+
+% ================== Séquence 3 ==================
+\chapter*{Séquence 3 — Produit tensoriel}\addcontentsline{toc}{chapter}{Séquence 3 — Produit tensoriel}
+\TraceSection{Définitions et exemples}{Construire et manipuler $u\otimes v$}
+
+\label{LastPage}
+\end{document}

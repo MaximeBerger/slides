@@ -1,0 +1,7 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{Séquence 1 — Calcul vectoriel}{3}{chapter*.3}%
+\contentsline {section}{Produit scalaire et normes}{3}{section*.4}%
+\contentsline {chapter}{Séquence 2 — Tenseurs}{4}{chapter*.5}%
+\contentsline {section}{Représentations matricielles}{4}{section*.6}%
+\contentsline {chapter}{Séquence 3 — Produit tensoriel}{5}{chapter*.7}%
+\contentsline {section}{Définitions et exemples}{5}{section*.8}%

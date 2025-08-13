@@ -1,6 +1,3 @@
-<!--
-    This example shows how to use the chalkboard plugin with the simplemenu plugin and the multimodal plugin.
--->
 <!doctype html>
 <html lang="en">
 	<head>
@@ -27,63 +24,110 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-                <section class="center" data-transition="fade" data-state="hide-menubar hide-menu">
-                    <h1>Révisions sur les vecteurs  </h1>
-                    <h3></h3>
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <section>
+                    <h2>Algèbre linéaire</h2>
+                    <h4>0 - Révisions sur les vecteurs</h4>
                 </section>
-                <section class="center" data-name="TOC" data-sm="false">
-                    <h4>Plan</h4>
+                <section >
+                        
+                </section>
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <p>A la fin de ce cours, vous serez capable de:</p>
+
+                </section>
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    Séquence 0 - Révisions. 
+                    A retenir. 
+                </section>
+            </section>
+                <section data-name="TOC" data-sm="false">
+                    <h4>Menu</h4>
                     <ul class="menu"></ul>
                 </section>
                 <section data-name="Définition">
-                    <section class="center">
-                        <h4>C'est quoi ?</h4>
-                        <p>Un vecteur est un objet mathématique qui possède une direction et une magnitude (ou longueur). Il est représenté par une flèche dans un espace à n dimensions.</p>
+                    <section>
+                        <h4>Un vecteur c'est quoi ?</h4>
+                        <ul class="fragment">
+                            <li>Une direction</li>
+                            <li>Un sens</li>
+                            <li>Une longueur</li>
+                        </ul>
+                        <p class="fragment">(Ce ne sera pas notre définition)</p>
                     </section>
-                    <section class="center">
-                        <h4>Comment on le représente ?</h4>
+                    <section>
+                        <h4>Par exemple ...</h4>
                         <ul>
-                            <li>En 2D : (x, y)</li>
-                            <li>En 3D : (x, y, z)</li>
-                            <li>En nD : (x1, x2, ..., xn)</li>
+                            <li class="fragment">Une flèche dans le plan $\mathbb{R}^2$</li>
+                            <li class="fragment">Une flèche dans l'espace $\mathbb{R}^3$</li>
+                            <li class="fragment">Une flèche dans l'espace à $n$ dimensions $\mathbb{R}^n$ ?</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Qu'est-ce qu'on peut faire avec des vecteurs ?</h4>
+                        <ul>
+                            <li class="fragment">Les additionner</li>
+                            <li class="fragment">Les multiplier par un nombre</li>
+                            <br>
+                            <li class="fragment">Calculer leur coordonnées</li>
+                            <br>
+                            <li class="fragment">Les projeter sur une droite</li>
+                            <li class="fragment">Calculer leur norme</li>
+                            <li class="fragment">Calculer leur produit scalaire</li>
+                            <li class="fragment">Calculer l'angle entre deux vecteurs</li>
                         </ul>
                     </section>
                 </section>
                 <section data-name="Applications">
-                    <section class="center">
+                    <section>
                         <h4>A quoi ça sert ?</h4>
-                        <p>Les vecteurs sont utilisés pour représenter des quantités physiques comme les forces, les vitesses, les positions, etc. Ils sont également utilisés pour résoudre des problèmes de géométrie et de physique.</p>
+                        <p>Modéliser des quantités physiques:
+                            <ul class="fragment highlight-red" data-fragment-index="4">
+                                <li class="fragment" data-fragment-index="1">Forces</li>
+                                <li class="fragment" data-fragment-index="2">Vitesses</li>
+                                <li class="fragment" data-fragment-index="3">Positions</li>
+                            </ul>
+                        <p class="fragment" data-fragment-index="4">Un vecteur n'a pas de point de départ...</p>
+                        </p>
                     </section>
-                    <section class="center">
-                        <h4>Comment on les additionne ?</h4>
-                        <ul>
-                            <li>En 2D : (x1, y1) + (x2, y2) = (x1 + x2, y1 + y2)</li>
-                            <li>En 3D : (x1, y1, z1) + (x2, y2, z2) = (x1 + x2, y1 + y2, z1 + z2)</li>
-                            <li>En nD : (x1, x2, ..., xn) + (y1, y2, ..., yn) = (x1 + y1, x2 + y2, ..., xn + yn)</li>
-                        </ul>
+                    <section >
+
                     </section>
                     
                     <section data-background-iframe="vecteurGateau.html" data-background-interactive>
                     </section>
-
-                    <section class="center">
+                    <section >
+                        Un utilisateur qui note des films sur netflix ou achète des produits sur amazon est représenté par un vecteur dans un espace à grande dimension. 
+                        
+                    </section>
+                    <section >
                         <iframe width="800" height="600" src="https://www.youtube.com/embed/iv-5mZ_9CPY?si=80XOcIEh8rK2MKB0&amp;controls=0&amp;clip=Ugkx2RXwUOx0Vf5YvPTztY4bXJ1z4WN94gV4&amp;clipt=EKG9FxiBkhs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </section>
                     
                 </section>  
                 <section data-name="Règles de calcul">
-                    <section class="center">
-                        <h4>Règles de calcul</h4>
+                    <section >
+                        <h4>Opérations légales</h4>
+                        Sur l'addition de vecteurs :
                         <ul>
-                            <li>Commutativité : a + b = b + a</li>
-                            <li>Associativité : (a + b) + c = a + (b + c)</li>
+                            <li>Commutativité : $u + v = v + u$</li>
                         </ul>
+                        Existence d'un opposé, 
+                        Sur le vecteur nul.
                     </section>
-                    <section data-background-iframe="produitScalaire.html" data-background-interactive></section>
+                    <section >
+                        Une animation sur les scalaires, addition de vecteurs ?
+                        Pour éviter la confusion entre les scalaires et les coordonnées des vecteurs.  
+                    </section>
+                    <section >
+                        Dans r2 on peut faire des choses supplémentaires : Le produit scalaire. Ce ne sera pas le cas de tous nos vecteurs.  
+                    </section>
+                    <section data-background-iframe="produitScalaire.html" data-background-interactive>
+
+                    </section>
                 </section>
                 <section>
-                    <h2>Fin du cours</h2>
-                    <p>exporter les annotations :</p>
+                    <h2>Fin.</h2>
                     <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
                 </section>
             </div>
@@ -98,7 +142,9 @@
 		<script>
 			Reveal.initialize({
 				hash: true,
-                
+                fragmentInURL: false,
+                hashOneBasedIndex: true,
+                navigationMode: 'linear',
 
                 simplemenu: {
                     barhtml: {
@@ -107,10 +153,14 @@
                 },
                 customcontrols: {
                     controls: [
-                                { icon: '<i class="fa fa-pen"></i>',
-                                    title: 'Toggle notes canvas (C)',
-                                    action: 'RevealChalkboard.toggleNotesCanvas();'
-                                }
+                            { icon: '<i class="fa fa-pen-square"></i>',
+                                title: 'Toggle chalkboard (B)',
+                                action: 'RevealChalkboard.toggleChalkboard();'
+                            },
+                            { icon: '<i class="fa fa-pen"></i>',
+                                title: 'Toggle notes canvas (C)',
+                                action: 'RevealChalkboard.toggleNotesCanvas();'
+                            }
                             ]
                 },
                 chalkboard: {

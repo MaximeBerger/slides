@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Calcul vectoriel – Révisions ingénieurs</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+                <!-- Titre -->
+                <section data-transition="fade">
+                    <h2>Calcul vectoriel</h2>
+                    <h4>Séquence 1 – Rappels et introduction au formalisme tensoriel</h4>
+                </section>
+
+                <!-- Objectifs -->
+                <section data-transition="fade">
+                    <p>À la fin de cette séance, vous serez capables de :</p>
+                    <ul>
+                        <li class="fragment">Manipuler les vecteurs et leurs produits (scalaire et vectoriel)</li>
+                        <li class="fragment">Calculer le gradient d’un champ scalaire</li>
+                        <li class="fragment">Interpréter physiquement un gradient et une dérivée directionnelle</li>
+                        <li class="fragment">Comprendre le lien entre champ de déplacement et gradient vectoriel</li>
+                    </ul>
+                </section>
+
+                <!-- Problématique -->
+                <section>
+                    <h4>Pourquoi le gradient est-il si important ?</h4>
+                    <ul>
+                        <li class="fragment">Comment un déplacement se propage-t-il dans un matériau solide ?</li>
+                        <li class="fragment">Quelles informations contient le gradient d’un champ vectoriel ?</li>
+                        <li class="fragment">Pourquoi l’élongation d’un ressort est-elle liée à un produit scalaire ?</li>
+                    </ul>
+                </section>
+
+                <!-- Définitions de base -->
+                <section data-name="Définition">
+                    <section>
+                        <h4>Un vecteur, c’est quoi ?</h4>
+                        <ul>
+                            <li class="fragment">Un objet qui possède une <b>direction</b>, un <b>sens</b> et une <b>norme</b></li>
+                            <li class="fragment">Représenté par des coordonnées dans une base donnée</li>
+                            <li class="fragment">Indépendant du point d’application (vecteurs libres)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Opérations de base</h4>
+                        <ul>
+                            <li class="fragment">Addition et multiplication par un scalaire</li>
+                            <li class="fragment">Produit scalaire : $u \cdot v = \|u\|\,\|v\| \cos\theta$</li>
+                            <li class="fragment">Produit vectoriel (en $\mathbb{R}^3$ uniquement)</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- Gradient -->
+                <section data-name="Gradient">
+                    <section>
+                        <h4>Gradient d’un champ scalaire</h4>
+                        <p class="fragment">Pour $f(x,y,z)$,</p>
+                        <p class="fragment">$$\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)$$</p>
+                        <p class="fragment">Vecteur pointant vers la direction de variation la plus rapide</p>
+                    </section>
+                    <section data-background-iframe="gradientVisualisation.html" data-background-interactive>
+                    </section>
+                </section>
+
+                <!-- Gradient vectoriel -->
+                <section>
+                    <h4>Gradient d’un champ vectoriel</h4>
+                    <p class="fragment">Pour $\mathbf{u}(x,y)$, le gradient est une matrice :</p>
+                    <p class="fragment">$$\nabla \mathbf{u} =
+                    \begin{pmatrix}
+                    \frac{\partial u_x}{\partial x} & \frac{\partial u_x}{\partial y} \\
+                    \frac{\partial u_y}{\partial x} & \frac{\partial u_y}{\partial y}
+                    \end{pmatrix}$$</p>
+                    <p class="fragment">Cette matrice contient toutes les informations sur les variations locales du champ.</p>
+                </section>
+
+                <!-- Exemple clé -->
+                <section data-name="Exemples">
+                    <section>
+                        <h4>Exemple : gradient d’un champ scalaire</h4>
+                        <p>$$f(x,y) = x^2 + y^2$$</p>
+                        <p class="fragment">$$\nabla f = (2x, 2y)$$</p>
+                        <p class="fragment">Vecteur radial pointant vers l’extérieur, proportionnel à la distance à l’origine</p>
+                    </section>
+                    <section>
+                        <h4>Exemple : gradient vectoriel</h4>
+                        <p>$$\mathbf{u}(x,y) = (x, 2y)$$</p>
+                        <p class="fragment">$$\nabla \mathbf{u} =
+                        \begin{pmatrix}
+                        1 & 0 \\
+                        0 & 2
+                        \end{pmatrix}$$</p>
+                        <p class="fragment">Dilate deux fois plus dans la direction $y$ que dans $x$</p>
+                    </section>
+                </section>
+
+                <!-- Erreurs fréquentes -->
+                <section>
+                    <h4>Pièges fréquents</h4>
+                    <ul>
+                        <li class="fragment">Confondre $\nabla f$ (vecteur) et $\frac{\partial f}{\partial x}$ (scalaire)</li>
+                        <li class="fragment">Penser que $\nabla \mathbf{u}$ est un vecteur</li>
+                        <li class="fragment">Oublier que le gradient agit sur des scalaires, pas directement sur des vecteurs</li>
+                    </ul>
+                </section>
+
+                <!-- Activité -->
+                <section data-name="Activité">
+                    <h4>Mini-défi en binôme</h4>
+                    <p class="fragment">Calculer le gradient de :</p>
+                    <ul>
+                        <li class="fragment">$f(x,y) = \sin x + e^y$</li>
+                        <li class="fragment">$\mathbf{u}(x,y) = (x^2, xy)$</li>
+                    </ul>
+                    <p class="fragment">→ Visualiser la direction et l’intensité</p>
+                </section>
+
+                <!-- Conclusion -->
+                <section>
+                    <h2>Fin.</h2>
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+
+            </div>
+		</div>
+
+		<script src="../../../../../dist/reveal.js"></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js"></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js"></script>
+        <script src="../../../../../plugin/math/math.js"></script>
+
+		<script>
+			Reveal.initialize({
+				hash: true,
+                fragmentInURL: false,
+                hashOneBasedIndex: true,
+                navigationMode: 'linear',
+
+                simplemenu: {
+                    barhtml: {
+                        header: "<div class='menubar'><ul class='menu'></ul></div>"
+                    }
+                },
+                customcontrols: {
+                    controls: [
+                            { icon: '<i class="fa fa-pen-square"></i>',
+                                title: 'Toggle chalkboard (B)',
+                                action: 'RevealChalkboard.toggleChalkboard();'
+                            },
+                            { icon: '<i class="fa fa-pen"></i>',
+                                title: 'Toggle notes canvas (C)',
+                                action: 'RevealChalkboard.toggleNotesCanvas();'
+                            }
+                            ]
+                },
+                chalkboard: {
+                    src: 'chalkboard.json'
+                },
+                mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				plugins: [ RevealChalkboard, RevealCustomControls, Simplemenu, Multimodal, RevealMath.MathJax2 ]
+			});
+		</script>
+	</body>
+</html>

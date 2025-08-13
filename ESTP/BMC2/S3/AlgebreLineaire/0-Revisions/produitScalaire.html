@@ -45,7 +45,7 @@
     #container {
       position: relative;
       width: 800px;  /* canvas = 800x600 comme demandé */
-      height: 600px;
+      height: 626px;
       overflow: hidden;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -85,7 +85,61 @@
     #panel button.active { background: #e7f5ee; border-color: #8dd3b4; }
     .chip { display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; border:1px solid #e1e4e8; background:#fff; margin-right:6px; font-size:12px;}
     .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+    /* Bouton Défis en bas du canvas */
+    #container .defis-btn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid #d0d7de;
+      background: #f0f3f7;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    #container .defis-btn:hover { background: #e8edf3; }
+
+    /* Modal Défis */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      z-index: 1000;
+    }
+    .modal.open { display: flex; }
+    .modal-dialog {
+      width: min(560px, 92vw);
+      background: #ffffff;
+      color: #111827;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      padding: 16px 18px;
+    }
+    .modal-header { 
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; 
+      border-bottom: 1px solid #eef2f7; padding-bottom: 8px; margin-bottom: 8px; 
+    }
+    .modal-header h3 { margin: 0; font-size: 18px; }
+    .modal-close { background: transparent; border: 0; font-size: 22px; cursor: pointer; line-height: 1; }
+    .modal-body ul { list-style: none; padding: 0; margin: 0; }
+    .modal-body li { margin: 8px 0; }
+    .modal-body li label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+    .modal-body input[type="checkbox"] { width: 16px; height: 16px; }
   </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
   <div class="page">
@@ -93,22 +147,49 @@
       <h1>Plan, produit scalaire et projection</h1>
     </div>
     <div class="content">
-      <div id="container"></div>
+      <div id="container">
+        <button id="btnDefis" class="defis-btn" type="button">Défis</button>
+      </div>
 
       <aside id="panel">
-      <h2>Produit scalaire et angle</h2>
-      <div class="row small">Cliquez-glissez les extrémités de <span style="color:#2063f7">u</span> et <span style="color:#ff6b6b">v</span>. Double-clic pour réinitialiser.</div>
+      <div class="row small">Cliquez-glissez les extrémités de <span style="color:#2063f7">u</span> et <span style="color:#ff6b6b">v</span>.</div>
       <div id="readout" class="row"></div>
       <button id="btnW" type="button">Afficher le vecteur w</button>
       <div class="row small">w est la projection orthogonale de <span style="color:#ff6b6b">v</span> sur la droite engendrée par <span style="color:#2063f7">u</span>.</div>
       <div class="row" style="margin-top:10px;">
-        <span class="chip"><span class="dot" style="background:#2063f7"></span>u</span>
-        <span class="chip"><span class="dot" style="background:#ff6b6b"></span>v</span>
-        <span class="chip"><span class="dot" style="background:#2ecc71"></span>w = proj<sub>u</sub>(v)</span>
-                 <span class="chip"><span class="dot" style="background:#8e44ad"></span>θ</span>
+        <span class="chip"><span class="dot" style="background:#2063f7"></span>$u$</span>
+        <span class="chip"><span class="dot" style="background:#ff6b6b"></span>$v$</span>
+        <span class="chip"><span class="dot" style="background:#2ecc71"></span>$w = proj_u(v)$</span>
+        <span class="chip"><span class="dot" style="background:#8e44ad"></span>$\theta$</span>
        </div>
      </aside>
-   </div>
+    </div>
+
+    <!-- Modal Défis -->
+    <div id="defisModal" class="modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="defisTitle">
+        <div class="modal-header">
+          <h3 id="defisTitle">Défis</h3>
+          <button class="modal-close" id="defisClose" aria-label="Fermer">×</button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>
+              <label for="defi1">
+                <input id="defi1" type="checkbox" />
+                <span>Déplacer le vecteur $u$ sans faire bouger $w$</span>
+              </label>
+            </li>
+            <li>
+              <label for="defi2">
+                <input id="defi2" type="checkbox" />
+                <span>Deplacer le vecteur $v$ sans changer le produit scalaire $u \cdot v$</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
    </div>
 
   <!-- p5.js -->
@@ -130,6 +211,8 @@
 
     // DOM panneau
     let readout, btnW;
+    // DOM défis
+    let btnDefis, defisModal, defisClose;
 
     function setup() {
       const c = createCanvas(800, 600);
@@ -140,6 +223,15 @@
       btnW = document.getElementById('btnW');
       updateWButton();
       btnW.addEventListener('click', () => { showW = !showW; updateWButton(); });
+
+      // Défis: références et événements
+      btnDefis = document.getElementById('btnDefis');
+      defisModal = document.getElementById('defisModal');
+      defisClose = document.getElementById('defisClose');
+      if (btnDefis) btnDefis.addEventListener('click', openDefisModal);
+      if (defisClose) defisClose.addEventListener('click', closeDefisModal);
+      if (defisModal) defisModal.addEventListener('click', (e) => { if (e.target === defisModal) closeDefisModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDefisModal(); });
     }
 
     function updateWButton() {
@@ -169,7 +261,7 @@
       drawArrow(createVector(0,0), v, V_COLOR, 'v');
 
       let theta = NaN;
-      const nu = mag(u), nv = mag(v);
+      const nu = u.mag(), nv = v.mag();
       if (nu > 1e-9 && nv > 1e-9) {
         theta = p5.Vector.angleBetween(u, v);
         drawThetaArc(u, v, 64);
@@ -185,6 +277,18 @@
     //   drawHandle(v, V_COLOR);
 
       updatePanel(dotUV, nu, nv, theta, w);
+    }
+
+    // --- Modal Défis ---
+    function openDefisModal() {
+      if (!defisModal) return;
+      defisModal.classList.add('open');
+      defisModal.setAttribute('aria-hidden', 'false');
+    }
+    function closeDefisModal() {
+      if (!defisModal) return;
+      defisModal.classList.remove('open');
+      defisModal.setAttribute('aria-hidden', 'true');
     }
 
     // --- Utilitaires géométrie et dessin ---
@@ -269,8 +373,8 @@
       noStroke(); fill(ANGL_COLOR);
       const amid = start + 0.5*(stop - start);
       const lx = C.x + (R+16)*Math.cos(amid), ly = C.y + (R+16)*Math.sin(amid);
-      const deg = degrees(Math.abs(d)).toFixed(2);
-      textAlign(CENTER, CENTER); text('θ = ' + deg + '°', lx, ly);
+      const deg = d.toFixed(2);
+      textAlign(CENTER, CENTER); text('θ = ' + deg + 'rad', lx, ly);
     }
 
     function drawRightAngleMarker(w, v) {
@@ -306,11 +410,11 @@
 
     // --- Panneau valeurs ---
     function updatePanel(dotUV, nu, nv, theta, w) {
-      const thetaDeg = isFinite(theta) ? degrees(theta).toFixed(4) : 'n/d';
+      const thetaDeg = isFinite(theta) ? degrees(theta).toFixed(1) : 'n/d';
+      const thetaRad = isFinite(theta) ? theta.toFixed(2) : 'n/d';
       const cosTheta = isFinite(theta) ? Math.cos(theta) : NaN;
-      const cosTxt = isFinite(cosTheta) ? cosTheta.toFixed(6) : 'n/d';
-      const dotByComp = (u.x*v.x + u.y*v.y).toFixed(4);
-      const dotByNorm = (isFinite(theta) ? (nu*nv*Math.cos(theta)).toFixed(4) : 'n/d');
+      const cosTxt = isFinite(cosTheta) ? cosTheta.toFixed(3) : 'n/d';
+      const dotByComp = (u.x*v.x + u.y*v.y).toFixed(0);
       const wTxt = (w && isFinite(w.x) && isFinite(w.y))
         ? `w = ( ${fmt(w.x)}, ${fmt(w.y)} )`
         : `w indéfini si u = (0,0)`;
@@ -318,34 +422,32 @@
       readout.innerHTML = [
         `<div class="section">
           <div class="section-title">Vecteurs</div>
-          <div class="row"><code>u = ( ${fmt(u.x)}, ${fmt(u.y)} )</code></div>
-          <div class="row"><code>v = ( ${fmt(v.x)}, ${fmt(v.y)} )</code></div>
-        </div>`,
-        `<div class="section">
-          <div class="section-title">Angle</div>
-          <div class="row"><span class="val">θ = ${thetaDeg}°</span></div>
+          <div class="row">$u = ( ${fmt(u.x)}, ${fmt(u.y)} )$</div>
+          <div class="row">$v = ( ${fmt(v.x)}, ${fmt(v.y)} )$</div>
         </div>`,
         `<div class="section">
           <div class="section-title">Produit scalaire</div>
-          <div class="row"><code>u·v = u_x v_x + u_y v_y</code></div>
-          <div class="row result">= <span class="val">${dotByComp}</span></div>
-          <div class="row"><code>u·v = ||u|| · ||v|| · cos(θ)</code></div>
-          <div class="row result">= <span class="val">${dotByNorm}</span></div>
+          <div>$u\\cdot v = u_x v_x + u_y v_y$</div>          
+          <div>$u\\cdot v = \\|u\\|\\,\\|v\\|\\,\\cos(\\theta)$</div>         
+          <div class="row result">$\\quad= \\, $<span class="val">${dotByComp}</span></div>
+        </div>`,
+        `<div class="section">
+          <span class="section-title">Angle </span>   
+          $\\quad \\theta = $<span class="val"> $ ${thetaRad}\\, $</span> rad
+          $\\,\\, = $<span class="val"> $ ${thetaDeg}°$</span>
         </div>`,
         `<div class="section">
           <div class="section-title">Normes et cosinus</div>
-          <div class="row small">||u|| = <span class="val">${nu.toFixed(4)}</span></div>
-          <div class="row small">||v|| = <span class="val">${nv.toFixed(4)}</span></div>
-          <div class="row small">cos(θ) = <span class="val">${cosTxt}</span></div>
-        </div>`,
-        `<div class="section">
-          <div class="section-title">Projection</div>
-          <div class="row"><code>${wTxt}</code></div>
+          <div class="row small">$\\|u\\| =\\, $<span class="val">$ ${nu.toFixed(0)}$</span></div>
+          <div class="row small">$\\|v\\| =\\, $<span class="val">$ ${nv.toFixed(0)}$</span></div>
+          <div class="row small">$\\cos(\\theta) = \\, $<span class="val">$ ${cosTxt}$</span></div>
         </div>`
       ].join('');
+      if (window.MathJax?.typesetPromise) MathJax.typesetPromise([readout]);
+
     }
 
-    function fmt(x) { return nf(x, 1, 3); }
+    function fmt(x) { return nf(x.toFixed(0)); }
   </script>
 </body>
 </html>
