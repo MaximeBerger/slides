@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Espace vectoriel</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<section>
+						<h2>Algèbre linéaire</h2>
+						<h4>2 - Définition : Espace vectoriel</h4>
+					</section>
+					<section>
+						<p>À la fin de cette séquence, vous serez capable de&nbsp;:</p>
+						<ul>
+							<li class="fragment">Énoncer la définition d’un espace vectoriel (EV)</li>
+							<li class="fragment">Identifier rapidement un exemple ou un non‑exemple</li>
+						</ul>
+					</section>
+				</section>
+				<section class="center" data-sm="false">
+					<h4>Menu</h4>
+					<ul class="menu"></ul>
+				</section>
+				<section data-name="Prérequis">
+					<section>
+						<h4>Prérequis</h4>
+						<ul>
+							<li class="fragment">Notion de structure sur un ensemble</li>
+							<li class="fragment">Loi interne et loi externe</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Objectif pédagogique">
+					<section>
+						<h4>Objectif pédagogique (But)</h4>
+						<p>Connaître la définition d’un <strong>espace vectoriel</strong>.</p>
+					</section>
+				</section>
+				<section data-name="Pourquoi un cadre EV ?">
+					<section>
+						<h4>Problématique / Accroche</h4>
+						<p>Beaucoup d’objets différents (vecteurs, polynômes, fonctions, matrices) obéissent aux mêmes règles&nbsp;→ un seul cadre&nbsp;: EV.</p>
+					</section>
+				</section>
+				<section data-name="Définition">
+					<section>
+						<h4>Définition d’un espace vectoriel</h4>
+						<p>EV sur \(\mathbb K\)&nbsp;: un ensemble \(V\) muni d’une addition \(+\) (loi interne) et d’une action \(\cdot\) de \(\mathbb K\) (loi externe), tels que pour tous \(u,v,w\in V\), \(\lambda,\mu\in\mathbb K\)&nbsp;:</p>
+						<ul>
+							<li class="fragment">\(u+v=v+u\)</li>
+							<li class="fragment">\((u+v)+w=u+(v+w)\)</li>
+							<li class="fragment">\(\exists\,0\) neutre, et \(\forall u,\exists -u\)</li>
+							<li class="fragment">\(\lambda(u+v)=\lambda u+\lambda v\)</li>
+							<li class="fragment">\((\lambda+\mu)u=\lambda u+\mu u\)</li>
+							<li class="fragment">\((\lambda\mu)u=\lambda(\mu u)\)</li>
+							<li class="fragment">\(1\cdot u=u\)</li>
+						</ul>
+						<p class="fragment small">Conséquences utiles (admises)&nbsp;: unicité de \(0\) et de \(-u\)&nbsp;; \(0\cdot u=\lambda\cdot 0=0\).</p>
+					</section>
+				</section>
+				<section data-name="Schéma / Visualisation">
+					<section>
+						<h4>Schéma global / Visualisation</h4>
+						<p>Carte mentale&nbsp;: «&nbsp;axiomes d’addition&nbsp;» + «&nbsp;compatibilités avec \(\mathbb K\)&nbsp;» → EV.</p>
+					</section>
+				</section>
+				<section data-name="Exemples et non‑exemples">
+					<section>
+						<h4>Exemples et non‑exemples</h4>
+						<ul>
+							<li class="fragment"><strong>EV</strong>&nbsp;: \(\mathbb R^n\), \(\mathcal P_n\), \(M_{m\times n}(\mathbb R)\), fonctions \(f:E\to\mathbb R\) (\(E\) fini)</li>
+							<li class="fragment"><strong>Non‑exemples</strong>&nbsp;: vecteurs de norme 1 dans \(\mathbb R^2\) (pas fermé) ; polynômes de degré exactement \(n\) (pas fermé par somme)</li>
+							<li class="fragment">Solutions d’équations différentielles homogènes ; suites réelles ; suites réelles \(\to 0\)</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Activité Vrai/Faux">
+					<section>
+						<h4>Activité pédagogique interactive</h4>
+						<p>Type&nbsp;: vrai/faux + test de définition. Objectif&nbsp;: diagnostiquer les confusions (fermeture, \(0\), degré exact). Matériel&nbsp;: ardoises.</p>
+						<ul>
+							<li class="fragment">«&nbsp;L’ensemble des solutions de \(ax+by=0\) est un EV de \(\mathbb R^2\)&nbsp;» (vrai si \(a,b\) non tous nuls)</li>
+							<li class="fragment">«&nbsp;Les matrices inversibles forment un EV&nbsp;» (faux)</li>
+							<li class="fragment">«&nbsp;Les fonctions positives \(f\ge 0\)&nbsp;» (faux)</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Pièges">
+					<section>
+						<h4>Pièges fréquents</h4>
+						<ul>
+							<li class="fragment">Polynômes&nbsp;: confondre «&nbsp;degré \(\le n\)&nbsp;» (EV) et «&nbsp;degré \(=n\)&nbsp;» (non)</li>
+							<li class="fragment">Oublier le vecteur nul</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Trace">
+					<section>
+						<h4>Trace distribuée (PDF)</h4>
+						<ul>
+							<li class="fragment"><strong>À savoir</strong>&nbsp;: définition complète d’un EV, notations</li>
+							<li class="fragment"><strong>À comprendre / savoir faire</strong>&nbsp;: appliquer la définition à un exemple / non‑exemple</li>
+							<li class="fragment"><strong>Exemple vu ensemble</strong>&nbsp;: \(M_{2\times 2}\) est un EV (vérification synthétique)</li>
+							<li class="fragment"><strong>Mini‑exercice</strong>&nbsp;: montrer que \(\{(x,y,z)\in\mathbb R^3: x+2y-3z=0\}\) est un EV</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Fin.</h2>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+            </div>
+		</div>
+
+		<script src="../../../../../../dist/reveal.js"></script>
+		<script src="../../../../../../plugin/simplemenu/simplemenu.js"></script>
+		<script src="../../../../../../plugin/multimodal/multimodal.js"></script>
+		<script src="../../../../../../plugin/math/math.js"></script>
+
+		<script src="../../../../../../plugin/config.js"></script>
+	</body>
+</html>

@@ -3,7 +3,8 @@ Reveal.initialize({
     fragmentInURL: false,
     hashOneBasedIndex: true,
     navigationMode: 'linear',
-
+    width: 960, height: 700, margin: 0,
+    minScale: 1, maxScale: 1,
     simplemenu: {
         barhtml: {
             header: "<div class='menubar'><ul class='menu'></ul></div>"
