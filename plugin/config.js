@@ -18,7 +18,11 @@ Reveal.initialize({
                     { icon: '<i class="fa fa-pen"></i>',
                         title: 'Toggle notes canvas (C)',
                         action: 'RevealChalkboard.toggleNotesCanvas();'
-                    }
+	                    },
+	                    { icon: '<i class="fa fa-th-large"></i>',
+	                        title: 'Afficher/Masquer le plan (Esc)',
+	                        action: 'Reveal.toggleOverview();'
+	                    }
                 ]
     },
     chalkboard: {

@@ -14,6 +14,8 @@
  **
  ** Ancienne version : 
  ** https://gitlab.univ-nantes.fr/sunye-g/asciidoctor-reveal-example/-/blob/master/static/revealjs-plugins/chalkboard/chalkboard.js?ref_type=heads
+
+ Ajouté deux resize, lignes 1451 et 1532
  ******************************************************************/
 
  "use strict";
