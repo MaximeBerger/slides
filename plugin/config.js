@@ -36,7 +36,6 @@ Reveal.initialize({
                 { color: 'rgba(20, 237, 28, 1)', cursor: 'url(' + path + 'img/chalk-green.png), auto'},
                 { color: 'rgba(220, 133, 41, 1)', cursor: 'url(' + path + 'img/chalk-orange.png), auto'},
                 { color: 'rgba(220,0,220, 1)', cursor: 'url(' + path + 'img/chalk-purple.png), auto'},
-                { color: 'rgba(255,220,0, 1)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto'}
         ]
     },  
     mathjax2: {
