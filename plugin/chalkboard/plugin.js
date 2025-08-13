@@ -1446,6 +1446,7 @@
      function setupCanvasEvents( canvas ) {
  // TODO: check all touchevents
          canvas.addEventListener( 'touchstart', function ( evt ) {
+            resize();
              evt.preventDefault();
  //console.log("Touch start");
              if ( !readOnly && evt.target.getAttribute( 'data-chalkboard' ) == mode ) {
@@ -1526,6 +1527,7 @@
          }, false );
  
          canvas.addEventListener( 'mousedown', function ( evt ) {
+             resize();
              evt.preventDefault();
              if ( !readOnly && evt.target.getAttribute( 'data-chalkboard' ) == mode ) {
  //console.log( "mousedown: " + evt.button );
