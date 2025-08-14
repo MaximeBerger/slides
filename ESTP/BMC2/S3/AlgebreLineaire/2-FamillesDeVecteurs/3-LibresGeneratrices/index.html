@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>e.v. - libres et génératrices</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+	</head>
+	<body>
+		<div class="reveal">
+            <div class="slides">
+      
+              <!-- Couverture -->
+              <section data-transition="fade" data-state="hide-menubar hide-menu">
+                <section>
+                  <h2>Algèbre linéaire</h2>
+                  <h4>3 — Familles libres, génératrices</h4>
+                  <p class="small">Redondance vs information minimale</p>
+                </section>
+                <section>
+                  <p>À la fin de cette séquence, vous serez capables de :</p>
+                  <ul>
+                    <li class="fragment">Tester la liberté ou la dépendance d’une famille de vecteurs.</li>
+                    <li class="fragment">Vérifier qu’une famille engendre un espace vectoriel.</li>
+                    <li class="fragment">Identifier une base et comprendre le lien avec la dimension.</li>
+                  </ul>
+                  <p>Prérequis : combinaisons linéaires, sous-espace engendré.</p>
+                </section>
+              </section>
+      
+              <!-- Menu -->
+              <section class="center" data-name="TOC" data-sm="false">
+                <h4>Menu</h4>
+                <ul class="menu"></ul>
+              </section>
+      
+              <!-- Accroche -->
+              <section data-name="Accroche">
+                <section>
+                  <h4>Problématique / Accroche</h4>
+                  <p>“Trop de capteurs, trop de données” → <strong>dépendances</strong>. L’idéal : <strong>information minimale</strong> = base.</p>
+                </section>
+              </section>
+      
+              <!-- Notions & définitions -->
+              <section data-name="Notions">
+                <section>
+                  <h4>Définitions</h4>
+                  <ul>
+                    <li><strong>Famille libre</strong> : \(\sum_{i=1}^p \lambda_i b_i=0 \Rightarrow \lambda_i=0\;\forall i\).</li>
+                    <li><strong>Famille génératrice</strong> : \(\mathrm{Vect}(b_1,\dots,b_p)=V\).</li>
+                    <li><strong>Rang</strong> d’une famille : dimension de \(\mathrm{Vect}(b_1,\dots,b_p)\).</li>
+                    <li><strong>Base</strong> : famille à la fois libre et génératrice.</li>
+                  </ul>
+                </section>
+                <section>
+                  <h4>Tests par Gauss</h4>
+                  <ul>
+                    <li><strong>Liberté</strong> \(\Leftrightarrow Bx=0\) n’a que la solution \(x=0\).</li>
+                    <li><strong>Engendrement</strong> (en dim. \(n\)) : \(\mathrm{rang}(B)=n\).</li>
+                  </ul>
+                </section>
+                <section>
+                  <h4>Théorème de la dimension</h4>
+                  <p>Toutes les bases d’un espace \(V\) ont le même cardinal \(n\).</p>
+                  <ul>
+                    <li>Si \(\dim V=n\), toute famille libre de \(n\) vecteurs est une base.</li>
+                    <li>Si \(\dim V=n\), toute famille génératrice de \(n\) vecteurs est une base.</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Schéma global / Visualisation -->
+              <section data-name="Schema">
+                <section>
+                  <h4>Schéma global</h4>
+                  <p class="small">Famille libre → vecteurs “indépendants” ; Famille génératrice → recouvre tout l’espace.</p>
+                  <!-- Commentaire pour animations à venir :
+                    - Animation 1 : En 2D, montrer deux vecteurs colinéaires (famille liée) puis les “ouvrir” pour former une base.
+                    - Animation 2 : En 3D, montrer 3 vecteurs dans un plan (rang 2) puis ajuster le 3e pour remplir l’espace (rang 3).
+                    - Animation 3 : Diagramme interactif liberté vs génération (4 zones : libre+génératrice = base; libre non gén. ; génératrice non libre; ni libre ni gén.).
+                  -->
+                </section>
+              </section>
+      
+              <!-- Exemples clés -->
+              <section data-name="Exemples">
+                <section>
+                  <h4>Exemple (\n R^3)</h4>
+                  <p>Trois vecteurs avec \(\mathrm{rang}=3\) → base ; rang=2 → plan.</p>
+                </section>
+                <section>
+                  <h4>Exemple (\n \mathcal P_2)</h4>
+                  <p>\((1, X, X^2)\) est libre et génératrice → base de \(\mathcal P_2\).</p>
+                </section>
+              </section>
+      
+              <!-- Activité pédagogique -->
+              <section data-name="Activite">
+                <section>
+                  <h4>Activité pédagogique</h4>
+                  <p>Pour 3 vecteurs de \(\mathbb R^3\) :
+                    <ol>
+                      <li>Pivoter la matrice \(B\).</li>
+                      <li>Lire le rang.</li>
+                      <li>Conclure : libre ? génératrice ? base ?</li>
+                    </ol>
+                  </p>
+                  <!-- Commentaire pour animations à venir :
+                    - Animation 4 : Tableau dynamique qui affiche le statut (libre/génératrice/base) en fonction du rang calculé.
+                  -->
+                </section>
+              </section>
+      
+              <!-- Pièges fréquents -->
+              <section data-name="Pieges">
+                <section>
+                  <h4>Pièges fréquents</h4>
+                  <ul>
+                    <li>Orthogonalité non nécessaire pour être libre.</li>
+                    <li>Inclure le vecteur nul dans une famille “libre” est impossible.</li>
+                    <li>En \(\mathbb R^2\), 3 vecteurs sont toujours liés.</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Trace distribuée -->
+              <section data-name="Trace">
+                <section>
+                  <h4>Trace distribuée aux étudiants (PDF)</h4>
+                  <div class="boxed small">
+                    <p><strong>Ce que je dois savoir</strong> : définition liberté, engendrement, base, rang.</p>
+                    <p><strong>Ce que je dois comprendre / savoir faire</strong> : tester liberté/engendrement avec Gauss, appliquer le théorème de la dimension.</p>
+                    <p><strong>Exemple vu ensemble</strong> : cas \(\mathbb R^3\) et \(\mathcal P_2\).</p>
+                    <p><strong>Mini-exercice</strong> : en \(\mathbb R^2\), montrer que toute famille de 3 vecteurs est liée.</p>
+                  </div>
+                  <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+              </section>
+      
+              <!-- Fin -->
+              <section>
+                <h2>Fin.</h2>
+                <p class="small">Questions, puis mise en pratique.</p>
+              </section>
+      
+            </div>
+          </div>
+
+		
+	</body>
+</html>

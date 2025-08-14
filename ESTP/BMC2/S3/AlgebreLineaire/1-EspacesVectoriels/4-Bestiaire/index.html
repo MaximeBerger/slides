@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>e.v. - bestiaire</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+		 
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+    
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<section>
+						<h2>Algèbre linéaire</h2>
+						<h4>4 – Bestiaire</h4>
+					</section>
+					<section>
+						<p>À la fin de cette séquence, vous serez capables de&nbsp;:</p>
+						<ul>
+							<li class="fragment">Construire un «&nbsp;catalogue mental&nbsp;» d’<strong>exemples</strong> / <strong>non‑exemples</strong> pour raisonner vite</li>
+						</ul>
+					</section>
+				</section>
+				<section class="center" data-sm="false">
+					<h4>Menu</h4>
+					<ul class="menu"></ul>
+				</section>
+				
+				<section data-name="Prérequis">
+					<section>
+						<h4>Prérequis</h4>
+						<ul>
+							<li class="fragment">Espaces vectoriels (EV)</li>
+							<li class="fragment">Sous‑espaces vectoriels</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Problématique / Accroche">
+					<section>
+						<h4>Problématique / Accroche</h4>
+						<ul>
+							<li class="fragment">«&nbsp;Tout ressemble à \(\mathbb R^n\)&nbsp;?&nbsp;» — Oui par les <strong>règles</strong>, non par la <strong>nature</strong> des objets</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Contenu réduit (panorama)">
+					<section>
+						<h4>Contenu réduit (panorama efficace)</h4>
+						<p class="small">Trois familles pour construire le «&nbsp;catalogue&nbsp;».</p>
+					</section>
+					<section>
+						<h4>EV canoniques</h4>
+						<ul>
+							<li class="fragment">\(\mathbb R^n\), \(\mathbb C^n\)</li>
+							<li class="fragment">\(M_{m\times n}(\mathbb R)\)</li>
+							<li class="fragment">\(\mathcal P_n\) et \(\mathcal P\)</li>
+							<li class="fragment">Fonctions \(\mathbb R\to\mathbb R\) (sur domaine fini)</li>
+							<li class="fragment">Suites à <strong>support fini</strong></li>
+						</ul>
+					</section>
+					<section>
+						<h4>Sous‑espaces typiques</h4>
+						<ul>
+							<li class="fragment">Solutions de \(Ax=0\)</li>
+							<li class="fragment">Hyperplans \(\{x: a^\top x=0\}\)</li>
+							<li class="fragment">Polynômes multiples d’un polynôme fixé</li>
+							<li class="fragment">Matrices <strong>symétriques</strong></li>
+							<li class="fragment">Fonctions de <strong>moyenne nulle</strong></li>
+						</ul>
+					</section>
+					<section>
+						<h4>Contre‑exemples utiles</h4>
+						<ul>
+							<li class="fragment">Polynômes de <strong>degré exactement \(n\)</strong></li>
+							<li class="fragment">Vecteurs de <strong>norme 1</strong></li>
+							<li class="fragment">Matrices <strong>inversibles</strong></li>
+							<li class="fragment">Fonctions <strong>positives</strong></li>
+							<li class="fragment">Courbes de type <strong>cercle / ellipse</strong></li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Schéma / Visualisation">
+					<section>
+						<h4>Schéma global / Visualisation</h4>
+						<ul>
+							<li class="fragment">Placer des axes et visualiser des <strong>bases</strong> : en espaces de fonctions, penser \(\cos\) / \(\sin\)</li>
+							<li class="fragment">Construire des <strong>combinaisons linéaires</strong> de manière géométrique</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Exemples clés">
+					<section>
+						<h4>Exemples clés</h4>
+						<ul>
+							<li class="fragment">Solutions d’une <strong>EDL linéaire homogène</strong> → EV ; <em>non‑homogènes</em> → non</li>
+							<li class="fragment">Solutions d’un système \(Ax=b\) — <strong>non</strong> (affine), sauf \(b=0\)</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Activité">
+					<section>
+						<h4>Activité pédagogique interactive</h4>
+						<ul>
+							<li class="fragment">Durée 10–12 min</li>
+							<li class="fragment">Matériel&nbsp;: <em>jeux de cartes</em> (ou <em>diapos</em>)</li>
+							<li class="fragment">Objectif&nbsp;: <strong>classer</strong> rapidement des objets en EV / sous‑EV / non‑EV</li>
+						</ul>
+					</section>
+				</section>
+				<section data-name="Trace">
+					<section>
+						<h4>Trace distribuée (PDF)</h4>
+						<ul>
+							<li class="fragment"><strong>À savoir</strong>&nbsp;: lexique rapide (homogène / affine, linéaire / non‑linéaire), exemples phares</li>
+							<li class="fragment"><strong>À comprendre / savoir faire</strong>&nbsp;: classer un exemple inédit en <strong>30 s</strong></li>
+							<li class="fragment"><strong>Exemple vu ensemble</strong>&nbsp;: table de classification (3 EV / 3 non‑EV)</li>
+							<li class="fragment"><strong>Mini‑exercices</strong>&nbsp;: classer \(\{P\in\mathcal P: P''(0)=0\}\) (EV) et \(\{f: \|f\|_\infty=1\}\) (non)</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Fin.</h2>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+			</div>
+		</div>
+
+	</body>
+</html>

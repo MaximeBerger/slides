@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>e.v. - combinaisons linéaires</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+	</head>
+	<body>
+		<div class="reveal">
+            <div class="slides">
+      
+              <!-- Couverture -->
+              <section data-transition="fade" data-state="hide-menubar hide-menu">
+                <section>
+                  <h2>Algèbre linéaire</h2>
+                  <h4>2 — Combinaisons linéaires</h4>
+                  <p class="small">Un fil conducteur : « synthétiser un objet à partir d’ingrédients »</p>
+                </section>
+                <section>
+                  <p>À la fin de cette séquence, vous serez capables de :</p>
+                  <ul>
+                    <li class="fragment">Décider si \(v\in\mathrm{Vect}(b_1,\dots,b_p)\) à l’aide d’un système \(B\lambda=v\).</li>
+                    <li class="fragment">Calculer explicitement des coefficients \(\lambda_i\) d’une combinaison linéaire.</li>
+                  </ul>
+                  <p>Prérequis : coordonnées dans une base ; mettre en équation une combinaison.</p>
+                </section>
+              </section>
+      
+              <!-- Menu -->
+              <section class="center" data-name="TOC" data-sm="false">
+                <h4>Menu</h4>
+                <ul class="menu"></ul>
+              </section>
+      
+              <!-- Accroche -->
+              <section data-name="Accroche">
+                <section>
+                  <h4>Problématique / Accroche</h4>
+                  <p>Peut-on synthétiser un <strong>signal</strong> ou une <strong>couleur</strong> à partir d’ingrédients donnés ?</p>
+                  <p class="small">Idée : un mélange = une <em>combinaison linéaire</em>.</p>
+                </section>
+              </section>
+      
+              <!-- Notions & définitions -->
+              <section data-name="Notions">
+                <section>
+                  <h4>Définitions</h4>
+                  <ul>
+                    <li><strong>Combinaison linéaire</strong> : \(v=\sum_{i=1}^p \lambda_i b_i\).</li>
+                    <li><strong>Sous-espace engendré</strong> : \(\mathrm{Vect}(b_1,\dots,b_p)=\{\sum_i \lambda_i b_i\}\).</li>
+                    <li><strong>Test d’appartenance</strong> : \(v\in \mathrm{Vect}(b_1,\dots,b_p)\iff \exists\,\lambda: B\lambda=v\), avec \(B=(b_1\;\cdots\;b_p)\).</li>
+                    <li><strong>Outil</strong> : élimination de Gauss pour résoudre \(B\lambda=v\).</li>
+                  </ul>
+                </section>
+                <section>
+                  <h4>Schéma global / Visualisation</h4>
+                  <p>Selon \(p\) et les dépendances linéaires :</p>
+                  <ul>
+                    <li class="fragment">\(p=1\) et \(b_1\neq 0\) : une <strong>droite</strong> par l’origine.</li>
+                    <li class="fragment">\(p=2\) indépendants dans \(\mathbb R^3\) : un <strong>plan</strong> par l’origine.</li>
+                    <li class="fragment">\(p\geq n\) avec rang \(n\) : tout l’<strong>espace</strong> \(\mathbb R^n\).</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Exemples clés -->
+              <section data-name="Exemples">
+                <section>
+                  <h4>Exemple clé (\n R^3)</h4>
+                  <p>\(b_1=(1,0,1),\; b_2=(0,1,1),\; b_3=(1,1,0)\). Décider si \((2,1,3)\in\mathrm{Vect}(b_1,b_2,b_3)\).</p>
+                  <div class="boxed small">
+                    On pose \(B=\begin{pmatrix}1&0&1\\0&1&1\\1&1&0\end{pmatrix}\), \(v=\begin{pmatrix}2\\1\\3\end{pmatrix}\), et on résout \(B\lambda=v\).
+                  </div>
+                  <p class="slide-note">Voir la démo interactive « Gauss pas à pas » ci-après.</p>
+                </section>
+                <section>
+                  <h4>Exemple clé (\n \mathcal P_2)</h4>
+                  <p>Écrire \(X\) comme combinaison de \((1, X-1, X^2)\).</p>
+                  <div class="boxed small">
+                    Chercher \(\alpha,\beta,\gamma\) tels que \(\alpha\cdot 1 + \beta(X-1) + \gamma X^2 = X\). On compare les coefficients.
+                  </div>
+                </section>
+              </section>
+      
+              <!-- Activités interactives -->
+              <section data-name="Activité">
+                <section>
+                  <h4>Activité : réinterpréter un système</h4>
+                  <p>Résoudre \(xu_1 + yu_2 = b\) <span class="small">= trouver une <em>combinaison</em> de \(u_1,u_2\) donnant \(b\)</span>.</p>
+                  <ul>
+                    <li class="fragment">Aucun \((x,y)\) : \(b\) est <span class="bad">hors</span> du plan engendré.</li>
+                    <li class="fragment">Une infinité : \(b\) est <span class="ok">dans</span> le plan et les solutions forment une droite d’inconnues.</li>
+                    <li class="fragment">Unique : \(u_1,u_2\) indépendants et \(b\) dans \(\mathrm{Vect}(u_1,u_2)\).</li>
+                  </ul>
+                </section>
+                <section>
+                  <h4>QCM express</h4>
+                  <p class="small">« \(v\) est combinaison linéaire de \(b_i\) ssi le système \(B\lambda=v\) est <em>compatible</em>. »</p>
+                  <div>
+                    <button class="btn" onclick="qcmAnswer(true)">Vrai</button>
+                    <button class="btn" onclick="qcmAnswer(false)">Faux</button>
+                    <span id="qcm-result" class="pill"></span>
+                  </div>
+                </section>
+              </section>
+      
+              <!-- Démo : mélange / combinaison (curseurs) -->
+              <section data-name="Demo-melange">
+                <section>
+                  <h4>Animation : combinaison à deux ingrédients</h4>
+                  <div class="row">
+                    <div class="col boxed">
+                      <p><strong>Vecteurs</strong> \(u=(1,2)\), \(v=(2,1)\). Ajuster \(\lambda,\mu\) :</p>
+                      <label>\(\lambda\) <input type="range" min="-3" max="3" step="0.5" value="1" id="lam" oninput="mixUpdate()"></label>
+                      <label>\(\mu\) <input type="range" min="-3" max="3" step="0.5" value="1" id="mu" oninput="mixUpdate()"></label>
+                      <p>Résultat : \(w=\lambda u + \mu v\) = <span id="mix-out" class="code"></span></p>
+                      <canvas id="mix-canvas" width="360" height="240" style="border:1px solid #ccc; border-radius:8px;"></canvas>
+                    </div>
+                    <div class="col boxed">
+                      <p><strong>Mélange de couleur</strong> (métaphore) : \(\lambda\)·Rouge + \(\mu\)·Bleu</p>
+                      <div class="row">
+                        <div class="color-box" id="c1"></div>
+                        <div class="color-box" id="c2"></div>
+                        <div class="color-box" id="cMix"></div>
+                      </div>
+                      <p class="tiny">Note : l’addition de vecteurs n’est <em>pas</em> l’addition physique de couleurs, c’est juste une analogie pour visualiser des « proportions ».</p>
+                    </div>
+                  </div>
+                </section>
+              </section>
+      
+              <!-- Démo : Gauss pas à pas -->
+              <section data-name="Gauss">
+                <section>
+                  <h4>Animation : élimination de Gauss (pas à pas)</h4>
+                  <p class="small">Problème : \(B\lambda=v\) avec l’exemple en \(\mathbb R^3\).</p>
+                  <div class="row boxed" style="align-items:flex-start;">
+                    <div>
+                      <div class="code">Augmentée [B | v] :</div>
+                      <div class="row" style="align-items:center;">
+                        <div id="matB" class="matrix"></div>
+                        <div class="sep"></div>
+                        <div id="vecv" class="matrix"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <button class="btn" onclick="gaussReset()">Réinitialiser</button>
+                      <button class="btn" onclick="gaussStep()">Étape suivante</button>
+                      <div id="gauss-log" class="small" style="margin-top:0.5rem;"></div>
+                    </div>
+                  </div>
+                  <p class="tiny">Boutons : applique des opérations élémentaires de lignes jusqu’à l’échelonnée réduite.</p>
+                </section>
+              </section>
+      
+              <!-- Pièges fréquents -->
+              <section data-name="Pieges">
+                <section>
+                  <h4>Pièges fréquents</h4>
+                  <ul>
+                    <li>Confondre <strong>combinaison linéaire</strong> et <strong>produit scalaire</strong> : \(\sum\lambda_i b_i\) ≠ \(\langle u,v\rangle\).</li>
+                    <li>Oublier la <strong>fermeture</strong> : le résultat doit rester dans l’ensemble considéré.</li>
+                    <li>Penser que toute partie de \(\mathbb R^n\) est un <strong>sous-espace</strong> : il faut contenir \(0\) et être stable par combinaisons.</li>
+                    <li>Confondre <strong>dépendance</strong> et <strong>engendrement</strong> : engendrer un espace n’implique pas l’indépendance.</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Trace distribuée (PDF) -->
+              <section data-name="Trace">
+                <section>
+                  <h4>Trace distribuée aux étudiants (PDF)</h4>
+                  <div class="boxed small">
+                    <p><strong>Ce que je dois savoir (rappels utiles)</strong> : mise en équation d’une combinaison, lecture de coordonnées.</p>
+                    <p><strong>Ce que je dois comprendre / savoir faire</strong> : tester \(v\in\mathrm{Vect}(b_i)\), résoudre \(B\lambda=v\) par Gauss.</p>
+                    <p><strong>Exemple vu ensemble</strong> : cas \(\mathbb R^3\) ci-dessus + polynômes \(\mathcal P_2\).</p>
+                    <p><strong>Mini-exercice</strong> : est-ce que \((1,2,3)\) appartient au sous-espace engendré par \((1,0,1),(1,1,0)\) ? Trouver \(\lambda\).</p>
+                  </div>
+                  <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                  <p class="tiny">Astuce impression PDF (Reveal) : ajouter <span class="code">?print-pdf</span> à l’URL puis Imprimer → PDF.</p>
+                </section>
+              </section>
+      
+              <!-- Fin -->
+              <section>
+                <h2>Fin.</h2>
+                <p class="small">Questions, puis pratique autonome.</p>
+              </section>
+      
+            </div>
+          </div>
+
+		
+	</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>e.v. - coordonnées</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+	</head>
+	<body>
+        <div class="reveal">
+            <div class="slides">
+      
+              <!-- Couverture -->
+              <section data-transition="fade" data-state="hide-menubar hide-menu">
+                <section>
+                  <h2>Algèbre linéaire</h2>
+                  <h4>5 — Matrices de passage & formule de changement de base</h4>
+                  <p class="small">Même vecteur, deux descriptions</p>
+                </section>
+                <section>
+                  <p>À la fin de cette séquence, vous serez capables de :</p>
+                  <ul>
+                    <li class="fragment">Construire la matrice de passage \(P_{\mathcal B\to \mathcal B'}\).</li>
+                    <li class="fragment">Convertir des coordonnées entre deux bases.</li>
+                    <li class="fragment">Utiliser l’inverse et la composition des matrices de passage.</li>
+                  </ul>
+                  <p>Prérequis : bases, coordonnées, résolution \(B\,x=v\), calcul matriciel.</p>
+                </section>
+              </section>
+      
+              <!-- Menu -->
+              <section class="center" data-name="TOC" data-sm="false">
+                <h4>Menu</h4>
+                <ul class="menu"></ul>
+              </section>
+      
+              <!-- Accroche -->
+              <section data-name="Accroche">
+                <section>
+                  <h4>Problématique / Accroche</h4>
+                  <p>« Même vecteur, deux descriptions » : passer instantanément d’un repère à l’autre.</p>
+                  <!-- Commentaires (idées d’animations, sans JS inclus ici) :
+                    - A1 : Schéma avec un vecteur fixe v et deux repères (bases) ; cliquer pour afficher ses coordonnées dans chaque base.
+                    - A2 : Glissière conceptuelle entre deux bases en R^2, montrant l’effet de la matrice de passage sur [v]_B.
+                  -->
+                </section>
+              </section>
+      
+              <!-- Notions & définitions -->
+              <section data-name="Notions">
+                <section>
+                  <h4>Définition</h4>
+                  <p>La matrice de passage de \(\mathcal B\) vers \(\mathcal B'\) est \(P_{\mathcal B\to \mathcal B'}=[\operatorname{Id}]_{\mathcal B'}^{\ \mathcal B}\), unique matrice telle que</p>
+                  <p class="boxed">\([v]_{\mathcal B'}=P_{\mathcal B\to \mathcal B'}\,[v]_{\mathcal B}\) pour tout \(v\in V\).</p>
+                </section>
+                <section>
+                  <h4>Construction</h4>
+                  <p>Les colonnes de \(P_{\mathcal B\to \mathcal B'}\) sont \([b_i]_{\mathcal B'}\), c.-à-d. les coordonnées des vecteurs de \(\mathcal B\) exprimés dans \(\mathcal B'\).</p>
+                </section>
+                <section>
+                  <h4>Inverse et composition</h4>
+                  <ul>
+                    <li>\(P_{\mathcal B'\to \mathcal B}=(P_{\mathcal B\to \mathcal B'})^{-1}\).</li>
+                    <li>\(P_{\mathcal B\to \mathcal B''}=P_{\mathcal B'\to \mathcal B''}\,P_{\mathcal B\to \mathcal B'}\).</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Schéma global / Visualisation -->
+              <section data-name="Schema">
+                <section>
+                  <h4>Schéma global</h4>
+                  <p>Diagramme de bases : \(\mathcal B \xrightarrow{\ P_{\mathcal B\to \mathcal B'}\ } \mathcal B' \xrightarrow{\ P_{\mathcal B'\to \mathcal B''}\ } \mathcal B''\).</p>
+                  <!-- Animation suggérée :
+                    - A3 : Diagramme cliquable où l’on peut composer deux matrices de passage et voir l’effet direct \(P_{\mathcal B\to \mathcal B''}\) sur un \([v]_\mathcal B\).
+                  -->
+                </section>
+              </section>
+      
+              <!-- Exemples clés -->
+              <section data-name="Exemples">
+                <section>
+                  <h4>Exemple clé (\n R^2)</h4>
+                  <p>Soient \(\mathcal B=((1,0),(0,1))\), \(\mathcal B'=((1,1),(1,-1))\).</p>
+                  <div class="boxed">
+                    <p>Alors \(P_{\mathcal B\to \mathcal B'}=\begin{pmatrix}1&1\\[2pt]1&-1\end{pmatrix}\), et \([v]_{\mathcal B'}=P_{\mathcal B\to \mathcal B'}\,[v]_{\mathcal B}\).</p>
+                    <p>Test : pour \(v=(2,0)^\top\), \([v]_{\mathcal B'}=(1,1)^\top\).</p>
+                  </div>
+                  <!-- Commentaire :
+                    - A4 : “Banque de vecteurs” : choisir v et afficher automatiquement ses coordonnées dans B et B'.
+                  -->
+                </section>
+              </section>
+      
+              <!-- Activité pédagogique -->
+              <section data-name="Activite">
+                <section>
+                  <h4>Activité pédagogique</h4>
+                  <p>Construire \(P_{\mathcal B\to \mathcal B'}\) à partir des colonnes \([b_i]_{\mathcal B'}\) ; vérifier numériquement \([v]_{\mathcal B'}=P[v]_{\mathcal B}\).</p>
+                  <p class="tiny">Matériel possible : feuille + calculatrice ; notebook Python ; ou GeoGebra pour visualiser en 2D.</p>
+                </section>
+              </section>
+      
+              <!-- Pièges fréquents -->
+              <section data-name="Pieges">
+                <section>
+                  <h4>Pièges fréquents</h4>
+                  <ul>
+                    <li>Sens de la flèche : ne pas confondre \(P_{\mathcal B\to \mathcal B'}\) et \(P_{\mathcal B'\to \mathcal B}\).</li>
+                    <li>Remplir \(P\) par lignes au lieu de colonnes.</li>
+                    <li>Oublier l’inversibilité (bases \(\Rightarrow\) \(P\) inversible).</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Trace distribuée -->
+              <section data-name="Trace">
+                <section>
+                  <h4>Trace distribuée aux étudiants (PDF)</h4>
+                  <div class="boxed small">
+                    <p><strong>Ce que je dois savoir</strong> : \([v]_{\mathcal B'}=P_{\mathcal B\to \mathcal B'}[v]_{\mathcal B}\) ; colonnes = \([b_i]_{\mathcal B'}\) ; inverse & composition.</p>
+                    <p><strong>Ce que je dois comprendre / savoir faire</strong> : construire \(P\), convertir des coordonnées, inverser \(P\).</p>
+                    <p><strong>Exemple vu ensemble</strong> : bases de \(\mathbb R^2\) ci-dessus.</p>
+                    <p><strong>Mini-exercice</strong> : pour \(\mathcal B'=((2,0),(0,1))\), calculer \(P_{\mathcal B\to \mathcal B'}\) et \([\,(3,1)\,]_{\mathcal B'}\).</p>
+                  </div>
+                  <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                  <p class="tiny">Astuce impression PDF (Reveal) : ajouter <span class="code">?print-pdf</span> à l’URL puis Imprimer → PDF.</p>
+                </section>
+              </section>
+      
+              <!-- Fin -->
+              <section>
+                <h2>Fin.</h2>
+                <p class="small">Questions, puis mise en pratique.</p>
+              </section>
+      
+            </div>
+          </div>
+
+		
+	</body>
+</html>

@@ -43,6 +43,7 @@
     #answersOverlay {
       position:absolute; inset:0; pointer-events:none;
     }
+     #answersOverlay .answersGroup { position:absolute; inset:0; }
     #answersOverlay .answerItem {
       position:absolute; left:0; top:0; width:0; height:0;
       display:flex; align-items:center; /* centrer verticalement */
@@ -257,20 +258,42 @@
       if (window.MathJax?.typesetPromise) MathJax.typesetPromise([questionOverlay]);
     }
 
-    function refreshAnswersOverlay(list) {
+    function renderAnswersGroups(currentList, nextList = null) {
       if (!answersOverlay) return;
       answersOverlay.innerHTML = '';
-      for (let i = 0; i < list.length; i++) {
-        const c = list[i];
+      // Groupe courant
+      const groupCur = document.createElement('div');
+      groupCur.className = 'answersGroup';
+      groupCur.id = 'answersGroupCurrent';
+      for (let i = 0; i < currentList.length; i++) {
+        const c = currentList[i];
         const div = document.createElement('div');
         div.className = 'answerItem';
-        // Positionner via style inline selon la carte p5
         div.style.left = (c.x) + 'px';
         div.style.top = (c.y) + 'px';
         div.style.width = (c.w) + 'px';
         div.style.height = (c.h) + 'px';
         div.innerHTML = (c.id ? `<strong>${c.id} — </strong>` : '') + c.text;
-        answersOverlay.appendChild(div);
+        groupCur.appendChild(div);
+      }
+      answersOverlay.appendChild(groupCur);
+      // Groupe suivant (optionnel)
+      if (nextList && Array.isArray(nextList)) {
+        const groupNext = document.createElement('div');
+        groupNext.className = 'answersGroup';
+        groupNext.id = 'answersGroupNext';
+        for (let i = 0; i < nextList.length; i++) {
+          const c = nextList[i];
+          const div = document.createElement('div');
+          div.className = 'answerItem';
+          div.style.left = (c.x) + 'px';
+          div.style.top = (c.y) + 'px';
+          div.style.width = (c.w) + 'px';
+          div.style.height = (c.h) + 'px';
+          div.innerHTML = (c.id ? `<strong>${c.id} — </strong>` : '') + c.text;
+          groupNext.appendChild(div);
+        }
+        answersOverlay.appendChild(groupNext);
       }
       if (window.MathJax?.typesetPromise) MathJax.typesetPromise([answersOverlay]);
     }
@@ -292,7 +315,7 @@
       layoutCards();
       refreshPanel();
       refreshQuestionOverlay();
-      refreshAnswersOverlay(cards);
+      renderAnswersGroups(cards);
     }
 
     function nextIndex() { return (qIndex + 1 < quiz.length) ? qIndex + 1 : null; }
@@ -313,6 +336,8 @@
       // Lance animation
       transitioning = true;
       t0 = performance.now();
+      // Met en place les deux groupes de réponses pour l'animation
+      renderAnswersGroups(cards, nextCards);
     }
 
     // p5
@@ -341,6 +366,14 @@
           const e = easeInOutCubic(u);
           offsetCurY = -e * H;       // le courant défile vers le haut
           offsetNextY = (1 - e) * H; // le suivant arrive par le bas
+          // Anime aussi le texte de la question (overlay HTML) et les réponses en synchronisation
+          if (questionOverlay) {
+            questionOverlay.style.transform = `translateY(${offsetCurY}px)`;
+          }
+          const groupCur = document.getElementById('answersGroupCurrent');
+          const groupNext = document.getElementById('answersGroupNext');
+          if (groupCur) groupCur.style.transform = `translateY(${offsetCurY}px)`;
+          if (groupNext) groupNext.style.transform = `translateY(${offsetNextY}px)`;
           if (u >= 1) {
             // Commit
             transitioning = false;
@@ -353,7 +386,15 @@
             layoutCards(); // recalc positions à l’état final
             refreshPanel();
             refreshQuestionOverlay();
-            refreshAnswersOverlay(cards);
+            renderAnswersGroups(cards);
+            // Réinitialise la transformation du texte de question
+            if (questionOverlay) {
+              questionOverlay.style.transform = 'translateY(0px)';
+            }
+            const g1 = document.getElementById('answersGroupCurrent');
+            const g2 = document.getElementById('answersGroupNext');
+            if (g1) g1.style.transform = 'translateY(0px)';
+            if (g2) g2.remove();
           }
         }
 
@@ -444,7 +485,12 @@
           let y2 = startY + Math.max(0, (H - startY - 40 - total)/2);
           for (const c of nextCards) { c.x = x; c.y = y2; c.w = Wc; c.h = Hc; y2 += Hc + gap; }
         }
-        refreshAnswersOverlay(cards);
+        // Maintient l'overlay synchronisé
+        if (transitioning && nextCards) {
+          renderAnswersGroups(cards, nextCards);
+        } else {
+          renderAnswersGroups(cards);
+        }
       };
     };
 

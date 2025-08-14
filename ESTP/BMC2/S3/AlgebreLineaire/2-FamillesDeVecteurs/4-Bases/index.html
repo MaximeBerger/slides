@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>e.v. - bases</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+	</head>
+	<body>
+		<div class="reveal">
+            <div class="slides">
+      
+              <!-- Couverture -->
+              <section data-transition="fade" data-state="hide-menubar hide-menu">
+                <section>
+                  <h2>Algèbre linéaire</h2>
+                  <h4>4 — Manipulation de bases</h4>
+                  <p class="small">Compléter, extraire, changer de base</p>
+                </section>
+                <section>
+                  <p>À la fin de cette séquence, vous serez capables de :</p>
+                  <ul>
+                    <li class="fragment">Compléter une famille libre en base (dimension finie).</li>
+                    <li class="fragment">Extraire une base d’une famille génératrice.</li>
+                    <li class="fragment">Calculer les coordonnées \([v]_{\mathcal B}\).</li>
+                  </ul>
+                  <p>Prérequis : bases, tests libre/génératrice.</p>
+                </section>
+              </section>
+      
+              <!-- Menu -->
+              <section class="center" data-name="TOC" data-sm="false">
+                <h4>Menu</h4>
+                <ul class="menu"></ul>
+              </section>
+      
+              <!-- Accroche -->
+              <section data-name="Accroche">
+                <section>
+                  <h4>Problématique / Accroche</h4>
+                  <ul>
+                    <li>Construire une base adaptée pour simplifier les calculs (ex : rotation dans l’espace).</li>
+                    <li>Dériver des polynômes : base canonique plus adaptée.</li>
+                    <li>Moyenne glissante sur une suite : coordonnées dans une base adaptée.</li>
+                    <li>Changer de base dans la pratique : conversion monétaire, conversion de couleurs, déplacement caméra en 3D.</li>
+                  </ul>
+                  <!-- Commentaire animations :
+                    - Animation 1 : rotation d’une base en 3D, montrer les nouveaux vecteurs.
+                    - Animation 2 : changement de base RVB → TSL, visualisation de la position du vecteur couleur.
+                    - Animation 3 : illustration interactive des coordonnées d’un vecteur selon deux bases différentes.
+                  -->
+                </section>
+              </section>
+      
+              <!-- Notions & méthodes -->
+              <section data-name="Notions">
+                <section>
+                  <h4>Théorème de la base incomplète</h4>
+                  <p>En dimension finie \(n\) : toute famille libre peut être complétée en base en ajoutant des vecteurs jusqu’à obtenir \(n\) pivots.</p>
+                </section>
+                <section>
+                  <h4>Extraction de base</h4>
+                  <p>À partir d’une famille génératrice : appliquer Gauss, garder les colonnes pivot → base.</p>
+                </section>
+                <section>
+                  <h4>Coordonnées dans une base</h4>
+                  <p>Si \(B=(b_1\,\dots\,b_n)\), trouver \([v]_{\mathcal B}\) en résolvant \(B\,x=v\).</p>
+                </section>
+                <section>
+                  <h4>Changement de base</h4>
+                  <p>Même vecteur, coordonnées différentes selon la base choisie.</p>
+                  <!-- Animation suggestion : curseur pour interpoler entre deux bases et afficher les coordonnées du même vecteur dans les deux systèmes. -->
+                </section>
+              </section>
+      
+              <!-- Exemples clés -->
+              <section data-name="Exemples">
+                <section>
+                  <h4>Exemple : Compléter une base</h4>
+                  <p>En \(\mathbb R^3\), \(\{(1,1,0),(0,1,1)\}\) : trouver \(b_3\) pour compléter en base.</p>
+                </section>
+                <section>
+                  <h4>Exemple : Extraction</h4>
+                  <p>4 vecteurs en \(\mathbb R^3\) : appliquer Gauss, garder les colonnes pivot → base.</p>
+                </section>
+              </section>
+      
+              <!-- Activité pédagogique -->
+              <section data-name="Activite">
+                <section>
+                  <h4>Activité pédagogique</h4>
+                  <ul>
+                    <li>QCM sur complétion/extraction de base.</li>
+                    <li>Pair programming : fonction Python pour extraire une base.</li>
+                    <li>Mini-défi : changer de base pour simplifier un calcul de coordonnées.</li>
+                  </ul>
+                  <!-- Animation suggestion : outil GeoGebra montrant la complétion visuelle d’une base en 2D/3D. -->
+                </section>
+              </section>
+      
+              <!-- Pièges fréquents -->
+              <section data-name="Pieges">
+                <section>
+                  <h4>Pièges fréquents</h4>
+                  <ul>
+                    <li>Penser que l’ordre des vecteurs dans la base est sans effet : il fixe les coordonnées.</li>
+                  </ul>
+                </section>
+              </section>
+      
+              <!-- Trace distribuée -->
+              <section data-name="Trace">
+                <section>
+                  <h4>Trace distribuée aux étudiants (PDF)</h4>
+                  <div class="boxed small">
+                    <p><strong>Ce que je dois savoir</strong> : compléter et extraire une base; résoudre \(B\,x=v\).</p>
+                    <p><strong>Ce que je dois comprendre / savoir faire</strong> : calculer \([v]_{\mathcal B}\).</p>
+                    <p><strong>Exemple vu ensemble</strong> : extraction en \(\mathbb R^3\).</p>
+                    <p><strong>Mini-exercice</strong> : compléter \(\{(1,0,0),(0,1,1)\}\) en base de \(\mathbb R^3\).</p>
+                  </div>
+                  <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+              </section>
+      
+              <!-- Fin -->
+              <section>
+                <h2>Fin.</h2>
+                <p class="small">Questions, puis mise en pratique.</p>
+              </section>
+      
+            </div>
+          </div>
+
+		
+	</body>
+</html>
