@@ -8,6 +8,14 @@ const state = {
   current: null, // { engine, id, label }
 };
 
+// Configuration API (à renseigner)
+const API_URL = 'https://d1-rest.maximeberger74.workers.dev//rest/ESTP/quiz_sessions';
+const API_SECRET = 'mot-de-passe';
+
+// Infos session
+let sessionId = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : ('session-' + Math.random().toString(36).slice(2));
+let sessionStartedAt = null; // Date
+
 // Elements DOM principaux 
 const panel = document.getElementById('panel');
 const container = document.getElementById('container');
@@ -147,6 +155,8 @@ function startTheme(themeId) {
   // Construire l'engine
   const engine = new ThemeQuizEngine(def.id, def.label, def.data, 5);
   state.current = { engine, id: def.id, label: def.label };
+  // Démarrage session si première fois
+  if (!sessionStartedAt) sessionStartedAt = new Date();
   // Réinitialiser le score à l'entrée d'un nouveau thème
   success = 0; errors = 0; tries = 0;
   // Initialiser l'UI quiz
@@ -167,6 +177,10 @@ function endTheme() {
   }
   state.current = null;
   renderThemesHome();
+  // Si tous les thèmes sont terminés, envoyer les résultats
+  if (areAllThemesCompleted()) {
+    submitResults().catch(err => console.error('submitResults error:', err));
+  }
 }
 
 // Gestion du cadre quiz (canvas + overlays)
@@ -370,6 +384,81 @@ function layoutCards() {
     for (const c of nextCards) { c.x = x; c.y = y2; c.w = Wc; c.h = Hc; y2 += Hc + gap; }
   }
   renderAnswersGroups(cards, nextCards);
+}
+
+// ----- Fin de session: collecte + envoi API -----
+function areAllThemesCompleted() {
+  return state.themes.every(t => t.done);
+}
+
+function computeSessionTotals() {
+  let numQuestionsTotal = 0;
+  let numCorrectTotal = 0;
+  for (const t of state.themes) {
+    if (t.score) {
+      const parts = String(t.score).split('/');
+      const c = Number(parts[0] || 0);
+      const q = Number(parts[1] || 0);
+      if (!Number.isNaN(c)) numCorrectTotal += c;
+      if (!Number.isNaN(q)) numQuestionsTotal += q;
+    }
+  }
+  return { numQuestionsTotal, numCorrectTotal };
+}
+
+function buildSessionPayload() {
+  const { numQuestionsTotal, numCorrectTotal } = computeSessionTotals();
+  const completedAt = new Date();
+  return {
+    session_id: sessionId,
+    started_at: sessionStartedAt ? sessionStartedAt.toISOString() : null,
+    completed_at: completedAt.toISOString(),
+    num_themes: state.themes.length,
+    num_questions_total: numQuestionsTotal,
+    num_correct_total: numCorrectTotal,
+    themes: state.themes.map(t => {
+      let correct = null, total = null;
+      if (t.score) {
+        const [c, q] = String(t.score).split('/');
+        correct = Number(c);
+        total = Number(q);
+      }
+      return {
+        theme_id: t.id,
+        theme_label: t.label,
+        done: !!t.done,
+        score: t.score, // ex: "3/5"
+        correct_count: Number.isFinite(correct) ? correct : null,
+        questions_total: Number.isFinite(total) ? total : null
+      };
+    })
+  };
+}
+
+async function submitResults() {
+  const payload = buildSessionPayload();
+  if (!API_URL || API_URL.includes('{YOUR-WORKER-URL}') || API_URL.includes('{YOUR-TABLE-NAME}')) {
+    console.warn('API_URL non configurée. Résultats non envoyés.', payload);
+    return;
+  }
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_SECRET}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      throw new Error(`HTTP ${res.status} ${res.statusText} - ${text}`);
+    }
+    // Optionnel: traiter la réponse
+    // const data = await res.json().catch(() => null);
+  } catch (e) {
+    console.error('Echec envoi résultats:', e);
+  }
 }
 
 // Modale
