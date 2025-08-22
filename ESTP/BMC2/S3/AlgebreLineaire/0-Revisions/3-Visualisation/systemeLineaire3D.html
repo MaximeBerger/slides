@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Systèmes linéaires 3D — Plans</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: transparent; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    .page { 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      gap: 20px; 
+      padding: 16px; 
+      background: transparent; 
+    }
+    .title-container { text-align: center; margin-bottom: 6px; }
+    .title-container h1 { font-size: 28px; font-weight: 700; color: #1f2937; margin: 0; letter-spacing: -0.5px; }
+    .subtitle { color:#6b7280; margin-top:6px; font-size:14px; }
+
+    .content { display: flex; align-items: flex-start; gap: 20px; }
+
+    /* Zone dessin p5.js */
+    #container {
+      position: relative;
+      width: 800px;   /* canvas = 800x600 */
+      height: 626px;  /* 600 + petite marge panneau titre interne */
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: transparent;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    /* Panneau latéral séparé */
+    #panel {
+      width: 300px;
+      height: 600px;
+      padding: 12px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      overflow: auto;
+    }
+
+    .eq-block {
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fcfcfd;
+    }
+    .eq-header {
+      display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;
+      font-weight:600; color:#374151;
+    }
+    .inputs { display:flex; align-items:center; gap:2px; flex-wrap:nowrap; }
+    input[type="number"] { width: 36px; padding: 2px 3px; border:1px solid #d1d5db; border-radius:3px; text-align:center; font-size:11px; }
+    button { cursor:pointer; border:none; border-radius:8px; padding:6px 10px; background:#111827; color:white; }
+    button.secondary { background:#e5e7eb; color:#111827; }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .tiny { font-size:12px; color:#6b7280; }
+    .math { font-size: 12px; }
+    .legend { display:flex; gap:6px; align-items:center; }
+    .chip { width:12px; height:12px; border-radius:3px; display:inline-block; border:1px solid rgba(0,0,0,.15); }
+
+    .section-title { margin: 10px 0 6px; font-weight:700; color:#111827; }
+    .sep { height:1px; background:#e5e7eb; margin:8px 0; }
+  </style>
+
+  <!-- MathJax pour afficher les formules -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }
+    };
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="title-container">
+      <h1>Systèmes linéaires en 3D</h1>
+      <div class="subtitle">Chaque équation $ax+by+cz=d$ définit un plan ; la scène montre leurs intersections.</div>
+    </div>
+    <div class="content">
+      <div id="container">
+        <div style="position:absolute; left:10px; top:8px; z-index:10;" class="tiny">
+          Drag gauche : rotation · Molette : zoom · Drag droit : pan
+        </div>
+      </div>
+      <div id="panel">
+        <div class="section-title">Équations</div>
+        <div id="equations"></div>
+        <div class="row">
+          <button onclick="addEquation()">Ajouter une équation</button>
+          <button class="secondary" onclick="randomize()">Exemple aléatoire</button>
+        </div>
+
+        <div class="sep"></div>
+                 <div class="section-title">Paramètres d'affichage</div>
+         
+         <div class="row tiny">
+              <!-- <label><input type="checkbox" id="chkAxes" checked onchange="redraw()"> Axes</label> -->
+              <span style="color:#dc3c3c; font-weight:600;">x</span> en rouge, 
+              <span style="color:#3cb45a; font-weight:600;">y</span> en vert, 
+              <span style="color:#3c5adc; font-weight:600;">z</span> en bleu
+         </div>
+
+         <div class="row tiny" style="padding-top: 8px;">
+             <button onclick="resetView()" class="secondary">Vue initiale</button>
+         </div>
+    </div>
+  </div>
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script>
+    /* ---------- Modèle ---------- */
+    // Quelques plans de départ (intersection unique)
+    let planes = [
+      {a: 1, b:  1, c: 1, d: 5, color: [ 20,100,220]},
+      {a: 1, b: -1, c: 2, d: 3, color: [220, 60, 40]},
+      {a: 2, b:  1, c:-1, d: 1, color: [ 40,160, 80]},
+    ];
+
+    const colorsPool = [
+      [ 20,100,220],[220, 60, 40],[ 40,160, 80],[140, 60,180],
+      [200,120, 20],[ 40, 40, 40],[  0,120,120],[120, 80, 40]
+    ];
+
+    let canvas, unit = 30;     // 1 unité = 40 px
+    let boxSize = 8;           // boîte de -8..+8 unités
+
+    /* ---------- p5.js ---------- */
+    function setup() {
+      canvas = createCanvas(800, 600, WEBGL);
+      canvas.parent("container");
+      setAttributes('antialias', true);
+      
+      // Configuration de la vision initiale
+      orbitControl(1, 1, 0.1); // Sensibilité de la souris
+      
+      // Position initiale de la caméra (vue isométrique)
+      camera(500, 500, 500, 0, 0, 0, 0, 0, -1);
+      
+      updatePanel();
+      // noLoop(); // on redessine à la demande - DÉSACTIVÉ pour orbitControl
+    }
+
+    function draw() {
+      background(255);
+      orbitControl(); // rotation/zoom/pan
+
+      // Lumière douce
+      ambientLight(120);
+      directionalLight(255, 255, 255, 0.5, 0.5, -1);
+
+      scale(unit); // On passe en unités mathématiques
+
+      // repères
+      drawAxes(boxSize);
+
+      // Plans
+      planes.forEach((p, i) => drawPlane(p, boxSize*2.2));
+    }
+
+    /* ---------- Dessins utils ---------- */
+    function drawAxes(L=10){
+      strokeWeight(1);
+      
+      // X rouge
+      stroke(220, 60, 60); 
+      line(-L,0,0, L,0,0);
+      // Cône X - pointe vers +X
+      push();
+      translate(L,0,0);
+      rotateZ(-PI/2); // Rotation de 180° pour pointer vers +X
+      fill(220, 60, 60);
+      noStroke();
+      cone(0.2, 0.4, 8);
+      pop();
+      
+      // Y vert
+      stroke(60, 180, 90); 
+      line(0,-L,0, 0,L,0);
+      // Cône Y - pointe vers +Y
+      push();
+      translate(0,L,0);
+    //   rotateX(PI); // Rotation de 90° pour pointer vers +Y
+      fill(60, 180, 90);
+      noStroke();
+      cone(0.2, 0.4, 8);
+      pop();
+      
+      // Z bleu
+      stroke(60, 90, 220); 
+      line(0,0,-L, 0,0,L);
+      // Cône Z - pointe vers +Z
+      push();
+      translate(0,0,L);
+      rotateX(PI/2); // Rotation de -90° pour pointer vers +Z
+      fill(60, 90, 220);
+      noStroke();
+      cone(0.2, 0.4, 8);
+      pop();
+    }
+    function drawBox(L=6){
+      noFill(); stroke(200); strokeWeight(1/unit);
+      push(); box(L*2, L*2, L*2); pop();
+    }
+    function drawGrid3D(L=6){
+      stroke(235); strokeWeight(1/unit);
+      // trois grilles sur les plans coordonnés
+      for (let k=-L; k<=L; k++){
+        // z=0
+        line(-L,k,0, L,k,0); line(k,-L,0, k,L,0);
+        // x=0
+        line(0,-L,k, 0,L,k); line(0,k,-L, 0,k,L);
+        // y=0
+        line(-L,0,k, L,0,k); line(k,0,-L, k,0,L);
+      }
+    }
+
+    function drawPlane(pl, extent=10){
+      // Équation : a x + b y + c z = d
+      const n = createVector(pl.a, pl.b, pl.c);
+      if (n.mag() < 1e-9) return;
+
+      // Point P0 sur le plan
+      let P0 = getPointOnPlane(pl);
+
+      // Base orthonormée (u, v) dans le plan
+      let t = Math.abs(n.x) < 0.9 ? createVector(1,0,0) : createVector(0,1,0);
+      let u = p5.Vector.cross(n, t).normalize();
+      let v = p5.Vector.cross(n, u).normalize();
+
+      // Carré centré en P0, taille 'extent'
+      const e = extent/2;
+      const p1 = p5.Vector.add(P0, p5.Vector.add(p5.Vector.mult(u, e), p5.Vector.mult(v, e)));
+      const p2 = p5.Vector.add(P0, p5.Vector.add(p5.Vector.mult(u,-e), p5.Vector.mult(v, e)));
+      const p3 = p5.Vector.add(P0, p5.Vector.add(p5.Vector.mult(u,-e), p5.Vector.mult(v,-e)));
+      const p4 = p5.Vector.add(P0, p5.Vector.add(p5.Vector.mult(u, e), p5.Vector.mult(v,-e)));
+
+      push();
+      noStroke();
+      ambientMaterial(pl.color[0], pl.color[1], pl.color[2], 120); // semi-transparent
+      beginShape();
+        vertex(p1.x, p1.y, p1.z);
+        vertex(p2.x, p2.y, p2.z);
+        vertex(p3.x, p3.y, p3.z);
+        vertex(p4.x, p4.y, p4.z);
+      endShape(CLOSE);
+
+      // Normale (petite flèche)
+      stroke(pl.color[0], pl.color[1], pl.color[2]); strokeWeight(1/unit);
+      line(P0.x, P0.y, P0.z, P0.x + n.x*0.4/n.mag(), P0.y + n.y*0.4/n.mag(), P0.z + n.z*0.4/n.mag());
+      pop();
+    }
+
+    function getPointOnPlane(pl){
+      const {a,b,c,d} = pl;
+      if (Math.abs(c) > 1e-9) return createVector(0, 0, d/c);
+      if (Math.abs(b) > 1e-9) return createVector(0, d/b, 0);
+      return createVector(d/a, 0, 0);
+    }
+
+    /* ---------- Panneau & interactions ---------- */
+    function updatePanel(){
+      const holder = document.getElementById('equations');
+      holder.innerHTML = "";
+      planes.forEach((pl, i) => {
+        const div = document.createElement('div');
+        div.className = 'eq-block';
+        // Ajuster la couleur pour correspondre à l'apparence du plan avec éclairage
+        const r = Math.min(255, pl.color[0] * 0.9 + 20); // Éclairage ambiant réduit
+        const g = Math.min(255, pl.color[1] * 0.9 + 20);
+        const b = Math.min(255, pl.color[2] * 0.9 + 20);
+        const col = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+        div.innerHTML = `
+          <div class="eq-header">
+            <span>Équation ${i+1}</span>
+            <span class="legend"><span class="chip" style="background:${col}"></span></span>
+          </div>
+          <div class="inputs">
+            <input type="number" step="0.5" value="${pl.a}" onchange="upd(${i},'a',this.value)">
+            <span class="math">x +</span>
+            <input type="number" step="0.5" value="${pl.b}" onchange="upd(${i},'b',this.value)">
+            <span class="math">y +</span>
+            <input type="number" step="0.5" value="${pl.c}" onchange="upd(${i},'c',this.value)">
+            <span class="math">z =</span>
+            <input type="number" step="0.5" value="${pl.d}" onchange="upd(${i},'d',this.value)">
+          </div>
+          <div class="row" style="margin-top:6px;">
+            <button style="background:#b91c1c" onclick="rem(${i})">Supprimer</button>
+          </div>
+        `;
+        holder.appendChild(div);
+      });
+      redraw();
+    }
+
+    function upd(i,k,val){ planes[i][k] = parseFloat(val); redraw(); }
+    function rem(i){ planes.splice(i,1); updatePanel(); }
+    function dup(i){
+      const p = planes[i];
+      const col = colorsPool[(planes.length)%colorsPool.length];
+      planes.push({a:p.a, b:p.b, c:p.c, d:p.d, color: col});
+      updatePanel();
+    }
+    function addEquation(){
+      const col = colorsPool[(planes.length)%colorsPool.length];
+      planes.push({a:1, b:1, c:1, d:3, color: col});
+      updatePanel();
+    }
+    function randomize(){
+      planes = [];
+      const m = 2 + Math.floor(Math.random()*2); // 2 ou 3 plans
+      for(let i=0;i<m;i++){
+        const a = rndNZ(), b = rndNZ(), c = rndNZ(), d = Math.round((Math.random()*6+1));
+        planes.push({a,b,c,d,color: colorsPool[i%colorsPool.length]});
+      }
+      updatePanel();
+    }
+         function rndNZ(){ let v=0; while(Math.abs(v)<0.4) v = (Math.random()*2-1)*2.5; return Math.round(v*2)/2; }
+
+     function resetView(){
+       // Réinitialiser la vue à la position isométrique
+       camera(500, 500, 500, 0, 0, 0, 0, 0, -1);
+     }
+
+
+     /* ---------- Divers ---------- */
+    function redraw(){ // wrapper pour noLoop()
+      // Avec orbitControl, draw() est appelée automatiquement
+      // Cette fonction n'est plus nécessaire mais gardée pour compatibilité
+    }
+  </script>
+</body>
+</html>
