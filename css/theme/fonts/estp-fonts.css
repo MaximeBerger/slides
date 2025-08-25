@@ -1,0 +1,14 @@
+/**
+ * ESTP Chart Graphique Fonts
+ * Montserrat pour les titres, Roboto pour le texte courant, Arial en fallback
+ * Utilise Adobe Fonts (Typekit) pour charger toutes les variations
+ */
+
+/* Chargement des polices via Adobe Fonts */
+@import url("https://use.typekit.net/fxl2egi.css");
+
+/* Définition des familles de polices avec fallbacks */
+:root {
+  --font-montserrat: 'Montserrat', Arial, sans-serif;
+  --font-roboto: 'Roboto', Arial, sans-serif;
+}

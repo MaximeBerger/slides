@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chart Graphique ESTP - Montserrat & Roboto</title>
+    <link rel="stylesheet" href="dist/theme/beige.css">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            background-color: #f7f3de;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h1 { font-size: 2.5em; font-weight: 700; }
+        h2 { font-size: 2em; font-weight: 600; }
+        h3 { font-size: 1.5em; font-weight: 500; }
+        h4 { font-size: 1.2em; font-weight: 500; }
+        
+        .font-test {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .montserrat-test {
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        
+        .roboto-test {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        .weight-test {
+            margin: 10px 0;
+        }
+        
+        .regular { font-weight: 400; }
+        .medium { font-weight: 500; }
+        .semibold { font-weight: 600; }
+        .bold { font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test Chart Graphique ESTP</h1>
+        <p>Cette page teste l'implémentation des polices Montserrat et Roboto selon la charte graphique ESTP.</p>
+        
+        <h2>Montserrat - Titres et encarts</h2>
+        <div class="font-test montserrat-test">
+            <div class="weight-test regular">Regular (400) - Titre principal avec Montserrat Regular</div>
+            <div class="weight-test medium">Medium (500) - Sous-titre avec Montserrat Medium</div>
+            <div class="weight-test semibold">Semi-Bold (600) - Encart important avec Montserrat Semi-Bold</div>
+            <div class="weight-test bold">Bold (700) - Titre principal avec Montserrat Bold</div>
+        </div>
+        
+        <h2>Roboto - Texte courant</h2>
+        <div class="font-test roboto-test">
+            <div class="weight-test regular">
+                <p>Regular (400) - Ceci est un paragraphe de texte courant écrit avec Roboto Regular. 
+                Il est utilisé pour le contenu principal des présentations et documents.</p>
+            </div>
+            <div class="weight-test medium">
+                <p>Medium (500) - Ceci est un texte en Roboto Medium, utilisé pour mettre en valeur 
+                certains éléments importants dans le contenu.</p>
+            </div>
+            <div class="weight-test bold">
+                <p>Bold (700) - Ceci est un texte en Roboto Bold, utilisé pour les éléments 
+                particulièrement importants ou les mots-clés.</p>
+            </div>
+        </div>
+        
+        <h2>Test de compatibilité</h2>
+        <p>Si les polices ne se chargent pas, le texte s'affichera en Arial (police de fallback).</p>
+        
+        <h3>Caractères spéciaux</h3>
+        <p>Test des caractères français : é è à ç ù û î ï ô œ æ</p>
+        <p>Test des chiffres : 0123456789</p>
+        <p>Test des symboles : @#$%^&*()_+-=[]{}|;':",./<>?</p>
+    </div>
+</body>
+</html>
