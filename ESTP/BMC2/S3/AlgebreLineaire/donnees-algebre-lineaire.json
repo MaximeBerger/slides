@@ -4,36 +4,48 @@
     {
       "id": "sec1",
       "numero": 0,
-      "titre": "0 · Révisions",
+      "titre": "Révisions",
       "description": "Vecteurs · Gauss · Systèmes",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "1 · Sur les vecteurs",
+          "titre": "Sur les vecteurs",
           "description": "",
           "lien": "0-Revisions/1-Vecteurs/index.html",
           "cible": "_blank"
         },
         {
           "numero": 2,
-          "titre": "2 · Pivot de Gauss",
+          "titre": "Pivot de Gauss",
           "description": "",
           "lien": "0-Revisions/2-PivotDeGauss/pivotGauss.html",
           "cible": "_blank"
         },
         {
           "numero": 3,
-          "titre": "3 · Systèmes 2D",
+          "titre": "Systèmes 2D",
           "description": "",
           "lien": "0-Revisions/3-Visualisation/systemeLineaire2D.html",
           "cible": "_blank"
         },
         {
           "numero": 4,
-          "titre": "4 · Systèmes 3D",
+          "titre": "Systèmes 3D",
           "description": "",
           "lien": "0-Revisions/3-Visualisation/systemeLineaire3D.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "QCM",
+          "lien": "0-Revisions/4-QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "0-Revisions/5-Exercices/index.html",
           "cible": "_blank"
         }
       ]
@@ -41,36 +53,48 @@
     {
       "id": "sec2",
       "numero": 1,
-      "titre": "1 · Espaces vectoriels",
+      "titre": "Espaces vectoriels",
       "description": "Définition · Exemples",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "1.1 · Les ensembles",
+          "titre": "Les ensembles",
           "description": "",
           "lien": "1-EspacesVectoriels/1-LesEnsembles/index.html",
           "cible": "_blank"
         },
         {
           "numero": 2,
-          "titre": "1.2 · Définition",
+          "titre": "Définition",
           "description": "",
           "lien": "1-EspacesVectoriels/2-Definition/index.html",
           "cible": "_blank"
         },
         {
           "numero": 3,
-          "titre": "1.3 · Sous-espaces",
+          "titre": "Sous-espaces",
           "description": "",
           "lien": "1-EspacesVectoriels/3-SousEspacesVectoriels/index.html",
           "cible": "_blank"
         },
         {
           "numero": 4,
-          "titre": "1.4 · Bestiaire",
+          "titre": "Bestiaire",
           "description": "",
           "lien": "1-EspacesVectoriels/4-Bestiaire/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "1-EspacesVectoriels/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "1-EspacesVectoriels/Exercices/index.html",
           "cible": "_blank"
         }
       ]
@@ -78,43 +102,55 @@
     {
       "id": "sec3",
       "numero": 2,
-      "titre": "2 · Familles de vecteurs",
+      "titre": "Familles de vecteurs",
       "description": "Libres · Bases · Dimension",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "2.1 · Coordonnées",
+          "titre": "Coordonnées",
           "description": "",
           "lien": "2-FamillesDeVecteurs/1-Coordonnees/index.html",
           "cible": "_blank"
         },
         {
           "numero": 2,
-          "titre": "2.2 · Combinaisons",
+          "titre": "Combinaisons",
           "description": "",
           "lien": "2-FamillesDeVecteurs/2-CombinaisonsLineaires/index.html",
           "cible": "_blank"
         },
         {
           "numero": 3,
-          "titre": "2.3 · Libres/Génératrices",
+          "titre": "Libres/Génératrices",
           "description": "",
           "lien": "2-FamillesDeVecteurs/3-LibresGeneratrices/index.html",
           "cible": "_blank"
         },
         {
           "numero": 4,
-          "titre": "2.4 · Bases",
+          "titre": "Bases",
           "description": "",
           "lien": "2-FamillesDeVecteurs/4-Bases/index.html",
           "cible": "_blank"
         },
         {
           "numero": 5,
-          "titre": "2.5 · Matrices passage",
+          "titre": "Matrices passage",
           "description": "",
           "lien": "2-FamillesDeVecteurs/5-MatricesDePassage/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "2-FamillesDeVecteurs/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "2-FamillesDeVecteurs/Exercices/index.html",
           "cible": "_blank"
         }
       ]
@@ -122,43 +158,55 @@
     {
       "id": "sec4",
       "numero": 3,
-      "titre": "3 · Applications linéaires",
+      "titre": "Applications linéaires",
       "description": "Noyau · Image · Matrices",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "3.1 · Définition",
+          "titre": "Définition",
           "description": "",
           "lien": "3-ApplicationsLineaires/1-Definition/index.html",
           "cible": "_blank"
         },
         {
           "numero": 2,
-          "titre": "3.2 · Propriétés",
+          "titre": "Propriétés",
           "description": "",
           "lien": "3-ApplicationsLineaires/2-Proprietes/index.html",
           "cible": "_blank"
         },
         {
           "numero": 3,
-          "titre": "3.3 · Théorème rang",
+          "titre": "Théorème rang",
           "description": "",
           "lien": "3-ApplicationsLineaires/3-TheoremeDuRang/index.html",
           "cible": "_blank"
         },
         {
           "numero": 4,
-          "titre": "3.4 · Révisions matrices",
+          "titre": "Révisions matrices",
           "description": "",
           "lien": "3-ApplicationsLineaires/4-RevisionsMatrices/index.html",
           "cible": "_blank"
         },
         {
           "numero": 5,
-          "titre": "3.5 · Matrice app. lin.",
+          "titre": "Matrice app. lin.",
           "description": "",
           "lien": "3-ApplicationsLineaires/5-MatriceDuneApplicationLineaire/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "3-ApplicationsLineaires/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "3-ApplicationsLineaires/Exercices/index.html",
           "cible": "_blank"
         }
       ]
@@ -166,22 +214,34 @@
     {
       "id": "sec5",
       "numero": 4,
-      "titre": "4 · Matrices",
+      "titre": "Matrices",
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "4.1 · Déterminants",
+          "titre": "Déterminants",
           "description": "",
           "lien": "4-Matrices/Déterminants/index.html",
           "cible": "_blank"
         },
         {
           "numero": 2,
-          "titre": "4.2 · Polynômes",
+          "titre": "Polynômes",
           "description": "",
           "lien": "4-Matrices/PolynomesDeMatrices/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "4-Matrices/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "4-Matrices/Exercices/index.html",
           "cible": "_blank"
         }
       ]
