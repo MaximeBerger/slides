@@ -154,7 +154,70 @@
     </div>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    // Chargement des thèmes depuis le fichier JSON
+    window.THEMES = [];
+
+    // Fonction pour charger les thèmes depuis le fichier JSON
+    async function loadThemes() {
+      try {
+        const response = await fetch('themes.json');
+        const data = await response.json();
+        window.THEMES = data.themes.map(theme => ({
+          id: theme.id,
+          label: theme.label,
+          data: theme.questions
+        }));
+        
+        // Initialiser l'état global après chargement
+        window.state.themes = window.THEMES.map(t => ({ id: t.id, label: t.label, done: false, score: null }));
+        
+        // Démarrer l'application après que le module soit chargé
+        setTimeout(() => {
+          if (window.renderThemesHome) {
+            window.renderThemesHome();
+          }
+        }, 100);
+      } catch (error) {
+        console.error('Erreur lors du chargement des thèmes:', error);
+      }
+    }
+
+    // Etat global de la session multi-thèmes
+    window.state = {
+      themes: [],
+      current: null, // { engine, id, label }
+    };
+
+    // Elements DOM principaux 
+    window.panel = document.getElementById('panel');
+    window.container = document.getElementById('container');
+    window.questionOverlay = document.getElementById('questionOverlay');
+    window.answersOverlay = document.getElementById('answersOverlay');
+
+    // Boutons existants
+    window.btnReset = document.getElementById('btnReset');
+    window.btnReveal = document.getElementById('btnReveal');
+    window.btnNext = document.getElementById('btnNext');
+
+    // Stats DOM existants
+    window.statIndex = document.getElementById('statIndex');
+    window.statTotal = document.getElementById('statTotal');
+    window.statTries = document.getElementById('statTries');
+    window.statErrors = document.getElementById('statErrors');
+
+    // Modale existante
+    window.overlay = document.getElementById('modalOverlay');
+    window.modalBody = document.getElementById('modalBody');
+    window.btnClose = document.getElementById('btnClose');
+
+    // Démarrage: charge les thèmes puis affiche l'écran
+    loadThemes();
+    
+    // Exposer la fonction renderThemesHome globalement pour qu'elle soit accessible depuis app.js
+    window.renderThemesHome = null; // Sera définie dans app.js
+  </script>
+  <script type="module" src="../../../../../../plugin/qcm/app.js"></script>
   <script>
     const sketch = (p) => {
       const W = 800, H = 600, margin = 24, headerH = 160;

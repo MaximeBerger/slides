@@ -31,6 +31,14 @@
 
 
 		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+        </style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -38,21 +46,22 @@
                 <section data-transition="fade" data-state="hide-menubar hide-menu">
                     <section>
                     <h2>Algèbre linéaire</h2>
-                    <h4>0 - Révisions sur les vecteurs</h4>
+                    <h3>0 - Révisions</h3>
+                    <h4>1 - Les vecteurs</h4>
                 </section>
                 
                 <section data-transition="fade" data-state="hide-menubar hide-menu">
                     <p>Objectifs :</p>
                     <ul>
-                        <li>Comprendre ce qu'est un vecteur</li>
+                        <li>Manipuler des vecteurs</li>
                         <li>Savoir faire des opérations avec des vecteurs</li>
                         <li>Savoir utiliser des vecteurs pour résoudre des problèmes</li>
                     </ul>
                 </section>
-                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                <!-- <section data-transition="fade" data-state="hide-menubar hide-menu">
                     Séquence 0 - Révisions. 
                     A retenir. 
-                </section>
+                </section> -->
             </section>
                 <section data-name="TOC" data-sm="false">
                     <h4>Menu</h4>
@@ -79,7 +88,7 @@
                         </ul>
                     </section>
                     <section>
-                        <h4>Qu'est-ce qu'on peut faire avec des vecteurs ?</h4>
+                        <h4>Comment manipuler des vecteurs ?</h4>
                         <ul>
                             <li class="fragment">Les additionner</li>
                             <li class="fragment">Les multiplier par un nombre</li>
@@ -102,38 +111,41 @@
                                 <li class="fragment" data-fragment-index="2">Vitesses</li>
                                 <li class="fragment" data-fragment-index="3">Positions</li>
                             </ul>
-                        <p class="fragment" data-fragment-index="4">Un vecteur n'a pas de point de départ...</p>
+                        <p class="fragment" data-fragment-index="4">Un vecteur n'a pas de point de départ !</p>
                         </p>
                     </section>
                     
                     
                     <section data-background-iframe="vecteurGateau.html" data-background-interactive>
                     </section>
-                    <section >
-                        Un utilisateur qui note des films sur netflix ou achète des produits sur amazon est représenté par un vecteur dans un espace à grande dimension. 
-                        
+                    <section class="align-top">
+                        Avez-vous d'autres idées ?  
                     </section>
                     <section >
-                        <iframe width="800" height="600" src="https://www.youtube.com/embed/iv-5mZ_9CPY?si=80XOcIEh8rK2MKB0&amp;controls=0&amp;clip=Ugkx2RXwUOx0Vf5YvPTztY4bXJ1z4WN94gV4&amp;clipt=EKG9FxiBkhs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        Une image.
+
+                        Un utilisateur qui note des films sur Netflix ou achète des produits sur amazon est représenté par un vecteur dans un espace à grande dimension. 
+                    </section>
+                    <section >
+                        <iframe width="800" height="600" src="https://www.youtube.com/embed/iv-5mZ_9CPY?si=80XOcIEh8rK2MKB0&amp;controls=1&amp;clip=Ugkx2RXwUOx0Vf5YvPTztY4bXJ1z4WN94gV4&amp;clipt=EKG9FxiBkhs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </section>
                     
                 </section>  
                 <section data-name="Règles de calcul">
                     <section >
-                        <h4>Opérations légales</h4>
+                        <h4>Propriétés</h4>
                         Sur l'addition de vecteurs :
                         <ul>
                             <li>Commutativité : $u + v = v + u$</li>
+                            <li>Existence d'un vecteur nul : $u + 0 = u$</li>
+                            <li>Existence d'un opposé : $u + (-u) = 0$</li>
                         </ul>
-                        Existence d'un opposé, 
-                        Sur le vecteur nul.
+                    </section>
+                    <section data-background-iframe="addition.html" data-background-interactive>
                     </section>
                     <section >
-                        Une animation sur les scalaires, addition de vecteurs ?
-                        Pour éviter la confusion entre les scalaires et les coordonnées des vecteurs.  
-                    </section>
-                    <section >
-                        Dans r2 on peut faire des choses supplémentaires : Le produit scalaire. Ce ne sera pas le cas de tous nos vecteurs.  
+                        <p>Dans $\R^n$ on a un produit scalaire.</p>
+                        <p class="fragment">Ce ne sera pas le cas de tous nos vecteurs.</p>
                     </section>
                     <section data-background-iframe="produitScalaire.html" data-background-interactive>
 

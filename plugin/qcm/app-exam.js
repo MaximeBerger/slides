@@ -1,39 +1,13 @@
-import { THEMES } from "./data/themes.js";
 import { ThemeQuizEngine } from "./core/engine.js";
 // utils non requis ici
 
-// Etat global de la session multi-thèmes
-const state = {
-  themes: THEMES.map(t => ({ id: t.id, label: t.label, done: false, score: null })),
-  current: null, // { engine, id, label }
-};
-
-// Elements DOM principaux 
-const panel = document.getElementById('panel');
-const container = document.getElementById('container');
-const questionOverlay = document.getElementById('questionOverlay');
-const answersOverlay = document.getElementById('answersOverlay');
-
-// Boutons existants
-const btnReset = document.getElementById('btnReset');
-const btnReveal = document.getElementById('btnReveal');
-const btnNext = document.getElementById('btnNext');
-
-// Stats DOM existants
-const statIndex = document.getElementById('statIndex');
-const statTotal = document.getElementById('statTotal');
-const statTries = document.getElementById('statTries');
-const statErrors = document.getElementById('statErrors');
-
-// Modale existante
-const overlay = document.getElementById('modalOverlay');
-const modalBody = document.getElementById('modalBody');
-const btnClose = document.getElementById('btnClose');
+// Les variables THEMES et state sont maintenant définies dans le HTML
+// et accessibles globalement
 
 // p5 integration (layout + drawing) est dans la page d'origine. On expose des hooks nécessaires.
 
 // Rendu de la liste des thèmes (écran principal et panneau latéral)
-function renderThemesHome() {
+window.renderThemesHome = function() {
   // Crée ou met à jour l'overlay d'accueil des thèmes sans détruire le canvas ni les overlays
   let home = document.getElementById('themesHome');
   if (!home) {
@@ -45,7 +19,7 @@ function renderThemesHome() {
     home.style.borderRadius = '8px';
     home.style.display = 'flex';
     home.style.flexDirection = 'column';
-    container.appendChild(home);
+    window.container.appendChild(home);
   }
   home.innerHTML = '';
   const header = document.createElement('div');
@@ -57,7 +31,7 @@ function renderThemesHome() {
   const grid = document.createElement('div');
   grid.id = 'themesGrid';
   grid.style.cssText = 'display:flex; flex-direction:column; gap:16px; padding:16px; overflow:auto;';
-  for (const t of state.themes) {
+  for (const t of window.state.themes) {
     const disabled = t.done ? 'pointer-events:none; opacity:0.6; text-decoration:line-through;' : '';
     const div = document.createElement('div');
     div.setAttribute('role', 'button');
@@ -66,24 +40,24 @@ function renderThemesHome() {
     div.addEventListener('mouseleave', () => { div.style.background = '#fff'; div.style.boxShadow = 'none'; });
     div.textContent = t.label;
     if (!t.done) {
-      div.addEventListener('click', () => startTheme(t.id));
+      div.addEventListener('click', () => window.startTheme(t.id));
     }
     grid.appendChild(div);
   }
   home.appendChild(header);
   home.appendChild(grid);
   // Masquer overlays et canvas
-  const canvas = container.querySelector('canvas');
+  const canvas = window.container.querySelector('canvas');
   if (canvas) canvas.style.display = 'none';
-  if (questionOverlay) questionOverlay.style.display = 'none';
-  if (answersOverlay) answersOverlay.style.display = 'none';
-  if (btnNext) btnNext.style.visibility = 'hidden';
-  renderThemesPanel();
+  if (window.questionOverlay) window.questionOverlay.style.display = 'none';
+  if (window.answersOverlay) window.answersOverlay.style.display = 'none';
+  if (window.btnNext) window.btnNext.style.visibility = 'hidden';
+  window.renderThemesPanel();
 }
 
-function renderThemesPanel() {
+window.renderThemesPanel = function() {
   // Injecte une section "Thèmes" au bas du panneau (non cliquable)
-  let section = panel.querySelector('#themesSection');
+  let section = window.panel.querySelector('#themesSection');
   if (!section) {
     section = document.createElement('div');
     section.className = 'panel-section';
@@ -100,11 +74,11 @@ function renderThemesPanel() {
     card.appendChild(list);
     section.appendChild(title);
     section.appendChild(card);
-    panel.appendChild(section);
+    window.panel.appendChild(section);
   }
   const list = section.querySelector('#themesList');
   list.innerHTML = '';
-  for (const t of state.themes) {
+  for (const t of window.state.themes) {
     const item = document.createElement('div');
     item.className = 'pill';
     item.style.cursor = 'default';
@@ -127,36 +101,36 @@ function renderThemesPanel() {
     item.appendChild(score);
     list.appendChild(item);
   }
-  if (panel.lastElementChild !== section) panel.appendChild(section);
+  if (window.panel.lastElementChild !== section) window.panel.appendChild(section);
 }
 
-function startTheme(themeId) {
-  if (state.current) return;
-  const def = THEMES.find(t => t.id === themeId);
+window.startTheme = function(themeId) {
+  if (window.state.current) return;
+  const def = window.THEMES.find(t => t.id === themeId);
   if (!def) return;
   // Construire l'engine
   const engine = new ThemeQuizEngine(def.id, def.label, def.data, 5);
-  state.current = { engine, id: def.id, label: def.label };
+  window.state.current = { engine, id: def.id, label: def.label };
   // Réinitialiser le score à l'entrée d'un nouveau thème
   success = 0; errors = 0; tries = 0;
   // Initialiser l'UI quiz
   renderQuizFrame();
   loadQuestion(0);
   refreshStats();
-  renderThemesPanel();
+  window.renderThemesPanel();
 }
 
-function endTheme() {
-  if (!state.current) return;
+window.endTheme = function() {
+  if (!window.state.current) return;
   // Marque le thème comme fait et détruit l'engine
-  const idx = state.themes.findIndex(t => t.id === state.current.id);
+  const idx = window.state.themes.findIndex(t => t.id === window.state.current.id);
   if (idx !== -1) {
-    state.themes[idx].done = true;
+    window.state.themes[idx].done = true;
     // Enregistre le score final du thème
-    state.themes[idx].score = `${success}/${state.current.engine.total}`;
+    window.state.themes[idx].score = `${success}/${window.state.current.engine.total}`;
   }
-  state.current = null;
-  renderThemesHome();
+  window.state.current = null;
+  window.renderThemesHome();
 }
 
 // Gestion du cadre quiz (canvas + overlays)
@@ -164,12 +138,12 @@ function renderQuizFrame() {
   // Affiche overlays et canvas, cache l'accueil
   const home = document.getElementById('themesHome');
   if (home) home.remove();
-  const canvas = container.querySelector('canvas');
+  const canvas = window.container.querySelector('canvas');
   if (canvas) canvas.style.display = '';
-  if (questionOverlay) questionOverlay.style.display = '';
-  if (answersOverlay) answersOverlay.style.display = '';
+  if (window.questionOverlay) window.questionOverlay.style.display = '';
+  if (window.answersOverlay) window.answersOverlay.style.display = '';
   // Ré-afficher le bouton "Suivante"
-  if (btnNext) btnNext.style.visibility = 'visible';
+  if (window.btnNext) window.btnNext.style.visibility = 'visible';
 }
 
 // Rendu overlays answers
@@ -188,11 +162,13 @@ function renderAnswersGroups(currentList, nextList = null) {
       div.style.top = c.y + 'px';
       div.style.width = c.w + 'px';
       div.style.height = c.h + 'px';
-      div.style.display = 'flex';
-      div.style.alignItems = 'center';
-      div.style.fontSize = '24px';
-      div.style.color = '#1f2937';
-      div.style.paddingLeft = '14px';
+             div.style.display = 'flex';
+       div.style.alignItems = 'center';
+       div.style.justifyContent = 'flex-start';
+       div.style.fontSize = '24px';
+       div.style.color = '#1f2937';
+       div.style.paddingLeft = '14px';
+       div.style.pointerEvents = 'none'; // Permettre les clics sur le canvas
       div.innerHTML = (c.id ? `<strong>${c.id} — </strong>` : '') + c.text;
       group.appendChild(div);
     }
@@ -219,19 +195,19 @@ let locked = false;
 let modalOpen = false;
 
 function refreshStats() {
-  if (!state.current) return;
-  statIndex.textContent = String(qIndex + 1);
-  statTotal.textContent = String(state.current.engine.total);
-  statTries.textContent = String(tries);
-  statErrors.textContent = String(errors);
+  if (!window.state.current) return;
+  window.statIndex.textContent = String(qIndex + 1);
+  window.statTotal.textContent = String(window.state.current.engine.total);
+  window.statTries.textContent = String(tries);
+  window.statErrors.textContent = String(errors);
 }
 
 function quizGet() {
-  return state.current?.engine?.questions || [];
+  return window.state.current?.engine?.questions || [];
 }
 
 function quizPrepare(idx) {
-  const engine = state.current.engine;
+  const engine = window.state.current.engine;
   const q = engine.questions[idx];
   return q.answers.map(a => ({ id: a.id, text: a.text, correct: !!a.correct, remediation: a.remediation || '', state:'idle', x:0, y:0, w:0, h:0 }));
 }
@@ -239,18 +215,18 @@ function quizPrepare(idx) {
 function quizSetCards(list) { cards = list; }
 
 function refreshQuestionOverlay() {
-  if (!state.current) return;
+  if (!window.state.current) return;
   const qEl = document.getElementById('questionOverlay');
   if (qEl) {
     // Utiliser l'index UI courant pour garantir la synchro avec l'animation
-    const q = state.current.engine.questions[qIndex];
+    const q = window.state.current.engine.questions[qIndex];
     qEl.innerHTML = q ? q.question : '';
     if (window.MathJax?.typesetPromise) MathJax.typesetPromise([qEl]);
   }
 }
 
 function loadQuestion(idx) {
-  if (!state.current) return;
+  if (!window.state.current) return;
   qIndex = idx;
   tries = 0;
   locked = false;
@@ -262,15 +238,15 @@ function loadQuestion(idx) {
 }
 
 function nextIndex() {
-  if (!state.current) return null;
-  return (qIndex + 1 < state.current.engine.total) ? qIndex + 1 : null;
+  if (!window.state.current) return null;
+  return (qIndex + 1 < window.state.current.engine.total) ? qIndex + 1 : null;
 }
 
 function goToNextWithAnimation() {
   if (transitioning) return;
   const ni = nextIndex();
   if (ni === null) {
-    openModal(`<strong>Thème terminé.</strong><br/>Score : ${success}/${state.current.engine.total}.<br/><br/>Clique « Fermer » pour revenir aux thèmes.`, "Fin du thème", () => endTheme());
+    openModal(`<strong>Thème terminé.</strong><br/>Score : ${success}/${window.state.current.engine.total}.<br/><br/>Clique « Fermer » pour revenir aux thèmes.`, "Fin du thème", () => window.endTheme());
     return;
   }
   nextCards = quizPrepare(ni);
@@ -285,6 +261,12 @@ function easeInOutCubic(u){ return u<0.5 ? 4*u*u*u : 1 - Math.pow(-2*u+2,3)/2; }
 // Dessin p5 existant: on réutilise le même fichier HTML avec sketch en place. Pour qu'il fonctionne, on expose ces handlers globaux:
 window.__themeQuiz = {
   draw: (p, W, H, margin, headerH) => {
+    // Réinitialiser l'ombre au début de chaque frame
+    p.drawingContext.shadowColor = 'transparent';
+    p.drawingContext.shadowBlur = 0;
+    p.drawingContext.shadowOffsetX = 0;
+    p.drawingContext.shadowOffsetY = 0;
+    
     // calc animation offsets
     let offsetCurY = 0, offsetNextY = 0, animating = transitioning;
     if (transitioning) {
@@ -328,15 +310,45 @@ window.__themeQuiz = {
     // Réponses
     for (const c of cards) {
       let bg = p.color(255), border = p.color(229), txt = p.color(31,41,55);
+      
+      // Effet de survol amélioré
+      const mouseOver = p.mouseX >= c.x && p.mouseX <= c.x + c.w && p.mouseY >= c.y && p.mouseY <= c.y + c.h && !modalOpen;
+      if (mouseOver && c.state === 'idle') {
+        bg = p.color(240, 249, 255); // Fond bleu très clair au survol
+        border = p.color(59, 130, 246); // Bordure bleue
+        txt = p.color(30, 58, 138); // Texte bleu foncé
+        
+        // Effet d'élévation avec ombre
+        p.drawingContext.shadowColor = 'rgba(59, 130, 246, 0.25)';
+        p.drawingContext.shadowBlur = 12;
+        p.drawingContext.shadowOffsetX = 0;
+        p.drawingContext.shadowOffsetY = 6;
+        
+        // Légère transformation pour effet 3D
+        p.push();
+        p.translate(0, -2);
+      } else {
+        // Pas d'ombre par défaut
+        p.drawingContext.shadowColor = 'transparent';
+        p.drawingContext.shadowBlur = 0;
+        p.drawingContext.shadowOffsetX = 0;
+        p.drawingContext.shadowOffsetY = 0;
+      }
+      
       if (c.state === 'wrong') { bg = p.color(254,242,242); border = p.color(252,165,165); txt = p.color(153,27,27); }
       if (c.state === 'right') { bg = p.color(240,253,244); border = p.color(134,239,172); txt = p.color(22,101,52); }
+      
       p.noStroke(); p.fill(bg); p.rect(c.x, c.y, c.w, c.h, 10);
       p.stroke(border); p.noFill(); p.rect(c.x, c.y, c.w, c.h, 10);
-      p.noStroke(); p.fill(txt); p.textSize(24); p.textAlign(p.LEFT, p.CENTER);
+      
+      // Restaurer la transformation si on était en mode survol
+      if (mouseOver && c.state === 'idle') {
+        p.pop();
+      }
     }
   },
   mousePressed: (p, mx, my) => {
-    if (locked || transitioning || modalOpen || !state.current) return;
+    if (locked || transitioning || modalOpen || !window.state.current) return;
     const i = (() => { for (let k=0;k<cards.length;k++){ const c=cards[k]; if (mx>=c.x && mx<=c.x+c.w && my>=c.y && my<=c.y+c.h) return k; } return -1; })();
     if (i === -1) return;
     tries++;
@@ -350,11 +362,34 @@ window.__themeQuiz = {
     } else {
       c.state = 'wrong';
       openModal(c.remediation || "Ce n'est pas la bonne réponse.");
-      const revert = () => { if (!c.correct) c.state = 'idle'; btnClose.removeEventListener('click', revert); overlay.removeEventListener('click', edge); };
-      const edge = (e) => { if (e.target === overlay) revert(); };
-      btnClose.addEventListener('click', revert); overlay.addEventListener('click', edge);
+      const revert = () => { if (!c.correct) c.state = 'idle'; window.btnClose.removeEventListener('click', revert); window.overlay.removeEventListener('click', edge); };
+      const edge = (e) => { if (e.target === window.overlay) revert(); };
+      window.btnClose.addEventListener('click', revert); window.overlay.addEventListener('click', edge);
       errors++;
       refreshStats();
+    }
+  },
+  
+  mouseMoved: (p, mx, my) => {
+    // Gérer le curseur au survol des cartes
+    if (locked || transitioning || modalOpen || !window.state.current) {
+      p.cursor(p.ARROW);
+      return;
+    }
+    
+    let isOverCard = false;
+    for (const c of cards) {
+      if (mx >= c.x && mx <= c.x + c.w && my >= c.y && my <= c.y + c.h) {
+        isOverCard = true;
+        break;
+      }
+    }
+    
+    // Changer le curseur seulement si on survole une carte cliquable
+    if (isOverCard) {
+      p.cursor(p.HAND);
+    } else {
+      p.cursor(p.ARROW);
     }
   }
 };
@@ -363,7 +398,7 @@ window.__themeQuiz = {
 function layoutCards() {
   const W = 800, H = 600; // canvas taille
   const startY = 200;
-  const Hc = 68, gap = 12, Wc = W - 48, x = 24;
+  const Hc = Math.round(68 * 1.2), gap = 12, Wc = W - 48, x = 24; // Augmentation de 20% de la hauteur
   const total = cards.length * Hc + (cards.length - 1) * gap;
   let y = startY + Math.max(0, (H - startY - 40 - total)/2);
   for (const c of cards) { c.x = x; c.y = y; c.w = Wc; c.h = Hc; y += Hc + gap; }
@@ -377,41 +412,40 @@ function layoutCards() {
 // Modale
 function openModal(html, title="Remédiation", onClose=null) {
   document.getElementById('modalTitle').textContent = title;
-  modalBody.innerHTML = html;
-  overlay.style.display = 'flex';
-  overlay.setAttribute('aria-hidden', 'false');
+  window.modalBody.innerHTML = html;
+  window.overlay.style.display = 'flex';
+  window.overlay.setAttribute('aria-hidden', 'false');
   modalOpen = true;
-  if (window.MathJax?.typesetPromise) MathJax.typesetPromise([modalBody]);
+  if (window.MathJax?.typesetPromise) MathJax.typesetPromise([window.modalBody]);
   const close = () => {
-    overlay.style.display = 'none'; overlay.setAttribute('aria-hidden','true'); modalBody.innerHTML=''; modalOpen = false;
-    btnClose.removeEventListener('click', close); overlay.removeEventListener('click', edge);
+    window.overlay.style.display = 'none'; window.overlay.setAttribute('aria-hidden','true'); window.modalBody.innerHTML=''; modalOpen = false;
+    window.btnClose.removeEventListener('click', close); window.overlay.removeEventListener('click', edge);
     if (onClose) onClose();
   };
-  const edge = (e) => { if (e.target === overlay) close(); };
-  btnClose.addEventListener('click', close); overlay.addEventListener('click', edge);
+  const edge = (e) => { if (e.target === window.overlay) close(); };
+  window.btnClose.addEventListener('click', close); window.overlay.addEventListener('click', edge);
 }
 
 // Brancher boutons
-btnReset?.addEventListener('click', () => {
+window.btnReset?.addEventListener('click', () => {
   // Reset complet de la session
-  state.themes.forEach(t => t.done = false);
-  state.current = null;
+  window.state.themes.forEach(t => t.done = false);
+  window.state.current = null;
   success = 0; errors = 0; tries = 0;
-  renderThemesHome();
+  window.renderThemesHome();
 });
 
-btnReveal?.addEventListener('click', () => {
-  if (!state.current) return;
+window.btnReveal?.addEventListener('click', () => {
+  if (!window.state.current) return;
   for (const c of cards) c.state = c.correct ? 'right' : 'idle';
-  locked = true;
+  // locked = true;
 });
 
-btnNext?.addEventListener('click', () => {
-  if (!state.current) return;
+window.btnNext?.addEventListener('click', () => {
+  if (!window.state.current) return;
   goToNextWithAnimation();
 });
 
-// Démarrage: affiche l'écran de thèmes
-renderThemesHome();
+// Le démarrage est maintenant géré dans le HTML
 
 
