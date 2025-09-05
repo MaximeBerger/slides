@@ -116,61 +116,15 @@
                         <p class="fragment">Les coefficients sous la diagonale sont nuls</p>
                     </section>
                     
-                    <section>
-                        <h4>Exemple guidé</h4>
-                        <p>Résoudre :</p>
-                        <div class="system-equation">
-                            $3x_3 = 9$<br>
-                            $x_1 + 5x_2 - 2x_3 = 2$<br>
-                            $\frac{1}{3}x_1 + 2x_2 = 3$
-                        </div>
+                    <section data-background-iframe="produitScalaire.html" data-background-interactive>
+
                     </section>
                     
-                    <section>
-                        <h4>Étape 1 : Réorganiser</h4>
-                        <p>Mettre les équations dans le bon ordre :</p>
-                        <div class="system-equation">
-                            $x_1 + 5x_2 - 2x_3 = 2$<br>
-                            $\frac{1}{3}x_1 + 2x_2 = 3$<br>
-                            $3x_3 = 9$
-                        </div>
-                    </section>
-                    
-                    <section>
-                        <h4>Étape 2 : Premier pivot</h4>
-                        <p>Éliminer $x_1$ de la deuxième équation :</p>
-                        <div class="system-equation">
-                            $x_1 + 5x_2 - 2x_3 = 2$<br>
-                            <span class="highlight-step">$0 + \frac{1}{3}x_2 + \frac{2}{3}x_3 = \frac{7}{3}$</span><br>
-                            $3x_3 = 9$
-                        </div>
-                    </section>
-                    
-                    <section>
-                        <h4>Étape 3 : Deuxième pivot</h4>
-                        <p>Éliminer $x_2$ de la troisième équation :</p>
-                        <div class="system-equation">
-                            $x_1 + 5x_2 - 2x_3 = 2$<br>
-                            $0 + \frac{1}{3}x_2 + \frac{2}{3}x_3 = \frac{7}{3}$<br>
-                            <span class="highlight-step">$0 + 0 + 3x_3 = 9$</span>
-                        </div>
-                    </section>
-                    
-                    <section>
-                        <h4>Résolution par remontée</h4>
-                        <p>Maintenant on peut résoudre facilement :</p>
-                        <div class="fragment">
-                            <p>$3x_3 = 9 \Rightarrow x_3 = 3$</p>
-                            <p>$\frac{1}{3}x_2 + \frac{2}{3}(3) = \frac{7}{3} \Rightarrow x_2 = 1$</p>
-                            <p>$x_1 + 5(1) - 2(3) = 2 \Rightarrow x_1 = 3$</p>
-                        </div>
-                    </section>
                 </section>
                 
-                <section data-name="Cas particuliers">
+                <section data-name="solutions">
                     <section>
-                        <h4>Que se passe-t-il si...</h4>
-                        <p>Trois cas possibles lors de la résolution :</p>
+                        <p>Trois cas possibles à la fin :</p>
                         <ul>
                             <li class="fragment">Une équation incompatible (0 = 1)</li>
                             <li class="fragment">Échelonné jusqu'à la fin</li>
@@ -210,28 +164,6 @@
                         <p class="fragment">Infinité de solutions : $x = 1 - t, y = t$</p>
                     </section>
                 </section>
-                
-                <section data-name="Applications">
-                    <section>
-                        <h4>Retour aux exemples</h4>
-                        <p>Résolvons le problème des billes :</p>
-                        <div class="system-equation">
-                            $A + B = 10$<br>
-                            $B + C = 8$<br>
-                            $A + C = 12$
-                        </div>
-                    </section>
-                    
-                    <section>
-                        <h4>Solution du problème des billes</h4>
-                        <p>Après pivot de Gauss :</p>
-                        <div class="system-equation">
-                            $A + B = 10$<br>
-                            $0 + B + C = 8$<br>
-                            $0 + 0 + 2C = 10$
-                        </div>
-                        <p class="fragment">Donc : $C = 5, B = 3, A = 7$</p>
-                    </section>
                     
                     <section>
                         <h4>Équilibrage de la réaction TNT</h4>

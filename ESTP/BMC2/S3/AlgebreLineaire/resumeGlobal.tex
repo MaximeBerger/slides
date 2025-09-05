@@ -13,12 +13,12 @@
 \usepackage{microtype}
 \usepackage{amsmath, amssymb}
 \usepackage{multicol}
+\usepackage{enumitem}
 
 
 % -------------------- Mise en page --------------------------
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{fancyhdr}
-\usepackage{lastpage}
 \usepackage{parskip}      % espace entre paragraphes
 \setlength{\parindent}{0pt}
 
@@ -55,9 +55,9 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\color{Gray}\leftmark}
-\fancyhead[R]{\color{Gray}\textit{Trace distribuée}}
-\fancyfoot[L]{\color{Gray}\small Auteur~: \textit{(à compléter)}}
-\fancyfoot[R]{\color{Gray}\small p.\ \thepage/\pageref{LastPage}}
+\fancyhead[R]{\color{Gray}\textit{BMC2}}
+\fancyfoot[L]{\color{Gray}\small Auteur~: \textit{M. Berger}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -103,12 +103,16 @@
 \chapter{Les vecteurs de $\mathbb{R}^n$}
 
   \begin{resumeBox}
-    \textbf{Objectif en une phrase :} Savoir mener et interpréter un pivot de Gauss\\[0.25em]
     \emph{À retenir dans une semaine :} 
     \begin{niceitemize}
-      \item Il faut penser aux vecteurs comme des points dans un espace
+      \item Nous intérprêterons les vecteurs plutôt comme des points, et pas comme des flèches.
       \item Pour résoudre un système linéaire, on le rend \textbf{échelonné} avec le pivot de Gauss.
-      \item Résoudre un système linéaire consiste à trouver la bonne combinaison de vecteurs. 
+      \item On peut interpréter un système linéaire de 4 façons différentes : 
+        \begin{itemize}
+          \item[$\bullet$] Comme une intersection d'éléments géométriques (droites, plans, etc.).
+          \item[$\bullet$] Comme une combinaison linéaire de vecteurs.
+          \item[$\bullet$] Comme une equation matricielle.
+        \end{itemize}
     \end{niceitemize}
   \end{resumeBox}
   % \begin{formulesBox}
@@ -124,177 +128,164 @@
     \end{niceitemize}
   \end{rappelsBox}
 
-    \section{Exercices}
-    \subsection{Equations de Réactions Chimiques}
-    Les équations de réactions chimiques peuvent être interprétées comme des systèmes linéaires. Y a-t-il toujours une infinité de façon d'équilibrer l'équation ?
-    
+\section{Exercices}
+    \subsection{Equations de réactions Chimiques}
+    Les équations de réactions chimiques peuvent être interprétées comme des systèmes linéaires. \newline
+    Y a-t-il toujours une infinité de façon d'équilibrer l'équation ?
+
+
+    \vspace{1em}
+
+    Transformer le problème suivant en système linéaire. Sans le résoudre, combien a-t-il de solutions ?
+    \begin{center}
+      \includegraphics[width=0.8\linewidth]{0-Revisions/2-PivotDeGauss/equilibre.png}
+    \end{center}
+
+    \newpage
+
+    \vspace{2em}
+
     \subsection{Combien de solutions ?}
 Ces systèmes admettent-ils zéro, une ou une infinité de solutions ?
 
 \begin{multicols}{3}
 \begin{enumerate}[label=\alph*)]
-  \item 
-  \begin{align*}
-    \begin{cases}
+  \item $$\begin{cases}
       -3x + 2y &= 0\\
       -2y &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
-  \item 
-  \begin{align*}
-    \begin{cases}
+  \item $$\begin{cases}
       x + y &= 4\\
       y - z &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x + y &= 4\\
       y - z &= 0\\
       0 &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x + y &= 4\\
       0 &= 4
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       3x + 6y + z &= -0.5\\
       -z &= 2.5
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x - 3y &= 2\\
       0 &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       2x + 2y &= 4\\
       y &= 1\\
       0 &= 4
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       2x + y &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x - y &= -1\\
       0 &= 0\\
       0 &= 4
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x + y - 3z &= -1\\
       y - z &= 2\\
       z &= 0\\
       0 &= 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 \end{enumerate}
 \end{multicols}
 
+\vspace{2em}
 \subsection{Systèmes d'équations linéaires}
 Résoudre les systèmes suivants :
 
 \begin{multicols}{3}
-\begin{enumerate}[label=\alph*)]
+\begin{enumerate}[label={}]
   \item 
-  \begin{align*}
-    \begin{cases}
-      2x + 2y = 5 \\
+  $$\begin{cases}
+    2x + 2y = 5 \\
       x - 4y = 0
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+    $$\begin{cases}
       -x + y = 1 \\
       x + y = 2
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       x - 3y + z = 1 \\
       x + y + 2z = 14
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
+
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       -x - y = 1 \\
       -3x - 3y = 2
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
+
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       4y + z = 20 \\
       2x - 2y + z = 0 \\
       x + z = 5 \\
       x + y - z = 10
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
+
 
   \item 
-  \begin{align*}
-    \begin{cases}
+  $$\begin{cases}
       2x + z + w = 5 \\
       y - w = -1 \\
       3x - z - w = 0 \\
       4x + y + 2z + w = 9
-    \end{cases}
-  \end{align*}
+    \end{cases}$$
+
 \end{enumerate}
 \end{multicols}
 
+\vspace{2em}
+
 \subsection{Approfondissement}
-Comment résoudre ce système ?
-\begin{align*}
-  \begin{cases}
+Résoudre 
+$$\begin{cases}
     2 \sin \alpha-\cos \beta+3 \tan \gamma &= 3 \\
     4 \sin \alpha+2 \cos \beta-2 \tan \gamma &= 10 \\
     6 \sin \alpha-3 \cos \beta+\tan \gamma &= 9
-  \end{cases}
-\end{align*}
+  \end{cases}$$
 
-\subsection{Interprétation}
+  \newpage
+  \vspace{2em}
 
-\textit{La méthode de Gauss consiste à combiner les équations d’un système pour en former de nouvelles.}
+\subsection{Manipulation}
+
+\textit{La méthode de Gauss consiste à combiner les équations d'un système pour en former de nouvelles.}
 
 \medskip
 \begin{enumerate}[label=\alph*)]
-\item Peut-on obtenir l’équation \(3x - 2y = 5\) par une suite d’opérations de réduction de Gauss à partir des équations de ce système ?
+\item Peut-on obtenir l'équation \(3x - 2y = 5\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
 \[
 \begin{cases}
 x + y = 1 \\
@@ -302,7 +293,7 @@ x + y = 1 \\
 \end{cases}
 \]
 
-\item Peut-on obtenir l’équation \(5x - 3y = 2\) par une suite d’opérations de réduction de Gauss à partir des équations de ce système ?
+\item Peut-on obtenir l'équation \(5x - 3y = 2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
 \[
 \begin{cases}
 2x + 2y = 5 \\
@@ -310,7 +301,7 @@ x + y = 1 \\
 \end{cases}
 \]
 
-\item Peut-on obtenir \(6x - 9y + 5z = -2\) par une suite d’opérations de réduction de Gauss à partir des équations de ce système ?
+\item Peut-on obtenir \(6x - 9y + 5z = -2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
 \[
 \begin{cases}
 2x + y - z = 4 \\
@@ -319,11 +310,27 @@ x + y = 1 \\
 \]
 \end{enumerate}
 
-  % \begin{exempleBox}
+\vspace{2em}
+\subsection{Interprétation}
+Choisir 3 systèmes linéaire dans un exercice précédent et l'écrire des 2 manières différentes : 
+\begin{enumerate}
+  \item Comme une combinaison linéaires de vecteurs.
+  \item Comme une equation matricielle.
+\end{enumerate}
 
-  %   \textbf{Énoncé.} ...\\
-  %   \textbf{Solution (esquisse).} ...
-  % \end{exempleBox}
+Par exemple, le système 
+$$\begin{cases}
+  x + y = 1 \\
+  4x - y = 6
+\end{cases}$$
+peut s'écrire comme une combinaison linéaire de vecteurs :
+$$x\begin{pmatrix}1\\4\end{pmatrix} + y\begin{pmatrix}1\\-1\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
+ou comme une equation matricielle :
+$$\begin{pmatrix}1&1\\4&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
 
-\label{LastPage}
+\vspace{2em}
+\subsection{Pour ceux qui s'ennuient}
+Une boîte contenant des pennies, des nickels et des dimes renferme treize pièces d'une valeur totale de 83 cents.
+Combien y a-t-il de pièces de chaque type dans la boîte ?
+(Ce sont des pièces américaines : un penny vaut 1 cent, un nickel 5 cents et un dime 10 cents.)
 \end{document}
