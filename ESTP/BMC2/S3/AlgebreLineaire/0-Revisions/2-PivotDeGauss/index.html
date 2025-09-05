@@ -74,18 +74,14 @@
                 </section>
                 
                 <section data-name="Motivation">
-                    <section class="align-top">
-                        <h4>Un système linéaire ?</h4>
-                    </section>
-                    
-                    <section class="align-top">
+                    <section>
+                        <h4>Exemple 1 : Equilibre</h4>
                         <img src="equilibre.png" alt="Un système linéaire">
                     </section>
                     
                     <section>
-                        <h4>Exemple 2 : Réaction chimique</h4>
-                        <p>Réaction TNT :</p>
-                        <p class="fragment">$C_7H_8 + HNO_3 \rightarrow C_7H_5O_6N_3 + H_2O$</p>
+                        <h4>Exemple 2 : Réaction chimique (TNT)</h4>
+                        <p class="fragment">$x\,C_7H_8 + y\,HNO_3 \rightarrow z\,C_7H_5O_6N_3 + w\,H_2O$</p>
                         <p class="fragment">Comment équilibrer cette réaction ?</p>
                         <p class="fragment">Il faut résoudre un système linéaire !</p>
                     </section>
@@ -109,14 +105,24 @@
                         <h4>Forme échelonnée</h4>
                         <p>Le système doit ressembler à :</p>
                         <div class="system-equation">
-                            $a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1$<br>
-                            $0 \quad + a'_{22}x_2 + a'_{23}x_3 = b'_2$<br>
-                            $0 \quad + 0 \quad + a''_{33}x_3 = b''_3$
+                            $\star x_1 + \star x_2 + \star x_3 = \star$<br>
+                            $ \qquad + \star x_2 + \star x_3 = \star$<br>
+                            $ \qquad  \qquad + \star x_3 = \star$
                         </div>
                         <p class="fragment">Les coefficients sous la diagonale sont nuls</p>
                     </section>
+
+                    <section>
+                        Pour cela : 
+                        <ul>
+                            <li>On utilise la première ligne pour retirer les $x$ des autres lignes</li>
+                            <li>On utilise la deuxième ligne pour retirer les $y$ des autres lignes</li>
+                            <li>...</li>
+                        </ul>
+                    </section>
+
+                    <section data-background-iframe="pivotGauss.html" data-background-interactive></section>
                     
-                    <section data-background-iframe="produitScalaire.html" data-background-interactive>
 
                     </section>
                     
@@ -149,7 +155,6 @@
                         <div class="system-equation">
                             $x + y = 1$<br>
                             $0 + y = 2$<br>
-                            <span class="highlight-step">$0 + 0 = 0$</span>
                         </div>
                         <p class="fragment">Une seule solution : $x = -1, y = 2$</p>
                     </section>
@@ -159,9 +164,9 @@
                         <p>Exemple :</p>
                         <div class="system-equation">
                             $x + y = 1$<br>
-                            <span class="highlight-step">$0 = 0$</span>
                         </div>
-                        <p class="fragment">Infinité de solutions : $x = 1 - t, y = t$</p>
+                        <p>Dans ce cas, on choisit une variable comme paramètre et on exprime les autres variables en fonction de ce paramètre</p>
+                        <p class="fragment">Infinité de solutions : $x = 1 - y, y \in \mathbb{R}$</p>
                     </section>
                 </section>
                     
