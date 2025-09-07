@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Suites de fonctions - révisions</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <section>
+                    <h2>Suites de fonctions</h2>
+                    <h3>0 - Révisions</h3>
+                    <h4>Plan du chapitre</h4>
+                </section>
+                
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <p>Objectifs :</p>
+                    <ul>
+                        <li>Définir une suite de fonctions, convergence ponctuelle et uniforme</li>
+                        <li>Utiliser le critère de Cauchy uniforme et la norme sup</li>
+                        <li>Savoir quand on peut échanger limite avec continuité, intégrale, dérivation</li>
+                        <li>Analyser des contre-exemples classiques</li>
+                        <li>Maîtriser quelques techniques de preuve/majoration</li>
+                    </ul>
+                </section>
+                <!-- <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    Séquence 0 - Révisions. 
+                    A retenir. 
+                </section> -->
+            </section>
+                <section data-name="TOC" data-sm="false">
+                    <h4>Menu</h4>
+                    <ul class="menu"></ul>
+                </section>
+                <section data-name="Observations">
+                    <section>
+                        <h4>Qu'est-ce qu'une suite de fonctions ?</h4>
+                        <ul>
+                            <li class="fragment">$(f_n)$ avec $f_n : \mathbb{R} \to \mathbb{R}$ (ou $\mathbb{C}$)</li>
+                            <li class="fragment">Pour chaque $x \in \mathbb{R}$, $(f_n(x))$ est une suite numérique</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Exemples</h4>
+                        <ul>
+                            <li class="fragment">$f_n(x) = \sin(nx)$</li>
+                            <li class="fragment">$f_n(x) = \frac{x}{n}$</li>
+                            <li class="fragment">$f_n(x) = \frac{x^n}{n}$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Comment une suite de fonctions peut-elle converger ?</h4>
+                        <ul>
+                            <li class="fragment">Convergence <strong>simple</strong> : pour chaque $x \in \mathbb{R}$, $f_n(x) \to f(x)$</li>
+                            <li class="fragment">Convergence <strong>uniforme</strong> : $\sup_{x \in \mathbb{R}} |f_n(x) - f(x)| \to 0$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Liens et conséquences</h4>
+                        <ul>
+                            <li class="fragment">Convergence uniforme $\Rightarrow$ convergence simple (réciproque ?)</li>
+                            <ul>Si $f_n\to f$ uniformément,
+                                <li class="fragment">Si les $f_n$ sont continues, alors $f$ est continue</li>
+                                <li class="fragment">Si les $f_n$ sont intégrables, alors $f$ intégrable et $\int f_n\to\int f$</li>
+                                <li class="fragment">Si les $f_n\in C^1$, alors $f\in C^1$ et $f'_n\to f'$ uniformément</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+                <section data-name="Contre-exemples">
+                    <section>
+                        <h4>Premier exemple</h4>
+                        <ul>
+                            <li class="fragment">Sur $[0,1]$, $f_n(x)=x^n \to $ ? </li>
+                            <li class="fragment">Convergence uniforme ?</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Second exemple</h4>
+                        <ul>
+                            <li class="fragment">Sur $[0,1]$, $f_n(x)= \begin{cases} 1 & \text{si } x \in [0,1/n] \\ 0 & \text{sinon} \end{cases} \to $ ? </li>
+                            <li class="fragment">Convergence uniforme ?</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Limite et intégrale</h4>
+                        <ul>
+                            <li class="fragment">Sur $[0,1]$, $f_n = n\,\mathbf{1}_{(0,1/n)} \to 0$ ponctuellement</li>
+                            <li class="fragment">Mais $\int_0^1 f_n = 1$ pour tout $n$</li>
+                            <li class="fragment">On ne peut pas toujours échanger limite et intégrale sans hypothèses</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Dérivation terme à terme</h4>
+                        <ul>
+                            <li class="fragment">Sur $[-1,1]$, $f_n(x)=\sqrt{x^2+\tfrac{1}{n}} \to |x|$ (ponctuellement, non $C^1$)</li>
+                            <li class="fragment">$f'_n(x)=\dfrac{x}{\sqrt{x^2+\tfrac{1}{n}}} \to \operatorname{sgn}(x)$ pour $x\ne 0$</li>
+                            <li class="fragment">La limite n'est pas dérivable en $0$ : dérivation et limite ne commutent pas</li>
+                        </ul>
+                    </section>
+                </section>
+                <section data-name="Outils et critères">
+                    <section>
+                        <h4>Critère de Cauchy uniforme</h4>
+                        <ul>
+                            <li class="fragment">$\forall\,\varepsilon>0,\ \exists N:\ m,n\ge N \Rightarrow \sup_{x\in E}|f_m(x)-f_n(x)|<\varepsilon$</li>
+                            <li class="fragment">Équivalent à la convergence uniforme dans un espace complet $(C(E),\|\cdot\|_\infty)$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Norme sup et majorations</h4>
+                        <ul>
+                            <li class="fragment">$\|g\|_\infty = \sup_{x\in E}|g(x)|$ ; $f_n\to f$ unif. $\Leftrightarrow \|f_n-f\|_\infty\to 0$</li>
+                            <li class="fragment">Si $|f_n-f|\le g_n$ et $g_n\to 0$ uniformément, alors $f_n\to f$ uniformément</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>Fin.</h2>
+                    <p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+            </div>
+		</div>
+
+		
+	</body>
+</html>

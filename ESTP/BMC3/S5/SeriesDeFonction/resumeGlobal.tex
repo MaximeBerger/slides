@@ -88,8 +88,17 @@
 
 % -------------------- Page de titre ------------------------
 \title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini‑exercices)}
-\author{ BMC2 }
+\author{ BMC3 }
 \date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
 
 % -------------------- Document ----------------------------
 \begin{document}
@@ -100,7 +109,7 @@
 
 
 % ================== Séquence 1 ==================
-\chapter{Les vecteurs de $\mathbb{R}^n$}
+\chapter{Suites et séries numériques}
 
 \input{0-Revisions/resume.tex}
 \end{document}

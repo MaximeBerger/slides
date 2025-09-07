@@ -1,0 +1,171 @@
+
+\begin{resumeBox}
+  \emph{À retenir dans une semaine :} 
+  \begin{niceitemize}
+    \item Les formules pour calculer les sommes de séries arithmétiques et géométriques.
+    \item Le critère de Riemann pour les séries à termes positifs.
+    \item Les contre-exemples de suites de fonctions qui convergent simplement mais pas uniformément. 
+  \end{niceitemize}
+\end{resumeBox}
+% \begin{formulesBox}
+%   % Placez ici vos formules, figures TikZ ou images.
+%   % Exemple : $F(\omega)=\int_{-\infty}^{+\infty} f(t)\,e^{-i\omega t}\,dt$
+%   % \begin{center}\includegraphics[width=.8\linewidth]{exemple.jpg}\end{center}
+% \end{formulesBox}
+\begin{rappelsBox}
+  \begin{niceitemize}
+    \item Quelle est la définition d'une suite convergente ?
+    \item Quels sont les outils pour montrer la convergence d'une série numérique ? 
+    \item Quels sont les deux modes de convergence d'une suite de fonctions ?
+  \end{niceitemize}
+\end{rappelsBox}
+
+\section*{Exercices}
+
+\vspace{1em}
+
+\subsection{Des exemples}
+Donner deux exemples différents dans chacune des situations suivantes :
+\begin{enumerate}[label = $\square$]
+  \item une suite décroissante positive dont le terme général ne tend pas vers 0 .
+  \item une suite bornée non convergente.
+  \item une suite positive non bornée ne tendant pas vers $+\infty$.
+  \item une suite non monotone qui tend vers 0.
+  \item une suite positive qui tend vers 0 et qui n'est pas décroissante.
+\end{enumerate}
+
+\vspace{1em}
+
+\newpage
+  \subsection{Vrai ou Faux ?}
+  Dire si les assertions suivantes sont vraies ou fausses. On justifiera les réponses avec une démonstration ou un contre-exemple.
+  \begin{enumerate}[label = $\square$]
+    \item Toute suite non-majorée tend vers $+\infty$.
+    \item Soit $\left(u_n\right)_{n \geq 0}$ une suite à termes positifs convergeant vers $0$. Alors, $(u_n)$ est décroissante à partir d'un certain rang.
+    \item Si $(u_n)$ est une suite géométrique de raison $q \neq 0$, alors $\left(\frac{1}{u_n}\right)$ est une suite géométrique de raison $\frac{1}{q}$.
+    \item Soit $(u_n)$ une suite croissante et $\ell \in \mathbb{R}$. Si pour tout $N \in \mathbb{N}$, il existe $n_0 \geq N$ tel que $u_{n_0} > \ell$, alors $(u_n)$ ne converge pas vers $\ell$.
+    \item Si $f: \mathbb{R} \rightarrow \mathbb{R}$ est croissante et que $(u_n)$ vérifie $u_{n+1}=f\left(u_n\right)$ pour tout entier $n$,  alors $(u_n)$ est croissante.
+    \item Si $u$ est divergente, alors $u$ est non bornée.
+    \item Si $u_n\to \ell$ et $f$ continue, alors $f(u_n)\to f(\ell)$
+  \end{enumerate}
+
+  \vspace{1em}
+
+
+  \subsection{Étude de suites}
+  Étudier la nature des suites suivantes, et déterminer un équivalent simple:
+  \begin{multicols}{3}
+  \begin{enumerate}[label = \alph*), itemsep = 0.5em]
+    \item $\displaystyle u_n=\frac{\sin (n)+3 \cos \left(n^2\right)}{\sqrt{n}}$
+    \item $\displaystyle u_n=\frac{2 n+(-1)^n}{5 n+(-1)^{n+1}}$
+    \item $\displaystyle u_n=\frac{n^3+5 n}{4 n^2+\sin (n)+\ln (n)}$
+    \item $\displaystyle u_n=\sqrt{2 n+1}-\sqrt{2 n-1}$
+    \item $\displaystyle u_n=3^n e^{-3 n}$.
+    \item $\displaystyle u_n=\frac{n}{2^n}$
+    \item $\displaystyle u_n=\frac{n!}{45^n}$
+    \item $\displaystyle u_n=\frac{n!}{n^n}$
+    \item $\displaystyle u_n=\frac{n^3+2^n}{n^2+3^n}$.
+  \end{enumerate}
+  \end{multicols}
+
+  \vspace{1em}
+
+
+  \subsection{Plus difficile}
+  Étudier la nature des suites suivantes, et déterminer un équivalent simple:
+  \begin{multicols}{2}
+  \begin{enumerate}[label = \alph*)]
+    \item $u_n=\ln \left(2 n^2-n\right)-\ln (3 n+1)$
+    \item $u_n=\sqrt{n^2+n+1}-\sqrt{n^2-n+1}$
+    \item $_n=\frac{a^n-b^n}{a^n+b^n}, a, b \in] 0,+\infty[$
+    \item $u_n=\frac{\ln \left(n+e^n\right)}{n}$
+    \item $u_n=\frac{\ln (1+\sqrt{n})}{\ln \left(1+n^2\right)}$.
+  \end{enumerate}
+  \end{multicols}
+
+  \vspace{1em}
+
+  \subsection{Formule de Stirling}
+  \begin{enumerate}[label = \alph*)]
+    \item Soit $\left(x_n\right)$ une suite de réels et soit $\left(y_n\right)$ définie par $y_n=x_{n+1}-x_n$. Démontrer que la série $\sum_n y_n$ et la suite $\left(x_n\right)$ sont de même nature.
+    \item On pose ( $u_n$ ) la suite définie par $u_n=\frac{n^n e^{-n} \sqrt{n}}{n!}$. Donner la nature de la série de terme général $v_n=\ln \left(\frac{u_{n+1}}{u_n}\right)$.
+    \item En déduire l'existence d'une constante $C>0$ telle que :
+  \end{enumerate}
+  $$
+  n!\sim_{+\infty} C \sqrt{n} n^n e^{-n}
+  $$
+
+  \vspace{1em}
+
+
+  \subsection{Télescopiques}
+  \begin{enumerate}[label = \alph*)]
+    \item Déterminer deux réels $a$ et $b$ tels que $\displaystyle
+\frac{1}{k^2-1}=\frac{a}{k-1}+\frac{b}{k+1} .
+$
+
+    \item En déduire la limite de la suite $\displaystyle
+u_n=\sum_{k=2}^n \frac{1}{k^2-1} .
+$
+
+    \item Sur le même modèle, déterminer la limite de la suite$
+v_n=\sum_{k=0}^n \frac{1}{k^2+3 k+2}
+$
+
+
+    \item Montrer que, pour tout $n \in \mathbb{N}^*$, on a $
+\sqrt{n+1}-\sqrt{n} \leq \frac{1}{2 \sqrt{n}}
+$
+
+
+    \item En déduire le comportement de la suite ( $u_n$ ) définie par $
+u_n=1+\frac{1}{\sqrt{2}}+\cdots+\frac{1}{\sqrt{n}} .
+$
+  \end{enumerate}
+
+
+\vspace{1em}
+
+\section*{Séries numériques}
+\subsection{Paramètres}
+Soit $a, b \in \mathbb{R}$. Pour $n \geq 1$, on pose $u_n=\ln (n)+a \ln (n+1)+b \ln (n+2)$.
+\begin{enumerate}[label = \alph*)]
+  \item Pour quelle(s) valeur(s) de $(a, b)$ la série $\sum u_n$ est-elle convergente?
+  \item Dans le(s) cas où la série converge, déterminer $\sum_{n=1}^{+\infty} u_n$.
+\end{enumerate}
+
+\vspace{1em}
+
+\subsection{Avec l'exponentielle}
+Sachant que $e=\sum_{n \geq 0} \frac{1}{n!}$, déterminer la valeur des sommes suivantes :
+\begin{enumerate}[label = \alph*)]
+  \item $\sum_{n \geq 0} \frac{n+1}{n!}$
+  \item $\sum_{n \geq 0} \frac{n^2-2}{n!}$
+  \item $\sum_{n \geq 0} \frac{n^3}{n!}$.
+\end{enumerate}
+
+
+\vspace{1em}
+\section*{Suites de fonctions}
+
+\subsection{Suites de fonctions}
+Soit $\left(f_n\right)$ une suite de fonctions qui converge simplement vers une fonction $f$ sur un intervalle $I$. Dire si les assertions suivantes sont vraies ou fausses :
+\begin{enumerate}[label = \alph*)]
+  \item Si les $f_n$ sont croissantes, alors $f$ aussi.
+  \item Si les $f_n$ sont strictement croissantes, alors $f$ aussi.
+  \item Si les $f_n$ sont périodiques de période $T$, alors $f$ aussi.
+  \item Si les $f_n$ sont continues en $a$, alors $f$ aussi.
+\end{enumerate}
+
+Reprendre l'exercice en remplaçant la convergence simple par la convergence uniforme.
+
+\vspace{1em}
+
+\subsection{Suites de fonctions}
+On pose, pour $n \geq 1$ et $x \in] 0,1], f_n(x)=n x^n \ln (x)$ et $f_n(0)=0$.
+\begin{enumerate}[label = \alph*)]
+  \item Démontrer que $\left(f_n\right)$ converge simplement sur $[0,1]$ vers une fonction $f$ que l'on précisera. On note ensuite $g=f-f_n$.
+  \item Étudier les variations de g.
+  \item En déduire que la convergence de $\left(f_n\right)$ vers $f$ n'est pas uniforme sur $[0,1]$.
+  \item Soit $a \in[0,1]$. En remarquant qu'il existe $n_0 \in \mathbb{N}$ tel que $e^{-1 / n} \geq a$ pour tout $n \geq n_0$, démontrer que la suite $\left(f_n\right)$ converge uniformément vers $f$ sur $[0, a]$.
+\end{enumerate}

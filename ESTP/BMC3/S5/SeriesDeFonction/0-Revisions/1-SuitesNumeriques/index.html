@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Suites numériques - révisions</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <section>
+                    <h2>Suites numériques</h2>
+                    <h3>0 - Révisions</h3>
+                    <h4>Plan du chapitre</h4>
+                </section>
+                
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <p>Objectifs :</p>
+                    <ul>
+                        <li>Définir une suite (explicite et récurrente)</li>
+                        <li>Étudier le sens de variation et la bornitude</li>
+                        <li>Appliquer des critères de convergence</li>
+                        <li>Maîtriser suites arithmétique et géométrique</li>
+                        <li>Connaître limites usuelles et équivalents</li>
+                    </ul>
+                </section>
+                <section data-background-iframe="https://fourier.ajai.dev/" data-background-interactive>
+                </section>
+            </section>
+                <section data-name="TOC" data-sm="false">
+                    <h4>Menu</h4>
+                    <ul class="menu"></ul>
+                </section>
+                <section data-name="Rappels">
+                    <section>
+                        <h4>Qu'est-ce qu'une suite ?</h4>
+                        <p>Une application de $\mathbb{N}$ vers $\mathbb{R}$ (ou $\mathbb{C}$) : $n \mapsto u_n$</p>
+                    </section>
+                    <section>
+                        <h4>Exemples</h4>
+                        <ul>
+                            <li class="fragment">$u_n = e^{in}$</li>
+                            <li class="fragment">$v_n = (-1)^n$</li>
+                            <li class="fragment">$w_{n+1} = \tfrac{1}{2}(w_n + 2),\quad w_0=0$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Quelles questions se posent-on sur les suites ?</h4>
+                        <ul>
+                            <li class="fragment">Sens de variation</li>
+                            <li class="fragment">La suite est-elle bornée ?</li>
+                            <li class="fragment">La suite est-elle convergente ?</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Théorèmes utiles</h4>
+                        <p class="fragment">Toute suite monotone et bornée est convergente.</p>
+                        <p class="fragment">Théorèmes de comparaison.</p>
+                    </section>
+                </section>  
+                <section data-name="Suites usuelles">
+                    <section>
+                        <h4>Suite arithmétique</h4>
+                        <ul>
+                            <li class="fragment">$u_{n+1} = u_n + r$ (raison $r$)</li>
+                            <li class="fragment">Forme explicite : $u_n = u_0 + nr$</li>
+                            <li class="fragment">Variation : signe de $r$; si $r\ne 0$, $|u_n|\to +\infty$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Suite géométrique</h4>
+                        <ul>
+                            <li class="fragment">$u_{n+1} = q\,u_n$ (raison $q$)</li>
+                            <li class="fragment">Forme explicite : $u_n = u_0\,q^n</li>
+                            <li class="fragment">Limites :
+                                <ul>
+                                    <li class="fragment">$|q|<1 \Rightarrow u_n\to 0$</li>
+                                    <li class="fragment">$q=1$ : constante</li>
+                                    <li class="fragment">$q=-1$ : oscillante</li>
+                                    <li class="fragment">$|q|>1$ : divergence (signe selon $u_0$ et $q$)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Croissances comparées</h4>
+                        <ul>
+                            <li class="fragment">Les fonctions exponentielles croissent plus vite que les fonctions puissances.</li>
+                            <li class="fragment">Les fonctions puissances croissent plus vite que les fonctions logarithmiques.</li>
+                            <li class="fragment">Les fonctions logarithmiques croissent plus vite que les fonctions constantes.</li>
+                        </ul>
+                    </section>
+                </section>
+                <section data-name="Comparaisons asymptotiques">
+                    <section>
+                        <h4>Equivalents</h4>
+                        <ul>
+                            <li class="fragment">$u_n \sim v_n$ signifie : $u_n / v_n \to 1$</li>
+                            <li class="fragment">On ne somme pas les équivalents</li>
+                            <li class="fragment">Si $u_n \sim v_n$ alors $e^{u_n} \sim e^{v_n}$ ? </li> <p class="fragment highlight-red">Non !</p>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Notations de Landau</h4>
+                        <ul>
+                            <li class="fragment">$u_n = o(v_n)$ signifie : $u_n / v_n \to 0$</li>
+                            <li class="fragment">$u_n = O(v_n)$ signifie : $(u_n/v_n)$ est bornée</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>Fin.</h2>
+                    <p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+            </div>
+		</div>
+
+		
+	</body>
+</html>

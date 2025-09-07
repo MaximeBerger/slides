@@ -1,0 +1,164 @@
+{
+  "themes": [
+    {
+      "id": "vecteurs",
+      "label": "Vecteurs et opérations",
+      "questions": [
+        {
+          "question": "Dans $\\mathbb{R}^3$, le produit vectoriel $\\mathbf{u} \\times \\mathbf{v}$ est :",
+          "answers": [
+            { "text": "un vecteur perpendiculaire à $\\mathbf{u}$ et $\\mathbf{v}$", "correct": true },
+            { "text": "un nombre réel positif", "correct": false, "remediation": "Ceci décrit le produit scalaire, pas le produit vectoriel." },
+            { "text": "toujours nul si $\\mathbf{u} \\neq \\mathbf{0}$", "correct": false, "remediation": "Il est nul seulement si les vecteurs sont colinéaires." },
+            { "text": "défini en toute dimension", "correct": false, "remediation": "Le produit vectoriel usuel est propre à $\\mathbb{R}^3$ (et $\\mathbb{R}^7$)." }
+          ]
+        },
+        {
+          "question": "Si $\\mathbf{u} \\perp \\mathbf{v}$ et non nuls, alors $\\mathbf{u} \\cdot \\mathbf{v} =$",
+          "answers": [
+            { "text": "$0$", "correct": true },
+            { "text": "$1$", "correct": false, "remediation": "Le produit scalaire vaut $\\|u\\|\\,\\|v\\| \\cos \\theta$; pour $90^\\circ$, c'est 0." },
+            { "text": "$\\|u\\|+\\|v\\|$", "correct": false, "remediation": "Ce n'est pas une somme de normes." },
+            { "text": "$\\|u\\|\\,\\|v\\|$", "correct": false, "remediation": "Il manque le facteur $\\cos \\theta$ (=0 ici)." }
+          ]
+        },
+        {
+          "question": "Dans la base canonique, avec $\\mathbf{u}=(1,2,-1)$ et $\\mathbf{v}=(2,0,3)$, $\\mathbf{u}\\cdot \\mathbf{v} =$",
+          "answers": [
+            { "text": "$-1$", "correct": true },
+            { "text": "$1$", "correct": false, "remediation": "Calcule: $1\\cdot2 + 2\\cdot0 + (-1)\\cdot3 = 2-3=-1$." },
+            { "text": "$7$", "correct": false, "remediation": "Vérifie le dernier terme: $(-1)\\cdot3=-3$." },
+            { "text": "$5$", "correct": false, "remediation": "Tu as peut-être additionné des normes au lieu des produits composante à composante." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gradient_scalaire",
+      "label": "Gradient d’un champ scalaire",
+      "questions": [
+        {
+          "question": "Pour $f(x,y,z)=x^2 + y^2 + z^2$, on a $\\nabla f =$",
+          "answers": [
+            { "text": "$(2x,2y,2z)$", "correct": true },
+            { "text": "$(x,y,z)$", "correct": false, "remediation": "Il manque les facteurs 2 issus des dérivées partielles." },
+            { "text": "$(2,2,2)$", "correct": false, "remediation": "Le gradient dépend des variables, pas des constantes ici." },
+            { "text": "$(x^2,y^2,z^2)$", "correct": false, "remediation": "Le gradient regroupe les dérivées, pas la fonction elle-même." }
+          ]
+        },
+        {
+          "question": "La direction de $\\nabla f$ indique :",
+          "answers": [
+            { "text": "la variation la plus rapide de $f$", "correct": true },
+            { "text": "une direction quelconque", "correct": false, "remediation": "Par définition, $\\nabla f$ pointe vers la plus forte croissance." },
+            { "text": "la plus forte décroissance de $f$", "correct": false, "remediation": "La décroissance maximale est $-\\nabla f$." },
+            { "text": "toujours l'axe $x$", "correct": false, "remediation": "Cela dépend de $f$ et du point considéré." }
+          ]
+        },
+        {
+          "question": "Pour $f(x,y)=\\sin x + e^{y}$, on a $\\nabla f =$",
+          "answers": [
+            { "text": "$(\\cos x, e^{y})$", "correct": true },
+            { "text": "$(\\sin x, e^{y})$", "correct": false, "remediation": "Dérivée de $\\sin x$ est $\\cos x$." },
+            { "text": "$(\\cos x, y e^{y})$", "correct": false, "remediation": "La dérivée de $e^{y}$ est $e^{y}$, pas $y e^{y}$." },
+            { "text": "$(1, e^{y})$", "correct": false, "remediation": "La dérivée de $\\sin x$ n'est pas 1." }
+          ]
+        },
+        {
+          "question": "La dérivée directionnelle de $f$ dans la direction unitaire $\\\hat{n}$ vaut :",
+          "answers": [
+            { "text": "$\\nabla f \\cdot \\hat{n}$", "correct": true },
+            { "text": "$\\\\nabla f\\\\|$", "correct": false, "remediation": "C'est seulement le maximum quand $\\\hat{n}$ est alignée avec $\\nabla f$." },
+            { "text": "$f \\cdot \\hat{n}$", "correct": false, "remediation": "On dérive $f$, on ne la multiplie pas directement par $\\\hat{n}$." },
+            { "text": "$\\\partial f/\\\partial x$", "correct": false, "remediation": "Cela dépend de la direction; ici c'est une combinaison via le produit scalaire." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gradient_vectoriel",
+      "label": "Gradient d’un champ vectoriel",
+      "questions": [
+        {
+          "question": "Pour $\\mathbf{u}(x,y)=(x,2y)$, le gradient $\\nabla \\mathbf{u}$ est :",
+          "answers": [
+            { "text": "$\\\\begin{pmatrix}1 & 0 \\\\ 0 & 2\\\\end{pmatrix}$", "correct": true },
+            { "text": "$(1,2)$", "correct": false, "remediation": "Le gradient vectoriel est une matrice de dérivées partielles." },
+            { "text": "$\\\\begin{pmatrix}x & 0 \\\\ 0 & y\\\\end{pmatrix}$", "correct": false, "remediation": "Les dérivées partielles sont constantes ici: $\\\\partial u_x/\\\\partial x=1$, $\\\\partial u_y/\\\\partial y=2$." },
+            { "text": "0", "correct": false, "remediation": "La fonction n'est pas constante; les dérivées ne sont pas nulles." }
+          ]
+        },
+        {
+          "question": "Le gradient d'un champ vectoriel est :",
+          "answers": [
+            { "text": "une matrice (tenseur d'ordre 2) de dérivées partielles", "correct": true },
+            { "text": "un nombre réel", "correct": false, "remediation": "Ceci correspond au produit scalaire, pas au gradient vectoriel." },
+            { "text": "un vecteur", "correct": false, "remediation": "Attention: c'est le gradient d'un champ scalaire qui est un vecteur." },
+            { "text": "toujours la matrice identité", "correct": false, "remediation": "Uniquement pour $\\mathbf{u}(x)=x$ dans la base canonique." }
+          ]
+        },
+        {
+          "question": "Pour $\\mathbf{u}=(u_x,u_y)$, l'entrée $(1,2)$ de $\\nabla \\mathbf{u}$ est :",
+          "answers": [
+            { "text": "$\\\\partial u_x/\\\\partial y$", "correct": true },
+            { "text": "$\\\\partial u_y/\\\\partial x$", "correct": false, "remediation": "$(1,2)$ signifie première ligne (composante $x$), deuxième colonne (dérivée par $y$)." },
+            { "text": "$u_x u_y$", "correct": false, "remediation": "Le gradient n'est pas un produit de composantes mais un tableau de dérivées." },
+            { "text": "$\\\\partial u_y/\\\\partial y$", "correct": false, "remediation": "Ceci est l'entrée $(2,2)$." }
+          ]
+        },
+        {
+          "question": "Dans $\\mathbb{R}^3$, pour $\\mathbf{u}(x,y,z)=(x,y,z)$, $\\nabla \\mathbf{u}$ vaut :",
+          "answers": [
+            { "text": "la matrice identité $I_3$", "correct": true },
+            { "text": "le vecteur $(1,1,1)$", "correct": false, "remediation": "Le gradient vectoriel est une matrice, pas un vecteur." },
+            { "text": "zéro", "correct": false, "remediation": "Les dérivées partielles de $x,y,z$ ne sont pas nulles." },
+            { "text": "$(x,y,z)$", "correct": false, "remediation": "Ceci est $\\mathbf{u}$, pas son gradient." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pieges",
+      "label": "Pièges fréquents",
+      "questions": [
+        {
+          "question": "$\\nabla f$ pour un champ scalaire $f$ est :",
+          "answers": [
+            { "text": "un vecteur", "correct": true },
+            { "text": "un scalaire", "correct": false, "remediation": "Confusion: $\\nabla f$ regroupe les dérivées partielles en un vecteur." },
+            { "text": "une matrice", "correct": false, "remediation": "C'est le gradient d'un champ vectoriel qui est matriciel." },
+            { "text": "toujours nul", "correct": false, "remediation": "Il n'est nul que si $f$ est localement constant." }
+          ]
+        },
+        {
+          "question": "$\\nabla \\mathbf{u}$ pour un champ vectoriel $\\mathbf{u}$ est :",
+          "answers": [
+            { "text": "une matrice de dérivées partielles", "correct": true },
+            { "text": "un nombre", "correct": false, "remediation": "Le gradient vectoriel n'est pas un scalaire." },
+            { "text": "un vecteur quelconque", "correct": false, "remediation": "Il s'agit d'un tenseur d'ordre 2 (matrice)." },
+            { "text": "indéfini en dimension 2", "correct": false, "remediation": "Il est bien défini en toute dimension." }
+          ]
+        },
+        {
+          "question": "Le gradient agit par défaut sur :",
+          "answers": [
+            { "text": "des champs scalaires", "correct": true },
+            { "text": "des champs vectoriels uniquement", "correct": false, "remediation": "Le gradient standard de $f$ exige un scalaire; pour un vecteur, on obtient une matrice." },
+            { "text": "des constantes", "correct": false, "remediation": "Le gradient d'une constante est nul, mais la définition vise des fonctions." },
+            { "text": "des matrices", "correct": false, "remediation": "Pas dans ce cours: on reste sur scalaires et vecteurs." }
+          ]
+        },
+        {
+          "question": "Si $f$ est constante sur un voisinage, alors $\\nabla f$ est :",
+          "answers": [
+            { "text": "le vecteur nul", "correct": true },
+            { "text": "la matrice identité", "correct": false, "remediation": "Le gradient d'une constante annule toutes les dérivées partielles." },
+            { "text": "indéterminé", "correct": false, "remediation": "Il est bien défini et vaut 0 partout." },
+            { "text": "égal à $f$", "correct": false, "remediation": "Le gradient regroupe les dérivées, pas la valeur de $f$." }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

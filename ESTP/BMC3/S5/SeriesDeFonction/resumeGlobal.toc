@@ -1,0 +1,12 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{\numberline {1}Suites et séries numériques}{2}{chapter.1}%
+\contentsline {subsection}{\numberline {1}Des exemples}{2}{subsection.1.0.1}%
+\contentsline {subsection}{\numberline {2}Vrai ou Faux ?}{3}{subsection.1.0.2}%
+\contentsline {subsection}{\numberline {3}Étude de suites}{3}{subsection.1.0.3}%
+\contentsline {subsection}{\numberline {4}Plus difficile}{3}{subsection.1.0.4}%
+\contentsline {subsection}{\numberline {5}Formule de Stirling}{3}{subsection.1.0.5}%
+\contentsline {subsection}{\numberline {6}Télescopiques}{4}{subsection.1.0.6}%
+\contentsline {subsection}{\numberline {7}Paramètres}{4}{subsection.1.0.7}%
+\contentsline {subsection}{\numberline {8}Avec l'exponentielle}{4}{subsection.1.0.8}%
+\contentsline {subsection}{\numberline {9}Suites de fonctions}{4}{subsection.1.0.9}%
+\contentsline {subsection}{\numberline {10}Suites de fonctions}{4}{subsection.1.0.10}%

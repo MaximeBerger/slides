@@ -40,12 +40,12 @@
       "sexercer" : [
         {
           "titre": "QCM",
-          "lien": "0-Revisions/4-QCM/index.html",
+          "lien": "0-Revisions/QCM/index.html",
           "cible": "_blank"
         },
         {
           "titre": "Exercices",
-          "lien": "0-Revisions/5-Exercices/index.html",
+          "lien": "0-Revisions/Exercices/resumeGlobal.pdf",
           "cible": "_blank"
         }
       ]

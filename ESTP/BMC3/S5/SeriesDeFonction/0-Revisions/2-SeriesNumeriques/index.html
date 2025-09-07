@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Séries numériques - révisions</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <section>
+                    <h2>Séries numériques</h2>
+                    <h3>0 - Révisions</h3>
+                    <h4>Plan du chapitre</h4>
+                </section>
+                
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <p>Objectifs :</p>
+                    <ul>
+                        <li>Définir une série et les sommes partielles</li>
+                        <li>Distinguer convergence simple, absolue et conditionnelle</li>
+                        <li>Appliquer les tests (comparaison, intégral, d’Alembert, Cauchy, Leibniz)</li>
+                        <li>Connaître les séries de référence (géométrique, p-séries, télescopiques)</li>
+                        <li>Maîtriser quelques techniques de manipulation</li>
+                    </ul>
+                </section>
+                <!-- <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    Séquence 0 - Révisions. 
+                    A retenir. 
+                </section> -->
+            </section>
+                <section data-name="TOC" data-sm="false">
+                    <h4>Menu</h4>
+                    <ul class="menu"></ul>
+                </section>
+                <section data-name="Rappels">
+                    <section>
+                        <h4>Qu'est-ce qu'une série ?</h4>
+                        <ul>
+                            <li class="fragment">À partir d'une suite $(u_n)$, on définit $S_n = \sum_{k=0}^n u_k$</li>
+                            <li class="fragment">La série $\sum u_n$ converge s'il existe $S$ tel que $S_n \to S$</li>
+                            <li class="fragment">Condition nécessaire : $u_n \to 0$ (est-elle suffisante ?)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Exemples</h4>
+                        <ul>
+                            <li class="fragment">$\sum \tfrac{1}{2^n}$</li>
+                            <li class="fragment">$\sum \tfrac{1}{n}$ </li>
+                            <li class="fragment">$\sum (-1)^{n+1}\,\tfrac{1}{n}$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Plusieurs façons de converger</h4>
+                        <ul>
+                            <li class="fragment">Convergence simple : </li> <p class="fragment">Si $\sum u_n$ converge</p>
+                            <li class="fragment">Convergence <strong>absolue</strong> : </li> <p class="fragment">Si $\sum |u_n|$ converge, alors $\sum u_n$ converge</p>
+                            <li class="fragment">Réarrangements permis seulement en convergence absolue</li>
+                        </ul>
+                    </section>
+                </section>  
+                <section data-name="Séries à termes positifs">
+                    <section>
+                        <h4>Séries de référence</h4>
+                        <ul>
+                            <li class="fragment">$\sum q^n$ converge si $|q|< 1$ et vaut $\tfrac{1}{1-q}$</li>
+                            <li class="fragment">$\sum \tfrac{1}{n^\alpha}$ converge si $\alpha>1$; diverge pour $\alpha\leq 1$</li>
+                            <li class="fragment">Séries télescopiques : $u_n = v_n - v_{n+1}$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Tests de comparaison</h4>
+                        <ul>
+                            <li class="fragment">Si $0\le u_n\le v_n$ et $\sum v_n$ converge, alors $\sum u_n$ converge</li>
+                            <li class="fragment">Si $u_n\ge v_n\ge 0$ et $\sum v_n$ diverge, alors $\sum u_n$ diverge</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Croissances comparées</h4>
+                        <ul>
+                            <li class="fragment">Exponentielles > puissances > logarithmes</li>
+                        </ul>
+                    </section>
+                </section>
+                <section data-name="Critères généraux">
+                    <section>
+                        <h4>Critère de d’Alembert (rapport)</h4>
+                        <ul>
+                            <li class="fragment">$L = \lim \left|\tfrac{u_{n+1}}{u_n}\right|$</li>
+                            <li class="fragment">$L<1$ : $\sum u_n$ converge absolument</li>
+                            <li class="fragment">$L>1$ ou $=+\infty$ : diverge</li>
+                            <li class="fragment">$L=1$ : sans conclusion</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Critère de Cauchy </h4>
+                        <ul>
+                            <li class="fragment">$L = \limsup |u_n|^{1/n}$</li>
+                            <li class="fragment">$L<1$ : convergence absolue ; $L>1$ : divergence ; $L=1$ : sans conclusion</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Séries alternées (Leibniz)</h4>
+                        <ul>
+                            <li class="fragment">Si $(a_n)$ décroît vers $0$ et $a_n\ge 0$, alors $\sum (-1)^n a_n$ converge</li>
+                            <li class="fragment">Reste borné : $|R_n| \le a_{n+1}$</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Comparer avec une intégrale</h4>
+                        <ul>
+                            <li class="fragment">Si $f$ est décroissante et positive, alors $\sum f(n)$ et $\int_1^\infty f(x)dx$ ont même nature</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>Fin.</h2>
+                    <p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+            </div>
+		</div>
+
+		
+	</body>
+</html>

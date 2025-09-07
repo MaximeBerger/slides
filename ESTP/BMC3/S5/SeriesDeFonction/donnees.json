@@ -1,0 +1,42 @@
+{
+  "titre": "Séries de fonctions — Parcours",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Révisions",
+      "description": "Suites · Séries · Suites de fonctions",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Suites numériques",
+          "description": "",
+          "lien": "0-Revisions/1-SuitesNumeriques/index.html",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Séries numériques",
+          "description": "",
+          "lien": "0-Revisions/2-SeriesNumeriques/index.html",
+          "cible": "_blank"
+        },
+        {
+          "numero": 3,
+          "titre": "Suites de fonctions",
+          "description": "",
+          "lien": "0-Revisions/3-SuitesDeFonctions/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "0-Revisions/QCM/QCM.html",
+          "cible": "_blank"
+        }
+      ]
+    }
+  ]
+}

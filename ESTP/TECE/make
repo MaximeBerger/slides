@@ -1,0 +1,4 @@
+pdflatex -jobname=corrige index.tex
+pdflatex -jobname=enonce index.tex 
+rm *.aux
+rm *.log

@@ -1,0 +1,232 @@
+
+\begin{resumeBox}
+  \emph{À retenir dans une semaine :} 
+  \begin{niceitemize}
+    \item Nous interprèterons les vecteurs plutôt comme des points, et pas comme des flèches.
+    \item Pour résoudre un système linéaire, on le rend \textbf{échelonné} avec le pivot de Gauss.
+    \item On peut interpréter un système linéaire de 3 façons différentes : 
+      \begin{itemize}
+        \item[$\bullet$] Comme une intersection d'éléments géométriques (droites, plans, etc.).
+        \item[$\bullet$] Comme une combinaison linéaire de vecteurs.
+        \item[$\bullet$] Comme une équation matricielle.
+      \end{itemize}
+  \end{niceitemize}
+\end{resumeBox}
+% \begin{formulesBox}
+%   % Placez ici vos formules, figures TikZ ou images.
+%   % Exemple : $F(\omega)=\int_{-\infty}^{+\infty} f(t)\,e^{-i\omega t}\,dt$
+%   % \begin{center}\includegraphics[width=.8\linewidth]{exemple.jpg}\end{center}
+% \end{formulesBox}
+\begin{rappelsBox}
+  \begin{niceitemize}
+    \item Que signifie qu'un système soit échelonné ?
+    \item Quelles sont les manipulations autorisées pour le pivot de Gauss ?
+    \item Comment interpréter un système linéaire comme une combinaison de vecteurs ?
+  \end{niceitemize}
+\end{rappelsBox}
+
+\section{Exercices}
+  \subsection{Equations de réactions Chimiques}
+  Les équations de réactions chimiques peuvent être interprétées comme des systèmes linéaires. \newline
+  Y a-t-il toujours une infinité de façon d'équilibrer l'équation ?
+
+
+  \vspace{1em}
+
+  Transformer le problème suivant en système linéaire. Sans le résoudre, combien a-t-il de solutions ?
+  \begin{center}
+    \includegraphics[width=0.8\linewidth]{0-Revisions/2-PivotDeGauss/equilibre.png}
+  \end{center}
+
+  \newpage
+
+  \vspace{2em}
+
+  \subsection{Combien de solutions ?}
+Ces systèmes admettent-ils zéro, une ou une infinité de solutions ?
+
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item $$\begin{cases}
+    -3x + 2y &= 0\\
+    -2y &= 0
+  \end{cases}$$
+
+\item $$\begin{cases}
+    x + y &= 4\\
+    y - z &= 0
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x + y &= 4\\
+    y - z &= 0\\
+    0 &= 0
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x + y &= 4\\
+    0 &= 4
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    3x + 6y + z &= -0.5\\
+    -z &= 2.5
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x - 3y &= 2\\
+    0 &= 0
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    2x + 2y &= 4\\
+    y &= 1\\
+    0 &= 4
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    2x + y &= 0
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x - y &= -1\\
+    0 &= 0\\
+    0 &= 4
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x + y - 3z &= -1\\
+    y - z &= 2\\
+    z &= 0\\
+    0 &= 0
+  \end{cases}$$
+\end{enumerate}
+\end{multicols}
+
+\vspace{2em}
+\subsection{Systèmes d'équations linéaires}
+Résoudre les systèmes suivants :
+
+\begin{multicols}{3}
+\begin{enumerate}[label={}]
+\item 
+$$\begin{cases}
+  2x + 2y = 5 \\
+    x - 4y = 0
+  \end{cases}$$
+
+\item 
+  $$\begin{cases}
+    -x + y = 1 \\
+    x + y = 2
+  \end{cases}$$
+
+\item 
+$$\begin{cases}
+    x - 3y + z = 1 \\
+    x + y + 2z = 14
+  \end{cases}$$
+
+
+\item 
+$$\begin{cases}
+    -x - y = 1 \\
+    -3x - 3y = 2
+  \end{cases}$$
+
+
+\item 
+$$\begin{cases}
+    4y + z = 20 \\
+    2x - 2y + z = 0 \\
+    x + z = 5 \\
+    x + y - z = 10
+  \end{cases}$$
+
+
+\item 
+$$\begin{cases}
+    2x + z + w = 5 \\
+    y - w = -1 \\
+    3x - z - w = 0 \\
+    4x + y + 2z + w = 9
+  \end{cases}$$
+
+\end{enumerate}
+\end{multicols}
+
+\vspace{2em}
+
+\subsection{Approfondissement}
+Résoudre 
+$$\begin{cases}
+  2 \sin \alpha-\cos \beta+3 \tan \gamma &= 3 \\
+  4 \sin \alpha+2 \cos \beta-2 \tan \gamma &= 10 \\
+  6 \sin \alpha-3 \cos \beta+\tan \gamma &= 9
+\end{cases}$$
+
+\newpage
+\vspace{2em}
+
+\subsection{Manipulation}
+
+\textit{La méthode de Gauss consiste à combiner les équations d'un système pour en former de nouvelles.}
+
+\medskip
+\begin{enumerate}[label=\alph*)]
+\item Peut-on obtenir l'équation \(3x - 2y = 5\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
+\[
+\begin{cases}
+x + y = 1 \\
+4x - y = 6
+\end{cases}
+\]
+
+\item Peut-on obtenir l'équation \(5x - 3y = 2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
+\[
+\begin{cases}
+2x + 2y = 5 \\
+3x + y = 4
+\end{cases}
+\]
+
+\item Peut-on obtenir \(6x - 9y + 5z = -2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
+\[
+\begin{cases}
+2x + y - z = 4 \\
+6x - 3y + z = 5
+\end{cases}
+\]
+\end{enumerate}
+
+\vspace{2em}
+\subsection{Interprétation}
+Choisir 3 systèmes linéaire dans un exercice précédent et l'écrire des 2 manières différentes : 
+\begin{enumerate}
+\item Comme une combinaison linéaires de vecteurs.
+\item Comme une equation matricielle.
+\end{enumerate}
+
+Par exemple, le système 
+$$\begin{cases}
+x + y = 1 \\
+4x - y = 6
+\end{cases}$$
+peut s'écrire comme une combinaison linéaire de vecteurs :
+$$x\begin{pmatrix}1\\4\end{pmatrix} + y\begin{pmatrix}1\\-1\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
+ou comme une equation matricielle :
+$$\begin{pmatrix}1&1\\4&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
+
+\vspace{2em}
+\subsection{Pour ceux qui s'ennuient}
+Une boîte contenant des pennies, des nickels et des dimes renferme treize pièces d'une valeur totale de 83 cents.
+Combien y a-t-il de pièces de chaque type dans la boîte ?
+(Ce sont des pièces américaines : un penny vaut 1 cent, un nickel 5 cents et un dime 10 cents.)
