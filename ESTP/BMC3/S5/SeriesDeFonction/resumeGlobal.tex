@@ -42,7 +42,7 @@
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
   {\Huge\bfseries\color{Theme}}
-  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Séries de fonctions - Chapitre~\thechapter}}
   {0.2ex}
   {\filright}
   [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
@@ -55,7 +55,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\color{Gray}\leftmark}
-\fancyhead[R]{\color{Gray}\textit{BMC2}}
+\fancyhead[R]{\color{Gray}\textit{BMC3}}
 \fancyfoot[L]{\color{Gray}\small Auteur~: \textit{M. Berger}}
 \fancyfoot[R]{\color{Gray}\small p.\ \thepage}
 \renewcommand{\headrulewidth}{0pt}
@@ -71,14 +71,14 @@
   before skip=8pt,after skip=8pt,drop fuzzy shadow}}
 
 \newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé des idées}}
-\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir }}
+\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Questions de cours }}
 \newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple vu ensemble}}
 
 % Encadré « Formules & illustrations »
 \newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
 
 % Astuce : puces clean
-\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
+\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}}{\end{itemize}}
 
 % Raccourci pour une « Trace » complète
 % Usage : \TraceSection{Titre}{Objectif court}
@@ -103,9 +103,6 @@
 % -------------------- Document ----------------------------
 \begin{document}
 
-
-\tableofcontents
-\clearpage
 
 
 % ================== Séquence 1 ==================
