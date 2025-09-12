@@ -90,24 +90,35 @@
 					<p class="fragment"><strong>Exemples :</strong></p>
 					<ul class="fragment">
 						<li>L'addition vectorielle sur \(\mathbb{R}^n\) : \((u,v) \mapsto u + v\)</li>
-					<li>L'addition de polynômes : \((P,Q) \mapsto P + Q\)</li>
-					<li>L'addition de matrices de même taille : \((A,B) \mapsto A + B\)</li>
+						<li>L'addition de polynômes : \((P,Q) \mapsto P + Q\)</li>
+						<li>L'addition de matrices de même taille : \((A,B) \mapsto A + B\)</li>
+						<li>La soustraction de vecteurs : \((u,v) \mapsto u - v\)</li>
 					</ul>
 					
 					<p class="fragment"><strong>Propriété clé :</strong> Le résultat de l'opération doit toujours appartenir à l'ensemble \(E\) (propriété de <em>fermeture</em>).</p>
 					</section>
 					<section>
+						<h4>Un exemple</h4>
+						
+						<div class="fragment">
+							<h5>Demi-plan supérieur</h5>
+							<p>Considérons l'ensemble \(H = \{(x,y) \in \mathbb{R}^2 \mid y \geq 0\}\).</p>
+							<p>L'addition vectorielle <strong>est</strong> une loi interne sur \(H\) car :</p>
+							
+							<p>Le résultat de l'addition ne peut pas sortir de l'ensemble \(H\).</p>
+						</div>
+						</section>
+					<section>
 					<h4>Deux contre-exemples</h4>
 					
 					<div class="fragment">
 						<h5>1. Demi-plan supérieur</h5>
-						<p>Considérons l'ensemble \(H = \{(x,y) \in \mathbb{R}^2 \mid y \geq 0\}\) (demi-plan supérieur).</p>
-						<p>L'addition vectorielle <strong>n'est pas</strong> une loi interne sur \(H\) car :</p>
+						<p>La soustraction vectorielle <strong>n'est pas</strong> une loi interne sur \(H\) car :</p>
 						<ul>
-							<li>\((1,2) \in H\) et \((3,-4) \in H\)</li>
-							<li>Mais \((1,2) + (3,-4) = (4,-2) \notin H\)</li>
+							<li>\((1,2) \in H\) et \((3,4) \in H\)</li>
+							<li>Mais \((1,2) - (3,4) = (-2,-2) \notin H\)</li>
 						</ul>
-						<p>Le résultat de l'addition peut sortir de l'ensemble \(H\).</p>
+						<p>Le résultat de la soustraction peut sortir de l'ensemble \(H\).</p>
 					</div>
 					</section>
 					<section>
