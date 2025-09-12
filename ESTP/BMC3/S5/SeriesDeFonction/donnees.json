@@ -35,6 +35,11 @@
           "titre": "QCM",
           "lien": "0-Revisions/QCM/QCM.html",
           "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "resumeGlobal.pdf",
+          "cible": "_blank"
         }
       ]
     }

@@ -1,164 +1,220 @@
 {
   "themes": [
     {
-      "id": "vecteurs",
-      "label": "Vecteurs et opérations",
+      "id": "suites",
+      "label": "Suites numériques",
       "questions": [
         {
-          "question": "Dans $\\mathbb{R}^3$, le produit vectoriel $\\mathbf{u} \\times \\mathbf{v}$ est :",
+          "question": "Soit la suite $u_n = n^2$. Que peut-on dire de son sens de variation ?",
           "answers": [
-            { "text": "un vecteur perpendiculaire à $\\mathbf{u}$ et $\\mathbf{v}$", "correct": true },
-            { "text": "un nombre réel positif", "correct": false, "remediation": "Ceci décrit le produit scalaire, pas le produit vectoriel." },
-            { "text": "toujours nul si $\\mathbf{u} \\neq \\mathbf{0}$", "correct": false, "remediation": "Il est nul seulement si les vecteurs sont colinéaires." },
-            { "text": "défini en toute dimension", "correct": false, "remediation": "Le produit vectoriel usuel est propre à $\\mathbb{R}^3$ (et $\\mathbb{R}^7$)." }
+            { "text": "Elle est strictement croissante", "correct": true },
+            { "text": "Elle est strictement décroissante", "correct": false, "remediation": "Pour $n$ croissant, $n^2$ augmente : la suite ne peut pas être décroissante." },
+            { "text": "Elle est constante", "correct": false, "remediation": "Chaque terme augmente avec $n$, la suite n'est pas constante." },
+            { "text": "Elle est croissante puis décroissante", "correct": false, "remediation": "La suite $n^2$ est toujours croissante dès $n=0$." }
           ]
         },
         {
-          "question": "Si $\\mathbf{u} \\perp \\mathbf{v}$ et non nuls, alors $\\mathbf{u} \\cdot \\mathbf{v} =$",
+          "question": "La suite $u_n = (-1)^n$ est-elle bornée ?",
           "answers": [
-            { "text": "$0$", "correct": true },
-            { "text": "$1$", "correct": false, "remediation": "Le produit scalaire vaut $\\|u\\|\\,\\|v\\| \\cos \\theta$; pour $90^\\circ$, c'est 0." },
-            { "text": "$\\|u\\|+\\|v\\|$", "correct": false, "remediation": "Ce n'est pas une somme de normes." },
-            { "text": "$\\|u\\|\\,\\|v\\|$", "correct": false, "remediation": "Il manque le facteur $\\cos \\theta$ (=0 ici)." }
+            { "text": "Oui, bornée par -1 et 1", "correct": true },
+            { "text": "Non, elle tend vers $+\\infty$", "correct": false, "remediation": "La suite reste toujours entre -1 et 1, elle ne diverge pas vers $+\\infty$." },
+            { "text": "Non, elle n'est pas bornée car elle oscille", "correct": false, "remediation": "Osciller n'empêche pas d'être bornée : les valeurs restent comprises entre deux bornes fixes." },
+            { "text": "Oui, bornée mais tend vers 0", "correct": false, "remediation": "La suite n'a pas de limite : elle alterne entre -1 et 1, elle ne converge pas vers 0." }
           ]
         },
         {
-          "question": "Dans la base canonique, avec $\\mathbf{u}=(1,2,-1)$ et $\\mathbf{v}=(2,0,3)$, $\\mathbf{u}\\cdot \\mathbf{v} =$",
+          "question": "Soit $u_n = \\dfrac{1}{n}$. Quelle est sa limite lorsque $n \\to +\\infty$ ?",
           "answers": [
-            { "text": "$-1$", "correct": true },
-            { "text": "$1$", "correct": false, "remediation": "Calcule: $1\\cdot2 + 2\\cdot0 + (-1)\\cdot3 = 2-3=-1$." },
-            { "text": "$7$", "correct": false, "remediation": "Vérifie le dernier terme: $(-1)\\cdot3=-3$." },
-            { "text": "$5$", "correct": false, "remediation": "Tu as peut-être additionné des normes au lieu des produits composante à composante." }
+            { "text": "0", "correct": true },
+            { "text": "+\\infty", "correct": false, "remediation": "Le terme $\\dfrac{1}{n}$ devient de plus en plus petit quand $n$ grandit, il ne diverge pas." },
+            { "text": "-\\infty", "correct": false, "remediation": "Les termes sont positifs, ils ne peuvent pas tendre vers $-\\infty$." },
+            { "text": "1", "correct": false, "remediation": "Pour $n$ grand, $\\dfrac{1}{n}$ devient proche de 0, pas de 1." }
+          ]
+        },
+        {
+          "question": "Soit $u_n = \\dfrac{(-1)^n}{n}$. La suite $(u_n)$ converge-t-elle ?",
+          "answers": [
+            { "text": "Oui, elle converge vers 0", "correct": true },
+            { "text": "Non, elle diverge vers $+\\infty$", "correct": false, "remediation": "Le terme $\\dfrac{1}{n}$ tend vers 0 et l'oscillation de signe reste limitée." },
+            { "text": "Non, elle diverge par oscillation entre -1 et 1", "correct": false, "remediation": "L'oscillation décroît en amplitude car les termes sont divisés par $n$." },
+            { "text": "Oui, elle converge vers 1", "correct": false, "remediation": "La limite est 0, car $\\dfrac{1}{n}$ tend vers 0." }
+          ]
+        },
+        {
+          "question": "Soit $u_n = 1 + \\dfrac{1}{n}$. Quelle est sa limite quand $n \\to +\\infty$ ?",
+          "answers": [
+            { "text": "1", "correct": true },
+            { "text": "0", "correct": false, "remediation": "La suite tend vers $1$, pas vers 0." },
+            { "text": "+\\infty", "correct": false, "remediation": "La fraction $\\dfrac{1}{n}$ tend vers 0, la suite ne peut pas diverger." },
+            { "text": "-\\infty", "correct": false, "remediation": "Les termes sont positifs et proches de 1, pas négatifs." }
+          ]
+        },
+        {
+          "question": "La suite $u_n = n + (-1)^n$ est-elle bornée ?",
+          "answers": [
+            { "text": "Non, elle tend vers $+\\infty$", "correct": true },
+            { "text": "Oui, bornée par -1 et 1", "correct": false, "remediation": "Les termes grandissent en valeur absolue, ils ne restent pas entre -1 et 1." },
+            { "text": "Oui, bornée supérieurement", "correct": false, "remediation": "Il n'existe pas de borne supérieure car $n$ croît indéfiniment." },
+            { "text": "Oui, bornée inférieurement et supérieurement", "correct": false, "remediation": "La suite diverge vers $+\\infty$, donc pas de majorant." }
+          ]
+        },
+        {
+          "question": "Soit $u_n = \\dfrac{n}{n+1}$. Quelle est sa limite quand $n \\to +\\infty$ ?",
+          "answers": [
+            { "text": "1", "correct": true },
+            { "text": "0", "correct": false, "remediation": "En divisant numérateur et dénominateur par $n$, on obtient $\\dfrac{1}{1+1/n}$ qui tend vers 1." },
+            { "text": "+\\infty", "correct": false, "remediation": "Le rapport de deux quantités de même ordre tend vers une valeur finie." },
+            { "text": "-\\infty", "correct": false, "remediation": "Les termes sont positifs et bornés par 1, pas négatifs." }
+          ]
+        },
+        {
+          "question": "Quel est l'équivalent de $u_n = \\ln(n+1) - \\ln(n)$ lorsque $n \\to +\\infty$ ?",
+          "answers": [
+            { "text": "$\\dfrac{1}{n}$", "correct": true },
+            { "text": "$\\dfrac{1}{n^2}$", "correct": false, "remediation": "Développement de $\\ln(1+1/n) \\sim 1/n$ pour $n$ grand, pas $1/n^2$." },
+            { "text": "$\\dfrac{1}{\\ln(n)}$", "correct": false, "remediation": "La différence de logarithmes n'est pas de l'ordre de $1/\\ln(n)$." },
+            { "text": "0", "correct": false, "remediation": "La limite est 0, mais la question porte sur l'équivalent, c'est-à-dire le terme asymptotique dominant." }
+          ]
+        },
+        {
+          "question": "La suite $u_n = \\dfrac{n}{2^n}$ converge-t-elle ?",
+          "answers": [
+            { "text": "Oui, elle converge vers 0", "correct": true },
+            { "text": "Non, elle tend vers $+\\infty$", "correct": false, "remediation": "La croissance exponentielle au dénominateur domine la croissance polynomiale au numérateur." },
+            { "text": "Oui, elle converge vers 1", "correct": false, "remediation": "Pour $n$ grand, $2^n$ croît beaucoup plus vite que $n$." },
+            { "text": "Non, elle diverge par oscillations", "correct": false, "remediation": "La suite est toujours positive et décroît vers 0." }
+          ]
+        },
+        {
+          "question": "La suite $u_n = (1+\\dfrac{1}{n})^n$ converge vers :",
+          "answers": [
+            { "text": "$e$", "correct": true },
+            { "text": "1", "correct": false, "remediation": "La limite n'est pas 1, c'est la définition classique du nombre $e$." },
+            { "text": "+\\infty", "correct": false, "remediation": "Bien que la suite croisse, elle converge vers une valeur finie $e$." },
+            { "text": "0", "correct": false, "remediation": "Les termes sont supérieurs à 1 et ne peuvent pas tendre vers 0." }
           ]
         }
       ]
-    },
+    }, 
     {
-      "id": "gradient_scalaire",
-      "label": "Gradient d’un champ scalaire",
+      "id": "suites_equivalents",
+      "label": "Suites numériques – Équivalents avancés",
       "questions": [
         {
-          "question": "Pour $f(x,y,z)=x^2 + y^2 + z^2$, on a $\\nabla f =$",
+          "question": "Donner un équivalent de $u_n = \\ln(n+1) - \\ln(n)$ lorsque $n \\to +\\infty$ :",
           "answers": [
-            { "text": "$(2x,2y,2z)$", "correct": true },
-            { "text": "$(x,y,z)$", "correct": false, "remediation": "Il manque les facteurs 2 issus des dérivées partielles." },
-            { "text": "$(2,2,2)$", "correct": false, "remediation": "Le gradient dépend des variables, pas des constantes ici." },
-            { "text": "$(x^2,y^2,z^2)$", "correct": false, "remediation": "Le gradient regroupe les dérivées, pas la fonction elle-même." }
+            { "text": "$\\dfrac{1}{n}$", "correct": true },
+            { "text": "$\\dfrac{1}{n^2}$", "correct": false, "remediation": "On a $\\ln(1+1/n) \\sim 1/n$ et non $1/n^2$." },
+            { "text": "$\\dfrac{1}{\\ln(n)}$", "correct": false, "remediation": "Le développement ne fait pas apparaître de facteur $\\ln(n)$." },
+            { "text": "0", "correct": false, "remediation": "La limite est bien 0, mais la question porte sur l’équivalent." }
           ]
         },
         {
-          "question": "La direction de $\\nabla f$ indique :",
+          "question": "Soit $u_n = \\sqrt{n^2+n} - n$. Quel est son équivalent pour $n \\to +\\infty$ ?",
           "answers": [
-            { "text": "la variation la plus rapide de $f$", "correct": true },
-            { "text": "une direction quelconque", "correct": false, "remediation": "Par définition, $\\nabla f$ pointe vers la plus forte croissance." },
-            { "text": "la plus forte décroissance de $f$", "correct": false, "remediation": "La décroissance maximale est $-\\nabla f$." },
-            { "text": "toujours l'axe $x$", "correct": false, "remediation": "Cela dépend de $f$ et du point considéré." }
+            { "text": "$\\dfrac{1}{2}$", "correct": true },
+            { "text": "$\\dfrac{1}{2n}$", "correct": false, "remediation": "Développer $\\sqrt{n^2+n} = n\\sqrt{1+1/n} \\sim n(1+1/(2n)) = n + 1/2$." },
+            { "text": "$1$", "correct": false, "remediation": "La correction est $1/2$, pas $1$." },
+            { "text": "$0$", "correct": false, "remediation": "Le terme tend vers $1/2$ et ne s’annule pas." }
           ]
         },
         {
-          "question": "Pour $f(x,y)=\\sin x + e^{y}$, on a $\\nabla f =$",
+          "question": "Donner un équivalent de $u_n = \\dfrac{n}{\\ln(n)} - \\dfrac{n}{\\ln(n+1)}$ lorsque $n \\to +\\infty$ :",
           "answers": [
-            { "text": "$(\\cos x, e^{y})$", "correct": true },
-            { "text": "$(\\sin x, e^{y})$", "correct": false, "remediation": "Dérivée de $\\sin x$ est $\\cos x$." },
-            { "text": "$(\\cos x, y e^{y})$", "correct": false, "remediation": "La dérivée de $e^{y}$ est $e^{y}$, pas $y e^{y}$." },
-            { "text": "$(1, e^{y})$", "correct": false, "remediation": "La dérivée de $\\sin x$ n'est pas 1." }
+            { "text": "$\\dfrac{1}{\\ln^2(n)}$", "correct": true },
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La différence est plus fine, on doit dériver $n/\\ln(n)$ pour l’estimer." },
+            { "text": "$\\dfrac{1}{n\\ln(n)}$", "correct": false, "remediation": "C’est l’ordre de grandeur de $\\dfrac{1}{n}$ multiplié par un log, mais pas l’équivalent exact." },
+            { "text": "$0$", "correct": false, "remediation": "La limite est 0 mais la question porte sur l’équivalent asymptotique." }
           ]
         },
         {
-          "question": "La dérivée directionnelle de $f$ dans la direction unitaire $\\\hat{n}$ vaut :",
+          "question": "Soit $u_n = (1+\\dfrac{1}{n})^n - e$. Quel est son équivalent quand $n \\to +\\infty$ ?",
           "answers": [
-            { "text": "$\\nabla f \\cdot \\hat{n}$", "correct": true },
-            { "text": "$\\\\nabla f\\\\|$", "correct": false, "remediation": "C'est seulement le maximum quand $\\\hat{n}$ est alignée avec $\\nabla f$." },
-            { "text": "$f \\cdot \\hat{n}$", "correct": false, "remediation": "On dérive $f$, on ne la multiplie pas directement par $\\\hat{n}$." },
-            { "text": "$\\\partial f/\\\partial x$", "correct": false, "remediation": "Cela dépend de la direction; ici c'est une combinaison via le produit scalaire." }
+            { "text": "$-\\dfrac{e}{2n}$", "correct": true },
+            { "text": "$\\dfrac{e}{n}$", "correct": false, "remediation": "Le développement binomial ou Taylor montre une correction négative $-e/(2n)$." },
+            { "text": "$\\dfrac{1}{n^2}$", "correct": false, "remediation": "Le terme principal est en $1/n$, pas en $1/n^2$." },
+            { "text": "0", "correct": false, "remediation": "La suite tend bien vers 0, mais il faut préciser l’équivalent." }
+          ]
+        },
+        {
+          "question": "Soit $u_n = n(\\sqrt{n+1} - \\sqrt{n})$. Quel est son équivalent pour $n \\to +\\infty$ ?",
+          "answers": [
+            { "text": "$\\dfrac{1}{2}$", "correct": true },
+            { "text": "$\\dfrac{1}{2n}$", "correct": false, "remediation": "On multiplie par $n$, donc on obtient une constante et pas un terme qui tend vers 0." },
+            { "text": "$1$", "correct": false, "remediation": "Le développement montre bien $1/2$, pas $1$." },
+            { "text": "$0$", "correct": false, "remediation": "La limite est non nulle : $1/2$." }
+          ]
+        },
+        {
+          "question": "Quel est l’équivalent de $u_n = \\dfrac{1}{n}\\sum_{k=1}^n \\dfrac{1}{k}$ quand $n \\to +\\infty$ ?",
+          "answers": [
+            { "text": "$\\dfrac{\\ln(n)}{n}$", "correct": true },
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La moyenne harmonique est plus proche de $\\ln(n)/n$ que de $1/n$." },
+            { "text": "$\\dfrac{1}{\\ln(n)}$", "correct": false, "remediation": "On a une croissance logarithmique au numérateur." },
+            { "text": "$\\dfrac{1}{\\sqrt{n}}$", "correct": false, "remediation": "Pas de racine, mais bien un rapport $\\ln(n)/n$." }
           ]
         }
       ]
-    },
+    }, 
     {
-      "id": "gradient_vectoriel",
-      "label": "Gradient d’un champ vectoriel",
+      "id": "suites_equivalents_avances",
+      "label": "Suites numériques – Équivalents difficiles",
       "questions": [
         {
-          "question": "Pour $\\mathbf{u}(x,y)=(x,2y)$, le gradient $\\nabla \\mathbf{u}$ est :",
+          "question": "Soit $u_n = \\ln(n!) - n\\ln(n)$. Quel est son équivalent pour $n \\to +\\infty$ ?",
           "answers": [
-            { "text": "$\\\\begin{pmatrix}1 & 0 \\\\ 0 & 2\\\\end{pmatrix}$", "correct": true },
-            { "text": "$(1,2)$", "correct": false, "remediation": "Le gradient vectoriel est une matrice de dérivées partielles." },
-            { "text": "$\\\\begin{pmatrix}x & 0 \\\\ 0 & y\\\\end{pmatrix}$", "correct": false, "remediation": "Les dérivées partielles sont constantes ici: $\\\\partial u_x/\\\\partial x=1$, $\\\\partial u_y/\\\\partial y=2$." },
-            { "text": "0", "correct": false, "remediation": "La fonction n'est pas constante; les dérivées ne sont pas nulles." }
+            { "text": "$-n$", "correct": true },
+            { "text": "$0$", "correct": false, "remediation": "Par Stirling : $\\ln(n!) \\sim n\\ln(n) - n$, donc la différence est $-n$ et non 0." },
+            { "text": "$\\sqrt{n}$", "correct": false, "remediation": "Le terme correct est de l’ordre de $n$, pas d’une racine." },
+            { "text": "$\\ln(n)$", "correct": false, "remediation": "La différence est beaucoup plus grande que $\\ln(n)$." }
           ]
         },
         {
-          "question": "Le gradient d'un champ vectoriel est :",
+          "question": "Soit $u_n = n\\left(\\ln(1+\\tfrac{1}{n}) - \\tfrac{1}{n}\\right)$. Quel est son équivalent pour $n \\to +\\infty$ ?",
           "answers": [
-            { "text": "une matrice (tenseur d'ordre 2) de dérivées partielles", "correct": true },
-            { "text": "un nombre réel", "correct": false, "remediation": "Ceci correspond au produit scalaire, pas au gradient vectoriel." },
-            { "text": "un vecteur", "correct": false, "remediation": "Attention: c'est le gradient d'un champ scalaire qui est un vecteur." },
-            { "text": "toujours la matrice identité", "correct": false, "remediation": "Uniquement pour $\\mathbf{u}(x)=x$ dans la base canonique." }
+            { "text": "$-\\tfrac{1}{2}$", "correct": true },
+            { "text": "$0$", "correct": false, "remediation": "On a $\\ln(1+1/n) = 1/n - 1/(2n^2)+o(1/n^2)$, donc l’équivalent est $-1/2$." },
+            { "text": "$1$", "correct": false, "remediation": "La correction du développement est négative, pas positive." },
+            { "text": "$-1$", "correct": false, "remediation": "Le terme exact est $-1/2$, pas $-1$." }
           ]
         },
         {
-          "question": "Pour $\\mathbf{u}=(u_x,u_y)$, l'entrée $(1,2)$ de $\\nabla \\mathbf{u}$ est :",
+          "question": "Soit $u_n = \\dfrac{n}{\\sqrt{n^2+1}}$. Donner un équivalent pour $n \\to +\\infty$.",
           "answers": [
-            { "text": "$\\\\partial u_x/\\\\partial y$", "correct": true },
-            { "text": "$\\\\partial u_y/\\\\partial x$", "correct": false, "remediation": "$(1,2)$ signifie première ligne (composante $x$), deuxième colonne (dérivée par $y$)." },
-            { "text": "$u_x u_y$", "correct": false, "remediation": "Le gradient n'est pas un produit de composantes mais un tableau de dérivées." },
-            { "text": "$\\\\partial u_y/\\\\partial y$", "correct": false, "remediation": "Ceci est l'entrée $(2,2)$." }
+            { "text": "$1 - \\dfrac{1}{2n^2}$", "correct": true },
+            { "text": "$1 - \\dfrac{1}{n}$", "correct": false, "remediation": "Le développement asymptotique au second ordre donne $1 - 1/(2n^2)$." },
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La suite tend vers 1, pas vers 0." },
+            { "text": "$0$", "correct": false, "remediation": "La limite est bien 1, pas 0." }
           ]
         },
         {
-          "question": "Dans $\\mathbb{R}^3$, pour $\\mathbf{u}(x,y,z)=(x,y,z)$, $\\nabla \\mathbf{u}$ vaut :",
+          "question": "Soit $u_n = (1+\\tfrac{1}{n})^{n+1} - e$. Quel est son équivalent ?",
           "answers": [
-            { "text": "la matrice identité $I_3$", "correct": true },
-            { "text": "le vecteur $(1,1,1)$", "correct": false, "remediation": "Le gradient vectoriel est une matrice, pas un vecteur." },
-            { "text": "zéro", "correct": false, "remediation": "Les dérivées partielles de $x,y,z$ ne sont pas nulles." },
-            { "text": "$(x,y,z)$", "correct": false, "remediation": "Ceci est $\\mathbf{u}$, pas son gradient." }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "pieges",
-      "label": "Pièges fréquents",
-      "questions": [
-        {
-          "question": "$\\nabla f$ pour un champ scalaire $f$ est :",
-          "answers": [
-            { "text": "un vecteur", "correct": true },
-            { "text": "un scalaire", "correct": false, "remediation": "Confusion: $\\nabla f$ regroupe les dérivées partielles en un vecteur." },
-            { "text": "une matrice", "correct": false, "remediation": "C'est le gradient d'un champ vectoriel qui est matriciel." },
-            { "text": "toujours nul", "correct": false, "remediation": "Il n'est nul que si $f$ est localement constant." }
+            { "text": "$\\tfrac{e}{2n}$", "correct": true },
+            { "text": "$-\\tfrac{e}{2n}$", "correct": false, "remediation": "Par développement : $(1+1/n)^{n+1} = e(1+1/(2n)+o(1/n))$, donc correction positive." },
+            { "text": "$\\tfrac{1}{n^2}$", "correct": false, "remediation": "Le terme principal est en $1/n$, pas $1/n^2$." },
+            { "text": "0", "correct": false, "remediation": "La limite est bien 0, mais la question porte sur l’équivalent." }
           ]
         },
         {
-          "question": "$\\nabla \\mathbf{u}$ pour un champ vectoriel $\\mathbf{u}$ est :",
+          "question": "Soit $u_n = \\dfrac{1}{n}\\sum_{k=1}^n \\dfrac{1}{\\sqrt{k}}$. Quel est son équivalent ?",
           "answers": [
-            { "text": "une matrice de dérivées partielles", "correct": true },
-            { "text": "un nombre", "correct": false, "remediation": "Le gradient vectoriel n'est pas un scalaire." },
-            { "text": "un vecteur quelconque", "correct": false, "remediation": "Il s'agit d'un tenseur d'ordre 2 (matrice)." },
-            { "text": "indéfini en dimension 2", "correct": false, "remediation": "Il est bien défini en toute dimension." }
+            { "text": "$\\dfrac{2}{\\sqrt{n}}$", "correct": true },
+            { "text": "$\\dfrac{1}{\\sqrt{n}}$", "correct": false, "remediation": "La somme est approchée par l’intégrale $\\int_1^n 1/\\sqrt{x}\\,dx = 2(\\sqrt{n}-1)$, ce qui donne $2/\\sqrt{n}$." },
+            { "text": "$\\dfrac{\\ln(n)}{n}$", "correct": false, "remediation": "C’est l’équivalent de la moyenne harmonique, pas ici." },
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La décroissance est bien plus lente que $1/n$." }
           ]
         },
         {
-          "question": "Le gradient agit par défaut sur :",
+          "question": "Soit $u_n = \\dfrac{n!}{n^n}$. Quel est son équivalent ?",
           "answers": [
-            { "text": "des champs scalaires", "correct": true },
-            { "text": "des champs vectoriels uniquement", "correct": false, "remediation": "Le gradient standard de $f$ exige un scalaire; pour un vecteur, on obtient une matrice." },
-            { "text": "des constantes", "correct": false, "remediation": "Le gradient d'une constante est nul, mais la définition vise des fonctions." },
-            { "text": "des matrices", "correct": false, "remediation": "Pas dans ce cours: on reste sur scalaires et vecteurs." }
-          ]
-        },
-        {
-          "question": "Si $f$ est constante sur un voisinage, alors $\\nabla f$ est :",
-          "answers": [
-            { "text": "le vecteur nul", "correct": true },
-            { "text": "la matrice identité", "correct": false, "remediation": "Le gradient d'une constante annule toutes les dérivées partielles." },
-            { "text": "indéterminé", "correct": false, "remediation": "Il est bien défini et vaut 0 partout." },
-            { "text": "égal à $f$", "correct": false, "remediation": "Le gradient regroupe les dérivées, pas la valeur de $f$." }
+            { "text": "$\\sqrt{2\\pi n}\\, e^{-n}$", "correct": true },
+            { "text": "$e^n$", "correct": false, "remediation": "C’est l’inverse qui croît comme $e^n$, pas cette suite." },
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "L’ordre de grandeur exact vient de la formule de Stirling." },
+            { "text": "0", "correct": false, "remediation": "La suite tend bien vers 0, mais il faut préciser la vitesse de décroissance." }
           ]
         }
       ]
     }
   ]
 }
-
