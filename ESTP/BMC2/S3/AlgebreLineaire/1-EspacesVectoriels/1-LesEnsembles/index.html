@@ -56,7 +56,7 @@
 					<section>
                         <p>Pourquoi \(\R^n\) «&nbsp;marche si bien&nbsp;» ?</p>
 						<ul>
-							<li class="fragment">C’est plus qu’un ensemble de points&nbsp;: 
+							<li class="fragment">C'est plus qu'un ensemble de points&nbsp;: 
                                 <ul>
                                     <li>il a une addition</li>
                                     <li>une multiplication par des scalaires (venant de \(\R\))</li>
@@ -68,7 +68,7 @@
 					</section>
 					
 				</section>
-				<section data-name="Notions et vocabulaire">
+				<section data-name="Structure algébrique">
 					<section>
 						<p>Notation&nbsp;: \(u,v\) vecteurs quelconques, \(\lambda,\mu\) scalaires.</p>
 						<ul>
@@ -80,11 +80,123 @@
 				</section>
 				<section>
 					<section>
-						<h4>Schéma global / Visualisation</h4>
-						<p>Visualiser comme dans \(\R^2\) mais penser \(\R^n\) ou l’ensemble des polynômes.</p>
+					<h4>Définition d'une loi interne</h4>
+					<p>Une <strong>loi interne</strong> sur un ensemble \(E\) est une application :</p>
+					<div style="text-align: center; margin: 20px 0;">
+						\(* : E \times E \to E\)
+					</div>
+					<p>qui à tout couple \((x,y) \in E \times E\) associe un élément \(x * y \in E\).</p>
+					
+					<p class="fragment"><strong>Exemples :</strong></p>
+					<ul class="fragment">
+						<li>L'addition vectorielle sur \(\mathbb{R}^n\) : \((u,v) \mapsto u + v\)</li>
+					<li>L'addition de polynômes : \((P,Q) \mapsto P + Q\)</li>
+					<li>L'addition de matrices de même taille : \((A,B) \mapsto A + B\)</li>
+					</ul>
+					
+					<p class="fragment"><strong>Propriété clé :</strong> Le résultat de l'opération doit toujours appartenir à l'ensemble \(E\) (propriété de <em>fermeture</em>).</p>
+					</section>
+					<section>
+					<h4>Deux contre-exemples</h4>
+					
+					<div class="fragment">
+						<h5>1. Demi-plan supérieur</h5>
+						<p>Considérons l'ensemble \(H = \{(x,y) \in \mathbb{R}^2 \mid y \geq 0\}\) (demi-plan supérieur).</p>
+						<p>L'addition vectorielle <strong>n'est pas</strong> une loi interne sur \(H\) car :</p>
+						<ul>
+							<li>\((1,2) \in H\) et \((3,-4) \in H\)</li>
+							<li>Mais \((1,2) + (3,-4) = (4,-2) \notin H\)</li>
+						</ul>
+						<p>Le résultat de l'addition peut sortir de l'ensemble \(H\).</p>
+					</div>
+					</section>
+					<section>
+					
+					<div class="fragment">
+						<h5>2. Polynômes de degré exactement 3</h5>
+						<p>Considérons l'ensemble \(P_3 = \{ax^3 + bx^2 + cx + d \mid a \neq 0\}\) des polynômes de degré exactement 3.</p>
+						<p>L'addition <strong>n'est pas</strong> une loi interne sur \(P_3\) car :</p>
+						<ul>
+							<li>\(x^3 + x^2 \in P_3\) et \(-x^3 + x \in P_3\)</li>
+							<li>Mais \((x^3 + x^2) + (-x^3 + x) = x^2 + x \notin P_3\)</li>
+						</ul>
+						<p>Le degré du résultat peut être inférieur à 3, sortant ainsi de l'ensemble.</p>
+					</div>
+					
+					<p class="fragment"><strong>Moralité :</strong> Il ne suffit pas de définir une opération, il faut vérifier qu'elle reste dans l'ensemble considéré !</p>
+
 					</section>
 				</section>
-				<section data-name="D'autres exemples">
+				<section data-name="Règles">
+					<section>
+					<section>
+						<h4>Définition d'un corps</h4>
+						<p>Un <strong>corps</strong> \(\mathbb{K}\) est un ensemble muni de deux lois :</p>
+						<ul>
+							<li class="fragment">Une <strong>addition</strong> \((a,b) \mapsto a + b\) qui fait de \(\mathbb{K}\) un groupe commutatif</li>
+							<li class="fragment">Une <strong>multiplication</strong> \((a,b) \mapsto a \cdot b\) qui fait de \(\mathbb{K} \setminus \{0\}\) un groupe commutatif</li>
+							<li class="fragment">La <strong>distributivité</strong> : \(a \cdot (b + c) = a \cdot b + a \cdot c\)</li>
+						</ul>
+						
+						<p class="fragment"><strong>Exemples de corps :</strong></p>
+						<ul class="fragment">
+							<li>\(\mathbb{R}\) (nombres réels)</li>
+							<li>\(\mathbb{C}\) (nombres complexes)</li>
+							<li>\(\mathbb{Q}\) (nombres rationnels)</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4>Définition d'une loi externe</h4>
+						<p>Une <strong>loi externe</strong> sur un ensemble \(E\) avec un corps \(\mathbb{K}\) est une application :</p>
+						<div style="text-align: center; margin: 20px 0;">
+							\(\cdot : \mathbb{K} \times E \to E\)
+						</div>
+						<p>qui à tout couple \((\lambda, x) \in \mathbb{K} \times E\) associe un élément \(\lambda \cdot x \in E\).</p>
+						
+						<p class="fragment"><strong>Exemples :</strong></p>
+						<ul class="fragment">
+							<li>Multiplication scalaire sur \(\mathbb{R}^n\) : \((\lambda, v) \mapsto \lambda v\)</li>
+							<li>Multiplication d'un polynôme par un scalaire : \((\lambda, P) \mapsto \lambda P\)</li>
+							<li>Multiplication d'une matrice par un scalaire : \((\lambda, A) \mapsto \lambda A\)</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h4>Propriétés d'un espace vectoriel</h4>
+						<p>Un <strong>espace vectoriel</strong> \(E\) sur un corps \(\mathbb{K}\) est un ensemble muni de :</p>
+						<ul>
+							<li class="fragment">Une <strong>loi interne</strong> \(+ : E \times E \to E\) (addition vectorielle)</li>
+							<li class="fragment">Une <strong>loi externe</strong> \(\cdot : \mathbb{K} \times E \to E\) (multiplication scalaire)</li>
+						</ul>
+						
+						<p class="fragment">Vérifiant les <strong>8 propriétés</strong> :</p>
+						<div class="fragment">
+							<p><strong>Pour l'addition :</strong></p>
+							<ul>
+								<li>Associativité : \((u + v) + w = u + (v + w)\)</li>
+								<li>Commutativité : \(u + v = v + u\)</li>
+								<li>Élément neutre : \(\exists 0_E \in E, u + 0_E = u\)</li>
+								<li>Élément opposé : \(\forall u \in E, \exists (-u) \in E, u + (-u) = 0_E\)</li>
+							</ul>
+						</div>
+					</section>
+					
+					<section>
+						<h4>Propriétés d'un espace vectoriel (suite)</h4>
+						<div>
+							<p><strong>Pour la multiplication scalaire :</strong></p>
+							<ul>
+								<li class="fragment">Distributivité par rapport à l'addition des scalaires : \((\lambda + \mu) \cdot u = \lambda \cdot u + \mu \cdot u\)</li>
+								<li class="fragment">Distributivité par rapport à l'addition des vecteurs : \(\lambda \cdot (u + v) = \lambda \cdot u + \lambda \cdot v\)</li>
+								<li class="fragment">Associativité mixte : \((\lambda \mu) \cdot u = \lambda \cdot (\mu \cdot u)\)</li>
+								<li class="fragment">Élément neutre : \(1_{\mathbb{K}} \cdot u = u\)</li>
+							</ul>
+						</div>
+						
+						<p class="fragment"><strong>Notation :</strong> On note souvent \(\lambda u\) au lieu de \(\lambda \cdot u\) pour simplifier.</p>
+					</section>
+					</section>
 					<section>
 						<h4>Exemples de structures</h4>
 						<ul>
@@ -92,28 +204,6 @@
 							<li class="fragment">Polynômes \(\mathcal P_n\)&nbsp;: addition coefficient à coefficient; \(\lambda P\) multiplie tous les coefficients</li>
 						</ul>
 					</section>
-				</section>
-				<section>
-					<section>
-						<h4>Activité pédagogique interactive</h4>
-						<p>Tri d’exemples&nbsp;: par binômes, déterminer ce qui manque pour obtenir une structure.</p>
-						<ul>
-							<li class="fragment">6 fiches «&nbsp;(ensemble, opérations)&nbsp;»</li>
-							<li class="fragment">Dire si la loi est bien définie, associative, s’il existe un neutre</li>
-							<li class="fragment">Préciser <em>interne</em> vs <em>externe</em></li>
-						</ul>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h4>Pièges fréquents</h4>
-						<ul>
-							<li class="fragment">Confondre «&nbsp;×&nbsp;» du corps et «&nbsp;⋅&nbsp;» (scalaire sur vecteur)</li>
-							<li class="fragment">Oublier la <strong>fermeture</strong> (le résultat doit rester dans l’ensemble)</li>
-							<li class="fragment">Prendre «&nbsp;partie de \(\R^n\) » pour «&nbsp;sous-espace&nbsp;» par défaut</li>
-						</ul>
-					</section>
-					
 				</section>
 				
 				<section>

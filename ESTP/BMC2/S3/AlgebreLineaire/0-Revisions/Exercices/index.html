@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Exercices</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+            .system-equation {
+                font-size: 1.2em;
+                margin: 10px 0;
+            }
+            .highlight-step {
+                background-color: #ffeb3b;
+                padding: 5px;
+                border-radius: 3px;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-transition="fade" data-state="hide-menubar hide-menu">
+                    <section>
+                    <h2>Algèbre linéaire</h2>
+                    <h3>0 - Révisions</h3>
+                    <h4>3 - Exercices</h4>
+                </section>
+                
+                <section>
+                    <section>
+                        <h4>Exercice 1 : Equilibre</h4>
+
+                        <img src="Exo1.png" alt="Un système linéaire" >
+                    </section>
+                    
+                    <section>
+                        <p>Oui, on peut toujours multiplier une solution par deux pour obtenir une autre solution </p>
+
+                        <p>L'équilibre avec les deux balance possède en revanche une unique solution.</p>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h4>Exercice 2 : Combien de solutions ?</h4>
+
+                        <img src="Exo2.png" alt="Un système linéaire">
+                    </section>
+                    
+                    <section>
+                       
+                    </section>
+
+                    <section>
+                        Pour cela : 
+                        <ul>
+                            <li>On utilise la première ligne pour retirer les $x$ des autres lignes</li>
+                            <li>On utilise la deuxième ligne pour retirer les $y$ des autres lignes</li>
+                            <li>...</li>
+                        </ul>
+                    </section>
+
+                    <section data-background-iframe="pivotGauss.html" data-background-interactive></section>
+                    
+
+                    </section>
+                    
+                </section>
+                
+                <section data-name="solutions">
+                    <section>
+                        <p>Trois cas possibles à la fin :</p>
+                        <ul>
+                            <li class="fragment">Une équation incompatible (0 = 1)</li>
+                            <li class="fragment">Échelonné jusqu'à la fin</li>
+                            <li class="fragment">Échelonné avant la fin (0 = 0)</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h4>Cas 1 : Équation incompatible</h4>
+                        <p>Exemple :</p>
+                        <div class="system-equation">
+                            $x + y = 1$<br>
+                            $x + y = 2$<br>
+                            <span class="highlight-step">$0 = 1$</span>
+                        </div>
+                        <p class="fragment">Aucune solution !</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Cas 2 : Solution unique</h4>
+                        <p>Exemple :</p>
+                        <div class="system-equation">
+                            $x + y = 1$<br>
+                            $0 + y = 2$<br>
+                        </div>
+                        <p class="fragment">Une seule solution : $x = -1, y = 2$</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Cas 3 : Infinité de solutions</h4>
+                        <p>Exemple :</p>
+                        <div class="system-equation">
+                            $x + y = 1$<br>
+                        </div>
+                        <p>Dans ce cas, on choisit une variable comme paramètre et on exprime les autres variables en fonction de ce paramètre</p>
+                        <p class="fragment">Infinité de solutions : $x = 1 - y, y \in \mathbb{R}$</p>
+                    </section>
+                </section>
+                    
+                    <section>
+                        <h4>Équilibrage de la réaction TNT</h4>
+                        <p>Réaction : $a C_7H_8 + b HNO_3 \rightarrow c C_7H_5O_6N_3 + d H_2O$</p>
+                        <p class="fragment">Système à résoudre :</p>
+                        <div class="system-equation">
+                            $7a = 7c$ (C)<br>
+                            $8a + b = 5c + 2d$ (H)<br>
+                            $3b = 6c + d$ (O)<br>
+                            $b = 3c$ (N)
+                        </div>
+                    </section>
+                </section>
+                
+                
+                <section>
+                    <h4>Points-clés</h4>
+                    <ul>
+                        <li class="fragment">Toujours bien aligner les variables</li>
+                        <li class="fragment">Travailler étape par étape</li>
+                        <li class="fragment">Vérifier ses calculs</li>
+                        <li class="fragment">Identifier le type de solution</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Fin.</h2>
+                    <p>Cours suivant : <a href="../3-Visualisation/">Visualisation</a></p> 
+                    <p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+            </div>
+		</div>
+
+		
+	</body>
+</html>
