@@ -13,11 +13,7 @@
       \end{itemize}
   \end{niceitemize}
 \end{resumeBox}
-% \begin{formulesBox}
-%   % Placez ici vos formules, figures TikZ ou images.
-%   % Exemple : $F(\omega)=\int_{-\infty}^{+\infty} f(t)\,e^{-i\omega t}\,dt$
-%   % \begin{center}\includegraphics[width=.8\linewidth]{exemple.jpg}\end{center}
-% \end{formulesBox}
+
 \begin{rappelsBox}
   \begin{niceitemize}
     \item Que signifie qu'une loi soit interne à un ensemble ?
@@ -54,16 +50,10 @@
     Déterminer si les ensembles suivants sont ou ne sont pas des sous-espaces vectoriels:
     \begin{enumerate}[i]
       \item $E_1=\{P \in \mathbb{R}[X] ; P(0)=P(2)\}$;
-      \item $E_2=\left\{P \in \mathbb{R}[X] ; P^{\prime}(0)=2\right\}$;
-      \item Pour $A \in \mathbb{R}[X]$ non-nul fixé, $E_3=\{P \in \mathbb{R}[X] ; A \mid P\}$;
-      \item D l'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$ qui sont dérivables;
-      \item $E_4$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=0$, où $a \in \mathcal{D}$.
-      \item $E_5$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=x$, où $a \in \mathcal{D}$.
-    \end{enumerate}
 
-    \ifthenelse{\boolean{showanswers}}{
+      \ifthenelse{\boolean{showanswers}}{
       \begin{mdframed}
-      1. Soit $f, g \in E$, et soit $M_1, M_2$ un majorant respectif de $|f|,|g|$. Alors, pour tout $\lambda \in \mathbb{R}$, et tout $x \in \mathbb{R}_{\text {, }}$
+      Soit $f, g \in E$, et soit $M_1, M_2$ un majorant respectif de $|f|,|g|$. Alors, pour tout $\lambda \in \mathbb{R}$, et tout $x \in \mathbb{R},$
 
       $$  
       |f(x)+g(x)| \leq|f(x)|+|g(x)| \leq M_1+M_2,|\lambda f(x)| \leq|\lambda| \times M_1 .
@@ -71,21 +61,46 @@
 
 
       Ainsi, $f+g$ et $\lambda f$ sont elles aussi bornées, et $V$ est un sous-espace vectoriel de $E$.
-      2. Considérons la fonction $f$ définie pour $x \in \mathbb{R}$ par $f(x)=-|x|$. Alors $f$ est majorée (par 0 ). Mais on a pour tout $x \in \mathbb{R}:-f(x)=|x|$. Ainsi, la fonction $-f$ n'est pas majorée. Donc $f \in V$ et $-f \notin V: V$ n'est pas un espace vectoriel de $E$.
-      3. Prenons $f$ et $g$ deux fonctions paires et $\lambda \in \mathbb{R}$. Alors
+      \end{mdframed}
+      }{
+      }
 
-      $$
-      \begin{aligned}
-      (f+g)(-x) & =f(-x)+g(-x) \\
-      & =f(x)+g(x)=(f+g)(x), \\
-      (\lambda f)(-x)= & \lambda f(-x)=\lambda f(x)=(\lambda f)(x) .
-      \end{aligned}
-      $$
+      \item $E_2=\left\{P \in \mathbb{R}[X] ; P^{\prime}(0)=2\right\}$;
+      \ifthenelse{\boolean{showanswers}}{
+      \begin{mdframed}
+        Considérons la fonction $f$ définie pour $x \in \mathbb{R}$ par $f(x)=-|x|$. Alors $f$ est majorée (par $0$). Mais on a pour tout $x \in \mathbb{R}:-f(x)=|x|$. Ainsi, la fonction $-f$ n'est pas majorée. Donc $f \in V$ et $-f \notin V: V$ n'est pas un espace vectoriel de $E$.
+      \end{mdframed}
+      }{
+      }
 
+      \item Pour $A \in \mathbb{R}[X]$ non-nul fixé, $E_3=\{P \in \mathbb{R}[X] ; A \mid P\}$;
 
-      Ainsi, $f+g$ et $\lambda f$ sont paires et $V$ est un sous-espace vectoriel de $E$.
-      4. Prenons $f(x)=x^2$ et $g(x)=x$. Alors $f$ est paire et $g$ est impaire. Mais $(f+g)(1)=2$ et $(f+g)(-1)=0$. Ainsi, $f+g$ n'est ni paire, ni impaire et $V$ n'est pas un sous-espace vectoriel de $E$.
+      \ifthenelse{\boolean{showanswers}}{
+      \begin{mdframed}
+        Prenons $f$ et $g$ deux fonctions paires et $\lambda \in \mathbb{R}$. Alors
+
+        $$
+        \begin{aligned}
+        (f+g)(-x) & =f(-x)+g(-x) \\
+        & =f(x)+g(x)=(f+g)(x), \\
+        (\lambda f)(-x)= & \lambda f(-x)=\lambda f(x)=(\lambda f)(x) .
+        \end{aligned}
+        $$
+  
+        Ainsi, $f+g$ et $\lambda f$ sont paires et $V$ est un sous-espace vectoriel de $E$.     
+      \end{mdframed}
+      }{
+      }
+
+      \item D l'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$ qui sont dérivables;
+      \item $E_4$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=0$, où $a \in \mathcal{D}$.
+      \item $E_5$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=x$, où $a \in \mathcal{D}$.
+    \end{enumerate}
+
+      \ifthenelse{\boolean{showanswers}}{
+      \begin{mdframed}
+        Prenons $f(x)=x^2$ et $g(x)=x$. Alors $f$ est paire et $g$ est impaire. Mais $(f+g)(1)=2$ et $(f+g)(-1)=0$. Ainsi, $f+g$ n'est ni paire, ni impaire et $V$ n'est pas un sous-espace vectoriel de $E$.
       \end{mdframed}
     }{}
-  \fi
+  
 \end{document}
