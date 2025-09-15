@@ -28,99 +28,580 @@
 Donner deux exemples différents dans chacune des situations suivantes :
 \begin{enumerate}[label = $\square$]
   \item une suite décroissante positive dont le terme général ne tend pas vers $0$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Par exemple, $u_n = 1+ \frac{1}{n}$, ou $v_n = 4 + e^{-n}$.
+    \end{mdframed}
+}{}
   \item une suite bornée non convergente.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Par exemple, $u_n = (-1)^n$, ou encore $v_n = \sin n$.
+    \end{mdframed}
+}{}
   \item une suite positive non bornée ne tendant pas vers $+\infty$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Par exemple, $u_n = \Big((-2)^n\Big)_+$, (la partie positive de $(-2)^n$) ou bien on peut la construire par disjonction de cas : 
+    $$
+    u_n = \begin{cases}
+    n & \text{si } n \text{est pair} \\
+    0 & \text{sinon}
+    \end{cases}
+    $$
+    \end{mdframed}
+}{}
   \item une suite non monotone qui tend vers $0$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Par exemple, $u_n = \dfrac{(-1)^n}{2^n}$., ou bien $v_n = e^{-n}\cos n$.
+    \end{mdframed}
+}{}
+
   \item une suite positive qui tend vers $0$ et qui n'est pas décroissante.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Par exemple, $u_n = \Big((-1/2)^n\Big)_+$, ou alors par disjonction de cas : 
+    $$
+    u_n = \begin{cases}
+    \frac{1}{n^2} & \text{si } n \text{est pair} \\
+    \frac{1}{n} & \text{sinon}
+    \end{cases}
+    $$
+    \end{mdframed}
+}{}
 \end{enumerate}
 
 \vspace{1em}
 
-\newpage
-  \subsection{Vrai ou Faux ?}
-  Dire si les assertions suivantes sont vraies ou fausses. On justifiera les réponses avec une démonstration ou un contre-exemple.
-  \begin{enumerate}[label = $\square$]
-    \item Toute suite non-majorée tend vers $+\infty$.
-    \item Soit $\left(u_n\right)_{n \geq 0}$ une suite à termes positifs convergeant vers $0$. Alors, $(u_n)$ est décroissante à partir d'un certain rang.
-    \item Si $(u_n)$ est une suite géométrique de raison $q \neq 0$, alors $\left(\frac{1}{u_n}\right)$ est une suite géométrique de raison~$\frac{1}{q}$.
-    \item Soit $(u_n)$ une suite croissante et $\ell \in \mathbb{R}$. Si pour tout $N \in \mathbb{N}$, il existe $n_0 \geq N$ tel que $u_{n_0} > \ell$, alors $(u_n)$ ne converge pas vers $\ell$.
-    \item Si $f: \mathbb{R} \rightarrow \mathbb{R}$ est croissante et que $(u_n)$ vérifie $u_{n+1}=f\left(u_n\right)$ pour tout entier $n$,  alors $(u_n)$ est croissante.
-    \item Si $u$ est divergente, alors $u$ est non bornée.
-    \item Si $u_n\to \ell$ et $f$ continue, alors $f(u_n)\to f(\ell)$
-  \end{enumerate}
-
-  \vspace{1em}
+\ifthenelse{\boolean{showSolutions}}{}{
+\newpage}
 
 
-  \subsection{Étude de suites}
-  Étudier la nature des suites suivantes, et déterminer un équivalent simple:
-  \begin{multicols}{3}
-  \begin{enumerate}[label = \alph*), itemsep = 0.5em]
-    \item $\displaystyle u_n=\frac{\sin (n)+3 \cos \left(n^2\right)}{\sqrt{n}}$
-    \item $\displaystyle u_n=\frac{2 n+(-1)^n}{5 n+(-1)^{n+1}}$
-    \item $\displaystyle u_n=\frac{n^3+5 n}{4 n^2+\sin (n)+\ln (n)}$
-    \item $\displaystyle u_n=\sqrt{2 n+1}-\sqrt{2 n-1}$
-    \item $\displaystyle u_n=3^n e^{-3 n}$.
-    \item $\displaystyle u_n=\frac{n}{2^n}$
-    \item $\displaystyle u_n=\frac{n!}{45^n}$
-    \item $\displaystyle u_n=\frac{n!}{n^n}$
-    \item $\displaystyle u_n=\frac{n^3+2^n}{n^2+3^n}$.
-  \end{enumerate}
-  \end{multicols}
+\subsection{Vrai ou Faux ?}
+Dire si les assertions suivantes sont vraies ou fausses. On justifiera les réponses avec une démonstration ou un contre-exemple.
+\begin{enumerate}[label = $\square$, itemsep = 0.5em]
+  \item Toute suite non-majorée tend vers $+\infty$.
 
-  \vspace{1em}
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
 
+  \begin{mdframed}
+  Faux, la suite $u_n = n (-1)^n$ n'est pas majorée et ne tend pas vers l'infini.
+  \end{mdframed}
+  }{
+  }
+  \item Soit $\left(u_n\right)_{n \geq 0}$ une suite à termes positifs convergeant vers $0$. Alors, $(u_n)$ est décroissante à partir d'un certain rang.
 
-  \subsection{Plus difficile}
-  Étudier la nature des suites suivantes, et déterminer un équivalent simple:
-  \begin{multicols}{2}
-  \begin{enumerate}[label = \alph*), itemsep = 0.5em]
-    \item $u_n=\ln \left(2 n^2-n\right)-\ln (3 n+1)$
-    \item $u_n=\sqrt{n^2+n+1}-\sqrt{n^2-n+1}$
-    \item $_n=\frac{a^n-b^n}{a^n+b^n}, a, b \in] 0,+\infty[$
-    \item $u_n=\frac{\ln \left(n+e^n\right)}{n}$
-    \item $u_n=\frac{\ln (1+\sqrt{n})}{\ln \left(1+n^2\right)}$.
-  \end{enumerate}
-  \end{multicols}
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
 
-  \vspace{1em}
-
-  \subsection{Formule de Stirling}
-  \begin{enumerate}[label = \alph*)]
-    \item Soit $\left(x_n\right)$ une suite de réels et soit $\left(y_n\right)$ définie par $y_n=x_{n+1}-x_n$. Démontrer que la série $\sum_n y_n$ et la suite $\left(x_n\right)$ sont de même nature.
-    \item On pose ( $u_n$ ) la suite définie par $u_n=\frac{n^n e^{-n} \sqrt{n}}{n!}$. Donner la nature de la série de terme général $v_n=\ln \left(\frac{u_{n+1}}{u_n}\right)$.
-    \item En déduire l'existence d'une constante $C>0$ telle que :
-  \end{enumerate}
+  \begin{mdframed}
+  Faux, on forme par exemple la suite 
   $$
-  n!\sim_{+\infty} C \sqrt{n} n^n e^{-n}
+  u_n = \begin{cases}
+  \dfrac{1}{n} & \text{si } n \text{ est pair} \\
+  \dfrac{1}{n^2} & \text{si } n \text{ est impair}
+  \end{cases}
   $$
+  qui converge vers $0$ mais n'est pas décroissante à partir d'un certain rang.
+  \end{mdframed}
+  }{
+  }
+  \item Si $(u_n)$ est une suite géométrique de raison $q \neq 0$, alors $\left(\frac{1}{u_n}\right)$ est une suite géométrique de raison~$1/q$.
 
-  \vspace{1em}
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Vrai, si $u_n = u_0 q^n$, alors $\frac{1}{u_n} = \frac{1}{u_0} q^{-n} = \frac{1}{u_0} \left(\frac{1}{q}\right)^n$.
+  \end{mdframed}
+  }{
+  }
+  \item Soit $(u_n)$ une suite croissante et $\ell \in \mathbb{R}$. Si pour tout $N \in \mathbb{N}$, il existe $n_0 \geq N$ tel que $u_{n_0} > \ell$, alors $(u_n)$ ne converge pas vers $\ell$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Faux, la suite $u_n = \dfrac{(-1)^n}{n}$ converge vers $\ell = 0$, pourtant il existe une infinité de valeurs de $(u_n)$ qui sont strictement supérieures à $\ell$.
+  \end{mdframed}
+  }{
+  }
+  \item Si $f: \mathbb{R} \rightarrow \mathbb{R}$ est croissante et que $(u_n)$ vérifie $u_{n+1}=f\left(u_n\right)$ pour tout entier $n$, alors $(u_n)$ est croissante.
+  
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Faux, on peut prendre par exemple $f(x) = x^2$ et $u_0 \in  ]0 , 1[$.
+  \end{mdframed}
+  }{
+  }
+  \item Si $(u_n)$ est divergente, alors $(u_n)$ est non bornée.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Faux, la suite $u_n = (-1)^n$ est divergente mais bornée.
+  \end{mdframed}
+  }{
+  }
+  \item Si $u_n\to \ell$ et $f$ continue, alors $f(u_n)\to f(\ell)$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Vrai, c'est la définition d'une fonction continue: $\lim_{x \to \ell} f(x) = f(\ell)$.
+  \end{mdframed}
+  }{
+  }
+\end{enumerate}
+
+\vspace{1em}
 
 
-  \subsection{Télescopiques}
+\subsection{Étude de suites}
+Étudier la nature des suites suivantes:
+\ifthenelse{\boolean{showSolutions}}{}{
+\begin{multicols}{3}}
+\begin{enumerate}[label = \alph*), itemsep = 0.5em]
+  \item $\displaystyle u_n=\frac{\sin (n)+3 \cos \left(n^2\right)}{\sqrt{n}}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+  Le numérateur est borné car $|\sin(n)| \leq 1$ et $|3 \cos(n^2)| \leq 3$. Le dénominateur tend vers $+\infty$. Donc la suite tend vers 0.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{2 n+(-1)^n}{5 n+(-1)^{n+1}}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+      On conserve les termes dominants : 
+      \[
+      2n + (-1)^n = 2n \big( 1 + \frac{(-1)^n}{2n} \big) = 2n \big(1+ o(1)\big)
+      \]
+      $u_n$ est équivalente à $\frac{2 n}{5 n} = \frac{2}{5}$. donc la suite tend vers $\frac{2}{5}$.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{n^3+5 n}{4 n^2+\sin (n)+\ln (n)}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+      On fait de même, on conserve les termes dominants : 
+      \[
+      n^3 + 5n = n^3 \big( 1 + \frac{5}{n^2} \big) = n^3 \big(1 + o(1)\big)
+      \]
+      Pour le dénominateur : 
+      \[
+      4 n^2 + \sin(n) + \ln(n) = 4 n^2 \big( 1 + \frac{\sin(n)}{4 n^2} + \frac{\ln(n)}{4 n^2} \big) = 4 n^2 \big(1+ o(1)\big)
+      \]
+      $u_n$ est équivalente à $\frac{n^3}{4 n^2} = \frac{n}{4}$. donc la suite tend vers $+\infty$.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\sqrt{2 n+1}-\sqrt{2 n-1}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+      On mutliplie en haut et en bas par la quantité conjuguée pour reconnaître une identité remarquable :
+      \[
+      u_n = \frac{\big(\sqrt{2 n+1}-\sqrt{2 n-1}\big)\big(\sqrt{2 n+1}+\sqrt{2 n-1}\big)}{\sqrt{2n + 1} + \sqrt{2n - 1}} 
+      = \frac{2n + 1 - (2n - 1)}{\sqrt{2n + 1} + \sqrt{2n - 1}} = \frac{2}{\sqrt{2n + 1} + \sqrt{2n - 1}}
+      \]
+      Comme le dénominateur est équivalent à $2\sqrt{2n}$, on a $u_n$ est équivalent à $\frac{2}{2\sqrt{2n}} = \frac{1}{\sqrt{2n}}$. Donc la suite tend vers 0.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=3^n e^{-3 n}$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+  \begin{mdframed}
+      Par croissances comparées, l'exponentielle l'emporte sur les puissances donc la suite tend vers 0.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{n}{2^n}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+      Par croissances comparées, les exponentielles (ici $2^n$) l'emportent sur les puissances donc la suite tend vers 0.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{n!}{45^n}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+      Par croissances comparées, les factorielles l'emportent sur les puissances donc la suite tend vers l'infini.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{n!}{n^n}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+      On peut étudier le rapport $u_{n+1}/u_n$ :
+      \[
+      \frac{u_{n+1}}{u_n} = \frac{(n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{n!} = \frac{n+1}{n+1} \cdot \left(\frac{n}{n+1}\right)^n = \left(\frac{n}{n+1}\right)^n
+      \]
+      Donc la suite est décroissante et tend vers 0.
+  \end{mdframed}
+  }{
+  }
+  \item $\displaystyle u_n=\frac{n^3+2^n}{n^2+3^n}$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+      On factorise par les termes dominants :
+      \[
+u_n = \frac{2^n(1 + \frac{n^3}{2^n})}{3^n(1 + \frac{n^2}{3^n})} = \frac{2^n(1 + o(1))}{3^n(1 + o(1))} 
+      \]
+      La suite est donc équivalente à $\frac{2^n}{3^n} = \left(\frac{2}{3}\right)^n$. Donc la suite tend vers 0.
+  \end{mdframed}
+  }{
+  }
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}}
+
+\vspace{1em}
+
+
+\subsection{*Plus difficile}
+Étudier la nature des suites suivantes, et déterminer un équivalent simple:
+\ifthenelse{\boolean{showSolutions}}{}{
+\begin{multicols}{2}}
+\begin{enumerate}[label = \alph*), itemsep = 1em]
+  \item $u_n=\ln \left(2 n^2-n\right)-\ln (3 n+1)$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          On met en facteur le terme dominant dans chaque logarithme, de sorte que
+
+          $$
+          \begin{aligned}
+          u_n & =\ln \left(2 n^2\left(1-\frac{1}{2 n}\right)\right)-\ln \left(3 n\left(1+\frac{1}{3 n}\right)\right) \\
+          & =2 \ln n+\ln 2+\ln \left(1-\frac{1}{2 n}\right)-\ln (n)-\ln (3)-\ln \left(1+\frac{1}{3 n}\right) \\
+          & =\ln n+\ln 2-\ln 3+v_n
+          \end{aligned}
+          $$
+          
+          où la suite $\left(v_n\right)$ tend vers 0 . On en déduit que $u_n$ tend vers $+\infty$.    \end{mdframed}
+  }{
+  }
+  \item $u_n=\sqrt{n^2+n+1}-\sqrt{n^2-n+1}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          On multiplie au numérateur et au dénominateur par la quantité conjuguée, de sorte que
+
+          $$
+          u_n=\frac{2 n}{\sqrt{n^2+n+1}+\sqrt{n^2-n+1}}
+          $$
+          
+          
+          On met encore en facteur, dans chaque racine carrée du dénominateur, le terme dominant (en $n^2$ ), et on trouve
+          
+          $$
+          u_n=\frac{2}{\sqrt{1+\frac{1}{n}+\frac{1}{n^2}}+\sqrt{1-\frac{1}{n}+\frac{1}{n^2}}}
+          $$
+          
+          
+          Or, $\sqrt{1+\frac{1}{n}+\frac{1}{n^2}}$ tend vers 1 et $\sqrt{1-\frac{1}{n}+\frac{1}{n^2}}$ tend également vers 1 . On en déduit que $\left(u_n\right)$ converge vers 1.    \end{mdframed}
+  }{
+  }
+  \item $_n=\frac{a^n-b^n}{a^n+b^n}, a, b \in] 0,+\infty[$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          Si $a=b$, alors $u_n=0$ pour tout $n$, et donc $\left(u_n\right)$ converge vers 0 . Si $a>b$, alors $a^n$ est prépondérant sur $b^n$ au sens que
+
+          $$
+          \frac{b^n}{a^n}=\left(\frac{b}{a}\right)^n \rightarrow 0
+          $$
+          
+          puisque $|b / a|<1$. On factorise donc par $a^n$ au numérateur et au dénominateur :
+          
+          $$
+          u_n=\frac{a^n\left(1-\left(\frac{b}{a}\right)^n\right)}{a^n\left(1+\left(\frac{b}{a}\right)^n\right)}=\frac{1-\left(\frac{b}{a}\right)^n}{1+\left(\frac{b}{a}\right)^n} .
+          $$
+          
+          
+          On en déduit que dans ce cas, ( $u_n$ ) converge vers 1. Si $b>a$, on factorise cette fois par $b^n$ et c'est $(a / b)^n$ qui converge vers 0 . On trouve :
+          
+          $$
+          u_n=\frac{-1+\left(\frac{a}{b}\right)^n}{1+\left(\frac{a}{b}\right)^n} .
+          $$
+          
+          ( $u_n$ ) converge donc vers -1 dans ce cas.    \end{mdframed}
+  }{
+  }
+  \item $u_n=\frac{\ln \left(n+e^n\right)}{n}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          On factorise par $e^n$ dans le logarithme. On obtient
+
+          $$
+          \begin{aligned}
+          u_n & =\frac{\ln \left(e^n\left(1+n e^{-n}\right)\right)}{n} \\
+          & =\frac{n+\ln \left(1+n e^{-n}\right)}{n} .
+          \end{aligned}
+          $$
+          
+          
+          D'autre part, $n e^{-n}$ tend vers 0 (par exemple, on peut écrire $n e^{-n}=\frac{1}{\frac{e^n}{n}}$ et utiliser la comparaison des fonctions exponentielle et polynôme au voisinage de l'infini). Puisque la fonction ln est continue en 1 et $\ln (1)=0$, on en déduit que $\ln \left(1+n e^{-n}\right)$ tend vers 0. II vient $\ln \left(1+n e^{-n}\right) / n$ tend vers 0 , et donc la suite ( $u_n$ ) converge vers 1 .    \end{mdframed}
+  }{
+  }
+  \item $u_n=\frac{\ln (1+\sqrt{n})}{\ln \left(1+n^2\right)}$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          On factorise par le terme dominant dans chaque logarithme. On en déduit
+
+          $$
+          \begin{aligned}
+          u_n & =\frac{\ln (\sqrt{n})+\ln \left(1+\frac{1}{\sqrt{n}}\right)}{\ln \left(n^2\right)+\ln \left(1+n^{-2}\right)} \\
+          & =\frac{\frac{1}{2} \ln n+\ln \left(1+\frac{1}{\sqrt{n}}\right)}{2 \ln (n)+\ln \left(1+n^{-2}\right)} \\
+          & =\frac{\frac{1}{2}+\frac{\ln \left(1+\frac{1}{\sqrt{n}}\right)}{\ln n}}{2+\frac{\ln \left(1+n^{-2}\right)}{\ln n}} .
+          \end{aligned}
+          $$
+          
+          
+          Puisque $\ln \left(1+\frac{1}{\sqrt{n}}\right), \ln \left(1+n^{-2}\right)$ tendent vers $0,\left(u_n\right)$ converge vers $\frac{1}{4}$.    
+      \end{mdframed}
+  }{
+  }
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}}
+
+\vspace{1em}
+
+\subsection{Formule de Stirling}
+\begin{enumerate}[label = \alph*)]
+  \item Soit $\left(x_n\right)$ une suite de réels et soit $\left(y_n\right)$ définie par $y_n=x_{n+1}-x_n$. \newline
+  Démontrer que la série $\sum_n y_n$ et la suite $\left(x_n\right)$ sont de même nature.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+      On a $y_n = x_{n+1} - x_n$. Donc
+      $$\sum_{n=0}^N y_n = \sum_{n=0}^N (x_{n+1} - x_n) = x_{N+1} - x_0.$$
+      Donc la série $\sum_n y_n$ et la suite $\left(x_n\right)$ sont de même nature.
+  \end{mdframed}
+  }{
+  }
+  \item On pose $(u_n)$ la suite définie par $u_n=\frac{n^n e^{-n} \sqrt{n}}{n!}$. \newline 
+  A l'aide d'un développement limité, déterminer la nature de la série de terme général $v_n=\ln \left(\frac{u_{n+1}}{u_n}\right)$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          2. Un petit calcul prouve que :
+
+          $$
+          v_n=\left(n+\frac{1}{2}\right) \ln \left(1+\frac{1}{n}\right)-1 .
+          $$
+          
+          
+          On effectue un développement limité de $v_n$-il faut pousser le développement du logarithme jusqu'à l'ordre 3 - et on a :
+          
+          $$
+          v_n=\frac{1}{12 n^2}+o\left(\frac{1}{n^2}\right) .
+          $$
+          
+          
+          La série de terme général $v_n$ est donc convergente.
+      \end{mdframed}
+  }{
+  }
+  \item En déduire l'existence d'une constante $C>0$ telle que :
+\end{enumerate}
+$$
+n!\sim_{+\infty} C \sqrt{n} n^n e^{-n}
+$$
+
+  \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+
+      \begin{mdframed}
+          On écrit $v_n=\ln \left(u_{n+1} / u_n\right)=\ln \left(u_{n+1}\right)-\ln \left(u_n\right)$. Puisque la série $\sum_n v_n$ converge, d'après la première question la suite $\left(\ln \left(u_n\right)\right)$ converge vers un réel $l_{\text {, }}$ et en passant à l'exponentielle, on trouve que la suite ( $u_n$ ) converge vers le réel $e^l$ qui est strictement positif. Revenant à la définition de $\left(u_n\right)$, ceci donne le résultat avec $C=e^{-l}$. 
+
+  \end{mdframed}
+  }{
+  }
+
+\vspace{1em}
+
+\subsection{Télescopiques}
   \begin{enumerate}[label = \alph*)]
     \item Déterminer deux réels $a$ et $b$ tels que $\displaystyle
 \frac{1}{k^2-1}=\frac{a}{k-1}+\frac{b}{k+1} .
 $
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+            On met tout au même dénominateur, et on procède par identification :
+
+            $$
+            \frac{a}{k-1}+\frac{b}{k+1}=\frac{(a+b) k+(a-b)}{k^2-1} .
+            $$
+            
+            
+            On cherche donc $a$ et $b$ de sorte que
+            
+            $$
+            \left\{\begin{array}{l}
+            a+b=0 \\
+            a-b=1
+            \end{array}\right.
+            $$
+            
+            
+            On en déduit $a=1 / 2$ et $b=-1 / 2$.    \end{mdframed}
+    }{
+    }
+
     \item En déduire la limite de la suite $\displaystyle
 u_n=\sum_{k=2}^n \frac{1}{k^2-1} .
 $
 
-    \item Sur le même modèle, déterminer la limite de la suite$
+    \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+            La somme est télescopique :
+
+            $$
+            \begin{aligned}
+            u_n= & \frac{1}{2}\left(1+\frac{1}{2}+\cdots+\frac{1}{n-1}\right) \\
+            & -\frac{1}{2}\left(\frac{1}{3}+\frac{1}{4}+\cdots+\frac{1}{n}+\frac{1}{n+1}\right)
+            \end{aligned}
+            $$
+            
+            soit
+            
+            $$
+            u_n=\frac{1}{2}\left(1+\frac{1}{2}-\frac{1}{n}-\frac{1}{n+1}\right) .
+            $$
+            
+            
+            On en déduit que $\left(u_n\right)$ converge vers $\frac{3}{4}$.
+            \end{mdframed}
+    }{
+    }
+
+    \item Sur le même modèle, déterminer la limite de la suite $
 v_n=\sum_{k=0}^n \frac{1}{k^2+3 k+2}
 $
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
 
-    \item Montrer que, pour tout $n \in \mathbb{N}^*$, on a $
-\sqrt{n+1}-\sqrt{n} \leq \frac{1}{2 \sqrt{n}}
-$
+        \begin{mdframed}
+            L'idée est de factoriser $k^2+3 k+2=(k+1)(k+2)$. On cherche donc $a$ et $b$ tels que
 
+            $$
+            \frac{1}{k^2+3 k+2}=\frac{a}{k+1}+\frac{b}{k+2} .
+            $$
+            
+            
+            On trouve $a=1$ et $b=-1$. On en déduit que
+            
+            $$
+            v_n=1-\frac{1}{n+2}
+            $$
+            
+            et donc $\left(v_n\right)$ converge vers 1 .
+        
+        \end{mdframed}
+    }{
+    }
+
+
+    \item Montrer que, pour tout $n \in \mathbb{N}^*$, on a $\sqrt{n+1}-\sqrt{n} \leq \frac{1}{2 \sqrt{n}}$
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+                Multipliant la différence de deux racines par la quantité conjuguée, on trouve
+                $$\sqrt{n+1}-\sqrt{n}=\frac{(\sqrt{n+1}+\sqrt{n})(\sqrt{n+1}-\sqrt{n})}{\sqrt{n+1}+\sqrt{n}}=\frac{1}{\sqrt{n+1}+\sqrt{n}} \leq \frac{1}{2 \sqrt{n}} .$$
+        \end{mdframed}
+    }{
+    }
 
     \item En déduire le comportement de la suite ( $u_n$ ) définie par $
-u_n=1+\frac{1}{\sqrt{2}}+\cdots+\frac{1}{\sqrt{n}} .
-$
+u_n=1+\frac{1}{\sqrt{2}}+\cdots+\frac{1}{\sqrt{n}} .$
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+        On somme alors ces inégalités, et les termes à gauche se télescopent :
+
+        $$
+        2(\sqrt{n+1}-\sqrt{1}) \leq u_n .
+        $$
+        
+        
+        Par le théorème de comparaison, on en déduit que ( $u_n$ ) diverge vers $+\infty$.
+    \end{mdframed}
+}{
+}
+
   \end{enumerate}
 
 
@@ -131,21 +612,126 @@ $
 Soit $a, b \in \mathbb{R}$. Pour $n \geq 1$, on pose $u_n=\ln (n)+a \ln (n+1)+b \ln (n+2)$.
 \begin{enumerate}[label = \alph*)]
   \item Pour quelle(s) valeur(s) de $(a, b)$ la série $\sum u_n$ est-elle convergente?
+
+
+
+  \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+            Écrivons
+
+            $$
+            \ln (n+1)=\ln (n)+\ln \left(1+\frac{1}{n}\right)=\ln n+\frac{1}{n}+O\left(\frac{1}{n^2}\right)
+            $$
+            
+            et
+            
+            $$
+            \ln (n+2)=\ln (n)+\ln \left(1+\frac{2}{n}\right)=\ln n+\frac{2}{n}+O\left(\frac{1}{n^2}\right) .
+            $$
+            
+            
+            On obtient
+            
+            $$
+            u_n=(1+a+b) \ln (n)+\frac{a+2 b}{n}++O\left(\frac{1}{n^2}\right) .
+            $$
+            
+            
+            Ainsi, si $1+a+b \neq 0, u_n \sim_{+\infty}(1+a+b) \ln (n)$ et la série diverge grossièrement. Si $1+a+b=0$ et $a+2 b \neq 0, u_n \sim_{+\infty} \frac{a+2 b}{n}$ et la série diverge par comparaison à une série de Riemann divergente. Si $1+a+b=0$ et $a+2 b=0$, alors $u_n=O\left(\frac{1}{n^2}\right)$ et la série converge absolument. Finalement, on a prouvé que $\sum u_n$ converge si et seulement si
+            
+            $$
+            \left\{\begin{array} { r } 
+            { 1 + a + b = 0 } \\
+            { 2 a + b = 0 }
+            \end{array} \Longleftrightarrow \left\{\begin{array}{l}
+            a=-2 \\
+            b=1
+            \end{array}\right.\right.
+            $$
+            \end{mdframed}
+    }{
+    }
+
   \item Dans le(s) cas où la série converge, déterminer $\sum_{n=1}^{+\infty} u_n$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+            On traite donc le cas $a=-2$ et $b=1$. Notons $S_n=\sum_{k=1}^n u_k$. Alors
+
+            $$
+            \begin{aligned}
+            S_n & =\sum_{k=1}^n \ln (k)-2 \sum_{k=1}^n \ln (k+1)+\sum_{k=1}^n \ln (k+2) \\
+            & =\sum_{k=1}^n \ln (k)-\sum_{k=1}^n \ln (k+1)+\sum_{k=1}^n \ln (k+2)-\sum_{k=1}^n \ln (k+1) .
+            \end{aligned}
+            $$
+            
+            
+            On reconnait deux couples de deux sommes télescopiques et on trouve
+            
+            $$
+            S_n=\ln (1)-\ln (2)+\ln (n+2)-\ln (n+1) \rightarrow-\ln (2) .
+            $$
+            \end{mdframed}
+    }{
+    }
 \end{enumerate}
 
 \vspace{1em}
 
 \subsection{Avec l'exponentielle}
 Sachant que $e=\sum_{n \geq 0} \frac{1}{n!}$, déterminer la valeur des sommes suivantes :
-\begin{enumerate}[label = \alph*)]
-  \item $\sum_{n \geq 0} \frac{n+1}{n!}$
-  \item $\sum_{n \geq 0} \frac{n^2-2}{n!}$
-  \item $\sum_{n \geq 0} \frac{n^3}{n!}$.
-\end{enumerate}
+  $$\sum_{n \geq 0} \frac{n+1}{n!}, \qquad \sum_{n \geq 0} \frac{n^2-2}{n!}, \qquad \sum_{n \geq 0} \frac{n^3}{n!}.$$
 
 
-\vspace{1em}
+  \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+            1. La première somme ne pose pas de problèmes :
+
+            $$
+            \sum_{n \geq 0} \frac{n+1}{n!}=\sum_{n \geq 0} \frac{n}{n!}+\sum_{n \geq 0} \frac{1}{n!}=\sum_{n \geq 1} \frac{1}{(n-1)!}+e=2 e .
+            $$
+            
+            2. La deuxième somme est plus compliquée à cause du terme en $n^2$. Pour qu'il se simplifie bien avec le $n!$, le plus commode est de l'écrire
+            
+            $$
+            n^2=n(n-1)+n
+            $$
+            
+            de sorte que
+            
+            $$
+            \sum_{n \geq 0} \frac{n^2-2}{n!}=\sum_{n \geq 2} \frac{n(n-1)}{n!}+\sum_{n \geq 1} \frac{1}{(n-1)!}-2 \sum_{n \geq 0} \frac{1}{n!}=e+e-2 e=0 .
+            $$
+            
+            3. La méthode est similaire. Dit de façon algébrique, on va décomposer le polynôme $X^3$ dans la base $1, X, X(X-1), X(X-1)(X-2)$. En raisonnant d'abord avec le terme de plus haut degré, puis celui juste après, etc..., on trouve :
+            
+            $$
+            X^3=X(X-1)(X-2)+3 X(X-1)+X .
+            $$
+            
+            
+            On en déduit :
+            
+            $$
+            \begin{aligned}
+            \sum_{n \geq 1} \frac{n^3}{n!} & =\sum_{n \geq 1} \frac{n(n-1)(n-2)}{n!}+3 \sum_{n \geq 1} \frac{n(n-1)}{n!}+\sum_{n \geq 1} \frac{n}{n!} \\
+            & =\sum_{n \geq 3} \frac{1}{(n-3)!}+\sum_{n \geq 2} \frac{3}{(n-2)!}+\sum_{n \geq 1} \frac{1}{(n-1)!} \\
+            & =5 e .
+            \end{aligned}
+            $$
+        
+        \end{mdframed}
+    }{
+    }
+
+
+    
 \section*{Suites de fonctions}
 
 \subsection{Suites de fonctions}

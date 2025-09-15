@@ -101,6 +101,15 @@
 % \renewcommand{\p@subsubsection}{}
 \makeatother
 
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+
 % -------------------- Document ----------------------------
 \begin{document}
 

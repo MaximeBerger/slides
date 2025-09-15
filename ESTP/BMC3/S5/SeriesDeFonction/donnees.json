@@ -38,7 +38,12 @@
         },
         {
           "titre": "Exercices",
-          "lien": "resumeGlobal.pdf",
+          "lien": "0-Revisions/Exercices/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "corrigés",
+          "lien": "0-Revisions/Exercices/corrige.pdf",
           "cible": "_blank"
         }
       ]
