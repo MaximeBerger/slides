@@ -98,7 +98,7 @@
     }, 
     {
       "id": "suites_equivalents",
-      "label": "Suites numériques – Équivalents avancés",
+      "label": "Suites numériques - Équivalents avancés",
       "questions": [
         {
           "question": "Donner un équivalent de $u_n = \\ln(n+1) - \\ln(n)$ lorsque $n \\to +\\infty$ :",
@@ -106,7 +106,7 @@
             { "text": "$\\dfrac{1}{n}$", "correct": true },
             { "text": "$\\dfrac{1}{n^2}$", "correct": false, "remediation": "On a $\\ln(1+1/n) \\sim 1/n$ et non $1/n^2$." },
             { "text": "$\\dfrac{1}{\\ln(n)}$", "correct": false, "remediation": "Le développement ne fait pas apparaître de facteur $\\ln(n)$." },
-            { "text": "0", "correct": false, "remediation": "La limite est bien 0, mais la question porte sur l’équivalent." }
+            { "text": "0", "correct": false, "remediation": "La limite est bien 0, mais la question porte sur l'équivalent." }
           ]
         },
         {
@@ -115,16 +115,16 @@
             { "text": "$\\dfrac{1}{2}$", "correct": true },
             { "text": "$\\dfrac{1}{2n}$", "correct": false, "remediation": "Développer $\\sqrt{n^2+n} = n\\sqrt{1+1/n} \\sim n(1+1/(2n)) = n + 1/2$." },
             { "text": "$1$", "correct": false, "remediation": "La correction est $1/2$, pas $1$." },
-            { "text": "$0$", "correct": false, "remediation": "Le terme tend vers $1/2$ et ne s’annule pas." }
+            { "text": "$0$", "correct": false, "remediation": "Le terme tend vers $1/2$ et ne s'annule pas." }
           ]
         },
         {
           "question": "Donner un équivalent de $u_n = \\dfrac{n}{\\ln(n)} - \\dfrac{n}{\\ln(n+1)}$ lorsque $n \\to +\\infty$ :",
           "answers": [
             { "text": "$\\dfrac{1}{\\ln^2(n)}$", "correct": true },
-            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La différence est plus fine, on doit dériver $n/\\ln(n)$ pour l’estimer." },
-            { "text": "$\\dfrac{1}{n\\ln(n)}$", "correct": false, "remediation": "C’est l’ordre de grandeur de $\\dfrac{1}{n}$ multiplié par un log, mais pas l’équivalent exact." },
-            { "text": "$0$", "correct": false, "remediation": "La limite est 0 mais la question porte sur l’équivalent asymptotique." }
+            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La différence est plus fine, on doit dériver $n/\\ln(n)$ pour l'estimer." },
+            { "text": "$\\dfrac{1}{n\\ln(n)}$", "correct": false, "remediation": "C'est l'ordre de grandeur de $\\dfrac{1}{n}$ multiplié par un log, mais pas l'équivalent exact." },
+            { "text": "$0$", "correct": false, "remediation": "La limite est 0 mais la question porte sur l'équivalent asymptotique." }
           ]
         },
         {
@@ -133,7 +133,7 @@
             { "text": "$-\\dfrac{e}{2n}$", "correct": true },
             { "text": "$\\dfrac{e}{n}$", "correct": false, "remediation": "Le développement binomial ou Taylor montre une correction négative $-e/(2n)$." },
             { "text": "$\\dfrac{1}{n^2}$", "correct": false, "remediation": "Le terme principal est en $1/n$, pas en $1/n^2$." },
-            { "text": "0", "correct": false, "remediation": "La suite tend bien vers 0, mais il faut préciser l’équivalent." }
+            { "text": "0", "correct": false, "remediation": "La suite tend bien vers 0, mais il faut préciser l'équivalent." }
           ]
         },
         {
@@ -146,7 +146,7 @@
           ]
         },
         {
-          "question": "Quel est l’équivalent de $u_n = \\dfrac{1}{n}\\sum_{k=1}^n \\dfrac{1}{k}$ quand $n \\to +\\infty$ ?",
+          "question": "Quel est l'équivalent de $u_n = \\dfrac{1}{n}\\sum_{k=1}^n \\dfrac{1}{k}$ quand $n \\to +\\infty$ ?",
           "answers": [
             { "text": "$\\dfrac{\\ln(n)}{n}$", "correct": true },
             { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La moyenne harmonique est plus proche de $\\ln(n)/n$ que de $1/n$." },
@@ -155,63 +155,52 @@
           ]
         }
       ]
-    }, 
+    },
     {
-      "id": "suites_equivalents_avances",
-      "label": "Suites numériques – Équivalents difficiles",
       "questions": [
         {
-          "question": "Soit $u_n = \\ln(n!) - n\\ln(n)$. Quel est son équivalent pour $n \\to +\\infty$ ?",
+          "question": "On dit que $(f_n)$ converge simplement vers $f$ sur $E$ si :",
           "answers": [
-            { "text": "$-n$", "correct": true },
-            { "text": "$0$", "correct": false, "remediation": "Par Stirling : $\\ln(n!) \\sim n\\ln(n) - n$, donc la différence est $-n$ et non 0." },
-            { "text": "$\\sqrt{n}$", "correct": false, "remediation": "Le terme correct est de l’ordre de $n$, pas d’une racine." },
-            { "text": "$\\ln(n)$", "correct": false, "remediation": "La différence est beaucoup plus grande que $\\ln(n)$." }
+            { "text": "$\\forall x \\in E, \\; \\lim_{n\\to\\infty} f_n(x) = f(x)$", "correct": true },
+            { "text": "$\\sup_{x \\in E} |f_n(x) - f(x)| \\to 0$", "correct": false, "remediation": "Ceci est la définition de la convergence uniforme, plus forte que la convergence simple." },
+            { "text": "$\\sum \\|f_n-f\\|_\\infty < +\\infty$", "correct": false, "remediation": "Tu décris la convergence normale d'une série de fonctions, pas la convergence simple d'une suite." },
+            { "text": "$\\int_E |f_n(x)-f(x)| dx \\to 0$", "correct": false, "remediation": "Ceci correspond à la convergence en norme $L^1$, pas à la convergence simple." }
           ]
         },
         {
-          "question": "Soit $u_n = n\\left(\\ln(1+\\tfrac{1}{n}) - \\tfrac{1}{n}\\right)$. Quel est son équivalent pour $n \\to +\\infty$ ?",
+          "question": "La convergence uniforme de $(f_n)$ vers $f$ signifie :",
           "answers": [
-            { "text": "$-\\tfrac{1}{2}$", "correct": true },
-            { "text": "$0$", "correct": false, "remediation": "On a $\\ln(1+1/n) = 1/n - 1/(2n^2)+o(1/n^2)$, donc l’équivalent est $-1/2$." },
-            { "text": "$1$", "correct": false, "remediation": "La correction du développement est négative, pas positive." },
-            { "text": "$-1$", "correct": false, "remediation": "Le terme exact est $-1/2$, pas $-1$." }
+            { "text": "$\\sup_{x \\in E} |f_n(x)-f(x)| \\to 0$", "correct": true },
+            { "text": "$f_n(x) \\to f(x)$ pour presque tout $x$", "correct": false, "remediation": "Cela correspond à la convergence presque partout, pas à la convergence uniforme." },
+            { "text": "$f_n(x) \\to f(x)$ pour tout $x$", "correct": false, "remediation": "Ceci est seulement la convergence simple, il manque l'uniformité." },
+            { "text": "$\\sum \\|f_n\\|_\\infty < +\\infty$", "correct": false, "remediation": "Cela caractérise une convergence normale, plus forte." }
           ]
         },
         {
-          "question": "Soit $u_n = \\dfrac{n}{\\sqrt{n^2+1}}$. Donner un équivalent pour $n \\to +\\infty$.",
+          "question": "Parmi les implications suivantes, laquelle est correcte (sur un compact $E$) ?",
           "answers": [
-            { "text": "$1 - \\dfrac{1}{2n^2}$", "correct": true },
-            { "text": "$1 - \\dfrac{1}{n}$", "correct": false, "remediation": "Le développement asymptotique au second ordre donne $1 - 1/(2n^2)$." },
-            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La suite tend vers 1, pas vers 0." },
-            { "text": "$0$", "correct": false, "remediation": "La limite est bien 1, pas 0." }
+            { "text": "Convergence normale $\\Rightarrow$ convergence uniforme $\\Rightarrow$ convergence simple", "correct": true },
+            { "text": "Convergence simple $\\Rightarrow$ convergence uniforme $\\Rightarrow$ convergence normale", "correct": false, "remediation": "C'est l'inverse : la convergence simple est la plus faible, la convergence normale la plus forte." },
+            { "text": "Convergence uniforme $\\Rightarrow$ convergence normale $\\Rightarrow$ convergence simple", "correct": false, "remediation": "La convergence uniforme n'implique pas la convergence normale, tu as inversé les liens." },
+            { "text": "Convergence simple $\\Rightarrow$ convergence en norme $L^1$", "correct": false, "remediation": "Une convergence simple ne garantit pas une convergence en norme intégrale." }
           ]
         },
         {
-          "question": "Soit $u_n = (1+\\tfrac{1}{n})^{n+1} - e$. Quel est son équivalent ?",
+          "question": "On dit que $(f_n)$ converge en norme $L^p$ vers $f$ si :",
           "answers": [
-            { "text": "$\\tfrac{e}{2n}$", "correct": true },
-            { "text": "$-\\tfrac{e}{2n}$", "correct": false, "remediation": "Par développement : $(1+1/n)^{n+1} = e(1+1/(2n)+o(1/n))$, donc correction positive." },
-            { "text": "$\\tfrac{1}{n^2}$", "correct": false, "remediation": "Le terme principal est en $1/n$, pas $1/n^2$." },
-            { "text": "0", "correct": false, "remediation": "La limite est bien 0, mais la question porte sur l’équivalent." }
+            { "text": "$\\int_E |f_n(x) - f(x)|^p dx \\to 0$", "correct": true },
+            { "text": "$f_n(x) \\to f(x)$ pour tout $x$", "correct": false, "remediation": "Ceci est la convergence simple, qui est plus faible." },
+            { "text": "$\\sup_{x \\in E} |f_n(x)-f(x)| \\to 0$", "correct": false, "remediation": "Ceci est la convergence uniforme, pas une convergence $L^p$." },
+            { "text": "$\\sum \\|f_n-f\\|_\\infty < +\\infty$", "correct": false, "remediation": "Tu donnes ici la définition de la convergence normale d'une série." }
           ]
         },
         {
-          "question": "Soit $u_n = \\dfrac{1}{n}\\sum_{k=1}^n \\dfrac{1}{\\sqrt{k}}$. Quel est son équivalent ?",
+          "question": "Sur $[0,1]$, la suite $f_n(x) = x^n$ converge :",
           "answers": [
-            { "text": "$\\dfrac{2}{\\sqrt{n}}$", "correct": true },
-            { "text": "$\\dfrac{1}{\\sqrt{n}}$", "correct": false, "remediation": "La somme est approchée par l’intégrale $\\int_1^n 1/\\sqrt{x}\\,dx = 2(\\sqrt{n}-1)$, ce qui donne $2/\\sqrt{n}$." },
-            { "text": "$\\dfrac{\\ln(n)}{n}$", "correct": false, "remediation": "C’est l’équivalent de la moyenne harmonique, pas ici." },
-            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "La décroissance est bien plus lente que $1/n$." }
-          ]
-        },
-        {
-          "question": "Soit $u_n = \\dfrac{n!}{n^n}$. Quel est son équivalent ?",
-          "answers": [
-            { "text": "$\\sqrt{2\\pi n}\\, e^{-n}$", "correct": true },
-            { "text": "$e^n$", "correct": false, "remediation": "C’est l’inverse qui croît comme $e^n$, pas cette suite." },
-            { "text": "$\\dfrac{1}{n}$", "correct": false, "remediation": "L’ordre de grandeur exact vient de la formule de Stirling." },
-            { "text": "0", "correct": false, "remediation": "La suite tend bien vers 0, mais il faut préciser la vitesse de décroissance." }
+            { "text": "Simplement vers $f(x)=0$ si $x<1$, et $f(1)=1$", "correct": true },
+            { "text": "Uniformément vers $f(x)=0$", "correct": false, "remediation": "Attention, la convergence n'est pas uniforme car en $x=1$, la limite est $1$ et non $0$." },
+            { "text": "En norme $L^1$ vers $0$", "correct": false, "remediation": "En réalité, $\\int_0^1 x^n dx = 1/(n+1) \\to 0$, donc oui, il y a convergence $L^1$. Vérifie ton calcul." },
+            { "text": "Normalement vers $0$", "correct": false, "remediation": "La convergence n'est pas normale car $\\|f_n\\|_\\infty = 1$ pour tout $n$." }
           ]
         }
       ]
