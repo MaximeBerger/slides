@@ -157,6 +157,8 @@
       ]
     },
     {
+      "id": "suites_fonctions",
+      "label": "Suites de fonctions",
       "questions": [
         {
           "question": "On dit que $(f_n)$ converge simplement vers $f$ sur $E$ si :",
