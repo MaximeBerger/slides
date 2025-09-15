@@ -172,20 +172,12 @@
         // Initialiser l'état global après chargement
         window.state.themes = window.THEMES.map(t => ({ id: t.id, label: t.label, done: false, score: null }));
         
-        // Démarrer l'application dès que les thèmes sont chargés
-        if (window.renderThemesHome) {
-          window.renderThemesHome();
-        } else {
-          // Si la fonction n'est pas encore définie, attendre qu'elle le soit
-          const checkRenderFunction = () => {
-            if (window.renderThemesHome) {
-              window.renderThemesHome();
-            } else {
-              setTimeout(checkRenderFunction, 50);
-            }
-          };
-          checkRenderFunction();
-        }
+        // Démarrer l'application après que le module soit chargé
+        setTimeout(() => {
+          if (window.renderThemesHome) {
+            window.renderThemesHome();
+          }
+        }, 100);
       } catch (error) {
         console.error('Erreur lors du chargement des thèmes:', error);
       }
@@ -219,11 +211,11 @@
     window.modalBody = document.getElementById('modalBody');
     window.btnClose = document.getElementById('btnClose');
 
-    // Exposer la fonction renderThemesHome globalement pour qu'elle soit accessible depuis app.js
-    window.renderThemesHome = null; // Sera définie dans app.js
-    
     // Démarrage: charge les thèmes puis affiche l'écran
     loadThemes();
+    
+    // Exposer la fonction renderThemesHome globalement pour qu'elle soit accessible depuis app.js
+    window.renderThemesHome = null; // Sera définie dans app.js
   </script>
   <script type="module" src="../../../../../../plugin/qcm/app.js"></script>
   <script>

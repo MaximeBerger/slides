@@ -447,5 +447,10 @@ window.btnNext?.addEventListener('click', () => {
 });
 
 // Le démarrage est maintenant géré dans le HTML
+// Mais on vérifie si les thèmes sont déjà chargés et on affiche l'écran d'accueil
+if (window.THEMES && window.THEMES.length > 0 && window.state && window.state.themes.length > 0) {
+  // Les thèmes sont déjà chargés, afficher l'écran d'accueil
+  window.renderThemesHome();
+}
 
 
