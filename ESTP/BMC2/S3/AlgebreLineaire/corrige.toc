@@ -1,0 +1,10 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{\numberline {1}Les vecteurs de $\mathbb {R}^n$}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Exercices}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Équations de réactions chimiques}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Combien de solutions ?}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Systèmes d'équations linéaires}{4}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Approfondissement}{6}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Manipulation}{7}{subsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.1.6}Interprétation}{8}{subsection.1.1.6}%
+\contentsline {subsection}{\numberline {1.1.7}Pour ceux qui s'ennuient}{9}{subsection.1.1.7}%

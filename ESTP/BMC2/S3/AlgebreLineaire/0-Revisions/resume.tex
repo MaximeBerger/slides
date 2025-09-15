@@ -46,35 +46,38 @@
 Ces systèmes admettent-ils zéro, une ou une infinité de solutions ?
 
 % Correction (affichée seulement si showSolutions=true)
-\ifthenelse{\boolean{showSolutions}}{%
-\textbf{Correction}
-\begin{multicols}{3}
-\begin{enumerate}[label=\alph*)]
-\item une solution unique
-\item une infinité de solutions
-\item une infinité de solutions
-\item aucune solution
-\item une infinité de solutions
-\item une infinité de solutions
-\item aucune solution
-\item une infinité de solutions
-\item aucune solution
-\item une solution unique
-\end{enumerate}
-\end{multicols}
-}{}
+\ifthenelse{\boolean{showSolutions}}{}{
+  \begin{multicols}{3}
+}
 
-\begin{multicols}{3}
 \begin{enumerate}[label=\alph*)]
 \item $$\begin{cases}
     -3x + 2y &= 0\\
     -2y &= 0
   \end{cases}$$
 
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    Le système est bien échelonné avec autant d'équations que d'inconnues, il admet une solution unique.
+    \end{mdframed}
+}{}
+
+
 \item $$\begin{cases}
     x + y &= 4\\
     y - z &= 0
   \end{cases}$$
+
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  Le système est déjà échelonné, mais il a plus d'inconnues que d'équations, il admet une infinité de solutions. Ces solutions sont arrangées selon une droite : on peut fixer le paramètre $z$ et exprimer $x$ et $y$ en fonction de $z$.
+  \end{mdframed}
+}{}
 
 \item 
 $$\begin{cases}
@@ -83,11 +86,28 @@ $$\begin{cases}
     0 &= 0
   \end{cases}$$
 
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  La dernière équation n'apporte aucune information, c'est le même que le système précédent. 
+  \end{mdframed}
+}{}
 \item 
 $$\begin{cases}
     x + y &= 4\\
     0 &= 4
   \end{cases}$$
+
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  La dernière équation est incompatible, le système n'admet pas de solution.
+  \end{mdframed}
+}{}
 
 \item 
 $$\begin{cases}
@@ -95,11 +115,31 @@ $$\begin{cases}
     -z &= 2.5
   \end{cases}$$
 
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  Le système est échelonné. $2$ équations pour $3$ inconnues, on peut donc en choisir une comme paramètre : $y$,et exprimer $x$ et $z$ en fonction de $y$.
+  Il admet donc une droite de solutions.
+  \end{mdframed}
+}{}
+
+
 \item 
 $$\begin{cases}
     x - 3y &= 2\\
     0 &= 0
   \end{cases}$$
+
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  La dernière équation n'apporte aucune information, On se ramène donc à une équation, deux inconnues. Il y a donc toute une droite de solution.  
+  \end{mdframed}
+}{}
 
 \item 
 $$\begin{cases}
@@ -108,10 +148,27 @@ $$\begin{cases}
     0 &= 4
   \end{cases}$$
 
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  La dernière équation est incompatible, le système n'admet pas de solution.
+  \end{mdframed}
+}{}
 \item 
 $$\begin{cases}
     2x + y &= 0
   \end{cases}$$
+
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  C'est l'équation d'une droite. Tous les points de cette droite sont solutions.
+  \end{mdframed}
+}{}
 
 \item 
 $$\begin{cases}
@@ -120,6 +177,15 @@ $$\begin{cases}
     0 &= 4
   \end{cases}$$
 
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  La dernière équation est incompatible, le système n'admet pas de solution.
+  \end{mdframed}
+}{}
+
 \item 
 $$\begin{cases}
     x + y - 3z &= -1\\
@@ -127,9 +193,20 @@ $$\begin{cases}
     z &= 0\\
     0 &= 0
   \end{cases}$$
-\end{enumerate}
-\end{multicols}
 
+  
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+  Le système est échelonné, $3$ équations pour $3$ inconnues, il admet une solution unique.
+  \end{mdframed}
+}{}
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}
+}
 
 
 \vspace{2em}
@@ -137,21 +214,8 @@ $$\begin{cases}
 Résoudre les systèmes suivants :
 
 % Correction (affichée seulement si showSolutions=true)
-\ifthenelse{\boolean{showSolutions}}{%
-\textbf{Correction}
-\begin{multicols}{3}
-\begin{enumerate}[label={}]
-\item $(x,y) = \left(2,\tfrac{1}{2}\right)$
-\item $(x,y) = \left(\tfrac{1}{2},\tfrac{3}{2}\right)$
-\item $\{(x,y,z)=(-12+7t,\ t,\ 13-4t),\ t\in\mathbb{R}\}$
-\item aucune solution
-\item $(x,y,z)=(5,5,0)$
-\item $\{(x,y,z,w)=(1,\ t-1,\ 3-t,\ t),\ t\in\mathbb{R}\}$
-\end{enumerate}
-\end{multicols}
-}{}
-
-\begin{multicols}{3}
+\ifthenelse{\boolean{showSolutions}}{}{
+\begin{multicols}{3}}
 \begin{enumerate}[label={}]
 \item 
 $$\begin{cases}
@@ -159,11 +223,28 @@ $$\begin{cases}
     x - 4y = 0
   \end{cases}$$
 
+  \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+        On peut effectuer l'opération $L_2 \leftarrow 2L_2 - L_1$ pour échelonner puis résoudre le système. Il admet une unique solution.
+        \end{mdframed}
+    }{
+    }
 \item 
   $$\begin{cases}
     -x + y = 1 \\
     x + y = 2
   \end{cases}$$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    On peut effectuer l'opération $L_2 \leftarrow L_2 + L_1$ pour échelonner puis résoudre le système. Il admet une unique solution.
+    \end{mdframed}
+}{
+}
 
 \item 
 $$\begin{cases}
@@ -171,6 +252,14 @@ $$\begin{cases}
     x + y + 2z = 14
   \end{cases}$$
 
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+    On peut effectuer l'opération $L_2 \leftarrow L_2 - L_1$ pour échelonner puis résoudre le système. Il admet toute une droite de solutions. On pourra choisir $z$ comme paramètre et exprimer $x$ et $y$ en fonction de $z$.
+    \end{mdframed}
+}{
+}
 
 \item 
 $$\begin{cases}
@@ -178,6 +267,14 @@ $$\begin{cases}
     -3x - 3y = 2
   \end{cases}$$
 
+  \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+
+        \begin{mdframed}
+        On peut effectuer l'opération $L_2 \leftarrow L_2 + 3L_1$, cela conduit à l'équation $0=5$, qui est incompatible. Le système n'admet pas de solution.
+        \end{mdframed}
+    }{
+    }
 
 \item 
 $$\begin{cases}
@@ -186,6 +283,39 @@ $$\begin{cases}
     x + z = 5 \\
     x + y - z = 10
   \end{cases}$$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+      Pour échelonner le système, il faut commencer par échanger les équations pour avoir un $x$ dans la première équation. On échange par exemple $L_1$ et $L_3$. 
+      On obtient  
+      $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+          2x - 2y + z = 0 \\
+          x + y - z = 10
+        \end{cases}$$
+
+        Ensuite, on élimine les $x$ des autres équations à l'aide de la première équation : $L_3 \leftarrow L_3 - 2L_1$ et $L_4 \leftarrow L_4 - L_1$. On obtient :
+        $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+          -2y - z = -10 \\
+           y - 2z = 5
+        \end{cases}$$
+
+        Ensuite, on utilise $L_2$ pour éliminer les $y$ : $L_3 \leftarrow 2L_3 + L_2$ et $L_4 \leftarrow 4L_4 - L_2$. On obtient :
+        $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+           - z = 0 \\
+           - 9z = 0
+        \end{cases}$$
+        Les 2 dernières équations apportent la même information, on peut en garder seulement une des deux. On obtient un système échelonné avec une unique solution. 
+    \end{mdframed}
+}{
+}
 
 
 \item 
@@ -196,8 +326,39 @@ $$\begin{cases}
     4x + y + 2z + w = 9
   \end{cases}$$
 
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+      Pour échelonner le système, on peut garder les deux premières équations. On élimine ensuite les $x$ des autres équations à l'aide de la première équation.
+      On fait donc : $L_3 \leftarrow 2L_3 - 3L_1$ et $L_4 \leftarrow L_4 - 2L_1$. On obtient :
+
+      $$\begin{cases}
+      2x + z + w = 5 \\
+      y - w = -1 \\
+      -5z - 5w = -15 \\
+      y  -w = -1
+    \end{cases}$$
+
+    Ensuite, on utilise $L_2$ pour éliminer les $y$ : $L_4 \leftarrow L_4 - L_2$. On obtient :
+    $$\begin{cases}
+      2x + z + w = 5 \\
+      y - w = -1 \\
+      -5z - 5w = -15 \\
+      0 = 0
+    \end{cases}$$
+
+    Le système est échelonné, $3$ équations pour $4$ inconnues, il admet une droite de solutions. On peut choisir $w$ comme paramètre et exprimer $x$, $y$ et $z$ en fonction de $w$.
+
+
+    \end{mdframed}
+}{
+}
+
 \end{enumerate}
-\end{multicols}
+
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}}
 
 \vspace{2em}
 
@@ -209,19 +370,34 @@ $$\begin{cases}
   6 \sin \alpha-3 \cos \beta+\tan \gamma &= 9
 \end{cases}$$
 
-% Correction (affichée seulement si showSolutions=true)
-\ifthenelse{\boolean{showSolutions}}{%
-\medskip
-En posant $u=\sin\alpha$, $v=\cos\beta$, $w=\tan\gamma$, on obtient le système linéaire
-\[\begin{cases}
-2u-v+3w=3,\\
-2u+v-w=5,\\
-6u-3v+w=9.
-\end{cases}\]
-Sa solution est $(u,v,w)=(2,1,0)$. Comme $\sin\alpha\in[-1,1]$, ceci est impossible, donc \textbf{pas de solution réelle}.
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    On peut se ramener à un système linéaire en posant $x=\sin\alpha$, $y=\cos\beta$, $z=\tan\gamma$. On obtient :
+    $$\begin{cases}
+      2x - y + 3z = 3 \\
+      4x + 2y - 2z = 10 \\
+      6x - 3y + z = 9
+    \end{cases}$$
+    
+    On applique alors le pivot de Gauss, on applique $L_2 \leftarrow L_2 - 2L_1$ et $L_3 \leftarrow L_3 - 3L_1$. On obtient :
+    $$\begin{cases}
+      2x - y + 3z = 3 \\
+      0 + 4y - 8z = 4 \\
+      0 + 0 - 8z = 0
+    \end{cases}$$
+
+    On obtient une unique solution : $x=1/2$, $y=1$, $z=0$.
+
+    On en déduit les solutions de système initial : 
+    $$ \alpha = \pi/6 \mod 2\pi \text{ ou } \alpha = 5\pi/6 \mod 2\pi,$$
+    $$ \beta = 0 \mod 2\pi,$$
+    $$ \gamma = 0 \mod \pi.$$
 }{}
 
-\newpage
+
+\ifthenelse{\boolean{showSolutions}}{}{
+\newpage}
 \vspace{2em}
 
 \subsection{Manipulation}
@@ -238,6 +414,40 @@ x + y = 1 \\
 \end{cases}
 \]
 
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+
+    Soit on voit tout de suite que $L_2-L_1$ donne $3x-2y=5$.
+
+    Sinon, il faut chercher $a$ et $b$ tels que $aL_1+bL_2$ donne $3x-2y=5$. On obtient le système de $3$ équations à $2$ inconnues :
+    $$\begin{cases}
+      \text{coefficients devant x : } \quad a + 4b = 3 \\
+      \text{coefficients devant y : } \quad a - b = -2 \\
+      \text{coefficients du second membre : } a + 6b = 5
+    \end{cases}$$
+
+    On obtient donc le système :
+    $$\begin{cases}
+      a + 4b = 3 \\
+      a - b = -2 \\
+      a + 6b = 5
+    \end{cases}$$
+    
+    On applique alors le pivot de Gauss, on applique $L_2 \leftarrow L_2 - L_1$ et $L_3 \leftarrow L_3 - L_1$. On obtient :
+    $$\begin{cases}
+      a + 4b = 3 \\
+      0 - 5b = -5 \\
+      0 + 2b = 2
+    \end{cases}$$
+    
+    On obtient donc $a=1$ et $b=2$, c'est la seule solution.
+
+  \end{mdframed}
+}{
+}
+
 \item Peut-on obtenir l'équation \(5x - 3y = 2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
 \[
 \begin{cases}
@@ -246,6 +456,38 @@ x + y = 1 \\
 \end{cases}
 \]
 
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+    On procède de même, on cherche $a$ et $b$ tels que $aL_1+bL_2$ donne $5x-3y=2$. On obtient le système de $3$ équations à $2$ inconnues :
+    $$\begin{cases}
+      \text{coefficients devant x : } \quad 2a + 3b = 5 \\
+      \text{coefficients devant y : } \quad 2a + b = -3 \\
+      \text{coefficients du second membre : } 5a + 4b = 2
+    \end{cases}$$
+
+    ce qui conduit au système :
+    $$\begin{cases}
+      2a + 3b = 5 \\
+      2a + b = -3 \\
+      5a + 4b = 2
+    \end{cases}$$
+
+    On applique alors le pivot de Gauss, on fait $L_2 \leftarrow L_2 - L_1$ et $L_3 \leftarrow 2L_3 - 5L_1$. On obtient :
+    $$\begin{cases}
+      2a + 3b = 5 \\
+      0 - 2b = -8 \\
+      0 -7b = -21
+    \end{cases}$$
+    
+    Les deux dernières équations sont incompatibles, le système n'admet pas de solution.
+    
+
+  \end{mdframed}
+}{
+}
+
 \item Peut-on obtenir \(6x - 9y + 5z = -2\) par une suite d'opérations de réduction de Gauss à partir des équations de ce système ?
 \[
 \begin{cases}
@@ -253,18 +495,43 @@ x + y = 1 \\
 6x - 3y + z = 5
 \end{cases}
 \]
+
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+  \begin{mdframed}
+    On procède de même, on cherche $a$ et $b$ tels que $aL_1+bL_2$ donne $6x-9y+5z=-2$. On obtient le système de $3$ équations à $3$ inconnues :
+    $$\begin{cases}
+      \text{coefficients devant x : } \quad 2a + 6b = 6 \\
+      \text{coefficients devant y : } \quad a - 3b = -9 \\
+      \text{coefficients devant z : } \quad -a + b = 5 \\
+      \text{coefficients du second membre : } 4a + 5b = -2
+    \end{cases}$$
+
+  On obtient donc le système :
+  $$\begin{cases}
+    2a + 6b = 6 \\
+    a - 3b = -9 \\
+    -a + b = 5 \\
+    4a + 5b = -2
+  \end{cases}$$
+
+  On applique alors le pivot de Gauss, on fait $L_2 \leftarrow 2L_2 - L_1$ et $L_3 \leftarrow 2L_3 + L_1$ et $L_4 \leftarrow L_4 - 2L_1$. On obtient :
+  $$\begin{cases}
+    2a + 6b = 6 \\
+    -12b = -24 \\
+    8b = 16 \\
+    -7b = -14
+  \end{cases}$$
+  Les trois dernières équations sont les mêmes, on obtient un système parfaitement échelonné avec une unique solution : $b=2$ et $a =-3$.
+
+  \end{mdframed}
+}{
+}
+
+
 \end{enumerate}
 
-% Correction (affichée seulement si showSolutions=true)
-\ifthenelse{\boolean{showSolutions}}{%
-\medskip
-\textbf{Correction}
-\begin{enumerate}[label=\alph*)]
-\item Oui. $-E_1+E_2$ donne $3x-2y=5$.
-\item Non. Aucune combinaison linéaire des équations ne peut donner un second membre égal à $2$.
-\item Oui. $-3E_1+2E_2$ donne $6x-9y+5z=-2$.
-\end{enumerate}
-}{}
 
 \vspace{2em}
 \subsection{Interprétation}
@@ -284,19 +551,12 @@ $$x\begin{pmatrix}1\\4\end{pmatrix} + y\begin{pmatrix}1\\-1\end{pmatrix} = \begi
 ou comme une équation matricielle :
 $$\begin{pmatrix}1&1\\4&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
 
+
+
 \vspace{2em}
 \subsection{Pour ceux qui s'ennuient}
 Une boîte contenant des pennies, des nickels et des dimes renferme treize pièces d'une valeur totale de 83 cents.
 Combien y a-t-il de pièces de chaque type dans la boîte ?
 (Ce sont des pièces américaines : un penny vaut 1 cent, un nickel 5 cents et un dime 10 cents.)
 
-% Correction (affichée seulement si showSolutions=true)
-\ifthenelse{\boolean{showSolutions}}{%
-\medskip
-Soient $p,n,d$ le nombre de pennies, nickels, dimes. On a
-\[\begin{cases}
-p+n+d=13,\\
-p+5n+10d=83.
-\end{cases}\]
-On en déduit $4n+9d=70$, donc $d\equiv2\ (\mathrm{mod}\ 4)$. L'unique solution entière non négative est $d=6$, $n=4$, $p=3$.
-}{}
+

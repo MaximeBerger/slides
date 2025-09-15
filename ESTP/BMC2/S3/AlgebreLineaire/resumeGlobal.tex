@@ -87,9 +87,19 @@
 }
 
 % -------------------- Page de titre ------------------------
-\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini‑exercices)}
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
 \author{ BMC2 }
 \date{\today}
+
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
 
 % -------------------- Document ----------------------------
 \begin{document}
