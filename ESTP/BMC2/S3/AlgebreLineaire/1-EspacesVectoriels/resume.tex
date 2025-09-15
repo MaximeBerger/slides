@@ -1,0 +1,91 @@
+
+\begin{resumeBox}
+  \emph{À retenir dans une semaine :} 
+  \begin{niceitemize}
+    \item Un espace vectoriel est un ensemble avec deux lois : une addition interne et une multiplication avec des scalaire.
+    \item Un vecteur est un élément d'un espace vectoriel.
+    \item Plusieurs espaces vectoriels à identifier :
+      \begin{itemize}
+        \item[$\bullet$] $\mathbb{R}^n$
+        \item[$\bullet$] L'ensemble des polynômes à coefficients réels
+        \item[$\bullet$] L'ensemble des matrices carrées de taille $n$
+        \item[$\bullet$] L'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$
+      \end{itemize}
+  \end{niceitemize}
+\end{resumeBox}
+% \begin{formulesBox}
+%   % Placez ici vos formules, figures TikZ ou images.
+%   % Exemple : $F(\omega)=\int_{-\infty}^{+\infty} f(t)\,e^{-i\omega t}\,dt$
+%   % \begin{center}\includegraphics[width=.8\linewidth]{exemple.jpg}\end{center}
+% \end{formulesBox}
+\begin{rappelsBox}
+  \begin{niceitemize}
+    \item Que signifie qu'une loi soit interne à un ensemble ?
+    \item Quelles sont les règles de calculs pour les espaces vectoriels ?
+    \item Comment montrer qu'un ensemble est un espace vectoriel ?
+  \end{niceitemize}
+\end{rappelsBox}
+
+\section{Exercices}
+  \subsection{Exemples d'espaces vectoriels}
+
+  Les ensembles ci dessous sont munis des opérations classiques d'addition et de multiplication, possèdent-ils une structure d'espace vectoriel ? \newline 
+  Si oui, préciser le corps de scalaires, donner leur dimension et expliciter une base.
+  
+  \begin{enumerate}[i]
+      \item L'ensemble des points d'un demi-plan de \(\mathbb{R}^2\).
+      \item L'ensemble des polynômes dont la dérivée vaut $1$ en $0$.
+      \item L'ensemble des nombres complexes. ( de deux façons différentes )
+      \item L'ensemble des polynômes dont le degré est inférieur ou égal à un certain entier $n$.
+      \item L'ensemble des suites réelles bornées dont le premier terme est $1$.
+  \end{enumerate}
+  
+  \subsection{parties de $\mathbb{R}^2$}
+
+    Les parties suivantes sont-elles des sous-espaces vectoriels de $\mathbb{R}^2$ ?
+    \begin{enumerate}[i]
+      \item A=\left\{(x, y) \in \mathbb{R}^2 \mid x \leqslant y\right\} \\
+      \item B=\left\{(x, y) \in \mathbb{R}^2 \mid x y=0\right\} \\
+      \item C=\left\{(x, y) \in \mathbb{R}^2 \mid x=y\right\} \\
+      \item D=\left\{(x, y) \in \mathbb{R}^2 \mid x+y=1\right\}
+    \end{enumerate}
+    
+    \subsection{Sous-espaces vectoriels}
+    Déterminer si les ensembles suivants sont ou ne sont pas des sous-espaces vectoriels:
+    \begin{enumerate}[i]
+      \item $E_1=\{P \in \mathbb{R}[X] ; P(0)=P(2)\}$;
+      \item $E_2=\left\{P \in \mathbb{R}[X] ; P^{\prime}(0)=2\right\}$;
+      \item Pour $A \in \mathbb{R}[X]$ non-nul fixé, $E_3=\{P \in \mathbb{R}[X] ; A \mid P\}$;
+      \item D l'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$ qui sont dérivables;
+      \item $E_4$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=0$, où $a \in \mathcal{D}$.
+      \item $E_5$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=x$, où $a \in \mathcal{D}$.
+    \end{enumerate}
+
+    \ifthenelse{\boolean{showanswers}}{
+      \begin{mdframed}
+      1. Soit $f, g \in E$, et soit $M_1, M_2$ un majorant respectif de $|f|,|g|$. Alors, pour tout $\lambda \in \mathbb{R}$, et tout $x \in \mathbb{R}_{\text {, }}$
+
+      $$  
+      |f(x)+g(x)| \leq|f(x)|+|g(x)| \leq M_1+M_2,|\lambda f(x)| \leq|\lambda| \times M_1 .
+      $$
+
+
+      Ainsi, $f+g$ et $\lambda f$ sont elles aussi bornées, et $V$ est un sous-espace vectoriel de $E$.
+      2. Considérons la fonction $f$ définie pour $x \in \mathbb{R}$ par $f(x)=-|x|$. Alors $f$ est majorée (par 0 ). Mais on a pour tout $x \in \mathbb{R}:-f(x)=|x|$. Ainsi, la fonction $-f$ n'est pas majorée. Donc $f \in V$ et $-f \notin V: V$ n'est pas un espace vectoriel de $E$.
+      3. Prenons $f$ et $g$ deux fonctions paires et $\lambda \in \mathbb{R}$. Alors
+
+      $$
+      \begin{aligned}
+      (f+g)(-x) & =f(-x)+g(-x) \\
+      & =f(x)+g(x)=(f+g)(x), \\
+      (\lambda f)(-x)= & \lambda f(-x)=\lambda f(x)=(\lambda f)(x) .
+      \end{aligned}
+      $$
+
+
+      Ainsi, $f+g$ et $\lambda f$ sont paires et $V$ est un sous-espace vectoriel de $E$.
+      4. Prenons $f(x)=x^2$ et $g(x)=x$. Alors $f$ est paire et $g$ est impaire. Mais $(f+g)(1)=2$ et $(f+g)(-1)=0$. Ainsi, $f+g$ n'est ni paire, ni impaire et $V$ n'est pas un sous-espace vectoriel de $E$.
+      \end{mdframed}
+    }{}
+  \fi
+\end{document}

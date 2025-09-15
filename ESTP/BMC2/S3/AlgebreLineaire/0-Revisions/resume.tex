@@ -26,7 +26,7 @@
 \end{rappelsBox}
 
 \section{Exercices}
-  \subsection{Equations de réactions Chimiques}
+  \subsection{Équations de réactions chimiques}
   Les équations de réactions chimiques peuvent être interprétées comme des systèmes linéaires. \newline
   Y a-t-il toujours une infinité de façon d'équilibrer l'équation ?
 
@@ -44,6 +44,25 @@
 
   \subsection{Combien de solutions ?}
 Ces systèmes admettent-ils zéro, une ou une infinité de solutions ?
+
+% Correction (affichée seulement si showSolutions=true)
+\ifthenelse{\boolean{showSolutions}}{%
+\textbf{Correction}
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item une solution unique
+\item une infinité de solutions
+\item une infinité de solutions
+\item aucune solution
+\item une infinité de solutions
+\item une infinité de solutions
+\item aucune solution
+\item une infinité de solutions
+\item aucune solution
+\item une solution unique
+\end{enumerate}
+\end{multicols}
+}{}
 
 \begin{multicols}{3}
 \begin{enumerate}[label=\alph*)]
@@ -111,9 +130,26 @@ $$\begin{cases}
 \end{enumerate}
 \end{multicols}
 
+
+
 \vspace{2em}
 \subsection{Systèmes d'équations linéaires}
 Résoudre les systèmes suivants :
+
+% Correction (affichée seulement si showSolutions=true)
+\ifthenelse{\boolean{showSolutions}}{%
+\textbf{Correction}
+\begin{multicols}{3}
+\begin{enumerate}[label={}]
+\item $(x,y) = \left(2,\tfrac{1}{2}\right)$
+\item $(x,y) = \left(\tfrac{1}{2},\tfrac{3}{2}\right)$
+\item $\{(x,y,z)=(-12+7t,\ t,\ 13-4t),\ t\in\mathbb{R}\}$
+\item aucune solution
+\item $(x,y,z)=(5,5,0)$
+\item $\{(x,y,z,w)=(1,\ t-1,\ 3-t,\ t),\ t\in\mathbb{R}\}$
+\end{enumerate}
+\end{multicols}
+}{}
 
 \begin{multicols}{3}
 \begin{enumerate}[label={}]
@@ -173,6 +209,18 @@ $$\begin{cases}
   6 \sin \alpha-3 \cos \beta+\tan \gamma &= 9
 \end{cases}$$
 
+% Correction (affichée seulement si showSolutions=true)
+\ifthenelse{\boolean{showSolutions}}{%
+\medskip
+En posant $u=\sin\alpha$, $v=\cos\beta$, $w=\tan\gamma$, on obtient le système linéaire
+\[\begin{cases}
+2u-v+3w=3,\\
+2u+v-w=5,\\
+6u-3v+w=9.
+\end{cases}\]
+Sa solution est $(u,v,w)=(2,1,0)$. Comme $\sin\alpha\in[-1,1]$, ceci est impossible, donc \textbf{pas de solution réelle}.
+}{}
+
 \newpage
 \vspace{2em}
 
@@ -207,12 +255,23 @@ x + y = 1 \\
 \]
 \end{enumerate}
 
+% Correction (affichée seulement si showSolutions=true)
+\ifthenelse{\boolean{showSolutions}}{%
+\medskip
+\textbf{Correction}
+\begin{enumerate}[label=\alph*)]
+\item Oui. $-E_1+E_2$ donne $3x-2y=5$.
+\item Non. Aucune combinaison linéaire des équations ne peut donner un second membre égal à $2$.
+\item Oui. $-3E_1+2E_2$ donne $6x-9y+5z=-2$.
+\end{enumerate}
+}{}
+
 \vspace{2em}
 \subsection{Interprétation}
 Choisir 3 systèmes linéaire dans un exercice précédent et l'écrire des 2 manières différentes : 
 \begin{enumerate}
 \item Comme une combinaison linéaires de vecteurs.
-\item Comme une equation matricielle.
+\item Comme une équation matricielle.
 \end{enumerate}
 
 Par exemple, le système 
@@ -222,7 +281,7 @@ x + y = 1 \\
 \end{cases}$$
 peut s'écrire comme une combinaison linéaire de vecteurs :
 $$x\begin{pmatrix}1\\4\end{pmatrix} + y\begin{pmatrix}1\\-1\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
-ou comme une equation matricielle :
+ou comme une équation matricielle :
 $$\begin{pmatrix}1&1\\4&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\\6\end{pmatrix}$$
 
 \vspace{2em}
@@ -230,3 +289,14 @@ $$\begin{pmatrix}1&1\\4&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin
 Une boîte contenant des pennies, des nickels et des dimes renferme treize pièces d'une valeur totale de 83 cents.
 Combien y a-t-il de pièces de chaque type dans la boîte ?
 (Ce sont des pièces américaines : un penny vaut 1 cent, un nickel 5 cents et un dime 10 cents.)
+
+% Correction (affichée seulement si showSolutions=true)
+\ifthenelse{\boolean{showSolutions}}{%
+\medskip
+Soient $p,n,d$ le nombre de pennies, nickels, dimes. On a
+\[\begin{cases}
+p+n+d=13,\\
+p+5n+10d=83.
+\end{cases}\]
+On en déduit $4n+9d=70$, donc $d\equiv2\ (\mathrm{mod}\ 4)$. L'unique solution entière non négative est $d=6$, $n=4$, $p=3$.
+}{}
