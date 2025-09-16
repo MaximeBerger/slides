@@ -39,8 +39,8 @@
         {
           "question": "Soit $E = \\{ (x,y) \\in \\mathbb{R}^2 \\mid x+y=1 \\}$ muni des opérations habituelles. <br /> Est-ce stable par addition ?",
           "answers": [
-            { "text": "Non, car $(x,y)$ et $(x',y')$ avec $x+y=1$ et $x'+y'=1$ donnent $(x+x', y+y')$ qui satisfait rarement $x+x' + y+y' = 1$", "correct": true },
-            { "text": "Oui, car la somme de deux couples vérifiant $x+y=1$ vérifie encore cette condition", "correct": false, "remediation": "Si $(1,0)$ et $(0,1)$ appartiennent à $E$, leur somme $(1,1)$ ne vérifie pas $x+y=1$." }
+            { "text": "Non", "correct": true },
+            { "text": "Oui", "correct": false, "remediation": "Si $(1,0)$ et $(0,1)$ appartiennent à $E$, leur somme $(1,1)$ ne vérifie pas $x+y=1$." }
           ]
         },
         {
