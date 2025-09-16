@@ -1343,4 +1343,105 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `superscript' on input line 111.
 
 
-Package hyperref Warning:
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 111.
+
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+11.
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+11.
+
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+111.
+
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+111.
+
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <24.88> on input line 111.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <20.74> on input line 111.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 111.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 111
+.
+
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 111
+.
+ (C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) (1-EspacesVectoriels/resume.tex
+(C:\Users\mberge04\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-TU-empt
+y.cfg
+File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonsta
+ndard glyph set (RS)
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 9.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 9.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 9.
+
+Overfull \hbox (0.41159pt too wide) in paragraph at lines 28--30
+[]\T1/lmr/m/n/10.95 Les en-sembles ci des-sous sont mu-nis des opé-ra-tions cla
+s-siques d'ad-di-tion et de mul-ti-pli-ca-tion, possèdent-
+ []
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 39.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 39.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 39.
+
+
+
+[1
+
+
+]
+! Undefined control sequence.
+\@gtempa ... \ifnum \@ne =\@ne \fi \ifshowanswers 
+                                                  \relax \TE@setvaltrue \els...
+l.54       \ifthenelse{\boolean{showanswers}}
+                                             {
+? x
+ 
+Here is how much of TeX's memory you used:
+ 34565 strings out of 403341
+ 671497 string characters out of 5462500
+ 1181528 words of memory out of 5000000
+ 62401 multiletter control sequences out of 15000+600000
+ 683841 words of font info for 90 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 102i,5n,107p,1203b,951s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on corrige.pdf (1 page).
