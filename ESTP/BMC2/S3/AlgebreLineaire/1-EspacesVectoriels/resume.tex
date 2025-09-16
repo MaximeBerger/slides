@@ -2,14 +2,14 @@
 \begin{resumeBox}
   \emph{À retenir dans une semaine :} 
   \begin{niceitemize}
-    \item Un espace vectoriel est un ensemble avec deux lois : une addition interne et une multiplication avec des scalaire.
+    \item Un espace vectoriel est un ensemble avec deux lois : une addition interne et une multiplication par un scalaire.
     \item Un vecteur est un élément d'un espace vectoriel.
-    \item Plusieurs espaces vectoriels à identifier :
+    \item Pour vérifier qu'un ensemble est un espace vectoriel  :
       \begin{itemize}
-        \item[$\bullet$] $\mathbb{R}^n$
-        \item[$\bullet$] L'ensemble des polynômes à coefficients réels
-        \item[$\bullet$] L'ensemble des matrices carrées de taille $n$
-        \item[$\bullet$] L'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$
+        \item[$\bullet$] Possède-t-il un vecteur nul ?
+        \item[$\bullet$] L'addition est-elle une loi interne ?
+        \item[$\bullet$] La multiplication par un scalaire est-elle une loi externe ?
+        \item[$\bullet$] Les règles de calcul de l'addition et de la multiplication par un scalaire sont-elles vérifiées ?
       \end{itemize}
   \end{niceitemize}
 \end{resumeBox}
@@ -18,89 +18,153 @@
   \begin{niceitemize}
     \item Que signifie qu'une loi soit interne à un ensemble ?
     \item Quelles sont les règles de calculs pour les espaces vectoriels ?
-    \item Comment montrer qu'un ensemble est un espace vectoriel ?
+    \item Qu'est-ce que le vecteur nul d'un espace vectoriel ?
   \end{niceitemize}
 \end{rappelsBox}
 
 \section{Exercices}
-  \subsection{Exemples d'espaces vectoriels}
+\subsection{Les espaces vectoriels dans $\mathbb{R}^n$}
 
-  Les ensembles ci dessous sont munis des opérations classiques d'addition et de multiplication, possèdent-ils une structure d'espace vectoriel ? \newline 
-  Si oui, préciser le corps de scalaires, donner leur dimension et expliciter une base.
-  
+\begin{enumerate}
+  \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}$ ?
+  \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}^2$ ?
+  \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}^3$ ?
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{}{\newpage }
+
+
+
+
+\vspace{2em}
+\subsection{parties de $\mathbb{R}^2$}
+
+  Les parties suivantes sont-elles des sous-espaces vectoriels de $\mathbb{R}^2$ ?
+
+  \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
   \begin{enumerate}
-      \item L'ensemble des points d'un demi-plan de \(\mathbb{R}^2\).
-      \item L'ensemble des polynômes dont la dérivée vaut $1$ en $0$.
-      \item L'ensemble des nombres complexes. ( de deux façons différentes )
-      \item L'ensemble des polynômes dont le degré est inférieur ou égal à un certain entier $n$.
-      \item L'ensemble des suites réelles bornées dont le premier terme est $1$.
+    \item $A=\left\{(x, y) \in \mathbb{R}^2 \mid x \leqslant y\right\}$ 
+    \item $B=\left\{(x, y) \in \mathbb{R}^2 \mid x y=0\right\}$ 
+    \item $C=\left\{(x, y) \in \mathbb{R}^2 \mid x=y\right\}$ 
+    \item $D=\left\{(x, y) \in \mathbb{R}^2 \mid x+y=1\right\}$
   \end{enumerate}
-  
-  \subsection{parties de $\mathbb{R}^2$}
+  \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
 
-    Les parties suivantes sont-elles des sous-espaces vectoriels de $\mathbb{R}^2$ ?
-    \begin{enumerate}
-      \item $A=\left\{(x, y) \in \mathbb{R}^2 \mid x \leqslant y\right\}$ 
-      \item $B=\left\{(x, y) \in \mathbb{R}^2 \mid x y=0\right\}$ 
-      \item $C=\left\{(x, y) \in \mathbb{R}^2 \mid x=y\right\}$ 
-      \item $D=\left\{(x, y) \in \mathbb{R}^2 \mid x+y=1\right\}$
-    \end{enumerate}
-    
-    \subsection{Sous-espaces vectoriels}
-    Déterminer si les ensembles suivants sont ou ne sont pas des sous-espaces vectoriels:
+
+\vspace{1em}
+
+  \subsection{Dans un espace de fonctions}
+
+  Soit $E$ le $\mathbb{R}$-espace vectoriel des applications de $[0,1]$ dans $\mathbb{R}$ muni des opérations usuelles. 
+  Soit $F$ l'ensemble des applications de $[0,1]$ dans $\mathbb{R}$ vérifiant l'une des conditions suivantes :
+
+  \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
+  \begin{enumerate}
+    \item $f(0)+f(1)=0$
+    \item $f(0)=0$
+    \item $f\left(\frac{1}{2}\right)=\frac{1}{4}$
+    \item $\forall x \in[0,1], f(x)+f(1-x)=0$
+    \item $\forall x \in[0,1], f(x) \geqslant 0$
+    \item $2 f(0)=f(1)+3$
+  \end{enumerate}
+  \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
+
+Dans quel cas $F$ est-il un espace vectoriel inclus dans $E$?
+
+\vspace{1em}
+
+\subsection{Dans $\mathbb{R}^n$}
+
+On munit $\mathbb{R}^n$ des lois usuelles. Parmi les sous-ensembles suivants $F$ de $\mathbb{R}^n$, lesquels sont des espaces vectoriels?
+
+\ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
+\begin{enumerate}
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=0\right\}$
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=1\right\}$
+  \item $F=\left\{\left(x_1, \ldots, x_n\right) \in \mathbb{R}^n / x_1=x_2\right\}$
+  \item $\mathrm{F}=\left\{\left(x_1, \ldots, x_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / x_1+\ldots+x_{\mathrm{n}}=0\right\}$
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1 \times \mathrm{x}_2=0\right\}$
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
+
+
+\vspace{2em}
+
+\subsection{Dans $\mathbb{R}[X]$}
+
+
+Les ensembles suivants sont-ils des espaces vectoriels?
+\begin{enumerate}
+  \item $A_1$ est l'ensemble des polynômes réels P vérifiant $\mathrm{P}(0)=1$.
+  \item $A_2$ est l'ensemble des polynômes réels ayant $a$ comme racine. ( $a \in \mathbb{R}$ fixé).
+  \item $A_3$ est l'ensemble des polynômes réels ayant au moins une racine réelle.
+  \item $A_4$ est l'ensemble des polynômes réels de degré 3.
+\end{enumerate}
+
+\vspace{2em}
+
+\subsection{Dans l'espace des suites réelles}
+
+Les ensembles suivants sont-ils des espaces vectoriels?
+\begin{enumerate}
+  \item $A_1$ est l'ensemble des suites réelles convergentes vers 1.
+  \item $A_2$ est l'ensemble des suites réelles négligeables devant $n^2$
+  \item $A_3$ est l'ensemble des suites réelles équivalentes à $n^2$.
+  \item $A_4$ est l'ensemble des suites réelles $\left(u_n\right)_{n \in \mathbb{N}}$ vérifiant :
+
+$$
+\forall n \in \mathbb{N}, u_{n+1}=5 u_n-3
+$$
+
+  \item $A_5$ est l'ensemble des suites réelles arithmétiques.
+  \item $A_6$ est l'ensemble des suites réelles géométriques.
+\end{enumerate}
+
+
+  \vspace{2em}
+    \subsection{Mélange}
+    Déterminer si les ensembles suivants sont ou ne sont pas des espaces vectoriels:
     \begin{enumerate}
       \item $E_1=\{P \in \mathbb{R}[X] ; P(0)=P(2)\}$;
-
-      \ifthenelse{\boolean{showanswers}}{
-      \begin{mdframed}
-      Soit $f, g \in E$, et soit $M_1, M_2$ un majorant respectif de $|f|,|g|$. Alors, pour tout $\lambda \in \mathbb{R}$, et tout $x \in \mathbb{R},$
-
-      $$  
-      |f(x)+g(x)| \leq|f(x)|+|g(x)| \leq M_1+M_2,|\lambda f(x)| \leq|\lambda| \times M_1 .
-      $$
-
-
-      Ainsi, $f+g$ et $\lambda f$ sont elles aussi bornées, et $V$ est un sous-espace vectoriel de $E$.
-      \end{mdframed}
-      }{
-      }
-
       \item $E_2=\left\{P \in \mathbb{R}[X] ; P^{\prime}(0)=2\right\}$;
-      \ifthenelse{\boolean{showanswers}}{
-      \begin{mdframed}
-        Considérons la fonction $f$ définie pour $x \in \mathbb{R}$ par $f(x)=-|x|$. Alors $f$ est majorée (par $0$). Mais on a pour tout $x \in \mathbb{R}:-f(x)=|x|$. Ainsi, la fonction $-f$ n'est pas majorée. Donc $f \in V$ et $-f \notin V: V$ n'est pas un espace vectoriel de $E$.
-      \end{mdframed}
-      }{
-      }
-
       \item Pour $A \in \mathbb{R}[X]$ non-nul fixé, $E_3=\{P \in \mathbb{R}[X] ; A \mid P\}$;
-
-      \ifthenelse{\boolean{showanswers}}{
-      \begin{mdframed}
-        Prenons $f$ et $g$ deux fonctions paires et $\lambda \in \mathbb{R}$. Alors
-
-        $$
-        \begin{aligned}
-        (f+g)(-x) & =f(-x)+g(-x) \\
-        & =f(x)+g(x)=(f+g)(x), \\
-        (\lambda f)(-x)= & \lambda f(-x)=\lambda f(x)=(\lambda f)(x) .
-        \end{aligned}
-        $$
-  
-        Ainsi, $f+g$ et $\lambda f$ sont paires et $V$ est un sous-espace vectoriel de $E$.     
-      \end{mdframed}
-      }{
-      }
-
       \item D l'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$ qui sont dérivables;
       \item $E_4$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=0$, où $a \in \mathcal{D}$.
       \item $E_5$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=x$, où $a \in \mathcal{D}$.
     \end{enumerate}
 
-      \ifthenelse{\boolean{showanswers}}{
-      \begin{mdframed}
-        Prenons $f(x)=x^2$ et $g(x)=x$. Alors $f$ est paire et $g$ est impaire. Mais $(f+g)(1)=2$ et $(f+g)(-1)=0$. Ainsi, $f+g$ n'est ni paire, ni impaire et $V$ n'est pas un sous-espace vectoriel de $E$.
-      \end{mdframed}
-    }{}
+\section*{Bases}
+\vspace{2em}
+
+\subsection{Dans $\mathbb{R}^2$}
+\begin{enumerate}
+\item  Montrer que les vecteurs $v_1=(0,1), v_2=(1,1)$ forment une base de $\mathbb{R}^2$. Trouver les composantes du vecteur $w=(1,2)$ dans cette base $\left(v_1, v_2\right)$.
+\item Montrer que les vecteurs $v_1=(1,2), v_2=(3,4)$forment une base de $\mathbb{R}^2$. Trouver les composantes des vecteurs $e_1=(1,0)$ et $e_2=(0,1)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+\item Dans $\mathbb{R}^2$, donner un exemple de famille libre qui n'est pas génératrice.
+\item Dans $\mathbb{R}^2$, donner un exemple de famille génératrice qui n'est pas libre.
+\end{enumerate}
+
+\vspace{2em}
+
+\subsection{Dans $\mathbb{R}^3$}
+\begin{enumerate}
+\item  Montrer que les vecteurs $v_1=(0,1,1), v_2=(1,0,1)$ et $v_3=(1,1,0)$ forment une base de $\mathbb{R}^3$. Trouver les composantes du vecteur $w=(1,1,1)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+\item Montrer que les vecteurs $v_1=(1,1,1), v_2=(-1,1,0)$ et $v_3=(1,0,-1)$ forment une base de $\mathbb{R}^3$. Trouver les composantes du vecteur $e_1=(1,0,0), e_2=(0,1,0), e_3=(0,0,1)$ et $w=(1,2,-3)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+\item Dans $\mathbb{R}^3$, donner un exemple de famille libre qui n'est pas génératrice.
+\item Dans $\mathbb{R}^3$, donner un exemple de famille génératrice qui n'est pas libre.
+\end{enumerate}
+
+
+Déterminer pour quelles valeurs de $t \in \mathbb{R}$ les vecteurs
+
+$$
+\{(1,0, t),(1,1, t),(t, 0,1)\}
+$$
+
+forment une base de $\mathbb{R}^3$.
+
+\vspace{2em}
+Considérons la famille $B=\left(Q_1, Q_2, Q_3\right)$ où $$\left\{\begin{array}{l}Q_1=X^2+1 \\ Q_2=3 X^2-X+3 \\ Q_3=X^2-X-1\end{array}\right.$$
+$B$ est-elle une base de $\mathbb{R}_2[X]$ ? Sioui, déterminer les coordonnées de $X$.
   
 \end{document}

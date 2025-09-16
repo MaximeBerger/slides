@@ -5,7 +5,7 @@
       "label": "Opérations sur des ensembles avec lois et scalaires",
       "questions": [
         {
-          "question": "Soit l'ensemble $E = \\mathbb{R}^2$ muni de l'addition $(x,y) + (x',y') = (x+x',y+y')$. Quelle est la nature de cette loi ?",
+          "question": "Soit l'ensemble $E = \\mathbb{R}^2$ muni de l'addition $(x,y) + (x',y') = (x+x',y+y')$. <br /> Quelle est la nature de cette loi ?",
           "answers": [
             { "text": "C'est une loi interne sur $E$", "correct": true },
             { "text": "Ce n'est pas une loi interne car le résultat n'est pas dans $E$", "correct": false, "remediation": "En additionnant deux couples réels, on obtient encore un couple réel." },
@@ -13,7 +13,7 @@
           ]
         },
         {
-          "question": "Dans $\\mathbb{R}^3$, on définit la multiplication par un nombre $\\lambda (x,y,z) = (\\lambda x, \\lambda y, \\lambda z)$. Que peut-on dire ?",
+          "question": "Dans $\\mathbb{R}^3$, on définit la multiplication par un nombre $\\lambda (x,y,z) = (\\lambda x, \\lambda y, \\lambda z)$. <br /> Que peut-on dire ?",
           "answers": [
             { "text": "C'est une opération bien définie : le résultat est encore dans $\\mathbb{R}^3$", "correct": true },
             { "text": "Ce n'est pas une opération car on ne peut pas multiplier un réel par un vecteur", "correct": false, "remediation": "On définit précisément cette opération comme la multiplication coordonnée par coordonnée." },
@@ -21,7 +21,7 @@
           ]
         },
         {
-          "question": "L'ensemble $E = \\mathbb{N}$ (nombres naturels) muni de l'addition usuelle et de la multiplication par un réel $\\lambda \\cdot n = \\lambda n$. Est-ce un bon exemple ?",
+          "question": "L'ensemble $E = \\mathbb{N}$ (nombres naturels) muni de l'addition usuelle et de la multiplication par un réel $\\lambda \\cdot n = \\lambda n$. <br /> Est-ce un bon exemple ?",
           "answers": [
             { "text": "Non, car $\\lambda n$ n'est pas forcément un nombre naturel", "correct": true },
             { "text": "Oui, car les entiers sont stables par addition et multiplication", "correct": false, "remediation": "Ils sont stables par addition, mais pas par multiplication par un réel non entier." },
@@ -29,7 +29,7 @@
           ]
         },
         {
-          "question": "Dans l'ensemble des fonctions $f : \\mathbb{R} \\to \\mathbb{R}$, on définit $f+g$ et $\\lambda f$. Que peut-on dire ?",
+          "question": "Dans l'ensemble des fonctions $f : \\mathbb{R} \\to \\mathbb{R}$, on définit $f+g$ et $\\lambda f$. <br /> Que peut-on dire ?",
           "answers": [
             { "text": "C'est bien défini : $f+g$ et $\\lambda f$ sont encore des fonctions de $\\mathbb{R}$ dans $\\mathbb{R}$", "correct": true },
             { "text": "Ce n'est pas bien défini car $f+g$ n'est pas une fonction", "correct": false, "remediation": "La somme point par point $(f+g)(x)=f(x)+g(x)$ est bien une fonction." },
@@ -37,14 +37,14 @@
           ]
         },
         {
-          "question": "Soit $E = \\{ (x,y) \\in \\mathbb{R}^2 \\mid x+y=1 \\}$ muni des opérations habituelles. Est-ce stable par addition ?",
+          "question": "Soit $E = \\{ (x,y) \\in \\mathbb{R}^2 \\mid x+y=1 \\}$ muni des opérations habituelles. <br /> Est-ce stable par addition ?",
           "answers": [
             { "text": "Non, car $(x,y)$ et $(x',y')$ avec $x+y=1$ et $x'+y'=1$ donnent $(x+x', y+y')$ qui satisfait rarement $x+x' + y+y' = 1$", "correct": true },
             { "text": "Oui, car la somme de deux couples vérifiant $x+y=1$ vérifie encore cette condition", "correct": false, "remediation": "Si $(1,0)$ et $(0,1)$ appartiennent à $E$, leur somme $(1,1)$ ne vérifie pas $x+y=1$." }
           ]
         },
         {
-          "question": "On considère $E = \\mathbb{R}[X]$, l'ensemble des polynômes à coefficients réels. Quelle affirmation est correcte ?",
+          "question": "On considère $E = \\mathbb{R}[X]$, l'ensemble des polynômes à coefficients réels. <br /> Quelle affirmation est correcte ?",
           "answers": [
             { "text": "La somme de deux polynômes est encore un polynôme", "correct": true },
             { "text": "La somme de deux polynômes n'est pas définie", "correct": false, "remediation": "On définit la somme en ajoutant les coefficients de même degré." },
