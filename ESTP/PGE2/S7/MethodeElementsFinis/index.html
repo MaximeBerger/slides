@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Méthode des Éléments Finis - Plan</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* Conteneur SVG avec défilement */
+        .svg-container {
+            width: 100%;
+            height: 100vh;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            transition: overflow-y 0.3s ease;
+        }
+        
+        /* Activer le défilement quand un panneau est ouvert */
+        .svg-container.has-open-panel {
+            overflow-y: auto;
+        }
+        
+        /* Style de la barre de défilement */
+        .svg-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .svg-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .svg-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        .svg-container::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+<div class="svg-container">
+<svg viewBox="0 0 1200 800" style="max-width:100%;min-height:100vh;overflow:visible"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     role="group" aria-label="Progression type ligne de métro avec sous-chapitres">
+  <style>
+    /* Typo */
+    .t-title { font:700 26px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; }
+    .t-station { font:600 18px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; text-anchor:middle; }
+    .t-sub { font:400 14px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#475569; text-anchor:middle; }
+
+    /* Ligne de métro */
+    .line { stroke:#334155; stroke-width:8; stroke-linecap:round; }
+    .tick { stroke:#64748B; stroke-width:2; }
+    .arrow { fill:#334155; }
+
+    /* Stations */
+    .station-dot { fill:#F8FAFC; stroke:#0EA5E9; stroke-width:6; }
+    a:focus .station-dot, a:hover .station-dot { stroke:#2563EB; }
+    .station-halo { fill:#93C5FD; opacity:0; transition:opacity .15s ease; }
+    a:focus .station-halo, a:hover .station-halo { opacity:.25; }
+
+    /* Sous-chapitres */
+    .sub-chapters { opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; }
+    .sub-chapters.active { opacity:1; visibility:visible; }
+    .sub-btn { fill:#F1F5F9; stroke:#CBD5E1; stroke-width:1; rx:8; }
+    .sub-btn-group:hover .sub-btn { stroke:#2563EB; fill:#E0F2FE; }
+    .sub-btn-text { font:500 16px system-ui; fill:#0F172A; pointer-events:none; user-select:none; }
+    .sub-btn-desc { font:400 12px system-ui; fill:#64748B; pointer-events:none; user-select:none; }
+  </style>
+
+  <!-- Titre -->
+  <text class="t-title" x="60" y="40" id="main-title">Chargement...</text>
+
+  <!-- ===== Ligne principale + flèche de direction ===== -->
+  <!-- Ligne -->
+  <path class="line" d="M100,150 H1100"/>
+  <!-- Petits ticks (rythme visuel) -->
+  <g class="ticks">
+    <line class="tick" x1="250" y1="138" x2="250" y2="162"/>
+    <line class="tick" x1="500" y1="138" x2="500" y2="162"/>
+    <line class="tick" x1="750" y1="138" x2="750" y2="162"/>
+    <line class="tick" x1="1000" y1="138" x2="1000" y2="162"/>
+  </g>
+  <!-- Flèche de progression -->
+  <polygon class="arrow" points="1120,150 1102,142 1102,158"/>
+
+  <!-- ===== Stations (Sections) ===== -->
+  <g id="stations-container">
+    <!-- Les stations seront générées ici -->
+  </g>
+
+  <!-- ===== SOUS-CHAPTERS (affichés en colonne) ===== -->
+  <g id="sub-chapters-container">
+    <!-- Les sous-chapitres seront générés ici -->
+  </g>
+
+  <script>
+    // Fonction pour basculer l'affichage des sous-chapitres
+    function toggleSubChapters(sectionId) {
+      const svgContainer = document.querySelector('.svg-container');
+      
+      // Masquer tous les sous-chapitres
+      const allSubChapters = document.querySelectorAll('.sub-chapters');
+      allSubChapters.forEach(chapter => {
+        chapter.classList.remove('active');
+      });
+      
+      // Afficher le sous-chapitre cliqué
+      const targetChapter = document.getElementById(sectionId);
+      if (targetChapter) {
+        targetChapter.classList.add('active');
+        // Activer le défilement
+        svgContainer.classList.add('has-open-panel');
+      }
+    }
+
+    // Fonction pour fermer tous les sous-chapitres
+    function closeAllSubChapters() {
+      const svgContainer = document.querySelector('.svg-container');
+      const allSubChapters = document.querySelectorAll('.sub-chapters');
+      allSubChapters.forEach(chapter => {
+        chapter.classList.remove('active');
+      });
+      // Désactiver le défilement
+      svgContainer.classList.remove('has-open-panel');
+    }
+
+    // Ajouter un écouteur d'événement pour fermer les sous-chapitres en cliquant à l'extérieur
+    document.addEventListener('click', function(event) {
+      // Vérifier si le clic n'est pas sur une station ou un sous-chapitre
+      const isStationClick = event.target.closest('a[onclick*="toggleSubChapters"]');
+      const isSubChapterClick = event.target.closest('.sub-chapters');
+      
+      if (!isStationClick && !isSubChapterClick) {
+        closeAllSubChapters();
+      }
+    });
+
+    // Fonction pour générer le plan à partir des données JSON
+    function generatePlan(data) {
+      // Mettre à jour le titre principal
+      document.getElementById('main-title').textContent = data.titre;
+
+      const stationsContainer = document.getElementById('stations-container');
+      const subChaptersContainer = document.getElementById('sub-chapters-container');
+      
+      // Calculer les positions des stations
+      const totalChapters = data.chapitres.length;
+      const positions = [];
+      
+      if (totalChapters === 1) {
+        positions.push(600); // Centre si une seule section
+      } else {
+        const startX = 100;
+        const endX = 1100;
+        const step = (endX - startX) / (totalChapters - 1);
+        
+        for (let i = 0; i < totalChapters; i++) {
+          positions.push(startX + i * step);
+        }
+      }
+
+      // Générer les stations
+      data.chapitres.forEach((chapitre, index) => {
+        const x = positions[index];
+        
+        // Créer la station
+        const stationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'a');
+        stationGroup.setAttribute('href', '#');
+        stationGroup.setAttribute('onclick', `toggleSubChapters('${chapitre.id}'); return false;`);
+        stationGroup.setAttribute('role', 'link');
+        stationGroup.setAttribute('aria-label', `Ouvrir ${chapitre.titre}`);
+        stationGroup.setAttribute('tabindex', '0');
+        
+                 const stationG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+         stationG.setAttribute('transform', `translate(${x},150)`);
+        
+        const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        halo.setAttribute('class', 'station-halo');
+        halo.setAttribute('r', '28');
+        
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('class', 'station-dot');
+        dot.setAttribute('r', '16');
+        
+        const titleText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        titleText.setAttribute('class', 't-station');
+        titleText.setAttribute('x', '0');
+        titleText.setAttribute('y', '46');
+        titleText.textContent = chapitre.numero + " · " + chapitre.titre;
+        
+        const descText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        descText.setAttribute('class', 't-sub');
+        descText.setAttribute('x', '0');
+        descText.setAttribute('y', '66');
+        descText.textContent = "";
+        
+        stationG.appendChild(halo);
+        stationG.appendChild(dot);
+        stationG.appendChild(titleText);
+        stationG.appendChild(descText);
+        
+        stationGroup.appendChild(stationG);
+        
+        stationsContainer.appendChild(stationGroup);
+
+        // Générer les sous-chapitres
+        if (chapitre.sousParties && chapitre.sousParties.length > 0) {
+          const subChaptersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          subChaptersGroup.setAttribute('id', chapitre.id);
+          subChaptersGroup.setAttribute('class', 'sub-chapters');
+          
+          // Calculer la position optimale pour éviter que le panneau sorte de l'écran
+          let panelX = x;
+          const panelWidth = 200; // Largeur du panneau
+          const margin = 50; // Marge minimale par rapport aux bords
+          
+          // Si le panneau sort à gauche, ajuster la position
+          if (x - panelWidth/2 < margin) {
+            panelX = margin + panelWidth/2;
+          }
+          // Si le panneau sort à droite, ajuster la position
+          else if (x + panelWidth/2 > 1200 - margin) {
+            panelX = 1200 - margin - panelWidth/2;
+          }
+          
+                     subChaptersGroup.setAttribute('transform', `translate(${panelX},230)`);
+          
+          let currentY = 0;
+          
+          // Section "Parties"
+          if (chapitre.sousParties && chapitre.sousParties.length > 0) {
+            // Titre de la section "Parties"
+            const sectionTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            sectionTitle.setAttribute('class', 't-station');
+            sectionTitle.setAttribute('x', '-100');
+            sectionTitle.setAttribute('y', currentY + 20);
+            sectionTitle.setAttribute('text-anchor', 'start');
+            sectionTitle.textContent = "Parties";
+            subChaptersGroup.appendChild(sectionTitle);
+            currentY += 35;
+            
+            // Sous-parties
+            chapitre.sousParties.forEach((sousPartie, subIndex) => {
+              // Créer un groupe cliquable
+              const subG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+              subG.setAttribute('transform', `translate(0,${currentY})`);
+              subG.setAttribute('style', 'cursor: pointer;');
+              subG.setAttribute('class', 'sub-btn-group');
+              
+              const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+              rect.setAttribute('class', 'sub-btn');
+              rect.setAttribute('x', '-100');
+              rect.setAttribute('y', '0');
+              rect.setAttribute('width', '200');
+              rect.setAttribute('height', '35');
+              
+              const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+              text.setAttribute('class', 'sub-btn-text');
+              text.setAttribute('x', '-92');
+              text.setAttribute('y', '22');
+              text.textContent = sousPartie.numero + " · " + sousPartie.titre;
+              
+              subG.appendChild(rect);
+              subG.appendChild(text);
+              
+              // Ajouter la description si elle existe
+              if (sousPartie.description) {
+                const descText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                descText.setAttribute('class', 'sub-btn-desc');
+                descText.setAttribute('x', '-92');
+                descText.setAttribute('y', '32');
+                descText.textContent = sousPartie.description;
+                subG.appendChild(descText);
+              }
+              
+              // Ajouter l'événement de clic
+              subG.addEventListener('click', function() {
+                if (sousPartie.cible === '_blank') {
+                  window.open(sousPartie.lien, '_blank');
+                } else {
+                  window.location.href = sousPartie.lien;
+                }
+              });
+              
+              // Ajouter l'événement pour la touche Entrée (accessibilité)
+              subG.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  if (sousPartie.cible === '_blank') {
+                    window.open(sousPartie.lien, '_blank');
+                  } else {
+                    window.location.href = sousPartie.lien;
+                  }
+                }
+              });
+              
+              // Rendre le groupe focusable pour l'accessibilité
+              subG.setAttribute('tabindex', '0');
+              subG.setAttribute('role', 'button');
+              subG.setAttribute('aria-label', `Aller vers ${sousPartie.titre}`);
+              
+              subChaptersGroup.appendChild(subG);
+              currentY += 45;
+            });
+          }
+          
+          // Section "S'exercer"
+          if (chapitre.sexercer && chapitre.sexercer.length > 0) {
+            // Espacement entre les sections
+            currentY += 20;
+            
+            // Titre de la section "S'exercer"
+            const exercerTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            exercerTitle.setAttribute('class', 't-station');
+            exercerTitle.setAttribute('x', '-100');
+            exercerTitle.setAttribute('y', currentY + 20);
+            exercerTitle.setAttribute('text-anchor', 'start');
+            exercerTitle.textContent = "S'exercer";
+            subChaptersGroup.appendChild(exercerTitle);
+            currentY += 35;
+            
+            // Exercices
+            chapitre.sexercer.forEach((exercice, exIndex) => {
+              // Créer un groupe cliquable
+              const exG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+              exG.setAttribute('transform', `translate(0,${currentY})`);
+              exG.setAttribute('style', 'cursor: pointer;');
+              exG.setAttribute('class', 'sub-btn-group');
+              
+              const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+              rect.setAttribute('class', 'sub-btn');
+              rect.setAttribute('x', '-100');
+              rect.setAttribute('y', '0');
+              rect.setAttribute('width', '200');
+              rect.setAttribute('height', '35');
+              
+              const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+              text.setAttribute('class', 'sub-btn-text');
+              text.setAttribute('x', '-92');
+              text.setAttribute('y', '22');
+              text.textContent = exercice.titre;
+              
+              exG.appendChild(rect);
+              exG.appendChild(text);
+              
+              // Ajouter l'événement de clic
+              exG.addEventListener('click', function() {
+                if (exercice.cible === '_blank') {
+                  window.open(exercice.lien, '_blank');
+                } else {
+                  window.location.href = exercice.lien;
+                }
+              });
+              
+              // Ajouter l'événement pour la touche Entrée (accessibilité)
+              exG.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  if (exercice.cible === '_blank') {
+                    window.open(exercice.lien, '_blank');
+                  } else {
+                    window.location.href = exercice.lien;
+                  }
+                }
+              });
+              
+              // Rendre le groupe focusable pour l'accessibilité
+              exG.setAttribute('tabindex', '0');
+              exG.setAttribute('role', 'button');
+              exG.setAttribute('aria-label', `Aller vers ${exercice.titre}`);
+              
+              subChaptersGroup.appendChild(exG);
+              currentY += 45;
+            });
+          }
+          
+          subChaptersContainer.appendChild(subChaptersGroup);
+        }
+      });
+    }
+
+    // Charger les données JSON et générer le plan
+    fetch('donnees-elements-finis.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors du chargement du fichier JSON');
+        }
+        return response.json();
+      })
+      .then(data => {
+        generatePlan(data);
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+        document.getElementById('main-title').textContent = 'Erreur de chargement';
+      });
+     </script>
+ </svg>
+ </div>
+ </body>
+ </html>

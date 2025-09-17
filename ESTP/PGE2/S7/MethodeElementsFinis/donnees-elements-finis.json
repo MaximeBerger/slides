@@ -1,0 +1,113 @@
+{
+  "titre": "Algèbre linéaire — Parcours",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Introduction",
+      "description": "Vecteurs · Gauss · Systèmes",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Motivation",
+          "description": "",
+          "lien": "1-Motivation/index.html",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Illustration",
+          "description": "",
+          "lien": "2-Illustration/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "QCM",
+          "lien": "0-Revisions/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices",
+          "lien": "0-Revisions/Exercices/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés",
+          "lien": "0-Revisions/Exercices/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec2",
+      "numero": 1,
+      "titre": "Formulation variationnelle",
+      "description": "Définition · Exemples",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "1-EspacesVectoriels/QCM/index.html",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec3",
+      "numero": 2,
+      "titre": "Matrices de rigidité",
+      "description": "Libres · Bases · Dimension",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "2-FamillesDeVecteurs/QCM/index.html",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec4",
+      "numero": 3,
+      "titre": "Dimension supérieure",
+      "description": "Noyau · Image · Matrices",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "3-ApplicationsLineaires/QCM/index.html",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec5",
+      "numero": 4,
+      "titre": "Maillages",
+      "description": "Déterminants · Polynômes",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "4-Matrices/QCM/index.html",
+          "cible": "_blank"
+        }
+      ]
+    }
+  ]
+}
