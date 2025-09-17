@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>e.v. - Les ensembles</title>
+		<title>Méthode des Éléments Finis</title>
 
 		<link rel="stylesheet" href="../../../../../../dist/reset.css">
 		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
@@ -33,14 +33,184 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<!-- Page de titre -->
 				<section data-background-transition="fade">
-					
+					<h1>Méthode des Éléments Finis</h1>
+					<h3>Comprendre le fonctionnement des logiciels de simulation</h3>
 				</section>
+
+				<!-- A quoi sert ce cours -->
 				<section>
-					
+					<h2>À quoi sert ce cours ?</h2>
+					<p class="fragment">Vous utiliserez des logiciels basés sur des méthodes d'éléments finis :</p>
+					<div class="fragment">
+						<ul>
+							<li><strong>ANSYS Mechanical</strong> - Solution FEA pour l'analyse structurelle</li>
+							<li><strong>Abaqus</strong> - Analyse par éléments finis (Dassault Systèmes)</li>
+							<li><strong>COMSOL Multiphysics</strong> - Modélisation multiphysique</li>
+							<li><strong>Cast3M</strong> - Logiciel français (CEA)</li>
+						</ul>
+					</div>
 				</section>
+
+				<!-- Applications des logiciels -->
 				<section>
-					<h2>Fin.</h2>
+					<h2>À quoi servent ces logiciels ?</h2>
+				</section>
+
+				<section>
+					<h3>Domaines d'application</h3>
+					<div class="fragment">
+						<h4>🔧 Mécanique des structures</h4>
+						<p>Étudier les déformations, contraintes et ruptures dans les poutres, ponts, avions, bâtiments.</p>
+					</div>
+					<div class="fragment">
+						<h4>🌡️ Thermique</h4>
+						<p>Analyser la diffusion de la chaleur, les transferts thermiques dans un moteur, un bâtiment ou un dispositif électronique.</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Domaines d'application (suite)</h3>
+					<div class="fragment">
+						<h4>🔊 Acoustique</h4>
+						<p>Simuler la propagation d'ondes sonores dans une salle, un échappement automobile, une enceinte audio.</p>
+					</div>
+					<div class="fragment">
+						<h4>⚡ Électromagnétisme</h4>
+						<p>Modéliser le champ électrique dans un capteur, une antenne, un moteur électrique.</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Domaines d'application (suite)</h3>
+					<div class="fragment">
+						<h4>💧 Hydraulique et mécanique des fluides</h4>
+						<p>Couplages fluide-structure, écoulements dans des canalisations, pressions sur une coque de navire.</p>
+					</div>
+					<div class="fragment">
+						<h4>🔄 Multi-physique</h4>
+						<p>Interactions simultanées (par exemple un matériau chauffé qui se dilate et modifie ses propriétés électriques).</p>
+					</div>
+				</section>
+
+				<section>
+					Tous ces phénomènes sont régis par des équations différentielles.
+					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
+
+				</section>
+
+				<!-- Étape 1: Modélisation géométrique -->
+				<section>
+					<h2>1. La modélisation géométrique</h2>
+					<ul>
+						<li class="fragment"><strong>L'utilisateur définit la forme</strong> de l'objet étudié : une poutre, une coque, une pièce mécanique, un mur, un pont, un moteur…</li>
+						<li class="fragment">Cela peut se faire directement dans le logiciel ou en important une géométrie depuis un logiciel de CAO (Catia, SolidWorks, Revit, etc.).</li>
+						<li class="fragment">À ce stade, on a uniquement la <strong>"géométrie nue"</strong> sans physique.</li>
+					</ul>
+				</section>
+
+				<!-- Étape 2: Discrétisation -->
+				<section>
+					<h2>2. La discrétisation (maillage)</h2>
+					<ul>
+						<li class="fragment">Le logiciel découpe le domaine en <strong>éléments finis</strong> : triangles, quadrilatères, tétraèdres, hexaèdres selon la dimension.</li>
+						<li class="fragment">Chaque élément est défini par ses <strong>nœuds</strong> (points de référence où les grandeurs physiques sont calculées).</li>
+						<li class="fragment">Plus le maillage est fin, plus la solution est précise, mais plus le temps de calcul est long.</li>
+						<li class="fragment"><strong>Exemple</strong> : une poutre peut être discrétisée en quelques dizaines d'éléments, alors qu'un avion entier en contient des millions.</li>
+					</ul>
+				</section>
+
+				<!-- Étape 3: Propriétés physiques -->
+				<section>
+					<h2>3. Définition des propriétés physiques</h2>
+					<p class="fragment">On attribue aux matériaux leurs <strong>caractéristiques</strong> :</p>
+					<ul>
+						<li class="fragment">module d'Young, coefficient de Poisson (mécanique)</li>
+						<li class="fragment">conductivité thermique (thermique)</li>
+						<li class="fragment">permittivité magnétique (électromagnétisme)</li>
+					</ul>
+					<p class="fragment">On précise si le matériau est isotrope (même propriété dans toutes les directions), anisotrope, non linéaire (ex. béton fissuré, plastique qui se déforme).</p>
+				</section>
+
+				<!-- Étape 4: Conditions aux limites -->
+				<section>
+					<h2>4. Conditions aux limites et sollicitations</h2>
+					<ul>
+						<li class="fragment">On fixe les <strong>conditions aux limites</strong> : appuis bloqués, murs encastrés, symétries, températures imposées, etc.</li>
+						<li class="fragment">On applique les <strong>sollicitations</strong> : forces, pressions, charges thermiques, tensions électriques, débits fluides…</li>
+						<li class="fragment">Ces conditions sont indispensables pour rendre le problème bien posé.</li>
+					</ul>
+				</section>
+
+				<!-- Étape 5: Assemblage -->
+				<section>
+					<h2>5. Assemblage et formulation mathématique</h2>
+					<p class="fragment">C'est le <strong>cœur de la MEF</strong>.</p>
+					<ul>
+						<li class="fragment">Chaque élément a une <strong>matrice de rigidité locale</strong> (ou équivalent thermique/électrique).</li>
+						<li class="fragment">Le logiciel <strong>assemble</strong> toutes les matrices locales pour obtenir une grande matrice globale K.</li>
+						<li class="fragment">On obtient un système d'équations linéaires du type :</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Système d'équations</h3>
+					<div class="fragment">
+						<p>$$K \cdot U = F$$</p>
+					</div>
+					<ul>
+						<li class="fragment"><strong>K</strong> : matrice de rigidité globale (taille énorme, parfois des millions de lignes)</li>
+						<li class="fragment"><strong>U</strong> : vecteur inconnu (déplacements, températures, potentiels)</li>
+						<li class="fragment"><strong>F</strong> : vecteur de chargements (forces, flux, excitations)</li>
+					</ul>
+				</section>
+
+				<!-- Étape 6: Résolution -->
+				<section>
+					<h2>6. Résolution numérique</h2>
+					<ul>
+						<li class="fragment">Le logiciel utilise des <strong>algorithmes numériques puissants</strong> pour résoudre le système (méthodes directes comme la décomposition LU ou méthodes itératives comme le gradient conjugué).</li>
+						<li class="fragment">En cas de problème non linéaire (grandes déformations, plasticité, turbulence…), il procède par itérations successives jusqu'à convergence.</li>
+						<li class="fragment">Des solveurs parallèles utilisent plusieurs processeurs ou GPU pour accélérer le calcul.</li>
+					</ul>
+				</section>
+
+				<!-- Étape 7: Post-traitement -->
+				<section>
+					<h2>7. Post-traitement (visualisation des résultats)</h2>
+					<ul>
+						<li class="fragment">Une fois la solution obtenue, le logiciel calcule les grandeurs dérivées :
+							<ul>
+								<li>contraintes de Von Mises (mécanique)</li>
+								<li>flux de chaleur (thermique)</li>
+								<li>distribution de champs (électromagnétisme)</li>
+							</ul>
+						</li>
+						<li class="fragment">On visualise sous forme de <strong>cartes colorées</strong>, de courbes, d'animations.</li>
+						<li class="fragment"><strong>Exemple</strong> : une poutre en flexion montrera en rouge les zones de forte contrainte et en bleu celles moins sollicitées.</li>
+					</ul>
+				</section>
+
+				<!-- Étape 8: Interprétation -->
+				<section>
+					<h2>8. Interprétation et validation</h2>
+					<ul>
+						<li class="fragment">L'ingénieur ne doit pas se fier aveuglément au logiciel : il faut <strong>interpréter</strong>.</li>
+						<li class="fragment">On vérifie si les résultats sont cohérents avec des calculs manuels simplifiés ou des essais expérimentaux.</li>
+						<li class="fragment">Parfois, on raffine le maillage ou on ajuste le modèle pour améliorer la précision.</li>
+					</ul>
+				</section>
+
+				<!-- Conclusion -->
+				<section>
+					<h2>Conclusion</h2>
+					<p class="fragment">Un logiciel MEF est un <strong>traducteur</strong>.</p>
+					<p class="fragment">Il prend un problème physique complexe, le découpe en petites équations simples, les assemble en un grand système linéaire, le résout numériquement, puis restitue les résultats de façon visuelle pour aider à la décision.</p>
+				</section>
+
+				<section>
+					<h2>Questions ?</h2>
 					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
 				</section>
             </div>
