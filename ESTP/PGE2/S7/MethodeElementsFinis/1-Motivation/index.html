@@ -40,43 +40,62 @@
 				</section>
 
 				<section class="align-top">
-					<h3>Un problème simple : </h3>
-					<p>Une poutre encastrée, longueur L, section A, module d'Young E, coefficient de Poisson $\nu$, soumise à une force $F$ à son extrémité.</p>
-
+					<h4>Un problème simple : </h4>
+					<p>Une poutre encastrée,
+						<ul>
+							<li>longueur L</li>
+							<li>section A</li>
+							<li>module d'Young E</li>
+							<li>coefficient de Poisson $\nu$</li>
+							<li>soumise à une force $F$ à son extrémité</li>
+						</ul>
 					<p class="fragment">Quelle est l'élongation de la poutre ?</p>
 				</section>
 				<section>
 					<h4>En RdM classique :</h4>
 					<p class="fragment">La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.</p>
 					<p class="fragment">L'allongement total est l'intégrale des allongements élémentaires :</p>
-					<p>$$
+					<p class="fragment">$$
 					\Delta L=\int_0^L \varepsilon(x) d x=\int_0^L \frac{F}{E A} d x=\frac{F L}{E A} .
 					$$</p>
 				</section>
 				<section>	
-					Plus compliqué : 
-					Poutre en flexion, soumise à une force $F$ à son extrémité.
-					Quelle est la déformation de la poutre ?
+					<h4>Plus compliqué : </h4>
+					<p>Poutre en flexion, soumise à une force $F$ à son extrémité.</p>
+					<p class="fragment">Quelle est la déformation de la poutre ?</p>
 				</section>
 				<section>
-					Encore pire : 
+					<h4>Encore pire : </h4>
 					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GHjopp47vvQ?si=IQBTc_lB85ecyA8b&amp;clip=UgkxmBAoXx2bJbJ5hY00HCazGVX8LgeiMA_7&amp;clipt=EObGBRio0AY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				</section>
 
 				<!-- A quoi sert ce cours -->
 				 <section>
-					Définir une méthode robuste pour résoudre ce genre de problème.
+					<h3>A quoi sert ce cours ?</h3>
+					<p class="fragment">Définir une méthode robuste pour résoudre ce genre de problème.</p>
 
-					En bureau d'étude, on utilise des logiciels de simulation pour résoudre ces problèmes. Voyons en quelques uns.
-				 </section>
-				 <section data-background-iframe="https://www.ansys.com/products/structures/ansys-mechanical" data-background-interactive>
-				 </section>
-
-				 <section data-background-iframe="https://www.3ds.com/products/simulia/abaqus" data-background-interactive>
+					<p class="fragment">En bureau d'étude, on utilise des logiciels de simulation pour résoudre ces problèmes. <br /> Voyons-en quelques uns.</p>
 				 </section>
 
-				 <section data-background-iframe="https://www.comsol.com/" data-background-interactive>
-
+				 <section>
+					<h4>Logiciels de simulation</h4>
+					<ul>
+						<li>
+					<a href="https://www.ansys.com/products/structures/ansys-mechanical" target="_blank" rel="noopener noreferrer">
+						ANSYS Mechanical
+					 </a>
+					 </li>
+					 <li>
+					 <a href="https://www.3ds.com/products/simulia/abaqus" target="_blank" rel="noopener noreferrer">
+						ABAQUS (Dassault Systèmes)
+					 </a>
+					 </li>
+					 <li>
+					<a href="https://www.comsol.com/" target="_blank" rel="noopener noreferrer">
+						 COMSOL Multiphysics
+					  </a>
+					 </li>
+					</ul>
 				 </section>
 
 				<section>
@@ -117,23 +136,19 @@
 
 				<section>
 					<h3>Quel est le point commun à tous ces domaines ?</h3>
-					<div class="fragment">
-						<h4>Des équations différentielles</h4>
-						<p>Les équations de la mécanique des structures, des équations de la thermique, des équations de l'électromagnétisme, des équations de l'hydraulique, des équations de la mécanique des fluides.</p>
-					</div>
-					<div class="fragment">
-						Des équations compliquées et souvent impossibles à résoudre mathématiquement. 
-					</div>
+						<p class="fragment">mécanique des structures, thermique, électromagnétisme, hydraulique, mécanique des fluides.</p>
+						<h4 class="fragment highlight-red">Des équations différentielles !</h4>
+						<h4 class="fragment">compliquées et souvent impossibles à résoudre mathématiquement.</h4>
 				</section>
 
 				<section>
-					La méthode des éléments finis est une méthode numérique pour résoudre des équations différentielles sur des domaines complexes.
+					<p>La méthode des éléments finis est une méthode numérique pour résoudre des équations différentielles sur des domaines complexes.</p>
 					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
 				</section>
 
 				<!-- Étape 1: Modélisation géométrique -->
 				<section>
-					<h2>1. La modélisation géométrique</h2>
+					<h4>1. La modélisation géométrique</h4>
 					<ul>
 						<li class="fragment"><strong>L'utilisateur définit la forme</strong> de l'objet étudié : une poutre, une coque, une pièce mécanique, un mur, un pont, un moteur…</li>
 						<li class="fragment">Cela peut se faire directement dans le logiciel ou en important une géométrie depuis un logiciel de CAO (Catia, SolidWorks, Revit, etc.).</li>
@@ -142,7 +157,7 @@
 
 				<!-- Étape 2: Discrétisation -->
 				<section>
-					<h2>2. La discrétisation (maillage)</h2>
+					<h3>2. La discrétisation (maillage)</h3>
 					<ul>
 						<li class="fragment">Le logiciel découpe le domaine en <strong>éléments finis</strong> : triangles, quadrilatères, tétraèdres, hexaèdres selon la dimension.</li>
 						<li class="fragment">Chaque élément est défini par ses <strong>nœuds</strong> (points de référence où les grandeurs physiques sont calculées).</li>
@@ -153,7 +168,7 @@
 
 				<!-- Étape 3: Propriétés physiques -->
 				<section>
-					<h2>3. Définition des propriétés physiques</h2>
+					<h3>3. Définition des propriétés physiques</h3>
 					<p class="fragment">On attribue aux matériaux leurs <strong>caractéristiques</strong> :</p>
 					<ul>
 						<li class="fragment">module d'Young, coefficient de Poisson (mécanique)</li>
@@ -165,7 +180,7 @@
 
 				<!-- Étape 4: Conditions aux limites -->
 				<section>
-					<h2>4. Conditions aux limites et sollicitations</h2>
+					<h3>4. Conditions aux limites et sollicitations</h3>
 					<ul>
 						<li class="fragment">On fixe les <strong>conditions aux limites</strong> : appuis bloqués, murs encastrés, symétries, températures imposées, etc.</li>
 						<li class="fragment">On applique les <strong>sollicitations</strong> : forces, pressions, charges thermiques, tensions électriques, débits fluides…</li>
@@ -175,7 +190,7 @@
 
 				<!-- Étape 5: Assemblage -->
 				<section>
-					<h2>5. Assemblage et formulation mathématique</h2>
+					<h3>5. Assemblage et formulation mathématique</h3>
 					<p class="fragment">C'est le <strong>cœur de la MEF</strong>.</p>
 					<ul>
 						<li class="fragment">Chaque élément a une <strong>matrice de rigidité locale</strong> (ou équivalent thermique/électrique).</li>
@@ -186,7 +201,7 @@
 
 				<!-- Étape 6: Résolution -->
 				<section>
-					<h2>6. Résolution numérique</h2>
+					<h3>6. Résolution numérique</h3>
 					<ul>
 						<li class="fragment">Le logiciel utilise des <strong>algorithmes numériques puissants</strong> pour résoudre le système (décomposition LU ou méthodes itératives comme la méthode de Jacobi).</li>
 						<li class="fragment">En cas de problème non linéaire (grandes déformations, plasticité, turbulence…), il procède par itérations successives jusqu'à convergence.</li>
@@ -196,7 +211,7 @@
 
 				<!-- Étape 7: Post-traitement -->
 				<section>
-					<h2>7. Post-traitement (visualisation des résultats)</h2>
+					<h3>7. Post-traitement (visualisation des résultats)</h3>
 					<ul>
 						<li class="fragment">Une fois la solution obtenue, le logiciel calcule les grandeurs dérivées :
 							<ul>
@@ -212,7 +227,7 @@
 
 				<!-- Étape 8: Interprétation -->
 				<section>
-					<h2>8. Interprétation et validation</h2>
+					<h3>8. Interprétation et validation</h3>
 					<ul>
 						<li class="fragment">L'ingénieur ne se fie pas aveuglément au logiciel : il <strong>interprète</strong>.</li>
 						<li class="fragment">On vérifie si les résultats sont cohérents avec des calculs manuels simplifiés ou des essais expérimentaux.</li>
@@ -222,13 +237,13 @@
 
 				<!-- Conclusion -->
 				<section>
-					<h2>Résumé en une phrase :</h2>
+					<h3>Résumé en une phrase :</h3>
 					<p class="fragment">Un logiciel MEF est un <strong>traducteur</strong>.</p>
 					<p class="fragment">Il prend un problème physique complexe, le découpe en petites équations simples, les assemble en un grand système linéaire, le résout numériquement, puis restitue les résultats de façon visuelle pour aider à la décision.</p>
 				</section>
 
 				<section>
-					<h2>Questions ?</h2>
+					<h3>Questions ?</h3>
 					<p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
 					<p>Cours suivant : <a href="../2-Illustration/">Appliquer la méthode</a></p>
 					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
