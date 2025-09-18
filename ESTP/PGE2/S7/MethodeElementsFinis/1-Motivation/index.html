@@ -6,9 +6,9 @@
 
 		<title>Méthode des Éléments Finis</title>
 
-		<link rel="stylesheet" href="../../../../../../dist/reset.css">
-		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
-		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
 
 
         <!-- Font awesome is required for the chalkboard plugin -->
@@ -18,16 +18,16 @@
         <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
         <!-- Chalkboard plugin -->
-        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
-        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
 
-        <script src="../../../../../../dist/reveal.js" defer></script>
-        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
-        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
-        <script src="../../../../../../plugin/math/math.js" defer></script>
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
 
 
-		<script src="../../../../../../plugin/config.js" defer></script>
+		<script src="../../../../../plugin/config.js" defer></script>
     
     </head>
 	<body>
@@ -39,19 +39,19 @@
 					<h4>Comprendre le fonctionnement des logiciels de simulation</h4>
 				</section>
 
-				<section>
-					Un problème simple : 
-					Une poutre encastrée, longueur L, section A, module d'Young E, coefficient de Poisson $\nu$, soumise à une force $F$ à son extrémité.
+				<section class="align-top">
+					<h3>Un problème simple : </h3>
+					<p>Une poutre encastrée, longueur L, section A, module d'Young E, coefficient de Poisson $\nu$, soumise à une force $F$ à son extrémité.</p>
 
-					Quelle est l'élongation de la poutre ?
+					<p class="fragment">Quelle est l'élongation de la poutre ?</p>
 				</section>
 				<section>
 					<h4>En RdM classique :</h4>
-					La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.
-					L'allongement total est l'intégrale des allongements élémentaires :
-					$$
+					<p class="fragment">La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.</p>
+					<p class="fragment">L'allongement total est l'intégrale des allongements élémentaires :</p>
+					<p>$$
 					\Delta L=\int_0^L \varepsilon(x) d x=\int_0^L \frac{F}{E A} d x=\frac{F L}{E A} .
-					$$
+					$$</p>
 				</section>
 				<section>	
 					Plus compliqué : 
