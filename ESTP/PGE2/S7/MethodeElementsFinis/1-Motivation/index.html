@@ -35,12 +35,12 @@
 			<div class="slides">
 				<!-- Page de titre -->
 				<section data-background-transition="fade">
-					<h2>Méthode des Éléments Finis</h2>
-					<h4>Comprendre le fonctionnement des logiciels de simulation</h4>
+					<h1>Méthode des Éléments Finis</h1>
+					<h4>Comprendre les logiciels de simulation</h4>
 				</section>
 
 				<section class="align-top">
-					<h3>Un problème simple : </h3>
+					<h2>Un problème simple : </h2>
 					<p>Une poutre encastrée,
 						<ul>
 							<li>longueur L</li>
@@ -49,10 +49,11 @@
 							<li>coefficient de Poisson $\nu$</li>
 							<li>soumise à une force $F$ à son extrémité</li>
 						</ul>
-					<p class="fragment">Quelle est l'élongation de la poutre ?</p>
+						
+					<p class="fragment" style = "margin-top: 20px;">Quelle est l'élongation de la poutre ?</p>
 				</section>
 				<section>
-					<h3>En RdM classique :</h3>
+					<h2>En RdM classique :</h2>
 					<p class="fragment">La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.</p>
 					<p class="fragment">L'allongement total est l'intégrale des allongements élémentaires :</p>
 					<p class="fragment">$$
@@ -60,9 +61,9 @@
 					$$</p>
 				</section>
 				<section>	
-					<h3>Plus compliqué : </h3>
+					<h2>Plus compliqué : </h2>
 					<p>Poutre en flexion, soumise à une force $F$ à son extrémité.</p>
-					<p class="fragment">Quelle est la déformation de la poutre ?</p>
+					<p class="fragment">Comment la poutre est-elle déformée ?</p>
 				</section>
 				<section>
 					<h4>Encore pire : </h4>
@@ -71,14 +72,14 @@
 
 				<!-- A quoi sert ce cours -->
 				 <section>
-					<h3>A quoi sert ce cours ?</h3>
+					<h2>A quoi sert ce cours ?</h2>
 					<p class="fragment">Définir une méthode robuste pour résoudre ce genre de problème.</p>
 
 					<p class="fragment">En bureau d'étude, on utilise des logiciels de simulation pour résoudre ces problèmes. <br /> Voyons-en quelques uns.</p>
 				 </section>
 
 				 <section>
-					<h4>Logiciels de simulation</h4>
+					<h2>Logiciels de simulation</h2>
 					<ul>
 						<li>
 					<a href="https://www.ansys.com/products/structures/ansys-mechanical" target="_blank" rel="noopener noreferrer">
@@ -99,7 +100,7 @@
 				 </section>
 
 				<section>
-					<h3>Domaines d'application</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>🔧 Mécanique des structures</h4>
 						<p>Étudier les déformations, contraintes et ruptures dans les poutres, ponts, avions, bâtiments.</p>
@@ -111,7 +112,7 @@
 				</section>
 
 				<section>
-					<h3>Domaines d'application</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>🔊 Acoustique</h4>
 						<p>Simuler la propagation d'ondes sonores dans une salle, un échappement automobile, une enceinte audio.</p>
@@ -123,7 +124,7 @@
 				</section>
 
 				<section>
-					<h3>Domaines d'application</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>💧 Hydraulique et mécanique des fluides</h4>
 						<p>Couplages fluide-structure, écoulements dans des canalisations, pressions sur une coque de navire.</p>
@@ -137,12 +138,13 @@
 				<section>
 					<h3>Quel est le point commun à tous ces domaines ?</h3>
 						<p class="fragment">mécanique des structures, thermique, électromagnétisme, hydraulique, mécanique des fluides.</p>
-						<h4 class="fragment highlight-red">Des équations différentielles !</h4>
+						<h4 class="fragment"><div class="highlight-red">Des équations différentielles !</div></h4>
 						<h4 class="fragment">compliquées et souvent impossibles à résoudre mathématiquement.</h4>
 				</section>
 
 				<section>
-					<p>La méthode des éléments finis est une méthode numérique pour résoudre des équations différentielles sur des domaines complexes.</p>
+					<h2>La MEF</h2>
+					<p>C'est une méthode <strong>numérique</strong> pour approcher la solution d'équations différentielles sur des domaines complexes.</p>
 					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
 					<ol>
 						<li>La modélisation géométrique</li>
