@@ -1,11 +1,11 @@
 {
-  "titre": "Algèbre linéaire — Parcours",
+  "titre": "Méthode des Éléments Finis — Parcours",
   "chapitres": [
     {
       "id": "sec1",
       "numero": 0,
       "titre": "Introduction",
-      "description": "Vecteurs · Gauss · Systèmes",
+      "description": "Motivation · Illustration",
       "lien": "#",
       "sousParties": [
         {
@@ -45,7 +45,7 @@
       "id": "sec2",
       "numero": 1,
       "titre": "Formulation variationnelle",
-      "description": "Définition · Exemples",
+      "description": "Formulation variationnelle · Matrices de rigidité · Vecteur de charges",
       "lien": "#",
       "sousParties": [
         
@@ -62,7 +62,7 @@
       "id": "sec3",
       "numero": 2,
       "titre": "Matrices de rigidité",
-      "description": "Libres · Bases · Dimension",
+      "description": "Matrices de rigidité · Vecteur de charges",
       "lien": "#",
       "sousParties": [
         
@@ -79,7 +79,7 @@
       "id": "sec4",
       "numero": 3,
       "titre": "Dimension supérieure",
-      "description": "Noyau · Image · Matrices",
+      "description": "Assemblage des matrices de rigidité",
       "lien": "#",
       "sousParties": [
         
