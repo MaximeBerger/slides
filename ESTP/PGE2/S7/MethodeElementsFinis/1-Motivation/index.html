@@ -35,12 +35,12 @@
 			<div class="slides">
 				<!-- Page de titre -->
 				<section data-background-transition="fade">
-					<h3>Méthode des Éléments Finis</h3>
+					<h2>Méthode des Éléments Finis</h2>
 					<h4>Comprendre le fonctionnement des logiciels de simulation</h4>
 				</section>
 
 				<section class="align-top">
-					<h4>Un problème simple : </h4>
+					<h3>Un problème simple : </h3>
 					<p>Une poutre encastrée,
 						<ul>
 							<li>longueur L</li>
@@ -52,7 +52,7 @@
 					<p class="fragment">Quelle est l'élongation de la poutre ?</p>
 				</section>
 				<section>
-					<h4>En RdM classique :</h4>
+					<h3>En RdM classique :</h3>
 					<p class="fragment">La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.</p>
 					<p class="fragment">L'allongement total est l'intégrale des allongements élémentaires :</p>
 					<p class="fragment">$$
@@ -60,7 +60,7 @@
 					$$</p>
 				</section>
 				<section>	
-					<h4>Plus compliqué : </h4>
+					<h3>Plus compliqué : </h3>
 					<p>Poutre en flexion, soumise à une force $F$ à son extrémité.</p>
 					<p class="fragment">Quelle est la déformation de la poutre ?</p>
 				</section>
@@ -144,11 +144,21 @@
 				<section>
 					<p>La méthode des éléments finis est une méthode numérique pour résoudre des équations différentielles sur des domaines complexes.</p>
 					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
+					<ol>
+						<li>La modélisation géométrique</li>
+						<li class="highlight-red">La discrétisation (maillage)</li>
+						<li>Définition des propriétés physiques</li>
+						<li>Conditions aux limites et sollicitations</li>
+						<li class="highlight-red">Assemblage et formulation mathématique</li>
+						<li class="highlight-red">Résolution numérique</li>
+						<li>Post-traitement (visualisation des résultats)</li>
+						<li>Interprétation et validation</li>
+					</ol>
 				</section>
 
 				<!-- Étape 1: Modélisation géométrique -->
 				<section>
-					<h4>1. La modélisation géométrique</h4>
+					<h3>1. La modélisation géométrique</h3>
 					<ul>
 						<li class="fragment"><strong>L'utilisateur définit la forme</strong> de l'objet étudié : une poutre, une coque, une pièce mécanique, un mur, un pont, un moteur…</li>
 						<li class="fragment">Cela peut se faire directement dans le logiciel ou en important une géométrie depuis un logiciel de CAO (Catia, SolidWorks, Revit, etc.).</li>
