@@ -1,0 +1,97 @@
+
+Appliquer le pivot de Gauss pour transformer ces systèmes en systèmes échelonnés. Indiquez pour chacun s'il possède aucune solution, une unique solution ou une infinité de solutions.
+
+$$
+\left\{\begin{array}{l}
+    2 x+3 y-z=1 \\
+    4 x+y+2 z=6 \\
+    x-3 y+z=2
+\end{array}\right.
+$$
+
+\ifthenelse{\boolean{showSolutions}}{
+    On applique les opérations suivantes pour enlever les $x$ des lignes 2 et 3 :
+    \begin{align*}
+        L_2 &\leftarrow L_2 - 2L_1 \\
+        L_3 &\leftarrow 2L_3 - L_1
+    \end{align*}
+    On obtient le système suivant :
+    $$
+    \left\{\begin{array}{l}
+        2 x+3 y-z=1 \\
+        \quad -5 y+4 z=4 \\
+        \quad -9 y+3 z=3
+    \end{array}\right.
+    $$
+    Pour retirer le $y$ de la ligne 3, on applique $L_3 \leftarrow 5L_3 + 9L_2$ :
+    $$
+    \left\{\begin{array}{l}
+        2 x+3 y-z=1 \\
+        \quad -5 y+4 z=4 \\
+        \quad \quad -21z=-21
+    \end{array}\right.
+    $$
+    Le système est parfaitement échelonné, il admet une unique solution. 
+}{}
+
+$$
+\left\{\begin{array}{l}
+    2 x+y=1 \\
+    x+y=0 \\
+    3 x+4 y=-1
+\end{array}\right.
+$$
+\ifthenelse{\boolean{showSolutions}}{
+    On applique les opérations suivantes pour enlever les $x$ des lignes 2 et 3 :
+    \begin{align*}
+        L_2 &\leftarrow 2L_2 - L_1 \\
+        L_3 &\leftarrow 2L_3 - 3L_1
+    \end{align*}
+    On obtient le système suivant :
+    $$
+    \left\{\begin{array}{l}
+        2 x+y=1 \\
+        \quad y=-1 \\
+        \quad 5 y=-5
+    \end{array}\right.
+    $$
+    Les deux dernières équations sont les mêmes, on se ramène donc au système :
+    $$
+    \left\{\begin{array}{l}
+        2 x+y=1 \\
+        \quad y=-1
+    \end{array}\right.
+    $$
+    Le système est parfaitement échelonné, il admet une unique solution. 
+}{}
+$$
+\left\{\begin{array}{l}
+    x+y+z+t=3 \\
+    x+y+z-t=3 \\
+    x-y-z-t=-1
+\end{array}\right.
+$$
+\ifthenelse{\boolean{showSolutions}}{
+    On applique les opérations suivantes pour enlever les $x$ des lignes 2 et 3 :
+    \begin{align*}
+        L_2 &\leftarrow L_2 - L_1 \\
+        L_3 &\leftarrow L_3 - L_1
+    \end{align*}
+    On obtient le système suivant :
+    $$
+    \left\{\begin{array}{l}
+        x+y+z+t=3 \\
+        \quad \quad \quad -2 t=6 \\
+        \quad -2y -2z -2 t=-4
+    \end{array}\right.
+    $$
+    En échangeant les lignes 2 et 3, on obtient un système échelonné :
+    $$
+    \left\{\begin{array}{l}
+        x+y+z+t=3 \\
+        \quad -2y -2z -2 t=-4 \\
+        \quad \quad \quad -2 t=6
+    \end{array}\right.
+    $$
+    Le système échelonné possède plus d'inconnues que d'équations, on peut donc garder un paramètre libre 
+}{}
