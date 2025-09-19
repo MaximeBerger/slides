@@ -6,9 +6,9 @@
 
 		<title>Méthode des Éléments Finis</title>
 
-		<link rel="stylesheet" href="../../../../../../dist/reset.css">
-		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
-		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
 
 
         <!-- Font awesome is required for the chalkboard plugin -->
@@ -18,16 +18,16 @@
         <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
         <!-- Chalkboard plugin -->
-        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
-        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
 
-        <script src="../../../../../../dist/reveal.js" defer></script>
-        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
-        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
-        <script src="../../../../../../plugin/math/math.js" defer></script>
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
 
 
-		<script src="../../../../../../plugin/config.js" defer></script>
+		<script src="../../../../../plugin/config.js" defer></script>
     
     </head>
 	<body>
@@ -35,31 +35,72 @@
 			<div class="slides">
 				<!-- Page de titre -->
 				<section data-background-transition="fade">
-					<h3>Méthode des Éléments Finis</h3>
-					<h4>Comprendre le fonctionnement des logiciels de simulation</h4>
+					<h1>Méthode des Éléments Finis</h1>
+					<h4>Comprendre les logiciels de simulation</h4>
+				</section>
+
+				<section class="align-top">
+					<h2>Un problème simple : </h2>
+					<p>Une poutre encastrée,
+						<ul>
+							<li>longueur L</li>
+							<li>section A</li>
+							<li>module d'Young E</li>
+							<li>coefficient de Poisson $\nu$</li>
+							<li>soumise à une force $F$ à son extrémité</li>
+						</ul>
+						
+					<p class="fragment" style = "margin-top: 20px;">Quelle est l'élongation de la poutre ?</p>
+				</section>
+				<section>
+					<h2>En RdM classique :</h2>
+					<p class="fragment">La déformation unitaire est $\varepsilon(x)=\sigma / E=F /(E A)$.</p>
+					<p class="fragment">L'allongement total est l'intégrale des allongements élémentaires :</p>
+					<p class="fragment">$$
+					\Delta L=\int_0^L \varepsilon(x) d x=\int_0^L \frac{F}{E A} d x=\frac{F L}{E A} .
+					$$</p>
+				</section>
+				<section>	
+					<h2>Plus compliqué : </h2>
+					<p>Poutre en flexion, soumise à une force $F$ à son extrémité.</p>
+					<p class="fragment">Comment la poutre est-elle déformée ?</p>
+				</section>
+				<section>
+					<h4>Encore pire : </h4>
+					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GHjopp47vvQ?si=IQBTc_lB85ecyA8b&amp;clip=UgkxmBAoXx2bJbJ5hY00HCazGVX8LgeiMA_7&amp;clipt=EObGBRio0AY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				</section>
 
 				<!-- A quoi sert ce cours -->
-				<section>
-					<h2>À quoi sert ce cours ?</h2>
-					<p class="fragment">Vous utiliserez des logiciels basés sur des méthodes d'éléments finis :</p>
-					<div class="fragment">
-						<ul>
-							<li><strong>ANSYS Mechanical</strong> - Solution FEA pour l'analyse structurelle</li>
-							<li><strong>Abaqus</strong> - Analyse par éléments finis (Dassault Systèmes)</li>
-							<li><strong>COMSOL Multiphysics</strong> - Modélisation multiphysique</li>
-							<li><strong>Cast3M</strong> - Logiciel français (CEA)</li>
-						</ul>
-					</div>
-				</section>
+				 <section>
+					<h2>A quoi sert ce cours ?</h2>
+					<p class="fragment">Définir une méthode robuste pour résoudre ce genre de problème.</p>
 
-				<!-- Applications des logiciels -->
-				<section>
-					<h2>À quoi servent ces logiciels ?</h2>
-				</section>
+					<p class="fragment">En bureau d'étude, on utilise des logiciels de simulation pour résoudre ces problèmes. <br /> Voyons-en quelques uns.</p>
+				 </section>
+
+				 <section>
+					<h2>Logiciels de simulation</h2>
+					<ul>
+						<li>
+					<a href="https://www.ansys.com/products/structures/ansys-mechanical" target="_blank" rel="noopener noreferrer">
+						ANSYS Mechanical
+					 </a>
+					 </li>
+					 <li>
+					 <a href="https://www.3ds.com/products/simulia/abaqus" target="_blank" rel="noopener noreferrer">
+						ABAQUS (Dassault Systèmes)
+					 </a>
+					 </li>
+					 <li>
+					<a href="https://www.comsol.com/" target="_blank" rel="noopener noreferrer">
+						 COMSOL Multiphysics
+					  </a>
+					 </li>
+					</ul>
+				 </section>
 
 				<section>
-					<h3>Domaines d'application</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>🔧 Mécanique des structures</h4>
 						<p>Étudier les déformations, contraintes et ruptures dans les poutres, ponts, avions, bâtiments.</p>
@@ -71,7 +112,7 @@
 				</section>
 
 				<section>
-					<h3>Domaines d'application (suite)</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>🔊 Acoustique</h4>
 						<p>Simuler la propagation d'ondes sonores dans une salle, un échappement automobile, une enceinte audio.</p>
@@ -83,7 +124,7 @@
 				</section>
 
 				<section>
-					<h3>Domaines d'application (suite)</h3>
+					<h2>Domaines d'application</h2>
 					<div class="fragment">
 						<h4>💧 Hydraulique et mécanique des fluides</h4>
 						<p>Couplages fluide-structure, écoulements dans des canalisations, pressions sur une coque de navire.</p>
@@ -95,9 +136,26 @@
 				</section>
 
 				<section>
-					Tous ces phénomènes sont régis par des équations différentielles.
-					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
+					<h3>Quel est le point commun à tous ces domaines ?</h3>
+						<p class="fragment">mécanique des structures, thermique, électromagnétisme, hydraulique, mécanique des fluides.</p>
+						<h4 class="fragment"><div class="highlight-red">Des équations différentielles !</div></h4>
+						<h4 class="fragment">compliquées et souvent impossibles à résoudre mathématiquement.</h4>
+				</section>
 
+				<section>
+					<h2>La MEF</h2>
+					<p>C'est une méthode <strong>numérique</strong> pour approcher la solution d'équations différentielles sur des domaines complexes.</p>
+					<p class="fragment">On peut découper le fonctionnement en <strong>8 étapes clés</strong> :</p>
+					<ol>
+						<li>La modélisation géométrique</li>
+						<li class="highlight-red">La discrétisation (maillage)</li>
+						<li>Définition des propriétés physiques</li>
+						<li>Conditions aux limites et sollicitations</li>
+						<li class="highlight-red">Assemblage et formulation mathématique</li>
+						<li class="highlight-red">Résolution numérique</li>
+						<li>Post-traitement (visualisation des résultats)</li>
+						<li>Interprétation et validation</li>
+					</ol>
 				</section>
 
 				<!-- Étape 1: Modélisation géométrique -->
@@ -106,7 +164,6 @@
 					<ul>
 						<li class="fragment"><strong>L'utilisateur définit la forme</strong> de l'objet étudié : une poutre, une coque, une pièce mécanique, un mur, un pont, un moteur…</li>
 						<li class="fragment">Cela peut se faire directement dans le logiciel ou en important une géométrie depuis un logiciel de CAO (Catia, SolidWorks, Revit, etc.).</li>
-						<li class="fragment">À ce stade, on a uniquement la <strong>"géométrie nue"</strong> sans physique.</li>
 					</ul>
 				</section>
 
@@ -150,19 +207,7 @@
 					<ul>
 						<li class="fragment">Chaque élément a une <strong>matrice de rigidité locale</strong> (ou équivalent thermique/électrique).</li>
 						<li class="fragment">Le logiciel <strong>assemble</strong> toutes les matrices locales pour obtenir une grande matrice globale K.</li>
-						<li class="fragment">On obtient un système d'équations linéaires du type :</li>
-					</ul>
-				</section>
-
-				<section>
-					<h3>Système d'équations</h3>
-					<div class="fragment">
-						<p>$$K \cdot U = F$$</p>
-					</div>
-					<ul>
-						<li class="fragment"><strong>K</strong> : matrice de rigidité globale (taille énorme, parfois des millions de lignes)</li>
-						<li class="fragment"><strong>U</strong> : vecteur inconnu (déplacements, températures, potentiels)</li>
-						<li class="fragment"><strong>F</strong> : vecteur de chargements (forces, flux, excitations)</li>
+						<li class="fragment">On obtient un système d'équations linéaires du type : $K \cdot U = F$</li>
 					</ul>
 				</section>
 
@@ -170,7 +215,7 @@
 				<section>
 					<h2>6. Résolution numérique</h2>
 					<ul>
-						<li class="fragment">Le logiciel utilise des <strong>algorithmes numériques puissants</strong> pour résoudre le système (méthodes directes comme la décomposition LU ou méthodes itératives comme le gradient conjugué).</li>
+						<li class="fragment">Le logiciel utilise des <strong>algorithmes numériques puissants</strong> pour résoudre le système (décomposition LU ou méthodes itératives comme la méthode de Jacobi).</li>
 						<li class="fragment">En cas de problème non linéaire (grandes déformations, plasticité, turbulence…), il procède par itérations successives jusqu'à convergence.</li>
 						<li class="fragment">Des solveurs parallèles utilisent plusieurs processeurs ou GPU pour accélérer le calcul.</li>
 					</ul>
@@ -182,7 +227,7 @@
 					<ul>
 						<li class="fragment">Une fois la solution obtenue, le logiciel calcule les grandeurs dérivées :
 							<ul>
-								<li>contraintes de Von Mises (mécanique)</li>
+								<li>Déplacements, déformations, contraintes de Von Mises (mécanique)</li>
 								<li>flux de chaleur (thermique)</li>
 								<li>distribution de champs (électromagnétisme)</li>
 							</ul>
@@ -196,7 +241,7 @@
 				<section>
 					<h2>8. Interprétation et validation</h2>
 					<ul>
-						<li class="fragment">L'ingénieur ne doit pas se fier aveuglément au logiciel : il faut <strong>interpréter</strong>.</li>
+						<li class="fragment">L'ingénieur ne se fie pas aveuglément au logiciel : il <strong>interprète</strong>.</li>
 						<li class="fragment">On vérifie si les résultats sont cohérents avec des calculs manuels simplifiés ou des essais expérimentaux.</li>
 						<li class="fragment">Parfois, on raffine le maillage ou on ajuste le modèle pour améliorer la précision.</li>
 					</ul>
@@ -204,13 +249,22 @@
 
 				<!-- Conclusion -->
 				<section>
-					<h2>Conclusion</h2>
+					<h2>Résumé en une phrase :</h2>
 					<p class="fragment">Un logiciel MEF est un <strong>traducteur</strong>.</p>
-					<p class="fragment">Il prend un problème physique complexe, le découpe en petites équations simples, les assemble en un grand système linéaire, le résout numériquement, puis restitue les résultats de façon visuelle pour aider à la décision.</p>
+					<p class="fragment">Il prend un problème physique complexe, 
+						<ul>
+							<li>le découpe en petites équations simples,</li>
+							<li>les assemble en un grand système linéaire,</li>
+							<li>le résout numériquement,</li>
+							<li>puis restitue les résultats de façon visuelle pour aider à la décision.</li>
+						</ul>
+					</p>
 				</section>
 
 				<section>
-					<h2>Questions ?</h2>
+					<h3>Questions ?</h3>
+					<p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+					<p>Cours suivant : <a href="../2-Illustration/">Appliquer la méthode</a></p>
 					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
 				</section>
             </div>

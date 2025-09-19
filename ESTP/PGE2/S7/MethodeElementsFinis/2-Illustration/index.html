@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Méthode des Éléments Finis</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../plugin/config.js" defer></script>
+    
+    </head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Page de titre -->
+				<section data-background-transition="fade">
+					<h2>Méthode des Éléments Finis</h2>
+					<h4>Appliquer la méthode sur un problème simple</h4>
+				</section>
+
+				<section class="align-top">
+					<h3>Un problème simple : </h3>
+					<p>Une poutre encastrée,
+						<ul>
+							<li>longueur L</li>
+							<li>section A</li>
+							<li>module d'Young E</li>
+							<li>coefficient de Poisson $\nu$</li>
+							<li>soumise à une force $F$ à son extrémité</li>
+						</ul>
+					<p class="fragment">Quelle est l'élongation de la poutre ?</p>
+				</section>
+				<section class="align-top">
+					<h3>On va découper la poutre en éléments finis.</h3>
+				</section>
+				<section class="align-top">
+					<h3>Des fonctions de formes.</h3>
+					<p>Approximation du déplacement par interpolation.</p>
+				</section>
+				<section class="align-top">
+					<h3>Matrice de rigidité élémentaire.</h3>
+					$$
+					\frac{E A}{L_e}\left[\begin{array}{cc}
+					1 & -1 \\
+					-1 & 1
+					\end{array}\right]
+					$$
+				</section>
+				<section class="align-top">
+					<h3>Vecteur de charges </h3>
+
+				</section>
+				<section class="align-top">
+					<h3>Système linéaire</h3>
+
+				</section>
+				<section class="align-top">
+					<h3>Interprétation des résultats.</h3>
+
+				</section>
+				<section>
+					<h2>Questions ?</h2>
+					<p>Revenir au plan : <a href="../../index.html">Plan</a></p> 
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+            </div>
+		</div>
+
+
+	</body>
+</html>
