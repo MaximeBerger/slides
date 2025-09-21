@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+pdflatex -jobname=enonce ./resumeGlobal.tex.tex
+pdflatex -jobname=corrige ./resumeGlobal.tex 
+rm *.aux
+rm *.log
