@@ -35,112 +35,80 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-                <section data-transition="fade" data-state="hide-menubar hide-menu">
-                    <section>
-                    <h2>Algèbre linéaire</h2>
-                    <h4>0 - Révisions sur les vecteurs</h4>
-                </section>
-                <section >
-                        
-                </section>
-                <section data-transition="fade" data-state="hide-menubar hide-menu">
-                    <p>A la fin de ce cours, vous serez capable de:</p>
-
-                </section>
-                <section data-transition="fade" data-state="hide-menubar hide-menu">
-                    Séquence 0 - Révisions. 
-                    A retenir. 
-                </section>
-            </section>
-                <section data-name="TOC" data-sm="false">
-                    <h4>Menu</h4>
-                    <ul class="menu"></ul>
-                </section>
-                <section data-name="Définition">
-                    <section>
-                        <h4>Un vecteur c'est quoi ?</h4>
-                        <ul class="fragment">
-                            <li>Une direction</li>
-                            <li>Un sens</li>
-                            <li>Une longueur</li>
-                        </ul>
-                        <p class="fragment">(Ce ne sera pas notre définition)</p>
-                    </section>
-                    <section>
-                        <h4>Par exemple ...</h4>
-                        <ul>
-                            <li class="fragment">Une flèche dans le plan $\mathbb{R}^2$</li>
-                            <li class="fragment">Une flèche dans l'espace $\mathbb{R}^3$</li>
-                            <li class="fragment">Une flèche dans l'espace à $n$ dimensions $\mathbb{R}^n$ ?</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h4>Qu'est-ce qu'on peut faire avec des vecteurs ?</h4>
-                        <ul>
-                            <li class="fragment">Les additionner</li>
-                            <li class="fragment">Les multiplier par un nombre</li>
-                            <br>
-                            <li class="fragment">Calculer leur coordonnées</li>
-                            <br>
-                            <li class="fragment">Les projeter sur une droite</li>
-                            <li class="fragment">Calculer leur norme</li>
-                            <li class="fragment">Calculer leur produit scalaire</li>
-                            <li class="fragment">Calculer l'angle entre deux vecteurs</li>
-                        </ul>
-                    </section>
-                </section>
-                <section data-name="Applications">
-                    <section>
-                        <h4>A quoi ça sert ?</h4>
-                        <p>Modéliser des quantités physiques:
-                            <ul class="fragment highlight-red" data-fragment-index="4">
-                                <li class="fragment" data-fragment-index="1">Forces</li>
-                                <li class="fragment" data-fragment-index="2">Vitesses</li>
-                                <li class="fragment" data-fragment-index="3">Positions</li>
-                            </ul>
-                        <p class="fragment" data-fragment-index="4">Un vecteur n'a pas de point de départ...</p>
-                        </p>
-                    </section>
-                    <section >
-
-                    </section>
-                    
-                    <section data-background-iframe="vecteurGateau.html" data-background-interactive>
-                    </section>
-                    <section >
-                        Un utilisateur qui note des films sur netflix ou achète des produits sur amazon est représenté par un vecteur dans un espace à grande dimension. 
-                        
-                    </section>
-                    <section >
-                        <iframe width="800" height="600" src="https://www.youtube.com/embed/iv-5mZ_9CPY?si=80XOcIEh8rK2MKB0&amp;controls=0&amp;clip=Ugkx2RXwUOx0Vf5YvPTztY4bXJ1z4WN94gV4&amp;clipt=EKG9FxiBkhs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </section>
-                    
-                </section>  
-                <section data-name="Règles de calcul">
-                    <section >
-                        <h4>Opérations légales</h4>
-                        Sur l'addition de vecteurs :
-                        <ul>
-                            <li>Commutativité : $u + v = v + u$</li>
-                        </ul>
-                        Existence d'un opposé, 
-                        Sur le vecteur nul.
-                    </section>
-                    <section >
-                        Une animation sur les scalaires, addition de vecteurs ?
-                        Pour éviter la confusion entre les scalaires et les coordonnées des vecteurs.  
-                    </section>
-                    <section >
-                        Dans r2 on peut faire des choses supplémentaires : Le produit scalaire. Ce ne sera pas le cas de tous nos vecteurs.  
-                    </section>
-                    <section data-background-iframe="produitScalaire.html" data-background-interactive>
-
-                    </section>
-                </section>
-                <section>
-                    <h2>Fin.</h2>
-                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
-                </section>
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<section>
+						<h2>Séquence n°1 – Coordonnées</h2>
+						<h4>Algèbre linéaire</h4>
+					</section>
+				</section>
+				<section data-name="TOC" data-sm="false">
+					<h4>Menu</h4>
+					<ul class="menu"></ul>
+				</section>
+				<section data-name="Prérequis">
+					<h4>Prérequis</h4>
+					<p>Savoir manipuler des vecteurs : addition et produit par un scalaire dans un EV.</p>
+				</section>
+				<section data-name="But">
+					<h4>But</h4>
+					<p>Pouvoir décomposer un vecteur comme combinaison linéaire d'autres vecteurs.</p>
+				</section>
+				<section data-name="Problématique / Accroche">
+					<h4>Problématique / Accroche</h4>
+					<ul>
+						<li>“Le même vecteur peut avoir des nombres différents” : les coordonnées dépendent de la base (axes tournés, capteurs différents).</li>
+					</ul>
+				</section>
+				<section data-name="Contenu réduit">
+					<h4>Contenu réduit</h4>
+					<ul>
+						<li>Base $\mathcal B=(b_1,\dots,b_n)$ d’un EV de dimension $n$.</li>
+						<li>Coordonnées: $v=\sum_{i=1}^n x_i b_i$, vecteur de coordonnées $[v]_{\mathcal B}=(x_1,\dots,x_n)^\top$ (unicité).</li>
+						<li>Bases canoniques:
+							<ul>
+								<li>$\mathbb R^n$: $\mathcal B_{\mathrm{can}}=(e_1,\dots,e_n)$, avec $e_i$ la $i$-ème colonne de l’identité.</li>
+								<li>$\mathcal P_n$: $\mathcal B_{\mathrm{can}}=(1,X,\dots,X^n)$.</li>
+								<li>$M_{m\times n}(\mathbb R)$: base donnée par les matrices $E_{ij}$ (1 en $(i,j)$, 0 ailleurs).</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section data-name="Schéma / Visualisation">
+					<h4>Schéma global / Visualisation</h4>
+					<p>Visualiser l'effet d'un changement de base sur un vecteur.</p>
+				</section>
+				<section data-name="Exemples clés">
+					<h4>Exemple(s) clé(s)</h4>
+					<ul>
+						<li>$\mathbb R^2$: $[\, (3,-1) \,]_{\mathcal B_{\mathrm{can}}}=(3,-1)^\top$.</li>
+						<li>$\mathcal P_2$: pour $P(X)=2-3X+X^2$, $[P]_{\mathcal B_{\mathrm{can}}}=(2,-3,1)^\top$.</li>
+						<li>Base non canonique en $\mathbb R^2$: $\mathcal B=((1,1),(1,-1))$, trouver $[(2,0)]_{\mathcal B}$ via $\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}2\\0\end{pmatrix}$.</li>
+					</ul>
+				</section>
+				<section data-name="Activité interactive">
+					<h4>Activité pédagogique interactive</h4>
+					<p>Objectif: lier géométrie et nombres de coordonnées; résoudre un petit système pour obtenir $[v]_{\mathcal B}$.</p>
+				</section>
+				<section data-name="Pièges fréquents">
+					<h4>Pièges fréquents / erreurs classiques</h4>
+					<ul>
+						<li>Confondre vecteur et liste de coordonnées; croire que les coordonnées sont “absolues”.</li>
+						<li>Oublier l’unicité dans une base.</li>
+					</ul>
+				</section>
+				<section data-name="Trace (PDF)">
+					<h4>Trace distribuée aux étudiants (PDF)</h4>
+					<ul>
+						<li><strong>Ce que je dois savoir</strong>: $v=\sum x_i b_i$, $[v]_{\mathcal B}=(x_i)$; bases canoniques.</li>
+						<li><strong>Ce que je dois comprendre / savoir faire</strong>: résoudre $B\,x=v$ où $B=(b_1\,\dots\,b_n)$.</li>
+						<li><strong>Exemple vu ensemble</strong>: $\mathcal B=((1,1),(1,-1))$, $[(2,0)]_{\mathcal B}$.</li>
+						<li><strong>Mini-exercice</strong>: dans $\mathcal P_2$, trouver $[\;1+4X\;]_{(1,X,X^2)}$.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Fin.</h2>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
             </div>
 		</div>
 

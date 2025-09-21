@@ -1,0 +1,263 @@
+
+\newcommand{\mtn}{\mathbb{N}}
+\newcommand{\mtns}{\mathbb{N}^*}
+\newcommand{\mtz}{\mathbb{Z}}
+\newcommand{\mtr}{\mathbb{R}}
+\newcommand{\mtk}{\mathbb{K}}
+\newcommand{\mtq}{\mathbb{Q}}
+\newcommand{\mtc}{\mathbb{C}}
+\newcommand{\mch}{\mathcal{H}}
+\newcommand{\mcp}{\mathcal{P}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcl}{\mathcal{L}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcmn}{\mathcal{M}}
+\newcommand{\mcmnr}{\mathcal{M}_n(\mtr)}
+\newcommand{\mcmnk}{\mathcal{M}_n(\mtk)}
+\newcommand{\mcsn}{\mathcal{S}_n}
+\newcommand{\mcs}{\mathcal{S}}
+\newcommand{\mcd}{\mathcal{D}}
+\newcommand{\mcsns}{\mathcal{S}_n^{++}}
+\newcommand{\glnk}{GL_n(\mtk)}
+\newcommand{\mnr}{\mathcal{M}_n(\mtr)}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\vect}{vect}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\comat}{comat}
+\DeclareMathOperator{\imv}{Im}
+\DeclareMathOperator{\rang}{rg}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\mcu}{\mathcal{U}}
+\newcommand{\mcun}{\mcu_n}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\croouv}{[\![}
+\newcommand{\crofer}{]\!]}
+\newcommand{\rab}{\mathcal{R}(a,b)}
+\newcommand{\pss}[2]{\langle #1,#2\rangle}
+ %Document 
+
+\begin{document} 
+
+\begin{center}\textsc{{\huge Révisions sur les intégrales}}\end{center}
+
+
+
+Pour les corrigés : http://www.bibmath.net/ressources/justeunefeuille.php?id=46200 
+
+% Exercice 3125
+
+
+\vskip0.3cm\noindent\textsc{Exercice 1} - Primitives usuelles
+\vskip0.2cm
+Déterminer toutes les primitives des fonctions suivantes, sur un intervalle bien choisi : 
+$$\begin{array}{lll}
+\displaystyle f_1(x)=5x^3-3x+7&\displaystyle f_2(x)=2\cos(x)-3\sin(x)&\displaystyle f_3(x)=10-3e^x+x\\
+\displaystyle f_4(x)=\frac{5}{\sqrt x}+\frac 4x+\frac{2}{x^2}+\frac{2}{x^3}&\displaystyle f_5(x)=\frac{x+5}{x^2}&\displaystyle f_6(x)=\frac{x^2}{5}+\frac 1{6}\\
+\end{array}$$
+
+
+% Exercice 3126
+
+
+\vskip0.3cm\noindent\textsc{Exercice 2} - Primitives usuelles
+\vskip0.2cm
+Déterminer toutes les primitives des fonctions suivantes sur un intervalle bien choisi : 
+$$\begin{array}{lll}
+\displaystyle f_1(x)=e^{4x}&\displaystyle f_2(x)=e^{4x+3}& \displaystyle f_3(x)=\sin(2x)\\
+\displaystyle f_4(x)=\cos\left(3x+\frac\pi 3\right)&
+\displaystyle f_5(x)=(2x+1)^2&\displaystyle f_6(x)=\frac{3}{\sqrt{5x+1}}.
+\end{array}$$
+
+
+
+% Exercice 2600
+
+
+\vskip0.3cm\noindent\textsc{Exercice 3} - Reconnaissance de formes
+\vskip0.2cm
+Déterminer toutes les primitives des fonctions suivantes : 
+$$
+\begin{array}{lllll}
+\displaystyle f(x)=\frac{x}{1+x^2}&\quad&\displaystyle g(x)=\frac{e^{3x}}{1+e^{3x}}&\quad&
+\displaystyle h(x)=\frac{\ln x}{x}\\
+\displaystyle k(x)=\cos(x)\sin^2(x)&\quad&l(x)=\frac{1}{x\ln x}&\quad&m(x)=3x\sqrt{1+x^2}.
+\end{array}
+$$
+
+
+% Exercice 431
+
+
+\vskip0.3cm\noindent\textsc{Exercice 4} - Reconnaissance de formes
+\vskip0.2cm
+Déterminer une primitive des fonctions suivantes sur l'intervalle considéré :
+\begin{array}{lll}
+\mathbf 1.\ f(x)=(3x-1)(3x^2-2x+3)^3,\ I=\mathbb R&\quad&\mathbf 2.\ f(x)=\frac{1-x^2}{(x^3-3x+2)^3},\ I=]-\infty,-2[\\
+\mathbf 3.\ f(x)=\frac{(x-1)}{\sqrt{x(x-2)}},\ I=]-\infty,0[&&\mathbf 4.\ f(x)=\frac{1}{x\ln(x^2)},\ I=]1,+\infty[.
+\end{array}
+
+
+% Exercice 397
+
+
+\vskip0.3cm\noindent\textsc{Exercice 5} - Intégration par parties - Niveau 1
+\vskip0.2cm
+Calculer les intégrales suivantes :
+$$\mathbf{1.}\quad I=\int_0^1 xe^xdx\quad\quad\mathbf{2.}\quad J=\int_1^e x^2\ln xdx$$
+
+
+% Exercice 398
+
+
+\vskip0.3cm\noindent\textsc{Exercice 6} - Intégration par parties - Niveau 2
+\vskip0.2cm
+Déterminer une primitive des fonctions suivantes :
+$$\mathbf{1.}\quad x\mapsto\arctan(x)\quad\quad\mathbf{2.}\quad x\mapsto (\ln x)^2\quad\quad\mathbf{3.} x\mapsto \sin(\ln x).$$
+
+
+% Exercice 3492
+
+
+\vskip0.3cm\noindent\textsc{Exercice 7} - Intégration par parties en boucle
+\vskip0.2cm
+Calculer les intégrales suivantes :
+$$1.\ \int_1^2 \frac{\ln(x)}{x}dx\quad\quad 2.\ \int_0^\pi e^x\sin(x)dx.$$
+
+
+% Exercice 393
+
+
+\vskip0.3cm\noindent\textsc{Exercice 8} - Changements de variables - Niveau 1
+\vskip0.2cm
+En effectuant le changement de variables demandé, calculer les intégrales suivantes :
+\begin{enumerate}
+\item $\displaystyle \int_1^4\frac{1-\sqrt t}{\sqrt t}dt$ en posant $x=\sqrt t$;
+\item $\displaystyle \int_0^{\pi}\frac{\sin t}{1+\cos^2 t}dt$ en posant $x=\cos t$;
+\item $\displaystyle \int_1^e \frac{dt}{2t\ln (t)+t}$ en posant $x=\ln t$.
+\end{enumerate}
+
+
+% Exercice 394
+
+
+\vskip0.3cm\noindent\textsc{Exercice 9} - Changements de variables - Niveau 2
+\vskip0.2cm
+En effectuant le changement de variables indiqué, calculer les intégrales suivantes :
+\begin{enumerate}
+\item  $\displaystyle \int_0^1\frac{dt}{1+e^t}$ en posant $x=e^t$;
+\item $\displaystyle \int_1^3\frac{\sqrt t}{t+1}dt$ en posant $x=\sqrt t$;
+\item $\displaystyle \int_{-1}^1 \sqrt{1-t^2}dt$ en posant $t=\sin\theta$.
+\end{enumerate}
+
+
+% Exercice 3154
+
+
+\vskip0.3cm\noindent\textsc{Exercice 10} - Changement de variables - Recherche de primitives - Niveau 1
+\vskip0.2cm
+En effectuant le changement de variables indiqué, déterminer une primitive des fonctions suivantes :
+\begin{enumerate}
+\item $\displaystyle x\mapsto \frac{x}{\sqrt{1+x}}$, en posant $u=\sqrt{1+x}$;
+\item $\displaystyle x\mapsto \frac{1}{e^x+1}$, en posant $u=e^x$;
+\item $\displaystyle x\mapsto \frac{1}{x+x(\ln x)^2}$, en posant $u=\ln x$.
+\end{enumerate}
+
+
+% Exercice 395
+
+
+\vskip0.3cm\noindent\textsc{Exercice 11} - Changements de variables - Recherche de primitives - Niveau 2
+\vskip0.2cm
+En effectuant un changement de variables, déterminer une primitive des fonctions suivantes :
+\begin{enumerate}
+\item $\displaystyle x\mapsto \cos(2\ln x)$;
+\item $\displaystyle x\mapsto\cos(\sqrt x)$;
+\item $\displaystyle x\mapsto \frac{e^x}{(3+e^x)\sqrt{e^x-1}}$.
+\end{enumerate}
+
+
+% Exercice 433
+
+
+\vskip0.3cm\noindent\textsc{Exercice 12} - Primitive de fractions rationnelles
+\vskip0.2cm
+Déterminer une primitive des fractions rationnelles suivantes :
+$$
+\begin{array}{lll}
+\mathbf 1.\ f(x)=\frac{2x^2-3x+4}{(x-1)^2}\textrm{ sur }]1,+\infty[&\quad&\mathbf 2. f(x)=\frac{2x-1}{(x+1)^2}\textrm{ sur }]-1,+\infty[ \\
+\mathbf 3.\ f(x)=\frac{x}{(x^2-4)^2}\textrm{ sur }]2,+\infty[&&\mathbf 4. f(x)=\frac{24x^3+18x^2+10x-9}{(3x-1)(2x+1)^2}\textrm{ sur }]-1/2,1/3[
+\end{array}
+$$
+
+
+% Exercice 3152
+
+
+\vskip0.3cm\noindent\textsc{Exercice 13} - Exponentielle * Polynôme
+\vskip0.2cm
+Calculer les intégrales suivantes  :
+$$\begin{array}{lcl}
+\displaystyle \mathbf{1.}\int_{0}^2 (x+6)e^{2x}dx &\quad&\displaystyle \mathbf{2.} \int_0^1 e^x(2x^3+3x^2-x+1)dx
+\end{array}$$
+
+
+% Exercice 3153
+
+
+\vskip0.3cm\noindent\textsc{Exercice 14} - Exponentielle * trigonométrique
+\vskip0.2cm
+Calculer les intégrales suivantes  :
+$$\begin{array}{lcl}
+\displaystyle \mathbf{1.} \int_0^\pi e^x\sin(2x)dx&\quad&\displaystyle \mathbf{2.} \int_0^{2\pi}e^{-x}\sin^2 xdx\\
+\end{array}$$
+
+
+% Exercice 437
+
+
+\vskip0.3cm\noindent\textsc{Exercice 15} - Exponentielle * polynôme * trigonométrique
+\vskip0.2cm
+Calculer l'intégrale :
+$$\int_0^\pi x^2e^x \cos xdx.$$
+
+
+% Exercice 2496
+
+
+\vskip0.3cm\noindent\textsc{Exercice 16} - Quelques primitives à savoir calculer!
+\vskip0.2cm
+Déterminer une primitive des fonctions suivantes :
+$$
+\begin{array}{lcl}
+\displaystyle \mathbf{1.}\quad x\mapsto \frac{1}{x^2+4}&\quad\quad&\displaystyle \mathbf{2.}\quad x\mapsto\frac{1}{x^2+4x+5}\\
+\displaystyle \mathbf{3.}\quad x\mapsto \frac{1}{1-x^2}&&\displaystyle \mathbf{4.}\quad x\mapsto e^x(2x^3+3x^2-x+1)\\
+\displaystyle \mathbf{5.}\quad x\mapsto\sin^3(x)&&\displaystyle \mathbf{6.}\quad x\mapsto \arctan(x)
+\end{array}$$
+
+
+
+% Exercice 165
+
+
+\vskip0.3cm\noindent\textsc{Exercice 17} - Quelques décompositions en séries de Fourier
+\vskip0.2cm
+Déterminer les séries de Fourier (termes en sinus et cosinus) des fonctions suivantes :
+\begin{enumerate}
+\item $f$ $2\pi-$périodique, définie par $f(x)=x$ si $-\pi\leq x<\pi$.
+\item la fonction créneau : $f$ est $2\pi$-périodique, définie par $f(x)=1$ si $x\in[0,\pi[$, et $f(x)=-1$ si $x\in[-\pi,0[$.
+\item la fonction $L-$périodique, où $L>0$, définie par $f(x)=|x|$ si $x\in[-L/2,L/2]$.
+\end{enumerate}
+
+
+
+
+\vskip0.5cm
+\noindent{\small Cette feuille d'exercices a été conçue à l'aide du site \textsf{https://www.bibmath.net}}
+
+%Vous avez accès aux corrigés de cette feuille par l'url : https://www.bibmath.net/ressources/justeunefeuille.php?id=46200
+\end{document}

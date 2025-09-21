@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Séries de Fourier — Définition</title>
+
+		<link rel="stylesheet" href="../../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../../dist/theme/beige.css">
+
+
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+
+        <link rel="stylesheet" href="../../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../../plugin/config.js" defer></script>
+
+        <style>
+            .reveal .slides section.align-top {
+                top: 0 !important;
+                transform: none !important;
+                display: block !important;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<section>
+					<h2>Séries de Fourier</h2>
+					<h3>1 — Définition</h3>
+					<h4>Fonctions périodiques et intégrales-produits</h4>
+				</section>
+				
+				<section data-transition="fade" data-state="hide-menubar hide-menu">
+					<p>Objectifs :</p>
+					<ul>
+						<li>Définir une fonction périodique et sa période</li>
+						<li>Introduire une intégrale-produit (produit scalaire) adaptée</li>
+						<li>Établir l’orthogonalité de $(\cos nx)$ et $(\sin nx)$</li>
+						<li>Définir les coefficients de Fourier et la série associée</li>
+					</ul>
+				</section>
+				<section data-background-iframe="https://fourier.ajai.dev/" data-background-interactive>
+				</section>
+			</section>
+				<section data-name="TOC" data-sm="false">
+					<h4>Menu</h4>
+					<ul class="menu"></ul>
+				</section>
+				<section data-name="Fonctions périodiques">
+					<section>
+						<h4>Définition</h4>
+						<p>Soit $T>0$. On dit que $f:\mathbb{R}\to\mathbb{R}$ est <em>$T$-périodique</em> si $\forall x\in\mathbb{R}$, $f(x+T)=f(x)$.</p>
+						<ul>
+							<li class="fragment">La plus petite telle valeur (si elle existe) est appelée <em>période</em>.</li>
+							<li class="fragment">Il suffit souvent d’étudier $f$ sur un <em>intervalle fondamental</em> de longueur $T$.</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Exemples</h4>
+						<ul>
+							<li class="fragment">$\sin x$, $\cos x$ : $2\pi$-périodiques</li>
+							<li class="fragment">Fonction « dent de scie » et « créneau » de période $2\pi$</li>
+							<li class="fragment">Fonction constante : toute période convient</li>
+						</ul>
+					</section>
+				</section>	
+				<section data-name="Intégrale-produit">
+					<section>
+						<h4>Produit scalaire sur une période</h4>
+						<p>Pour des fonctions réelles $2\pi$-périodiques intégrables, on définit</p>
+						<p class="fragment">$$\langle f,g\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,g(x)\,dx$$</p>
+						<ul>
+							<li class="fragment">Norme associée : $\|f\| = \sqrt{\langle f,f\rangle}$</li>
+							<li class="fragment">Orthogonalité : $\langle f,g\rangle = 0$</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Remarque (période générale)</h4>
+						<p>Pour une période $T$, poser $$\langle f,g\rangle_T = \frac{1}{T}\int_{x_0}^{x_0+T} f(x)g(x)\,dx,$$ indépendante de $x_0$ si $f,g$ sont $T$-périodiques.</p>
+					</section>
+				</section>
+				<section data-name="Base trigonométrique">
+					<section>
+						<h4>Famille trigonométrique</h4>
+						<p>Sur $[-\pi,\pi]$ : $\{1,\,\cos x,\,\sin x,\,\cos 2x,\,\sin 2x,\,\dots\}$</p>
+						<ul>
+							<li class="fragment">$\langle \cos nx,\cos mx\rangle = 0$ si $n\ne m$, $=1$ si $n=m\ne 0$</li>
+							<li class="fragment">$\langle \sin nx,\sin mx\rangle = 0$ si $n\ne m$, $=1$ si $n=m\ne 0$</li>
+							<li class="fragment">$\langle \sin nx,\cos mx\rangle = 0$ pour tous $m,n$</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Conséquence</h4>
+						<p>Cette famille est orthogonale pour $\langle\cdot,\cdot\rangle$; on pourra projeter $f$ dessus.</p>
+					</section>
+				</section>
+				<section data-name="Coefficients de Fourier">
+					<section>
+						<h4>Définition des coefficients</h4>
+						<p>Pour $f$ $2\pi$-périodique et intégrable :</p>
+						<p class="fragment">$$a_0 = \langle f,1\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,dx$$</p>
+						<p class="fragment">$$a_n = \langle f,\cos nx\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx)\,dx$$</p>
+						<p class="fragment">$$b_n = \langle f,\sin nx\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx)\,dx$$</p>
+					</section>
+					<section>
+						<h4>Série de Fourier</h4>
+						<p class="align-top">Forme trigonométrique :</p>
+						<p>$$S_f(x) = \tfrac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos nx + b_n\sin nx\big).$$</p>
+						<p class="fragment">On étudiera plus tard les conditions de convergence (Dirichlet, point de discontinuité, etc.).</p>
+					</section>
+				</section>
+				<section data-name="Exemples">
+					<section>
+						<h4>Exemple rapide</h4>
+						<p>Si $f(x)=\cos x$, alors $a_1=1$ et tous les autres coefficients sont nuls ; $S_f=f$.</p>
+					</section>
+					<section>
+						<h4>À faire au tableau</h4>
+						<p>Calculer $a_n,b_n$ pour $f(x)=|x|$ sur $[-\pi,\pi]$ (fonction paire).</p>
+						<button onclick="RevealChalkboard.toggleChalkboard()">✏️ Ouvrir le tableau</button>
+					</section>
+				</section>
+				<section data-name="Applications en construction">
+					<section>
+						<h4>Dynamique des structures</h4>
+						<ul>
+							<li class="fragment">Réponse harmonique mode par mode, identification de la résonance</li>
+							<li class="fragment">Dimensionnement de l’amortissement pour limiter les pics</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Thermique du bâtiment</h4>
+						<ul>
+							<li class="fragment">Excitation jour/nuit traitée en harmoniques</li>
+							<li class="fragment">Amortissement et déphasage des parois (type EN ISO 13786)</li>
+							<li class="fragment">Peu d’harmoniques suffisent pour capter l’essentiel</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Acoustique des locaux</h4>
+						<ul>
+							<li class="fragment">Décomposition modale en salle rectangulaire</li>
+							<li class="fragment">Diagnostic des ondes stationnaires et traitements</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Mesure et diagnostic</h4>
+						<ul>
+							<li class="fragment">Analyse de spectre (FFT) sur accéléros et jauges</li>
+							<li class="fragment">Surveillance vibratoire (SHM), filtrage fréquentiel</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Fin.</h2>
+					<p>Revenir au plan : <a href="../../index.html">Plan</a></p>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+			</div>
+		</div>
+
+		
+	</body>
+</html>
