@@ -37,38 +37,37 @@
 			<div class="slides">
 				<section data-transition="fade" data-state="hide-menubar hide-menu">
 					<section>
-						<h2>Séquence n°1 – Coordonnées</h2>
-						<h4>Algèbre linéaire</h4>
+						<h2>Algèbre linéaire</h2>
+						<h4>Coordonées de vecteurs</h4>
 					</section>
 				</section>
 				<section data-name="TOC" data-sm="false">
 					<h4>Menu</h4>
 					<ul class="menu"></ul>
 				</section>
-				<section data-name="Prérequis">
+				<section>
 					<h4>Prérequis</h4>
 					<p>Savoir manipuler des vecteurs : addition et produit par un scalaire dans un EV.</p>
 				</section>
-				<section data-name="But">
+				<section>
 					<h4>But</h4>
-					<p>Pouvoir décomposer un vecteur comme combinaison linéaire d'autres vecteurs.</p>
+					<p>Pouvoir décomposer un vecteur dans un repère, comme dans $\mathbb{R}^2$ ou $\mathbb{R}^3$.</p>
 				</section>
-				<section data-name="Problématique / Accroche">
-					<h4>Problématique / Accroche</h4>
+				<section>
+					<h4>Problématique</h4>
 					<ul>
-						<li>“Le même vecteur peut avoir des nombres différents” : les coordonnées dépendent de la base (axes tournés, capteurs différents).</li>
+						<li>les coordonnées dépendent de la base (axes tournés, capteurs différents).</li>
 					</ul>
 				</section>
 				<section data-name="Contenu réduit">
 					<h4>Contenu réduit</h4>
 					<ul>
-						<li>Base $\mathcal B=(b_1,\dots,b_n)$ d’un EV de dimension $n$.</li>
-						<li>Coordonnées: $v=\sum_{i=1}^n x_i b_i$, vecteur de coordonnées $[v]_{\mathcal B}=(x_1,\dots,x_n)^\top$ (unicité).</li>
+						<li>Base $\mathcal B=(b_1,\dots,b_n)$ d'un EV de dimension $n$.</li>
+						<li>Coordonnées: $u=\sum_{i=1}^n u_i b_i$, vecteur de coordonnées $[v]_{\mathcal B}=(x_1,\dots,x_n)^\top$ (unicité).</li>
 						<li>Bases canoniques:
 							<ul>
-								<li>$\mathbb R^n$: $\mathcal B_{\mathrm{can}}=(e_1,\dots,e_n)$, avec $e_i$ la $i$-ème colonne de l’identité.</li>
+								<li>$\mathbb R^n$: $\mathcal B_{\mathrm{can}}=(e_1,\dots,e_n)$, avec $e_i$ la $i$-ème colonne de l'identité.</li>
 								<li>$\mathcal P_n$: $\mathcal B_{\mathrm{can}}=(1,X,\dots,X^n)$.</li>
-								<li>$M_{m\times n}(\mathbb R)$: base donnée par les matrices $E_{ij}$ (1 en $(i,j)$, 0 ailleurs).</li>
 							</ul>
 						</li>
 					</ul>
@@ -83,26 +82,6 @@
 						<li>$\mathbb R^2$: $[\, (3,-1) \,]_{\mathcal B_{\mathrm{can}}}=(3,-1)^\top$.</li>
 						<li>$\mathcal P_2$: pour $P(X)=2-3X+X^2$, $[P]_{\mathcal B_{\mathrm{can}}}=(2,-3,1)^\top$.</li>
 						<li>Base non canonique en $\mathbb R^2$: $\mathcal B=((1,1),(1,-1))$, trouver $[(2,0)]_{\mathcal B}$ via $\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}2\\0\end{pmatrix}$.</li>
-					</ul>
-				</section>
-				<section data-name="Activité interactive">
-					<h4>Activité pédagogique interactive</h4>
-					<p>Objectif: lier géométrie et nombres de coordonnées; résoudre un petit système pour obtenir $[v]_{\mathcal B}$.</p>
-				</section>
-				<section data-name="Pièges fréquents">
-					<h4>Pièges fréquents / erreurs classiques</h4>
-					<ul>
-						<li>Confondre vecteur et liste de coordonnées; croire que les coordonnées sont “absolues”.</li>
-						<li>Oublier l’unicité dans une base.</li>
-					</ul>
-				</section>
-				<section data-name="Trace (PDF)">
-					<h4>Trace distribuée aux étudiants (PDF)</h4>
-					<ul>
-						<li><strong>Ce que je dois savoir</strong>: $v=\sum x_i b_i$, $[v]_{\mathcal B}=(x_i)$; bases canoniques.</li>
-						<li><strong>Ce que je dois comprendre / savoir faire</strong>: résoudre $B\,x=v$ où $B=(b_1\,\dots\,b_n)$.</li>
-						<li><strong>Exemple vu ensemble</strong>: $\mathcal B=((1,1),(1,-1))$, $[(2,0)]_{\mathcal B}$.</li>
-						<li><strong>Mini-exercice</strong>: dans $\mathcal P_2$, trouver $[\;1+4X\;]_{(1,X,X^2)}$.</li>
 					</ul>
 				</section>
 				<section>
