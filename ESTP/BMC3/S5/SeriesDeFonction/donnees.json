@@ -47,6 +47,28 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Vers les séries de Fourier",
+      "description": "Suites · Séries · Suites de fonctions",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+        {
+          "titre": "QCM",
+          "lien": "1-Fourier/QCM/index.html",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Exercices sur les intégrales",
+          "lien": "1-Fourier/Integrales/enonce.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
