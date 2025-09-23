@@ -98,11 +98,6 @@
       ],
       "sexercer": [
         {
-          "titre": "QCM",
-          "lien": "1-EspacesVectoriels/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
           "titre": "Exercices",
           "lien": "1-EspacesVectoriels/Exercices/enonce.pdf",
           "cible": "_blank"
