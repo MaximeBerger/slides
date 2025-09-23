@@ -57,12 +57,12 @@
       "controle": [
         {
           "titre": "Controle",
-          "lien": "1-EspacesVectoriels/Exercices/enonce.pdf",
+          "lien": "0-Revisions/CC/enonce.pdf",
           "cible": "_blank"
         },
         {
           "titre": "Corrigé",
-          "lien": "1-EspacesVectoriels/Exercices/corrige.pdf",
+          "lien": "0-Revisions/CC/corrige.pdf",
           "cible": "_blank"
         }
       ]
