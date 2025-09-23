@@ -45,47 +45,46 @@
 					<h4>Menu</h4>
 					<ul class="menu"></ul>
 				</section>
-				<section>
-					<h4>Prérequis</h4>
-					<p>Savoir manipuler des vecteurs : addition et produit par un scalaire dans un EV.</p>
-				</section>
+				
 				<section>
 					<h4>But</h4>
-					<p>Pouvoir décomposer un vecteur dans un repère, comme dans $\mathbb{R}^2$ ou $\mathbb{R}^3$.</p>
+					<p>On se donne une famille de vecteurs, qui constitueront un repère.</p>
+					<p>On voudra décomposer un vecteur dans ce repère, comme dans $\mathbb{R}^2$ ou $\mathbb{R}^3$.</p>
+					<p class="fragment">les coordonnées dépendent de la base (axes tournés).</p>
+				</section>
+				
+				<section data-name="Notations">
+					<h4>Notations</h4>
+					<ul>
+						<li style="margin-bottom: 1em;">On se donne une base $\mathcal B=(e_1,\dots,e_n)$ de $\mathbb{R}^n$.</li>
+
+						<li style="margin-bottom: 1em;">Les coordonnées d'un vecteur $u$ dans la base $\mathcal B$ : $u=\sum_{i=1}^n u_i e_i$</li>
+
+						<li class="fragment" style="margin-bottom: 1em;">On note $u_{\mathcal B}=(u_1,\dots,u_n)$.</li>
+
+
+					</ul>
+				</section>
+				
+				<section data-name="Exemples">
+					<h4>Dans la base canonique</h4>
+					<ul>
+						<li style="margin-bottom: 1em;">$\mathbb R^2$: $[\, (3,-1) \,]_{\mathcal B_{\mathrm{can}}}=(3,-1)$.</li>
+					</ul>
 				</section>
 				<section>
-					<h4>Problématique</h4>
+					<h4>Dans une autre base</h4>
 					<ul>
-						<li>les coordonnées dépendent de la base (axes tournés, capteurs différents).</li>
+						<li style="margin-bottom: 1em;">Dans $\mathbb R^2$, on se donne $e_1=(1,1)$ et $e_2=(1,-1)$.</li>
+						<li style="margin-bottom: 1em;">On forme la base $\mathcal B=(e_1,e_2)$.</li>
+						<li class="fragment" style="margin-bottom: 1em;">Comment trouver les coordonnées d'un vecteur dans cette base ?</li>
 					</ul>
 				</section>
-				<section data-name="Contenu réduit">
-					<h4>Contenu réduit</h4>
-					<ul>
-						<li>Base $\mathcal B=(b_1,\dots,b_n)$ d'un EV de dimension $n$.</li>
-						<li>Coordonnées: $u=\sum_{i=1}^n u_i b_i$, vecteur de coordonnées $[v]_{\mathcal B}=(x_1,\dots,x_n)^\top$ (unicité).</li>
-						<li>Bases canoniques:
-							<ul>
-								<li>$\mathbb R^n$: $\mathcal B_{\mathrm{can}}=(e_1,\dots,e_n)$, avec $e_i$ la $i$-ème colonne de l'identité.</li>
-								<li>$\mathcal P_n$: $\mathcal B_{\mathrm{can}}=(1,X,\dots,X^n)$.</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section data-name="Schéma / Visualisation">
-					<h4>Schéma global / Visualisation</h4>
-					<p>Visualiser l'effet d'un changement de base sur un vecteur.</p>
-				</section>
-				<section data-name="Exemples clés">
-					<h4>Exemple(s) clé(s)</h4>
-					<ul>
-						<li>$\mathbb R^2$: $[\, (3,-1) \,]_{\mathcal B_{\mathrm{can}}}=(3,-1)^\top$.</li>
-						<li>$\mathcal P_2$: pour $P(X)=2-3X+X^2$, $[P]_{\mathcal B_{\mathrm{can}}}=(2,-3,1)^\top$.</li>
-						<li>Base non canonique en $\mathbb R^2$: $\mathcal B=((1,1),(1,-1))$, trouver $[(2,0)]_{\mathcal B}$ via $\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}2\\0\end{pmatrix}$.</li>
-					</ul>
-				</section>
+
+				
 				<section>
 					<h2>Fin.</h2>
+					<a href="2-CombinaisonsLineaires/Exercices/enonce.pdf">Exercices</a>
 					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
 				</section>
             </div>
