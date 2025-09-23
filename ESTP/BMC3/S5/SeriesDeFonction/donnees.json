@@ -59,13 +59,13 @@
       ],
       "sexercer": [
         {
-          "titre": "QCM",
-          "lien": "1-Fourier/QCM/index.html",
+          "titre": "Exercices sur les intégrales",
+          "lien": "1-Fourier/Integrales/enonce.pdf",
           "cible": "_blank"
         },
         {
-          "titre": "Exercices sur les intégrales",
-          "lien": "1-Fourier/Integrales/enonce.pdf",
+          "titre": "Exercices sur les complexes",
+          "lien": "1-Fourier/Complexes/enonce.pdf",
           "cible": "_blank"
         }
       ]

@@ -1,0 +1,179 @@
+
+\newcommand{\mtn}{\mathbb{N}}
+\newcommand{\mtns}{\mathbb{N}^*}
+\newcommand{\mtz}{\mathbb{Z}}
+\newcommand{\mtr}{\mathbb{R}}
+\newcommand{\mtk}{\mathbb{K}}
+\newcommand{\mtq}{\mathbb{Q}}
+\newcommand{\mtc}{\mathbb{C}}
+\newcommand{\mch}{\mathcal{H}}
+\newcommand{\mcp}{\mathcal{P}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcl}{\mathcal{L}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcmn}{\mathcal{M}}
+\newcommand{\mcmnr}{\mathcal{M}_n(\mtr)}
+\newcommand{\mcmnk}{\mathcal{M}_n(\mtk)}
+\newcommand{\mcsn}{\mathcal{S}_n}
+\newcommand{\mcs}{\mathcal{S}}
+\newcommand{\mcd}{\mathcal{D}}
+\newcommand{\mcsns}{\mathcal{S}_n^{++}}
+\newcommand{\glnk}{GL_n(\mtk)}
+\newcommand{\mnr}{\mathcal{M}_n(\mtr)}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\mcu}{\mathcal{U}}
+\newcommand{\mcun}{\mcu_n}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\croouv}{[\![}
+\newcommand{\crofer}{]\!]}
+\newcommand{\rab}{\mathcal{R}(a,b)}
+\newcommand{\pss}[2]{\langle #1,#2\rangle}
+ %Document 
+
+
+\section*{Rappels sur les nombres complexes}
+
+\subsection*{Définitions et formes usuelles}
+
+Un \underline{nombre complexe} $z$ s'écrit sous la forme :
+\[
+z = a + ib \qquad (a, b \in \mathbb{R},\ i^2 = -1)
+\]
+où $a$ est la partie réelle $\Re(z)$ et $b$ la partie imaginaire $\Im(z)$.
+
+
+\underline{Forme algébrique} : $z = a + ib$
+
+\underline{Forme trigonométrique} : 
+\[
+z = r(\cos\theta + i\sin\theta)
+\]
+où $r = |z| = \sqrt{a^2 + b^2}$ est le \textbf{module} de $z$, et $\theta = \arg(z)$ est un \textbf{argument} de $z$ (défini à $2\pi$ près).
+
+\underline{Forme exponentielle} (formule d'Euler) :
+\[
+z = r e^{i\theta}
+\]
+avec $e^{i\theta} = \cos\theta + i\sin\theta$.
+
+
+\subsection*{Module, argument et conjugué}
+
+\begin{itemize}
+    \item \underline{Module} : $|z| = \sqrt{a^2 + b^2}$
+    \item \underline{Argument} : $\theta = \arctan\left(\frac{b}{a}\right)$ (attention au quadrant)
+    \item \underline{Conjugué} : $\overline{z} = a - ib$
+\end{itemize}
+
+\subsection*{Formule de Moivre}
+
+Pour tout $n \in \mathbb{Z}$,
+\[
+\left(\cos\theta + i\sin\theta\right)^n = \cos(n\theta) + i\sin(n\theta)
+\]
+ou, sous forme exponentielle :
+\[
+\left(e^{i\theta}\right)^n = e^{in\theta}
+\]
+
+\subsection*{Racines $n$-ièmes de l'unité}
+
+Les solutions de $z^n = 1$ sont :
+\[
+z_k = e^{i\frac{2\pi k}{n}},\quad k = 0, 1, \ldots, n-1
+\]
+
+
+
+\vspace{3em}
+
+\subsection{Module et argument}
+
+Écrire sous la forme $a+i b$, puis sou forme exponentielle les nombres complexes suivants :
+\begin{enumerate}
+\item Nombre de module 2 et d'argument $\pi / 3$.
+\item Nombre de module 3 et d'argument $-\pi / 8$.
+\item Nombre de module 1 et d'argument $\pi / 4$.
+\item Nombre de module 2 et d'argument $-\pi / 6$.
+\item Nombre de module 7 et d'argument $-\pi / 2$.
+\end{enumerate}
+
+\vspace{2em}
+
+\subsection{Forme exponentielle $\rightarrow$ forme algébrique}
+
+Écrire sous la forme $a+ib$ les nombres complexes suivants, donnés sous forme exponentielle :
+\begin{multicols}{2}
+\begin{enumerate}
+    \item $z_1 = 5 e^{i \frac{\pi}{6}}$
+    \item $z_2 = 2 e^{-i \frac{\pi}{4}}$
+    \item $z_3 = 3 e^{i \frac{2\pi}{3}}$
+    \item $z_4 = 7 e^{i \pi}$
+    \item $z_5 = 4 e^{i 0}$
+    \item $z_6 = 6 e^{-i \frac{\pi}{2}}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{2em}
+
+\subsection{Forme exponentielle}
+Mettre sous forme exponentielle les nombres complexes suivants : 
+\begin{multicols}{3}
+\begin{enumerate}
+    \item $z_1=1+i \sqrt{3}$, 
+    \item $z_2=1+i$, 
+    \item $z_3=-2 \sqrt{3}+2 i$, 
+    \item $z_4=i$, 
+    \item $z_5=-2 i$, 
+    \item $z_6=-3$,
+    \item $z_7=1$
+    \item $z_8=9 i$
+    \item $z_9=-3$
+    \item $z_{10}=\frac{-i \sqrt{2}}{1+i}$
+    \item $z_{11}=\frac{(1+i \sqrt{3})^3}{(1-i)^5}$
+    \item $z_{12}=\sin x+i \cos x$.
+\end{enumerate}
+\end{multicols}
+
+
+
+\vspace{2em}
+
+\subsection{Exponentielle}
+Résoudre l'équation $e^z=3 \sqrt{3}-3 i$.
+
+\newpage
+
+\subsection{Trigonométrique}
+En utilisant les nombres complexes, calculer  $\cos 5 \theta$ et $\sin 5 \theta$ en fonction de $\cos \theta$ et $\sin \theta$.
+
+\vspace{2em}
+
+
+\subsection{Pour préparer les séries de fourier}
+Calculer les intégrales suivantes, pour toute valeur de $n$ et $m$ dans les entiers relatifs:
+
+\begin{enumerate}
+    \item $$\int_0^\pi e^{i n x} e^{i m x} dx$$
+    \item $$\int_0^\pi \cos(n x) \cos(m x) dx$$
+    \item $$\int_0^\pi \sin(n x) \sin(m x) dx$$
+    \item $$\int_0^\pi \cos(n x) \sin(m x) dx$$
+\end{enumerate}
+
+
+
+\vspace{2em}
+
+\subsection{Exponentielle}
+On pose 
+$$z_1=4 e^{i \frac{\pi}{4}}, \qquad z_2=3 i e^{i \frac{\pi}{6}}, \qquad z_3=-2 e^{i \frac{2 \pi}{3}}$$
+Écrire sous forme exponentielle les nombres complexes : 
+$$z_1,\qquad z_2,\qquad z_3 , \qquad z_1 z_2, \qquad \frac{z_1 z_2}{z_2}$$
+
+
+
+\vspace{2em}
+
+\subsection{Racines carrées}
+Calculer de deux façons les racines carrées de $1+i$ et en déduire les valeurs exactes de $\cos \left(\frac{\pi}{8}\right)$ et $\sin \left(\frac{\pi}{8}\right)$.
