@@ -41,13 +41,13 @@
                 <section>
                   <h2>Algèbre linéaire</h2>
                   <h4>2 — Combinaisons linéaires</h4>
-                  <p class="small">Un fil conducteur : « synthétiser un objet à partir d’ingrédients »</p>
+                  <p class="small">Un fil conducteur : « synthétiser un objet à partir d'ingrédients »</p>
                 </section>
                 <section>
                   <p>À la fin de cette séquence, vous serez capables de :</p>
                   <ul>
-                    <li class="fragment">Décider si \(v\in\mathrm{Vect}(b_1,\dots,b_p)\) à l’aide d’un système \(B\lambda=v\).</li>
-                    <li class="fragment">Calculer explicitement des coefficients \(\lambda_i\) d’une combinaison linéaire.</li>
+                    <li class="fragment">Décider si \(v\in\mathrm{Vect}(b_1,\dots,b_p)\) à l'aide d'un système \(B\lambda=v\).</li>
+                    <li class="fragment">Calculer explicitement des coefficients \(\lambda_i\) d'une combinaison linéaire.</li>
                   </ul>
                   <p>Prérequis : coordonnées dans une base ; mettre en équation une combinaison.</p>
                 </section>
@@ -60,35 +60,24 @@
               </section>
       
               <!-- Accroche -->
-              <section data-name="Accroche">
+              <section data-name="Définition">
                 <section>
-                  <h4>Problématique / Accroche</h4>
-                  <p>Peut-on synthétiser un <strong>signal</strong> ou une <strong>couleur</strong> à partir d’ingrédients donnés ?</p>
+                  <h4>Problématique</h4>
+                  <p>Peut-on synthétiser un <strong>signal</strong> ou une <strong>couleur</strong> à partir d'ingrédients donnés ?</p>
                   <p class="small">Idée : un mélange = une <em>combinaison linéaire</em>.</p>
                 </section>
-              </section>
       
               <!-- Notions & définitions -->
-              <section data-name="Notions">
                 <section>
                   <h4>Définitions</h4>
                   <ul>
                     <li><strong>Combinaison linéaire</strong> : \(v=\sum_{i=1}^p \lambda_i b_i\).</li>
                     <li><strong>Sous-espace engendré</strong> : \(\mathrm{Vect}(b_1,\dots,b_p)=\{\sum_i \lambda_i b_i\}\).</li>
-                    <li><strong>Test d’appartenance</strong> : \(v\in \mathrm{Vect}(b_1,\dots,b_p)\iff \exists\,\lambda: B\lambda=v\), avec \(B=(b_1\;\cdots\;b_p)\).</li>
-                    <li><strong>Outil</strong> : élimination de Gauss pour résoudre \(B\lambda=v\).</li>
-                  </ul>
-                </section>
-                <section>
-                  <h4>Schéma global / Visualisation</h4>
-                  <p>Selon \(p\) et les dépendances linéaires :</p>
-                  <ul>
-                    <li class="fragment">\(p=1\) et \(b_1\neq 0\) : une <strong>droite</strong> par l’origine.</li>
-                    <li class="fragment">\(p=2\) indépendants dans \(\mathbb R^3\) : un <strong>plan</strong> par l’origine.</li>
-                    <li class="fragment">\(p\geq n\) avec rang \(n\) : tout l’<strong>espace</strong> \(\mathbb R^n\).</li>
+                    <li><strong>Test d'appartenance</strong> : \(v\in \mathrm{Vect}(b_1,\dots,b_p)\iff \exists\,\lambda: B\lambda=v\), avec \(B=(b_1\;\cdots\;b_p)\).</li>
                   </ul>
                 </section>
               </section>
+
       
               <!-- Exemples clés -->
               <section data-name="Exemples">
@@ -116,7 +105,7 @@
                   <p>Résoudre \(xu_1 + yu_2 = b\) <span class="small">= trouver une <em>combinaison</em> de \(u_1,u_2\) donnant \(b\)</span>.</p>
                   <ul>
                     <li class="fragment">Aucun \((x,y)\) : \(b\) est <span class="bad">hors</span> du plan engendré.</li>
-                    <li class="fragment">Une infinité : \(b\) est <span class="ok">dans</span> le plan et les solutions forment une droite d’inconnues.</li>
+                    <li class="fragment">Une infinité : \(b\) est <span class="ok">dans</span> le plan et les solutions forment une droite d'inconnues.</li>
                     <li class="fragment">Unique : \(u_1,u_2\) indépendants et \(b\) dans \(\mathrm{Vect}(u_1,u_2)\).</li>
                   </ul>
                 </section>
@@ -150,7 +139,7 @@
                         <div class="color-box" id="c2"></div>
                         <div class="color-box" id="cMix"></div>
                       </div>
-                      <p class="tiny">Note : l’addition de vecteurs n’est <em>pas</em> l’addition physique de couleurs, c’est juste une analogie pour visualiser des « proportions ».</p>
+                      <p class="tiny">Note : l'addition de vecteurs n'est <em>pas</em> l'addition physique de couleurs, c'est juste une analogie pour visualiser des « proportions ».</p>
                     </div>
                   </div>
                 </section>
@@ -160,7 +149,7 @@
               <section data-name="Gauss">
                 <section>
                   <h4>Animation : élimination de Gauss (pas à pas)</h4>
-                  <p class="small">Problème : \(B\lambda=v\) avec l’exemple en \(\mathbb R^3\).</p>
+                  <p class="small">Problème : \(B\lambda=v\) avec l'exemple en \(\mathbb R^3\).</p>
                   <div class="row boxed" style="align-items:flex-start;">
                     <div>
                       <div class="code">Augmentée [B | v] :</div>
@@ -176,7 +165,7 @@
                       <div id="gauss-log" class="small" style="margin-top:0.5rem;"></div>
                     </div>
                   </div>
-                  <p class="tiny">Boutons : applique des opérations élémentaires de lignes jusqu’à l’échelonnée réduite.</p>
+                  <p class="tiny">Boutons : applique des opérations élémentaires de lignes jusqu'à l'échelonnée réduite.</p>
                 </section>
               </section>
       
@@ -186,9 +175,9 @@
                   <h4>Pièges fréquents</h4>
                   <ul>
                     <li>Confondre <strong>combinaison linéaire</strong> et <strong>produit scalaire</strong> : \(\sum\lambda_i b_i\) ≠ \(\langle u,v\rangle\).</li>
-                    <li>Oublier la <strong>fermeture</strong> : le résultat doit rester dans l’ensemble considéré.</li>
+                    <li>Oublier la <strong>fermeture</strong> : le résultat doit rester dans l'ensemble considéré.</li>
                     <li>Penser que toute partie de \(\mathbb R^n\) est un <strong>sous-espace</strong> : il faut contenir \(0\) et être stable par combinaisons.</li>
-                    <li>Confondre <strong>dépendance</strong> et <strong>engendrement</strong> : engendrer un espace n’implique pas l’indépendance.</li>
+                    <li>Confondre <strong>dépendance</strong> et <strong>engendrement</strong> : engendrer un espace n'implique pas l'indépendance.</li>
                   </ul>
                 </section>
               </section>
@@ -198,13 +187,13 @@
                 <section>
                   <h4>Trace distribuée aux étudiants (PDF)</h4>
                   <div class="boxed small">
-                    <p><strong>Ce que je dois savoir (rappels utiles)</strong> : mise en équation d’une combinaison, lecture de coordonnées.</p>
+                    <p><strong>Ce que je dois savoir (rappels utiles)</strong> : mise en équation d'une combinaison, lecture de coordonnées.</p>
                     <p><strong>Ce que je dois comprendre / savoir faire</strong> : tester \(v\in\mathrm{Vect}(b_i)\), résoudre \(B\lambda=v\) par Gauss.</p>
                     <p><strong>Exemple vu ensemble</strong> : cas \(\mathbb R^3\) ci-dessus + polynômes \(\mathcal P_2\).</p>
                     <p><strong>Mini-exercice</strong> : est-ce que \((1,2,3)\) appartient au sous-espace engendré par \((1,0,1),(1,1,0)\) ? Trouver \(\lambda\).</p>
                   </div>
                   <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
-                  <p class="tiny">Astuce impression PDF (Reveal) : ajouter <span class="code">?print-pdf</span> à l’URL puis Imprimer → PDF.</p>
+                  <p class="tiny">Astuce impression PDF (Reveal) : ajouter <span class="code">?print-pdf</span> à l'URL puis Imprimer → PDF.</p>
                 </section>
               </section>
       

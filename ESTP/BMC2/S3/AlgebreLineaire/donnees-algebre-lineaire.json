@@ -121,19 +121,23 @@
       "description": "Libres · Bases · Dimension",
       "lien": "#",
       "sousParties": [
-        
-      ],
-      "sexercer": [
         {
-          "titre": "QCM",
-          "lien": "2-FamillesDeVecteurs/QCM/index.html",
+          "numero": 1,
+          "titre": "Coordonnées",
+          "description": "",
+          "lien": "2-FamillesDeVecteurs/1-Coordonnees/index.html",
           "cible": "_blank"
         },
         {
-          "titre": "Exercices",
-          "lien": "2-FamillesDeVecteurs/Exercices/enonce.pdf",
+          "numero": 2,
+          "titre": "Combinaisons linéaires",
+          "description": "",
+          "lien": "2-FamillesDeVecteurs/2-CombinaisonsLineaires/index.html",
           "cible": "_blank"
         }
+      ],
+      "sexercer": [
+        
       ]
     },
     {
@@ -143,53 +147,10 @@
       "description": "Noyau · Image · Matrices",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Définition",
-          "description": "",
-          "lien": "3-ApplicationsLineaires/1-Definition/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Propriétés",
-          "description": "",
-          "lien": "3-ApplicationsLineaires/2-Proprietes/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 3,
-          "titre": "Théorème rang",
-          "description": "",
-          "lien": "3-ApplicationsLineaires/3-TheoremeDuRang/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 4,
-          "titre": "Révisions matrices",
-          "description": "",
-          "lien": "3-ApplicationsLineaires/4-RevisionsMatrices/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 5,
-          "titre": "Matrice app. lin.",
-          "description": "",
-          "lien": "3-ApplicationsLineaires/5-MatriceDuneApplicationLineaire/index.html",
-          "cible": "_blank"
-        }
+        
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "3-ApplicationsLineaires/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Exercices",
-          "lien": "3-ApplicationsLineaires/Exercices/index.html",
-          "cible": "_blank"
-        }
+        
       ]
     },
     {
@@ -199,32 +160,10 @@
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Déterminants",
-          "description": "",
-          "lien": "4-Matrices/Déterminants/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Polynômes",
-          "description": "",
-          "lien": "4-Matrices/PolynomesDeMatrices/index.html",
-          "cible": "_blank"
-        }
+      
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "4-Matrices/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Exercices",
-          "lien": "4-Matrices/Exercices/index.html",
-          "cible": "_blank"
-        }
+        
       ]
     }
   ]
