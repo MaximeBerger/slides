@@ -46,6 +46,18 @@
           "lien": "0-Revisions/Exercices/corrige.pdf",
           "cible": "_blank"
         }
+      ], 
+      "controle": [
+        {
+          "titre": "Controle",
+          "lien": "0-Revisions/CC/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé",
+          "lien": "0-Revisions/CC/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {

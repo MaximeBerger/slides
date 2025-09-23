@@ -383,6 +383,75 @@
             });
           }
           
+          // Section "Controles"
+          if (chapitre.controle && chapitre.controle.length > 0) {
+            // Espacement entre les sections
+            currentY += 20;
+            
+            // Titre de la section "S'exercer"
+            const exercerTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            exercerTitle.setAttribute('class', 't-station');
+            exercerTitle.setAttribute('x', '-100');
+            exercerTitle.setAttribute('y', currentY + 20);
+            exercerTitle.setAttribute('text-anchor', 'start');
+            exercerTitle.textContent = "S'exercer";
+            subChaptersGroup.appendChild(exercerTitle);
+            currentY += 35;
+            
+            // Exercices
+            chapitre.controle.forEach((exercice, exIndex) => {
+              // Créer un groupe cliquable
+              const exG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+              exG.setAttribute('transform', `translate(0,${currentY})`);
+              exG.setAttribute('style', 'cursor: pointer;');
+              exG.setAttribute('class', 'sub-btn-group');
+              
+              const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+              rect.setAttribute('class', 'sub-btn');
+              rect.setAttribute('x', '-100');
+              rect.setAttribute('y', '0');
+              rect.setAttribute('width', '200');
+              rect.setAttribute('height', '35');
+              
+              const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+              text.setAttribute('class', 'sub-btn-text');
+              text.setAttribute('x', '-92');
+              text.setAttribute('y', '22');
+              text.textContent = exercice.titre;
+              
+              exG.appendChild(rect);
+              exG.appendChild(text);
+              
+              // Ajouter l'événement de clic
+              exG.addEventListener('click', function() {
+                if (exercice.cible === '_blank') {
+                  window.open(exercice.lien, '_blank');
+                } else {
+                  window.location.href = exercice.lien;
+                }
+              });
+              
+              // Ajouter l'événement pour la touche Entrée (accessibilité)
+              exG.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  if (exercice.cible === '_blank') {
+                    window.open(exercice.lien, '_blank');
+                  } else {
+                    window.location.href = exercice.lien;
+                  }
+                }
+              });
+              
+              // Rendre le groupe focusable pour l'accessibilité
+              exG.setAttribute('tabindex', '0');
+              exG.setAttribute('role', 'button');
+              exG.setAttribute('aria-label', `Aller vers ${exercice.titre}`);
+              
+              subChaptersGroup.appendChild(exG);
+              currentY += 45;
+            });
+          }
           subChaptersContainer.appendChild(subChaptersGroup);
         }
       });
