@@ -53,6 +53,18 @@
           "lien": "0-Revisions/Exercices/corrige.pdf",
           "cible": "_blank"
         }
+      ], 
+      "controle": [
+        {
+          "titre": "Controle",
+          "lien": "1-EspacesVectoriels/Exercices/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé",
+          "lien": "1-EspacesVectoriels/Exercices/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {
@@ -94,6 +106,11 @@
           "titre": "Exercices",
           "lien": "1-EspacesVectoriels/Exercices/enonce.pdf",
           "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés",
+          "lien": "1-EspacesVectoriels/Exercices/corrige.pdf",
+          "cible": "_blank"
         }
       ]
     },
@@ -104,41 +121,7 @@
       "description": "Libres · Bases · Dimension",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Coordonnées",
-          "description": "",
-          "lien": "2-FamillesDeVecteurs/1-Coordonnees/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Combinaisons",
-          "description": "",
-          "lien": "2-FamillesDeVecteurs/2-CombinaisonsLineaires/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 3,
-          "titre": "Libres/Génératrices",
-          "description": "",
-          "lien": "2-FamillesDeVecteurs/3-LibresGeneratrices/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 4,
-          "titre": "Bases",
-          "description": "",
-          "lien": "2-FamillesDeVecteurs/4-Bases/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 5,
-          "titre": "Matrices passage",
-          "description": "",
-          "lien": "2-FamillesDeVecteurs/5-MatricesDePassage/index.html",
-          "cible": "_blank"
-        }
+        
       ],
       "sexercer": [
         {
