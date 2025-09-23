@@ -27,8 +27,38 @@
 
 \begin{enumerate}
   \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}$ ?
+
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{mdframed}
+      \vspace{1em}
+
+      Il y a seulement le singleton $\{0\}$ et l'ensemble $\mathbb{R}$ comme espaces vectoriels inclus dans $\mathbb{R}$.
+    \end{mdframed}
+
+  }{}
+  \vspace{1em}
+
   \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}^2$ ?
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{mdframed}
+      \vspace{1em}
+
+      Il y a le singleton $\{0\}$, toutes les droites qui passent par l'origine et l'ensemble $\mathbb{R}^2$ comme espaces vectoriels inclus dans $\mathbb{R}^2$.
+    \end{mdframed}
+
+  }{}    
+  \vspace{1em}
+
   \item Quels sont les espaces vectoriels inclus dans $\mathbb{R}^3$ ?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{mdframed}    \vspace{1em}
+
+      Il y a le singleton $\{0\}$, toutes les droites qui passent par l'origine, tous les plans qui passent par l'origine, et l'espace $\mathbb{R}^3$ comme espaces vectoriels inclus dans $\mathbb{R}^3$.
+    \end{mdframed}
+  }{}    \vspace{1em}
+
 \end{enumerate}
 
 \ifthenelse{\boolean{showSolutions}}{}{\newpage }
@@ -44,9 +74,45 @@
   \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
   \begin{enumerate}
     \item $A=\left\{(x, y) \in \mathbb{R}^2 \mid x \leqslant y\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $A$ est un demi-plan de $\mathbb{R}^2$, ce n'est pas un espace vectoriel, si on prend un vecteur non nul et qu'on multiplie par un scalaire négatif, on obtient un vecteur qui n'est pas dans $A$.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $B=\left\{(x, y) \in \mathbb{R}^2 \mid x y=0\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $B$ est une réunion de deux droites qui passent par l'origine. Si on prend un vecteur sur chaque droite et qu'on les additionne, on obtient un vecteur qui n'est pas dans $B$.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $C=\left\{(x, y) \in \mathbb{R}^2 \mid x=y\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $C$ est une droite qui passe par l'origine. C'est un espace vectoriel.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $D=\left\{(x, y) \in \mathbb{R}^2 \mid x+y=1\right\}$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        Le vecteur nul n'est pas dans $D$, donc $D$ n'est pas un espace vectoriel.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
   \end{enumerate}
   \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
 
@@ -55,21 +121,89 @@
 
   \subsection{Dans un espace de fonctions}
 
-  Soit $E$ le $\mathbb{R}$-espace vectoriel des applications de $[0,1]$ dans $\mathbb{R}$ muni des opérations usuelles. 
-  Soit $F$ l'ensemble des applications de $[0,1]$ dans $\mathbb{R}$ vérifiant l'une des conditions suivantes :
+  Soit $E$ le $\mathbb{R}$-espace vectoriel des applications de $[0,1]$ dans $\mathbb{R}$ muni des opérations usuelles. \newline 
+  Soit $F$ l'ensemble des applications de $[0,1]$ dans $\mathbb{R}$ vérifiant l'une des conditions suivantes. \newline 
+  Dans quel cas $F$ est-il un espace vectoriel inclus dans $E$?
+
 
   \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
   \begin{enumerate}
     \item $f(0)+f(1)=0$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        C'est bien un espace vectoriel, pour le montrer on répond aux 3 questions : 
+        \begin{itemize}
+          \item Le vecteur nul est dans $F$, c'est la fonction nulle.
+          \item L'addition est une loi interne, pour tout $f,g \in F$, $f+g \in F$.
+          \item La multiplication par un scalaire est une loi externe, pour tout $f \in F$ et $\lambda \in \mathbb{R}$, $\lambda f \in F$.
+        \end{itemize}
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $f(0)=0$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        C'est bien un espace vectoriel, pour le montrer on répond aux 3 questions : 
+        \begin{itemize}
+          \item Le vecteur nul est dans $F$, c'est la fonction nulle.
+          \item L'addition est une loi interne, pour tout $f,g \in F$, $f+g \in F$.
+          \item La multiplication par un scalaire est une loi externe, pour tout $f \in F$ et $\lambda \in \mathbb{R}$, $\lambda f \in F$.
+        \end{itemize}
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $f\left(\frac{1}{2}\right)=\frac{1}{4}$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        Le vecteur nul n'est pas dans $F$, donc $F$ n'est pas un espace vectoriel.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $\forall x \in[0,1], f(x)+f(1-x)=0$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        C'est bien un espace vectoriel, on le montre en détaillant les 3 questions :
+        \begin{itemize}
+          \item Le vecteur nul est dans $F$, c'est la fonction nulle.
+          \item L'addition est une loi interne, pour tout $f,g \in F$, $f+g \in F$.
+          \item La multiplication par un scalaire est une loi externe, pour tout $f \in F$ et $\lambda \in \mathbb{R}$, $\lambda f \in F$.
+        \end{itemize}
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $\forall x \in[0,1], f(x) \geqslant 0$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $F$ n'est pas un espace vectoriel, si on prend la fonction $f(x)=x$ et qu'on la multiplie par un scalaire négatif, on obtient une fonction qui n'est pas dans $F$.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
     \item $2 f(0)=f(1)+3$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $F$ n'est pas un espace vectoriel, la fonction nulle n'est pas dans $F$.
+      \end{mdframed}
+    }{}
   \end{enumerate}
   \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
 
-Dans quel cas $F$ est-il un espace vectoriel inclus dans $E$?
 
 \vspace{1em}
 
@@ -80,10 +214,55 @@ On munit $\mathbb{R}^n$ des lois usuelles. Parmi les sous-ensembles suivants $F$
 \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
 \begin{enumerate}
   \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=0\right\}$
-  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=1\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=1\right\}$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ n'est pas un espace vectoriel, le vecteur nul n'est pas dans $F$.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $F=\left\{\left(x_1, \ldots, x_n\right) \in \mathbb{R}^n / x_1=x_2\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $\mathrm{F}=\left\{\left(x_1, \ldots, x_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / x_1+\ldots+x_{\mathrm{n}}=0\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1 \times \mathrm{x}_2=0\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ n'est pas un espace vectoriel, on peut trouver deux vecteurs de $F$ dont la somme n'est pas dans $F$.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
 \end{enumerate}
 \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
 
@@ -96,9 +275,46 @@ On munit $\mathbb{R}^n$ des lois usuelles. Parmi les sous-ensembles suivants $F$
 Les ensembles suivants sont-ils des espaces vectoriels?
 \begin{enumerate}
   \item $A_1$ est l'ensemble des polynômes réels P vérifiant $\mathrm{P}(0)=1$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_1$ ne contient pas le polynome nul, donc $A_1$ n'est pas un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_2$ est l'ensemble des polynômes réels ayant $a$ comme racine. ( $a \in \mathbb{R}$ fixé).
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_2$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_3$ est l'ensemble des polynômes réels ayant au moins une racine réelle.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_3$ n'est pas un espace vectoriel, on peut trouver deux polynômes de $A_3$ dont la somme n'est pas dans $A_3$.\newline 
+      Par exemple, $X^2$ et $(X-1)^2$ sont dans $A_3$, mais $X^2+(X-1)^2$ n'est pas dans $A_3$ car ce polynôme n'admet aucune racine. 
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_4$ est l'ensemble des polynômes réels de degré 3.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      Exemple du cours : $A_4$ n'est pas un espace vectoriel, l'addition n'est pas une loi interne.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
 \end{enumerate}
 
 \vspace{2em}
@@ -108,16 +324,69 @@ Les ensembles suivants sont-ils des espaces vectoriels?
 Les ensembles suivants sont-ils des espaces vectoriels?
 \begin{enumerate}
   \item $A_1$ est l'ensemble des suites réelles convergentes vers 1.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      La suite nulle ne converge pas vers $1$, donc $A_1$ n'est pas un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_2$ est l'ensemble des suites réelles négligeables devant $n^2$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_2$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_3$ est l'ensemble des suites réelles équivalentes à $n^2$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_3$ n'est pas un espace vectoriel, la suite nulle n'est pas dans $A_3$.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_4$ est l'ensemble des suites réelles $\left(u_n\right)_{n \in \mathbb{N}}$ vérifiant :
 
 $$
 \forall n \in \mathbb{N}, u_{n+1}=5 u_n-3
 $$
 
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      La suite nulle ne vérifie pas la condition, donc $A_4$ n'est pas un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_5$ est l'ensemble des suites réelles arithmétiques.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_5$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
   \item $A_6$ est l'ensemble des suites réelles géométriques.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $A_6$ n'est pas un espace vectoriel, la somme de deux suites géométriques n'est pas une suite géométrique.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
 \end{enumerate}
 
 
@@ -126,11 +395,65 @@ $$
     Déterminer si les ensembles suivants sont ou ne sont pas des espaces vectoriels:
     \begin{enumerate}
       \item $E_1=\{P \in \mathbb{R}[X] ; P(0)=P(2)\}$;
+
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          $E_1$ est bien un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
       \item $E_2=\left\{P \in \mathbb{R}[X] ; P^{\prime}(0)=2\right\}$;
+      
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          La polynome nul n'est pas dans $E_2$, donc $E_2$ n'est pas un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
       \item Pour $A \in \mathbb{R}[X]$ non-nul fixé, $E_3=\{P \in \mathbb{R}[X] ; A \mid P\}$;
+      
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          $E_3$ est bien un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
       \item D l'ensemble des fonctions de $\mathbb{R}$ dans $\mathbb{R}$ qui sont dérivables;
+      
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          $E_4$ est bien un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
       \item $E_4$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=0$, où $a \in \mathcal{D}$.
+      
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          $E_4$ est bien un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
       \item $E_5$, l'ensemble des solutions de l'équation différentielle $y^{\prime}+a(x) y=x$, où $a \in \mathcal{D}$.
+
+      \ifthenelse{\boolean{showSolutions}}{
+        \vspace{1em}
+        \begin{mdframed}
+          La fonction nulle n'est pas dans $E_5$, donc $E_5$ n'est pas un espace vectoriel.
+        \end{mdframed}
+      }{}
+      \vspace{1em}
+
     \end{enumerate}
 
 \section*{Bases}
@@ -138,10 +461,16 @@ $$
 
 \subsection{Dans $\mathbb{R}^2$}
 \begin{enumerate}
-\item  Montrer que les vecteurs $v_1=(0,1), v_2=(1,1)$ forment une base de $\mathbb{R}^2$. Trouver les composantes du vecteur $w=(1,2)$ dans cette base $\left(v_1, v_2\right)$.
-\item Montrer que les vecteurs $v_1=(1,2), v_2=(3,4)$forment une base de $\mathbb{R}^2$. Trouver les composantes des vecteurs $e_1=(1,0)$ et $e_2=(0,1)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+\item  Montrer que les vecteurs $v_1=(0,1), v_2=(1,1)$ forment une base de $\mathbb{R}^2$. \newline 
+Trouver les composantes du vecteur $w=(1,2)$ dans cette base $\left(v_1, v_2\right)$.
+
+\item Montrer que les vecteurs $v_1=(1,2), v_2=(3,4)$forment une base de $\mathbb{R}^2$. \newline 
+Trouver les composantes des vecteurs $e_1=(1,0)$ et $e_2=(0,1)$ dans cette base $\left(v_1, v_2\right)$.
+
 \item Dans $\mathbb{R}^2$, donner un exemple de famille libre qui n'est pas génératrice.
+
 \item Dans $\mathbb{R}^2$, donner un exemple de famille génératrice qui n'est pas libre.
+
 \end{enumerate}
 
 \vspace{2em}
@@ -150,10 +479,14 @@ $$
 \begin{enumerate}
 \item  Montrer que les vecteurs $v_1=(0,1,1), v_2=(1,0,1)$ et $v_3=(1,1,0)$ forment une base de $\mathbb{R}^3$. \newline
  Trouver les composantes du vecteur $w=(1,1,1)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+
 \item Montrer que les vecteurs $v_1=(1,1,1), v_2=(-1,1,0)$ et $v_3=(1,0,-1)$ forment une base de $\mathbb{R}^3$. \newline 
 Trouver les composantes du vecteur $e_1=(1,0,0), e_2=(0,1,0), e_3=(0,0,1)$ et $w=(1,2,-3)$ dans cette base $\left(v_1, v_2, v_3\right)$.
+
 \item Dans $\mathbb{R}^3$, donner un exemple de famille libre qui n'est pas génératrice.
+
 \item Dans $\mathbb{R}^3$, donner un exemple de famille génératrice qui n'est pas libre.
+
 \end{enumerate}
 
 \vspace{2em}
