@@ -1,8 +1,71 @@
-Des exos sur les fonctions périodiques. 
+\section{Les fonctions périodiques}
+
+\subsection{Les fonctions complexes périodiques}
+
+Les fonctions réelles suivantes sont-elles périodiques et si oui, quelle est leur période ?
+
+\begin{enumerate}
+    \item $f(x) = \cos(x)$
+    \item $f(x) = \sin(2\pi x)$
+    \item $f(x) = \cos(x/2)$
+    \item $f(x) = \sin(2x) + \cos(3x)$
+    \item $f(x) = \sin(nx) + \cos(px)$
+\end{enumerate}
+Les fonctions complexes suivantes sont-elles périodiques et si oui, quelle est leur période ?
+
+\begin{enumerate}
+    \item $f(x) = e^{ix}$
+    \item $f(x) = e^{2ix}$
+    \item $f(x) = e^{ix/2\pi}$
+    \item $f(x) = e^{inx} + e^{ipx}$
+\end{enumerate}
 
 
-Des exos sur le produit scalaire et retrouver les coordonnées d'un vecteur dans une base orthonormale. 
-Sur des exemples simples. 
+\section{Produit scalaire}
 
-Définir un produit scalaire sur un autre espace vectoriel que $\mathbb{R}^n$. 
-Par exemple sur l'espace des fonctions périodiques de période $2\pi$. Montrer la symétrie, la positivité , le défini. 
+\subsection{Définition}
+On appelle produit scalaire sur un espace vectoriel $E$ une application 
+$$\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$$
+telle que :
+\begin{itemize}
+    \item $\langle u, v \rangle = \langle v, u \rangle$
+    \item $\langle u, v + \lambda w \rangle = \langle u, v \rangle + \lambda \langle u, w \rangle$
+    \item $\langle u, u \rangle \geq 0$
+    \item $\langle u, u \rangle = 0 \iff u = 0$
+\end{itemize}
+
+
+
+\subsection{Dans $\mathbb{R}^3$}
+
+On se place dans $\mathbb{R}^3$, qu'on muni de la base 
+$$e_1 = (1,2,1), \qquad e_2 = (2,1,-4), \qquad e_3 = (-3,2,-1)$$
+
+\begin{enumerate}
+\item La famille est-elle orthogonale ? 
+\item Est-elle orthonormée ? Si non, définissez une base $(f_1,f_2,f_3)$ orthonormée à partir de la famille $(e_1,e_2,e_3)$. 
+\end{enumerate}
+
+Soit $u$ un vecteur de $\mathbb{R}^3$, on note $u_i$ ses coordonnées dans la base orthonormée $(f_1,f_2,f_3)$. Cela signifie que 
+$$u = u_1 f_1 + u_2 f_2 + u_3 f_3$$
+
+Déterminer les coordonnées de $u = (1,0,1)$ dans la base $(f_1,f_2,f_3)$.
+
+\vspace{2em}
+
+\subsection{Dans $\mathbb{R}_n[X]$}
+
+On se place dans $\mathbb{R}_n[X]$, qu'on muni de la base 
+$$e_1 = (1, -1, 0, \dots, 0), \qquad e_2 = (0, 1, -1, 0, \dots, 0), \qquad \dots, \qquad e_{n-1} = (0, \dots, 0, 1, -1), \qquad e_n = (1, \dots, 1, 1)$$
+\subsection{Dans $\mathbb{R}[X]$}
+
+
+
+\subsection{Dans l'espace des fonctions complexes $2\pi$-périodiques}
+
+On définit le produit scalaire :
+$$
+\langle f, g \rangle = \int_{0}^{2\pi} f(x) \overline{g(x)} dx
+$$
+
+Montrer que c'est un produit scalaire.
