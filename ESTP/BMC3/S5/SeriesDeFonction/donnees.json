@@ -67,7 +67,13 @@
       "description": "Suites · Séries · Suites de fonctions",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "numero": 1,
+          "titre": "Introduction",
+          "description": "",
+          "lien": "1-Fourier/1-Definition/index.html",
+          "cible": "_blank"
+        }
       ],
       "sexercer": [
         {
