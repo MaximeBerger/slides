@@ -1,0 +1,438 @@
+\section*{Espaces Vectoriels}
+
+\vspace{2em}
+
+\subsection{parties de $\mathbb{R}^2$}
+
+  Les parties suivantes sont-elles des sous-espaces vectoriels de $\mathbb{R}^2$ ?
+
+  \ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
+  \begin{enumerate}
+    \item $A=\left\{(x, y) \in \mathbb{R}^2 \mid x \leqslant y\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $A$ est un demi-plan de $\mathbb{R}^2$, ce n'est pas un espace vectoriel, si on prend un vecteur non nul et qu'on multiplie par un scalaire négatif, on obtient un vecteur qui n'est pas dans $A$.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
+    \item $B=\left\{(x, y) \in \mathbb{R}^2 \mid x y=0\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $B$ est une réunion de deux droites qui passent par l'origine. Si on prend un vecteur sur chaque droite et qu'on les additionne, on obtient un vecteur qui n'est pas dans $B$.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
+    \item $C=\left\{(x, y) \in \mathbb{R}^2 \mid x=y\right\}$ 
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        $C$ est une droite qui passe par l'origine. C'est un espace vectoriel.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
+    \item $D=\left\{(x, y) \in \mathbb{R}^2 \mid x+y=1\right\}$
+
+    \ifthenelse{\boolean{showSolutions}}{
+      \vspace{1em}
+      \begin{mdframed}
+        Le vecteur nul n'est pas dans $D$, donc $D$ n'est pas un espace vectoriel.
+      \end{mdframed}
+    }{}
+    \vspace{1em}
+
+  \end{enumerate}
+  \ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
+
+
+  \vspace{2em}
+
+\subsection{Dans $\mathbb{R}^n$}
+
+On munit $\mathbb{R}^n$ des lois usuelles. Parmi les sous-ensembles suivants $F$ de $\mathbb{R}^n$, lesquels sont des espaces vectoriels?
+
+\ifthenelse{\boolean{showSolutions}}{}{\begin{multicols}{2} }
+\begin{enumerate}
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=0\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel. Il suffit pour le montrer de se poser les 3 questions : 
+      \begin{itemize}
+        \item Le vecteur nul est-il dans $F$ ? \newline 
+        Oui, il s'agit du vecteur $(0,0,\dots,0)$.
+
+        \item $F$ est-il stable par l'addition ? \newline 
+        Oui, si $(x_1,x_2,\dots,x_n)$ et $(y_1,y_2,\dots,y_n)$ sont dans $F$, alors $x_1+y_1=0$ et $x_2+y_2=0$ et ainsi de suite. 
+        
+        Donc $(x_1+y_1,x_2+y_2,\dots,x_n+y_n)$ est dans $F$.
+        \item $F$ est-il stable par la multiplication par un scalaire ? \newline 
+        Oui, si $(x_1,x_2,\dots,x_n)$ est dans $F$ et $\lambda$ est un scalaire, alors $\lambda x_1=0$ et $\lambda x_2=0$ et ainsi de suite. 
+        
+        Donc $(\lambda x_1,\lambda x_2,\dots,\lambda x_n)$ est dans $F$.
+      \end{itemize}
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1=1\right\}$.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ n'est pas un espace vectoriel, le vecteur nul n'est pas dans $F$.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+  \item $F=\left\{\left(x_1, \ldots, x_n\right) \in \mathbb{R}^n / x_1=x_2\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+  \item $\mathrm{F}=\left\{\left(x_1, \ldots, x_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / x_1+\ldots+x_{\mathrm{n}}=0\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      $F$ est bien un espace vectoriel.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+  \item $\mathrm{F}=\left\{\left(\mathrm{x}_1, \ldots, \mathrm{x}_{\mathrm{n}}\right) \in \mathbb{R}^{\mathrm{n}} / \mathrm{x}_1 \times \mathrm{x}_2=0\right\}$
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+    \begin{mdframed}
+      $F$ n'est pas un espace vectoriel, on peut trouver deux vecteurs de $F$ dont la somme n'est pas dans $F$.
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{\end{multicols} }
+
+\vspace{1em}
+\section*{Calcul vectoriel}
+\vspace{1em}
+
+\subsection{Combinaisons linéaires}
+
+\begin{itemize}
+    \item Dans $\mathbb{R}^2$, $u=(1,2)$ est-il combinaison linéaire de $e_1=(1,-2)$ et $e_2=(2,3)$ ?
+    \item Dans $\mathbb{R}^2$, $u=(1,2)$ est-il combinaison linéaire de $e_1=(1,-2), e_2=(2,3), e_3=(-4,5)$ ?
+    \item Dans $\mathbb{R}^3$, $u=(2,5,3)$ est-il combinaison linéaire de $e_1=(1,3,2)$ et $e_2=(1,-1,4)$ ?
+    \item Dans $\mathbb{R}^3$, $u=(3,1, m)$ est-il combinaison linéaire de $e_1=(1,3,2)$ et $e_2=(1,-1,4)$ ? \newline 
+    (discuter suivant la valeur de $m$ ) 
+\end{itemize}
+Si oui, donner toutes les combinaisons linéaires possibles.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+\begin{mdframed}
+
+  \begin{enumerate}
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + 2b &= 1 \\
+      -2a + 3b &= 2
+    \end{align*}
+
+    On trouve $a=-1/7$ et $b=4/7$. Donc $u$ est combinaison linéaire de $e_1$ et $e_2$.
+
+    \item $u$ est combinaison linéaire de $e_1, e_2$ et $e_3$ si et seulement si il existe $a, b, c \in \mathbb{R}$ tels que $u=a e_1 + b e_2 + c e_3$.
+
+    Trouver $a$, $b$ et $c$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + 2b -4c &= 1 \\
+      -2a + 3b + 5c &= 2 \\
+    \end{align*}
+
+    La première étape du pivot de gauss nous donne : 
+    \begin{align*}
+      a + 2b -4c &= 1 \\
+      0 + 7b - 3c &= 3 \\
+    \end{align*}
+    On peut choisir $c$ comme on veut dans $\mathbb{R}$. $b$ et $a$ sont ensuite déterminés en fonction de $c$.
+
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + b &= 2 \\
+      3a - b &= 5 \\
+      2a + 4 b &= 3
+    \end{align*}
+
+    Les premières étapes du pivot de Gauss nous donnent : 
+    \begin{align*}
+      a + b &= 2 \\
+      0 - 4b &= 1 \\
+      0 + 2b &= -1
+    \end{align*}
+    Le système est donc incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + b &= 3 \\
+      3a - b &= 1 \\
+      2a + 4 b &= m
+    \end{align*}
+
+    Les premières étapes du pivot de Gauss nous donnent : 
+    \begin{align*}
+      a + b &= 3 \\
+      0 - 4b &= -8 \\
+      0 + 2b &= m-6
+    \end{align*}
+    Le système est compatible si et seulement si $m = 10$, dans ce cas, $u$ est combinaison linéaire de $e_1$ et $e_2$.
+
+    Si $m \neq 10$, le système est incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+  \end{enumerate}
+\end{mdframed}
+}{}
+\vspace{2em}
+\subsection{Sous-espace engendré}
+
+
+Dans $\mathbb{R}^3$, on pose $u_1=(1, -1, 2)$ et $u_2=(1, 1, -1)$.
+\begin{itemize}
+    \item Les vecteurs $v_1=(3, 1, 0)$ et $v_2=(1, 5, -1)$ sont-ils combinaison linéaire de $u_1$ et $u_2$ ?
+    \item Soit $a, b, c \in \mathbb{R}$. Démontrer que $v=(a, b, c)$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si $-a+3 b+2 c=0$.
+    \item En déduire un vecteur de $\mathbb{R}^3$ qui n'est pas combinaison linéaire de $u_1$ et de $u_2$.
+\end{itemize}
+
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+  \begin{mdframed}
+    \begin{enumerate}
+      \item $v_1$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $v_1=a u_1 + b u_2$.
+
+      Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+      \begin{align*}
+        a + b &= 3 \\
+        -a + b &= 1 \\
+        2a - b &= 0
+      \end{align*}
+
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        a + b &= 3 \\
+        0 + 2b &= 4 \\
+        0 -3b &= -6
+      \end{align*}
+      Les deux dernières lignes correspondent à la même équation, le système possède donc une solution. 
+
+      \item $v_2$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $v_2=a u_1 + b u_2$.
+
+      Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+      \begin{align*}
+        a + b &= 1 \\
+        -a + b &= 5 \\
+        2a - b &= -1
+      \end{align*}
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        a + b &= 1 \\
+        0 + 2b &= 6 \\
+        0 - 3b &= -3
+      \end{align*}
+      Le système est incompatible et $v_2$ n'est pas combinaison linéaire de $u_1$ et $u_2$.
+
+      \item $v=(a, b, c)$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si le système suivant possède une solution : 
+      \begin{align*}
+        x + y &= a \\
+        -x + y &= b \\
+        2x - y &= c
+      \end{align*}
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        x + y &= a \\
+        0 + 2y &= a + b \\
+        0 - 3y &= c- 2a
+      \end{align*}
+      qu'on peut réécrire : 
+      \begin{align*}
+        x + y &= a \\
+        y &= (a + b)/2 \\
+        y &= (2a-c)/3
+      \end{align*}
+      Le système est compatible si et seulement si $(2a-c)/3 = (a+b)/2$, c'est-à-dire
+      $$
+      4a - 2c = 3a + 3b
+      $$
+      c'est-à-dire
+      $$
+      a - 3b - 2c = 0
+      $$
+      c'est bien l'équation de l'énoncé.
+
+      \item Il suffit de trouver trois nombres $a, b, c$ qui ne vérifient pas l'équation de l'énoncé. Par exemple, $(1,0,0)$ n'est pas combinaison linéaire de $u_1$ et $u_2$.
+    \end{enumerate}
+  \end{mdframed}
+}{}
+
+
+\ifthenelse{\boolean{showSolutions}}{}{
+    \newpage 
+}
+
+\section*{Familles}
+\vspace{1em}
+\subsection{Familles libres}
+
+Les familles suivantes sont-elles libres dans $\mathbb{R}^3$ ?
+\begin{itemize}
+    \item $(u, v)$ avec $u=(1,2,3)$ et $v=(-1,4,6)$;
+    \item $(u, v, w)$ avec $u=(1,2,-1), v=(1,0,1)$ et $w=(0,0,1)$;
+    \item $(u, v, w)$ avec $u=(1,2,-1), v=(1,0,1)$ et $w=(-1,2,-3)$;
+\end{itemize}
+
+Sans calcul supplémentaire, dire si elles sont génératrices. 
+
+\vspace{3em}
+\subsection{Dimension}
+On considère, dans $\mathbb{R}^4$, les vecteurs :
+
+$$
+v_1=(1,2,3,4), \quad v_2=(1,1,1,3), \quad v_3=(2,1,1,1), \quad v_4=(-1,0,-1,2), \quad v_5=(2,3,0,1) .
+$$
+
+
+Soit $F$ l'espace vectoriel engendré par $\left\{v_1, v_2, v_3\right\}$ et soit $G$ celui engendré par $\left\{v_4, v_5\right\}$. Calculer les dimensions respectives de $F, G, F \cap G, F+G$.
+
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+\begin{mdframed}
+
+
+    \begin{enumerate}
+    \item $G$ est engendré par deux vecteurs donc $\operatorname{dim} G \leqslant 2$. Clairement $v_4$ et $v_5$ ne sont pas liés donc $\operatorname{dim} G \geqslant 2$ c'est-à-dire $\operatorname{dim} G=2$.
+    \item $F$ est engendré par trois vecteurs donc $\operatorname{dim} F \leqslant 3$. Un calcul montre que la famille $\left\{v_1, v_2, v_3\right\}$ est libre, d'où $\operatorname{dim} F \geqslant 3$ et donc $\operatorname{dim} F=3$.
+    \item Essayons d'abord d'estimer la dimension de $F \cap G$.
+    
+    D'une part $F \cap G \subset G$ donc $\operatorname{dim}(F \cap G) \leqslant 2$. 
+    
+    Utilisons d'autre part la formule $\operatorname{dim}(F+G)=\operatorname{dim} F+\operatorname{dim} G-\operatorname{dim}(F \cap G)$. 
+    
+    Comme $F+G \subset \mathbb{R}^4$, on a $\operatorname{dim}(F+ G) \leqslant 4$ d'où on tire l'inégalité $\operatorname{dim}(F \cap G) \geqslant 1$. \newline 
+    Donc soit $\operatorname{dim}(F \cap G)=1$ ou bien $\operatorname{dim}(F \cap G)=2$.
+
+    Supposons que $\operatorname{dim}(F \cap G)$ soit égale à 2. 
+    Comme $F \cap G \subset G$ on aurait dans ce cas $F \cap G=G$ et donc $G \subset F$.
+    En particulier il existerait $\alpha, \beta, \gamma \in \mathbb{R}$ tels que $v_4=\alpha v_1+\beta v_2+\gamma v_3$. 
+    On vérifie aisément que ce n'est pas le cas, ainsi $\operatorname{dim}(F \cap G)$ n'est pas égale à 2. 
+    
+    On peut donc conclure $\operatorname{dim}(F \cap G)=1$
+
+    \item Par la formule $\operatorname{dim}(F+G)=\operatorname{dim} F+\operatorname{dim} G-\operatorname{dim}(F \cap G)$, on obtient $\operatorname{dim}(F+G)=2+3-1=4$. Cela entraîne $F+G=\mathbb{R}^4$.
+    \end{enumerate}
+\end{mdframed}
+}{}
+
+\section*{Champs de vecteurs}
+\vspace{1em}
+
+\subsection{Gradient et divergence}
+
+Déterminer les coordonnées de $\operatorname{grad}(f)$ où $f$ est le champ scalaire suivant:
+\begin{enumerate}[itemsep=0.5em]
+    \item $f(x, y, z)=x y^2-y z^2$.
+    \item $f(x, y, z)=x y z \sin (x y)$.
+\end{enumerate}
+
+\vspace{1em}
+Déterminer $\operatorname{div}(f)$ où $f$ est le champ de vecteurs suivant:
+\begin{enumerate}[itemsep=0.5em]
+    \item $f(x, y, z)=\big(2 x^2 y, 2 x y^2, x y\big)$.
+    \item $f(x, y, z)=\big(\sin (x y), 0, \cos (x z)\big)$.
+    \item $f(x, y, z)=\big(x(2 y+z),-y(x+z), z(x-2 y)\big)$.
+\end{enumerate}
+
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+
+\begin{mdframed}
+Pour les gradients : 
+\begin{enumerate}[itemsep=0.5em]
+    \item $\operatorname{grad}(f)=\left(y^2, 2 x y-z^2,-2 y z\right)$.
+    \item $\operatorname{grad}(f)=\left(y z \sin (x y)+x y^2 z \cos (x y), x z \sin (x y)+x^2 y z \cos (x y), x y \sin (x y)\right)$.
+\end{enumerate}
+
+
+\vspace{1em}
+Pour les divergences : 
+\begin{enumerate}[itemsep=0.5em]
+    \item $\operatorname{div}(f)=8 x y$.
+    \item $\operatorname{div}(f)=y \cos (x y)-x \sin (x z)$.
+    \item $\operatorname{div}(f)=0$.
+\end{enumerate}
+\end{mdframed}
+}{}
+
+\vspace{2em}
+\subsection{Potentiel scalaire}
+
+On rappelle qu'on dit qu'un champ de vecteurs $F$ dérive d'un potentiel scalaire s'il existe un champ scalaire $f$ tel que $F=\operatorname{grad}(f)$. 
+\begin{enumerate}[itemsep=0.5em]
+    \item $F(x, y, z)=\left(2 x y+z^3, x^2, 3 x z^2\right)$, défini sur $\mathbb{R}^3$.
+    \item $F(x, y)=\left(-\frac{y}{(x-y)^2}, \frac{x}{(x-y)^2}\right)$, défini sur $U=\left\{(x, y) \in \mathbb{R}^2, x>y\right\}$.
+\end{enumerate}
+
+Pour chacun des champs de vecteurs précédents, montrer qu'ils sont définis sur un ouvert étoilé, que leur rotationnel est nul, et qu'ils dérivent d'un potentiel scalaire. \newline 
+ Déterminer tous les potentiels scalaires dont ils dérivent.   
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+
+D'une part, on peut prouver l'existence théorique d'un tel champ scalaire, en observant que les champs de vecteurs sont définis sur des ouverts étoilés, et que leur rotationnel est nul. 
+
+D'autre part, il est possible de les "intégrer". On cherche en effet:
+\begin{enumerate}[itemsep=0.5em]
+    \item $f$ de $\mathbb{R}^3$ dans $\mathbb{R}$ tel que $\frac{\partial f}{\partial x}=2 x y+z^3, \frac{\partial f}{\partial y}=x^2$ et $\frac{\partial f}{\partial z}=3 x z^2$. On résoud ce système d'équation aux dérivées partielles: la deuxième équation donne par exemple $f(x, y, z)=x^2 y+h(x, z)$, et utilisant les deux autres équations, on trouve:
+
+$$
+f(x, y, z)=x^2 y+x z^3+\text { cste. }
+$$
+
+    \item $f$ de $\mathbb{R}^2$ dans $\mathbb{R}$ tel que
+
+$$
+\frac{\partial f}{\partial x}=-\frac{y}{(x-y)^2} \text { et } \frac{\partial f}{\partial y}=\frac{x}{(x-y)^2} .
+$$
+
+
+Les fonctions $f$ qui conviennent sont donc $f(x, y)=\frac{y}{x-y}+c s t e$.
+\end{enumerate}
+\end{mdframed}
+}{}
