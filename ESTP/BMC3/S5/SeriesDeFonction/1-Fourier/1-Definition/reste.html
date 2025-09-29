@@ -1,0 +1,45 @@
+<section data-name="Intégrale-produit">
+    <section>
+        <h4>Produit scalaire sur une période</h4>
+        <p>Pour des fonctions réelles $2\pi$-périodiques intégrables, on définit</p>
+        <p class="fragment">$$\langle f,g\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,g(x)\,dx$$</p>
+        <ul>
+            <li class="fragment">Norme associée : $\|f\| = \sqrt{\langle f,f\rangle}$</li>
+            <li class="fragment">Orthogonalité : $\langle f,g\rangle = 0$</li>
+        </ul>
+    </section>
+    <section>
+        <h4>Remarque (période générale)</h4>
+        <p>Pour une période $T$, poser $$\langle f,g\rangle_T = \frac{1}{T}\int_{x_0}^{x_0+T} f(x)g(x)\,dx,$$ indépendante de $x_0$ si $f,g$ sont $T$-périodiques.</p>
+    </section>
+</section>
+<section data-name="Base trigonométrique">
+    <section>
+        <h4>Famille trigonométrique</h4>
+        <p>Sur $[-\pi,\pi]$ : $\{1,\,\cos x,\,\sin x,\,\cos 2x,\,\sin 2x,\,\dots\}$</p>
+        <ul>
+            <li class="fragment">$\langle \cos nx,\cos mx\rangle = 0$ si $n\ne m$, $=1$ si $n=m\ne 0$</li>
+            <li class="fragment">$\langle \sin nx,\sin mx\rangle = 0$ si $n\ne m$, $=1$ si $n=m\ne 0$</li>
+            <li class="fragment">$\langle \sin nx,\cos mx\rangle = 0$ pour tous $m,n$</li>
+        </ul>
+    </section>
+    <section>
+        <h4>Conséquence</h4>
+        <p>Cette famille est orthogonale pour $\langle\cdot,\cdot\rangle$; on pourra projeter $f$ dessus.</p>
+    </section>
+</section>
+<section data-name="Coefficients de Fourier">
+    <section>
+        <h4>Définition des coefficients</h4>
+        <p>Pour $f$ $2\pi$-périodique et intégrable :</p>
+        <p class="fragment">$$a_0 = \langle f,1\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\,dx$$</p>
+        <p class="fragment">$$a_n = \langle f,\cos nx\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx)\,dx$$</p>
+        <p class="fragment">$$b_n = \langle f,\sin nx\rangle = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx)\,dx$$</p>
+    </section>
+    <section>
+        <h4>Série de Fourier</h4>
+        <p class="align-top">Forme trigonométrique :</p>
+        <p>$$S_f(x) = \tfrac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos nx + b_n\sin nx\big).$$</p>
+        <p class="fragment">On étudiera plus tard les conditions de convergence (Dirichlet, point de discontinuité, etc.).</p>
+    </section>
+</section>

@@ -1,44 +1,61 @@
-\section{Les fonctions périodiques}
+\section*{Les fonctions périodiques}
 
 \subsection{Les fonctions complexes périodiques}
 
 Les fonctions réelles suivantes sont-elles périodiques et si oui, quelle est leur période ?
 
+\ifthenelse{\boolean{showSolutions}}{}
+{\begin{multicols}{2}}
 \begin{enumerate}
-    \item $f(x) = \cos(x)$
-    \item $f(x) = \sin(2\pi x)$
-    \item $f(x) = \cos(x/2)$
-    \item $f(x) = \sin(2x) + \cos(3x)$
-    \item $f(x) = \sin(nx) + \cos(px)$
+    \item $\displaystyle \cos(x)$
+    \item $\displaystyle \sin(2\pi x)$
+    \item $\displaystyle \cos(x/2)$
+    \item $\displaystyle \sin(2x) + \cos(3x)$
+    \item $\displaystyle \sin(nx)$, $n$ est un entier naturel non nul
+    \item $\displaystyle \cos \left(\frac{3 x}{2}-\frac{\pi}{4}\right)$
+    \item $\displaystyle x-\lfloor x\rfloor$
 \end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}
+}
+
 Les fonctions complexes suivantes sont-elles périodiques et si oui, quelle est leur période ?
 
+\ifthenelse{\boolean{showSolutions}}{}
+{\begin{multicols}{2}}
 \begin{enumerate}
-    \item $f(x) = e^{ix}$
-    \item $f(x) = e^{2ix}$
-    \item $f(x) = e^{ix/2\pi}$
-    \item $f(x) = e^{inx} + e^{ipx}$
+    \item $\displaystyle e^{ix}$
+    \item $\displaystyle e^{2ix}$
+    \item $\displaystyle e^{ix/2\pi}$
+    \item $\displaystyle e^{2i\pi x/T}$, $T$ est un réel strictement positif
+    \item $\displaystyle e^{inx} + e^{ipx}$
 \end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}
+}
 
 
-\section{Produit scalaire}
+\section*{Produit scalaire réel}
 
 \subsection{Définition}
 On appelle produit scalaire sur un espace vectoriel $E$ une application 
 $$\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$$
 telle que :
+\begin{multicols}{2}
 \begin{itemize}
-    \item $\langle u, v \rangle = \langle v, u \rangle$
-    \item $\langle u, v + \lambda w \rangle = \langle u, v \rangle + \lambda \langle u, w \rangle$
-    \item $\langle u, u \rangle \geq 0$
-    \item $\langle u, u \rangle = 0 \iff u = 0$
+    \item[*] symétrie : $\langle u, v \rangle = \langle v, u \rangle$ 
+    \item[*] linéarité à gauche : $\langle \lambda u + v, w \rangle = \lambda \langle u, w \rangle + \langle v, w \rangle$
+    \item[*] positivité : $\langle u, u \rangle \geq 0$
+    \item[*] définie positivité : $\langle u, u \rangle = 0 \iff u = 0$
 \end{itemize}
+\end{multicols}
 
 
+\vspace{1em}
 
 \subsection{Dans $\mathbb{R}^3$}
 
-On se place dans $\mathbb{R}^3$, qu'on muni de la base 
+On se place dans $\mathbb{R}^3$, qu'on munit de la base 
 $$e_1 = (1,2,1), \qquad e_2 = (2,1,-4), \qquad e_3 = (-3,2,-1)$$
 
 \begin{enumerate}
@@ -51,14 +68,40 @@ $$u = u_1 f_1 + u_2 f_2 + u_3 f_3$$
 
 Déterminer les coordonnées de $u = (1,0,1)$ dans la base $(f_1,f_2,f_3)$.
 
-\vspace{2em}
+\vspace{1em}
 
-\subsection{Dans $\mathbb{R}_n[X]$}
-
-On se place dans $\mathbb{R}_n[X]$, qu'on muni de la base 
-$$e_1 = (1, -1, 0, \dots, 0), \qquad e_2 = (0, 1, -1, 0, \dots, 0), \qquad \dots, \qquad e_{n-1} = (0, \dots, 0, 1, -1), \qquad e_n = (1, \dots, 1, 1)$$
 \subsection{Dans $\mathbb{R}[X]$}
 
+\begin{itemize}
+    \item Quelle est la dimension de $\mathbb{R}[X]$ ?
+\end{itemize}
+La famille $(1,X,X^2,X^3, \cdots )$ est appelée base hilbertienne de $\mathbb{R}[X]$ : tout élément de $\mathbb{R}[X]$ peut s'écrire comme une combinaison linéaire finie de vecteurs de cette famille.
+
+On munit cet espace du produit scalaire : 
+$$ \langle P, Q \rangle = \int_{0}^{1} P(x) Q(x) dx $$
+
+\begin{itemize}
+    \item Montrer que c'est bien un produit scalaire en vérifiant les propriétés ci-dessus.
+    \item La famille $(1,X,X^2,X^3, \cdots )$ est-elle orthogonale ? Est-elle orthonormée ?
+    \item Comment trouver $a, b, c$ tels que la famille $(1, X-a, X^2-bX-c)$ soit orthogonale ?
+    \item Quelles sont les coordonnées de $P = 1+2X+3X^2$ dans la base $(1, X, X^2, \cdots)$ ?
+    \item Peut-on retrouver ces coordonnées avec le produit scalaire comme dans l'exercice précédent ?
+\end{itemize}
+\vspace{1em}
+
+\section*{Produit scalaire complexe}
+\subsection{Définition}
+On appelle produit scalaire sur un espace vectoriel $E$ une application 
+$$\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$$
+telle que :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[*] symétrie conjuguée : $\langle u, v \rangle = \overline{\langle v, u \rangle}$
+    \item[*] linéarité à gauche : $\langle \lambda u + v, w \rangle = \lambda \langle u, w \rangle + \langle v, w \rangle$
+    \item[*] positivité : $\langle u, u \rangle \geq 0$
+    \item[*] définie positivité : $\langle u, u \rangle = 0 \iff u = 0$
+\end{itemize}
+\end{multicols}
 
 
 \subsection{Dans l'espace des fonctions complexes $2\pi$-périodiques}
@@ -69,3 +112,21 @@ $$
 $$
 
 Montrer que c'est un produit scalaire.
+
+Montrer que la famille $(e^{inx})_{n \in \mathbb{Z}}$ est orthonormée.
+
+Les coefficients de Fourier d'une fonction $f$ sont les coordonnées de $f$ dans la base $(e^{inx})_{n \in \mathbb{Z}}$.
+
+Déterminer les coefficients de Fourier des fonctions suivantes :
+\ifthenelse{\boolean{showSolutions}}{}
+{\begin{multicols}{2}}
+\begin{enumerate}
+\item $\displaystyle \cos(x)$
+\item $\displaystyle \sin(2\pi x)$
+\item $\displaystyle \cos(x/2)$
+\item $\displaystyle \sin(2x) + \cos(3x)$
+\item $\displaystyle \exp^{-x}$ sur l'intervalle $[0, 2\pi]$
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}
+}

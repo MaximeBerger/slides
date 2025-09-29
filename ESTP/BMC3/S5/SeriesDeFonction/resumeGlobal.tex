@@ -53,11 +53,13 @@
 % -------------------- Titres -------------------------------
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\Huge\bfseries\color{Theme}}
-  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Séries de fonctions - Chapitre~\thechapter}}
-  {0.2ex}
+  {\huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[1pt]{Séries de fonctions - Chapitre~\thechapter}}
+  {0.1ex}
   {\filright}
-  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+  [\vspace{0ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titlespacing*{\chapter}{0pt}{0.5ex}{0.25ex}
 
 \titleformat{\section}
   {\Large\bfseries\color{Gray}}
@@ -99,7 +101,7 @@
 }
 
 % -------------------- Page de titre ------------------------
-\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini‑exercices)}
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
 \author{ BMC3 }
 \date{\today}
 
@@ -131,9 +133,9 @@
 % \chapter{Suites et séries numériques}
 % \input{0-Revisions/resume.tex}
 
-\setcounter{chapter}{0}
-\chapter{Contrôle continu}
-\input{0-Revisions/CC/CC.tex}
+% \setcounter{chapter}{0}
+% \chapter{Contrôle continu}
+% \input{0-Revisions/CC/CC.tex}
 
 % \setcounter{chapter}{1}
 % \chapter{Révisions sur les intégrales}
@@ -142,5 +144,9 @@
 % \setcounter{chapter}{2}
 % \chapter{Révisions sur les complexes}
 % \input{1-Fourier/Complexes/resume.tex}
+
+\setcounter{chapter}{3}
+\chapter{Des produits scalaires aux coefficients de Fourier}
+\input{1-Fourier/ProduitScalaire/resume.tex}
 
 \end{document}

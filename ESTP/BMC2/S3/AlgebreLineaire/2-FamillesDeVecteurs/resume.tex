@@ -1,31 +1,176 @@
 
 
-\subsection*{Combinaisons linéaires}
+\subsection{Combinaisons linéaires}
 
-Les vecteurs $u$ suivants sont-ils combinaison linéaire des vecteurs $e_i$ ?
 \begin{itemize}
-    \item $E=\mathbb{R}^2, u=(1,2), e_1=(1,-2), e_2=(2,3)$;
-    \item $E=\mathbb{R}^2, u=(1,2), e_1=(1,-2), e_2=(2,3), e_3=(-4,5)$;
-    \item $E=\mathbb{R}^3, u=(2,5,3), e_1=(1,3,2), e_2=(1,-1,4)$;
-    \item $E=\mathbb{R}^3, u=(3,1, m), e_1=(1,3,2), e_2=(1,-1,4)$ (discuter suivant la valeur de $m$ ).
+    \item Dans $\mathbb{R}^2$, $u=(1,2)$ est-il combinaison linéaire de $e_1=(1,-2)$ et $e_2=(2,3)$ ?
+    \item Dans $\mathbb{R}^2$, $u=(1,2)$ est-il combinaison linéaire de $e_1=(1,-2), e_2=(2,3), e_3=(-4,5)$ ?
+    \item Dans $\mathbb{R}^3$, $u=(2,5,3)$ est-il combinaison linéaire de $e_1=(1,3,2)$ et $e_2=(1,-1,4)$ ?
+    \item Dans $\mathbb{R}^3$, $u=(3,1, m)$ est-il combinaison linéaire de $e_1=(1,3,2)$ et $e_2=(1,-1,4)$ ? \newline 
+    (discuter suivant la valeur de $m$ ) 
+\end{itemize}
+Si oui, donner toutes les combinaisons linéaires possibles.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+
+\begin{mdframed}
+
+  \begin{enumerate}
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + 2b &= 1 \\
+      -2a + 3b &= 2
+    \end{align*}
+
+    On trouve $a=-1/7$ et $b=4/7$. Donc $u$ est combinaison linéaire de $e_1$ et $e_2$.
+
+    \item $u$ est combinaison linéaire de $e_1, e_2$ et $e_3$ si et seulement si il existe $a, b, c \in \mathbb{R}$ tels que $u=a e_1 + b e_2 + c e_3$.
+
+    Trouver $a$, $b$ et $c$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + 2b -4c &= 1 \\
+      -2a + 3b + 5c &= 2 \\
+    \end{align*}
+
+    La première étape du pivot de gauss nous donne : 
+    \begin{align*}
+      a + 2b -4c &= 1 \\
+      0 + 7b - 3c &= 3 \\
+    \end{align*}
+    On peut choisir $c$ comme on veut dans $\mathbb{R}$. $b$ et $a$ sont ensuite déterminés en fonction de $c$.
+
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + b &= 2 \\
+      3a - b &= 5 \\
+      2a + 4 b &= 3
+    \end{align*}
+
+    Les premières étapes du pivot de Gauss nous donnent : 
+    \begin{align*}
+      a + b &= 2 \\
+      0 - 4b &= 1 \\
+      0 + 2b &= -1
+    \end{align*}
+    Le système est donc incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+
+    \item $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + b &= 3 \\
+      3a - b &= 1 \\
+      2a + 4 b &= m
+    \end{align*}
+
+    Les premières étapes du pivot de Gauss nous donnent : 
+    \begin{align*}
+      a + b &= 3 \\
+      0 - 4b &= -8 \\
+      0 + 2b &= m-6
+    \end{align*}
+    Le système est compatible si et seulement si $m = 10$, dans ce cas, $u$ est combinaison linéaire de $e_1$ et $e_2$.
+
+    Si $m \neq 10$, le système est incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+  \end{enumerate}
+\end{mdframed}
+}{}
+\vspace{2em}
+\subsection{Sous-espace engendré}
+
+
+Dans $\mathbb{R}^3$, on pose $u_1=(1, -1, 2)$ et $u_2=(1, 1, -1)$.
+\begin{itemize}
+    \item Les vecteurs $v_1=(3, 1, 0)$ et $v_2=(1, 5, -1)$ sont-ils combinaison linéaire de $u_1$ et $u_2$ ?
+    \item Soit $a, b, c \in \mathbb{R}$. Démontrer que $v=(a, b, c)$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si $-a+3 b+2 c=0$.
+    \item En déduire un vecteur de $\mathbb{R}^3$ qui n'est pas combinaison linéaire de $u_1$ et de $u_2$.
 \end{itemize}
 
-\vspace{3em}
-\subsection*{Sous-espace engendré}
+\ifthenelse{\boolean{showSolutions}}{
+  \vspace{1em}
+  \begin{mdframed}
+    \begin{enumerate}
+      \item $v_1$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $v_1=a u_1 + b u_2$.
+
+      Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+      \begin{align*}
+        a + b &= 3 \\
+        -a + b &= 1 \\
+        2a - b &= 0
+      \end{align*}
+
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        a + b &= 3 \\
+        0 + 2b &= 4 \\
+        0 -3b &= -6
+      \end{align*}
+      Les deux dernières lignes correspondent à la même équation, le système possède donc une solution. 
+
+      \item $v_2$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $v_2=a u_1 + b u_2$.
+
+      Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+      \begin{align*}
+        a + b &= 1 \\
+        -a + b &= 5 \\
+        2a - b &= -1
+      \end{align*}
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        a + b &= 1 \\
+        0 + 2b &= 6 \\
+        0 - 3b &= -3
+      \end{align*}
+      Le système est incompatible et $v_2$ n'est pas combinaison linéaire de $u_1$ et $u_2$.
+
+      \item $v=(a, b, c)$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si le système suivant possède une solution : 
+      \begin{align*}
+        x + y &= a \\
+        -x + y &= b \\
+        2x - y &= c
+      \end{align*}
+      Les premières étapes du pivot de Gauss nous donnent : 
+      \begin{align*}
+        x + y &= a \\
+        0 + 2y &= a + b \\
+        0 - 3y &= c- 2a
+      \end{align*}
+      qu'on peut réécrire : 
+      \begin{align*}
+        x + y &= a \\
+        y &= (a + b)/2 \\
+        y &= (2a-c)/3
+      \end{align*}
+      Le système est compatible si et seulement si $(2a-c)/3 = (a+b)/2$, c'est-à-dire
+      $$
+      4a - 2c = 3a + 3b
+      $$
+      c'est-à-dire
+      $$
+      a - 3b - 2c = 0
+      $$
+      c'est bien l'équation de l'énoncé.
+
+      \item Il suffit de trouver trois nombres $a, b, c$ qui ne vérifient pas l'équation de l'énoncé. Par exemple, $(1,0,0)$ n'est pas combinaison linéaire de $u_1$ et $u_2$.
+    \end{enumerate}
+  \end{mdframed}
+}{}
 
 
-Dans $\mathbb{R}^3$, on pose $u_1=\left(\begin{array}{c}1 \\ -1 \\ 2\end{array}\right)$ et $u_2=\left(\begin{array}{c}1 \\ 1 \\ -1\end{array}\right)$.
-\begin{itemize}
-    \item Les vecteurs $v_1=\left(\begin{array}{l}3 \\ 1 \\ 0\end{array}\right)$ et $v_2=\left(\begin{array}{c}1 \\ 5 \\ -1\end{array}\right)$ sont-ils combinaison linéaire de $u_1$ et $u_2$ ?
-    \item Soit $a, b, c \in \mathbb{R}$. Démontrer que $v=\left(\begin{array}{l}a \\ b \\ c\end{array}\right)$ est combinaison linéaire de $u_1$ et $u_2$ si et seulement si $-a+3 b+2 c=0$.
-    \item En déduire un vecteur de $\mathbb{R}^3$ qui n'est pas combinaison linéaire de $\boldsymbol{u}_1$ et de $\boldsymbol{u}_2$.
-\end{itemize}
-
-
-
-\vspace{3em}
-\subsection*{Familles libres}
-Une famille $(e_1, \cdots, e_p)$ est dite \emph{libre} si la seule combinaison linéaire $\lambda_1 e_1 + \cdots + \lambda_p e_p$ qui donne le vecteur nul est la combinaison $\lambda_1 = \cdots = \lambda_p = 0$.
+\section*{Familles}
+\vspace{1em}
+\subsection{Familles libres}
 
 Les familles suivantes sont-elles libres dans $\mathbb{R}^3$ ?
 \begin{itemize}
@@ -34,4 +179,143 @@ Les familles suivantes sont-elles libres dans $\mathbb{R}^3$ ?
     \item $(u, v, w)$ avec $u=(1,2,-1), v=(1,0,1)$ et $w=(-1,2,-3)$;
 \end{itemize}
 
-\section*{Bases}
+Sans calcul supplémentaire, dire si elles sont génératrices. 
+
+\vspace{3em}
+\subsection{Dimension}
+On considère, dans $\mathbb{R}^4$, les vecteurs :
+
+$$
+v_1=(1,2,3,4), \quad v_2=(1,1,1,3), \quad v_3=(2,1,1,1), \quad v_4=(-1,0,-1,2), \quad v_5=(2,3,0,1) .
+$$
+
+
+Soit $F$ l'espace vectoriel engendré par $\left\{v_1, v_2, v_3\right\}$ et soit $G$ celui engendré par $\left\{v_4, v_5\right\}$. Calculer les dimensions respectives de $F, G, F \cap G$.
+
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+
+\begin{mdframed}
+
+
+    \begin{enumerate}
+    \item $G$ est engendré par deux vecteurs donc $\operatorname{dim} G \leqslant 2$. Clairement $v_4$ et $v_5$ ne sont pas liés donc $\operatorname{dim} G \geqslant 2$ c'est-à-dire $\operatorname{dim} G=2$.
+    \item $F$ est engendré par trois vecteurs donc $\operatorname{dim} F \leqslant 3$. Un calcul montre que la famille $\left\{v_1, v_2, v_3\right\}$ est libre, d'où $\operatorname{dim} F \geqslant 3$ et donc $\operatorname{dim} F=3$.
+    \item Essayons d'abord d'estimer la dimension de $F \cap G$.
+    
+    D'une part $F \cap G \subset G$ donc $\operatorname{dim}(F \cap G) \leqslant 2$. 
+    
+    Utilisons d'autre part la formule $\operatorname{dim}(F+G)=\operatorname{dim} F+\operatorname{dim} G-\operatorname{dim}(F \cap G)$. 
+    
+    Comme $F+G \subset \mathbb{R}^4$, on a $\operatorname{dim}(F+ G) \leqslant 4$ d'où on tire l'inégalité $\operatorname{dim}(F \cap G) \geqslant 1$. \newline 
+    Donc soit $\operatorname{dim}(F \cap G)=1$ ou bien $\operatorname{dim}(F \cap G)=2$.
+
+    Supposons que $\operatorname{dim}(F \cap G)$ soit égale à 2. 
+    Comme $F \cap G \subset G$ on aurait dans ce cas $F \cap G=G$ et donc $G \subset F$.
+    En particulier il existerait $\alpha, \beta, \gamma \in \mathbb{R}$ tels que $v_4=\alpha v_1+\beta v_2+\gamma v_3$. 
+    On vérifie aisément que ce n'est pas le cas, ainsi $\operatorname{dim}(F \cap G)$ n'est pas égale à 2. 
+    
+    On peut donc conclure $\operatorname{dim}(F \cap G)=1$
+    \end{enumerate}
+\end{mdframed}
+}{}
+
+\section*{Dimension}
+\subsection{Dimension}
+
+Déterminer la dimension des espaces vectoriels suivants. 
+La dimension d'un espace vectoriel correspond au nombre de paramètres scalaires nécessaires pour décrire un vecteur. 
+
+\begin{enumerate}
+    \item L'ensemble des polynômes de degré inférieur ou égal à $n$ sur $\mathbb{R}$.
+    \item L'ensemble des matrices $2 \times 3$ à coefficients réels.
+    \item L'ensemble des fonctions continues de $\mathbb{R}$ dans $\mathbb{R}$.
+    \item L'ensemble des suites réelles $(u_n)_{n \in \mathbb{N}}$.
+    \item L'ensemble des polynômes de degré inférieur ou égal à $n$ qui s'annulent en $0$.
+    \item L'ensemble des vecteurs de $\mathbb{R}^n$ dont la somme des coordonnées est nulle.
+\end{enumerate}
+
+\vspace{2em}
+
+\subsection{Bases}
+
+Les familles de vecteurs suivantes sont-elles libres ? sont-elles génératrices ? 
+
+\begin{itemize}
+    \item Dans $\mathbb{R}^2$ :
+    \begin{itemize}
+        \item La famille $\{(1,0), (0,1)\}$ dans l'espace $\mathbb{R}^2$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,0), (0,1)\}$ est libre et génératrice.
+            \end{mdframed}
+        }{}
+
+        \item La famille $\{(1,2), (2,4)\}$ dans l'espace $\mathbb{R}^2$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,2), (2,4)\}$ n'est pas libre (les vecteurs sont colinéaires).
+            \end{mdframed}
+        }{}
+
+        \item La famille $\{(1,0)\}$ n'est pas génératrice de $\mathbb{R}^2$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,0)\}$ n'est pas génératrice de $\mathbb{R}^2$ (ne permet pas d'obtenir tous les vecteurs du plan).
+            \end{mdframed}
+        }{}
+    \end{itemize}
+    \item Dans $\mathbb{R}^3$ :
+    \begin{itemize}
+        \item La famille $\{(1,0,0), (0,1,0), (0,0,1)\}$ dans l'espace $\mathbb{R}^3$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,0,0), (0,1,0), (0,0,1)\}$ est une base de $\mathbb{R}^3$.
+            \end{mdframed}
+        }{}
+        \item La famille $\{(1,1,1), (1,2,3)\}$ dans l'espace $\mathbb{R}^3$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,1,1), (1,2,3)\}$ est libre mais pas génératrice.
+            \end{mdframed}
+        }{}
+        \item La famille $\{(1,0,0), (0,1,0), (1,1,0)\}$ dans l'espace $\mathbb{R}^3$ 
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{(1,0,0), (0,1,0), (1,1,0)\}$ n'est ni libre ni génératrice (car $(1,1,0) = (1,0,0) + (0,1,0)$).
+            \end{mdframed}
+        }{}
+    \end{itemize}
+    \item Dans l'espace des polynômes de degré inférieur ou égal à $2$ :
+    \begin{itemize}
+        \item La famille $\{1, X, X^2\}$ dans l'espace des polynômes de degré inférieur ou égal à $2$
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{1, X, X^2\}$ est une base de $\mathbb{R}_2[X]$.
+            \end{mdframed}
+        }{}
+        \item La famille $\{1+X, X+X^2, 1+X^2\}$ dans l'espace des polynômes de degré inférieur ou égal à $2$   
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{1+X, X+X^2, 1+X^2\}$ est une base de $\mathbb{R}_2[X]$.
+            \end{mdframed}
+        }{}
+        \item La famille $\{1, X, X\}$ dans l'espace des polynômes de degré inférieur ou égal à $2$
+        \ifthenelse{\boolean{showSolutions}}{
+            \vspace{1em}
+            \begin{mdframed}
+                La famille $\{1, X, X\}$ n'est pas libre car $X$ est pris deux fois.
+            \end{mdframed}
+        }{}
+    \end{itemize}
+\end{itemize}
+
