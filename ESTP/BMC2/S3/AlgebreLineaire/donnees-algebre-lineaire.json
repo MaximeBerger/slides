@@ -136,6 +136,11 @@
           "titre": "Exercices",
           "lien": "2-FamillesDeVecteurs/Exercices/enonce.pdf",
           "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés",
+          "lien": "2-FamillesDeVecteurs/Exercices/corrige.pdf",
+          "cible": "_blank"
         }
       ]
     },
