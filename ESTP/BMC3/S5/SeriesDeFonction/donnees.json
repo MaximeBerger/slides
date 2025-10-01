@@ -82,8 +82,38 @@
           "cible": "_blank"
         },
         {
+          "titre": "Corrigés sur les intégrales",
+          "lien": "1-Fourier/Integrales/corrige.pdf",
+          "cible": "_blank"
+        },
+        {
           "titre": "Exercices sur les complexes",
           "lien": "1-Fourier/Complexes/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés sur les complexes",
+          "lien": "1-Fourier/Complexes/corrige.pdf",
+          "cible": "_blank"
+        }
+        {
+          "titre": "Exercices sur fonctions périodiques et Fourier",
+          "lien": "1-Fourier/ProduitScalaire/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés sur fonctions périodiques et Fourier",
+          "lien": "1-Fourier/ProduitScalaire/corrige.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Focus sur les produits scalaires",
+          "lien": "1-Fourier/ProduitScalaire/intermediaire/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés sur les produits scalaires",
+          "lien": "1-Fourier/ProduitScalaire/intermediaire/corrige.pdf",
           "cible": "_blank"
         }
       ]

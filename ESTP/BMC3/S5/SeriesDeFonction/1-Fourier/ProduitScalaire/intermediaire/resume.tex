@@ -1,0 +1,113 @@
+\section*{Produit scalaire}
+
+On appelle produit scalaire sur un espace vectoriel $E$ une application
+$$\langle \cdot, \cdot \rangle : E \times E \to \mathbb{R}$$
+
+vérifiant :
+\begin{itemize}
+\item symétrie : $\langle u, v \rangle = \langle v, u \rangle$
+\item linéarité à gauche : $\langle \lambda u + v, w \rangle = \lambda \langle u, w \rangle + \langle v, w \rangle$
+\item positivité : $\langle u, u \rangle \geq 0$
+\item définie positivité : $\langle u, u \rangle = 0 \iff u = 0$
+\end{itemize}
+
+\subsection{Dans $\mathbb{R}^n$}
+\begin{enumerate}
+\item Montrer que le produit scalaire dans $\mathbb{R}^n$ défini par, si $u=(u_1, u_2, \cdots, u_n)$ et $v=(v_1, v_2, \cdots, v_n)$,
+$$\langle u, v \rangle = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n$$
+\item Donner une base orthonormée pour ce produit scalaire. 
+\item Que penser de l'application avec des coefficients devant les produits ? Est-ce encore un produit scalaire ? 
+$$\langle u, v \rangle = 2u_1 v_1 + 6u_2 v_2 + \cdots + 3u_n v_n$$
+\item Donner une base orthonormée pour ce produit scalaire ? 
+\item Peut-on choisir des coefficients réels comme on veut devant les produits ?
+\item Donner une base orthonormée pour ce produit scalaire. 
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\vspace{1em}
+\begin{mdframed}
+\textbf{Corrections --- $\mathbb{R}^n$}
+\begin{enumerate}
+\item C'est bien un produit scalaire :
+\begin{itemize}
+\item symétrie : $\langle u,v\rangle = \sum_{i=1}^n u_i v_i = \sum_{i=1}^n v_i u_i = \langle v,u\rangle$;
+\item linéarité à gauche : $\langle \lambda u + w, v\rangle = \sum_i (\lambda u_i + w_i)v_i = \lambda \sum_i u_i v_i + \sum_i w_i v_i$;
+\item positivité : $\langle u,u\rangle = \sum_i u_i^2 \ge 0$;
+\item définie positivité : $\langle u,u\rangle = 0 \Rightarrow u_i=0$ pour tout $i$, donc $u=0$.
+\end{itemize}
+\item Une base orthonormée est la base canonique $(e_1,\dots,e_n)$ de $\mathbb{R}^n$.
+\item L'application pondérée $\langle u,v\rangle = 2u_1 v_1 + 6u_2 v_2 + \cdots + 3u_n v_n$ est un produit scalaire car elle est symétrique, linéaire et telle que $\langle u,u\rangle = 2u_1^2 + 6u_2^2 + \cdots + 3u_n^2 > 0$ si $u\ne 0$ (tous les poids sont strictement positifs).
+\item Une base orthonormée associée est obtenue en normalisant la base canonique : $f_1 = \tfrac{1}{\sqrt{2}}e_1$, $f_2 = \tfrac{1}{\sqrt{6}}e_2$, $\dots$, $f_n = \tfrac{1}{\sqrt{3}}e_n$.
+\item On ne peut pas « choisir comme on veut » : pour obtenir un produit scalaire diagonal $\langle u,v\rangle = \sum_i a_i u_i v_i$, il faut et il suffit que $a_i>0$ pour tout $i$ (sinon la positivité définie échoue).
+\item Pour $\langle u,v\rangle = \sum_i a_i u_i v_i$ avec $a_i>0$, une base orthonormée est $f_i = \tfrac{1}{\sqrt{a_i}} e_i$ pour $i=1,\dots,n$.
+\end{enumerate}
+\end{mdframed}
+}{}
+
+\subsection{Dans $m_{2,2}(\mathbb{R})$}
+Dans l'espace des matrices $2\times 2$, on définit l'application
+$$\langle A, B \rangle = \mathop{Tr}(A^t\, B)$$
+\begin{enumerate}
+\item Montrer que c'est un produit scalaire. 
+\item La base canonique est-elle orthonormée pour ce produit scalaire ? 
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\vspace{1em}
+\begin{mdframed}
+\textbf{Corrections --- $m_{2,2}(\mathbb{R})$}
+\begin{enumerate}
+\item Oui :
+\begin{itemize}
+\item symétrie : $\langle A,B\rangle = \mathrm{Tr}(A^t B) = \mathrm{Tr}((B^t A)^t) = \mathrm{Tr}(B^t A) = \langle B,A\rangle$;
+\item linéarité : découle de la linéarité de la trace;
+\item positivité : $\langle A,A\rangle = \mathrm{Tr}(A^t A) = \sum_{i,j} a_{ij}^2 \ge 0$ et $=0 \iff A=0$.
+\end{itemize}
+\item En notant $(E_{11},E_{12},E_{21},E_{22})$ la base canonique, on a
+$\langle E_{ij}, E_{kl}\rangle = \mathrm{Tr}(E_{ji} E_{kl}) = \delta_{ik}\,\delta_{jl}$, donc cette base est orthonormée.
+\end{enumerate}
+\end{mdframed}
+}{}
+
+\subsection{Dans l'espace des polynômes}
+Reprendre l'exercice 6
+
+\ifthenelse{\boolean{showSolutions}}{
+\vspace{1em}
+\begin{mdframed}
+\textbf{Indication} — On procède comme à la question 6 : selon le produit scalaire choisi sur $\mathbb{R}[X]$ (par exemple $\langle P,Q\rangle = \int_a^b P Q$), on normalise une base naturelle ou on applique Gram–Schmidt pour construire une base orthonormée.
+\end{mdframed}
+}{}
+
+\subsection{Dans l'espace des fonctions réelles $2\pi$-périodiques}
+On définit l'application 
+$$\langle f, g \rangle = \int_0^{2\pi} f(x)g(x)dx$$
+\begin{enumerate}
+\item Montrer que c'est un produit scalaire
+\item Montrer que la famille $(1, \cos x, \sin x, \cos 2x, \sin 2x, \cos 3x, \sin 3x, \cdots )$ est orthonormée. 
+\item Déterminer les coordonnées de $f(x)=|x|$ définie sur $[0, 2\pi]$ sur cette base. 
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\vspace{1em}
+\begin{mdframed}
+\textbf{Corrections — fonctions $2\pi$-périodiques}
+\begin{enumerate}
+\item C'est bien un produit scalaire : symétrie, linéarité et positivité découlent des propriétés de l'intégrale de Riemann.
+\item On a, pour $m,n\ge 1$,
+\[\int_0^{2\pi} \cos(mx)\cos(nx)\,dx = \int_0^{2\pi} \sin(mx)\sin(nx)\,dx = \begin{cases}
+\pi & m=n,\\
+0 & m\ne n,
+\end{cases}\]
+\[\int_0^{2\pi} \cos(mx)\sin(nx)\,dx = 0,\qquad \int_0^{2\pi} 1\cdot 1\,dx=2\pi.\]
+Ainsi la famille annoncée est orthogonale; pour l'orthonormaliser, on utilise
+$$\varphi_0 = \tfrac{1}{\sqrt{2\pi}},\quad \varphi_n^c = \tfrac{\cos(nx)}{\sqrt{\pi}},\quad \varphi_n^s = \tfrac{\sin(nx)}{\sqrt{\pi}}\quad (n\ge 1).$$
+\item On considère la fonction $2\pi$-périodique définie par $f(x)=x$ sur $[0,2\pi]$ (puisque $|x|=x$ sur cet intervalle). Les coefficients de Fourier usuels sont
+\[a_0 = \frac{1}{\pi}\int_0^{2\pi} x\,dx = 2\pi,\quad a_n = \frac{1}{\pi}\int_0^{2\pi} x\cos(nx)\,dx = 0,\quad b_n = \frac{1}{\pi}\int_0^{2\pi} x\sin(nx)\,dx = -\frac{2}{n}.
+\]
+Ainsi,
+\[f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \big(a_n\cos nx + b_n\sin nx\big) = \pi - 2\sum_{n=1}^{\infty} \frac{1}{n}\sin(nx).\]
+Relativement à la base orthonormée $(\varphi_0,\varphi_n^c,\varphi_n^s)$, les coordonnées sont $\langle f,\varphi_0\rangle = \tfrac{1}{\sqrt{2\pi}}\int_0^{2\pi} x\,dx = \tfrac{2\pi^2}{\sqrt{2\pi}}$, $\langle f,\varphi_n^c\rangle = 0$ et $\langle f,\varphi_n^s\rangle = \tfrac{1}{\sqrt{\pi}}\int_0^{2\pi} x\sin(nx)\,dx = -\tfrac{2\sqrt{\pi}}{n}$.
+\end{enumerate}
+\end{mdframed}
+}{}
