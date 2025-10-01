@@ -4,10 +4,24 @@
 
 Les fonctions réelles suivantes sont-elles périodiques et si oui, quelle est leur période ?
 
-\ifthenelse{\boolean{showSolutions}}{}
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $\cos(x)$ : Oui, période $T = 2\pi$
+    \item $\sin(2\pi x)$ : Oui, période $T = 1$ (car $\sin(2\pi(x+1)) = \sin(2\pi x + 2\pi) = \sin(2\pi x)$)
+    \item $\cos(x/2)$ : Oui, période $T = 4\pi$ (car $\cos((x+4\pi)/2) = \cos(x/2 + 2\pi) = \cos(x/2)$)
+    \item $\sin(2x) + \cos(3x)$ : Oui, période $T = 2\pi$ (le PPCM des périodes $\pi$ et $\frac{2\pi}{3}$)
+    \item $\sin(nx)$ : Oui, période $T = \frac{2\pi}{n}$
+    \item $\cos\left(\frac{3x}{2}-\frac{\pi}{4}\right)$ : Oui, période $T = \frac{4\pi}{3}$
+    \item $x-\lfloor x\rfloor$ : Oui, période $T = 1$ (c'est la fonction partie fractionnaire)
+\end{enumerate}
+\end{mdframed}
+}{}
 {\begin{multicols}{2}}
 \begin{enumerate}
     \item $\displaystyle \cos(x)$
+    
     \item $\displaystyle \sin(2\pi x)$
     \item $\displaystyle \cos(x/2)$
     \item $\displaystyle \sin(2x) + \cos(3x)$
@@ -21,7 +35,18 @@ Les fonctions réelles suivantes sont-elles périodiques et si oui, quelle est l
 
 Les fonctions complexes suivantes sont-elles périodiques et si oui, quelle est leur période ?
 
-\ifthenelse{\boolean{showSolutions}}{}
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $e^{ix}$ : Oui, période $T = 2\pi$ (car $e^{i(x+2\pi)} = e^{ix}e^{i2\pi} = e^{ix} \cdot 1 = e^{ix}$)
+    \item $e^{2ix}$ : Oui, période $T = \pi$ (car $e^{2i(x+\pi)} = e^{2ix}e^{i2\pi} = e^{2ix}$)
+    \item $e^{ix/2\pi}$ : Oui, période $T = 4\pi^2$ (car $e^{i(x+4\pi^2)/2\pi} = e^{ix/2\pi}e^{i2\pi} = e^{ix/2\pi}$)
+    \item $e^{2i\pi x/T}$ : Oui, période $T$ (car $e^{2i\pi (x+T)/T} = e^{2i\pi x/T}e^{i2\pi} = e^{2i\pi x/T}$)
+    \item $e^{inx} + e^{ipx}$ : Oui, période $T = \frac{2\pi}{\text{PGCD}(n,p)}$ (le PPCM des périodes $\frac{2\pi}{n}$ et $\frac{2\pi}{p}$)
+\end{enumerate}
+\end{mdframed}
+}{}
 {\begin{multicols}{2}}
 \begin{enumerate}
     \item $\displaystyle e^{ix}$
@@ -67,6 +92,46 @@ Soit $u$ un vecteur de $\mathbb{R}^3$, on note $u_i$ ses coordonnées dans la ba
 $$u = u_1 f_1 + u_2 f_2 + u_3 f_3$$
 
 Déterminer les coordonnées de $u = (1,0,1)$ dans la base $(f_1,f_2,f_3)$.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \textbf{1.} Vérifions si la famille est orthogonale :
+    
+    $\langle e_1, e_2 \rangle = 1 \cdot 2 + 2 \cdot 1 + 1 \cdot (-4) = 2 + 2 - 4 = 0$ ✓
+    
+    $\langle e_1, e_3 \rangle = 1 \cdot (-3) + 2 \cdot 2 + 1 \cdot (-1) = -3 + 4 - 1 = 0$ ✓
+    
+    $\langle e_2, e_3 \rangle = 2 \cdot (-3) + 1 \cdot 2 + (-4) \cdot (-1) = -6 + 2 + 4 = 0$ ✓
+    
+    La famille est orthogonale.
+    
+    \textbf{2.} Vérifions si elle est orthonormée :
+    
+    $\|e_1\|^2 = 1^2 + 2^2 + 1^2 = 6$, donc $\|e_1\| = \sqrt{6}$
+    
+    $\|e_2\|^2 = 2^2 + 1^2 + (-4)^2 = 4 + 1 + 16 = 21$, donc $\|e_2\| = \sqrt{21}$
+    
+    $\|e_3\|^2 = (-3)^2 + 2^2 + (-1)^2 = 9 + 4 + 1 = 14$, donc $\|e_3\| = \sqrt{14}$
+    
+    La famille n'est pas orthonormée. Une base orthonormée est :
+    $$f_1 = \frac{e_1}{\|e_1\|} = \frac{1}{\sqrt{6}}(1,2,1) = \left(\frac{1}{\sqrt{6}}, \frac{2}{\sqrt{6}}, \frac{1}{\sqrt{6}}\right)$$
+    
+    $$f_2 = \frac{e_2}{\|e_2\|} = \frac{1}{\sqrt{21}}(2,1,-4) = \left(\frac{2}{\sqrt{21}}, \frac{1}{\sqrt{21}}, \frac{-4}{\sqrt{21}}\right)$$
+    
+    $$f_3 = \frac{e_3}{\|e_3\|} = \frac{1}{\sqrt{14}}(-3,2,-1) = \left(\frac{-3}{\sqrt{14}}, \frac{2}{\sqrt{14}}, \frac{-1}{\sqrt{14}}\right)$$
+    
+    \textbf{3.} Coordonnées de $u = (1,0,1)$ dans la base $(f_1,f_2,f_3)$ :
+    
+    $u_1 = \langle u, f_1 \rangle = 1 \cdot \frac{1}{\sqrt{6}} + 0 \cdot \frac{2}{\sqrt{6}} + 1 \cdot \frac{1}{\sqrt{6}} = \frac{2}{\sqrt{6}} = \frac{\sqrt{6}}{3}$
+    
+    $u_2 = \langle u, f_2 \rangle = 1 \cdot \frac{2}{\sqrt{21}} + 0 \cdot \frac{1}{\sqrt{21}} + 1 \cdot \frac{-4}{\sqrt{21}} = \frac{-2}{\sqrt{21}}$
+    
+    $u_3 = \langle u, f_3 \rangle = 1 \cdot \frac{-3}{\sqrt{14}} + 0 \cdot \frac{2}{\sqrt{14}} + 1 \cdot \frac{-1}{\sqrt{14}} = \frac{-4}{\sqrt{14}}$
+    
+    Donc $u = \frac{\sqrt{6}}{3}f_1 - \frac{2}{\sqrt{21}}f_2 - \frac{4}{\sqrt{14}}f_3$
+\end{mdframed}
+}{}
 
 \vspace{1em}
 
@@ -118,7 +183,39 @@ Montrer que la famille $(e^{inx})_{n \in \mathbb{Z}}$ est orthonormée.
 Les coefficients de Fourier d'une fonction $f$ sont les coordonnées de $f$ dans la base $(e^{inx})_{n \in \mathbb{Z}}$.
 
 Déterminer les coefficients de Fourier des fonctions suivantes :
-\ifthenelse{\boolean{showSolutions}}{}
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \textbf{Démonstration que c'est un produit scalaire :}
+    
+    Les propriétés de symétrie conjuguée, linéarité et positivité découlent des propriétés de l'intégrale et du conjugué complexe.
+    
+    \textbf{Démonstration que $(e^{inx})_{n \in \mathbb{Z}}$ est orthonormée :}
+    
+    Pour $n = m$ : $\langle e^{inx}, e^{inx} \rangle = \int_0^{2\pi} e^{inx} \overline{e^{inx}} dx = \int_0^{2\pi} 1 dx = 2\pi$
+    
+    Pour $n \neq m$ : $\langle e^{inx}, e^{imx} \rangle = \int_0^{2\pi} e^{inx} \overline{e^{imx}} dx = \int_0^{2\pi} e^{i(n-m)x} dx = 0$
+    
+    Donc la famille $(e^{inx})_{n \in \mathbb{Z}}$ est orthogonale. Pour l'orthonormaliser, on divise par $\sqrt{2\pi}$.
+    
+    \textbf{Coefficients de Fourier :}
+    \begin{enumerate}
+    \item $\cos(x) = \frac{e^{ix} + e^{-ix}}{2}$, donc $c_1 = \frac{1}{2}$, $c_{-1} = \frac{1}{2}$, $c_n = 0$ sinon.
+    
+    \item $\sin(2\pi x)$ : Cette fonction n'est pas $2\pi$-périodique ! Elle est de période $1$.
+    
+    \item $\cos(x/2) = \frac{e^{ix/2} + e^{-ix/2}}{2}$, donc $c_{1/2} = \frac{1}{2}$, $c_{-1/2} = \frac{1}{2}$, $c_n = 0$ sinon.
+    
+    \item $\sin(2x) + \cos(3x) = \frac{e^{i2x} - e^{-i2x}}{2i} + \frac{e^{i3x} + e^{-i3x}}{2}$
+    Donc $c_2 = \frac{1}{2i}$, $c_{-2} = -\frac{1}{2i}$, $c_3 = \frac{1}{2}$, $c_{-3} = \frac{1}{2}$, $c_n = 0$ sinon.
+    
+    \item $f(x) = e^{-x}$ sur $[0, 2\pi]$ :
+    $$c_n = \frac{1}{2\pi}\int_0^{2\pi} e^{-x} e^{-inx} dx = \frac{1}{2\pi}\int_0^{2\pi} e^{-(1+in)x} dx$$
+    $$= \frac{1}{2\pi}\left[\frac{e^{-(1+in)x}}{-(1+in)}\right]_0^{2\pi} = \frac{1}{2\pi} \cdot \frac{1-e^{-2\pi(1+in)}}{1+in} = \frac{1-e^{-2\pi}e^{-2\pi in}}{2\pi(1+in)}$$
+\end{enumerate}
+\end{mdframed}
+}{}
 {\begin{multicols}{2}}
 \begin{enumerate}
 \item $\displaystyle \cos(x)$

@@ -99,6 +99,20 @@ z_k = e^{i\frac{2\pi k}{n}},\quad k = 0, 1, \ldots, n-1
 \item Nombre de module 7 et d'argument $-\pi / 2$.
 \end{enumerate}
 
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+
+    \begin{mdframed}
+\begin{enumerate}
+    \item $1 + \sqrt{3}  i $ = $2e^{i\frac{\pi}{3}}$
+    \item $3 \cos \left(-\frac{\pi}{8}\right) + i \sin \left(-\frac{\pi}{8}\right) $ = $3e^{-i\frac{\pi}{8}}$
+    \item $1 + i $ = $e^{i\frac{\pi}{4}}$
+    \item $\sqrt{3} - i $ = $2e^{-i\frac{\pi}{6}}$
+    \item $-7 i $ = $7e^{-i\frac{\pi}{2}}$
+\end{enumerate}
+\end{mdframed}
+
+}{}
 \vspace{2em}
 
 \subsection{Forme exponentielle $\rightarrow$ forme algébrique}
@@ -114,6 +128,19 @@ z_k = e^{i\frac{2\pi k}{n}},\quad k = 0, 1, \ldots, n-1
     \item $z_6 = 6 e^{-i \frac{\pi}{2}}$
 \end{enumerate}
 \end{multicols}
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $5 \frac{\sqrt{3}}{2} + i \frac{5}{2} $ 
+    \item $\sqrt{2} - \sqrt{2} i  $ 
+    \item $- \frac{3}{2} + i \frac{\sqrt{3}}{2} $ 
+    \item $-7 $ 
+    \item $4 $ 
+    \item $-6 i $ 
+\end{enumerate}
+\end{mdframed}
+}{}
 
 \vspace{2em}
 
@@ -135,6 +162,29 @@ Mettre sous forme exponentielle les nombres complexes suivants :
     \item $z_{12}=\sin x+i \cos x$.
 \end{enumerate}
 \end{multicols}
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $1 + i \sqrt{3} $ = $2e^{i\frac{\pi}{3}}$
+    \item $1 + i $ = $e^{i\frac{\pi}{4}}$
+    \item $-2 \sqrt{3} + 2 i $ = $4e^{i\frac{4\pi}{6}}$
+    \item $i $ = $e^{i\frac{\pi}{2}}$
+    \item $-2 i $ = $2e^{-i\frac{\pi}{2}}$
+    \item $-3 $ = $3e^{i\pi}$
+    \item $1 $ = $e^{i0}$
+    \item $9 i $ = $9e^{i\frac{\pi}{2}}$
+    \item $0 $ = $0e^{i0}$
+    \item On met sous forme exponentielle le numérateur et le dénominateur et on simplifie $-i \sqrt{2}= \sqrt{2}e^{-i\frac{\pi}{2}}$ et $1+i= \sqrt{2}e^{i\frac{\pi}{4}}$
+    
+    donc $\frac{-i \sqrt{2}}{1+i} $ = $e^{-i\frac{3\pi}{4}}$
+    \item De même, $1+i \sqrt{3} = 2e^{i\frac{\pi}{3}}$, $(1-i) = \sqrt{2}e^{-i\frac{\pi}{4}}$
+    donc
+    $$\frac{(1+i \sqrt{3})^3}{(1-i)^5}  = \frac{2^3}{\sqrt{2}^5}e^{i(\pi + 5\frac{\pi}{4})}= \sqrt{2}e^{i\frac{5\pi}{4}}$$
+    \item $\sin x + i \cos x = e^{i(\frac{\pi}{2}-x)}$
+\end{enumerate}
+\end{mdframed}
+}{}
 
 
 
@@ -142,12 +192,53 @@ Mettre sous forme exponentielle les nombres complexes suivants :
 
 \subsection{Exponentielle}
 Résoudre l'équation $e^z=3 \sqrt{3}-3 i$.
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item en mettant le terme de droite sous forme exponentielle, on obtient $3 \sqrt{3}-3 i = 6e^{-i\frac{\pi}{6}}$
+    En cherchant $z=a+ib$, $e^z = e^{a+ib} = e^a e^{ib} = 6e^{-i\frac{\pi}{6}}$
+    donc $a= \ln(6)$ et $b=-\frac{\pi}{6}$
+    donc $z= \ln(6)-\frac{\pi}{6}i$
+\end{enumerate}
+\end{mdframed}
+}{}
+
 
 \newpage
 
 \subsection{Trigonométrique}
 En utilisant les nombres complexes, calculer  $\cos 5 \theta$ et $\sin 5 \theta$ en fonction de $\cos \theta$ et $\sin \theta$.
-
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    en utilisant la formule de Moivre, on obtient
+    \[
+    (\cos \theta + i \sin \theta)^5 = \cos(5\theta) + i \sin(5\theta)
+    \]
+    En développant à l'aide du binôme de Newton :
+    \[
+    (\cos \theta + i \sin \theta)^5 = \sum_{k=0}^5 \binom{5}{k} (\cos \theta)^{5-k} (i \sin \theta)^k
+    \]
+    \[
+    = \sum_{k=0}^5 \binom{5}{k} i^k (\cos \theta)^{5-k} (\sin \theta)^k
+    \]
+    En séparant la partie réelle et imaginaire, on obtient :
+    \[
+    \cos(5\theta) = \Re\left[(\cos \theta + i \sin \theta)^5\right] = \sum_{k=0}^{5} \binom{5}{k} (\cos \theta)^{5-k} (\sin \theta)^k \Re(i^k)
+    \]
+    \[
+    \sin(5\theta) = \Im\left[(\cos \theta + i \sin \theta)^5\right] = \sum_{k=0}^{5} \binom{5}{k} (\cos \theta)^{5-k} (\sin \theta)^k \Im(i^k)
+    \]
+    En explicitant, on trouve :
+    \[
+    \cos(5\theta) = \cos^5\theta - 10\cos^3\theta\sin^2\theta + 5\cos\theta\sin^4\theta
+    \]
+    \[
+    \sin(5\theta) = 5\cos^4\theta\sin\theta - 10\cos^2\theta\sin^3\theta + \sin^5\theta
+    \]
+\end{mdframed}
+}{}
 \vspace{2em}
 
 
@@ -161,7 +252,61 @@ Calculer les intégrales suivantes, pour toute valeur de $n$ et $m$ dans les ent
     \item $$\int_0^{2\pi} \cos(n x) \sin(m x) dx$$
 \end{enumerate}
 
-
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $$\int_0^{2\pi} e^{i n x} e^{i m x} dx = \int_0^{2\pi} e^{i (n+m) x} dx$$
+    
+    Si $n+m \neq 0$ : 
+    $$\int_0^{2\pi} e^{i (n+m) x} dx = \left[\frac{e^{i (n+m) x}}{i(n+m)}\right]_0^{2\pi} = \frac{e^{i (n+m) 2\pi} - e^{i (n+m) 0}}{i(n+m)} = \frac{1 - 1}{i(n+m)} = 0$$
+    
+    Si $n+m = 0$ (c'est-à-dire $m = -n$) :
+    $$\int_0^{2\pi} e^{i 0} dx = \int_0^{2\pi} 1 dx = 2\pi$$
+    
+    Donc : $\int_0^{2\pi} e^{i n x} e^{i m x} dx = \begin{cases} 2\pi & \text{si } m = -n \\ 0 & \text{sinon} \end{cases}$
+    
+    \item $$\int_0^{2\pi} \cos(n x) \cos(m x) dx$$
+    
+    En utilisant $\cos(nx)\cos(mx) = \frac{1}{2}[\cos((n+m)x) + \cos((n-m)x)]$ :
+    
+    Si $n \neq \pm m$ :
+    $$\int_0^{2\pi} \cos(n x) \cos(m x) dx = \frac{1}{2}\int_0^{2\pi} [\cos((n+m)x) + \cos((n-m)x)] dx = 0$$
+    
+    Si $n = m \neq 0$ :
+    $$\int_0^{2\pi} \cos^2(nx) dx = \int_0^{2\pi} \frac{1+\cos(2nx)}{2} dx = \frac{1}{2}[x]_0^{2\pi} + 0 = \pi$$
+    
+    Si $n = m = 0$ :
+    $$\int_0^{2\pi} \cos^2(0) dx = \int_0^{2\pi} 1 dx = 2\pi$$
+    
+    Donc : $\int_0^{2\pi} \cos(n x) \cos(m x) dx = \begin{cases} 2\pi & \text{si } n = m = 0 \\ \pi & \text{si } n = m \neq 0 \\ 0 & \text{sinon} \end{cases}$
+    
+    \item $$\int_0^{2\pi} \sin(n x) \sin(m x) dx$$
+    
+    En utilisant $\sin(nx)\sin(mx) = \frac{1}{2}[\cos((n-m)x) - \cos((n+m)x)]$ :
+    
+    Si $n \neq \pm m$ :
+    $$\int_0^{2\pi} \sin(n x) \sin(m x) dx = \frac{1}{2}\int_0^{2\pi} [\cos((n-m)x) - \cos((n+m)x)] dx = 0$$
+    
+    Si $n = m \neq 0$ :
+    $$\int_0^{2\pi} \sin^2(nx) dx = \int_0^{2\pi} \frac{1-\cos(2nx)}{2} dx = \frac{1}{2}[x]_0^{2\pi} - 0 = \pi$$
+    
+    Si $n = m = 0$ :
+    $$\int_0^{2\pi} \sin^2(0) dx = \int_0^{2\pi} 0 dx = 0$$
+    
+    Donc : $\int_0^{2\pi} \sin(n x) \sin(m x) dx = \begin{cases} \pi & \text{si } n = m \neq 0 \\ 0 & \text{sinon} \end{cases}$
+    
+    \item $$\int_0^{2\pi} \cos(n x) \sin(m x) dx$$
+    
+    En utilisant $\cos(nx)\sin(mx) = \frac{1}{2}[\sin((n+m)x) + \sin((m-n)x)]$ :
+    
+    Pour toute valeur de $n$ et $m$ :
+    $$\int_0^{2\pi} \cos(n x) \sin(m x) dx = \frac{1}{2}\int_0^{2\pi} [\sin((n+m)x) + \sin((m-n)x)] dx = 0$$
+    
+    Donc : $\int_0^{2\pi} \cos(n x) \sin(m x) dx = 0$ pour tous $n, m \in \mathbb{Z}$
+\end{enumerate}
+\end{mdframed}
+}{}
 
 \vspace{2em}
 
@@ -171,9 +316,73 @@ $$z_1=4 e^{i \frac{\pi}{4}}, \qquad z_2=3 i e^{i \frac{\pi}{6}}, \qquad z_3=-2 e
 Écrire sous forme exponentielle les nombres complexes : 
 $$z_1,\qquad z_2,\qquad z_3 , \qquad z_1 z_2, \qquad \frac{z_1 z_2}{z_2}$$
 
-
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \begin{enumerate}
+    \item $z_1 = 4 e^{i \frac{\pi}{4}}$ (déjà sous forme exponentielle)
+    \item $z_2 = 3i e^{i \frac{\pi}{6}} = 3 e^{i \frac{\pi}{2}} e^{i \frac{\pi}{6}} = 3 e^{i \frac{\pi}{2} + i \frac{\pi}{6}} = 3 e^{i \frac{2\pi}{3}}$
+    \item $z_3 = -2 e^{i \frac{2\pi}{3}} = 2 e^{i\pi} e^{i \frac{2\pi}{3}} = 2 e^{i\pi + i \frac{2\pi}{3}} = 2 e^{i \frac{5\pi}{3}}$
+    \item $z_1 z_2 = 4 e^{i \frac{\pi}{4}} \times 3 e^{i \frac{2\pi}{3}} = 12 e^{i \frac{\pi}{4} + i \frac{2\pi}{3}} = 12 e^{i \frac{3\pi + 8\pi}{12}} = 12 e^{i \frac{11\pi}{12}}$
+    \item $\frac{z_1 z_2}{z_2} = \frac{12 e^{i \frac{11\pi}{12}}}{3 e^{i \frac{2\pi}{3}}} = 4 e^{i \frac{11\pi}{12} - i \frac{2\pi}{3}} = 4 e^{i \frac{11\pi - 8\pi}{12}} = 4 e^{i \frac{3\pi}{12}} = 4 e^{i \frac{\pi}{4}} = z_1$
+\end{enumerate}
+\end{mdframed}
+}{}
 
 \vspace{2em}
 
 \subsection{Racines carrées}
 Calculer de deux façons les racines carrées de $1+i$ et en déduire les valeurs exactes de $\cos \left(\frac{\pi}{8}\right)$ et $\sin \left(\frac{\pi}{8}\right)$.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \vspace{2em}
+    \begin{mdframed}
+    \textbf{Méthode 1 : Forme algébrique}
+    
+    On cherche $z = a + ib$ tel que $z^2 = 1 + i$.
+    
+    $(a + ib)^2 = a^2 - b^2 + 2iab = 1 + i$
+    
+    En identifiant partie réelle et imaginaire :
+    $$\begin{cases} a^2 - b^2 = 1 \\ 2ab = 1 \end{cases}$$
+    
+    De la deuxième équation : $b = \frac{1}{2a}$ (avec $a \neq 0$)
+    
+    En substituant dans la première : $a^2 - \frac{1}{4a^2} = 1$
+    
+    En multipliant par $4a^2$ : $4a^4 - 1 = 4a^2$, soit $4a^4 - 4a^2 - 1 = 0$
+    
+    Posons $X = a^2$ : $4X^2 - 4X - 1 = 0$
+    
+    $\Delta = 16 + 16 = 32$, donc $X = \frac{4 \pm \sqrt{32}}{8} = \frac{4 \pm 4\sqrt{2}}{8} = \frac{1 \pm \sqrt{2}}{2}$
+    
+    Comme $X = a^2 \geq 0$, on prend $X = \frac{1 + \sqrt{2}}{2}$
+    
+    Donc $a = \pm\sqrt{\frac{1 + \sqrt{2}}{2}}$ et $b = \frac{1}{2a}$
+    
+    \textbf{Méthode 2 : Forme exponentielle}
+    
+    $1 + i = \sqrt{2}e^{i\frac{\pi}{4}}$
+    
+    Les racines carrées sont : $\sqrt[2]{\sqrt{2}}e^{i\frac{\pi}{4}/2 + ik\pi}$ avec $k \in \{0,1\}$
+    
+    Donc : $z_1 = 2^{1/4}e^{i\frac{\pi}{8}} = 2^{1/4}(\cos\frac{\pi}{8} + i\sin\frac{\pi}{8})$
+    
+    et $z_2 = 2^{1/4}e^{i\frac{\pi}{8} + i\pi} = 2^{1/4}e^{i\frac{9\pi}{8}} = -2^{1/4}(\cos\frac{\pi}{8} + i\sin\frac{\pi}{8})$
+    
+    \textbf{Identification des valeurs}
+    
+    En comparant les deux méthodes, on a :
+    $$2^{1/4}\cos\frac{\pi}{8} = \sqrt{\frac{1 + \sqrt{2}}{2}}$$
+    $$2^{1/4}\sin\frac{\pi}{8} = \frac{1}{2\sqrt{\frac{1 + \sqrt{2}}{2}}} = \frac{1}{2^{3/4}\sqrt{1 + \sqrt{2}}}$$
+    
+    Comme $2^{1/4} = \sqrt{\sqrt{2}} = 2^{1/2}$, on a :
+    $$\cos\frac{\pi}{8} = \frac{\sqrt{\frac{1 + \sqrt{2}}{2}}}{2^{1/4}} = \frac{\sqrt{\frac{1 + \sqrt{2}}{2}}}{\sqrt{\sqrt{2}}} = \frac{\sqrt{1 + \sqrt{2}}}{\sqrt{2\sqrt{2}}} = \frac{\sqrt{1 + \sqrt{2}}}{\sqrt{2}}$$
+    
+    $$\sin\frac{\pi}{8} = \frac{\sqrt{1 - \sqrt{2}}}{\sqrt{2}}$$
+    
+    En fait, en utilisant les identités trigonométriques :
+    $$\cos\frac{\pi}{8} = \frac{\sqrt{2 + \sqrt{2}}}{2}$$
+    $$\sin\frac{\pi}{8} = \frac{\sqrt{2 - \sqrt{2}}}{2}$$
+\end{mdframed}
+}{}
