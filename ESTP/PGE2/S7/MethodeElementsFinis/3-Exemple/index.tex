@@ -95,7 +95,7 @@
 
 % -------------------- Page de titre ------------------------
 \title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
-\author{ TECE - 2025/2026 }
+\author{ MEF - 2025/2026 }
 \date{\today}
 
 
@@ -118,391 +118,433 @@
 % -------------------- Document ----------------------------
 \begin{document}
 
+\begin{center}
+    {\LARGE \textbf{Méthode des éléments finis -- TD1}}\\[1em]
+    {\large \textit{Librement inspiré de M. Jocelin Poulain}}
+\end{center}
 \captionsetup{singlelinecheck=false}
 \section*{Problème}
 On considère une barre de longueur $2 L$, constituée de deux barres de longueur égale :
 
 \begin{itemize}
-  \item Barre $AB$ (acier) : $L=6 \mathrm{~m} ; E_{1}=210000 \mathrm{MPa}, A_{1}=0.001 \mathrm{~m}^{2}$
-  \item Barre $BC$ (aluminium) : $L=6 \mathrm{~m} ; E_{2}=70000 \mathrm{MPa}, A_{2}=0.003 \mathrm{~m}^{2}$
+  \item Barre $AB$ (acier) : $L=6 \mathrm{~m}, \, E_{1}=210000 \mathrm{MPa},\,  A_{1}=0.001 \mathrm{~m}^{2}$
+  \item Barre $BC$ (aluminium) : $L=6 \mathrm{~m}, \, E_{2}=70000 \mathrm{MPa},\, A_{2}=0.003 \mathrm{~m}^{2}$
 \end{itemize}
+
+(Remarquez que $E_1A_1 = E_2A_2$)
 
 La barre $1$ est soumise à un chargement constant $p=100 \mathrm{kN} / \mathrm{m}$.
 
 \begin{center}
-\includegraphics[max width=0.9\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-1(2)}
+\includegraphics[max width=0.8\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-1(2)}
 \end{center}
 
 On cherche à déterminer les contraintes et déformations dans la barre en résolvant d'une part le problème de manière exacte par les lois de l'élasticité et d'autre part par la méthode des éléments finis.
 
 \section*{Partie 1 : Résolution par les lois de l'élasticité.}
-La convention adoptée ici pour la loi de Hooke est : $\sigma=-E \varepsilon$ (convention GC vue en RDM) On note $X_{1}$ la réaction à gauche et $X_{5}$ la réaction à droite.
+La convention adoptée ici pour la loi de Hooke est : $\sigma=-E \varepsilon$ (convention Génie civil) On note $X_{1}$ la réaction à gauche et $X_{5}$ la réaction à droite.
 
 \begin{enumerate}
-  \item Déterminer l'expression de l'effort normal dans la barre en fonction de $X_{1}, p$ et de l'abscisse x .
+  \item Déterminer l'expression de l'effort normal dans la barre en fonction de $X_{1}, p$ et de l'abscisse $x$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      En procédant à une coupure à gauche d'une section $\Sigma(\mathrm{x})$, il vient :
+
+      \begin{itemize}
+        \item Pour $x<L$ : $N(x)=X_{1}+px$
+          \begin{center}
+          \includegraphics[width=0.6\textwidth]{2025_10_03_26e11264345fd9bad5cag-3}
+          \end{center}
+        \item Pour $x>L$ : $N(x)=X_{1}+p L$
+      \end{itemize}
+    \end{mdframed}
+  }{}
+  \vspace{1em}
+  
   \item Déterminer l'allongement de la barre noté $u(x)$. Quelles sont les conditions aux limites ? En exploitant ces conditions aux limites, déterminer les réactions $X_{1}$ et $X_{5}$
-  \item En déduire l'expression de $N(x)$ et tracer.
-  \item En déduire l'expression du champ de déplacement $u(x)$ et tracer.
-  \item En déduire le champ de contrainte $\sigma(x)$ et tracer.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      D'après la loi de Hooke :
+
+      $$
+      \varepsilon(x)=\frac{d u(x)}{d x}=-\frac{\sigma(x)}{E(x)}=-\frac{N(x)}{E(x) A(x)}
+      $$
+
+      On en déduit alors la translation horizontale des sections à une abscisse $x$ donnée :
+
+      \begin{itemize}
+        \item Pour $x<L$ : on est dans la $1^{\text {ère }}$ barre en acier :
+      \end{itemize}
+
+      $$
+      u(x)=u_{A}-\int_{0}^{x} \frac{N(\xi)}{E_{1} A_{1}} d \xi=u_{A}-\int_{0}^{x} \frac{X_{1}+p \xi}{E_{1} A_{1}} d \xi=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} x+\frac{p x^{2}}{2}\right)
+      $$
+
+      On pourra noter que le déplacement en $\mathrm{x}=\mathrm{L}$ vaut alors :
+
+      $$
+      u(L)=u_{B}=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)
+      $$
+
+      \begin{itemize}
+        \item Pour $\mathrm{x}>\mathrm{L}$, on est dans la $2^{\text {nde }}$ barre en aluminium et l'effort normal est constant :
+      \end{itemize}
+
+      En se mettant dans le repère local de la seconde barre ( $x=0$ au début de la $2^{\text {nde }}$ barre), il vient :
+
+      \begin{align*}
+      u^{\prime}(x)& =u_{B}-\int_{0}^{x} \frac{N(\xi)}{E_{2} A_{2}} d \xi\\
+       & =u_{B}-\int_{0}^{x} \frac{X_{1}+p L}{E_{2} A_{2}} d \xi\\
+       & =u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)-\frac{1}{E_{2} A_{2}}\left(X_{1} x+p L x\right)
+      \end{align*}
+
+      Le déplacement de l'extrémité de la seconde barre vaut alors :
+
+      $$
+      u^{\prime}(L)=u_{C}=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)-\frac{1}{E_{2} A_{2}}\left(X_{1} L+p L^{2}\right)
+      $$
+
+      Or, d'après les conditions aux limites : $u_{A}=u_{C}=0$\\
+      On en déduit alors l'expression de la réaction $X_{1}$ :\\
+      Soit :
+
+      $$
+      X_{1} L\left(\frac{1}{E_{1} A_{1}}+\frac{1}{E_{2} A_{2}}\right)+p L^{2}\left(\frac{\frac{1}{2}}{E_{1} A_{1}}+\frac{1}{E_{2} A_{2}}\right)=0
+      $$
+
+      On note que $E_{1} A_{1}=E_{2} A_{2}=E A=210 M N$. On en déduit alors :
+
+      $$
+      2 \frac{X_{1}}{E A}+\frac{3}{2}\frac{p L}{E A}=0
+      $$
+
+      Soit
+
+      $$
+      X_{1}=-\frac{3}{4} p L=- 0.75 * 100 * 6=-450 \mathrm{kN}
+      $$
+
+      On déduit également :
+
+      $$
+      X_{5}=-(p L+X_{1})=-\frac{p L}{4}=-150 \mathrm{kN}
+      $$
+    \end{mdframed}
+  }{
+  }
+  \vspace{1em}
+
+      Le champ de déplacement se déduit des équations de Bresse.\newline 
+
+      Sur la page suivante est tracée l'allure du champ de déformation. 
+      
+      Il est parabolique sur la première partie de la barre et une linéaire sur la seconde partie. 
+      
+      On note que le déplacement maximal est obtenu en $x=4{,}5\,\mathrm{m}$, correspondant au point où $N(x)=0$ (séparation traction/compression).
+      
+      % Légère extension pour éviter un grand blanc si la figure déborde
+      \enlargethispage{2\baselineskip}
+
+      \begin{center}
+      \includegraphics[width=0.8\textwidth]{2025_10_03_26e11264345fd9bad5cag-5}
+      \end{center}
+  
 \end{enumerate}
 
 \section*{Partie 2: Résolution par la MEF}
-On utilise la méthode des éléments finis pour résoudre le problème (de manière approchée). On veut limiter la discrétisation à 4 éléments finis judicieusement choisis.\\
+On utilise la méthode des éléments finis pour résoudre le problème (de manière approchée). On veut limiter la discrétisation à 4 éléments finis judicieusement choisis.
+
+Comme vous le verrez, on retrouvera la solution exacte sur les nœuds du maillage, et on estimera la solution sur les autres points par interpolation.
 
 \begin{enumerate}[start=6]
   \item Compte tenu des résultats précédents, préciser quel vous semble le meilleur maillage parmi les 3 présentés ci-dessous en justifiant votre choix :
 \end{enumerate}
 
+Maillage 1 : 
 \begin{center}
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-1(1)}
-\end{center}
-Maillage 1
-\begin{center}
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-1}
+\includegraphics[width=0.7\textwidth]{2025_10_03_26e11264345fd9bad5cag-1(1)}
 \end{center}
 
-Maillage 2
+Maillage 2 :
 \begin{center}
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-1(3)}
+\includegraphics[width=0.7\textwidth]{2025_10_03_26e11264345fd9bad5cag-1}
 \end{center}
 
-Maillage 3
+Maillage 3 : 
+\begin{center}
+\includegraphics[width=0.7\textwidth]{2025_10_03_26e11264345fd9bad5cag-1(3)}
+\end{center}
 
-\begin{enumerate}[start=7]
-  \item Pour le maillage choisi, déterminer les matrices de rigidités élémentaires (applications numériques en kN/m)\\
-  \item En déduire la matrice de raideur globale de la structure.\\
-  \item Déterminer les forces nodales provoquées par le chargement.\\
-  \item Etablir la relation $\{F\}=[K]\{d\}$ pour l'ensemble de la structure et résoudre les inconnues de déplacements.\\
-  \item Tracer ainsi le champ de déplacements obtenu par la FEM et comparer au champ exact.\\
-  \item En déduire le champ de contraintes obtenu par la FEM et comparer au champ exact. Quel enseignement peut-on en tirer ?
-\end{enumerate}
+
+
 
 \ifthenelse{\boolean{showSolutions}}{
-\section*{ELEMENTS DE REPONSE}
-\section*{1 Question 1}
-En procédant à une coupure à gauche d'une section $\Sigma(\mathrm{x})$, il vient :
-
-\begin{itemize}
-  \item Pour $x<L$ :\\
-$N(x)=X_{1}+p$\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-3}
-  \item Pour $x>L$ :
-\end{itemize}
-
-$$
-N(x)=X_{1}+p L
-$$
-
-\section*{2 Question 2}
-D'après la loi de Hooke :
-
-$$
-\varepsilon(x)=\frac{d u(x)}{d x}=-\frac{\sigma(x)}{E(x)}=-\frac{N(x)}{E(x) A(x)}
-$$
-
-On en déduit alors la translation horizontale des sections à une abscisse x donnée :
-
-\begin{itemize}
-  \item Pour $x<L$ : on est dans la $1^{\text {ère }}$ barre en acier :
-\end{itemize}
-
-$$
-u(x)=u_{A}-\int_{0}^{x} \frac{N(\xi)}{E_{1} A_{1}} d \xi=u_{A}-\int_{0}^{x} \frac{X_{1}+p \xi}{E_{1} A_{1}} d \xi=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} x+\frac{p x^{2}}{2}\right)
-$$
-
-On pourra noter que le déplacement en $\mathrm{x}=\mathrm{L}$ vaut alors :
-
-$$
-u(L)=u_{B}=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)
-$$
-
-\begin{itemize}
-  \item Pour $\mathrm{x}>\mathrm{L}$, on est dans la $2^{\text {nde }}$ barre en aluminium et l'effort normal est constant :
-\end{itemize}
-
-En se mettant dans le repère local de la seconde barre ( $\mathrm{x}=0$ au début de la $2^{\text {nde }}$ barre), il vient :
-
-$$
-u^{\prime}(x)=u_{B}-\int_{0}^{x} \frac{N(\xi)}{E_{2} A_{2}} d \xi=u_{B}-\int_{0}^{x} \frac{X_{1}+p L}{E_{2} A_{2}} d \xi=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)-\frac{1}{E_{2} A_{2}}\left(X_{1} x+\frac{p L x}{2}\right)
-$$
-
-Le déplacement de l'extrémité de la seconde barre vaut alors :
-
-$$
-u^{\prime}(L)=u_{B}=u_{A}-\frac{1}{E_{1} A_{1}}\left(X_{1} L+\frac{p L^{2}}{2}\right)-\frac{1}{E_{2} A_{2}}\left(X_{1} L+\frac{p L^{2}}{2}\right)
-$$
-
-Or, d'après les conditions aux limites : $u_{A}=u_{B}=0$\\
-On en déduit alors l'expression de la réaction $X_{1}$ :\\
-Soit :
-
-$$
-X_{1} L\left(\frac{1}{E_{1} A_{1}}+\frac{1}{E_{2} A_{2}}\right)+p L^{2}\left(\frac{\frac{1}{2}}{E_{1} A_{1}}+\frac{1}{E_{2} A_{2}}\right)=0
-$$
-
-On note que $E_{1} A_{1}=E_{2} A_{2}=E A=210 M N$. On en déduit alors :
-
-$$
-\frac{2 X_{1}}{E A}+\frac{1.5 p L}{E A}=0
-$$
-
-Soit
-
-$$
-X_{1}=-\frac{3}{4} p L=0.75 * 100 * 6=-450 \mathrm{kN}
-$$
-
-On déduit également :
-
-$$
-X_{5}=p L-X_{1}=\frac{p L}{4}=150 \mathrm{kN}
-$$
-
-\section*{3 Question 3}
-On en déduit l'allure de l'effort normal :
-
-Pour $x<L: N(x)=-450+100 x$\\
-Pour $x>L: N(x)=-450+600=150 k N$\\
-Ci-dessous l'allure de l'effort normal :\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-4}
-
-On peut noter que la barre est en traction sur les 4 premiers mètres, puis en compression.
-
-\section*{4 Question 4}
-Le champ de déplacement se déduit des équations de Bresse :
-
-$$
-u(x)=u_{A}-\int_{0}^{x} \frac{N(\xi)}{E A} d \xi
-$$
-
-Où $u_{A}=0$ compte tenu de l'encastrement.\\
-Ainsi, pour $x<L$ :
-
-$$
-u(x)=-\int_{0}^{x} \frac{-0.75 p L+p \xi}{E A} d \xi=\frac{p}{E A}\left(\frac{3 L x}{4}-\frac{x^{2}}{2}\right)
-$$
-
-En $x=L$, on note ainsi que :
-
-$$
-u(L)=\frac{1}{4} \frac{p L^{2}}{E A}
-$$
-
-Pour $x>L$ :
-
-$$
-u(x)=u(L)-\int_{L}^{x} \frac{0.25 p L}{E A} d \xi=\frac{1}{4} \frac{p L^{2}}{E A}-\frac{1}{4} \frac{p L}{E A}(x-L)
-$$
-
-On vérifie bien ainsi que
-
-$$
-u(2 L)=0
-$$
-
-Ci-dessous l'allure du champ de déformation. Il a une allure parabolique sur la première partie de la barre et une allure linéaire sur la seconde partie. On note que le déplacement maximal est obtenu en $x=3,75 m$, correspondant au point séparant le domaine des tractions et des compressions.
-
-Pour cette abscisse $x=\frac{3}{4} L$, il vient :
-
-$$
-u_{\max }=\frac{9}{32} \frac{p L^{2}}{E A}=4,762 \times 10^{-3} m
-$$
-
-\begin{center}
-\includegraphics[max width=\textwidth]{2025_10_03_26e11264345fd9bad5cag-5}
-\end{center}
-
-\section*{5 Question 5}
-Les contraintes dans la barre sont obtenues par la loi de Hooke:
-
-$$
-\sigma=-E \varepsilon=-E \frac{\partial u(x)}{\partial x}
-$$
-
-Ainsi, pour $x<L$ :
-
-$$
-\sigma=-\frac{p}{A_{1}}\left(\frac{3 L}{4}-x\right)
-$$
-
-La contrainte de traction est maximale à l'encastrement gauche, et suit une évolution linéaire. Elle est nulle en $x=4 \mathrm{~m}$. On enregistre ensuite une contrainte de compression croissante jusque $x=5 \mathrm{~m}$, pour atteindre 150 MPa en $x=6 \mathrm{~m}$.
-
-Et pour $x>L$ :
-
-$$
-\sigma=\frac{1}{4} \frac{p L}{A_{2}}=50 \mathrm{MPa}
-$$
-
-La contrainte devient constante dans la seconde moitié de la barre et vaut 50 MPa . On note une chute brutale de la contrainte entre $x=6-\varepsilon$ où la contrainte vaut 150 MPa et $x=6+\varepsilon$ où la contrainte vaut 50 MPa . Cela s'explique par le changement de section qui est trois fois plus importante dans la seconde moitié ( 50 $\mathrm{MPa} \times 3=150 \mathrm{MPa}$ ). Les hypothèses simplificatrices ne rendent pas bien compte du phénomène complexe de diffusion des contraintes dans cette zone de transition brutale. Les résultats de la RDM établis ici sont valables lorsqu'on se situe suffisamment loin de la zone de discontinuité de section (principe de Saint Venant).
-
-Rem : on aurait pu également établir ce résultat par la relation $\sigma=\frac{N}{A}$, mais ce n'est pas l'esprit de la méthode des éléments finis.\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-6}
-
-\section*{6 Question 6}
-Il n'y a pas de chargement dans la seconde moitié de la barre : cette seconde moitié ne sera soumis qu'à des efforts à ses extrémités, à savoir la réaction d'appui de droite ( $X_{5}$ ) et l'effort provenant de la partie au niveau de la jonction entre les 2 moitiés ( $X_{B}$ ). Les questions précédentes ont mis en évidence que la contrainte dans cette partie sont constantes. Il n'est donc pas nécessaire de discrétiser cette seconde moitié. En conséquence, le maillage 2 est le plus approprié car il permet une discrétisation de la première moitié de la poutre en 3 éléments et augmente donc ainsi la précision par rapport au maillage 1 ou au maillage 3.
-
-\section*{7 Question 7}
-On discrétise ainsi le $1^{\text {er }}$ tronçon en 3 éléments de 2 m et le second en un élément de 6 m .\\
-Les matrices de rigidité élémentaire de chacun des tronçons 1,2 et 3 valent ainsi :
-
-$$
-K_{1}=K_{2}=K_{3}=\frac{E A_{1}}{L_{1} / 3}\left[\begin{array}{cc}
-1 & -1 \\
--1 & 1
-\end{array}\right]=\frac{3 E A_{1}}{L_{1}}\left[\begin{array}{cc}
-1 & -1 \\
--1 & 1
-\end{array}\right]=105000\left[\begin{array}{cc}
-1 & -1 \\
--1 & 1
-\end{array}\right](\mathrm{kN} / \mathrm{m})
-$$
-
-La matrice de rigidité élémentaire du tronçon 4 vaut ainsi :
-
-$$
-K_{4}=\frac{E A_{2}}{L_{2}}\left[\begin{array}{cc}
-1 & -1 \\
--1 & 1
-\end{array}\right]=35000\left[\begin{array}{cc}
-1 & -1 \\
--1 & 1
-\end{array}\right](\mathrm{kN} / \mathrm{m})
-$$
-
-\section*{8 Question 8}
-La matrice de raideur est obtenue en procédant à l'assemblage des raideurs (voir cours sur les méthodes matricielles) :
-
-$$
-K=\left[\begin{array}{ccccc}
-k_{1} & -k_{1} & 0 & 0 & 0 \\
--k_{1} & k_{1}+k_{2} & -k_{2} & 0 & 0 \\
-0 & -k_{2} & k_{2}+k_{3} & -k_{3} & 0 \\
-0 & 0 & -k_{3} & k_{3}+k_{4} & -k_{4} \\
-0 & 0 & 0 & -k_{4} & k_{4}
-\end{array}\right]=35000\left[\begin{array}{lrcrr}
-3 & -3 & 0 & 0 & 0 \\
--3 & 6 & -3 & 0 & 0 \\
-0 & -3 & 6 & -3 & 0 \\
-0 & 0 & -3 & 4 & -1 \\
-0 & 0 & 0 & -1 & 1
-\end{array}\right]
-$$
-
-\section*{9 Question 9}
-II a été montré en cours que le chargement nodal équivalent au chargement réparti p vaut $\frac{p L_{e}}{2}=100 \times \frac{2}{2}= 100 k N$ où $L_{e}=2 m$ est la longueur des éléments de la première moitié. Le chargement réel peut ainsi être remplacé par le chargement nodal équivalent :\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-7(1)}
-
-Chargement réel
-
-$$
-p=100 \mathrm{kN} / \mathrm{m}
-$$
-
-\begin{figure}[h]
-\begin{center}
-  \includegraphics[width=\textwidth]{2025_10_03_26e11264345fd9bad5cag-7}
-\captionsetup{labelformat=empty}
-\caption{Maillage 2}
-\end{center}
-\end{figure}
-
-$$
-F_{2}=F_{3}=200 \mathrm{kN}
-$$
-
-On vérifie que la résultante du chargement réel est bien identique à celle des forces nodales équivalentes, soit 600 kN .
-
-\section*{10 Question 10}
-La relation force-déplacement de la structure est ainsi exprimé sous la force matricielle :
-
-\begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
-\hline
-\{F\} &  & u1 & 42 & u3 & u4 & u5 &  & \{d\} \\
-\hline
-X1 + 100 &  & $1.050 \mathrm{E}+05$ & $-1.050 \mathrm{E}+05$ & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & 0.000E+00 & \multirow{5}{*}{=} & u1 \\
-\hline
-200 &  & $-1.050 \mathrm{E}+05$ & $2.100 \mathrm{E}+05$ & $-1.050 \mathrm{E}+05$ & $0.000 \mathrm{E}+00$ & 0.000E+00 &  & u2 \\
-\hline
-200 & \multirow[t]{3}{*}{=} & 0.000E+00 & $-1.050 \mathrm{E}+05$ & $2.100 \mathrm{E}+05$ & $-1.050 \mathrm{E}+05$ & 0.000E+00 &  & u3 \\
-\hline
-100 &  & 0.000E+00 & $0.000 \mathrm{E}+00$ & $-1.050 \mathrm{E}+05$ & $1.400 \mathrm{E}+05$ & -3.500E+04 &  & u4 \\
-\hline
-X5 &  & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $-3.500 \mathrm{E}+04$ & $3.500 \mathrm{E}+04$ &  & u5 \\
-\hline
-\end{tabular}
-\end{center}
-
-Où les forces inconnues sont les réactions d'appui $X_{1}$ et $X_{5}$. Au niveau des appuis, en revanche on sait que $u_{1}=u_{5}=0$.
-
-Les inconnues de déplacement sont résolues en inversant la relation $\{F\}=[K]\{d\}$ où les lignes et colonnes correspondant au dd connus sont supprimées (en grisé) :
-
-\begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
-\hline
-\{F\} &  & u1 & 42 & 43 & u4 & 45 &  & \{d\} & \{ drésolu\} \\
-\hline
-X1 + 100 &  & $1.050 \mathrm{E}+05$ & -1.050E+05 & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & \multirow{5}{*}{=} & u1 & 0.00E+00 \\
-\hline
-200 &  & $-1.050 \mathrm{E}+05$ & $2.100 \mathrm{E}+05$ & -1.050E+05 & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ &  & u2 & 3.33E-03 \\
-\hline
-200 & \multirow[t]{3}{*}{=} & $0.000 \mathrm{E}+00$ & $-1.050 \mathrm{E}+05$ & $2.100 \mathrm{E}+05$ & $-1.050 \mathrm{E}+05$ & 0.000E+00 &  & u3 & 4.76E-03 \\
-\hline
-100 &  & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $-1.050 \mathrm{E}+05$ & $1.400 \mathrm{E}+05$ & $-3.500 \mathrm{E}+04$ &  & u4 & 4.29E-03 \\
-\hline
-X5 &  & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $0.000 \mathrm{E}+00$ & $-3.500 \mathrm{E}+04$ & $3.500 \mathrm{E}+04$ &  & u5 & 0.00E+00 \\
-\hline
-\end{tabular}
-\end{center}
-
-\section*{11 Question 11}
-Le champ de déplacement est donné ci-dessous et superposé au champ de déplacement exact.
-
-On peut constater que le champ FEM est identique au champ exact dans la partie de barre non chargée. ll y a bien sûr un léger écart dans la partie de barre chargée. On pourra néanmoins noter que les déplacements FEM et exacts sont identiques aux niveaux des nœuds du maillage, à savoir en $x=0,2,4,6$ et 12 m .\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-8}
-
-\section*{12 Question 12}
-Pour déterminer le champ de contrainte FEM, il convient d'établir d'abord les déformations dans chaque élément fini (origine i, extrémité j, longueur Lij) donné par la relation :
-
-$$
-\varepsilon=\frac{u_{j}-u_{i}}{L_{i j}}
-$$
-
-Puis d'appliquer la loi de Hooke (ici version GC, comme vue en cours de RDM) :
-
-$$
-\sigma=-E_{i j} \varepsilon=-E_{i j} \frac{u_{j}-u_{i}}{L_{i j}}
-$$
-
-Le tableau ci-dessous résume les valeurs nodales des contraintes :
-
-\begin{center}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-x & u(x) FEM & Le (m) & epsilon & E (MPa) & sigma FEM (MPa) \\
-\hline
-0 & 0 &  & 0.00166667 & 210000 & -350 \\
-\hline
-2 & 3.33E-03 & 2 & 0.00166667 & 210000 & -350 \\
-\hline
-4 & 4.76E-03 & 2 & 0.00071429 & 210000 & -150 \\
-\hline
-6 & 4.29 E -03 & 2 & -0.0002381 & 210000 & 50 \\
-\hline
-6 & 4.29 E -03 & 6 & -0.0007143 & 70000 & 50 \\
-\hline
-12 & 0.00E+00 & 6 & -0.0007143 & 70000 & 50 \\
-\hline
-\end{tabular}
-\end{center}
-
-Le graphique ci-dessous superpose les champs de contraintes exact et FEM :\\
-\includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-9}
-
-Dans la seconde moitié de la barre, on retrouve exactement la même contrainte que la contrainte exacte, ce qui était attendu. En revanche, dans la première moitié, on trouve des différences très significatives. Cela s'explique par le fait que les contraintes sont proportionnelles aux déformations, donc proportionnelles aux dérivées du déplacement. Or on peut constater que si, qualitativement, on avait une bonne approximation du champ de déplacement, on s'aperçoit qu'il n'en est pas de même pour les dérivées (c'est-à-dire les pentes des courbes de champs de déplacement exact et FEM) : le graphique comparant les champs de déplacement montre en effet des pentes bien différentes, ce qui explique que les résultats sont beaucoup moins probants pour les déformations et les contraintes. Aussi, pour avoir des résultats meilleurs, il faut discrétiser encore plus la structure dans la zone chargée, les pentes du champ de déplacement donné par la FEM se rapprocheront des pentes du champ de déplacement exact. Cet exemple montre ainsi que lorsqu'on procède à une opération de dérivation à partir d'un champ approché, plus l'écart entre la dérivée du champ approché et la dérivée du champ exact (ici les champs de déformations ou contraintes) augmente, plus les écarts sur les contraintes, qui sont une des grandeurs qui guident en général la conception des ouvrages, augmentent.
-
-Cet exemple montre aussi qu'un maillage « grossier » peut aboutir à une sous-estimation des contraintes.
+  \vspace{1em}
+  \begin{mdframed}
+    Il n'y a pas de chargement dans la seconde moitié de la barre : cette seconde moitié ne sera soumis qu'à des efforts à ses extrémités, à savoir la réaction d'appui de droite ( $X_{5}$ ) et l'effort provenant de la partie au niveau de la jonction entre les 2 moitiés ( $X_{B}$ ). 
+    
+    Les questions précédentes ont mis en évidence que la contrainte dans cette partie sont constantes. 
+    Il n'est donc pas nécessaire de discrétiser cette seconde moitié. 
+    
+    En conséquence, le maillage 2 est le plus approprié car il permet une discrétisation de la première moitié de la poutre en 3 éléments et augmente donc ainsi la précision par rapport au maillage 1 ou au maillage 3.
+  \end{mdframed}
+
+\vspace{1em}
+
+}{
 }
+
+\begin{enumerate}[start=7]
+  \item La formule générale pour la matrice de rigidité d'un élément de barre est :
+
+  $$
+  K_e = \frac{EA}{L}
+  \begin{bmatrix}
+  1 & -1 \\
+  -1 & 1
+  \end{bmatrix}
+  $$
+  où $E$ est le module de Young, $A$ la section de l'élément, et $L$ sa longueur. 
+  
+  Pour le maillage choisi, déterminer les matrices de rigidités élémentaires. 
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      On discrétise le $1^{\text {er }}$ tronçon en 3 éléments de 2 m et le second en un élément de 6 m .\\
+      Les matrices de rigidité élémentaire de chacun des tronçons 1,2 et 3 valent ainsi :
+
+      $$
+      K_{1}=K_{2}=K_{3}=\frac{E A_{1}}{L_{1} / 3}\left[\begin{array}{cc}
+      1 & -1 \\
+      -1 & 1
+      \end{array}\right]=\frac{3 E A_{1}}{L_{1}}\left[\begin{array}{cc}
+      1 & -1 \\
+      -1 & 1
+      \end{array}\right]=105000\left[\begin{array}{cc}
+      1 & -1 \\
+      -1 & 1
+      \end{array}\right](\mathrm{kN} / \mathrm{m})
+      $$
+
+      La matrice de rigidité élémentaire du tronçon 4 vaut ainsi :
+
+      $$
+      K_{4}=\frac{E A_{2}}{L_{2}}\left[\begin{array}{cc}
+      1 & -1 \\
+      -1 & 1
+      \end{array}\right]=35000\left[\begin{array}{cc}
+      1 & -1 \\
+      -1 & 1
+      \end{array}\right](\mathrm{kN} / \mathrm{m})
+      $$
+
+    \end{mdframed}
+
+  \vspace{1em}
+  }{
+  }
+
+
+  Pour écrire la matrice globale du système, il faut assembler les matrices de rigidité élémentaires de chaque barre en tenant compte de la connectivité des nœuds. On procède ainsi :
+
+  \begin{itemize}
+    \item Numéroter tous les nœuds du système.
+    \item Partir d'une matrice carrée de dimension égale au nombre total de nœuds, remplie de zéros. La première ligne correspond au nœud 1, la deuxième au nœud 2, etc. de même pour les colonnes. 
+    \item Pour chaque petit élément du maillage, identifier les nœuds à ses extrémités et le coefficient de la matrice élémentaire associé à ces nœuds.
+    \item Dans la matrice globale, on additionne les contributions de chaque nœud à la position correspondante dans la matrice globale.
+  \end{itemize}
+
+  Mathématiquement, cela revient à superposer les matrices élémentaires dans la matrice globale en respectant la topologie du maillage.
+
+  Par exemple, si un élément relie les noeuds 1 et 3, et que sa matrice élémentaire est :
+
+  $$
+  K_e = 
+  \begin{bmatrix}
+  a & b \\
+  c & d
+  \end{bmatrix}
+  $$
+
+  Alors, dans la matrice globale, cet élément contribuera aux positions (1,1), (1,3), (3,1) et (3,3):
+
+  $$
+  K = 
+  \begin{bmatrix}
+  a & . & b & \cdots  \\
+  . & . & . & \cdots  \\
+  c & . & d & \cdots \\
+  \vdots & \vdots & \vdots & \ddots \\
+  \end{bmatrix}
+  $$
+  \item Exprimer la matrice de raideur globale de la structure.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+
+      La matrice de raideur est obtenue en procédant à l'assemblage des matrices élémentaires :
+
+      $$
+      K=\left[\begin{array}{ccccc}
+      k_{1} & -k_{1} & 0 & 0 & 0 \\
+      -k_{1} & k_{1}+k_{2} & -k_{2} & 0 & 0 \\
+      0 & -k_{2} & k_{2}+k_{3} & -k_{3} & 0 \\
+      0 & 0 & -k_{3} & k_{3}+k_{4} & -k_{4} \\
+      0 & 0 & 0 & -k_{4} & k_{4}
+      \end{array}\right]=\frac{EA}{L}\left[\begin{array}{lrcrr}
+      3 & -3 & 0 & 0 & 0 \\
+      -3 & 6 & -3 & 0 & 0 \\
+      0 & -3 & 6 & -3 & 0 \\
+      0 & 0 & -3 & 4 & -1 \\
+      0 & 0 & 0 & -1 & 1
+      \end{array}\right]
+      $$
+    \end{mdframed}
+  }{
+  }
+
+  \vspace{1em}
+
+  Pour écrire la relation $F=K \bf{u}$ et résoudre le système, il faut encore exprimer les forces qui s'appliquent sur les noeuds du maillage. \newline 
+  Dans le cours de RdM, vous avez montré que le chargement réparti peut être remplacé par un chargement nodal équivalent $F_e = \frac{p L_e}{2}$.
+
+  \item Déterminer les forces équivalentes qui s'appliquent sur les noeuds du maillage.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      Le chargement réel peut être remplacé par le chargement nodal équivalent :
+      
+      
+      \begin{center}
+        \includegraphics[width=0.8\textwidth]{2025_10_03_26e11264345fd9bad5cag-7}
+      \end{center}
+      
+      $$
+      F_{2}=F_{3}=200 \mathrm{kN}
+      $$
+      
+      On vérifie que la résultante du chargement réel est bien identique à celle des forces nodales équivalentes, soit $600 \mathrm{kN}$.
+    \end{mdframed}
+    \vspace{1em}
+  }{
+  }
+
+
+
+  Il reste une dernière étape avant d'écrire le système linéaire, il faut tenir compte des conditions aux limites. Pour cela, on supprime dans la matrice de rigidité globale les lignes et colonnes correspondant aux déplacements connus.
+
+  \item Etablir la relation $F=K \bf{u}$ pour l'ensemble de la structure.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      On a supprimé les premières et dernières lignes et colonnes de la matrice de rigidité globale. Les conditions aux limites imposent $u_1 = u_5 = 0$.
+
+      La relation force-déplacement de la structure est ainsi exprimée sous la forme matricielle :
+
+      $$
+      \begin{pmatrix}
+        200 \\
+        200 \\ 
+        100 \\
+      \end{pmatrix}
+       = 
+       \frac{EA}{L}\left[
+        \begin{array}{lrcrr}
+         6 & -3 & 0  \\
+         -3 & 6 & -3  \\
+         0 & -3 & 4  \\
+        \end{array}\right]
+        \begin{pmatrix}
+          u_2 \\
+          u_3 \\
+          u_4 \\
+        \end{pmatrix}
+      $$
+    \end{mdframed}
+
+  \vspace{1em}
+  }{
+  }
+
+  \item Ecrire puis résoudre le système linéaire pour obtenir les déplacements aux noeuds du maillage.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}
+      On résout le système linéaire pour obtenir les déplacements.
+
+    \[
+    \left\{
+    \begin{array}{rcl}
+      6u_2 - 3u_3           & = & 200L/EA \\
+      -3u_2 + 6u_3 - 3u_4   & = & 200L/EA \\
+                -3u_3 + 4u_4 & = & 100L/EA \\
+    \end{array}
+    \right.
+    \]
+
+    Après l'opération $R_2 \leftarrow 2R_2 + R_1$, on obtient :
+
+    \[
+    \left\{
+    \begin{array}{rcl}
+      6u_2 - 3u_3           & = & 200L/EA \\
+      9u_3 - 6u_4           & = & 600L/EA \\
+      -3u_3 + 4u_4          & = & 100L/EA \\
+    \end{array}
+    \right.
+    \]
+    Ensuite, $R_3 \leftarrow 3R_3 + R_2$, ce qui donne le système suivant :
+
+    \[
+    \left\{
+    \begin{array}{rcl}
+      6u_2 - 3u_3           & = & 200L/EA \\
+      9u_3 - 6u_4           & = & 600L/EA \\
+      6u_4           & = & 900L/EA \\
+    \end{array}
+    \right.
+    \]
+    On obtient finalement :
+    \[
+    \left\{\begin{array}{rcl}
+      u_2 & = & 350L/3EA \\
+      u_3 & = & 500L/3EA \\
+      u_4 & = & 150L/EA \\
+    \end{array}\right.
+    \]
+
+    \end{mdframed}
+
+  \vspace{1em}
+  }{
+  }
+
+  \item Tracer ainsi le champ de déplacements obtenu par la FEM sur le schéma donné ci-dessus et comparer au champ exact.
+
+  \ifthenelse{\boolean{showSolutions}}{
+    \vspace{1em}
+    \begin{mdframed}      
+      
+      Les déplacements FEM et exacts sont identiques aux niveaux des nœuds du maillage, à savoir en $x=0,2,4,6$ et $12\,\mathrm{m}$ .\\
+
+      Le champ FEM est identique au champ exact dans la partie de barre non chargée. 
+
+      \includegraphics[max width=\textwidth, center]{2025_10_03_26e11264345fd9bad5cag-8}
+      
+      Il y a bien sûr un léger écart dans la partie de barre chargée. 
+
+      Cet exemple montre aussi qu'un maillage « grossier » peut aboutir à une sous-estimation des contraintes.    
+    \end{mdframed}
+  }{
+  }
+\end{enumerate}
 
 \end{document}

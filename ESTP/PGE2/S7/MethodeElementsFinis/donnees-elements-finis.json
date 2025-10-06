@@ -25,18 +25,13 @@
       ],
       "sexercer" : [
         {
-          "titre": "QCM",
-          "lien": "0-Revisions/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
           "titre": "Exercices",
-          "lien": "0-Revisions/Exercices/enonce.pdf",
+          "lien": "3-Exemple/enonce.pdf",
           "cible": "_blank"
         },
         {
           "titre": "Corrigés",
-          "lien": "0-Revisions/Exercices/corrige.pdf",
+          "lien": "3-Exemple/corrige.pdf",
           "cible": "_blank"
         }
       ]
@@ -51,11 +46,7 @@
         
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "1-EspacesVectoriels/QCM/index.html",
-          "cible": "_blank"
-        }
+
       ]
     },
     {
@@ -68,11 +59,7 @@
         
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "2-FamillesDeVecteurs/QCM/index.html",
-          "cible": "_blank"
-        }
+
       ]
     },
     {
@@ -85,11 +72,7 @@
         
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "3-ApplicationsLineaires/QCM/index.html",
-          "cible": "_blank"
-        }
+
       ]
     },
     {
@@ -102,11 +85,7 @@
         
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "4-Matrices/QCM/index.html",
-          "cible": "_blank"
-        }
+
       ]
     }
   ]
