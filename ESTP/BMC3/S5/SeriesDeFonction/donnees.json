@@ -61,8 +61,8 @@
       ]
     },
     {
-      "id": "sec1",
-      "numero": 0,
+      "id": "sec2",
+      "numero": 1,
       "titre": "Vers les séries de Fourier",
       "description": "Suites · Séries · Suites de fonctions",
       "lien": "#",
