@@ -144,6 +144,17 @@
       }
     });
 
+    // Garde anti-doublon pour événements tactiles/clics rapprochés
+    function withTapGuard(target, handler) {
+      let locked = false;
+      return function(ev) {
+        if (locked) return;
+        locked = true;
+        setTimeout(() => { locked = false; }, 400);
+        handler(ev);
+      };
+    }
+
     // Fonction pour générer le plan à partir des données JSON
     function generatePlan(data) {
       // Mettre à jour le titre principal
@@ -179,6 +190,7 @@
         stationGroup.setAttribute('role', 'link');
         stationGroup.setAttribute('aria-label', `Ouvrir ${chapitre.titre}`);
         stationGroup.setAttribute('tabindex', '0');
+        stationGroup.setAttribute('data-prevent-swipe', '');
         
                  const stationG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
          stationG.setAttribute('transform', `translate(${x},150)`);
@@ -255,6 +267,7 @@
               subG.setAttribute('transform', `translate(0,${currentY})`);
               subG.setAttribute('style', 'cursor: pointer;');
               subG.setAttribute('class', 'sub-btn-group');
+              subG.setAttribute('data-prevent-swipe', '');
               
               const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
               rect.setAttribute('class', 'sub-btn');
@@ -282,14 +295,17 @@
                 subG.appendChild(descText);
               }
               
-              // Ajouter l'événement de clic
-              subG.addEventListener('click', function() {
+              // Navigation fiable sur mobile (pointerup/touchend/click) avec garde anti-doublon
+              const subGo = withTapGuard(subG, function() {
                 if (sousPartie.cible === '_blank') {
                   window.open(sousPartie.lien, '_blank');
                 } else {
                   window.location.href = sousPartie.lien;
                 }
               });
+              subG.addEventListener('pointerup', subGo);
+              subG.addEventListener('touchend', subGo, { passive: true });
+              subG.addEventListener('click', subGo);
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               subG.addEventListener('keydown', function(event) {
@@ -335,6 +351,7 @@
               exG.setAttribute('transform', `translate(0,${currentY})`);
               exG.setAttribute('style', 'cursor: pointer;');
               exG.setAttribute('class', 'sub-btn-group');
+              exG.setAttribute('data-prevent-swipe', '');
               
               const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
               rect.setAttribute('class', 'sub-btn');
@@ -352,14 +369,17 @@
               exG.appendChild(rect);
               exG.appendChild(text);
               
-              // Ajouter l'événement de clic
-              exG.addEventListener('click', function() {
+              // Navigation fiable sur mobile (pointerup/touchend/click) avec garde anti-doublon
+              const exGo = withTapGuard(exG, function() {
                 if (exercice.cible === '_blank') {
                   window.open(exercice.lien, '_blank');
                 } else {
                   window.location.href = exercice.lien;
                 }
               });
+              exG.addEventListener('pointerup', exGo);
+              exG.addEventListener('touchend', exGo, { passive: true });
+              exG.addEventListener('click', exGo);
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               exG.addEventListener('keydown', function(event) {
