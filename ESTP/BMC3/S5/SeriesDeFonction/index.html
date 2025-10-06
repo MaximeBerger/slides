@@ -158,6 +158,9 @@
       
       if (totalChapters === 1) {
         positions.push(600); // Centre si une seule section
+      } else if (totalChapters === 2) {
+        // Placement équilibré pour deux chapitres
+        positions.push(400, 800);
       } else {
         const startX = 100;
         const endX = 1100;
