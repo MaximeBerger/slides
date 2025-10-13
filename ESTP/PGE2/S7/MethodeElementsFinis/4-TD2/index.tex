@@ -1,0 +1,745 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{multirow}
+
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{MEF - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+% Tcolorboxes stylisées
+\tcbset{tracebox/.style={breakable,enhanced,sharp corners,boxrule=0pt,frame hidden,arc=2mm,
+  colback=white,coltitle=black,fonttitle=\bfseries\large,
+  borderline west={2mm}{0pt}{Theme},
+  before skip=8pt,after skip=8pt,drop fuzzy shadow}}
+
+\newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé des idées}}
+\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir }}
+\newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple}}
+
+% Encadré « Formules & illustrations »
+\newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
+
+% Astuce : puces clean
+\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
+
+% Raccourci pour une « Trace » complète
+% Usage : \TraceSection{Titre}{Objectif court}
+\newcommand{\TraceSection}[2]{%
+  
+}
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ MEF - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Méthode des éléments finis -- TD2}}\\[1em]
+    {\large \textit{Avec des équations différentielles partielles}}
+\end{center}
+\section*{Contexte}
+La méthode des éléments finis est une technique numérique puissante utilisée pour résoudre des équations différentielles partielles. Nous allons étudier un problème aux limites elliptique en dimension 1 : le problème de Dirichlet. 
+
+Voici les étapes de la méthode quand on part d'une équation différentielle partielle :
+\begin{enumerate}
+    \item Découper le domaine en éléments simples
+    \item Établir la formulation variationnelle de l'EDP ()
+    \item Ecrire la matrice élémentaire sur chaque élément
+    \item Assembler ces matrices pour obtenir la matrice de rigidité globale
+    \item Résoudre le système linéaire
+\end{enumerate}
+
+
+Considérons l'équation différentielle suivante en dimension $1$ :
+\[
+- \frac{d}{dx} \left( p(x) \frac{du}{dx} \right) + q(x) u = f(x), \quad x \in (0, 1)
+\]
+où \( p(x) > 0 \), \( q(x) \geq 0 \), et \( f(x) \) est une fonction donnée.
+
+\textbf{Conditions aux limites de Dirichlet: la valeur de l'inconnue est fixée au bord}
+\[
+u(0) = \alpha, \quad u(1) = \beta
+\]
+
+\subsection*{Exemple concret d'application : Isolation thermique d'un mur}
+
+\begin{exempleBox}
+\textbf{Contexte :} Imaginons un mur de bâtiment de 1 mètre d'épaisseur, composé de plusieurs matériaux (béton, isolant, plâtre). On souhaite déterminer la distribution de température $u(x)$ à travers le mur en régime stationnaire.
+
+\vspace{0.3cm}
+
+\textbf{Interprétation physique de l'équation :}
+
+\begin{itemize}
+    \item \textbf{$u(x)$} : température (en °C) à la position $x$ dans le mur
+    \item \textbf{$p(x)$} : conductivité thermique du matériau (en W/(m·K))
+    \begin{itemize}
+        \item Béton : $p \approx 1.5$ W/(m·K)
+        \item Isolant (laine de verre) : $p \approx 0.04$ W/(m·K)
+        \item Plâtre : $p \approx 0.5$ W/(m·K)
+    \end{itemize}
+    \item \textbf{$q(x) u$} : pertes thermiques volumiques (par exemple dues à la convection interne)
+    \item \textbf{$f(x)$} : sources de chaleur internes (par exemple, câbles électriques chauffants intégrés)
+\end{itemize}
+
+\vspace{0.3cm}
+
+
+\textbf{Conditions aux limites :}
+\begin{itemize}
+    \item $u(0) = \alpha = 20$°C (température intérieure imposée par le chauffage)
+    \item $u(1) = \beta = 5$°C (température extérieure en hiver)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Cas simple :} Si $p$ et $q$ sont constants et $f = 0$ (pas de source interne), on retrouve l'équation classique de diffusion :
+\[
+-p u'' + q u = 0
+\]
+
+\textbf{Résultat attendu :} La méthode des éléments finis permet de calculer la température en tout point du mur, et notamment :
+\begin{itemize}
+    \item Localiser les zones de forte variation de température (ponts thermiques)
+    \item Calculer le flux thermique total : $\Phi = -p \frac{du}{dx}$ (pour dimensionner le chauffage)
+    \item Vérifier les risques de condensation (température du point de rosée)
+\end{itemize}
+\end{exempleBox}
+
+\subsection*{Autres exemples d'applications}
+
+L'équation $- \frac{d}{dx} \left( p(x) \frac{du}{dx} \right) + q(x) u = f(x)$ peut modéliser d'autres phénomènes physiques :
+
+\begin{multicols}{2}
+\begin{itemize}[label=]
+    \item \textbf{Mécanique :} Déformation d'une barre élastique
+    \begin{itemize}[label=$\bullet$]
+        \item $u$ : déplacement
+        \item $p$ : module d'Young
+        \item $f$ : force appliquée
+    \end{itemize}
+    
+    \item \textbf{Électrostatique :} Potentiel électrique
+    \begin{itemize}[label=$\bullet$]
+        \item $u$ : potentiel
+        \item $p$ : permittivité
+        \item $f$ : densité de charge
+    \end{itemize}
+    
+    \item \textbf{Hydraulique :} Écoulement en milieu poreux
+    \begin{itemize}[label=$\bullet$]
+        \item $u$ : pression
+        \item $p$ : perméabilité
+        \item $f$ : source/puits
+    \end{itemize}
+    
+    \item \textbf{Chimie :} Diffusion d'un polluant
+    \begin{itemize}[label=$\bullet$]
+        \item $u$ : concentration
+        \item $p$ : coefficient de diffusion
+        \item $q$ : taux de dégradation
+    \end{itemize}
+\end{itemize}
+\end{multicols}
+
+\section*{La formulation variationnelle}
+
+\begin{rappelsBox}
+La formulation variationnelle (ou formulation faible) est une reformulation d'une équation différentielle qui permet de :
+\begin{itemize}
+    \item Affaiblir les hypothèses de régularité (on passe de dérivées classiques à des dérivées au sens faible)
+    \item Obtenir une forme adaptée à l'approximation numérique
+    \item Garantir l'existence et l'unicité de la solution (théorème de Lax-Milgram)
+\end{itemize}
+\end{rappelsBox}
+
+\subsection*{Principe général}
+
+Considérons une équation différentielle sous la forme :
+\[
+\mathcal{L}(u) = f \quad \text{dans } \Omega
+\]
+avec des conditions aux limites appropriées, où $\mathcal{L}$ est un opérateur différentiel.
+
+\textbf{Étape 1 : Multiplier par une fonction test}
+
+On multiplie l'équation par une fonction test $v$ (appelée aussi fonction poids) et on intègre sur le domaine :
+\[
+\int_\Omega \mathcal{L}(u) \, v \, dx = \int_\Omega f \, v \, dx
+\]
+
+\textbf{Étape 2 : Intégration par parties}
+
+On utilise l'intégration par parties pour réduire l'ordre de dérivation. Cela permet de :
+\begin{itemize}
+    \item Répartir les dérivées entre $u$ et $v$ (formulation symétrique)
+    \item Faire apparaître les conditions aux limites naturellement
+    \item Réduire les exigences de régularité sur $u$
+\end{itemize}
+
+\textbf{Étape 3 : Formulation finale}
+
+On obtient une formulation du type :
+\[
+a(u, v) = L(v) \quad \forall v \in V_0
+\]
+où :
+\begin{itemize}
+    \item $a(\cdot, \cdot)$ est une forme bilinéaire (linéaire en chaque argument)
+    \item $L(\cdot)$ est une forme linéaire
+    \item $V_0$ est l'espace des fonctions test (qui satisfont les conditions aux limites homogènes)
+\end{itemize}
+
+\subsection*{Exemple avec notre problème}
+
+Pour l'équation sur un segment $[0,h]$:
+\[
+- \frac{d}{dx} \left( p(x) \frac{du}{dx} \right) + q(x) u = f(x)
+\]
+
+\textbf{Étape 1 :} Multipliez par $v$ et intégrez sur $[0,h]$ :
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \int_0^h \left[ - \frac{d}{dx} \left( p \frac{du}{dx} \right) + q u \right] v \, dx = \int_0^h f v \, dx
+    \]
+    \end{solution}
+    }{}
+
+\textbf{Étape 2 :} Intégrez par parties sur le terme dérivé, on choisit la fonction test $v$ pour être nulle au bord ($v(0) = v(h) = 0$) :
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \int_0^h \left( - \frac{d}{dx} \left( p \frac{du}{dx} \right) \right) v \, dx = \left[ -p \frac{du}{dx} v \right]_0^h + \int_0^h p \frac{du}{dx} \frac{dv}{dx} \, dx
+    \]
+    
+
+    Si $v(0) = v(h) = 0$ (conditions homogènes), le terme de bord s'annule :
+
+    \[
+    \int_0^h p \frac{du}{dx} \frac{dv}{dx} \, dx + \int_0^h q u v \, dx = \int_0^h f v \, dx
+    \]
+\end{solution}
+    }{}
+
+\textbf{Étape 3 :} Formulation variationnelle finale :
+
+Résoudre l'équation différentielle revient à trouver une fonction $u$ telle que
+\[
+a(u, v) = L(v) \quad \forall v \in V_0
+\]
+avec $a(u, v)$ une fonction bilinéaire symétrique et $L(v)$ une fonction linéaire.
+
+C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre pour trouver $u$.
+
+
+\subsection*{Pourquoi cette formulation ?}
+
+\begin{itemize}
+    \item \textbf{Régularité} : On n'a besoin que de $u' $ et $v'$ (pas de $u''$)
+    \item \textbf{Symétrie} : $a(u,v)$ est symétrique : $a(u,v) = a(v,u)$
+    \item \textbf{Coercivité} : Sous certaines conditions, $a(u,u) \geq \alpha \|u\|^2$ garantit l'existence et l'unicité (Théorème de Lax-Milgram)
+    \item \textbf{Approximation} : Cette forme se prête bien à la discrétisation par éléments finis
+\end{itemize}
+
+\section*{Questions}
+
+\begin{enumerate}[itemsep=0.5em]
+\item \textbf{Maillage}
+\begin{enumerate}
+    \item Définissez un maillage avec $4$ éléments $(0=x_0,\,x_1,\,x_2,\,x_3,\,x_4=1)$, chacun de longueur $h$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+        
+    \begin{solution}
+    
+    Divisons l'intervalle \([0,1]\) en 4 éléments égaux. La longueur de chaque élément est \( h = \frac{1}{4} = 0.25 \).
+
+    Les noeuds sont :
+    \[
+    x_0 = 0, \quad x_1 = h, \quad x_2 = 2h, \quad x_3 = 3h, \quad x_4 = 4h = 1
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+     \item \textbf{Formulation Variationnelle}
+\begin{enumerate}
+    \item Sur le premier élément $[0,h]$, formulez le problème de Dirichlet sous sa forme variationnelle. On pourra choisir $V_0 = \{ v \in H^1(0,h) \ | \ v(0) = v(h) = 0 \}$ comme espace de fonctions test.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+    Nous cherchons \( u \in V \) tel que
+    \[
+    a(u, v) = L(v) \quad \forall v \in V_0
+    \]
+    où \( V_0 = \{ v \in H^1(0,h) \ | \ v(0) = v(h) = 0 \} \), et
+    \[
+    a(u, v) = \int_0^h p \frac{du}{dx} \frac{dv}{dx} \, + \int_0^h q u v 
+    \]
+    \[
+    L(v) = \int_0^h f v
+    \]
+    \end{solution}
+    }{}
+
+    \item Sur le second élément du maillage, comment la formulation variationnelle est-elle modifiée ? 
+ \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Il suffit de changer les bornes d'intégration.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+\item \textbf{Approximation dans un Espace de Dimension Finie}
+\begin{enumerate}
+    \item La méthode des éléments finis nous donnera une solution seulement sur les noeuds du maillage. Nous relierons ensuite ces points par des segments de droite. 
+
+    Déterminez les expressions des fonctions \( \varphi_i \), affines par morceaux et telles que \( \varphi_i(x_j) = \delta_{ij} \). 
+    
+    \vspace{2em}
+    Pour obtenir une solution approchée de notre équation différentielle, nous chercherons alors une fonction $u_h$ telle que
+    \[
+    u_h = \sum_{i=0}^{4} \alpha_i \varphi_i
+    \]
+    où les $ \alpha_i $ sont des coefficients inconnus à déterminer. $u_h$ vérifiera les conditions au bord.
+    
+\end{enumerate}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+    \begin{enumerate}
+        \item Les fonctions \( \varphi_i \) sont les fonctions affines par morceaux définies comme suit :
+        \[
+        \varphi_i(x_j) = \delta_{ij}, \quad i,j = 0,1,2,3,4
+        \]
+        Chaque \( \varphi_i \) est égale à 1 au noeud \( x_i \) et à 0 aux autres noeuds.
+            % Start Generation Here
+            \[
+            \varphi_0(x) =
+            \begin{cases}
+                1 - \dfrac{x}{h} & \text{si } 0 \leq x \leq x_1, \\
+                0 & \text{sinon}.
+            \end{cases}
+            \]
+            \[
+            \varphi_1(x) =
+            \begin{cases}
+                \dfrac{x}{h} & \text{si } x_0 \leq x \leq x_1, \\
+                1 - \dfrac{x - x_1}{h} & \text{si } x_1 \leq x \leq x_2, \\
+                0 & \text{sinon}.
+            \end{cases}
+            \]
+            \[
+            \varphi_2(x) =
+            \begin{cases}
+                \dfrac{x - x_1}{h} & \text{si } x_1 \leq x \leq x_2, \\
+                1 - \dfrac{x - x_2}{h} & \text{si } x_2 \leq x \leq x_3, \\
+                0 & \text{sinon}.
+            \end{cases}
+            \]
+            \[
+            \varphi_3(x) =
+            \begin{cases}
+                \dfrac{x - x_2}{h} & \text{si } x_2 \leq x \leq x_3, \\
+                1 - \dfrac{x - x_3}{h} & \text{si } x_3 \leq x \leq x_4, \\
+                0 & \text{sinon}.
+            \end{cases}
+            \]
+            \[
+            \varphi_4(x) =
+            \begin{cases}
+                \dfrac{x - x_3}{h} & \text{si } x_3 \leq x \leq x_4, \\
+                0 & \text{sinon}.
+            \end{cases}
+            \]
+    \end{enumerate}
+    \end{solution}
+    }{}
+\item \textbf{Obtention du Système Linéaire}
+\begin{enumerate}
+    \item La matrice de rigidité élémentaire $K_e$ associée au problème de Dirichlet sur l'élément $[x_i,x_{i+1}]$ est
+    
+    \[
+    K_e = \begin{pmatrix}
+        a(\varphi_i, \varphi_i) & a(\varphi_i, \varphi_{i+1}) \\
+        a(\varphi_{i+1}, \varphi_i) & a(\varphi_{i+1}, \varphi_{i+1})
+    \end{pmatrix}
+    \]
+    On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newline
+
+    \item Montrer que si $u = \sum_{i=0}^{4} \alpha_i \varphi_i$, alors $a(u, v) = \sum_{i=0}^{4} \alpha_i a(\varphi_i, v)$. En déduire que
+    \[
+        u \text{ vérifie } a(u, v) = L(v) \quad \forall v \in V_0 \Leftrightarrow K_e \begin{pmatrix} \alpha_i \\ \alpha_{i+1} \end{pmatrix} = \begin{pmatrix} L(\varphi_i) \\ L(\varphi_{i+1}) \end{pmatrix}
+    \]
+    On pourra le vérifier pour $v = \varphi_i$ et $v = \varphi_{i+1}$.
+    
+    \item Ecrivez la matrice de rigidité du premier élément $[0,h]$.
+    
+    \item Sans vous lancer dans de longs calculs, explicitez la matrice de rigidité sur chacun des autres éléments. Nous continuerons à supposer que les fonctions $p$ et $q$ sont constantes.
+
+    \item Etablissez la matrice de rigidité globale \( K \) et décrivez ses propriétés (par exemple: forme particulière, symétrie, définie positive). 
+
+    \item En supposant maintenant que $f$ est constante sur chaque élément, explicitez le second membre du système linéaire.
+
+\end{enumerate}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+    \begin{enumerate}
+            % Start of Selection
+            \item La matrice de rigidité locale \( K \) sur le premier élément est définie par :
+            \[
+            K = \left(
+                \begin{array}{cc}
+                    a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_1) \\
+                    a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_1)
+                \end{array}
+            \right)
+            \]
+            Il faut donc calculer ces $4$ termes. En fait seulement $3$ puisque $a(\varphi_0, \varphi_1) = a(\varphi_1, \varphi_0)$, $a$ est symétrique.
+
+            On peut commencer par calculer les dérivées des fonctions de base : sur l'intervalle $[0,h]$,
+            \[
+            \frac{d\varphi_0}{dx} = -\frac{1}{h}, \quad \frac{d\varphi_1}{dx} = \frac{1}{h}
+            \]
+            et les autres dérivées sont nulles.
+
+            \[
+            K_{11} = a\big(\varphi_0, \varphi_0\big) = \int_{0}^{h} p_0 \frac{d\varphi_0}{dx} \frac{d\varphi_0}{dx} \, dx + \int_{0}^{h} q_0 \varphi_0 \varphi_0 \, dx
+            \]
+            En remplaçant les fonctions de base par leur expression, on obtient :
+            \[
+            K_{11} = \int_{0}^{h} p_0 \left( -\frac{1}{h} \right)^2 dx + \int_{0}^{h} q_0 \varphi_0^2 dx
+            \]
+            C'est à dire :
+            \[
+            K_{11} = \frac{p_0}{h} + q_0 \int_{0}^{h} \Big(1 - \frac{x}{h}\Big)^2 dx 
+            \]  
+            Or 
+            \[\int_{0}^{h} \Big(1 - \frac{x}{h}\Big)^2 dx = \Big[\frac{-h}{3}\Big(1 - \frac{x}{h}\Big)^3\Big]_{0}^{h} = \frac{h}{3}.\]
+
+            Finalement :
+            \[
+            K_{11} = \frac{p_0}{h} + q_0 \frac{h}{3}
+            \]
+            
+            Pour le second terme, on a :
+
+            \[
+            K_{12} = K_{21} = \int_{0}^{h} p_0 \left( -\frac{1}{h} \right) \left( \frac{1}{h} \right) dx + q_0 \int_{0}^{h} \Big(1 - \frac{x}{h}\Big) \Big(\frac{x}{h}\Big) dx
+            \]
+            Ainsi, 
+            \[
+            K_{12} = K_{21} = -\frac{p_0}{h} + q_0 \int_{0}^{h} \frac{x}{h} \Big(1 - \frac{x}{h}\Big)  dx
+            \]
+            Or 
+            \[\int_{0}^{h} \frac{x}{h}\Big(1 - \frac{x}{h}\Big)  dx = \frac{1}{h}\Big[\frac{x^2}{2} - \frac{x^3}{3h}\Big]_{0}^{h} = \frac{h}{6}.\]
+
+            Finalement :
+            \[
+            K_{12} = K_{21} = -\frac{p_0}{h} + q_0 \frac{h}{6}
+            \]
+            
+            Pour le dernier coefficient de la matrice, on a :
+            \[
+            K_{22} = \int_{0}^{h} p_0 \left( \frac{1}{h} \right)^2 dx  + q_0 \int_{0}^{h} \Big(\frac{x}{h}\Big)^2 dx = \frac{p_0}{h} + q_0 \frac{h}{3}.
+            \]
+            
+            En rassemblant les résultats, la matrice de rigidité sur le premier élément est:
+            \[
+            K = \frac{p_0}{h}
+            \begin{pmatrix}
+                1 & -1 \\
+                -1 & 1
+            \end{pmatrix}
+            + q_0 \frac{h}{3}
+            \begin{pmatrix}
+                1 & 1/2 \\
+                1/2 & 1
+            \end{pmatrix}
+            \]
+
+            \item L'équation se déduit par linéarité de $a$ et $L$ et en effectuant la multiplication matricielle. 
+
+            \item Les autres matrices de rigidité sont identiques aux constantes $p_0$ et $q_0$ près. Cela découle de la symétrie des fonctions $\varphi_i$, par exemple un changement de variable sur les intégrales $u=x+h$ conduit à :
+            \[
+            \int_0^h \left( \frac{d\varphi_0}{dx} \right)^2 dx = \int_h^{2h} \left( \frac{d\varphi_1}{dx} \right)^2 dx 
+            \]
+            On le voit bien aussi en traçant les graphes des fonctions $\varphi_i$.
+            % Start of Selection
+            \item En assemblant les matrices locales, on construit le système global $K \mathbf{u} = \mathbf{f}$. Ce processus implique de placer chaque matrice locale dans la matrice globale $K$ en fonction de la connectivité des nœuds de chaque élément. 
+            Une fois tous les éléments assemblés, la matrice $K$ sera de taille $5 \times 5$ (pour 5 nœuds).
+
+            Si les fonctions $p$ et $q$ étaient constantes sur tout le domaine égales à $p(x)=p_0$ et $q(x)=q_0$, on aurait
+
+            \begin{multline*}
+            K = \frac{p_0}{h}
+            \begin{pmatrix}
+                1 & -1 & 0 & 0 & 0\\
+                -1 & 2 & -1 & 0 & 0\\
+                0 & -1 & 2 & -1 & 0\\
+                0 & 0 & -1 & 2 & -1\\
+                0 & 0 & 0 & -1 & 1
+            \end{pmatrix} \\ 
+            + q_0 \frac{h}{3}
+            \begin{pmatrix}
+                1 & 1/2 & 0 & 0 & 0\\
+                1/2 & 2 & 1/2 & 0 & 0\\
+                0 & 1/2 & 2  & 1/2 & 0\\
+                0 & 0 & 1/2 & 2 & 1/2\\
+                0 & 0 & 0 & 1/2 & 2
+            \end{pmatrix}
+            \end{multline*}
+
+            Dans le cas général, on a 
+            \begin{multline*}
+            K = \frac{1}{h}
+            \begin{pmatrix}
+                p_0 & -p_0 & 0 & 0 & 0\\
+                -p_0 & p_0+p_1 & -p_1 & 0 & 0\\
+                0 & -p_1 & p_1+p_2 & -p_2 & 0\\
+                0 & 0 & -p_2 & p_2+p_3 & -p_3\\
+                0 & 0 & 0 & -p_3 & p_3
+            \end{pmatrix}\\
+            + \frac{h}{3}
+            \begin{pmatrix}
+                q_0 & q_0/2 & 0 & 0 & 0\\
+                q_0/2 & q_0+q_1 & q_1/2 & 0 & 0\\
+                0 & q_1/2 & q_1+q_2 & q_2/2 & 0\\
+                0 & 0 & q_2/2 & q_2+q_3 & q_3/2\\
+                0 & 0 & 0 & q_3/2 & q_3
+            \end{pmatrix}
+            \end{multline*}
+
+        La matrice $K$ est symétrique donc diagonalisable d'après le théorème spectral. 
+    
+    \item Pour le second membre du système linéaire il faut également calculer les intégrales des $\varphi_i$:
+    Pour le premier élément 
+    \[
+    \int_{0}^{h} f(x) \varphi_0(x) dx = f_0 \int_{0}^{h} \Big(1 - \frac{x}{h}\Big) dx = f_0\Big[\frac{-h}{2}\Big(1 - \frac{x}{h}\Big)^2\Big]_{0}^{h} = \frac{f_0h}{2}
+    \]
+    Par symétrie, on a de même
+    \[
+    \int_{0}^{h} f(x) \varphi_1(x) dx = \frac{f_0h}{2}
+    \]
+
+    On peut alors assembler un second membre global pour le système linéaire.
+    \[
+    \mathbf{f} = \begin{pmatrix}
+        f_0h/2 \\
+        f_0h \\
+        f_0h \\
+        f_0h \\
+        f_0h/2
+    \end{pmatrix}
+    \]
+
+    
+    \end{enumerate}
+    \end{solution}
+    }{}
+\item \textbf{Résolution Manuelle dans un Cas Simple}
+\begin{enumerate}
+    \item Considérez le cas où \( p(x) = 1 \), \( q(x) = 0 \), \( f(x) = 1 \) et dites à quelle équation différentielle du second ordre ces conditions correspondent.
+    
+    \item Les équations du système linéaire trouvées précédemment ne prennent pas du tout en compte les conditions aux limites. Ecrivez les $3$ équations sur $\alpha_1, \, \alpha_2, \, \alpha_3$ puis explicitez la solution approchée $u_h$. 
+    
+    \item Calculez la solution exacte de l'équation différentielle avec conditions aux limites.
+    
+    \item Comparez votre solution approchée avec la solution exacte et discutez de la précision de l'approximation à la fois aux noeuds du maillage et entre les noeuds. 
+    
+    \item Quelles méthodes proposez-vous pour améliorer l'approximation?
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+    \begin{enumerate}
+        \item Avec \( p(x) = 1 \), \( q(x) = 0 \), \( f(x) = 1 \), l'équation devient :
+        \[
+        -u'' = 1
+        \]
+        C'est l'équation de Laplace. 
+
+        \item Comme $\alpha_0 = u(0)$ et $\alpha_4 = u(1)$ sont connus, on doit retirer les équations correspondantes du système, cela correspond à la première ligne et la dernière ligne de la matrice $K$.
+        
+        On résout le système linéaire $K \mathbf{u} = \mathbf{f}$ pour obtenir les coefficients $\alpha_1, \alpha_2, \alpha_3$.
+
+        \[
+        \left\{
+        \begin{array}{cccccc}
+             \frac{p_0}{h}\Big(- \alpha & +  2 \alpha_1 &- \alpha_2 & & \Big)  &=  f_0 h \\
+             \frac{p_0}{h}\Big( & - \alpha_1 &+  2 \alpha_2& - \alpha_3 &\Big)  &=  f_0 h \\
+             \frac{p_0}{h}\Big(  & & - \alpha_2 &+  2 \alpha_3 &- \beta\Big)  &=  f_0 h \\
+        \end{array}
+        \right.
+        \]
+        La quantité $f_0 h^2/p_O$ apparaîtra souvent, nous la notons $\lambda$ dans la suite. Le système se réécrit:
+        \[
+            \left\{
+                \begin{array}{cccccc}
+                     - \alpha &+ 2 \alpha_1 &- \alpha_2 & & &=  \lambda \\
+                     & - \alpha_1 &+ 2 \alpha_2 &- \alpha_3  & &=  \lambda \\
+                     & & - \alpha_2 &+ 2 \alpha_3 &- \beta &= \lambda \\
+                \end{array}
+                \right.
+        \]
+         Pour obtenir $\alpha_3$, nous effectuons $L_1+2L_2+3L_3$ et nous avons
+         \[
+         4 \alpha_3 = 6 \lambda + \alpha + 3 \beta\,.
+         \]
+         Ainsi, 
+         \[
+         \alpha_3 = \frac{3}{2}\lambda + \frac{\alpha +3\beta}{4}\,.
+         \]
+
+         Il suffit alors de réinjecter dans $L_3$ pour obtenir $\alpha_2$ 
+         \[
+         \alpha_2 = 2\lambda + \frac{\alpha + \beta}{2}
+         \]
+         et de même pour $\alpha_1$
+         \[
+         \alpha_1 = \frac{3}{2}\lambda + \frac{3\alpha + \beta}{4}\,.
+         \]
+        
+        \item \textbf{Solution Exacte :}
+        
+        L'équation est réduite à 
+        \[
+        u'' = - f_0
+        \]
+        Intégrant deux fois, la solution exacte s'écrit sous la forme :
+        \[
+        u(x) = -\frac{f_0}{2}x^2 + Cx + D
+        \]
+        En appliquant les conditions aux limites \( u(0) = \alpha \) donc $D=\alpha$ et \( u(1) = \beta \), donc $C= \beta-\alpha+\frac{f_0}{2}.$
+        Finalement, 
+        \[
+        u(x) = -\frac{f_0}{2}x^2 + \left(\beta - \alpha + \frac{f_0}{2}\right)x + \alpha
+        \]
+
+        \item \textbf{Comparaison :}
+
+        Regardons sur les noeuds du maillage, au point $x=h$ par exemple. D'un côté la solution approchée donne
+        \[u_h(h) = \alpha_1 = \frac{3}{2}f_0 h^2 + \frac{\alpha +3\beta}{4} \]
+        et de l'autre, pour la solution exacte: 
+        \[u(h) = -\frac{f_0}{2}h^2 + \left(\beta - \alpha + \frac{f_0}{2}\right)h + \alpha = \frac{3}{2}f_0 h^2 + \frac{\alpha +3\beta}{4} \]
+
+        ainsi, les deux fonctions coïncident. On aurait de même sur $x=2h$ et $x=3h$.
+        En revanche, entre les noeuds, la différence est significative. Notre fonction approchée relie les valeurs aux noeud par des segments de droite. 
+        La solution réelle est beaucoup plus lisse.
+
+        \item \textbf{Amélioration de l'Approximation :}
+
+        \begin{itemize}
+            \item Affiner le maillage en augmentant le nombre d'éléments.
+            \item Utiliser des fonctions de base de degré supérieur.
+        \end{itemize}
+    \end{enumerate}
+    \end{solution}
+    }{}
+    
+
+\end{enumerate}
+
+\vspace{1em}
+
+\subsection*{D'autres fonctions \( p \), \( q \), et \( f \)}
+
+Reprenez le problème avec \( p(x) = e^x \), \( q(x) = \sin(x) \), et \( f(x) = x^2 \).
+
+\end{document}

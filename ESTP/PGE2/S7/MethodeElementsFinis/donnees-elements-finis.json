@@ -46,6 +46,16 @@
         
       ],
       "sexercer": [
+        {
+          "titre": "Exercices TD - 2",
+          "lien": "4-TD2/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigés TD - 2",
+          "lien": "4-TD2/corrige.pdf",
+          "cible": "_blank"
+        }
 
       ]
     },

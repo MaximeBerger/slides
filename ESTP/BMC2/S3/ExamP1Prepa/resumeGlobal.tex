@@ -1,0 +1,132 @@
+% =====================================================================
+% Template LaTeX – Traces distribuées aux étudiants
+% Auteur : (à compléter)
+% Compilation : pdflatex/xelatex (pdflatex recommandé ici)
+% =====================================================================
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{BMC2}}
+\fancyfoot[L]{\color{Gray}\small Auteur~: \textit{M. Berger}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+
+
+% Tcolorboxes stylisées
+\tcbset{tracebox/.style={breakable,enhanced,sharp corners,boxrule=0pt,frame hidden,arc=2mm,
+  colback=white,coltitle=black,fonttitle=\bfseries\large,
+  borderline west={2mm}{0pt}{Theme},
+  before skip=8pt,after skip=8pt,drop fuzzy shadow}}
+
+\newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé des idées}}
+\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir }}
+\newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple vu ensemble}}
+
+% Encadré « Formules & illustrations »
+\newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
+
+% Astuce : puces clean
+\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
+
+% Raccourci pour une « Trace » complète
+% Usage : \TraceSection{Titre}{Objectif court}
+\newcommand{\TraceSection}[2]{%
+  
+}
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ BMC2 }
+\date{\today}
+
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+
+% -------------------- Document ----------------------------
+\begin{document}
+
+
+On considère la courbe d'équation polaire $\rho(\theta)=4 \cos \theta-\frac{1}{\cos \theta}$.
+
+\begin{enumerate}
+  \item Démontrer qu'on peut limiter l'intervalle d'étude à $[0, \pi / 2[$.
+
+  \item Convertir l'équation polaire en coordonnées cartésiennes $x(\theta)$ et $y(\theta)$.
+  \begin{enumerate}
+    \item Étudier les limites de $x(\theta)$ et $y(\theta)$ lorsque $\theta$ approche $\frac{\pi}{2}$ et $-\frac{\pi}{2}$.
+    \item Calculer les dérivées $x^{\prime}(\theta)$ et $y^{\prime}(\theta)$.
+    \item En déduire les coordonnées d'un vecteur tangent $\vec{V}(\theta)$ à la courbe à un point régulier $M_\theta$ de coordonnées $(x(\theta), y(\theta))$.
+    \item Déterminer les points où la tangente est horizontale ou verticale.
+    \item Donner l'équation des asymptotes.
+  \end{enumerate}
+
+  \item Calculer la dérivée $\frac{d r}{d \theta}$.
+  \item Déterminer l'angle $\alpha$ de la tangente à la courbe en un point de coordonnées $(r, \theta)$.
+  \begin{enumerate}
+    \item Effectuer un développement limité de $r(\theta)$ au voisinage de $\theta=0$ à l'ordre 2 .
+    \item En déduire la nature du point correspondant à $\theta=0$.
+  \end{enumerate}
+\end{enumerate}
+\end{document}
