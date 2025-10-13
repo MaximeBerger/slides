@@ -133,7 +133,7 @@ La méthode des éléments finis est une technique numérique puissante utilisé
 Voici les étapes de la méthode quand on part d'une équation différentielle partielle :
 \begin{enumerate}
     \item Découper le domaine en éléments simples
-    \item Établir la formulation variationnelle de l'EDP ()
+    \item Établir la formulation variationnelle de l'EDP
     \item Ecrire la matrice élémentaire sur chaque élément
     \item Assembler ces matrices pour obtenir la matrice de rigidité globale
     \item Résoudre le système linéaire
@@ -243,7 +243,7 @@ La formulation variationnelle (ou formulation faible) est une reformulation d'un
 \end{itemize}
 \end{rappelsBox}
 
-\subsection*{Principe général}
+(Cette partie servira pour la question 2.)
 
 Considérons une équation différentielle sous la forme :
 \[
@@ -314,6 +314,16 @@ Pour l'équation sur un segment $[0,h]$:
 
 \textbf{Étape 3 :} Formulation variationnelle finale :
 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        L'équation différentielle devient :
+    \[
+    a(u, v) = L(v)
+    \]
+    avec $a(u, v) = \int_0^h p \frac{du}{dx} \frac{dv}{dx} \, dx + \int_0^h q u v \, dx$ et $L(v) = \int_0^h f v \, dx$.
+    \end{solution}
+    }{}
+
 Résoudre l'équation différentielle revient à trouver une fonction $u$ telle que
 \[
 a(u, v) = L(v) \quad \forall v \in V_0
@@ -343,7 +353,7 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
         
     \begin{solution}
     
-    Divisons l'intervalle \([0,1]\) en 4 éléments égaux. La longueur de chaque élément est \( h = \frac{1}{4} = 0.25 \).
+    Divisons l'intervalle \([0,1]\) en 4 éléments égaux. La longueur de chaque élément est \( h = \frac{1}{4}\).
 
     Les noeuds sont :
     \[
@@ -360,11 +370,11 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
 
-    Nous cherchons \( u \in V \) tel que
+        En suivant les 3 étapes décrites ci-dessus, on obtient :
     \[
     a(u, v) = L(v) \quad \forall v \in V_0
     \]
-    où \( V_0 = \{ v \in H^1(0,h) \ | \ v(0) = v(h) = 0 \} \), et
+    avec 
     \[
     a(u, v) = \int_0^h p \frac{du}{dx} \frac{dv}{dx} \, + \int_0^h q u v 
     \]
@@ -377,7 +387,7 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
     \item Sur le second élément du maillage, comment la formulation variationnelle est-elle modifiée ? 
  \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-    Il suffit de changer les bornes d'intégration.
+    Il faut changer les bornes d'intégration, ce sont les mêmes intégrales, mais on intègre sur $[h,2h]$.
     \end{solution}
     }{}
 \end{enumerate}
@@ -464,7 +474,7 @@ On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newl
 
     \item Montrer que si $u = \sum_{i=0}^{4} \alpha_i \varphi_i$, alors $a(u, v) = \sum_{i=0}^{4} \alpha_i a(\varphi_i, v)$. En déduire que
     \[
-        u \text{ vérifie } a(u, v) = L(v) \quad \forall v \in V_0 \Leftrightarrow K_e \begin{pmatrix} \alpha_i \\ \alpha_{i+1} \end{pmatrix} = \begin{pmatrix} L(\varphi_i) \\ L(\varphi_{i+1}) \end{pmatrix}
+        u \text{ vérifie } a(u, v) = L(v) sur [x_i,x_{i+1}] \Leftrightarrow \, K_e \begin{pmatrix} \alpha_i \\ \alpha_{i+1} \end{pmatrix} = \begin{pmatrix} L(\varphi_i) \\ L(\varphi_{i+1}) \end{pmatrix}
     \]
     On pourra le vérifier pour $v = \varphi_i$ et $v = \varphi_{i+1}$.
     
