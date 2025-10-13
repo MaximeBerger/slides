@@ -450,16 +450,17 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
     \end{solution}
     }{}
 \item \textbf{Obtention du Système Linéaire}
-\begin{enumerate}
-    \item La matrice de rigidité élémentaire $K_e$ associée au problème de Dirichlet sur l'élément $[x_i,x_{i+1}]$ est
+La matrice de rigidité élémentaire $K_e$ associée au problème de Dirichlet sur l'élément $[x_i,x_{i+1}]$ est
     
-    \[
-    K_e = \begin{pmatrix}
-        a(\varphi_i, \varphi_i) & a(\varphi_i, \varphi_{i+1}) \\
-        a(\varphi_{i+1}, \varphi_i) & a(\varphi_{i+1}, \varphi_{i+1})
-    \end{pmatrix}
-    \]
-    On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newline
+\[
+K_e = \begin{pmatrix}
+    a(\varphi_i, \varphi_i) & a(\varphi_i, \varphi_{i+1}) \\
+    a(\varphi_{i+1}, \varphi_i) & a(\varphi_{i+1}, \varphi_{i+1})
+\end{pmatrix}
+\]
+On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newline
+
+\begin{enumerate}
 
     \item Montrer que si $u = \sum_{i=0}^{4} \alpha_i \varphi_i$, alors $a(u, v) = \sum_{i=0}^{4} \alpha_i a(\varphi_i, v)$. En déduire que
     \[
@@ -482,7 +483,11 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
 
     \begin{enumerate}
             % Start of Selection
-            \item La matrice de rigidité locale \( K \) sur le premier élément est définie par :
+
+
+            \item L'équation se déduit par linéarité de $a$ et $L$, en effectuant la multiplication matricielle et en prenant pour fonction $v$ les fonctions   $\varphi_i$ et $\varphi_{i+1}$. 
+
+            \item La matrice de rigidité locale \( K_e \) sur le premier élément est définie par :
             \[
             K = \left(
                 \begin{array}{cc}
@@ -553,8 +558,6 @@ C'est cette équation qui donnera le système linéaire $Ku = F$ à résoudre po
                 1/2 & 1
             \end{pmatrix}
             \]
-
-            \item L'équation se déduit par linéarité de $a$ et $L$ et en effectuant la multiplication matricielle. 
 
             \item Les autres matrices de rigidité sont identiques aux constantes $p_0$ et $q_0$ près. Cela découle de la symétrie des fonctions $\varphi_i$, par exemple un changement de variable sur les intégrales $u=x+h$ conduit à :
             \[
