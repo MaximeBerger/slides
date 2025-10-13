@@ -43,7 +43,13 @@
       "description": "Formulation variationnelle · Matrices de rigidité · Vecteur de charges",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "numero": 1,
+          "titre": "Formulation variationnelle",
+          "description": "",
+          "lien": "1-FormulationVariationnelle/index.html",
+          "cible": "_blank"
+        }
       ],
       "sexercer": [
         {
