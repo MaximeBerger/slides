@@ -130,7 +130,6 @@
   <script>
     // Fonction pour basculer l'affichage des sous-chapitres
     function toggleSubChapters(sectionId) {
-      console.log('toggleSubChapters appelé avec ID:', sectionId);
       const svgContainer = document.querySelector('.svg-container');
       
       // Masquer tous les sous-chapitres
@@ -141,15 +140,11 @@
       
       // Afficher le sous-chapitre cliqué
       const targetChapter = document.getElementById(sectionId);
-      console.log('Chapitre cible trouvé:', targetChapter);
       if (targetChapter) {
         targetChapter.classList.add('active');
         // Activer le défilement
         svgContainer.classList.add('has-open-panel');
-        console.log('Sous-chapitre activé');
-      } else {
-        console.log('Aucun chapitre trouvé avec l\'ID:', sectionId);
-      }
+      } 
     }
 
     // Fonction pour fermer tous les sous-chapitres
@@ -306,7 +301,7 @@
         stationsContainer.appendChild(stationGroup);
 
         // Générer les sous-chapitres
-        if (chapitre.sousParties && chapitre.sousParties.length > 0) {
+        if ((chapitre.sousParties && chapitre.sousParties.length > 0) || (chapitre.sexercer && chapitre.sexercer.length > 0)) {
           const subChaptersGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
           subChaptersGroup.setAttribute('id', chapitre.id);
           subChaptersGroup.setAttribute('class', 'sub-chapters');

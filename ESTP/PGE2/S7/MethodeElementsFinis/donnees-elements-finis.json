@@ -25,12 +25,12 @@
       ],
       "sexercer" : [
         {
-          "titre": "Exercices",
+          "titre": "TD1 - de la RdM à la MEF",
           "lien": "3-Exemple/enonce.pdf",
           "cible": "_blank"
         },
         {
-          "titre": "Corrigés",
+          "titre": "Corrigé TD1",
           "lien": "3-Exemple/corrige.pdf",
           "cible": "_blank"
         }
@@ -45,7 +45,7 @@
       "sousParties": [
         {
           "numero": 1,
-          "titre": "Formulation variationnelle",
+          "titre": " ",
           "description": "",
           "lien": "1-FormulationVariationnelle/index.html",
           "cible": "_blank"
@@ -53,12 +53,12 @@
       ],
       "sexercer": [
         {
-          "titre": "Exercices TD - 2",
+          "titre": "TD 2 - Une équation différentielle",
           "lien": "4-TD2/enonce.pdf",
           "cible": "_blank"
         },
         {
-          "titre": "Corrigés TD - 2",
+          "titre": "Corrigé TD 2",
           "lien": "4-TD2/corrige.pdf",
           "cible": "_blank"
         }
@@ -68,7 +68,7 @@
     {
       "id": "sec3",
       "numero": 2,
-      "titre": "Matrices de rigidité",
+      "titre": "Procédure d'assemblage",
       "description": "Matrices de rigidité · Vecteur de charges",
       "lien": "#",
       "sousParties": [
