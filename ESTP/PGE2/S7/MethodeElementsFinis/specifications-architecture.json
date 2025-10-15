@@ -1,0 +1,342 @@
+{
+  "architecture": {
+    "description": "Architecture séparée : index.html (structure/mise en page) + donnees.json (contenu)",
+    "fichiers": {
+      "index.html": "Page principale avec structure, styles et logique d'affichage",
+      "donnees.json": "Fichier de données contenant titre, sections et éléments",
+      "styles.css": "Fichier CSS externe (optionnel)"
+    }
+  },
+
+  "specifications_index_html": {
+    "structure_generale": {
+      "doctype": "HTML5",
+      "meta_viewport": "width=device-width, initial-scale=1.0, user-scalable=no",
+      "charset": "UTF-8",
+      "lang": "fr",
+      "title": "Dynamique basé sur donnees.json"
+    },
+
+    "structure_html": {
+      "head": {
+        "meta_tags": [
+          "charset=UTF-8",
+          "viewport avec user-scalable=no",
+          "description dynamique",
+          "keywords dynamiques"
+        ],
+        "styles": {
+          "inline_css": "Styles principaux intégrés",
+          "external_css": "Optionnel : styles.css"
+        }
+      },
+      "body": {
+        "container_principal": "div.svg-container",
+        "svg_viewport": "viewBox='0 0 1200 800'",
+        "sections": [
+          "titre_principal",
+          "ligne_metro",
+          "stations_container", 
+          "sous_chapitres_container"
+        ]
+      }
+    },
+
+    "logique_javascript": {
+      "chargement_donnees": {
+        "methode": "fetch('donnees.json')",
+        "gestion_erreurs": "try/catch avec messages utilisateur",
+        "fallback": "Contenu par défaut si erreur"
+      },
+      "generation_dynamique": {
+        "titre": "document.getElementById('main-title').textContent = data.titre",
+        "stations": "Boucle sur data.chapitres pour créer les stations",
+        "sous_chapitres": "Génération dynamique des panneaux",
+        "positionnement": "Calcul automatique des positions"
+      },
+      "gestion_events": {
+        "touch_handlers": "setupTouchHandlers() pour iframe",
+        "click_handlers": "toggleSubChapters() pour affichage",
+        "keyboard_handlers": "Navigation clavier",
+        "resize_handlers": "Responsive design"
+      }
+    },
+
+    "styles_css_integres": {
+      "reset_global": {
+        "body": "margin: 0, padding: 0, overflow: hidden, user-select: none",
+        "iframe_optimization": "touch-callout: none, tap-highlight: transparent"
+      },
+      "container_svg": {
+        "width": "100%",
+        "height": "100vh", 
+        "overflow": "hidden par défaut, auto si panneau ouvert"
+      },
+      "ligne_metro": {
+        "stroke": "#334155",
+        "stroke-width": "8px",
+        "stroke-linecap": "round"
+      },
+      "stations": {
+        "halo": "r=32, fill=#93C5FD, opacity=0, transition",
+        "dot": "r=18, fill=#F8FAFC, stroke=#0EA5E9, stroke-width=6",
+        "hover_effects": "scale(1.1), halo visible"
+      },
+      "panneaux": {
+        "width": "280px",
+        "background": "#FFFFFF",
+        "border": "1px solid #E2E8F0",
+        "border-radius": "12px",
+        "box-shadow": "0 10px 25px rgba(0,0,0,0.1)",
+        "animation": "slideInUp 0.4s ease-out"
+      },
+      "boutons": {
+        "height": "48px",
+        "background": "#F8FAFC",
+        "border": "1px solid #CBD5E1",
+        "border-radius": "8px",
+        "transition": "all 0.2s ease",
+        "hover": "translateY(-2px), border-color: #2563EB"
+      }
+    }
+  },
+
+  "specifications_donnees_json": {
+    "structure_generale": {
+      "format": "JSON valide",
+      "encoding": "UTF-8",
+      "validation": "Schéma JSON optionnel"
+    },
+
+    "proprietes_racine": {
+      "titre": {
+        "type": "string",
+        "description": "Titre principal affiché en haut de la page",
+        "exemple": "Méthode des Éléments Finis — Parcours"
+      },
+      "description": {
+        "type": "string", 
+        "description": "Description optionnelle du cours",
+        "requis": false
+      },
+      "chapitres": {
+        "type": "array",
+        "description": "Liste des chapitres/sections",
+        "min_items": 1
+      }
+    },
+
+    "structure_chapitre": {
+      "id": {
+        "type": "string",
+        "description": "Identifiant unique pour le chapitre",
+        "format": "alphanumeric, underscore autorisé",
+        "exemple": "sec1, introduction, chapitre_1"
+      },
+      "numero": {
+        "type": "integer",
+        "description": "Numéro d'ordre du chapitre",
+        "minimum": 0
+      },
+      "titre": {
+        "type": "string",
+        "description": "Titre affiché sur la station",
+        "max_length": 50
+      },
+      "description": {
+        "type": "string",
+        "description": "Description courte sous le titre",
+        "requis": false,
+        "max_length": 100
+      },
+      "lien": {
+        "type": "string",
+        "description": "Lien principal du chapitre",
+        "format": "URL relative ou absolue",
+        "defaut": "#"
+      },
+      "couleur_theme": {
+        "type": "string",
+        "description": "Couleur personnalisée pour le chapitre",
+        "format": "hex color",
+        "defaut": "#3B82F6",
+        "requis": false
+      },
+      "icone": {
+        "type": "string",
+        "description": "Emoji ou icone pour le chapitre",
+        "defaut": "📚",
+        "requis": false
+      },
+      "sousParties": {
+        "type": "array",
+        "description": "Liste des sous-parties du chapitre",
+        "defaut": []
+      },
+      "sexercer": {
+        "type": "array", 
+        "description": "Liste des exercices du chapitre",
+        "defaut": []
+      }
+    },
+
+    "structure_sous_partie": {
+      "numero": {
+        "type": "integer",
+        "description": "Numéro de la sous-partie",
+        "minimum": 1
+      },
+      "titre": {
+        "type": "string",
+        "description": "Titre de la sous-partie",
+        "max_length": 60
+      },
+      "description": {
+        "type": "string",
+        "description": "Description optionnelle",
+        "requis": false,
+        "max_length": 120
+      },
+      "lien": {
+        "type": "string",
+        "description": "URL vers le contenu",
+        "format": "URL relative ou absolue"
+      },
+      "cible": {
+        "type": "string",
+        "description": "Cible du lien",
+        "enum": ["_self", "_blank", "_parent", "_top"],
+        "defaut": "_self"
+      },
+      "type": {
+        "type": "string",
+        "description": "Type de contenu",
+        "enum": ["cours", "demo", "video", "pdf", "exercice", "corrige"],
+        "defaut": "cours"
+      },
+      "duree_estimee": {
+        "type": "string",
+        "description": "Durée estimée de lecture",
+        "format": "X min, Xh Ymin, etc.",
+        "requis": false
+      },
+      "difficulte": {
+        "type": "string",
+        "description": "Niveau de difficulté",
+        "enum": ["facile", "moyen", "difficile"],
+        "defaut": "moyen",
+        "requis": false
+      }
+    },
+
+    "exemple_complet": {
+      "titre": "Méthode des Éléments Finis — Parcours",
+      "description": "Cours complet sur la méthode des éléments finis",
+      "chapitres": [
+        {
+          "id": "sec1",
+          "numero": 0,
+          "titre": "Introduction",
+          "description": "Motivation · Illustration",
+          "lien": "#",
+          "couleur_theme": "#3B82F6",
+          "icone": "🚀",
+          "sousParties": [
+            {
+              "numero": 1,
+              "titre": "Motivation",
+              "description": "Comprendre pourquoi les éléments finis",
+              "lien": "1-Motivation/index.html",
+              "cible": "_blank",
+              "type": "cours",
+              "duree_estimee": "15 min",
+              "difficulte": "facile"
+            },
+            {
+              "numero": 2,
+              "titre": "Illustration",
+              "description": "Exemple concret d'application",
+              "lien": "2-Illustration/index.html",
+              "cible": "_blank",
+              "type": "demo",
+              "duree_estimee": "20 min",
+              "difficulte": "facile"
+            }
+          ],
+          "sexercer": [
+            {
+              "titre": "Exercices",
+              "description": "Problèmes pratiques",
+              "lien": "3-Exemple/enonce.pdf",
+              "cible": "_blank",
+              "type": "exercice",
+              "difficulte": "facile"
+            },
+            {
+              "titre": "Corrigés",
+              "description": "Solutions détaillées",
+              "lien": "3-Exemple/corrige.pdf",
+              "cible": "_blank",
+              "type": "corrige",
+              "difficulte": "facile"
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  "specifications_implementation": {
+    "etapes_developpement": [
+      "1. Créer index.html avec structure de base et styles CSS intégrés",
+      "2. Implémenter la logique JavaScript de chargement de donnees.json",
+      "3. Créer les fonctions de génération dynamique des éléments SVG",
+      "4. Ajouter la gestion des événements tactiles optimisée iframe",
+      "5. Implémenter les animations et transitions CSS",
+      "6. Créer donnees.json avec le contenu du cours",
+      "7. Tester la compatibilité iframe et responsive design",
+      "8. Optimiser les performances et l'accessibilité"
+    ],
+
+    "fonctions_javascript_requises": [
+      "loadData() - Chargement et parsing du JSON",
+      "generatePlan(data) - Génération de la structure SVG",
+      "createStation(chapitre, position) - Création d'une station",
+      "createSubChapters(chapitre) - Création des panneaux",
+      "setupTouchHandlers(element, handler) - Gestion tactile",
+      "toggleSubChapters(sectionId) - Affichage/masquage panneaux",
+      "calculatePositions(totalChapters) - Calcul positions stations",
+      "handleErrors(error) - Gestion des erreurs"
+    ],
+
+    "optimisations_requises": [
+      "Prévention sélection de texte sur mobile",
+      "Gestion robuste des événements tactiles dans iframe",
+      "Détection tap vs swipe pour éviter actions accidentelles",
+      "Fallback si donnees.json non accessible",
+      "Responsive design pour différentes tailles d'écran",
+      "Accessibilité clavier et lecteurs d'écran",
+      "Performance avec de nombreux chapitres"
+    ],
+
+    "tests_necessaires": [
+      "Test chargement donnees.json (succès/erreur)",
+      "Test affichage avec différents nombres de chapitres",
+      "Test interactions tactiles sur tablette/mobile",
+      "Test intégration dans iframe Reveal.js",
+      "Test navigation clavier complète",
+      "Test responsive design sur différents écrans",
+      "Test accessibilité avec lecteurs d'écran"
+    ]
+  },
+
+  "exemple_utilisation": {
+    "prompt_ia": "Crée une page web interactive de navigation pédagogique avec cette architecture :\n\n1. index.html : Page principale qui charge donnees.json et génère dynamiquement une interface 'ligne de métro' avec stations cliquables et panneaux de sous-chapitres\n\n2. donnees.json : Fichier de données contenant titre, chapitres, sous-parties et exercices\n\n3. Fonctionnalités requises :\n   - Chargement dynamique du contenu depuis JSON\n   - Interface ligne de métro avec stations interactives\n   - Panneaux qui s'ouvrent au clic sur les stations\n   - Gestion tactile optimisée pour iframe\n   - Design responsive et accessible\n   - Animations fluides\n\nUtilise les spécifications détaillées dans ce JSON pour l'implémentation.",
+    
+    "structure_fichiers": {
+      "index.html": "Page principale avec HTML, CSS intégré et JavaScript",
+      "donnees.json": "Fichier de données avec contenu du cours",
+      "README.md": "Documentation d'utilisation (optionnel)"
+    }
+  }
+}
