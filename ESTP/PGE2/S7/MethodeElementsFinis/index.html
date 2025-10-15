@@ -308,7 +308,7 @@
           
           // Calculer la position optimale pour éviter que le panneau sorte de l'écran
           let panelX = x;
-          const panelWidth = 200; // Largeur du panneau
+          const panelWidth = 300; // Largeur du panneau
           const margin = 50; // Marge minimale par rapport aux bords
           
           // Si le panneau sort à gauche, ajuster la position
@@ -329,7 +329,7 @@
             // Titre de la section "Parties"
             const sectionTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             sectionTitle.setAttribute('class', 't-station');
-            sectionTitle.setAttribute('x', '-100');
+            sectionTitle.setAttribute('x', '-150');
             sectionTitle.setAttribute('y', currentY + 20);
             sectionTitle.setAttribute('text-anchor', 'start');
             sectionTitle.textContent = "Parties";
@@ -347,14 +347,14 @@
               
               const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
               rect.setAttribute('class', 'sub-btn');
-              rect.setAttribute('x', '-100');
+              rect.setAttribute('x', '-150');
               rect.setAttribute('y', '0');
-              rect.setAttribute('width', '200');
+              rect.setAttribute('width', '300');
               rect.setAttribute('height', '35');
               
               const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
               text.setAttribute('class', 'sub-btn-text');
-              text.setAttribute('x', '-92');
+              text.setAttribute('x', '-142');
               text.setAttribute('y', '22');
               text.textContent = sousPartie.numero + " · " + sousPartie.titre;
               
@@ -365,7 +365,7 @@
               if (sousPartie.description) {
                 const descText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 descText.setAttribute('class', 'sub-btn-desc');
-                descText.setAttribute('x', '-92');
+                descText.setAttribute('x', '-142');
                 descText.setAttribute('y', '32');
                 descText.textContent = sousPartie.description;
                 subG.appendChild(descText);
@@ -410,7 +410,7 @@
             // Titre de la section "S'exercer"
             const exercerTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             exercerTitle.setAttribute('class', 't-station');
-            exercerTitle.setAttribute('x', '-100');
+            exercerTitle.setAttribute('x', '-150');
             exercerTitle.setAttribute('y', currentY + 20);
             exercerTitle.setAttribute('text-anchor', 'start');
             exercerTitle.textContent = "S'exercer";
@@ -428,14 +428,14 @@
               
               const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
               rect.setAttribute('class', 'sub-btn');
-              rect.setAttribute('x', '-100');
+              rect.setAttribute('x', '-150');
               rect.setAttribute('y', '0');
-              rect.setAttribute('width', '200');
+              rect.setAttribute('width', '300');
               rect.setAttribute('height', '35');
               
               const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
               text.setAttribute('class', 'sub-btn-text');
-              text.setAttribute('x', '-92');
+              text.setAttribute('x', '-142');
               text.setAttribute('y', '22');
               text.textContent = exercice.titre;
               
