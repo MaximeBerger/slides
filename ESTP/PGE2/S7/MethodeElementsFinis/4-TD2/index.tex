@@ -580,7 +580,7 @@ On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newl
 
             Si les fonctions $p$ et $q$ étaient constantes sur tout le domaine égales à $p(x)=p_0$ et $q(x)=q_0$, on aurait
 
-            $$
+            \begin{multline*}
             K = \frac{p_0}{h}
             \begin{pmatrix}
                 1 & -1 & 0 & 0 & 0\\
@@ -588,7 +588,7 @@ On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newl
                 0 & -1 & 2 & -1 & 0\\
                 0 & 0 & -1 & 2 & -1\\
                 0 & 0 & 0 & -1 & 1
-            \end{pmatrix} 
+            \end{pmatrix} \\ 
             + q_0 \frac{h}{3}
             \begin{pmatrix}
                 1 & 1/2 & 0 & 0 & 0\\
@@ -597,7 +597,27 @@ On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newl
                 0 & 0 & 1/2 & 2 & 1/2\\
                 0 & 0 & 0 & 1/2 & 2
             \end{pmatrix}
-            $$
+            \end{multline*}
+
+            Dans le cas général, on a 
+            \begin{multline*}
+            K = \frac{1}{h}
+            \begin{pmatrix}
+                p_0 & -p_0 & 0 & 0 & 0\\
+                -p_0 & p_0+p_1 & -p_1 & 0 & 0\\
+                0 & -p_1 & p_1+p_2 & -p_2 & 0\\
+                0 & 0 & -p_2 & p_2+p_3 & -p_3\\
+                0 & 0 & 0 & -p_3 & p_3
+            \end{pmatrix}\\
+            + \frac{h}{3}
+            \begin{pmatrix}
+                q_0 & q_0/2 & 0 & 0 & 0\\
+                q_0/2 & q_0+q_1 & q_1/2 & 0 & 0\\
+                0 & q_1/2 & q_1+q_2 & q_2/2 & 0\\
+                0 & 0 & q_2/2 & q_2+q_3 & q_3/2\\
+                0 & 0 & 0 & q_3/2 & q_3
+            \end{pmatrix}
+            \end{multline*}
 
         La matrice $K$ est symétrique donc diagonalisable d'après le théorème spectral. 
     
@@ -613,12 +633,12 @@ On supposera que $p(x)=p_0$ et $q(x)=q_0$ sont constants sur cet élément.\newl
 
     On peut alors assembler un second membre global pour le système linéaire.
     \[
-    \mathbf{f} = \frac{f_0h}{2}\begin{pmatrix}
-        1 \\
-        2 \\
-        2 \\
-        2 \\
-        1
+    \mathbf{f} = \begin{pmatrix}
+        f_0h/2 \\
+        f_0h \\
+        f_0h \\
+        f_0h \\
+        f_0h/2
     \end{pmatrix}
     \]
 
