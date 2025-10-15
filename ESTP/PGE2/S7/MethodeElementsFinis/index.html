@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Méthode des Éléments Finis - Plan</title>
     <style>
         body {
@@ -10,6 +10,13 @@
             padding: 0;
             overflow: hidden;
             height: 100vh;
+            /* Empêcher la sélection de texte globalement dans l'iframe */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
         }
         
         /* Conteneur SVG avec défilement */
@@ -123,6 +130,7 @@
   <script>
     // Fonction pour basculer l'affichage des sous-chapitres
     function toggleSubChapters(sectionId) {
+      console.log('toggleSubChapters appelé avec ID:', sectionId);
       const svgContainer = document.querySelector('.svg-container');
       
       // Masquer tous les sous-chapitres
@@ -133,10 +141,14 @@
       
       // Afficher le sous-chapitre cliqué
       const targetChapter = document.getElementById(sectionId);
+      console.log('Chapitre cible trouvé:', targetChapter);
       if (targetChapter) {
         targetChapter.classList.add('active');
         // Activer le défilement
         svgContainer.classList.add('has-open-panel');
+        console.log('Sous-chapitre activé');
+      } else {
+        console.log('Aucun chapitre trouvé avec l\'ID:', sectionId);
       }
     }
 
@@ -173,6 +185,57 @@
       };
     }
 
+    // Fonction pour gérer les événements tactiles dans les iframes
+    function setupTouchHandlers(element, handler) {
+      let touchStartTime = 0;
+      let touchStartPos = { x: 0, y: 0 };
+      
+      // Gérer le début du toucher
+      element.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        touchStartTime = Date.now();
+        if (e.touches && e.touches[0]) {
+          touchStartPos.x = e.touches[0].clientX;
+          touchStartPos.y = e.touches[0].clientY;
+        }
+        console.log('Touch start sur élément:', element);
+      }, { passive: false });
+      
+      // Gérer la fin du toucher
+      element.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const touchDuration = Date.now() - touchStartTime;
+        const touchEndPos = { x: 0, y: 0 };
+        
+        if (e.changedTouches && e.changedTouches[0]) {
+          touchEndPos.x = e.changedTouches[0].clientX;
+          touchEndPos.y = e.changedTouches[0].clientY;
+        }
+        
+        // Vérifier que c'est un tap (pas un swipe)
+        const deltaX = Math.abs(touchEndPos.x - touchStartPos.x);
+        const deltaY = Math.abs(touchEndPos.y - touchStartPos.y);
+        const isTap = touchDuration < 500 && deltaX < 10 && deltaY < 10;
+        
+        console.log('Touch end - Duration:', touchDuration, 'Delta:', deltaX, deltaY, 'IsTap:', isTap);
+        
+        if (isTap) {
+          console.log('Exécution du handler');
+          handler(e);
+        }
+      }, { passive: false });
+      
+      // Gérer les clics normaux
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Click détecté');
+        handler(e);
+      });
+    }
+
     // Fonction pour générer le plan à partir des données JSON
     function generatePlan(data) {
       // Mettre à jour le titre principal
@@ -201,22 +264,19 @@
       data.chapitres.forEach((chapitre, index) => {
         const x = positions[index];
         
-        // Créer la station
+        // Créer la station avec la transformation directement sur le groupe cliquable
         const stationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'a');
         stationGroup.setAttribute('href', '#');
-        stationGroup.setAttribute('onclick', `toggleSubChapters('${chapitre.id}'); return false;`);
         stationGroup.setAttribute('role', 'link');
         stationGroup.setAttribute('aria-label', `Ouvrir ${chapitre.titre}`);
         stationGroup.setAttribute('tabindex', '0');
         stationGroup.setAttribute('data-prevent-swipe', '');
+        stationGroup.setAttribute('transform', `translate(${x},150)`);
         
-        // Empêcher la sélection de texte sur les stations
-        stationGroup.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-        }, { passive: false });
-        
-                 const stationG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-         stationG.setAttribute('transform', `translate(${x},150)`);
+        // Utiliser la nouvelle fonction de gestion tactile pour les stations
+        setupTouchHandlers(stationGroup, function() {
+          toggleSubChapters(chapitre.id);
+        });
         
         const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         halo.setAttribute('class', 'station-halo');
@@ -238,12 +298,10 @@
         descText.setAttribute('y', '66');
         descText.textContent = "";
         
-        stationG.appendChild(halo);
-        stationG.appendChild(dot);
-        stationG.appendChild(titleText);
-        stationG.appendChild(descText);
-        
-        stationGroup.appendChild(stationG);
+        stationGroup.appendChild(halo);
+        stationGroup.appendChild(dot);
+        stationGroup.appendChild(titleText);
+        stationGroup.appendChild(descText);
         
         stationsContainer.appendChild(stationGroup);
 
@@ -318,23 +376,14 @@
                 subG.appendChild(descText);
               }
               
-              // Navigation fiable sur mobile (pointerup/touchend/click) avec garde anti-doublon
-              const subGo = withTapGuard(subG, function() {
+              // Utiliser la nouvelle fonction de gestion tactile pour les sous-chapitres
+              setupTouchHandlers(subG, function() {
                 if (sousPartie.cible === '_blank') {
                   window.open(sousPartie.lien, '_blank');
                 } else {
                   window.location.href = sousPartie.lien;
                 }
               });
-              
-              // Empêcher la sélection de texte sur les événements tactiles
-              subG.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-              }, { passive: false });
-              
-              subG.addEventListener('pointerup', subGo);
-              subG.addEventListener('touchend', subGo, { passive: true });
-              subG.addEventListener('click', subGo);
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               subG.addEventListener('keydown', function(event) {
@@ -398,23 +447,14 @@
               exG.appendChild(rect);
               exG.appendChild(text);
               
-              // Navigation fiable sur mobile (pointerup/touchend/click) avec garde anti-doublon
-              const exGo = withTapGuard(exG, function() {
+              // Utiliser la nouvelle fonction de gestion tactile pour les exercices
+              setupTouchHandlers(exG, function() {
                 if (exercice.cible === '_blank') {
                   window.open(exercice.lien, '_blank');
                 } else {
                   window.location.href = exercice.lien;
                 }
               });
-              
-              // Empêcher la sélection de texte sur les événements tactiles
-              exG.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-              }, { passive: false });
-              
-              exG.addEventListener('pointerup', exGo);
-              exG.addEventListener('touchend', exGo, { passive: true });
-              exG.addEventListener('click', exGo);
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               exG.addEventListener('keydown', function(event) {
@@ -440,6 +480,31 @@
           
           subChaptersContainer.appendChild(subChaptersGroup);
         }
+      });
+    }
+
+    // Détecter si on est dans un iframe et ajuster le comportement
+    function isInIframe() {
+      try {
+        return window.self !== window.top;
+      } catch (e) {
+        return true;
+      }
+    }
+
+    // Ajuster le comportement pour les iframes
+    if (isInIframe()) {
+      // Empêcher le zoom sur les iframes
+      document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gesturechange', function(e) {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gestureend', function(e) {
+        e.preventDefault();
       });
     }
 
