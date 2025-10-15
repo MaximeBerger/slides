@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algèbre linéaire - Redirection</title>
+    <meta http-equiv="refresh" content="0; url=ESTP/PGE2/S7/MethodeElementsFinis/index.html">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8fafc;
+        }
+        .redirect-message {
+            text-align: center;
+            color: #334155;
+        }
+        .spinner {
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #0ea5e9;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        a {
+            color: #0ea5e9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <div class="spinner"></div>
+        <h2>Redirection en cours...</h2>
+        <p>Vous allez être redirigé vers la page Algèbre linéaire.</p>
+        <p>Si la redirection ne fonctionne pas, <a href="ESTP/BMC2/S3/AlgebreLineaire/index.html">cliquez ici</a>.</p>
+    </div>
+    
+    <script>
+        // Redirection JavaScript en fallback
+        setTimeout(function() {
+            window.location.href = 'ESTP/BMC2/S3/AlgebreLineaire/index.html';
+        }, 100);
+    </script>
+</body>
+</html>

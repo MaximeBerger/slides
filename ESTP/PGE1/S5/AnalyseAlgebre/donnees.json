@@ -1,0 +1,83 @@
+{
+  "titre": "Analyse & Algèbre — Parcours",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Calcul vectoriel et tensoriel",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        
+      ]
+    },
+    {
+      "id": "sec2",
+      "numero": 1,
+      "titre": "Espaces Lp",
+      "description": "Espaces Lp · Espaces L∞",
+      "lien": "#",
+      "sousParties": [
+
+      ],
+      "sexercer": [
+
+      ]
+    },
+    {
+      "id": "sec3",
+      "numero": 2,
+      "titre": "Produit de convolution",
+      "description": "Produit de convolution · Propriétés",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    },
+    {
+      "id": "sec4",
+      "numero": 3,
+      "titre": "Transformées Fourier/Laplace",
+      "description": "Assemblage des matrices de rigidité",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    },
+    {
+      "id": "sec5",
+      "numero": 4,
+      "titre": "Distributions",
+      "description": "Déterminants · Polynômes",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    },
+    {
+      "id": "sec6",
+      "numero": 5,
+      "titre": "Equations aux dérivées partielles",
+      "description": "Equations aux dérivées partielles · Problèmes aux limites",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    }
+  ]
+}
