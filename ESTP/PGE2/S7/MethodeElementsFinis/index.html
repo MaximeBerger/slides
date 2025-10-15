@@ -130,7 +130,6 @@
   <script>
     // Fonction pour basculer l'affichage des sous-chapitres
     function toggleSubChapters(sectionId) {
-      console.log('toggleSubChapters appelé avec ID:', sectionId);
       const svgContainer = document.querySelector('.svg-container');
       
       // Masquer tous les sous-chapitres
@@ -141,14 +140,10 @@
       
       // Afficher le sous-chapitre cliqué
       const targetChapter = document.getElementById(sectionId);
-      console.log('Chapitre cible trouvé:', targetChapter);
       if (targetChapter) {
         targetChapter.classList.add('active');
         // Activer le défilement
         svgContainer.classList.add('has-open-panel');
-        console.log('Sous-chapitre activé');
-      } else {
-        console.log('Aucun chapitre trouvé avec l\'ID:', sectionId);
       }
     }
 
@@ -198,7 +193,6 @@
           touchStartPos.x = e.touches[0].clientX;
           touchStartPos.y = e.touches[0].clientY;
         }
-        console.log('Touch start sur élément:', element);
       }, { passive: false });
       
       // Gérer la fin du toucher
@@ -219,10 +213,7 @@
         const deltaY = Math.abs(touchEndPos.y - touchStartPos.y);
         const isTap = touchDuration < 500 && deltaX < 10 && deltaY < 10;
         
-        console.log('Touch end - Duration:', touchDuration, 'Delta:', deltaX, deltaY, 'IsTap:', isTap);
-        
         if (isTap) {
-          console.log('Exécution du handler');
           handler(e);
         }
       }, { passive: false });
@@ -231,7 +222,6 @@
       element.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Click détecté');
         handler(e);
       });
     }
@@ -378,22 +368,14 @@
               
               // Utiliser la nouvelle fonction de gestion tactile pour les sous-chapitres
               setupTouchHandlers(subG, function() {
-                if (sousPartie.cible === '_blank') {
-                  window.open(sousPartie.lien, '_blank');
-                } else {
-                  window.location.href = sousPartie.lien;
-                }
+                openLinkInLMS(sousPartie.lien, sousPartie.cible);
               });
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               subG.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault();
-                  if (sousPartie.cible === '_blank') {
-                    window.open(sousPartie.lien, '_blank');
-                  } else {
-                    window.location.href = sousPartie.lien;
-                  }
+                  openLinkInLMS(sousPartie.lien, sousPartie.cible);
                 }
               });
               
@@ -449,22 +431,14 @@
               
               // Utiliser la nouvelle fonction de gestion tactile pour les exercices
               setupTouchHandlers(exG, function() {
-                if (exercice.cible === '_blank') {
-                  window.open(exercice.lien, '_blank');
-                } else {
-                  window.location.href = exercice.lien;
-                }
+                openLinkInLMS(exercice.lien, exercice.cible);
               });
               
               // Ajouter l'événement pour la touche Entrée (accessibilité)
               exG.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault();
-                  if (exercice.cible === '_blank') {
-                    window.open(exercice.lien, '_blank');
-                  } else {
-                    window.location.href = exercice.lien;
-                  }
+                  openLinkInLMS(exercice.lien, exercice.cible);
                 }
               });
               
@@ -490,6 +464,138 @@
       } catch (e) {
         return true;
       }
+    }
+
+    // Détecter si on est dans un LMS (Learning Management System)
+    function isInLMS() {
+      try {
+        // Vérifier si on peut accéder au parent (souvent bloqué dans les LMS)
+        const canAccessParent = window.parent !== window.self;
+        // Vérifier les référents communs des LMS
+        const referrer = document.referrer.toLowerCase();
+        const lmsIndicators = ['moodle', 'canvas', 'blackboard', 'brightspace', 'schoology', 'edmodo', 'lms'];
+        const isLMSReferrer = lmsIndicators.some(indicator => referrer.includes(indicator));
+        
+        return isInIframe() && (isLMSReferrer || !canAccessParent);
+      } catch (e) {
+        return isInIframe();
+      }
+    }
+
+    // Fonction pour ouvrir les liens dans un LMS
+    function openLinkInLMS(url, target) {
+      console.log('Tentative d\'ouverture de lien:', url, 'cible:', target);
+      
+      if (isInLMS()) {
+        // Dans un LMS, essayer plusieurs méthodes
+        try {
+          // Méthode 1: Essayer window.open avec noopener
+          if (target === '_blank') {
+            const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+            if (newWindow) {
+              console.log('Lien ouvert avec window.open');
+              return true;
+            }
+          }
+          
+          // Méthode 2: Essayer de communiquer avec le parent
+          try {
+            window.parent.postMessage({
+              type: 'OPEN_LINK',
+              url: url,
+              target: target
+            }, '*');
+            console.log('Message envoyé au parent pour ouvrir le lien');
+            return true;
+          } catch (e) {
+            console.log('Impossible de communiquer avec le parent');
+          }
+          
+          // Méthode 3: Créer un lien temporaire et le cliquer
+          const tempLink = document.createElement('a');
+          tempLink.href = url;
+          tempLink.target = target;
+          tempLink.rel = 'noopener noreferrer';
+          tempLink.style.display = 'none';
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          document.body.removeChild(tempLink);
+          console.log('Lien ouvert avec élément temporaire');
+          return true;
+          
+        } catch (e) {
+          console.error('Erreur lors de l\'ouverture du lien:', e);
+          
+          // Méthode 4: Afficher l'URL pour que l'utilisateur puisse la copier
+          showLinkFallback(url);
+          return false;
+        }
+      } else {
+        // Comportement normal en dehors d'un LMS
+        if (target === '_blank') {
+          window.open(url, '_blank');
+        } else {
+          window.location.href = url;
+        }
+        return true;
+      }
+    }
+
+    // Fonction de fallback pour afficher l'URL
+    function showLinkFallback(url) {
+      // Créer une notification temporaire
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #1E40AF;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+        max-width: 300px;
+        word-break: break-all;
+      `;
+      
+      notification.innerHTML = `
+        <div style="font-weight: 600; margin-bottom: 8px;">Lien à ouvrir :</div>
+        <div style="background: rgba(255,255,255,0.2); padding: 8px; border-radius: 4px; font-family: monospace; font-size: 12px;">${url}</div>
+        <div style="margin-top: 8px; font-size: 12px; opacity: 0.9;">Cliquez pour copier</div>
+      `;
+      
+      notification.addEventListener('click', function() {
+        navigator.clipboard.writeText(url).then(() => {
+          notification.innerHTML = '<div style="font-weight: 600;">URL copiée !</div>';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 2000);
+        }).catch(() => {
+          // Fallback si clipboard API n'est pas disponible
+          const textArea = document.createElement('textarea');
+          textArea.value = url;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          notification.innerHTML = '<div style="font-weight: 600;">URL copiée !</div>';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 2000);
+        });
+      });
+      
+      document.body.appendChild(notification);
+      
+      // Supprimer automatiquement après 10 secondes
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
+      }, 10000);
     }
 
     // Ajuster le comportement pour les iframes
