@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interpolation Polynomiale</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container { 
+            width: 800px; 
+            margin: 20px auto; 
+        }
+        .controls-group {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .point-control {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        input[type="range"] { 
+            width: 200px; 
+            margin: 0 10px; 
+        }
+        .value-display { 
+            width: 50px; 
+            text-align: right; 
+        }
+        .top-controls {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        .function-select {
+            margin-right: 20px;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-controls">
+            <div class="method-select">
+                <label><strong>Méthode d'interpolation : </strong></label>
+                <select id="methodSelect">
+                    <option value="lagrange">Lagrange</option>
+                    <option value="hermite">Hermite</option>
+                </select>
+            </div>
+            <div class="degree-control">
+                <label>Degré : <span id="degreeValue">1</span></label>
+                <input type="range" id="degreeControl" min="1" max="3" value="1" step="1">
+            </div>
+            <div class="function-select">
+                <label><strong>Fonction à interpoler : </strong></label>
+                <select id="functionSelect">
+                    <option value="none">Aucune</option>
+                    <option value="sin">Sinus</option>
+                    <option value="sin2">Sinus (2π)</option>
+                    <option value="cos">Cosinus</option>
+                    <option value="exp">Exponentielle</option>
+                    <option value="abs">Valeur absolue</option>
+                    <option value="square">Fonction carrée</option>
+                </select>
+            </div>
+        </div>
+
+        <canvas id="graphCanvas"></canvas>
+        
+        <div class="controls-group">
+            <h3>Points principaux</h3>
+            <div id="pointControls"></div>
+        </div>
+
+        <div class="controls-group" id="intermediatePointsControls" style="display: none;">
+            <h3>Points intermédiaires</h3>
+            <div id="intermediatePointsContainer"></div>
+        </div>
+
+        <div class="controls-group" id="derivativeControls" style="display: none;">
+            <h3>Dérivées aux points principaux</h3>
+            <div id="derivativesContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let chart;
+        const xPoints = [-2, -1, 0, 1, 2];
+        let yPoints = [-1, 1, 0, 1, -1];
+        let currentDegree = 1;
+        let segments = [];
+        let currentMethod = 'lagrange';
+        let derivatives = xPoints.map(() => 0); // Dérivées initialisées à 0
+        let targetFunction = null;
+
+        const predefinedFunctions = {
+            none: null,
+            sin: x => Math.sin(x),
+            sin2: x => Math.sin(2 * Math.PI * x / 3), // Oscillations plus rapides
+            cos: x => Math.cos(x),
+            exp: x => Math.exp(x/2)/Math.exp(1),  // normalisée pour rester dans la fenêtre
+            abs: x => Math.abs(x),
+            square: x => x*x/4,  // divisé par 4 pour rester dans la fenêtre
+        };
+
+        function initializeSegments() {
+            let newSegments = [];
+            for (let i = 0; i < xPoints.length - 1; i++) {
+                const x1 = xPoints[i];
+                const x2 = xPoints[i + 1];
+                const y1 = yPoints[i];
+                const y2 = yPoints[i + 1];
+                
+                let segmentPoints = [{x: x1, y: y1}];
+                
+                // Récupère les anciens points intermédiaires s'ils existent
+                const oldIntermediatePoints = segments[i] ? segments[i].slice(1, -1) : [];
+                
+                if (currentDegree >= 2) {
+                    if (oldIntermediatePoints.length >= 1 && oldIntermediatePoints[0].x === (x1 + x2) / 2) {
+                        // Garde l'ancien point
+                        segmentPoints.push(oldIntermediatePoints[0]);
+                    } else {
+                        // Crée un nouveau point
+                        segmentPoints.push({
+                            x: (x1 + x2) / 2,
+                            y: (y1 + y2) / 2
+                        });
+                    }
+                }
+                
+                if (currentDegree === 3) {
+                    segmentPoints = [{x: x1, y: y1}];
+                    const x13 = x1 + (x2 - x1) / 3;
+                    const x23 = x1 + 2 * (x2 - x1) / 3;
+                    
+                    if (oldIntermediatePoints.length >= 2) {
+                        // Garde les anciens points
+                        segmentPoints.push(oldIntermediatePoints[0]);
+                        segmentPoints.push(oldIntermediatePoints[1]);
+                    } else {
+                        // Crée de nouveaux points
+                        segmentPoints.push({
+                            x: x13,
+                            y: y1 + (y2 - y1) / 3
+                        });
+                        segmentPoints.push({
+                            x: x23,
+                            y: y1 + 2 * (y2 - y1) / 3
+                        });
+                    }
+                }
+                
+                segmentPoints.push({x: x2, y: y2});
+                newSegments.push(segmentPoints);
+            }
+            segments = newSegments;
+            updateIntermediateControls();
+        }
+
+        function lagrangeInterpolation(x, points) {
+            let result = 0;
+            for (let i = 0; i < points.length; i++) {
+                let term = points[i].y;
+                for (let j = 0; j < points.length; j++) {
+                    if (i !== j) {
+                        term *= (x - points[j].x) / (points[i].x - points[j].x);
+                    }
+                }
+                result += term;
+            }
+            return result;
+        }
+
+        function hermiteInterpolation(x, points, derivatives) {
+            const x0 = points[0].x;
+            const x1 = points[1].x;
+            const y0 = points[0].y;
+            const y1 = points[1].y;
+            const d0 = derivatives[0];
+            const d1 = derivatives[1];
+            
+            // Normalisation de x sur [0,1]
+            const t = (x - x0) / (x1 - x0);
+            
+            // Polynômes de base de Hermite
+            const h00 = 2*t*t*t - 3*t*t + 1;
+            const h10 = t*t*t - 2*t*t + t;
+            const h01 = -2*t*t*t + 3*t*t;
+            const h11 = t*t*t - t*t;
+            
+            // Calcul de la valeur interpolée
+            return y0 * h00 + 
+                   d0 * (x1 - x0) * h10 + 
+                   y1 * h01 + 
+                   d1 * (x1 - x0) * h11;
+        }
+
+        function updateIntermediateControls() {
+            const container = document.getElementById('intermediatePointsContainer');
+            container.innerHTML = '';
+            
+            if (currentDegree === 1) {
+                document.getElementById('intermediatePointsControls').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('intermediatePointsControls').style.display = 'block';
+
+            segments.forEach((segmentPoints, segIdx) => {
+                const intervalLabel = document.createElement('div');
+                intervalLabel.innerHTML = `<strong>Intervalle ${segIdx + 1}</strong>`;
+                container.appendChild(intervalLabel);
+
+                // Skip first and last points as they are main points
+                for (let i = 1; i < segmentPoints.length - 1; i++) {
+                    const point = segmentPoints[i];
+                    const controlDiv = document.createElement('div');
+                    controlDiv.className = 'point-control';
+                    
+                    const label = document.createElement('label');
+                    label.textContent = `Point ${i} (x=${point.x.toFixed(2)}) : `;
+                    
+                    const input = document.createElement('input');
+                    input.type = 'range';
+                    input.min = -3;
+                    input.max = 3;
+                    input.step = 0.1;
+                    input.value = point.y;
+                    
+                    const valueDisplay = document.createElement('span');
+                    valueDisplay.className = 'value-display';
+                    valueDisplay.textContent = point.y.toFixed(1);
+                    
+                    input.oninput = (e) => {
+                        point.y = parseFloat(e.target.value);
+                        valueDisplay.textContent = point.y.toFixed(1);
+                        updateGraph();
+                    };
+                    
+                    controlDiv.appendChild(label);
+                    controlDiv.appendChild(input);
+                    controlDiv.appendChild(valueDisplay);
+                    container.appendChild(controlDiv);
+                }
+            });
+        }
+
+        function updateTargetFunction() {
+            if (!targetFunction) {
+                chart.data.datasets[3].data = [];
+                return;
+            }
+
+            const points = [];
+            const step = 0.1;
+            for (let x = -3; x <= 3; x += step) {
+                points.push({
+                    x: x,
+                    y: targetFunction(x)
+                });
+            }
+            chart.data.datasets[3].data = points;
+        }
+
+        function updateGraph() {
+            // Met à jour les points principaux
+            chart.data.datasets[0].data = xPoints.map((x, i) => ({x: x, y: yPoints[i]}));
+            
+            // Met à jour les points intermédiaires
+            const intermediatePointsData = currentMethod === 'lagrange' 
+                ? segments.flatMap(segment => segment.slice(1, -1).map(p => ({x: p.x, y: p.y})))
+                : [];
+            chart.data.datasets[1].data = intermediatePointsData;
+            
+            // Calcule l'interpolation
+            const interpolationPoints = [];
+            
+            if (currentMethod === 'lagrange') {
+                segments.forEach(segmentPoints => {
+                    const start = segmentPoints[0].x;
+                    const end = segmentPoints[segmentPoints.length - 1].x;
+                    const steps = 20;
+                    const step = (end - start) / steps;
+                    
+                    for (let i = 0; i <= steps; i++) {
+                        const x = start + i * step;
+                        interpolationPoints.push({
+                            x: x,
+                            y: lagrangeInterpolation(x, segmentPoints)
+                        });
+                    }
+                });
+            } else { // Hermite
+                for (let i = 0; i < xPoints.length - 1; i++) {
+                    const x1 = xPoints[i];
+                    const x2 = xPoints[i + 1];
+                    const steps = 50; // Augmenter le nombre de points pour une courbe plus lisse
+                    const step = (x2 - x1) / steps;
+                    
+                    for (let j = 0; j <= steps; j++) {
+                        const x = x1 + j * step;
+                        interpolationPoints.push({
+                            x: x,
+                            y: hermiteInterpolation(x, 
+                                [{x: x1, y: yPoints[i]}, {x: x2, y: yPoints[i + 1]}],
+                                [derivatives[i], derivatives[i + 1]])
+                        });
+                    }
+                }
+            }
+            
+            chart.data.datasets[2].data = interpolationPoints;
+            
+            // Mettre à jour la fonction cible
+            updateTargetFunction();
+            
+            chart.update();
+        }
+
+        function setupDerivativeControls() {
+            const container = document.getElementById('derivativesContainer');
+            container.innerHTML = '';
+            
+            xPoints.forEach((x, i) => {
+                const controlDiv = document.createElement('div');
+                controlDiv.className = 'point-control';
+                
+                const label = document.createElement('label');
+                label.textContent = `Dérivée au point x=${x} : `;
+                
+                const input = document.createElement('input');
+                input.type = 'range';
+                input.min = -3;
+                input.max = 3;
+                input.step = 0.1;
+                input.value = derivatives[i];
+                
+                const valueDisplay = document.createElement('span');
+                valueDisplay.className = 'value-display';
+                valueDisplay.textContent = derivatives[i].toFixed(1);
+                
+                input.oninput = (e) => {
+                    derivatives[i] = parseFloat(e.target.value);
+                    valueDisplay.textContent = derivatives[i].toFixed(1);
+                    updateGraph();
+                };
+                
+                controlDiv.appendChild(label);
+                controlDiv.appendChild(input);
+                controlDiv.appendChild(valueDisplay);
+                container.appendChild(controlDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('graphCanvas').getContext('2d');
+            const degreeControl = document.getElementById('degreeControl');
+            const degreeValue = document.getElementById('degreeValue');
+
+            chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Points principaux',
+                        data: [],
+                        backgroundColor: 'red',
+                        pointRadius: 5
+                    }, {
+                        label: 'Points intermédiaires',
+                        data: [],
+                        backgroundColor: 'green',
+                        pointRadius: 4
+                    }, {
+                        label: 'Interpolation',
+                        data: [],
+                        borderColor: 'blue',
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0
+                    }, {
+                        label: 'Fonction cible',
+                        data: [],
+                        borderColor: 'rgba(128, 128, 128, 0.5)',
+                        borderDash: [5, 5],
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    animation: false,
+                    responsive: true,
+                    scales: {
+                        x: { min: -3, max: 3 },
+                        y: { min: -3, max: 3 }
+                    }
+                }
+            });
+
+            degreeControl.oninput = (e) => {
+                currentDegree = parseInt(e.target.value);
+                degreeValue.textContent = currentDegree;
+                
+                // Mise à jour de l'affichage des points intermédiaires
+                document.getElementById('intermediatePointsControls').style.display = 
+                    currentMethod === 'lagrange' && currentDegree > 1 ? 'block' : 'none';
+                
+                initializeSegments();
+                updateGraph();
+            };
+
+            const pointControls = document.getElementById('pointControls');
+            yPoints.forEach((y, i) => {
+                const controlDiv = document.createElement('div');
+                controlDiv.className = 'point-control';
+                
+                const label = document.createElement('label');
+                label.textContent = `Point ${i+1} (x=${xPoints[i]}) : `;
+                
+                const input = document.createElement('input');
+                input.type = 'range';
+                input.min = -3;
+                input.max = 3;
+                input.step = 0.1;
+                input.value = y;
+                
+                const valueDisplay = document.createElement('span');
+                valueDisplay.className = 'value-display';
+                valueDisplay.textContent = y.toFixed(1);
+                
+                input.oninput = (e) => {
+                    yPoints[i] = parseFloat(e.target.value);
+                    valueDisplay.textContent = yPoints[i].toFixed(1);
+                    initializeSegments();
+                    updateGraph();
+                };
+                
+                controlDiv.appendChild(label);
+                controlDiv.appendChild(input);
+                controlDiv.appendChild(valueDisplay);
+                pointControls.appendChild(controlDiv);
+            });
+
+            initializeSegments();
+            updateGraph();
+
+            const methodSelect = document.getElementById('methodSelect');
+            const derivativeControls = document.getElementById('derivativeControls');
+
+            methodSelect.onchange = (e) => {
+                currentMethod = e.target.value;
+                
+                // Gestion de l'affichage des contrôles
+                document.getElementById('degreeControl').parentElement.style.display = 
+                    currentMethod === 'lagrange' ? 'block' : 'none';
+                
+                document.getElementById('intermediatePointsControls').style.display = 'none';
+                document.getElementById('derivativeControls').style.display = 
+                    currentMethod === 'hermite' ? 'block' : 'none';
+                
+                if (currentMethod === 'lagrange' && currentDegree > 1) {
+                    document.getElementById('intermediatePointsControls').style.display = 'block';
+                }
+                
+                updateGraph();
+            };
+
+            // Initialiser les contrôles des dérivées
+            setupDerivativeControls();
+
+            const functionSelect = document.getElementById('functionSelect');
+
+            functionSelect.onchange = (e) => {
+                targetFunction = predefinedFunctions[e.target.value];
+                updateGraph();
+            };
+
+            // Ajouter un bouton pour ajuster les points à la fonction
+            const adjustButton = document.createElement('button');
+            adjustButton.textContent = "Ajuster les points";
+            adjustButton.style.marginLeft = '10px';
+            adjustButton.onclick = () => {
+                if (!targetFunction) return;
+                
+                // Ajuster les points principaux
+                yPoints = xPoints.map(x => targetFunction(x));
+                
+                // Si on est en mode Hermite, ajuster aussi les dérivées
+                if (currentMethod === 'hermite') {
+                    // Calculer les dérivées par différences finies
+                    const h = 0.0001; // petit pas pour la dérivée numérique
+                    derivatives = xPoints.map(x => 
+                        (targetFunction(x + h) - targetFunction(x - h)) / (2 * h)
+                    );
+                    
+                    // Mettre à jour les contrôles des dérivées
+                    const derivativesContainer = document.getElementById('derivativesContainer');
+                    const derivativeInputs = derivativesContainer.querySelectorAll('input[type="range"]');
+                    const derivativeDisplays = derivativesContainer.querySelectorAll('.value-display');
+                    derivatives.forEach((d, i) => {
+                        derivativeInputs[i].value = d;
+                        derivativeDisplays[i].textContent = d.toFixed(1);
+                    });
+                }
+                
+                // Réinitialiser les segments avec les nouvelles valeurs
+                initializeSegments();
+                
+                // Mettre à jour les contrôles des points principaux
+                const pointControls = document.getElementById('pointControls');
+                const inputs = pointControls.querySelectorAll('input[type="range"]');
+                const displays = pointControls.querySelectorAll('.value-display');
+                yPoints.forEach((y, i) => {
+                    inputs[i].value = y;
+                    displays[i].textContent = y.toFixed(1);
+                });
+                
+                updateGraph();
+            };
+            functionSelect.parentNode.appendChild(adjustButton);
+        });
+    </script>
+</body>
+</html> 

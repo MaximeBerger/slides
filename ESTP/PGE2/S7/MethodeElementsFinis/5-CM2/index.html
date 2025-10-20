@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Méthode des Éléments Finis</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../plugin/config.js" defer></script>
+    
+    </head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Page de titre -->
+				<section data-background-transition="fade">
+					<h1>Méthode des Éléments Finis</h1>
+					<h4>Assemblage et conditions aux limites</h4>
+				</section>
+
+
+				<section>
+					<h2>Résumé en une phrase :</h2>
+					<p class="fragment">Un logiciel MEF est un <strong>traducteur</strong>.</p>
+					<p class="fragment">Il prend un problème physique complexe, 
+						<ul>
+							<li>le découpe en petites équations simples,</li>
+							<li>les assemble en un grand système linéaire,</li>
+							<li>le résout numériquement,</li>
+							<li>puis restitue les résultats de façon visuelle pour aider à la décision.</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+				</section>
+            </div>
+		</div>
+
+
+	</body>
+</html>
