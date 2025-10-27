@@ -10,27 +10,15 @@
             padding: 0;
             overflow: hidden;
             height: 100vh;
-            /* Empêcher la sélection de texte globalement dans l'iframe */
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
+
         }
         
         /* Conteneur SVG avec défilement */
         .svg-container {
             width: 100%;
             height: 100vh;
-            overflow-y: hidden;
-            overflow-x: hidden;
-            transition: overflow-y 0.3s ease;
-        }
-        
-        /* Activer le défilement quand un panneau est ouvert */
-        .svg-container.has-open-panel {
             overflow-y: auto;
+            overflow-x: hidden;
         }
         
         /* Style de la barre de défilement */
@@ -54,14 +42,15 @@
 </head>
 <body>
 <div class="svg-container">
-<svg viewBox="0 0 1200 800" style="max-width:100%;min-height:100vh;overflow:visible"
+<svg viewBox="0 0 1000 1200" style="max-width:100%;min-height:100vh;overflow:visible"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      role="group" aria-label="Progression type ligne de métro avec sous-chapitres">
   <style>
     /* Typo */
     .t-title { font:700 26px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; }
-    .t-station { font:600 18px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; text-anchor:middle; }
-    .t-sub { font:400 14px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#475569; text-anchor:middle; }
+    .t-station { font:600 16px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; text-anchor:middle; }
+    .t-station-vertical { font:600 14px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#0F172A; text-anchor:middle; }
+    .t-sub { font:400 12px/1.2 system-ui, Segoe UI, Roboto, sans-serif; fill:#475569; text-anchor:middle; }
 
     /* Ligne de métro */
     .line { stroke:#334155; stroke-width:8; stroke-linecap:round; }
@@ -73,6 +62,18 @@
     a:focus .station-dot, a:hover .station-dot { stroke:#2563EB; }
     .station-halo { fill:#93C5FD; opacity:0; transition:opacity .15s ease; }
     a:focus .station-halo, a:hover .station-halo { opacity:.25; }
+    
+    /* Titres horizontaux */
+    .horizontal-title { 
+      transition: opacity 0.3s ease;
+      opacity: 0.9;
+    }
+    .horizontal-title:hover { 
+      opacity: 1; 
+    }
+    .horizontal-title.active { 
+      opacity: 1; 
+    }
 
     /* Sous-chapitres */
     .sub-chapters { opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; }
@@ -102,20 +103,25 @@
   </style>
 
   <!-- Titre -->
-  <text class="t-title" x="60" y="40" id="main-title">Chargement...</text>
+  <text class="t-title" x="500" y="40" id="main-title" text-anchor="middle">Chargement...</text>
 
   <!-- ===== Ligne principale + flèche de direction ===== -->
-  <!-- Ligne -->
-  <path class="line" d="M100,150 H1100"/>
+  <!-- Ligne verticale -->
+  <path class="line" d="M150,100 V1100"/>
   <!-- Petits ticks (rythme visuel) -->
   <g class="ticks">
-    <line class="tick" x1="250" y1="138" x2="250" y2="162"/>
-    <line class="tick" x1="500" y1="138" x2="500" y2="162"/>
-    <line class="tick" x1="750" y1="138" x2="750" y2="162"/>
-    <line class="tick" x1="1000" y1="138" x2="1000" y2="162"/>
+    <line class="tick" x1="138" y1="250" x2="162" y2="250"/>
+    <line class="tick" x1="138" y1="500" x2="162" y2="500"/>
+    <line class="tick" x1="138" y1="750" x2="162" y2="750"/>
+    <line class="tick" x1="138" y1="1000" x2="162" y2="1000"/>
   </g>
   <!-- Flèche de progression -->
-  <polygon class="arrow" points="1120,150 1102,142 1102,158"/>
+  <polygon class="arrow" points="150,1120 142,1102 158,1102"/>
+  
+  <!-- ===== Titres horizontaux ===== -->
+  <g id="horizontal-titles-container">
+    <!-- Les titres horizontaux seront générés ici -->
+  </g>
 
   <!-- ===== Stations (Sections) ===== -->
   <g id="stations-container">
@@ -130,32 +136,43 @@
   <script>
     // Fonction pour basculer l'affichage des sous-chapitres
     function toggleSubChapters(sectionId) {
-      const svgContainer = document.querySelector('.svg-container');
-      
       // Masquer tous les sous-chapitres
       const allSubChapters = document.querySelectorAll('.sub-chapters');
       allSubChapters.forEach(chapter => {
         chapter.classList.remove('active');
       });
       
+      // Désactiver tous les titres horizontaux
+      const allHorizontalTitles = document.querySelectorAll('.horizontal-title');
+      allHorizontalTitles.forEach(title => {
+        title.classList.remove('active');
+      });
+      
       // Afficher le sous-chapitre cliqué
       const targetChapter = document.getElementById(sectionId);
       if (targetChapter) {
         targetChapter.classList.add('active');
-        // Activer le défilement
-        svgContainer.classList.add('has-open-panel');
+        
+        // Activer le titre horizontal correspondant
+        const targetTitle = document.getElementById('title-' + sectionId);
+        if (targetTitle) {
+          targetTitle.classList.add('active');
+        }
       } 
     }
 
     // Fonction pour fermer tous les sous-chapitres
     function closeAllSubChapters() {
-      const svgContainer = document.querySelector('.svg-container');
       const allSubChapters = document.querySelectorAll('.sub-chapters');
       allSubChapters.forEach(chapter => {
         chapter.classList.remove('active');
       });
-      // Désactiver le défilement
-      svgContainer.classList.remove('has-open-panel');
+      
+      // Désactiver tous les titres horizontaux
+      const allHorizontalTitles = document.querySelectorAll('.horizontal-title');
+      allHorizontalTitles.forEach(title => {
+        title.classList.remove('active');
+      });
     }
 
     // Ajouter un écouteur d'événement pour fermer les sous-chapitres en cliquant à l'extérieur
@@ -238,35 +255,36 @@
 
       const stationsContainer = document.getElementById('stations-container');
       const subChaptersContainer = document.getElementById('sub-chapters-container');
+      const horizontalTitlesContainer = document.getElementById('horizontal-titles-container');
       
-      // Calculer les positions des stations
+      // Calculer les positions des stations (verticales)
       const totalChapters = data.chapitres.length;
       const positions = [];
       
       if (totalChapters === 1) {
         positions.push(600); // Centre si une seule section
       } else {
-        const startX = 100;
-        const endX = 1100;
-        const step = (endX - startX) / (totalChapters - 1);
+        const startY = 100;
+        const endY = 1100;
+        const step = (endY - startY) / (totalChapters - 1);
         
         for (let i = 0; i < totalChapters; i++) {
-          positions.push(startX + i * step);
+          positions.push(startY + i * step);
         }
       }
 
-      // Générer les stations
+      // Générer les stations et titres horizontaux
       data.chapitres.forEach((chapitre, index) => {
-        const x = positions[index];
+        const y = positions[index];
         
-        // Créer la station avec la transformation directement sur le groupe cliquable
+        // Créer la station simplifiée (juste le point)
         const stationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'a');
         stationGroup.setAttribute('href', '#');
         stationGroup.setAttribute('role', 'link');
         stationGroup.setAttribute('aria-label', `Ouvrir ${chapitre.titre}`);
         stationGroup.setAttribute('tabindex', '0');
         stationGroup.setAttribute('data-prevent-swipe', '');
-        stationGroup.setAttribute('transform', `translate(${x},150)`);
+        stationGroup.setAttribute('transform', `translate(150,${y})`);
         
         // Utiliser la nouvelle fonction de gestion tactile pour les stations
         setupTouchHandlers(stationGroup, function() {
@@ -281,24 +299,36 @@
         dot.setAttribute('class', 'station-dot');
         dot.setAttribute('r', '16');
         
+        stationGroup.appendChild(halo);
+        stationGroup.appendChild(dot);
+        stationsContainer.appendChild(stationGroup);
+        
+        // Créer le titre horizontal
+        const horizontalTitleGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        horizontalTitleGroup.setAttribute('id', 'title-' + chapitre.id);
+        horizontalTitleGroup.setAttribute('class', 'horizontal-title');
+        horizontalTitleGroup.setAttribute('transform', `translate(350,${y - 10})`);
+        
+        // Titre principal
         const titleText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         titleText.setAttribute('class', 't-station');
         titleText.setAttribute('x', '0');
-        titleText.setAttribute('y', '46');
+        titleText.setAttribute('y', '0');
+        titleText.setAttribute('text-anchor', 'start');
         titleText.textContent = chapitre.numero + " · " + chapitre.titre;
         
+        // Description
         const descText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         descText.setAttribute('class', 't-sub');
         descText.setAttribute('x', '0');
-        descText.setAttribute('y', '66');
-        descText.textContent = "";
+        descText.setAttribute('y', '20');
+        descText.setAttribute('text-anchor', 'start');
+        descText.textContent = chapitre.description || "";
         
-        stationGroup.appendChild(halo);
-        stationGroup.appendChild(dot);
-        stationGroup.appendChild(titleText);
-        stationGroup.appendChild(descText);
+        horizontalTitleGroup.appendChild(titleText);
+        horizontalTitleGroup.appendChild(descText);
         
-        stationsContainer.appendChild(stationGroup);
+        horizontalTitlesContainer.appendChild(horizontalTitleGroup);
 
         // Générer les sous-chapitres
         if ((chapitre.sousParties && chapitre.sousParties.length > 0) || (chapitre.sexercer && chapitre.sexercer.length > 0)) {
@@ -307,20 +337,22 @@
           subChaptersGroup.setAttribute('class', 'sub-chapters');
           
           // Calculer la position optimale pour éviter que le panneau sorte de l'écran
-          let panelX = x;
+          let panelX = 600; // Position fixe à droite des titres
+          let panelY = y;
           const panelWidth = 300; // Largeur du panneau
+          const panelHeight = 200; // Hauteur estimée du panneau
           const margin = 50; // Marge minimale par rapport aux bords
           
-          // Si le panneau sort à gauche, ajuster la position
-          if (x - panelWidth/2 < margin) {
-            panelX = margin + panelWidth/2;
+          // Si le panneau sort en bas, ajuster la position
+          if (y + panelHeight > 1000 - margin) {
+            panelY = 1000 - margin - panelHeight;
           }
-          // Si le panneau sort à droite, ajuster la position
-          else if (x + panelWidth/2 > 1200 - margin) {
-            panelX = 1200 - margin - panelWidth/2;
+          // Si le panneau sort en haut, ajuster la position
+          else if (y < margin) {
+            panelY = margin;
           }
           
-                     subChaptersGroup.setAttribute('transform', `translate(${panelX},230)`);
+          subChaptersGroup.setAttribute('transform', `translate(${panelX},${panelY})`);
           
           let currentY = 0;
           

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours</title>
+    <style>
+        /* Chargement des polices ESTP */
+        @import url("https://use.typekit.net/fxl2egi.css");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --font-montserrat: 'Montserrat', Arial, sans-serif;
+            --font-roboto: 'Roboto', Arial, sans-serif;
+            --primary-color: #479280;
+            --secondary-color: #ccc6c8;
+            --accent-color: #574255;
+            --text-color: #000000;
+            --light-bg: #f8f8f8;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: var(--font-roboto);
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-color);
+        }
+
+        .header h1 {
+            font-family: var(--font-montserrat);
+            font-size: 2.5rem;
+            margin-top: 30px;
+            margin-bottom: 90px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: var(--primary-color);
+        }
+
+        .chapters-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .chapter {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .chapter:hover {
+            transform: translateY(5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .chapter-header {
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: var(--white);
+            position: relative;
+        }
+
+        .chapter-header h2 {
+            font-family: var(--font-montserrat);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .chapter-header .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .chapter-number {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .chapter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .chapter-content.active {
+            max-height: 2000px;
+        }
+
+        .subsections {
+            padding: 25px 30px;
+            background: var(--light-bg);
+        }
+
+        .subsections h3 {
+            font-family: var(--font-montserrat);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .subsection-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .subsection-item {
+            margin-bottom: 10px;
+        }
+
+        .subsection-link {
+            display: block;
+            padding: 15px 20px;
+            background: var(--white);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .subsection-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .subsection-description {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .subsection-link:hover {
+            background: var(--secondary-color);
+            border-left-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .exercises {
+            padding: 25px 30px;
+            background: var(--secondary-color);
+        }
+
+        .exercises h3 {
+            font-family: var(--font-montserrat);
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .exercise-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .exercise-link {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .exercise-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+        }
+
+        .empty-chapter {
+            padding: 25px;
+            text-align: center;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .chapter-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .exercise-list {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="main-title">Chargement...</h1>
+        </div>
+        
+        <div class="loading" id="loading">
+            Chargement des données...
+        </div>
+        
+        <div class="chapters-container" id="chapters-container" style="display: none;">
+            <!-- Les chapitres seront générés dynamiquement -->
+        </div>
+    </div>
+
+    <script>
+        // Chargement des données JSON
+        async function loadData() {
+            try {
+                // Ajout d'un paramètre de cache-busting pour éviter les problèmes de cache
+                const timestamp = new Date().getTime();
+                const response = await fetch(`donnees.json?t=${timestamp}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+                return null;
+            }
+        }
+
+        // Création d'un élément de sous-partie
+        function createSubsectionItem(subsection) {
+            const li = document.createElement('li');
+            li.className = 'subsection-item';
+            
+            const link = document.createElement('a');
+            link.href = subsection.lien;
+            link.target = subsection.cible || '_self';
+            link.className = 'subsection-link';
+            
+            // Titre de la sous-partie
+            const title = document.createElement('div');
+            title.className = 'subsection-title';
+            title.textContent = `${subsection.numero}. ${subsection.titre}`;
+            link.appendChild(title);
+            
+            // Description de la sous-partie (si elle existe)
+            if (subsection.description && subsection.description.trim() !== '') {
+                const description = document.createElement('div');
+                description.className = 'subsection-description';
+                description.textContent = subsection.description;
+                link.appendChild(description);
+            }
+            
+            li.appendChild(link);
+            return li;
+        }
+
+        // Création d'un élément d'exercice
+        function createExerciseLink(exercise) {
+            const link = document.createElement('a');
+            link.href = exercise.lien;
+            link.target = exercise.cible || '_self';
+            link.className = 'exercise-link';
+            link.textContent = exercise.titre;
+            return link;
+        }
+
+        // Création du contenu d'un chapitre
+        function createChapterContent(chapter) {
+            const content = document.createElement('div');
+            content.className = 'chapter-content';
+
+            // Sous-parties
+            if (chapter.sousParties && chapter.sousParties.length > 0) {
+                const subsectionsDiv = document.createElement('div');
+                subsectionsDiv.className = 'subsections';
+                
+                const subsectionsTitle = document.createElement('h3');
+                subsectionsTitle.textContent = 'Parties';
+                subsectionsDiv.appendChild(subsectionsTitle);
+                
+                const subsectionsList = document.createElement('ul');
+                subsectionsList.className = 'subsection-list';
+                
+                chapter.sousParties.forEach(subsection => {
+                    subsectionsList.appendChild(createSubsectionItem(subsection));
+                });
+                
+                subsectionsDiv.appendChild(subsectionsList);
+                content.appendChild(subsectionsDiv);
+            }
+
+            // Exercices
+            if (chapter.sexercer && chapter.sexercer.length > 0) {
+                const exercisesDiv = document.createElement('div');
+                exercisesDiv.className = 'exercises';
+                
+                const exercisesTitle = document.createElement('h3');
+                exercisesTitle.textContent = 'S\'exercer';
+                exercisesDiv.appendChild(exercisesTitle);
+                
+                const exercisesList = document.createElement('div');
+                exercisesList.className = 'exercise-list';
+                
+                chapter.sexercer.forEach(exercise => {
+                    exercisesList.appendChild(createExerciseLink(exercise));
+                });
+                
+                exercisesDiv.appendChild(exercisesList);
+                content.appendChild(exercisesDiv);
+            }
+
+            // Message si chapitre vide
+            if ((!chapter.sousParties || chapter.sousParties.length === 0) && 
+                (!chapter.sexercer || chapter.sexercer.length === 0)) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'empty-chapter';
+                emptyDiv.textContent = 'Contenu à venir...';
+                content.appendChild(emptyDiv);
+            }
+
+            return content;
+        }
+
+        // Création d'un chapitre complet
+        function createChapter(chapter) {
+            const chapterDiv = document.createElement('div');
+            chapterDiv.className = 'chapter';
+            chapterDiv.id = chapter.id;
+
+            // En-tête du chapitre
+            const header = document.createElement('div');
+            header.className = 'chapter-header';
+            
+            const title = document.createElement('h2');
+            title.textContent = chapter.titre;
+            header.appendChild(title);
+            
+            if (chapter.description) {
+                const description = document.createElement('div');
+                description.className = 'description';
+                description.textContent = chapter.description;
+                header.appendChild(description);
+            }
+            
+            const chapterNumber = document.createElement('div');
+            chapterNumber.className = 'chapter-number';
+            chapterNumber.textContent = `Chapitre ${chapter.numero+1}`;
+            header.appendChild(chapterNumber);
+            
+            chapterDiv.appendChild(header);
+
+            // Contenu du chapitre
+            const content = createChapterContent(chapter);
+            chapterDiv.appendChild(content);
+
+            // Gestionnaire de clic pour ouvrir/fermer
+            chapterDiv.addEventListener('click', function() {
+                const content = this.querySelector('.chapter-content');
+                const isActive = content.classList.contains('active');
+                
+                // Fermer tous les autres chapitres
+                document.querySelectorAll('.chapter-content.active').forEach(activeContent => {
+                    if (activeContent !== content) {
+                        activeContent.classList.remove('active');
+                    }
+                });
+                
+                // Toggle le chapitre actuel
+                content.classList.toggle('active');
+            });
+
+            return chapterDiv;
+        }
+
+        // Initialisation de la page
+        async function init() {
+            const data = await loadData();
+            
+            if (!data) {
+                document.getElementById('loading').textContent = 'Erreur lors du chargement des données';
+                return;
+            }
+
+            // Mise à jour du titre
+            document.getElementById('main-title').textContent = data.titre;
+            
+            // Masquer le loading et afficher le conteneur
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('chapters-container').style.display = 'block';
+            
+            // Création des chapitres
+            const container = document.getElementById('chapters-container');
+            data.chapitres.forEach(chapter => {
+                container.appendChild(createChapter(chapter));
+            });
+        }
+
+        // Démarrage de l'application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
