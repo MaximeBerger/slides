@@ -1,0 +1,99 @@
+
+\newcommand{\mtn}{\mathbb{N}}
+\newcommand{\mtns}{\mathbb{N}^*}
+\newcommand{\mtz}{\mathbb{Z}}
+\newcommand{\mtr}{\mathbb{R}}
+\newcommand{\mtk}{\mathbb{K}}
+\newcommand{\mtq}{\mathbb{Q}}
+\newcommand{\mtc}{\mathbb{C}}
+\newcommand{\mch}{\mathcal{H}}
+\newcommand{\mcp}{\mathcal{P}}
+\newcommand{\mcb}{\mathcal{B}}
+\newcommand{\mcl}{\mathcal{L}}
+\newcommand{\mcm}{\mathcal{M}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\mcmn}{\mathcal{M}}
+\newcommand{\mcmnr}{\mathcal{M}_n(\mtr)}
+\newcommand{\mcmnk}{\mathcal{M}_n(\mtk)}
+\newcommand{\mcsn}{\mathcal{S}_n}
+\newcommand{\mcs}{\mathcal{S}}
+\newcommand{\mcd}{\mathcal{D}}
+\newcommand{\mcsns}{\mathcal{S}_n^{++}}
+\newcommand{\glnk}{GL_n(\mtk)}
+\newcommand{\mnr}{\mathcal{M}_n(\mtr)}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\mcu}{\mathcal{U}}
+\newcommand{\mcun}{\mcu_n}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\croouv}{[\![}
+\newcommand{\crofer}{]\!]}
+\newcommand{\rab}{\mathcal{R}(a,b)}
+\newcommand{\pss}[2]{\langle #1,#2\rangle}
+
+\vspace{4em}
+
+\section*{Exercice 1 - Nombres complexes (6 points)}
+
+\begin{enumerate}
+    \item Montrer que $z \overline{z} = |z|^2$ pour tout nombre complexe $z$.
+
+    \item Mettre sous forme exponentielle les nombres complexes suivants :
+
+    $$z_1 = -2\sqrt{3} - 2i, \qquad z_2 = \dfrac{\sqrt{2}(i-1)}{i}, \qquad z_3 = \frac{(1 - \sqrt{3}i)^4}{(1 - i)^5}$$
+
+    \item Ecrire sous forme algébrique les conjugués de ces nombres complexes.
+
+\end{enumerate}
+
+
+\vspace{3em}
+
+\section*{Exercice 2 - Intégration (8 points)}
+
+Calculer les intégrales suivantes :
+$$I = \int_0^1 (x^2 + 1)e^x dx, \qquad  J = \int_1^e x^2\ln (x^3) dx$$
+
+Déterminer une primitive des fonctions suivantes :
+$$f(x) = \arctan(x), \qquad g(x) = \cos(x)\sin^2(x)$$
+
+\vspace{2em}
+
+
+
+\newpage
+
+\section*{Exercice 5 - Fonctions périodiques (5 points)}
+
+Les fonctions suivantes sont-elles périodiques ? Si oui, déterminer leur période :
+\begin{multicols}{3}
+\begin{enumerate}
+    \item $f_1(x) = \sin(5x)$
+    \item $f_2(x) = \tan(x)$
+    \item $f_3(x) = \sin^2(x)$
+    \item $f_4(x) = \cos(x) + \sin(\sqrt{2}x)$
+    \item $f_5(x) = e^{ix} + e^{2ix}$
+\end{enumerate}
+\end{multicols}
+
+
+\vspace{2em}
+
+\section*{Exercice 6 - Signal de température et analyse spectrale (5 points)}
+
+Un capteur de température dans un bâtiment enregistre les variations de température.
+
+
+    Le signal de température est modélisé par :
+    $$T(t) = 20 + 5\cos\left(\frac{\pi t}{12}\right) + 2\sin\left(\frac{\pi t}{6}\right) + 0.5\cos\left(\frac{\pi t}{4}\right)$$
+    
+    où $t$ est en heures et $T$ en degrés Celsius. Le graphe est tracé à la fin de l'exercice.
+   \begin{enumerate}
+    \item Déterminer sur le graphe et avec le calcul la période de ce signal.
+    \item Représenter sur le graphe la sinusoïdale la plus proche du signal.
+
+    \item Calculer les coefficients de Fourier complexes de ce signal.
+
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{1-Fourier/Exam/temperature_signal.png}
+\end{center}
+\end{enumerate}
