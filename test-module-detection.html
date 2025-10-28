@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de détection de modules</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-case { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .improved { background-color: #d4edda; }
+        .same { background-color: #f8f9fa; }
+        .result { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Test de détection de modules par mots</h1>
+    <div id="results"></div>
+
+    <script>
+        const modulesRules = {
+            "Architecture/Construction générale": [
+                "architecture/construction générale", 
+                "architecture construction générale", 
+                "architecture", 
+                "construction générale"
+            ],
+            "Mathématiques": [
+                "mathématiques", 
+                "maths", 
+                "math", 
+                "mathematiques"
+            ],
+            "Béton Armé": [
+                "béton armé", 
+                "beton arme", 
+                "ba"
+            ],
+            "Stabilité des ouvrages": [
+                "stabilité des ouvrages", 
+                "stabilite des ouvrages", 
+                "stab ouvrages",
+                "stab ouv"
+            ]
+        };
+
+        // Nouvelle fonction extractModule avec logique hybride
+        function extractModule(text) {
+            if (!text) return "";
+            
+            let cleanText = text.toLowerCase().trim();
+            
+            // Chercher dans le dictionnaire de modules
+            for (let [moduleName, variants] of Object.entries(modulesRules)) {
+                for (let variant of variants) {
+                    let variantLower = variant.toLowerCase();
+                    
+                    // Si le variant contient plusieurs mots, utiliser la comparaison de chaînes complètes
+                    if (variantLower.includes(' ')) {
+                        if (cleanText.includes(variantLower)) {
+                            return moduleName;
+                        }
+                    } else {
+                        // Pour les variants d'un seul mot, utiliser la détection de mot entier
+                        let wordRegex = new RegExp(`\\b${variantLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+                        if (wordRegex.test(cleanText)) {
+                            return moduleName;
+                        }
+                    }
+                }
+            }
+            
+            return ""; // Aucun module trouvé
+        }
+
+        // Ancienne fonction pour comparaison
+        function extractModuleOld(text) {
+            if (!text) return "";
+            
+            let cleanText = text.toLowerCase().trim();
+            
+            for (let [moduleName, variants] of Object.entries(modulesRules)) {
+                for (let variant of variants) {
+                    if (cleanText.includes(variant.toLowerCase())) {
+                        return moduleName;
+                    }
+                }
+            }
+            
+            return "";
+        }
+
+        // Tests
+        const testCases = [
+            // Tests pour mots uniques (devraient être détectés comme mots entiers)
+            "Cours d'architecture moderne", // "architecture" seul
+            "Mathématiques appliquées", // "mathématiques" seul
+            "Architecture bioclimatique", // "architecture" seul
+            "Maths pour ingénieurs", // "maths" seul
+            "Architecture et urbanisme", // "architecture" seul
+            "Mathématiques financières", // "mathématiques" seul
+            "Architecture durable", // "architecture" seul
+            "Maths avancées", // "maths" seul
+            "Cours de mathématiques", // "mathématiques" seul
+            "Architecture des systèmes", // "architecture" seul
+            
+            // Tests pour chaînes multiples (devraient être détectés comme chaînes complètes)
+            "Construction générale des bâtiments", // "construction générale" complet
+            "Béton armé et précontraint", // "béton armé" complet
+            "Stabilité des ouvrages d'art", // "stabilité des ouvrages" complet
+            "Stab ouvrages complexes", // "stab ouvrages" complet
+            "Stabilite des ouvrages", // "stabilite des ouvrages" complet
+            "Construction en béton armé", // "béton armé" complet
+            
+            // Tests de non-détection (pour vérifier que ça ne détecte pas à tort)
+            "Architectural", // ne devrait PAS détecter "architecture"
+            "Mathematical", // ne devrait PAS détecter "maths"
+            "Constructions", // ne devrait PAS détecter "construction" seul
+            "Betonnière", // ne devrait PAS détecter "béton" seul
+            "Stabilisation", // ne devrait PAS détecter "stab" seul
+        ];
+
+        function runTests() {
+            const resultsDiv = document.getElementById('results');
+            let html = '<h2>Résultats des tests :</h2>';
+            
+            testCases.forEach((testCase, index) => {
+                const detectedModuleNew = extractModule(testCase);
+                const detectedModuleOld = extractModuleOld(testCase);
+                const improved = detectedModuleNew !== detectedModuleOld;
+                const cssClass = improved ? 'improved' : 'same';
+                
+                html += `
+                    <div class="test-case ${cssClass}">
+                        <strong>Test ${index + 1}:</strong> "${testCase}"<br>
+                        <span class="result">Ancien:</span> "${detectedModuleOld}" | 
+                        <span class="result">Nouveau:</span> "${detectedModuleNew}" 
+                        ${improved ? '<strong style="color: green;">✓ AMÉLIORÉ</strong>' : '<span style="color: gray;">=</span>'}
+                    </div>
+                `;
+            });
+            
+            // Statistiques
+            const improvements = testCases.filter((testCase, index) => {
+                const detectedModuleNew = extractModule(testCase);
+                const detectedModuleOld = extractModuleOld(testCase);
+                return detectedModuleNew !== detectedModuleOld;
+            }).length;
+            
+            html += `
+                <div style="margin-top: 20px; padding: 15px; background-color: #e9ecef; border-radius: 5px;">
+                    <h3>Statistiques :</h3>
+                    <p><strong>Améliorations détectées :</strong> ${improvements} sur ${testCases.length} tests</p>
+                    <p><strong>Pourcentage d'amélioration :</strong> ${Math.round((improvements / testCases.length) * 100)}%</p>
+                </div>
+            `;
+            
+            resultsDiv.innerHTML = html;
+        }
+
+        // Exécuter les tests au chargement de la page
+        window.onload = runTests;
+    </script>
+</body>
+</html>

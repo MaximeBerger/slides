@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Mind Map SVG - Calcul Vectoriel</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
+
+		<script src="../../../../../plugin/config.js" defer></script>
+
+		<style>
+			.mindmap-svg {
+				width: 100%;
+				height: 500px;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+				background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+			}
+			
+			.mindmap-node {
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+			
+			.mindmap-node:hover {
+				transform: scale(1.1);
+				filter: brightness(1.2);
+			}
+			
+			.mindmap-text {
+				user-select: none;
+				pointer-events: none;
+			}
+			
+			.mindmap-connection {
+				stroke-dasharray: 5,5;
+				animation: dash 2s linear infinite;
+			}
+			
+			@keyframes dash {
+				to { stroke-dashoffset: -10; }
+			}
+		</style>
+    </head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+                <!-- Titre -->
+                <section data-transition="fade">
+                    <h2>Mind Map : Calcul Vectoriel</h2>
+                    <h4>Approche SVG + Fragments</h4>
+                    <p><em>Cliquez sur les éléments pour les explorer</em></p>
+                </section>
+
+                <!-- Mind Map SVG -->
+                <section>
+                    <h3>Structure du Calcul Vectoriel</h3>
+                    <svg class="mindmap-svg" viewBox="0 0 800 500">
+                        <!-- Définitions des flèches et styles -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+                            </marker>
+                            <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#3498db"/>
+                            </marker>
+                            <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+                            </marker>
+                            <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#f39c12"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Variables pour le centre et fonctions de positionnement -->
+                        <script>
+                            // Définition du centre
+                            const centerX = 400;
+                            const centerY = 250;
+                            
+                            // Fonction pour calculer les positions relatives par rapport au centre
+                            function getPosition(angle, distance) {
+                                const x = centerX + distance * Math.cos(angle * Math.PI / 180);
+                                const y = centerY + distance * Math.sin(angle * Math.PI / 180);
+                                return { x: Math.round(x), y: Math.round(y) };
+                            }
+                            
+                            // Fonction pour créer des courbes de Bézier quadratiques
+                            function getBezierPath(startX, startY, endX, endY, curvature = 0.3) {
+                                const midX = (startX + endX) / 2;
+                                const midY = (startY + endY) / 2;
+                                const controlX = midX + curvature * (endY - startY);
+                                const controlY = midY - curvature * (endX - startX);
+                                return `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`;
+                            }
+                            
+                            // Fonction pour créer des courbes de Bézier cubiques (plus fluides)
+                            function getCubicBezierPath(startX, startY, endX, endY, curvature = 0.2) {
+                                const dx = endX - startX;
+                                const dy = endY - startY;
+                                const control1X = startX + dx * 0.3 + curvature * dy;
+                                const control1Y = startY + dy * 0.3 - curvature * dx;
+                                const control2X = startX + dx * 0.7 - curvature * dy;
+                                const control2Y = startY + dy * 0.7 + curvature * dx;
+                                return `M ${startX} ${startY} C ${control1X} ${control1Y} ${control2X} ${control2Y} ${endX} ${endY}`;
+                            }
+                            
+                            // Configuration des branches principales
+                            const mainBranches = [
+                                { angle: -45, distance: 150, color: "#e74c3c", text: "Opérations" },
+                                { angle: 45, distance: 150, color: "#27ae60", text: "Gradient" },
+                                { angle: 135, distance: 120, color: "#f39c12", text: "Applications" }
+                            ];
+                            
+                            // Configuration des sous-branches
+                            const subBranches = {
+                                operations: [
+                                    { angle: -30, distance: 80, color: "#3498db", text: "Scalaire" },
+                                    { angle: 30, distance: 80, color: "#3498db", text: "Vectoriel" }
+                                ],
+                                gradient: [
+                                    { angle: 30, distance: 80, color: "#27ae60", text: "Champ scalaire" },
+                                    { angle: 60, distance: 80, color: "#27ae60", text: "Champ vectoriel" }
+                                ],
+                                applications: [
+                                    { angle: 120, distance: 80, color: "#f39c12", text: "Physique" },
+                                    { angle: 150, distance: 80, color: "#f39c12", text: "Géométrie" }
+                                ]
+                            };
+                        </script>
+
+                        <!-- Centre : Vecteurs -->
+                        <g class="fragment" data-fragment-index="0">
+                            <circle cx="400" cy="250" r="45" fill="#e74c3c" stroke="#c0392b" stroke-width="4" class="mindmap-node"/>
+                            <text x="400" y="260" text-anchor="middle" fill="white" font-weight="bold" font-size="16" class="mindmap-text">Vecteurs</text>
+                        </g>
+                        
+                        <!-- Branche 1 : Opérations (angle: -45°, distance: 150) -->
+                        <g class="fragment" data-fragment-index="1">
+                            <path d="M 400 250 Q 300 200 200 150" stroke="#e74c3c" stroke-width="4" fill="none" marker-end="url(#arrowhead)" class="mindmap-connection"/>
+                            <circle cx="200" cy="150" r="35" fill="#3498db" stroke="#2980b9" stroke-width="3" class="mindmap-node"/>
+                            <text x="200" y="155" text-anchor="middle" fill="white" font-weight="bold" font-size="14" class="mindmap-text">Opérations</text>
+                        </g>
+                        
+                        <!-- Branche 2 : Gradient (angle: 45°, distance: 150) -->
+                        <g class="fragment" data-fragment-index="2">
+                            <path d="M 400 250 Q 500 200 600 150" stroke="#27ae60" stroke-width="4" fill="none" marker-end="url(#arrowhead-green)" class="mindmap-connection"/>
+                            <circle cx="600" cy="150" r="35" fill="#27ae60" stroke="#229954" stroke-width="3" class="mindmap-node"/>
+                            <text x="600" y="155" text-anchor="middle" fill="white" font-weight="bold" font-size="14" class="mindmap-text">Gradient</text>
+                        </g>
+                        
+                        <!-- Branche 3 : Applications (angle: 135°, distance: 120) -->
+                        <g class="fragment" data-fragment-index="3">
+                            <path d="M 400 250 Q 450 300 500 350" stroke="#f39c12" stroke-width="4" fill="none" marker-end="url(#arrowhead-orange)" class="mindmap-connection"/>
+                            <circle cx="500" cy="350" r="35" fill="#f39c12" stroke="#e67e22" stroke-width="3" class="mindmap-node"/>
+                            <text x="500" y="355" text-anchor="middle" fill="white" font-weight="bold" font-size="14" class="mindmap-text">Applications</text>
+                        </g>
+                        
+                        <!-- Sous-branches pour Opérations -->
+                        <g class="fragment" data-fragment-index="4">
+                            <path d="M 200 150 Q 150 125 100 100" stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowhead-blue)"/>
+                            <rect x="60" y="80" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="100" y="100" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="12" class="mindmap-text">Scalaire</text>
+                        </g>
+                        
+                        <g class="fragment" data-fragment-index="5">
+                            <path d="M 200 150 Q 160 185 120 220" stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowhead-blue)"/>
+                            <rect x="80" y="200" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="120" y="220" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="12" class="mindmap-text">Vectoriel</text>
+                        </g>
+                        
+                        <!-- Sous-branches pour Gradient -->
+                        <g class="fragment" data-fragment-index="6">
+                            <path d="M 600 150 Q 650 125 700 100" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)"/>
+                            <rect x="660" y="80" width="80" height="40" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="700" y="100" text-anchor="middle" fill="#27ae60" font-weight="bold" font-size="12" class="mindmap-text">Champ scalaire</text>
+                        </g>
+                        
+                        <g class="fragment" data-fragment-index="7">
+                            <path d="M 600 150 Q 660 175 720 200" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#arrowhead-green)"/>
+                            <rect x="680" y="180" width="80" height="40" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="720" y="200" text-anchor="middle" fill="#27ae60" font-weight="bold" font-size="12" class="mindmap-text">Champ vectoriel</text>
+                        </g>
+                        
+                        <!-- Sous-branches pour Applications -->
+                        <g class="fragment" data-fragment-index="8">
+                            <path d="M 500 350 Q 450 385 400 420" stroke="#f39c12" stroke-width="3" fill="none" marker-end="url(#arrowhead-orange)"/>
+                            <rect x="360" y="400" width="80" height="40" fill="#fef5e7" stroke="#f39c12" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="400" y="420" text-anchor="middle" fill="#f39c12" font-weight="bold" font-size="12" class="mindmap-text">Physique</text>
+                        </g>
+                        
+                        <g class="fragment" data-fragment-index="9">
+                            <path d="M 500 350 Q 550 385 600 420" stroke="#f39c12" stroke-width="3" fill="none" marker-end="url(#arrowhead-orange)"/>
+                            <rect x="560" y="400" width="80" height="40" fill="#fef5e7" stroke="#f39c12" stroke-width="2" rx="8" class="mindmap-node"/>
+                            <text x="600" y="420" text-anchor="middle" fill="#f39c12" font-weight="bold" font-size="12" class="mindmap-text">Géométrie</text>
+                        </g>
+                    </svg>
+                </section>
+
+                <!-- Démonstration du positionnement relatif -->
+                <section>
+                    <h3>Positionnement Relatif et Courbes de Bézier</h3>
+                    <div class="fragment">
+                        <h4>Avantages du positionnement relatif :</h4>
+                        <ul>
+                            <li><strong>Facilité de modification</strong> : Changer le centre modifie toute la structure</li>
+                            <li><strong>Calculs automatiques</strong> : Positions calculées par angle et distance</li>
+                            <li><strong>Symétrie parfaite</strong> : Distribution équilibrée autour du centre</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h4>Courbes de Bézier :</h4>
+                        <ul>
+                            <li><strong>Quadratiques (Q)</strong> : Un point de contrôle, courbes simples</li>
+                            <li><strong>Cubiques (C)</strong> : Deux points de contrôle, courbes plus fluides</li>
+                            <li><strong>Paramètre de courbure</strong> : Contrôle l'intensité de la courbe</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Détails des opérations -->
+                <section>
+                    <h3>Opérations Vectorielles</h3>
+                    <div class="fragment">
+                        <h4>Produit Scalaire</h4>
+                        <p>$$\vec{u} \cdot \vec{v} = |\vec{u}| |\vec{v}| \cos(\theta)$$</p>
+                        <p>Mesure l'angle entre deux vecteurs</p>
+                    </div>
+                    <div class="fragment">
+                        <h4>Produit Vectoriel</h4>
+                        <p>$$\vec{u} \times \vec{v} = |\vec{u}| |\vec{v}| \sin(\theta) \vec{n}$$</p>
+                        <p>Vecteur perpendiculaire aux deux vecteurs</p>
+                    </div>
+                </section>
+
+                <!-- Détails du gradient -->
+                <section>
+                    <h3>Gradient et Applications</h3>
+                    <div class="fragment">
+                        <h4>Gradient d'un champ scalaire</h4>
+                        <p>$$\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)$$</p>
+                    </div>
+                    <div class="fragment">
+                        <h4>Applications en physique</h4>
+                        <ul>
+                            <li>Champ électrique : $\vec{E} = -\nabla V$</li>
+                            <li>Force conservative : $\vec{F} = -\nabla U$</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Exemple de code -->
+                <section>
+                    <h3>Exemple d'Implémentation</h3>
+                    <div class="fragment">
+                        <h4>Positionnement relatif :</h4>
+                        <pre><code class="javascript">// Définir le centre
+const centerX = 400, centerY = 250;
+
+// Calculer position par angle et distance
+function getPosition(angle, distance) {
+    const x = centerX + distance * Math.cos(angle * Math.PI / 180);
+    const y = centerY + distance * Math.sin(angle * Math.PI / 180);
+    return { x: Math.round(x), y: Math.round(y) };
+}
+
+// Utilisation
+const pos = getPosition(45, 150); // 45°, distance 150px
+// pos.x = 506, pos.y = 356</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <h4>Courbes de Bézier :</h4>
+                        <pre><code class="javascript">// Courbe quadratique simple
+function getBezierPath(startX, startY, endX, endY, curvature = 0.3) {
+    const midX = (startX + endX) / 2;
+    const midY = (startY + endY) / 2;
+    const controlX = midX + curvature * (endY - startY);
+    const controlY = midY - curvature * (endX - startX);
+    return `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`;
+}
+
+// Utilisation dans SVG
+&lt;path d="M 400 250 Q 300 200 200 150" stroke="red" fill="none"/&gt;</code></pre>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section>
+                    <h2>Récapitulatif</h2>
+                    <p class="fragment">La mind map montre les <strong>connexions</strong> entre les concepts</p>
+                    <p class="fragment">Chaque branche peut être <strong>explorée</strong> en détail</p>
+                    <p class="fragment">L'approche SVG permet un <strong>contrôle total</strong> sur l'apparence</p>
+                    <p class="fragment">Le <strong>positionnement relatif</strong> facilite la maintenance et les modifications</p>
+                    <p class="fragment">Les <strong>courbes de Bézier</strong> créent des connexions visuellement attrayantes</p>
+                </section>
+
+            </div>
+		</div>
+	</body>
+</html>
