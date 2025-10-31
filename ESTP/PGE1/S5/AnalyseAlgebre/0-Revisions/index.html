@@ -4,11 +4,16 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Calcul vectoriel – Révisions ingénieurs</title>
+		<title>Calcul vectoriel - Révisions ingénieurs</title>
 
 		<link rel="stylesheet" href="../../../../../dist/reset.css">
 		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+
+
 		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+
+        <link rel="stylesheet" href="../../../../../dist/templates.css">
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,16 +30,7 @@
 
 
 		<script src="../../../../../plugin/config.js" defer></script>
-        <script type="module">
-            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-            mermaid.initialize({
-                startOnLoad: true,
-                theme: 'base',
-                flowchart: {
-                    curve: 'basis',
-                },
-            });
-          </script>
+  
     
     </head>
 	<body>
@@ -42,148 +38,257 @@
 			<div class="slides">
 
                 <!-- Titre -->
-                <section data-transition="fade"  style="text-align: left">
-                    <h2>Calcul vectoriel</h2>
-                    <h4>Séquence 1 – Rappels et introduction au formalisme tensoriel</h4>
+                <section >
+                    <div style="position: relative;">
+                        <h1 class="main-title">Chapitre 1</h1>
+                        <h2 class="subtitle">Calcul tensoriel</h2>
+                        <div class="author-info">
+                            <p class="author">Maxime Berger</p>
+                            <p class="date">4 Novembre 2025</p>
+                        </div>
+                        <img src="logo.png" alt="Logo ESTP" style="position: absolute; top: 300px; right: -100px; height:30vh; opacity: 0.5;">
+                    </div>
                 </section>
 
-                <!-- Objectifs -->
-                <section data-transition="fade">
-                    <p>À la fin de cette séance, vous serez capables de :</p>
-                    <pre class="mermaid">
-                        graph TD
-                        A[Client] --> B[Load Balancer]
-                        B --> C[Serveur 01]
-                        B --> D[Serveur 02]
-                    </pre>
-                </section>
-
+                <!-- Rectangles couleurs -->
                 <section>
-                    <h3>Évolution du diagramme</h3>
-                    <div class="mermaid">
-                        mindmap
-                            Root
-                                A
-                                    B
-                                    C
+                    <h2>Un sujet assez vaste</h2>
+                    <div style="display: flex; flex-direction: column; gap: 18px; align-items: center;">
+                        <div style="display: flex; flex-direction: row; justify-content: center; gap: 24px; width: 100%;">
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture1.png" alt="Capture d'écran 1" style="width:70%;height:auto;">
+                            </div>
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture2.png" alt="Capture d'écran 2" style="width:80%;height:auto;border-radius:8px;">
+                            </div>
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture3.png" alt="Capture d'écran 3" style="width:100%;height:auto;border-radius:8px;">
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: center; gap: 24px; width: 100%;">
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture4.png" alt="Capture d'écran 4" style="width:100%;height:auto;border-radius:8px;">
+                            </div>
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture5.png" alt="Capture d'écran 5" style="width:100%;height:auto;border-radius:8px;">
+                            </div>
+                            <div style="flex: 0 0 32%; max-width: 32%; display: flex; justify-content: center; align-items: center;">
+                                <img src="capture6.png" alt="Capture d'écran 6" style="width:100%;height:auto;border-radius:8px;">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                
+
+                <!-- Image et texte -->
+                <section>
+                    <h2>Le repère cartésien</h2>
+                    <div class="image-text-container">
+                        <div class="image-section">
+                            <img src="cartesian.png" alt="Description de l'image" class="main-image">
+                            <div class="image-caption">
+                                <p>Représentation d'un point dans l'espace</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-section">
+                            <h3>Problème :</h3>
+                            <p>Intuitif, mais trop facile !</p>
+                            
+                            <ul>
+                                <li class="fragment">Pas adapté à tous les problèmes</li>
+                                <li class="fragment">Plusieurs particularités</li>
+                                <li class="fragment">C'est une représentation parmi d'autres</li>
+                            </ul>
+                            
+                            <div class="highlight-text fragment">
+                                Les lois de la physique ne doivent pas dépendre du référentiel
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quiz relier les changements de repère linéaires et non linéaires ? -->
+                <!-- Montrer un repère curviligne ? -->
+
+
+                <!-- Contenu et notes-->
+                <section>
+                    <h2>Changer de repère</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Comment passer d'un repère à un autre ?</h3>
+                            <p>Lois de transformation non linéaires !</p>
+                            <ul>
+                                <li class="fragment">La matrice jacobienne est la matrice des dérivées partielles de la transformation.</li>
+                                <li class="fragment">Elle est notée $J$ et est définie par $J = \frac{\partial y}{\partial x}$.</li>
+                                <li class="fragment">Elle fera entre les deux repères</li>
+                            </ul>
+                            
+                            <blockquote class="fragment">
+                                On linéarise la transformation.
+                            </blockquote>
+                        </div>
+                        
                     </div>
                 </section>
                 
+                
                 <section>
-                    <h3>Évolution du diagramme</h3>
-                    <div style="display: flex; justify-content: center; align-items: center; min-height: 400px;">
-
-                    <div class="mermaid">
-                        mindmap
-                            Root
-                                A
-                                    B
-                                    C
-                                $\alpha$
-                                    $\beta$
+                    <h2>Les tenseurs d'ordre 0</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Définition</h3>
+                            <p>
+                                Un <strong>tenseur d'ordre 0</strong> est simplement un <strong>scalaire</strong>. Il s'agit d'une quantité qui ne change pas lorsqu'on change de repère.
+                            </p>
+                            <ul>
+                                <li>Valeur numérique simple</li>
+                                <li>Indépendant du système de coordonnées choisi</li>
+                                <li>Exemples&nbsp;: température, masse, pression</li>
+                            </ul>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>Exemples</h4>
+                            <ul>
+                                <li>La température d'un point de l'espace</li>
+                                <li>La densité d'une substance</li>
+                                <li>La masse totale d'un objet</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>À retenir :</strong><br>
+                                Les scalaires sont des quantités invariantes par changement de repère.
+                            </div>
+                        </div>
                     </div>
+                </section>
+
+                <section>
+                    <h2>Les tenseurs d'ordre 1 : Vecteurs et covecteurs</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Vecteurs</h3>
+                            <p>
+                                Un <strong>vecteur</strong> (tenseur d'ordre 1) possède à la fois une norme et une direction.<br>
+                                Il change de composantes lorsqu'on change de repère, selon une règle linéaire.
+                            </p>
+                            <ul>
+                                <li>Décrit comme une liste de composantes $(v^1, v^2, ..., v^n)$ dans un repère donné</li>
+                                <li class="fragment">Transformations : $v'^i = \sum_j A^i_j v^j$ où $A^i_j$ dépend du changement de repère</li>
+                                <li class="fragment">Exemples : position, vitesse, force</li>
+                            </ul>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>Exemples</h4>
+                            <ul>
+                                <li>Le déplacement d'un point $\vec{r}$</li>
+                                <li>La vitesse $\vec{v}$</li>
+                                <li>La force $\vec{F}$</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>À retenir :</strong><br>
+                                Les vecteurs changent de composantes selon le changement de repère.
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                <!-- Problématique -->
                 <section>
-                    <h4>Pourquoi le gradient est-il si important ?</h4>
-                    <ul>
-                        <li class="fragment">Comment un déplacement se propage-t-il dans un matériau solide ?</li>
-                        <li class="fragment">Quelles informations contient le gradient d’un champ vectoriel ?</li>
-                        <li class="fragment">Pourquoi l’élongation d’un ressort est-elle liée à un produit scalaire ?</li>
-                    </ul>
+                    <h2>Covecteurs (formes linéaires)</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Définition</h3>
+                            <p>
+                                Un <strong>covecteur</strong> est aussi un tenseur d'ordre 1, mais il se transforme "à l'inverse" des vecteurs.
+                                <br>On l'appelle aussi <strong>forme linéaire</strong> ou <strong>vecteur dual</strong>.
+                            </p>
+                            <ul>
+                                <li>Action sur un vecteur : $a(\vec{v}) = \text{nombre}$</li>
+                                <li class="fragment">Exemples : gradient d'une fonction, différentielle $df$, plan tangent</li>
+                                <li class="fragment">Transformations : $a'_i = \sum_j B_i^j a_j$ (avec $B = A^{-1}$ si $A$ est la matrice du changement de base)</li>
+                            </ul>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>Exemples</h4>
+                            <ul>
+                                <li>Le gradient d’une fonction $f$ : $\nabla f$</li>
+                                <li>Les différentiels $dx$, $dy$, $dz$</li>
+                                <li>Une forme linéaire appliquée à un vecteur</li>
+                            </ul>
+                            <div class="highlight-box">
+                                <strong>À retenir :</strong><br>
+                                Covecteurs et vecteurs se transforment différemment lors d’un changement de repère.
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- Définitions de base -->
-                <section data-name="Définition">
-                    <section>
-                        <h4>Un vecteur, c’est quoi ?</h4>
-                        <ul>
-                            <li class="fragment">Un objet qui possède une <b>direction</b>, un <b>sens</b> et une <b>norme</b></li>
-                            <li class="fragment">Représenté par des coordonnées dans une base donnée</li>
-                            <li class="fragment">Indépendant du point d’application (vecteurs libres)</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h4>Opérations de base</h4>
-                        <ul>
-                            <li class="fragment">Addition et multiplication par un scalaire</li>
-                            <li class="fragment">Produit scalaire : $u \cdot v = \|u\|\,\|v\| \cos\theta$</li>
-                            <li class="fragment">Produit vectoriel (en $\mathbb{R}^3$ uniquement)</li>
-                        </ul>
-                    </section>
-                </section>
-
-                <!-- Gradient -->
-                <section data-name="Gradient">
-                    <section>
-                        <h4>Gradient d’un champ scalaire</h4>
-                        <p class="fragment">Pour $f(x,y,z)$,</p>
-                        <p class="fragment">$$\nabla f = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)$$</p>
-                        <p class="fragment">Vecteur pointant vers la direction de variation la plus rapide</p>
-                    </section>
-                    <section data-background-iframe="gradientVisualisation.html" data-background-interactive>
-                    </section>
-                </section>
-
-                <!-- Gradient vectoriel -->
+                <!-- Trois colonnes -->
                 <section>
-                    <h4>Gradient d’un champ vectoriel</h4>
-                    <p class="fragment">Pour $\mathbf{u}(x,y)$, le gradient est une matrice :</p>
-                    <p class="fragment">$$\nabla \mathbf{u} =
-                    \begin{pmatrix}
-                    \frac{\partial u_x}{\partial x} & \frac{\partial u_x}{\partial y} \\
-                    \frac{\partial u_y}{\partial x} & \frac{\partial u_y}{\partial y}
-                    \end{pmatrix}$$</p>
-                    <p class="fragment">Cette matrice contient toutes les informations sur les variations locales du champ.</p>
+                    <h2>Les tenseurs</h2>
+                    <div class="three-columns-container">
+                        <div class="column">
+                            <h3>Tenseur d'ordre 0</h3>
+                            <div class="column-content">
+                                <p>Un tenseur d'ordre 0 est un scalaire.</p>
+                                <ul>
+                                    <li>Un nombre</li>
+                                    <li>Invariant par changement de repère</li>
+                                    <li>Par exemple : Température, pression, etc.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="column">
+                            <h3>Tenseur d'ordre 1</h3>
+                            <div class="column-content">
+                                <p>Un tenseur d'ordre 1 est un vecteur.</p>
+                                <ul>
+                                    <li>Représenté par un vecteur</li>
+                                    <li>Invariant par changement de repère</li>
+                                    <li>Par exemple : Vitesse, force, etc.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="column">
+                            <h3>Titre Colonne 3</h3>
+                            <div class="column-content">
+                                <p>Contenu de la troisième colonne</p>
+                                <ul>
+                                    <li>Élément X</li>
+                                    <li>Élément Y</li>
+                                    <li>Élément Z</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- Exemple clé -->
-                <section data-name="Exemples">
-                    <section>
-                        <h4>Exemple : gradient d’un champ scalaire</h4>
-                        <p>$$f(x,y) = x^2 + y^2$$</p>
-                        <p class="fragment">$$\nabla f = (2x, 2y)$$</p>
-                        <p class="fragment">Vecteur radial pointant vers l’extérieur, proportionnel à la distance à l’origine</p>
-                    </section>
-                    <section>
-                        <h4>Exemple : gradient vectoriel</h4>
-                        <p>$$\mathbf{u}(x,y) = (x, 2y)$$</p>
-                        <p class="fragment">$$\nabla \mathbf{u} =
-                        \begin{pmatrix}
-                        1 & 0 \\
-                        0 & 2
-                        \end{pmatrix}$$</p>
-                        <p class="fragment">Dilate deux fois plus dans la direction $y$ que dans $x$</p>
-                    </section>
-                </section>
-
-                <!-- Erreurs fréquentes -->
+                
+                <!-- Split horizontal -->
                 <section>
-                    <h4>Pièges fréquents</h4>
-                    <ul>
-                        <li class="fragment">Confondre $\nabla f$ (vecteur) et $\frac{\partial f}{\partial x}$ (scalaire)</li>
-                        <li class="fragment">Penser que $\nabla \mathbf{u}$ est un vecteur</li>
-                        <li class="fragment">Oublier que le gradient agit sur des scalaires, pas directement sur des vecteurs</li>
-                    </ul>
-                </section>
-
-                <!-- Activité -->
-                <section data-name="Activité">
-                    <h4>Mini-défi en binôme</h4>
-                    <p class="fragment">Calculer le gradient de :</p>
-                    <ul>
-                        <li class="fragment">$f(x,y) = \sin x + e^y$</li>
-                        <li class="fragment">$\mathbf{u}(x,y) = (x^2, xy)$</li>
-                    </ul>
-                    <p class="fragment">→ Visualiser la direction et l’intensité</p>
-                </section>
-
-                <!-- Conclusion -->
-                <section>
-                    <h2>Fin.</h2>
-                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                    <div class="split-container">
+                        <div class="split-left" style="background-color: #3498db; color: white;">
+                            <h3>Titre de la partie gauche</h3>
+                            <p>Contenu de la partie gauche</p>
+                            <ul>
+                                <li>Point 1</li>
+                                <li>Point 2</li>
+                                <li>Point 3</li>
+                            </ul>
+                        </div>
+                        <div class="split-right" style="background-color: #e74c3c; color: white;">
+                            <h3>Titre de la partie droite</h3>
+                            <p>Contenu de la partie droite</p>
+                            <ul>
+                                <li>Point A</li>
+                                <li>Point B</li>
+                                <li>Point C</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
 
             </div>

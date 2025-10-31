@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Présentation Analyse & Algèbre</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+		<link rel="stylesheet" href="../../../../../dist/theme/white.css">
+
+		<!-- Police personnalisée -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+
+		<style>
+			:root {
+				--primary-color: #a73e3e;
+				--white: #ffffff;
+				--text-dark: #333333;
+			}
+
+			.reveal {
+				font-family: 'Source Sans Pro', sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+			}
+
+			/* Slide de titre */
+			.title-slide {
+				background: linear-gradient(135deg, var(--primary-color) 0%, #8b2d2d 100%);
+				color: white;
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.title-slide h1 {
+				font-size: 3.5em;
+				font-weight: 700;
+				margin-bottom: 0.5em;
+				text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+			}
+
+			.title-slide h2 {
+				font-size: 1.8em;
+				font-weight: 400;
+				opacity: 0.9;
+			}
+
+			/* Slides avec colonnes */
+			.three-columns {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 20px;
+				height: 100vh;
+				align-items: stretch;
+			}
+
+			.column {
+				background: var(--primary-color);
+				padding: 40px 30px;
+				border-radius: 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				color: white;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.column::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+				pointer-events: none;
+			}
+
+			.column h3 {
+				font-size: 2.2em;
+				font-weight: 700;
+				margin-bottom: 20px;
+				text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+			}
+
+			.column p {
+				font-size: 1.2em;
+				line-height: 1.6;
+				opacity: 0.95;
+			}
+
+			/* Animations personnalisées */
+			.fade-in-up {
+				animation: fadeInUp 0.8s ease-out;
+			}
+
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Slide de contenu classique */
+			.content-slide {
+				padding: 60px;
+			}
+
+			.content-slide h2 {
+				color: var(--primary-color);
+				font-size: 2.5em;
+				margin-bottom: 30px;
+				border-bottom: 3px solid var(--primary-color);
+				padding-bottom: 15px;
+			}
+
+			.content-slide h3 {
+				color: var(--text-dark);
+				font-size: 1.8em;
+				margin: 30px 0 15px 0;
+			}
+
+			.content-slide ul {
+				font-size: 1.3em;
+				line-height: 1.8;
+			}
+
+			.content-slide li {
+				margin-bottom: 10px;
+			}
+
+			/* Slide de conclusion */
+			.conclusion-slide {
+				background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.conclusion-slide h2 {
+				color: var(--primary-color);
+				font-size: 3em;
+				margin-bottom: 30px;
+			}
+
+			.conclusion-slide p {
+				font-size: 1.5em;
+				color: var(--text-dark);
+				max-width: 800px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Slide de titre -->
+				<section class="title-slide">
+					<h1 class="fade-in-up">Analyse & Algèbre</h1>
+					<h2 class="fade-in-up">Révisions PGE1 S5</h2>
+				</section>
+
+				<!-- Slide avec 3 colonnes -->
+				<section>
+					<div class="three-columns">
+						<div class="column">
+							<h3>Idée numéro 1</h3>
+							<p>Concepts fondamentaux d'analyse mathématique et leurs applications pratiques dans l'ingénierie.</p>
+						</div>
+						<div class="column">
+							<h3>Idée numéro 2</h3>
+							<p>Méthodes algébriques avancées pour la résolution de problèmes complexes en génie civil.</p>
+						</div>
+						<div class="column">
+							<h3>Idée numéro 3</h3>
+							<p>Intégration des outils mathématiques dans les projets de construction et d'infrastructure.</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- Slide de contenu -->
+				<section class="content-slide">
+					<h2>Objectifs du Module</h2>
+					<h3>Analyse Mathématique</h3>
+					<ul>
+						<li>Limites et continuité des fonctions</li>
+						<li>Dérivation et applications</li>
+						<li>Intégration et calcul d'aires</li>
+						<li>Équations différentielles</li>
+					</ul>
+					<h3>Algèbre Linéaire</h3>
+					<ul>
+						<li>Espaces vectoriels et applications linéaires</li>
+						<li>Matrices et systèmes d'équations</li>
+						<li>Valeurs propres et vecteurs propres</li>
+						<li>Formes quadratiques</li>
+					</ul>
+				</section>
+
+				<!-- Slide avec animation de fragments -->
+				<section class="content-slide">
+					<h2>Points Clés à Retenir</h2>
+					<ul>
+						<li class="fragment fade-in">La maîtrise des concepts d'analyse est essentielle pour la modélisation</li>
+						<li class="fragment fade-in">L'algèbre linéaire trouve de nombreuses applications en ingénierie</li>
+						<li class="fragment fade-in">La résolution de problèmes complexes nécessite une approche méthodique</li>
+						<li class="fragment fade-in">La pratique régulière améliore significativement la compréhension</li>
+					</ul>
+				</section>
+
+				<!-- Slide de conclusion -->
+				<section class="conclusion-slide">
+					<h2>Merci pour votre attention</h2>
+					<p>Questions et discussions</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="../../../../../dist/reveal.js"></script>
+		<script src="../../../../../plugin/notes/notes.js"></script>
+		<script src="../../../../../plugin/markdown/markdown.js"></script>
+		<script src="../../../../../plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				transition: 'slide',
+				transitionSpeed: 'default',
+				backgroundTransition: 'fade',
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+				// Configuration pour les animations
+				fragments: true,
+				fragmentInURL: true,
+				// Navigation
+				controls: true,
+				progress: true,
+				center: true,
+				// Défilement vertical
+				view: 'scroll',
+				// Thème et apparence
+				width: 1280,
+				height: 720,
+				margin: 0.1,
+				minScale: 0.2,
+				maxScale: 1.5
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,325 @@
+<!-- Template : Statistiques animées avec compteurs -->
+<!-- Usage : Copier-coller cette section dans votre présentation reveal.js -->
+
+<section>
+    <h2>Nos Performances</h2>
+    <div class="stats-container">
+        <div class="stat-card fragment" data-fragment-index="0">
+            <div class="stat-icon">👥</div>
+            <div class="stat-number" data-target="1250">0</div>
+            <div class="stat-label">Clients satisfaits</div>
+            <div class="stat-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 95%;"></div>
+                </div>
+                <span class="progress-text">95%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card fragment" data-fragment-index="1">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-number" data-target="99">0</div>
+            <div class="stat-label">Projets livrés</div>
+            <div class="stat-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 99%;"></div>
+                </div>
+                <span class="progress-text">99%</span>
+            </div>
+        </div>
+        
+        <div class="stat-card fragment" data-fragment-index="2">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-number" data-target="24">0</div>
+            <div class="stat-label">Heures de support</div>
+            <div class="stat-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+                <span class="progress-text">24/7</span>
+            </div>
+        </div>
+        
+        <div class="stat-card fragment" data-fragment-index="3">
+            <div class="stat-icon">💡</div>
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-label">Années d'expérience</div>
+            <div class="stat-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+                <span class="progress-text">100%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-container fragment" data-fragment-index="4">
+        <h3>Évolution des ventes (2020-2024)</h3>
+        <div class="chart">
+            <div class="chart-bar" style="height: 40%;" data-value="40">
+                <span class="bar-value">40%</span>
+                <span class="bar-label">2020</span>
+            </div>
+            <div class="chart-bar" style="height: 60%;" data-value="60">
+                <span class="bar-value">60%</span>
+                <span class="bar-label">2021</span>
+            </div>
+            <div class="chart-bar" style="height: 75%;" data-value="75">
+                <span class="bar-value">75%</span>
+                <span class="bar-label">2022</span>
+            </div>
+            <div class="chart-bar" style="height: 85%;" data-value="85">
+                <span class="bar-value">85%</span>
+                <span class="bar-label">2023</span>
+            </div>
+            <div class="chart-bar" style="height: 95%;" data-value="95">
+                <span class="bar-value">95%</span>
+                <span class="bar-label">2024</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.stat-card.fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.stat-icon {
+    font-size: 3em;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.stat-number {
+    font-size: 3em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-size: 1.1em;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.stat-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 4px;
+    position: relative;
+    animation: fillProgress 2s ease-out;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.progress-text {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 0.9em;
+}
+
+.chart-container {
+    margin-top: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.chart-container.fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chart-container h3 {
+    text-align: center;
+    margin: 0 0 2rem 0;
+    color: #2c3e50;
+}
+
+.chart {
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+    height: 200px;
+    gap: 1rem;
+}
+
+.chart-bar {
+    flex: 1;
+    background: linear-gradient(to top, #3498db, #2ecc71);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    min-height: 40px;
+    animation: growUp 1.5s ease-out;
+}
+
+.bar-value {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.bar-label {
+    color: #7f8c8d;
+    font-size: 0.8em;
+    margin-top: 0.5rem;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fillProgress {
+    from { width: 0%; }
+    to { width: var(--target-width); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes growUp {
+    from { height: 0; }
+    to { height: var(--target-height); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .chart {
+        height: 150px;
+        gap: 0.5rem;
+    }
+    
+    .chart-bar {
+        min-height: 30px;
+    }
+}
+</style>
+
+<script>
+// Animation des compteurs
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000; // 2 secondes
+        const increment = target / (duration / 16); // 60 FPS
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            counter.textContent = Math.floor(current);
+        }, 16);
+    });
+}
+
+// Démarrer l'animation quand la slide devient visible
+document.addEventListener('DOMContentLoaded', function() {
+    // Observer pour détecter quand les fragments deviennent visibles
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const element = mutation.target;
+                if (element.classList.contains('fragment') && element.classList.contains('visible')) {
+                    if (element.querySelector('.stat-number')) {
+                        animateCounters();
+                    }
+                }
+            }
+        });
+    });
+    
+    // Observer tous les éléments avec la classe fragment
+    document.querySelectorAll('.fragment').forEach(function(element) {
+        observer.observe(element, { attributes: true });
+    });
+});
+</script>
+
+
+

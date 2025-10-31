@@ -1,0 +1,450 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{MEF - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+% Tcolorboxes stylisées
+\tcbset{tracebox/.style={breakable,enhanced,sharp corners,boxrule=0pt,frame hidden,arc=2mm,
+  colback=white,coltitle=black,fonttitle=\bfseries\large,
+  borderline west={2mm}{0pt}{Theme},
+  before skip=8pt,after skip=4pt,drop fuzzy shadow}}
+
+\newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé des idées}}
+\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir }}
+\newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple}}
+
+% Encadré « Formules & illustrations »
+\newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
+
+% Astuce : puces clean
+\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
+
+% Raccourci pour une « Trace » complète
+% Usage : \TraceSection{Titre}{Objectif court}
+\newcommand{\TraceSection}[2]{%
+  
+}
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ MEF - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Méthode des éléments finis -- TD3}}\\[1em]
+    {\large \textit{Des éléments un peu plus complexes}}
+\end{center}
+
+\section*{Exercice 1 : Éléments de barre, ordre supérieur}
+On s'intéresse à l'équation de Laplace en 1D : 
+$$\frac{\partial^2 u}{\partial x^2} = f(x)$$
+avec $u(0) = 0$ et $u(L) = 1$.
+Etablir la formulation variationnelle de l'équation différentielle. 
+
+On considère un unique élément fini barre de longueur $L$, de section $A$ et de module d'Young $E$. 
+
+On rappelle la formule générale pour un polynôme de Lagrange tel que $\varphi_i(x_j) = \delta_{ij}$ :
+$$
+\varphi_i(X)=\prod_{j \neq i} \frac{X-x_j}{x_i-x_j}
+$$
+\textbf{Element d'ordre 1 :}
+Rappeler les polynômes de Lagrange d'ordre 1 et les calculs nécessaires pour retrouver la matrice de rigidité élémentaire : 
+$$K = \frac{EA}{L} \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}
+$$
+
+\textbf{Element d'ordre 2 :}
+On ajoute maintenant un nœud intermédiaire à l'élément. 
+Donner les polynômes de Lagrange nécessaires pour interpoler les 3 inconnues du problème.
+Donner la taille de la matrice de rigidité élémentaire.
+Donner la matrice de rigidité élémentaire.
+
+\textbf{Element d'ordre 3 :}
+On ajoute maintenant deux nœuds intermédiaires à l'élément fini.
+Donner les polynômes de Lagrange nécessaires pour interpoler les 4 inconnues du problème.
+Donner la taille de la matrice de rigidité élémentaire.
+Donner la matrice de rigidité élémentaire.
+
+\textbf{assemblage :}
+Imaginons que le domaine d'étude soit composé de 3 éléments finis de barre, l'un à la suite de l'autre. 
+En utilisant des symboles, montrer comment s'assemble la matrice de rigidité globale pour des éléments d'ordre 1, 2 et 3.
+
+
+\section*{Exercice 3 : Une matrice de rigidité en 2D}
+Dans un plan en 2D, on considère le déplacement horizontal et le déplacement vertical d'un point. On a donc 2 inconnues par nœud.
+Quelle taille font les matrices de rigidité élémentaires pour les éléments finis d'ordre 1 ?
+En utilisant des symboles, montrer comment s'assemble la matrice de rigidité globale pour des éléments d'ordre 1.
+
+
+\includegraphics[width=0.5\textwidth]{triangle.png}
+
+
+\section*{Exercice 2 : Éléments de poutre}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{flexion.png}
+\end{center}
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Modélisation Mécanique} : Une poutre en flexion subit des contraintes de flexion dues à une charge appliquée perpendiculairement à son axe longitudinal. Les principaux paramètres sont le module d'élasticité $E$, le moment d'inertie de la section $I$ qu'on supposera constant, la longueur de la poutre $L$, et la distribution de la charge $q(x)$.
+    
+    \[
+    EI \frac{d^4 w(x)}{dx^4} = q(x),
+    \]
+où $w(x)$ est le déplacement transversal. Dans notre cas, la force $q$ est répartie uniformément sur la poutre.
+    
+    \item \textbf{Formulation Variationnelle} : Formulez le problème de flexion de la poutre en termes de formulation variationnelle.
+    
+    \item \textbf{Utilisation de l'Élément Fini Cubique d'Hermite} : Expliquez pourquoi l'élément fini cubique d'Hermite est approprié pour l'analyse de flexion. Définissez pour un élément fini, les $4$ fonctions de forme correspondantes. On pourra soit chercher une expression générale dans le cours ou alors écrire le polynômes avec des coefficients inconnus puis les déterminer pour respecter les contraintes.
+    
+    On rappelle que ces polynômes doivent vérifier : 
+    \[
+    \varphi_i(x_j) = \delta_{ij}, \quad \frac{d\varphi_i}{dx}(x_j) = 0 \quad \forall i,j \in \{1,2,3,4\}.
+    \]
+    \[
+    \psi_i(x_j) = 0, \quad \frac{d\psi_i}{dx}(x_j) = \delta_{ij} \quad \forall i,j \in \{1,2,3,4\}.
+    \]
+    On donne la formule générale pour les construire :
+    $$
+        \varphi_i =q_i(X)\left(1-q_i^{\prime}\left(x_i\right)\left(X-x_i\right)\right),  \qquad 
+        \psi_i =q_i(X) \left(X-x_i\right)
+    $$
+    avec $q_i(X)=\prod_{j \neq i}\left(\frac{X-x_j}{x_i-x_j}\right)^2$,
+    
+    Vérifiez que ces polynômes vérifient les bonnes conditions
+    \item \textbf{Calcul de la Matrice Élémentaire} : Calculez la matrice élémentaire $K_e$ pour l'élément fini cubique d'Hermite utilisé dans la flexion.
+    
+    \item \textbf{Assemblage et Résolution} : Décrivez le processus d'assemblage du système global et résolvez numériquement le déplacement pour une poutre encastrée soumise à une charge répartie uniformément.
+
+    \item \textbf{Application Numérique} : Considérez une poutre encastrée de longueur $L = 10\, \text{m}$, avec un module d'élasticité $E = 210\, \text{GPa}$ et un moment d'inertie $I = 8.333 \times 10^{-6}\, \text{m}^4$. Supposons une charge répartie uniformément $q = 1000\, \text{N/m}$.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{mdframed}[linewidth=1pt]
+\section*{Correction}
+
+\begin{enumerate}[label=\alph*.]
+   
+    
+    \item \textbf{Formulation Variationnelle} :
+    
+    La formulation variationnelle pour une poutre en flexion est obtenue en multipliant l'équation différentielle par une fonction de test $v(x)$ et en intégrant sur le domaine $\Omega = [0, L]$ :
+    \[
+    \int_{0}^{L} EI(x) \frac{d^2 w}{dx^2} \frac{d^2 v}{dx^2} \, dx = \int_{0}^{L} q(x) v(x) \, dx.
+    \]
+    
+    Cette formulation nécessite que les fonctions de forme soient suffisamment régulières, c'est-à-dire qu'elles soient $C^1$ pour garantir la continuité des dérivées premières.
+    
+    \item \textbf{Utilisation de l'Élément Fini Cubique d'Hermite} :
+    
+    L'élément fini cubique d'Hermite est particulièrement adapté pour les problèmes de flexion car il permet de définir à la fois les déplacements et les rotations (dérivées premières) aux nœuds, assurant ainsi la continuité $C^1$ des fonctions de forme nécessaires pour une représentation précise des courbures.
+    
+    De cette manière, on n'obtient pas de "coins" dans la solution approchée comme on a pu le voir dans le TD1. 
+    
+    Les fonctions de forme cubiques d'Hermite pour un élément fini en dimension 1 sont définies comme suit :
+    \[
+    \varphi_1(x) = 1 - 3\left(\frac{x}{h}\right)^2 + 2\left(\frac{x}{h}\right)^3,
+    \]
+    \[
+    \psi_1(x) = x \left(1 - 2\frac{x}{h} + \left(\frac{x}{h}\right)^2\right),
+    \]
+    \[
+    \varphi_2(x) = 3\left(\frac{x}{h}\right)^2 - 2\left(\frac{x}{h}\right)^3,
+    \]
+    \[
+    \psi_2(x) = x \left(-\frac{x}{h} + \left(\frac{x}{h}\right)^2\right).
+    \]
+
+    On cherche alors $\alpha_1, \alpha_2, \alpha_3, \alpha_4$ tels que $w(x) = \alpha_1 \varphi_1(x) + \alpha_2 \psi_1(x) + \alpha_3 \varphi_2(x) + \alpha_4 \psi_2(x)$.
+
+    Pour les calculs des intégrales, nous aurons besoin des dérivées secondes, elles donnent:
+    \[
+    \frac{d^2 \varphi_1}{dx^2} = \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right)
+    \]
+    \[
+    \frac{d^2 \psi_1}{dx^2} = \frac{2}{h} \left( \frac{3x}{h} -2 \right)
+    \]
+    \[
+    \frac{d^2 \varphi_2}{dx^2} = - \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right)
+    \]
+    \[
+    \frac{d^2 \psi_2}{dx^2} = \frac{2}{h} \left( \frac{3x}{h} - 1 \right)
+    \]
+
+    
+    \item \textbf{Calcul de la Matrice Élémentaire} :
+    
+    Pour l'élément fini cubique d'Hermite, la matrice élémentaire $K_e$ est une matrice $4 \times 4$ intégrant les produits des dérivées secondes des fonctions de forme :
+    \[
+    K_e= 
+    \begin{pmatrix}
+        a(\varphi_1,\varphi_1) & a(\varphi_1,\psi_1) & a(\varphi_1,\varphi_2) & a(\varphi_1,\psi_2) \\
+        a(\psi_1,\varphi_1) & a(\psi_1,\psi_1) & a(\psi_1,\varphi_2) & a(\psi_1,\psi_2) \\
+        a(\varphi_2,\varphi_1) & a(\varphi_2,\psi_1) & a(\varphi_2,\varphi_2) & a(\varphi_2,\psi_2) \\
+        a(\psi_2,\varphi_1) & a(\psi_2,\psi_1) & a(\psi_2,\varphi_2) & a(\psi_2,\psi_2)
+    \end{pmatrix}
+    \]
+    
+    En supposant $EI$ constant sur l'élément, les intégrales peuvent être calculées: pour la première ligne par exemple:
+    \[
+    a(\varphi_1,\varphi_1) = EI \int_0^h \frac{d^2 \varphi_1}{dx^2} \frac{d^2 \varphi_1}{dx^2} \, dx 
+    \]
+    \[
+    a(\varphi_1,\varphi_1) = EI \int_0^h \frac{36}{h^4} \left( \frac{2x}{h} - 1 \right)^2 \, dx
+    \]
+    \[
+    = EI \frac{36}{h^4} \int_0^h \left( \frac{4x^2}{h^2} - \frac{4x}{h} + 1 \right) \, dx
+    \]
+    \[
+    = EI \frac{36}{h^4} \left[\frac{4x^3}{3h^2} - \frac{4x^2}{2h} + x\right]_0^h
+    \]
+    \[
+    = EI \frac{12}{h^3}
+    \]
+
+
+    On trouve alors:
+    \[
+    a(\varphi_1,\varphi_1) = EI \frac{12}{h^3}
+    \]
+
+Il faut ensuite calculer une intégrale mélangeant $\varphi$ et $\psi$ : 
+
+    \[
+    a(\varphi_1,\psi_1) = EI \int_0^h \frac{d^2 \varphi_1}{dx^2} \frac{d^2 \psi_1}{dx^2} \, dx
+    \]
+    \[
+    = EI \int_0^h \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right) \frac{2}{h} \left( \frac{3x}{h} -2 \right) \, dx
+    \]
+    \[
+    = EI \frac{12}{h^3} \int_0^h \left( \frac{6x^2}{h^2} - \frac{7x}{h} + 2 \right) \, dx
+    \]
+    \[
+    = EI \frac{12}{h^3} \left[\frac{6x^3}{3h^2} - \frac{7x^2}{2h} + 2x\right]_0^h
+    \]
+    \[
+    = EI \frac{6}{h^3}
+    \]
+Pour pouvoir déduire tous les coefficients, il faut maintenant calculer les intégrales avec $\psi$ :
+\[
+a(\psi_1,\psi_1) = EI \int_0^h \frac{d^2 \psi_1}{dx^2} \frac{d^2 \psi_1}{dx^2} \, dx
+\]
+\[
+= EI \int_0^h \frac{4}{h^2} \left( \frac{3x}{h} -2 \right)  \left( \frac{3x}{h} -2 \right) \, dx
+\]
+\[
+= EI \frac{4}{h^2} \int_0^h \left( \frac{9x^2}{h^2} - \frac{12x}{h} + 4 \right) \, dx
+\]
+\[
+= EI \frac{4}{h^2} \left[\frac{9x^3}{3h^2} - \frac{12x^2}{2h} + 4x\right]_0^h
+\]
+\[
+= EI \frac{4}{h}
+\]
+
+Pour $a(\psi_2,\psi_2)$, c'est presque la même chose :
+
+\[
+a(\psi_2,\psi_2) =  EI \frac{4}{h^2} \left[\frac{9x^3}{3h^2} - \frac{6x^2}{2h} + 1x\right]_0^h
+\]
+\[
+= EI \frac{4}{h}
+\]
+
+On obtient finalement : 
+\[
+    K_e = \frac{EI}{h^3}
+    \begin{bmatrix}
+    12 & 6h & -12 & 6h \\
+    6h & 4h^2 & -6h & 2h^2 \\
+    -12 & -6h & 12 & -6h \\
+    6h & 2h^2 & -6h & 4h^2
+    \end{bmatrix}
+\]
+    
+    \item \textbf{Assemblage et Résolution} :
+
+        
+        Assemblez la matrice globale de rigidité $\mathbf{K}$ en combinant les matrices élémentaires $K_e$ de chaque élément. Pour une poutre encastrée, imposez les conditions aux limites appropriées (par exemple, déplacement nul et rotation nulle à l'extrémité encastrée).
+        La matrice globale de rigidité $\mathbf{K}$ pour une poutre discrétisée en $n$ éléments est une matrice de taille $2(n+1) \times 2(n+1)$, car chaque nœud a deux degrés de liberté (déplacement et rotation). Pour trois éléments ($n=3$), la matrice globale est de taille $8 \times 8$.
+
+        L'assemblage se fait en additionnant les contributions de chaque élément aux positions appropriées dans la matrice globale. Pour un élément $e$ reliant les nœuds $e$ et $e+1$, les indices dans la matrice globale sont :
+        \[
+        \begin{array}{l}
+        \text{Pour le nœud } e: \quad \text{indices } 2e-1 \text{ et } 2e \\
+        \text{Pour le nœud } e+1: \quad \text{indices } 2e+1 \text{ et } 2e+2
+        \end{array}
+        \]
+
+        Pour une poutre encastrée à gauche avec trois éléments, la matrice globale avant application des conditions aux limites est :
+        \[
+        \mathbf{K} = \frac{EI}{h^3}
+        \begin{bmatrix}
+        12 & 6h & -12 & 6h & 0 & 0 & 0 & 0 \\
+        6h & 4h^2 & -6h & 2h^2 & 0 & 0 & 0 & 0 \\
+        -12 & -6h & 24 & 0 & -12 & 6h & 0 & 0 \\
+        6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 & 0 & 0 \\
+        0 & 0 & -12 & -6h & 24 & 0 & -12 & 6h \\
+        0 & 0 & 6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 \\
+        0 & 0 & 0 & 0 & -12 & -6h & 12 & -6h \\
+        0 & 0 & 0 & 0 & 6h & 2h^2 & -6h & 4h^2
+        \end{bmatrix}
+        \]
+
+        Pour imposer les conditions d'encastrement à gauche (déplacement et rotation nuls au premier nœud), on supprime les deux premières lignes et colonnes de la matrice, obtenant ainsi une matrice $6 \times 6$ :
+        \[
+        \mathbf{K}_{\text{réduite}} = \frac{EI}{h^3}
+        \begin{bmatrix}
+        24 & 0 & -12 & 6h & 0 & 0 \\
+        0 & 8h^2 & -6h & 2h^2 & 0 & 0 \\
+        -12 & -6h & 24 & 0 & -12 & 6h \\
+        6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 \\
+        0 & 0 & -12 & -6h & 12 & -6h \\
+        0 & 0 & 6h & 2h^2 & -6h & 4h^2
+        \end{bmatrix}
+        \]
+        \item \textbf{Résolution} :
+        
+        On résout alors le système linéaire $\mathbf{K} \mathbf{W} = \mathbf{F}$ pour obtenir le vecteur des déplacements nodaux $\mathbf{W}$.
+        Pour le cas de trois éléments avec une charge répartie $q$, le vecteur des forces nodales équivalentes est :
+        \[
+        \mathbf{F} = \frac{qh}{2}
+        \begin{bmatrix}
+        1 \\
+        h/6 \\
+        2 \\
+        0 \\
+        2 \\
+        0 \\
+        1 \\
+        -h/6
+        \end{bmatrix}
+        \]
+        
+        Après application des conditions aux limites (suppression des deux premières composantes), on obtient :
+        \[
+        \mathbf{F}_{\text{réduit}} = \frac{qh}{2}
+        \begin{bmatrix}
+        2 \\
+        0 \\
+        2 \\
+        0 \\
+        1 \\
+        -h/6
+        \end{bmatrix}
+        \]
+        
+    \item \textbf{Résultats} :
+    
+    Considérons une poutre encastrée de longueur $L = 10\, \text{m}$, avec un module d'élasticité $E = 210\, \text{GPa}$ et un moment d'inertie $I = 8.333 \times 10^{-6}\, \text{m}^4$. Supposons une charge répartie uniformément $q = 1000\, \text{N/m}$.
+    
+    En utilisant des éléments finis Hermite cubiques avec trois éléments, le système linéaire est résolu pour obtenir les déplacements nodaux. Les résultats montrent que le déplacement maximal se situe à l'extrémité libre et correspond étroitement à la solution analytique :
+    \[
+    w(L) = \frac{q L^4}{8 EI}.
+    \]
+    
+    Pour les paramètres donnés :
+    \[
+    w(10) = \frac{1000 \times 10^4}{8 \times 210 \times 10^9 \times 8.333 \times 10^{-6}} \approx 7.2 \times 10^{-3}\, \text{m}.
+    \]
+    
+    Les déplacements calculés par la méthode des éléments finis confirment cette valeur, démontrant la précision de l'élément fini cubique d'Hermite pour les problèmes de flexion.
+
+\end{enumerate}
+
+\end{mdframed}
+}{} % Fin de la condition
+
+
+\end{document}

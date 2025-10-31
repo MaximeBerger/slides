@@ -1,0 +1,462 @@
+.rectangles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.color-rectangle {
+    padding: 2rem;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-rectangle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.color-rectangle h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.color-rectangle p {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Animation pour les fragments */
+.color-rectangle.fragment {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease;
+}
+
+.color-rectangle.fragment.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .rectangles-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .color-rectangle {
+        min-height: 120px;
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .rectangles-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.content-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    height: 70vh;
+}
+
+.content-main {
+    flex: 2;
+    padding-right: 1rem;
+}
+
+.content-sidebar {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.content-main h3 {
+    color: #007bff;
+    margin-bottom: 1rem;
+    font-size: 1.3em;
+}
+
+.content-main p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.1em;
+}
+
+.content-main ul {
+    margin-bottom: 1.5rem;
+}
+
+.content-main li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05em;
+}
+
+blockquote {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+}
+
+.content-sidebar h4 {
+    color: #495057;
+    margin-bottom: 1rem;
+    font-size: 1.1em;
+}
+
+.content-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.content-sidebar li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.9em;
+}
+
+.content-sidebar li:last-child {
+    border-bottom: none;
+}
+
+.highlight-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 0.9em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    
+    .content-main {
+        padding-right: 0;
+    }
+    
+    .content-sidebar {
+        order: -1;
+    }
+}
+
+/* Animations pour les fragments */
+.fragment {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+}
+
+.fragment.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.image-text-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    height: 70vh;
+    align-items: flex-start;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.text-section {
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.text-section h3 {
+    color: #007bff;
+    margin-bottom: 1rem;
+    font-size: 1.3em;
+}
+
+.text-section p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.05em;
+}
+
+.text-section ul {
+    margin-bottom: 1.5rem;
+}
+
+.text-section li {
+    margin-bottom: 0.5rem;
+    font-size: 1em;
+}
+
+.highlight-text {
+    background-color: #e3f2fd;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid #2196f3;
+    margin-top: 1rem;
+    font-size: 1em;
+}
+
+/* Variante : Image à droite */
+.image-text-container.reverse {
+    flex-direction: row-reverse;
+}
+
+.image-text-container.reverse .text-section {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .image-text-container {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    
+    .text-section {
+        padding-left: 0;
+    }
+    
+    .main-image {
+        max-height: 250px;
+    }
+}
+
+/* Animations pour les fragments */
+.fragment {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Effet hover sur l'image */
+.main-image:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+.split-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.split-left, .split-right {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.split-left h3, .split-right h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+}
+
+.split-left ul, .split-right ul {
+    text-align: left;
+    max-width: 80%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .split-left, .split-right {
+        min-height: 50vh;
+    }
+}
+
+.three-columns-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    height: 70vh;
+}
+
+.column {
+    flex: 1;
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.column h3 {
+    background-color: #007bff;
+    color: white;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    padding: 1rem;
+    border-radius: 6px 6px 0 0;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.column-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.column-content ul {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.column-content p {
+    margin-bottom: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .three-columns-container {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+    
+    .column {
+        min-height: 200px;
+    }
+}
+
+/* Animation pour les fragments */
+.column.fragment {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.column.fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.title-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 3.5em;
+    margin: 0 0 1rem 0;
+    font-weight: 300;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: fadeInUp 1s ease-out;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin: 0 0 3rem 0;
+    font-weight: 300;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.author-info {
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.author {
+    font-size: 1.2em;
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
+}
+
+.date {
+    font-size: 1em;
+    margin: 0;
+    opacity: 0.8;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5em;
+    }
+    
+    .subtitle {
+        font-size: 1.2em;
+    }
+    
+    .author {
+        font-size: 1em;
+    }
+}

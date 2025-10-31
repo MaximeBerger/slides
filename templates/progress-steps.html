@@ -1,0 +1,244 @@
+<!-- Template : Progression par étapes avec barre de progrès -->
+<!-- Usage : Copier-coller cette section dans votre présentation reveal.js -->
+
+<section>
+    <h2>Progression du Projet</h2>
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill fragment" data-fragment-index="0" style="width: 20%; background: #e74c3c;"></div>
+            <div class="progress-fill fragment" data-fragment-index="1" style="width: 20%; background: #f39c12;"></div>
+            <div class="progress-fill fragment" data-fragment-index="2" style="width: 20%; background: #2ecc71;"></div>
+            <div class="progress-fill fragment" data-fragment-index="3" style="width: 20%; background: #3498db;"></div>
+            <div class="progress-fill fragment" data-fragment-index="4" style="width: 20%; background: #9b59b6;"></div>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step fragment" data-fragment-index="0">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Phase 1</h3>
+                    <p>Analyse et planification</p>
+                    <div class="step-details">
+                        <span class="step-status completed">✓ Terminé</span>
+                        <span class="step-percentage">100%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fragment" data-fragment-index="1">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Phase 2</h3>
+                    <p>Conception et design</p>
+                    <div class="step-details">
+                        <span class="step-status completed">✓ Terminé</span>
+                        <span class="step-percentage">100%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fragment" data-fragment-index="2">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Phase 3</h3>
+                    <p>Développement</p>
+                    <div class="step-details">
+                        <span class="step-status in-progress">⚡ En cours</span>
+                        <span class="step-percentage">75%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fragment" data-fragment-index="3">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Phase 4</h3>
+                    <p>Tests et validation</p>
+                    <div class="step-details">
+                        <span class="step-status pending">⏳ En attente</span>
+                        <span class="step-percentage">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fragment" data-fragment-index="4">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Phase 5</h3>
+                    <p>Déploiement</p>
+                    <div class="step-details">
+                        <span class="step-status pending">⏳ En attente</span>
+                        <span class="step-percentage">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.progress-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.progress-bar {
+    position: relative;
+    height: 8px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    margin-bottom: 3rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.8s ease;
+    border-radius: 4px;
+}
+
+.progress-fill.fragment.visible {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.step.fragment.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 auto 1rem auto;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.step-content {
+    background: white;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #ecf0f1;
+    transition: all 0.3s ease;
+}
+
+.step:hover .step-content {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.step-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+
+.step-content p {
+    margin: 0 0 1rem 0;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.step-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+.step-status {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.step-status.completed {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.step-status.in-progress {
+    background: #fef9e7;
+    color: #f39c12;
+    animation: pulse 2s infinite;
+}
+
+.step-status.pending {
+    background: #f8f9fa;
+    color: #95a5a6;
+}
+
+.step-percentage {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Ligne de connexion entre les étapes */
+.steps-container::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    height: 2px;
+    background: #ecf0f1;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .steps-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .steps-container::before {
+        display: none;
+    }
+    
+    .step-content {
+        padding: 1rem;
+    }
+}
+</style>
+
+
+
