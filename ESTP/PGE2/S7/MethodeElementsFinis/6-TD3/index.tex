@@ -15,7 +15,6 @@
 \usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
-\graphicspath{ {./images/} }
 \usepackage{caption}
 \usepackage{multirow}
 \usepackage{tikz}
@@ -76,27 +75,6 @@
 }
 
 
-% Tcolorboxes stylisées
-\tcbset{tracebox/.style={breakable,enhanced,sharp corners,boxrule=0pt,frame hidden,arc=2mm,
-  colback=white,coltitle=black,fonttitle=\bfseries\large,
-  borderline west={2mm}{0pt}{Theme},
-  before skip=8pt,after skip=4pt,drop fuzzy shadow}}
-
-\newtcolorbox{resumeBox}{tracebox,title={\faStickyNote\quad Résumé des idées}}
-\newtcolorbox{rappelsBox}{tracebox,title={\faRedo\quad Ce que je dois savoir }}
-\newtcolorbox{exempleBox}{tracebox,title={\faChalkboardTeacher\quad Exemple}}
-
-% Encadré « Formules & illustrations »
-\newtcolorbox{formulesBox}{tracebox,title={\faCalculator\quad Formules \& illustrations},colback=ThemeLight}
-
-% Astuce : puces clean
-\newenvironment{niceitemize}{\begin{itemize}\setlength{\itemsep}{0.25em}\color{Gray}}{\end{itemize}}
-
-% Raccourci pour une « Trace » complète
-% Usage : \TraceSection{Titre}{Objectif court}
-\newcommand{\TraceSection}[2]{%
-  
-}
 
 % -------------------- Page de titre ------------------------
 \title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
@@ -129,159 +107,529 @@
 \end{center}
 
 \section*{Exercice 1 : Éléments de barre, ordre supérieur}
-On s'intéresse à l'équation de Laplace en 1D : 
-$$\frac{\partial^2 u}{\partial x^2} = f(x)$$
+On s'intéresse à l'équation de Laplace en 1D sur une barre de longueur $L$ de section $A$ et de module d'Young $E$. On considère une charge $f(x)$ appliquée à la barre.
+$$ - E A \,\Delta u = f(x)$$
 avec $u(0) = 0$ et $u(L) = 1$.
-Etablir la formulation variationnelle de l'équation différentielle. 
+\begin{enumerate}
+    \item Etablir la formulation variationnelle de l'équation différentielle pour l'écrire sous la forme 
+    $$a(u,v) = \ell(v).$$
+    avec $a$ une forme bilinéaire symétrique et $\ell$ une forme linéaire.
 
-On considère un unique élément fini barre de longueur $L$, de section $A$ et de module d'Young $E$. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Voir la méthode dans le TD2, on multiplie par une fonction test $v(x)$ nulle aux bordset on intégre sur le domaine $\Omega = [0, L]$ :
+            \[
+            \int_0^L - E A \,\frac{\partial^2 u}{\partial x^2} v(x) \, dx = \int_0^L f(x) v(x) \, dx
+            \]
+            Une intégration par parties donne :
+            \[
+            \int_0^L E A \, u'(x) v'(x) \, dx = \int_0^L f(x) v(x) \, dx
+            \]
+            On pose donc :
+            \[
+            a(u, v) = \int_0^L E A \, u'(x) v'(x) \, dx
+            \]
+            et
+            \[
+            \ell(v) = \int_0^L f(x) v(x) \, dx
+            \]
+        \end{solution}
+    }{\vspace{1em}}
+    
+
+On découpe la barre en $n$ éléments finis de longueur $h = \frac{L}{n}$:
+\[x_0 = 0,\, x_1 = h,\, x_2 = 2h, \ldots, x_n = L\]
+
+\textbf{Eléments d'ordre 1 :}
+La solution approchée sera cherchée sous la forme 
+\[u_h(x) = \alpha_0 \varphi_0(x) + \alpha_1 \varphi_1(x) + \cdots + \alpha_n \varphi_n(x),\]
+où $\varphi_i(x)$ sont les fonctions d'interpolation et $\alpha_i$ sont les inconnues.
+
+    \item Rappelez l'expression de la matrice de rigidité élémentaire pour chaque élément fini. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+
+            Voir dans le TD2, l'équation différentielle sur le premier élément donne par exemple 
+            \[a( u_h, \varphi_0) = \ell(\varphi_0), a( u_h, \varphi_1) = \ell(\varphi_1)\]
+            En utilisant la linéarité de $a$, on obtient le système sous forme matricielle : 
+            \[
+            \begin{pmatrix}
+                a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_1) \\
+                a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_1)
+            \end{pmatrix}
+            \begin{pmatrix}
+                \alpha_0 \\
+                \alpha_1
+            \end{pmatrix} = \begin{pmatrix} \ell(\varphi_0) \\ \ell(\varphi_1) \end{pmatrix}
+            \]
+            Rappel : nous avions obtenu la matrice de rigidité élémentaire :
+            \[
+            K_e = \frac{EA}{L} \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}
+            \]
+            Pour les autres éléments, on obtient la même matrice de rigidité élémentaire.
+        \end{solution}
+    }{}
+
+    \item Pour obtenir toutes les matrices de rigidité, en admettant qu'elles soient différentes sur tous les éléments, combien d'intégrales au total avez-vous besoin de calculer ?\newline 
+    Comparez ce nombre avec le nombre de noeuds du maillage.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour chaque élément fini, on a eu besoin de calculer 5 intégrales (par symétrie de $a$). 
+            Donc pour $n$ éléments finis, on aura besoin de calculer $5n$ intégrales.
+
+            La solution approchée est construite sur $n+1$ points.
+            Il faut donc calculer environ $5$ fois plus d'intégrales qu'il y a de noeuds dans le maillage. 
+        \end{solution}
+    }{}
+
+    
+    \item Si on voulait doubler le nombre de points de discrétisation, en dédoublant le maillage, combien d'intégrales au total avez-vous besoin de calculer ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour chaque élément fini, on a encore besoin de calculer 5 intégrales (par symétrie de $a$). 
+            Donc pour $2n$ éléments finis, on aura besoin de calculer $10n$ intégrales. Deux fois plus d'intégrales que précédemment.
+        \end{solution}
+    }{\vspace{1em}}
+
+    Essayons maintenant d'améliorer la solution en calculant moins d'intégrales :
 
 On rappelle la formule générale pour un polynôme de Lagrange tel que $\varphi_i(x_j) = \delta_{ij}$ :
 $$
-\varphi_i(X)=\prod_{j \neq i} \frac{X-x_j}{x_i-x_j}
+\varphi_i(X)=\prod_{j \neq i} \frac{X-x_j}{x_i-x_j}\,.
 $$
-\textbf{Element d'ordre 1 :}
-Rappeler les polynômes de Lagrange d'ordre 1 et les calculs nécessaires pour retrouver la matrice de rigidité élémentaire : 
-$$K = \frac{EA}{L} \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}
-$$
+
+
 
 \textbf{Element d'ordre 2 :}
-On ajoute maintenant un nœud intermédiaire à l'élément. 
-Donner les polynômes de Lagrange nécessaires pour interpoler les 3 inconnues du problème.
-Donner la taille de la matrice de rigidité élémentaire.
-Donner la matrice de rigidité élémentaire.
+On ajoute maintenant un noeud intermédiaire à chaque élément. 
+\[x_0 = 0, \, x_{1/2} = h/2, \, x_1 = h, \, x_{3/2} = 3h/2, \, x_2 = 2h, \ldots, \, x_{n-1/2} = (n-1)h/2, \, x_n = L\]
+
+
+\item Comment est formée la solution approchée à partir des $\varphi_*$ ? 
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La solution approchée est formée par les $\varphi_i$ interpolés aux points du maillage :
+            \[u_h(x) = \alpha_0 \varphi_0(x) + \alpha_{1/2} \varphi_{1/2}(x) + \alpha_1 \varphi_1(x) + \alpha_{3/2} \varphi_{3/2}(x) + \cdots + \alpha_n \varphi_n(x),\]
+        \end{solution}
+    }{}
+
+\item Donner les expressions de $\varphi_0$, $\varphi_{1/2}$ et $\varphi_1$ entre $0$ et $h$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Sur chaque élément, il y a maintenant 3 noeuds. Cela conduira à des polynômes interpolateurs de degré 2. 
+            Par exemple sur le premier élément, soit pour $x$ entre $0$ et $h$, on aura :
+            \[
+            \varphi_0(x) = \frac{(x-x_{1/2})(x-x_1)}{(x_0-x_{1/2})(x_0-x_1)}
+            \]
+            donc :
+            \[
+            \varphi_0(x) = 2 \frac{(x-h/2)(x-h)}{h^2}\]
+            Ensuite, 
+            \[
+            \varphi_{1/2}(x) = \frac{(x-x_0)(x-x_1)}{(x_{1/2}-x_0)(x_{1/2}-x_1)}
+            \]
+            donc :
+            \[
+            \varphi_{1/2}(x) = -4 \frac{x(x-h)}{h^2}\]
+            Enfin, 
+            \[
+            \varphi_1(x) = \frac{(x-x_0)(x-x_{1/2})}{(x_1-x_0)(x_1-x_{1/2})}
+            \]
+            donc :
+            \[
+            \varphi_1(x) = 2 \frac{x(x-h/2)}{h^2}\]
+        \end{solution}
+    }{}
+
+    L'équation différentielle est toujours approchée par un système linéaire 
+    \[K_e \begin{pmatrix} \alpha_0 \\ \alpha_{1/2} \\ \alpha_1 \end{pmatrix} = \begin{pmatrix} \ell(\varphi_0) \\ \ell(\varphi_{1/2}) \\ \ell(\varphi_1) \end{pmatrix}\]
+\item Donner la taille et l'expression de la matrice de rigidité élémentaire $K_e$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice de rigidité élémentaire est de taille $3 \times 3$ :
+            \[
+            K_e = 
+            \begin{pmatrix}
+                a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_{1/2}) & a(\varphi_0, \varphi_1) \\
+                a(\varphi_{1/2}, \varphi_0) & a(\varphi_{1/2}, \varphi_{1/2}) & a(\varphi_{1/2}, \varphi_1) \\
+                a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_{1/2}) & a(\varphi_1, \varphi_1)
+            \end{pmatrix}
+            \]
+        \end{solution}
+    }{}
+
+    \item Combien de calculs d'intégrales au total avez-vous besoin de calculer par élément ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour chaque élément fini, on a eu besoin de calculer 9 intégrales (par symétrie de $a$). 
+            Donc pour $n$ éléments finis, on aura besoin de calculer $9n$ intégrales.
+        \end{solution}
+    }{}
+
+    \item Calculer le coefficient première ligne, première colonne de la matrice de rigidité élémentaire $K_e$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \[
+            a(\varphi_0, \varphi_0) = \int_0^h \varphi_0'(x) \varphi_0'(x) \, dx
+            \]
+            Sous forme développée, $\varphi_0$ s'écrit : 
+            \[
+            \varphi_0(x) = 2 \frac{x^2}{h^2} - 3 \frac{x}{h} + 1
+            \]
+            donc :
+            \[
+            \varphi_0'(x) = 4 \frac{x}{h^2} - \frac{3}{h}
+            \]
+            Ainsi :
+            \[
+            a(\varphi_0, \varphi_0) = \int_0^h \Big(4 \frac{x}{h^2} - \frac{3}{h}\Big)^2 \, dx
+            \]
+            Une primitive de $\Big(4 \frac{x}{h^2} - \frac{3}{h}\Big)^2$ est :
+            \[
+            \frac{h^2}{12} \Big(4\frac{x}{h^2} - \frac{3}{h}\Big)^3 = \frac{1}{12h} \Big(4\frac{x}{h} - 3\Big)^3
+            \]
+            donc :
+            \[
+            a(\varphi_0, \varphi_0) 
+            = \frac{1}{12h} \Big(4 - 3\Big)^3 - \frac{1}{12h} \Big(- 3\Big)^3 
+            = \frac{1 + 27}{12h}  = \frac{28}{12h} = \frac{7}{3h}
+            \]
+        \end{solution}
+    }{}
+
+    \item Comparer les deux méthodes de raffinement du maillage. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour un même nombre de points du maillage, on calcule (un peu) moins d'intégrale avec la deuxième méthode. 
+            Les intégrales sont en revanche plus compliquées à calculer exactement mais l'ordinateur lui ne verra pas la différence. 
+        \end{solution}
+    }{\vspace{1em}}
+
+    \item On attribue une lettre pour chaque élément fini, $a$ pour le premier, $b$ pour le second, etc. 
+    Pour illustrer la construction de la matrice de rigidité globale, on utilise ces lettres pour les coefficients des matrices locales.
+    Par exemple, pour $3$ éléments d'ordre $1$, la matrice de rigidité globale est assemblée comme suit : 
+    \[
+    \begin{pmatrix}
+        a & a \,\, & 0 & 0 \\
+        a & a+b & b & 0 \\
+        0 &\, \,b & b+c & c \\
+        0 & 0 & \,\,c & c 
+    \end{pmatrix}
+    \]
+    (tous les coefficients notés $a$ ne sont pas identiques mais on les note de la même façon pour simplifier l'écriture).
+
+    Montrer comment s'assemble la matrice de rigidité globale pour $3$ éléments d'ordre $2$.\newline
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Cette fois, les matrices locales sont de taille $3 \times 3$ :
+            La matrice de rigidité globale est assemblée comme suit :
+            \[
+            \begin{pmatrix}
+                a & a & a\,\, & 0 & 0 & 0 & 0\\
+                a & a & a\,\, & 0 & 0 & 0 & 0\\
+                a & a & a+b & b & b \,\,& 0 & 0\\
+                0 & 0 & \,\,b & b & b\,\, & 0 & 0\\
+                0 & 0 & \,\,b & b & b+c & c & c\\
+                0 & 0 & 0 & 0 & \,\,c & c & c\\
+                0 & 0 & 0 & 0 & \,\,c & c & c
+            \end{pmatrix}
+            \]
+        \end{solution}
+    }{}
 
 \textbf{Element d'ordre 3 :}
-On ajoute maintenant deux nœuds intermédiaires à l'élément fini.
-Donner les polynômes de Lagrange nécessaires pour interpoler les 4 inconnues du problème.
-Donner la taille de la matrice de rigidité élémentaire.
-Donner la matrice de rigidité élémentaire.
+On ajoute maintenant deux noeuds intermédiaires aux éléments finis.
 
-\textbf{assemblage :}
-Imaginons que le domaine d'étude soit composé de 3 éléments finis de barre, l'un à la suite de l'autre. 
-En utilisant des symboles, montrer comment s'assemble la matrice de rigidité globale pour des éléments d'ordre 1, 2 et 3.
+\item Décrire les noeuds du maillage.
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les noeuds du maillage sont :
+            \[
+            x_0 = 0,\,  x_{1/3} = h/3, \, x_{2/3} = 2h/3,\,  x_1 = h, \ldots,  x_{n-1/3} = (n-1)h/3, \, x_n = L
+            \]
+        \end{solution}
+    }{}
 
-\section*{Exercice 3 : Une matrice de rigidité en 2D}
-Dans un plan en 2D, on considère le déplacement horizontal et le déplacement vertical d'un point. On a donc 2 inconnues par nœud.
-Quelle taille font les matrices de rigidité élémentaires pour les éléments finis d'ordre 1 ?
-En utilisant des symboles, montrer comment s'assemble la matrice de rigidité globale pour des éléments d'ordre 1.
+\item Comment est formée la solution approchée $u_h(x)$ à partir des $\varphi_*$ ?
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Toujours par la même expression :
+            \[u_h(x) = \alpha_0 \varphi_0(x) + \alpha_{1/3} \varphi_{1/3}(x) + \alpha_{2/3} \varphi_{2/3}(x) + \alpha_1 \varphi_1(x)  + \cdots + \alpha_n \varphi_n(x),\]
+        \end{solution}
+    }{}
 
-\includegraphics[width=0.5\textwidth]{triangle.png}
+\item Déterminer les expressions formelles des polynômes de Lagrange pour le premier élément fini.
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les polynômes de Lagrange sont :
+            \[
+            \varphi_0(x) = \frac{(x-x_{1/3})(x-x_{2/3})(x-x_1)}{(x_0-x_{1/3})(x_0-x_{2/3})(x_0-x_1)}
+            \]
+            Ensuite, 
+            \[
+            \varphi_{1/3}(x) = \frac{(x-x_0)(x-x_{2/3})(x-x_1)}{(x_{1/3}-x_0)(x_{1/3}-x_{2/3})(x_{1/3}-x_1)}
+            \] 
+            \[
+            \varphi_{2/3}(x) = \frac{(x-x_0)(x-x_{1/3})(x-x_1)}{(x_{2/3}-x_0)(x_{2/3}-x_{1/3})(x_{2/3}-x_1)}
+            \]
+            et
+            \[
+            \varphi_1(x) = \frac{(x-x_0)(x-x_{1/3})(x-x_{2/3})}{(x_1-x_0)(x_1-x_{1/3})(x_1-x_{2/3})}
+            \]
+           
+        \end{solution}
+    }{}
 
+\item Donner la taille et l'expression de la matrice de rigidité élémentaire $K_e$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice de rigidité élémentaire est de taille $4 \times 4$ :
+            \[
+            K_e = 
+            \begin{pmatrix}
+                a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_{1/3}) & a(\varphi_0, \varphi_{2/3}) & a(\varphi_0, \varphi_1)  \\
+                a(\varphi_{1/3}, \varphi_0) & a(\varphi_{1/3}, \varphi_{1/3}) & a(\varphi_{1/3}, \varphi_{2/3}) & a(\varphi_{1/3}, \varphi_1) \\
+                a(\varphi_{2/3}, \varphi_0) & a(\varphi_{2/3}, \varphi_{1/3}) & a(\varphi_{2/3}, \varphi_{2/3}) & a(\varphi_{2/3}, \varphi_1) \\
+                a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_{1/3}) & a(\varphi_1, \varphi_{2/3}) & a(\varphi_1, \varphi_1) \\
+             \end{pmatrix}
+            \]
+        \end{solution}
+    }{}
+
+    \item Combien d'intégrales au total avez-vous besoin de calculer par élément ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour chaque élément fini, on a eu besoin de calculer 14 intégrales (par symétrie de $a$). 
+            Donc pour $n$ éléments finis, on aura besoin de calculer $14n$ intégrales.
+        \end{solution}
+    }{}
+
+    \item Montrer comment s'assemble la matrice de rigidité globale pour $3$ éléments d'ordre $3$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les matrices locales sont de taille $4 \times 4$ :
+            La matrice de rigidité globale est assemblée comme suit :
+            \[
+            \begin{pmatrix}
+                a & a & a & a \,\,  & 0 & 0 & 0   & 0 & 0 & 0 \\
+                a & a & a & a \,\,  & 0 & 0 & 0   & 0 & 0 & 0 \\
+                a & a & a & a \,\,  & 0 & 0 & 0   & 0 & 0 & 0 \\
+                a & a & a & a+b & b & b & b   & 0 & 0 & 0 \\
+                0 & 0 & 0 & \,\,b   & b & b & b \,\,  & 0 & 0 & 0 \\
+                0 & 0 & 0 & \,\,b   & b & b & b  \,\, & 0 & 0 & 0 \\
+                0 & 0 & 0 & \,\,b   & b & b & b+c & c & c & c \\
+                0 & 0 & 0 & 0   & 0 & 0 & \,\,c   & c & c & c \\
+                0 & 0 & 0 & 0   & 0 & 0 & \,\,c   & c & c & c \\
+                0 & 0 & 0 & 0   & 0 & 0 &\,\, c   & c & c & c 
+            \end{pmatrix}
+            \]
+        \end{solution}
+    }{}
+    \end{enumerate}
+
+\vspace{2em}
 \section*{Exercice 2 : Éléments de poutre}
+On considère une poutre biencastrée soumise à une charge répartie uniformément.
 \begin{center}
     \includegraphics[width=0.5\textwidth]{flexion.png}
 \end{center}
 
-\begin{enumerate}[label=\alph*.]
-    \item \textbf{Modélisation Mécanique} : Une poutre en flexion subit des contraintes de flexion dues à une charge appliquée perpendiculairement à son axe longitudinal. Les principaux paramètres sont le module d'élasticité $E$, le moment d'inertie de la section $I$ qu'on supposera constant, la longueur de la poutre $L$, et la distribution de la charge $q(x)$.
+\textbf{Modélisation Mécanique} : Une poutre en flexion subit des contraintes dues à une charge appliquée perpendiculairement à son axe longitudinal. 
+    Les principaux paramètres sont le module d'élasticité $E$, le moment d'inertie de la section $I$ qu'on supposera constant, la longueur de la poutre $L$, et la distribution de la charge $q(x)$.
     
+    L'équation différentielle régissant le déplacement transversal $w(x)$ est :
     \[
     EI \frac{d^4 w(x)}{dx^4} = q(x),
     \]
-où $w(x)$ est le déplacement transversal. Dans notre cas, la force $q$ est répartie uniformément sur la poutre.
-    
+    où $w(x)$ est le déplacement transversal. Dans notre cas, la force $q$ est répartie uniformément sur la poutre.
+
+\begin{enumerate}
     \item \textbf{Formulation Variationnelle} : Formulez le problème de flexion de la poutre en termes de formulation variationnelle.
-    
-    \item \textbf{Utilisation de l'Élément Fini Cubique d'Hermite} : Expliquez pourquoi l'élément fini cubique d'Hermite est approprié pour l'analyse de flexion. Définissez pour un élément fini, les $4$ fonctions de forme correspondantes. On pourra soit chercher une expression générale dans le cours ou alors écrire le polynômes avec des coefficients inconnus puis les déterminer pour respecter les contraintes.
-    
-    On rappelle que ces polynômes doivent vérifier : 
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    La formulation variationnelle est obtenue en multipliant l'équation différentielle par une fonction de test $v(x)$ et en intégrant sur le domaine $\Omega = [0, L]$. Après deux intégrations par parties pour obtenir le même degré de dérivation sur $w$ et $v$, on obtient :
     \[
-    \varphi_i(x_j) = \delta_{ij}, \quad \frac{d\varphi_i}{dx}(x_j) = 0 \quad \forall i,j \in \{1,2,3,4\}.
+    \int_{0}^{L} EI \frac{d^2 w(x)}{dx^2} \frac{d^2 v(x)}{dx^2} \, dx = \int_{0}^{L} q(x) v(x) \, dx.
     \]
-    \[
-    \psi_i(x_j) = 0, \quad \frac{d\psi_i}{dx}(x_j) = \delta_{ij} \quad \forall i,j \in \{1,2,3,4\}.
-    \]
-    On donne la formule générale pour les construire :
+    On posera donc 
+    \[ a (w, v) = \int_{0}^{L} EI \frac{d^2 w(x)}{dx^2} \frac{d^2 v(x)}{dx^2} \, dx \]
+    et
+    \[ \ell (v) = \int_{0}^{L} q(x) v(x) \, dx. \]
+    \end{solution}
+    }{\newpage}
+    
+    
+    Il y a cette fois deux inconnues par noeud : 
+    \begin{itemize}
+        \item le déplacement transversal $w(x)$ 
+        \item  l'angle $\theta(x)$ qui est la dérivée première du déplacement transversal. 
+    \end{itemize}
+    Pour écrire une solution approchée du problème $w_h$, il y aura donc deux types de polynômes interpolateurs : 
+    \begin{itemize}
+        \item $\varphi_i(x)$ pour le déplacement transversal
+        \item $\psi_i(x)$ pour l'angle.
+    \end{itemize}
+
+    Sur le premier élément fini, on cherchera alors $\alpha_0, \alpha_1, \beta_0, \beta_1$ tels que $$w(x) = \alpha_0 \varphi_0(x) + \beta_0 \psi_0(x) + \alpha_1\varphi_1(x) + \beta_1 \psi_1(x).$$
+
+    \item Que doivent vérifier les polynômes $\varphi_i(x)$ et $\psi_i(x)$ pour que $\alpha_i$ soient bien les coefficients du déplacement transversal et $\beta_i$ les coefficients de l'angle ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            il faut retrouver 
+            $$w(0) = \alpha_0, w(x_1)= \alpha_1, \qquad \text{et} \qquad w'(0) = \beta_1, w'(x_1) = \beta_1$$
+
+            Les polynômes $\varphi_i(x)$ et $\psi_i(x)$ doivent donc vérifier 
+            \[
+            \varphi_i(x_j) = \delta_{ij}, \quad \varphi_i'(x_j) = 0 \quad \forall i,j \in \{0,1\}.
+            \]
+            \[
+            \psi_i(x_j) = 0, \quad \psi_i'(x_j) = \delta_{ij} \quad \forall i,j \in \{0,1\}.
+            \]
+        \end{solution}
+    }{\vspace{1em}}
+    
+    Ces polynômes sont appelés polynômes de Hermite et les expressions générales de ces polynômes sont les suivantes :
     $$
-        \varphi_i =q_i(X)\left(1-q_i^{\prime}\left(x_i\right)\left(X-x_i\right)\right),  \qquad 
-        \psi_i =q_i(X) \left(X-x_i\right)
+        \varphi_i(X) =q_i(X)\left(1-q_i^{\prime}\left(x_i\right)\left(X-x_i\right)\right),  \qquad 
+        \psi_i(X) =q_i(X) \left(X-x_i\right)
     $$
-    avec $q_i(X)=\prod_{j \neq i}\left(\frac{X-x_j}{x_i-x_j}\right)^2$,
+    avec $q_i(X)=\left(L_i(X)\right)^2$, où $L_i(X) = \prod_{j \neq i} \frac{X-x_j}{x_i-x_j}$ est le polynôme de Lagrange associé à $x_i$.
     
-    Vérifiez que ces polynômes vérifient les bonnes conditions
-    \item \textbf{Calcul de la Matrice Élémentaire} : Calculez la matrice élémentaire $K_e$ pour l'élément fini cubique d'Hermite utilisé dans la flexion.
-    
-    \item \textbf{Assemblage et Résolution} : Décrivez le processus d'assemblage du système global et résolvez numériquement le déplacement pour une poutre encastrée soumise à une charge répartie uniformément.
+    Remarquez que $q_i' = 2 L_i' L_i$, puis vérifiez que ces polynômes satisfont les bonnes conditions
 
-    \item \textbf{Application Numérique} : Considérez une poutre encastrée de longueur $L = 10\, \text{m}$, avec un module d'élasticité $E = 210\, \text{GPa}$ et un moment d'inertie $I = 8.333 \times 10^{-6}\, \text{m}^4$. Supposons une charge répartie uniformément $q = 1000\, \text{N/m}$.
-\end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
 
-\ifthenelse{\boolean{showSolutions}}{
-\begin{mdframed}[linewidth=1pt]
-\section*{Correction}
+            \textbf{Pour $\varphi_i$ :}
+            \[
+                \varphi_i(X) = q_i(X)\big(1-q_i'(x_i)(X-x_i)\big)
+            \]
+            Calculons aux noeuds $x_j$ :
+            \begin{itemize}
+                \item Si $j=i$, $q_i(x_i) = 1$, $X-x_i = x_i-x_i=0$ donc $\varphi_i(x_i)=1$.
+                \item Sinon, $q_i(x_j)=0$ et donc $\varphi(x_j)$ aussi. 
+            \end{itemize}
+            \textbf{Pour $\varphi_i'$ :}
+            Commencons par calculer $\varphi_i'(X)$ :
+            \[
+                \varphi_i'(X) = q_i'(X)\big(1-q_i'(x_i)(X-x_i)\big) - q_i(X) q_i'(x_i)
+            \]
+            \begin{itemize}
+                \item $X=x_j$ avec $j=i$ :
+                \[
+                    \varphi_i'(x_i) = q_i'(x_i) -  q_i'(x_i) = 0
+                \]
+                \item $X=x_j$ avec $j\neq i$ :
+                \[
+                    \varphi_i'(x_j) = q_i'(x_j)\cdot 0 - 0\cdot q_i'(x_j) = 0
+                \]
+            \end{itemize}
 
-\begin{enumerate}[label=\alph*.]
-   
-    
-    \item \textbf{Formulation Variationnelle} :
-    
-    La formulation variationnelle pour une poutre en flexion est obtenue en multipliant l'équation différentielle par une fonction de test $v(x)$ et en intégrant sur le domaine $\Omega = [0, L]$ :
+            \textbf{Pour $\psi_i(X)$ :}
+            \[
+                \psi_i(X) = q_i(X)(X-x_i)
+            \]
+            \begin{itemize}
+                \item Pour $X=x_j$ ; si $j=i$, $X-x_i=0$, donc $\psi_i(x_i)=0$ ; 
+                \item si $j\neq i$, $q_i(x_j)=0$, donc $\psi_i(x_j)=0$.
+            \end{itemize}
+
+            \textbf{Pour $\psi_i'$ :}
+            Commencons par calculer $\psi_i'(X)$ :
+            \[
+                \psi_i'(X) = q_i'(X)(X-x_i) + q_i(X)
+            \]
+            \begin{itemize}
+                \item $X=x_j$ avec $j=i$ :
+                \[
+                    \psi_i'(x_i) = q_i'(x_i) -  q_i'(x_i) = 0
+                \]
+                \item $X=x_j$ avec $j\neq i$ :
+                \[
+                    \psi_i'(x_j) = q_i'(x_j) -  q_i'(x_j) = 0
+                \]
+            \end{itemize}
+            Ainsi, ces polynômes satisfont bien :
+            \[
+                \varphi_i(x_j) = \delta_{ij},\qquad \varphi_i'(x_j) = 0 
+            \]
+            \[
+                \psi_i(x_j) = 0,\qquad \psi_i'(x_j) = \delta_{ij}
+            \]
+            pour tous les $i, j$.
+
+            \vspace{1em}
+        \end{solution}
+    }{\vspace{1em}}
+
+    \item Exprimer les polynômes de Hermite pour le premier élément du maillage. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les fonctions de forme cubiques d'Hermite pour un élément fini en dimension 1 sont définies comme suit :
+            \[
+            \varphi_0(x) = 1 - 3\left(\frac{x}{h}\right)^2 + 2\left(\frac{x}{h}\right)^3,
+            \]
+            \[
+            \psi_0(x) = x \left(1 - 2\frac{x}{h} + \left(\frac{x}{h}\right)^2\right),
+            \]
+            \[
+            \varphi_1(x) = 3\left(\frac{x}{h}\right)^2 - 2\left(\frac{x}{h}\right)^3,
+            \]
+            \[
+            \psi_1(x) = x \left(-\frac{x}{h} + \left(\frac{x}{h}\right)^2\right).
+            \]
+        \end{solution}
+    }{\vspace{1em}}
+
+
+    \item Le vecteur des inconnus est formé par $\begin{pmatrix} \alpha_0 \\ \beta_0 \\ \alpha_1 \\ \beta_1 \end{pmatrix}$. Exprimez la matrice de rigidité élémentaire $K_e$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice de rigidité élémentaire $K_e$ est une matrice $4 \times 4$ intégrant les produits des dérivées secondes des fonctions de forme :
+            Pour l'élément fini cubique d'Hermite, la matrice élémentaire $K_e$ est une matrice $4 \times 4$ intégrant les produits des dérivées secondes des fonctions de forme :
+                \[
+                K_e= 
+                \begin{pmatrix}
+                    a(\varphi_0,\varphi_0) & a(\varphi_0,\psi_0) & a(\varphi_0,\varphi_1) & a(\varphi_0,\psi_1) \\
+                    a(\psi_0,\varphi_0) & a(\psi_0,\psi_0) & a(\psi_0,\varphi_1) & a(\psi_0,\psi_1) \\
+                    a(\varphi_1,\varphi_0) & a(\varphi_1,\psi_0) & a(\varphi_1,\varphi_1) & a(\varphi_1,\psi_1) \\
+                    a(\psi_1,\varphi_0) & a(\psi_1,\psi_0) & a(\psi_1,\varphi_1) & a(\psi_1,\psi_1) \\
+                \end{pmatrix}
+                \]
+        \end{solution}
+    }{\vspace{1em}}
+
+    \item Choisisser un coefficient dans la matrice et calculer l'intégrale. vous devriez trouver un coefficient en accord avec la forme suivante :
     \[
-    \int_{0}^{L} EI(x) \frac{d^2 w}{dx^2} \frac{d^2 v}{dx^2} \, dx = \int_{0}^{L} q(x) v(x) \, dx.
-    \]
-    
-    Cette formulation nécessite que les fonctions de forme soient suffisamment régulières, c'est-à-dire qu'elles soient $C^1$ pour garantir la continuité des dérivées premières.
-    
-    \item \textbf{Utilisation de l'Élément Fini Cubique d'Hermite} :
-    
-    L'élément fini cubique d'Hermite est particulièrement adapté pour les problèmes de flexion car il permet de définir à la fois les déplacements et les rotations (dérivées premières) aux nœuds, assurant ainsi la continuité $C^1$ des fonctions de forme nécessaires pour une représentation précise des courbures.
-    
-    De cette manière, on n'obtient pas de "coins" dans la solution approchée comme on a pu le voir dans le TD1. 
-    
-    Les fonctions de forme cubiques d'Hermite pour un élément fini en dimension 1 sont définies comme suit :
-    \[
-    \varphi_1(x) = 1 - 3\left(\frac{x}{h}\right)^2 + 2\left(\frac{x}{h}\right)^3,
-    \]
-    \[
-    \psi_1(x) = x \left(1 - 2\frac{x}{h} + \left(\frac{x}{h}\right)^2\right),
-    \]
-    \[
-    \varphi_2(x) = 3\left(\frac{x}{h}\right)^2 - 2\left(\frac{x}{h}\right)^3,
-    \]
-    \[
-    \psi_2(x) = x \left(-\frac{x}{h} + \left(\frac{x}{h}\right)^2\right).
+    K_e = \frac{EI}{h^3}
+    \begin{bmatrix}
+    12 & 6h & -12 & 6h \\
+    6h & 4h^2 & -6h & 2h^2 \\
+    -12 & -6h & 12 & -6h \\
+    6h & 2h^2 & -6h & 4h^2
+    \end{bmatrix}
     \]
 
-    On cherche alors $\alpha_1, \alpha_2, \alpha_3, \alpha_4$ tels que $w(x) = \alpha_1 \varphi_1(x) + \alpha_2 \psi_1(x) + \alpha_3 \varphi_2(x) + \alpha_4 \psi_2(x)$.
-
-    Pour les calculs des intégrales, nous aurons besoin des dérivées secondes, elles donnent:
-    \[
-    \frac{d^2 \varphi_1}{dx^2} = \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right)
-    \]
-    \[
-    \frac{d^2 \psi_1}{dx^2} = \frac{2}{h} \left( \frac{3x}{h} -2 \right)
-    \]
-    \[
-    \frac{d^2 \varphi_2}{dx^2} = - \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right)
-    \]
-    \[
-    \frac{d^2 \psi_2}{dx^2} = \frac{2}{h} \left( \frac{3x}{h} - 1 \right)
-    \]
-
-    
-    \item \textbf{Calcul de la Matrice Élémentaire} :
-    
-    Pour l'élément fini cubique d'Hermite, la matrice élémentaire $K_e$ est une matrice $4 \times 4$ intégrant les produits des dérivées secondes des fonctions de forme :
-    \[
-    K_e= 
-    \begin{pmatrix}
-        a(\varphi_1,\varphi_1) & a(\varphi_1,\psi_1) & a(\varphi_1,\varphi_2) & a(\varphi_1,\psi_2) \\
-        a(\psi_1,\varphi_1) & a(\psi_1,\psi_1) & a(\psi_1,\varphi_2) & a(\psi_1,\psi_2) \\
-        a(\varphi_2,\varphi_1) & a(\varphi_2,\psi_1) & a(\varphi_2,\varphi_2) & a(\varphi_2,\psi_2) \\
-        a(\psi_2,\varphi_1) & a(\psi_2,\psi_1) & a(\psi_2,\varphi_2) & a(\psi_2,\psi_2)
-    \end{pmatrix}
-    \]
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                
     
     En supposant $EI$ constant sur l'élément, les intégrales peuvent être calculées: pour la première ligne par exemple:
     \[
-    a(\varphi_1,\varphi_1) = EI \int_0^h \frac{d^2 \varphi_1}{dx^2} \frac{d^2 \varphi_1}{dx^2} \, dx 
+    a(\varphi_0,\varphi_0) = EI \int_0^h \frac{d^2 \varphi_1}{dx^2} \frac{d^2 \varphi_1}{dx^2} \, dx 
     \]
     \[
-    a(\varphi_1,\varphi_1) = EI \int_0^h \frac{36}{h^4} \left( \frac{2x}{h} - 1 \right)^2 \, dx
+    a(\varphi_0,\varphi_0) = EI \int_0^h \frac{36}{h^4} \left( \frac{2x}{h} - 1 \right)^2 \, dx
     \]
     \[
     = EI \frac{36}{h^4} \int_0^h \left( \frac{4x^2}{h^2} - \frac{4x}{h} + 1 \right) \, dx
@@ -296,13 +644,13 @@ où $w(x)$ est le déplacement transversal. Dans notre cas, la force $q$ est ré
 
     On trouve alors:
     \[
-    a(\varphi_1,\varphi_1) = EI \frac{12}{h^3}
+    a(\varphi_0,\varphi_0) = EI \frac{12}{h^3}
     \]
 
 Il faut ensuite calculer une intégrale mélangeant $\varphi$ et $\psi$ : 
 
     \[
-    a(\varphi_1,\psi_1) = EI \int_0^h \frac{d^2 \varphi_1}{dx^2} \frac{d^2 \psi_1}{dx^2} \, dx
+    a(\varphi_0,\psi_0) = EI \int_0^h \frac{d^2 \varphi_0}{dx^2} \frac{d^2 \psi_0}{dx^2} \, dx
     \]
     \[
     = EI \int_0^h \frac{6}{h^2} \left( \frac{2x}{h} - 1 \right) \frac{2}{h} \left( \frac{3x}{h} -2 \right) \, dx
@@ -318,7 +666,7 @@ Il faut ensuite calculer une intégrale mélangeant $\varphi$ et $\psi$ :
     \]
 Pour pouvoir déduire tous les coefficients, il faut maintenant calculer les intégrales avec $\psi$ :
 \[
-a(\psi_1,\psi_1) = EI \int_0^h \frac{d^2 \psi_1}{dx^2} \frac{d^2 \psi_1}{dx^2} \, dx
+a(\psi_0,\psi_0) = EI \int_0^h \frac{d^2 \psi_0}{dx^2} \frac{d^2 \psi_0}{dx^2} \, dx
 \]
 \[
 = EI \int_0^h \frac{4}{h^2} \left( \frac{3x}{h} -2 \right)  \left( \frac{3x}{h} -2 \right) \, dx
@@ -333,10 +681,10 @@ a(\psi_1,\psi_1) = EI \int_0^h \frac{d^2 \psi_1}{dx^2} \frac{d^2 \psi_1}{dx^2} \
 = EI \frac{4}{h}
 \]
 
-Pour $a(\psi_2,\psi_2)$, c'est presque la même chose :
+Pour $a(\psi_1,\psi_1)$, c'est presque la même chose :
 
 \[
-a(\psi_2,\psi_2) =  EI \frac{4}{h^2} \left[\frac{9x^3}{3h^2} - \frac{6x^2}{2h} + 1x\right]_0^h
+a(\psi_1,\psi_1) =  EI \frac{4}{h^2} \left[\frac{9x^3}{3h^2} - \frac{6x^2}{2h} + 1x\right]_0^h
 \]
 \[
 = EI \frac{4}{h}
@@ -352,99 +700,29 @@ On obtient finalement :
     6h & 2h^2 & -6h & 4h^2
     \end{bmatrix}
 \]
-    
-    \item \textbf{Assemblage et Résolution} :
+            \end{solution}
+        }{\vspace{1em}}
 
-        
-        Assemblez la matrice globale de rigidité $\mathbf{K}$ en combinant les matrices élémentaires $K_e$ de chaque élément. Pour une poutre encastrée, imposez les conditions aux limites appropriées (par exemple, déplacement nul et rotation nulle à l'extrémité encastrée).
-        La matrice globale de rigidité $\mathbf{K}$ pour une poutre discrétisée en $n$ éléments est une matrice de taille $2(n+1) \times 2(n+1)$, car chaque nœud a deux degrés de liberté (déplacement et rotation). Pour trois éléments ($n=3$), la matrice globale est de taille $8 \times 8$.
-
-        L'assemblage se fait en additionnant les contributions de chaque élément aux positions appropriées dans la matrice globale. Pour un élément $e$ reliant les nœuds $e$ et $e+1$, les indices dans la matrice globale sont :
-        \[
-        \begin{array}{l}
-        \text{Pour le nœud } e: \quad \text{indices } 2e-1 \text{ et } 2e \\
-        \text{Pour le nœud } e+1: \quad \text{indices } 2e+1 \text{ et } 2e+2
-        \end{array}
-        \]
-
-        Pour une poutre encastrée à gauche avec trois éléments, la matrice globale avant application des conditions aux limites est :
-        \[
-        \mathbf{K} = \frac{EI}{h^3}
-        \begin{bmatrix}
-        12 & 6h & -12 & 6h & 0 & 0 & 0 & 0 \\
-        6h & 4h^2 & -6h & 2h^2 & 0 & 0 & 0 & 0 \\
-        -12 & -6h & 24 & 0 & -12 & 6h & 0 & 0 \\
-        6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 & 0 & 0 \\
-        0 & 0 & -12 & -6h & 24 & 0 & -12 & 6h \\
-        0 & 0 & 6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 \\
-        0 & 0 & 0 & 0 & -12 & -6h & 12 & -6h \\
-        0 & 0 & 0 & 0 & 6h & 2h^2 & -6h & 4h^2
-        \end{bmatrix}
-        \]
-
-        Pour imposer les conditions d'encastrement à gauche (déplacement et rotation nuls au premier nœud), on supprime les deux premières lignes et colonnes de la matrice, obtenant ainsi une matrice $6 \times 6$ :
-        \[
-        \mathbf{K}_{\text{réduite}} = \frac{EI}{h^3}
-        \begin{bmatrix}
-        24 & 0 & -12 & 6h & 0 & 0 \\
-        0 & 8h^2 & -6h & 2h^2 & 0 & 0 \\
-        -12 & -6h & 24 & 0 & -12 & 6h \\
-        6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 \\
-        0 & 0 & -12 & -6h & 12 & -6h \\
-        0 & 0 & 6h & 2h^2 & -6h & 4h^2
-        \end{bmatrix}
-        \]
-        \item \textbf{Résolution} :
-        
-        On résout alors le système linéaire $\mathbf{K} \mathbf{W} = \mathbf{F}$ pour obtenir le vecteur des déplacements nodaux $\mathbf{W}$.
-        Pour le cas de trois éléments avec une charge répartie $q$, le vecteur des forces nodales équivalentes est :
-        \[
-        \mathbf{F} = \frac{qh}{2}
-        \begin{bmatrix}
-        1 \\
-        h/6 \\
-        2 \\
-        0 \\
-        2 \\
-        0 \\
-        1 \\
-        -h/6
-        \end{bmatrix}
-        \]
-        
-        Après application des conditions aux limites (suppression des deux premières composantes), on obtient :
-        \[
-        \mathbf{F}_{\text{réduit}} = \frac{qh}{2}
-        \begin{bmatrix}
-        2 \\
-        0 \\
-        2 \\
-        0 \\
-        1 \\
-        -h/6
-        \end{bmatrix}
-        \]
-        
-    \item \textbf{Résultats} :
-    
-    Considérons une poutre encastrée de longueur $L = 10\, \text{m}$, avec un module d'élasticité $E = 210\, \text{GPa}$ et un moment d'inertie $I = 8.333 \times 10^{-6}\, \text{m}^4$. Supposons une charge répartie uniformément $q = 1000\, \text{N/m}$.
-    
-    En utilisant des éléments finis Hermite cubiques avec trois éléments, le système linéaire est résolu pour obtenir les déplacements nodaux. Les résultats montrent que le déplacement maximal se situe à l'extrémité libre et correspond étroitement à la solution analytique :
-    \[
-    w(L) = \frac{q L^4}{8 EI}.
-    \]
-    
-    Pour les paramètres donnés :
-    \[
-    w(10) = \frac{1000 \times 10^4}{8 \times 210 \times 10^9 \times 8.333 \times 10^{-6}} \approx 7.2 \times 10^{-3}\, \text{m}.
-    \]
-    
-    Les déplacements calculés par la méthode des éléments finis confirment cette valeur, démontrant la précision de l'élément fini cubique d'Hermite pour les problèmes de flexion.
+    \item Ecrivez la matrice globale après assemblage en considérant trois éléments.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice globale après assemblage en considérant trois éléments est :
+            \[
+                \mathbf{K} = \frac{EI}{h^3}
+                \begin{bmatrix}
+                12 & 6h & -12 & 6h & 0 & 0 & 0 & 0 \\
+                6h & 4h^2 & -6h & 2h^2 & 0 & 0 & 0 & 0 \\
+                -12 & -6h & 24 & 0 & -12 & 6h & 0 & 0 \\
+                6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 & 0 & 0 \\
+                0 & 0 & -12 & -6h & 24 & 0 & -12 & 6h \\
+                0 & 0 & 6h & 2h^2 & 0 & 8h^2 & -6h & 2h^2 \\
+                0 & 0 & 0 & 0 & -12 & -6h & 12 & -6h \\
+                0 & 0 & 0 & 0 & 6h & 2h^2 & -6h & 4h^2
+                \end{bmatrix}
+            \]
+        \end{solution}
+    }{}
 
 \end{enumerate}
-
-\end{mdframed}
-}{} % Fin de la condition
-
 
 \end{document}

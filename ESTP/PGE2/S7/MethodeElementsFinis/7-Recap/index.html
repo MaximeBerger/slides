@@ -1,0 +1,334 @@
+﻿<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Récapitulatif MEF</title>
+
+		<link rel="stylesheet" href="../../../../../dist/reset.css">
+		<link rel="stylesheet" href="../../../../../dist/reveal.css">
+
+		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
+		<link rel="stylesheet" href="../../../../../dist/templates.css">
+
+
+        <!-- Font awesome is required for the chalkboard plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Custom controls plugin is used to for opening and closing annotation modes. -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+        <!-- Chalkboard plugin -->
+        <link rel="stylesheet" href="../../../../../plugin/chalkboard/style.css">
+        <script src="../../../../../plugin/chalkboard/plugin.js" defer></script>
+
+        <script src="../../../../../dist/reveal.js" defer></script>
+        <script src="../../../../../plugin/simplemenu/simplemenu.js" defer></script>
+        <script src="../../../../../plugin/multimodal/multimodal.js" defer></script>
+        <script src="../../../../../plugin/math/math.js" defer></script>
+
+
+		<script src="../../../../../plugin/config.js" defer></script>
+    
+    </head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+                <!-- Titre -->
+                <section>
+                    <div style="position: relative;">
+                        <h1 class="main-title">📊 Récapitulatif</h1>
+                        <h2 class="subtitle">Méthode des Éléments Finis</h2>
+                        <div class="author-info">
+                            <p class="author">Maxime Berger</p>
+                            <p class="date">2025</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="align-top">
+                    <h2 >Le principe fondamental</h2>
+                    <div style="display: flex; gap: 2rem; height: 50vh; margin-top: 2rem;">
+                        <div style="flex: 1; padding: 1.5rem; background-color: #e3f2fd; border-radius: 8px; box-sizing: border-box; overflow-y: auto;">
+                            <h3>Le problème</h3>
+                            <p>Les équations différentielles sont <strong>impossibles à résoudre</strong> analytiquement sur des domaines complexes.</p>
+                            <ul>
+                                <li>Géométries complexes</li>
+                                <li>Conditions aux limites</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; padding: 1.5rem; background-color: #f1f8e9; border-radius: 8px; box-sizing: border-box; overflow-y: auto;">
+                            <h3>La MEF</h3>
+                            <p>Obtenir des <strong>solutions approchées</strong> en discrétisant le domaine.</p>
+                            <ul>
+                                <li>Solutions exactes sur les nœuds</li>
+                                <li>Interpolation entre nœuds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <!-- Slide 2: Assemblage -->
+                <section>
+                    <h2>L'assemblage des matrices</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Principe de l'assemblage</h3>
+                            <p class="fragment">Assemblage des matrices de rigidité <strong>locales</strong> pour former une grande matrice <strong>globale</strong>.</p>
+                            <ul>
+                                <li class="fragment">1 élément finis $\rightarrow$ une matrice locale $k_e$</li>
+                                <li class="fragment">Superposition des contributions locales $\rightarrow$ matrice globale $K$</li>
+                            </ul>
+                        </div>
+                        <div class="content-sidebar fragment">
+                            <h4>Avantages</h4>
+                            <ul>
+                                <li>Parallélisation facile</li>
+                                
+                                <li>Structure creuse</li>
+                            </ul>
+                            <div class="highlight-box fragment">
+                                <strong>À retenir :</strong><br>
+                                L'assemblage transforme les problèmes locaux en un système global.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Système linéaire -->
+                <section>
+                    <h2>📐 Le système linéaire final</h2>
+                    <div class="image-text-container">
+                        <div class="text-section">
+                            <h3>Formulation du problème</h3>
+                            <p class="fragment">Après assemblage, on obtient un système linéaire :</p>
+                            <div class="fragment" style="font-size: 1.5em; text-align: center;">
+                                $$K \mathbf{U} = \mathbf{F}$$
+                            </div>
+                            <ul>
+                                <li class="fragment"><strong>$K$</strong> : matrice de rigidité globale</li>
+                                <li class="fragment"><strong>$\mathbf{U}$</strong> : vecteur des inconnues (déplacements)</li>
+                                <li class="fragment"><strong>$\mathbf{F}$</strong> : vecteur des forces</li>
+                            </ul>
+                            <div class="fragment">
+                                <h4>🔗 Conditions aux limites</h4>
+                                <p>Intégration des conditions aux limites par modification du système.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: Le problème de précision -->
+                <section>
+                    <h2>⚠️ Quel est le problème avec cette méthode ?</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Limitation de l'interpolation</h3>
+                            <p class="fragment">L'interpolation <strong>sous-estime les contraintes</strong> entre les nœuds.</p>
+                            <ul>
+                                <li class="fragment">📉 Courbes lissées</li>
+                                <li class="fragment">📉 Pics de contrainte masqués</li>
+                                <li class="fragment">📉 Éléments trop grossiers</li>
+                            </ul>
+                            <h4 class="fragment">💭 Comment améliorer la précision ?</h4>
+                            <div class="highlight-text fragment">
+                                Deux approches : raffinement $h$ ou augmentation de l'ordre $p$
+                            </div>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>Comparaison</h4>
+                            <div class="fragment">
+                                <strong>Maillage grossier</strong>
+                                <p>Solution peu précise</p>
+                            </div>
+                            <div class="fragment">
+                                <strong>Maillage fin</strong>
+                                <p>Solution plus précise, mais coûteuse</p>
+                            </div>
+                            <div class="highlight-box fragment">
+                                <strong>💰 Coût :</strong><br>
+                                Doubler le nombre d'éléments multiplie la taille de la matrice par ~4
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: Élément barre ordre 1 -->
+                <section>
+                    <h2>📏 Élément barre ordre 1</h2>
+                    <div class="split-container">
+                        <div class="split-left" style="background-color: #2c3e50; color: white;">
+                            <h3 style="color: white;">Caractéristiques</h3>
+                            <ul style="color: white;">
+                                <li><strong>Deux nœuds</strong> par élément</li>
+                                <li><strong>Déplacement horizontal</strong> uniquement</li>
+                                <li>Matrice locale : <strong>$2 \times 2$</strong></li>
+                                <li>Interpolation linéaire</li>
+                            </ul>
+                            <div class="fragment" style="margin-top: 20px;">
+                                <p style="color: white; text-align: center;">$$u(x) = N_1(x)u_1 + N_2(x)u_2$$</p>
+                            </div>
+                        </div>
+                        <div class="split-right" style="background-color: #34495e; color: white;">
+                            <h3 style="color: white;">Comment obtenir plus de précision ?</h3>
+                            <ul style="color: white;">
+                                <li class="fragment">🔢 Utiliser plus d'éléments</li>
+                                <li class="fragment">🔺 Augmenter l'ordre de l'élément</li>
+                            </ul>
+                            <h4 class="fragment" style="color: white;">🎯 Éléments d'ordre supérieur</h4>
+                            <p class="fragment" style="color: white;">Ajouter des nœuds intermédiaires pour permettre une interpolation de degré plus élevé.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: Nouvelle slide avec deux colonnes -->
+                
+
+                <!-- Slide 6: Ordre 2 -->
+                <section>
+                    <h2>📐 Élément barre ordre 2</h2>
+                    <div class="three-columns-container">
+                        <div class="column">
+                            <h3>🔗 Structure</h3>
+                            <div class="column-content">
+                                <p><strong>Trois nœuds</strong> par élément</p>
+                                <ul>
+                                    <li>2 nœuds aux extrémités</li>
+                                    <li>1 nœud au milieu</li>
+                                </ul>
+                                <p>Matrice locale : <strong>$3 \times 3$</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="column">
+                            <h3>📊 Interpolation</h3>
+                            <div class="column-content">
+                                <p><strong>Polynôme de degré 2</strong></p>
+                                <p style="text-align: center;">$$u(x) = a + bx + cx^2$$</p>
+                                <p>Approximation plus précise des courbes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="column">
+                            <h3>📏 Taille système</h3>
+                            <div class="column-content">
+                                <p><strong>Autant de nœuds qu'il y a de nœuds</strong></p>
+                                <p>Avec $N_e$ éléments d'ordre 2 :</p>
+                                <p style="text-align: center;">$$n = 2N_e + 1$$</p>
+                                <p>nœuds dans le système global</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 7: Ordre 3 -->
+                <section>
+                    <h2>📐 Élément barre ordre 3</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Caractéristiques de l'élément d'ordre 3</h3>
+                            <div style="display: flex; align-items: center; gap: 40px;">
+                                <div style="flex: 1;">
+                                    <ul>
+                                        <li class="fragment"><strong>Quatre nœuds</strong> par élément</li>
+                                        <li class="fragment"><strong>Deux nœuds supplémentaires</strong> par rapport à l'ordre 2</li>
+                                        <li class="fragment">Matrice locale : <strong>$4 \times 4$</strong></li>
+                                        <li class="fragment">Polynôme d'interpolation : <strong>degré 3</strong></li>
+                                    </ul>
+                                    <p class="fragment" style="text-align: center;">$$u(x) = a + bx + cx^2 + dx^3$$</p>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div class="fragment">
+                                        <h4>💻 Coût de calcul</h4>
+                                        <p><strong>Combien de calculs d'intégrales ?</strong></p>
+                                        <div class="highlight-box">
+                                            <strong>Ordre 1 :</strong> Quelques intégrales simples<br>
+                                            <strong>Ordre 2 :</strong> Plus complexes<br>
+                                            <strong>Ordre 3 :</strong> Encore plus complexes
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 8: Élément poutre 2D -->
+                <section>
+                    <h2>🏗️ Élément poutre en 2D</h2>
+                    <div class="image-text-container">
+                        <div class="text-section">
+                            <h3>Complexité accrue</h3>
+                            <p class="fragment">On s'intéresse maintenant à :</p>
+                            <ul>
+                                <li class="fragment"><strong>Déplacements verticaux</strong> $w(x)$</li>
+                                <li class="fragment"><strong>Rotations</strong> $\theta(x)$</li>
+                            </ul>
+                            <div class="fragment">
+                                <h4>Chaque nœud a <strong>deux inconnues</strong></h4>
+                                <p>Matrice de rigidité locale : <strong>$4 \times 4$</strong></p>
+                                <p>Deux degrés de liberté par nœud $\Rightarrow$ Plus complexe que la barre !</p>
+                            </div>
+                            <blockquote class="fragment">
+                                La structure locale reflète la physique du problème (flexion vs traction)
+                            </blockquote>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section>
+                    <h2>🎓 Synthèse</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Les concepts clés de la MEF</h3>
+                            <div class="three-columns-container">
+                                <div class="column">
+                                    <h4>🎯 Approximation</h4>
+                                    <div class="column-content">
+                                        <p>Solutions approchées par discrétisation et interpolation</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="column">
+                                    <h4>🧩 Assemblage</h4>
+                                    <div class="column-content">
+                                        <p>Construction du système global à partir de contributions locales</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="column">
+                                    <h4>📊 Précision</h4>
+                                    <div class="column-content">
+                                        <p>Contrôlable via raffinement $h$ ou ordre $p$</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>📏 Tailles matrices</h4>
+                            <ul>
+                                <li>Barre ordre 1: $2 \times 2$</li>
+                                <li>Barre ordre 2: $3 \times 3$</li>
+                                <li>Barre ordre 3: $4 \times 4$</li>
+                                <li>Poutre 2D: $4 \times 4$</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>❓ Questions ?</h3>
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+
+            </div>
+		</div>
+
+		
+	</body>
+</html>
+
+
+
