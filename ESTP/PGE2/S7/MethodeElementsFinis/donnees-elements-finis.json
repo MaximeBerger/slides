@@ -69,7 +69,16 @@
         
       ],
       "sexercer": [
-
+        {
+          "titre": "TD 3 - Assemblage",
+          "lien": "6-TD3/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD 3",
+          "lien": "6-TD3/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {
