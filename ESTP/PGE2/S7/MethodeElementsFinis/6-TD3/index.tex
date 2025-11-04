@@ -275,7 +275,7 @@ On ajoute maintenant un noeud intermédiaire à chaque élément.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
             \[
-            a(\varphi_0, \varphi_0) = \int_0^h \varphi_0'(x) \varphi_0'(x) \, dx
+            a(\varphi_0, \varphi_0) = EA \int_0^h \varphi_0'(x) \varphi_0'(x) \, dx
             \]
             Sous forme développée, $\varphi_0$ s'écrit : 
             \[
@@ -287,7 +287,7 @@ On ajoute maintenant un noeud intermédiaire à chaque élément.
             \]
             Ainsi :
             \[
-            a(\varphi_0, \varphi_0) = \int_0^h \Big(4 \frac{x}{h^2} - \frac{3}{h}\Big)^2 \, dx
+            a(\varphi_0, \varphi_0) = EA\int_0^h \Big(4 \frac{x}{h^2} - \frac{3}{h}\Big)^2 \, dx
             \]
             Une primitive de $\Big(4 \frac{x}{h^2} - \frac{3}{h}\Big)^2$ est :
             \[
@@ -296,8 +296,8 @@ On ajoute maintenant un noeud intermédiaire à chaque élément.
             donc :
             \[
             a(\varphi_0, \varphi_0) 
-            = \frac{1}{12h} \Big(4 - 3\Big)^3 - \frac{1}{12h} \Big(- 3\Big)^3 
-            = \frac{1 + 27}{12h}  = \frac{28}{12h} = \frac{7}{3h}
+            = EA \frac{1}{12h} \Big(4 - 3\Big)^3 - \frac{1}{12h} \Big(- 3\Big)^3 
+            = EA \frac{1 + 27}{12h}  = EA \frac{28}{12h} = \frac{7 EA }{3h}
             \]
         \end{solution}
     }{}
