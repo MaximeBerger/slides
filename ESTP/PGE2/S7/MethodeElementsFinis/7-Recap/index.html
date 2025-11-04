@@ -39,11 +39,9 @@
                 <!-- Titre -->
                 <section>
                     <div style="position: relative;">
-                        <h1 class="main-title">📊 Récapitulatif</h1>
                         <h2 class="subtitle">Méthode des Éléments Finis</h2>
                         <div class="author-info">
                             <p class="author">Maxime Berger</p>
-                            <p class="date">2025</p>
                         </div>
                     </div>
                 </section>
@@ -53,7 +51,7 @@
                     <div style="display: flex; gap: 2rem; height: 50vh; margin-top: 2rem;">
                         <div style="flex: 1; padding: 1.5rem; background-color: #e3f2fd; border-radius: 8px; box-sizing: border-box; overflow-y: auto;">
                             <h3>Le problème</h3>
-                            <p>Les équations différentielles sont <strong>impossibles à résoudre</strong> analytiquement sur des domaines complexes.</p>
+                            <p> équations différentielles <strong>impossibles à résoudre</strong></p>
                             <ul>
                                 <li>Géométries complexes</li>
                                 <li>Conditions aux limites</li>
@@ -71,11 +69,11 @@
                 </section>
                 <!-- Slide 2: Assemblage -->
                 <section>
-                    <h2>L'assemblage des matrices</h2>
+                    <h2>Pluisieurs matrices locales</h2>
                     <div class="content-container">
                         <div class="content-main">
                             <h3>Principe de l'assemblage</h3>
-                            <p class="fragment">Assemblage des matrices de rigidité <strong>locales</strong> pour former une grande matrice <strong>globale</strong>.</p>
+                            <p class="fragment">Assemblage des matrices <strong>locales</strong> pour former une matrice <strong>globale</strong>.</p>
                             <ul>
                                 <li class="fragment">1 élément finis $\rightarrow$ une matrice locale $k_e$</li>
                                 <li class="fragment">Superposition des contributions locales $\rightarrow$ matrice globale $K$</li>
@@ -98,7 +96,7 @@
 
                 <!-- Slide 3: Système linéaire -->
                 <section>
-                    <h2>📐 Le système linéaire final</h2>
+                    <h2>Le système linéaire</h2>
                     <div class="image-text-container">
                         <div class="text-section">
                             <h3>Formulation du problème</h3>
@@ -112,16 +110,18 @@
                                 <li class="fragment"><strong>$\mathbf{F}$</strong> : vecteur des forces</li>
                             </ul>
                             <div class="fragment">
-                                <h4>🔗 Conditions aux limites</h4>
-                                <p>Intégration des conditions aux limites par modification du système.</p>
+                                <h4>Conditions aux limites</h4>
+                                <p>Intégration des conditions aux limites ens upprimant des lignes.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                
+
                 <!-- Slide 4: Le problème de précision -->
                 <section>
-                    <h2>⚠️ Quel est le problème avec cette méthode ?</h2>
+                    <h2>Quel est le problème avec cette méthode ?</h2>
                     <div class="content-container">
                         <div class="content-main">
                             <h3>Limitation de l'interpolation</h3>
