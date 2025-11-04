@@ -174,7 +174,7 @@ où $\varphi_i(x)$ sont les fonctions d'interpolation et $\alpha_i$ sont les inc
     Comparez ce nombre avec le nombre de noeuds du maillage.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pour chaque élément fini, on a eu besoin de calculer 5 intégrales (par symétrie de $a$). 
+            Pour chaque élément fini, on a eu besoin de calculer 5 intégrales (par symétrie de $a$): 3 pour la matrice de rigidité, 2 pour le second membre. 
             Donc pour $n$ éléments finis, on aura besoin de calculer $5n$ intégrales.
 
             La solution approchée est construite sur $n+1$ points.
@@ -264,7 +264,7 @@ On ajoute maintenant un noeud intermédiaire à chaque élément.
     \item Combien de calculs d'intégrales au total avez-vous besoin de calculer par élément ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pour chaque élément fini, on a eu besoin de calculer 9 intégrales (par symétrie de $a$). 
+            Pour chaque élément fini, on a eu besoin de calculer 9 intégrales (par symétrie de $a$): 6 pour la matrice de rigidité, 3 pour le second membre.  
             Donc pour $n$ éléments finis, on aura besoin de calculer $9n$ intégrales.
         \end{solution}
     }{}
