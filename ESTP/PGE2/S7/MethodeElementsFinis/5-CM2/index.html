@@ -1,17 +1,16 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Méthode des Éléments Finis</title>
+		<title>Récapitulatif MEF</title>
 
 		<link rel="stylesheet" href="../../../../../dist/reset.css">
 		<link rel="stylesheet" href="../../../../../dist/reveal.css">
 
 		<link rel="stylesheet" href="../../../../../dist/theme/beige.css">
 		<link rel="stylesheet" href="../../../../../dist/templates.css">
-
 
 
         <!-- Font awesome is required for the chalkboard plugin -->
@@ -36,20 +35,182 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<!-- Page de titre -->
-				<section data-background-transition="fade">
-					<h1>Méthode des Éléments Finis</h1>
-					<h4>Assemblage et conditions aux limites</h4>
-				</section>
+
+                <!-- Titre -->
+                <section>
+                    <div style="position: relative;">
+                        <h2 class="subtitle">Méthode des Éléments Finis</h2>
+                        <div class="author-info">
+                            <p class="author">Maxime Berger</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="align-top">
+                    <h2 >Le principe fondamental</h2>
+                    <div style="display: flex; gap: 2rem; height: 50vh; margin-top: 2rem;">
+                        <div style="flex: 1; padding: 1.5rem; background-color: #e3f2fd; border-radius: 8px; box-sizing: border-box; overflow-y: auto;">
+                            <h3>Le problème</h3>
+                            <p> équations différentielles <strong>impossibles à résoudre</strong></p>
+                            <ul>
+                                <li>Géométries complexes</li>
+                                <li>Conditions aux limites</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; padding: 1.5rem; background-color: #f1f8e9; border-radius: 8px; box-sizing: border-box; overflow-y: auto;">
+                            <h3>La MEF</h3>
+                            <p>Obtenir des <strong>solutions approchées</strong> en discrétisant le domaine.</p>
+                            <ul>
+                                <li>Solutions exactes sur les nœuds</li>
+                                <li>Interpolation entre nœuds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-background-iframe="appli.html" data-background-interactive>
+                </section>
+
+                <!-- Slide 2: Assemblage -->
+                <section>
+                    <h2>Pluisieurs matrices locales</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>Principe de l'assemblage</h3>
+                            <p class="fragment">Assemblage des matrices <strong>locales</strong> pour former une matrice <strong>globale</strong>.</p>
+                            <ul>
+                                <li class="fragment">1 élément finis $\rightarrow$ une matrice locale $k_e$</li>
+                                <li class="fragment">Superposition des contributions locales $\rightarrow$ matrice globale $K$</li>
+                            </ul>
+                        </div>
+                        <div class="content-sidebar fragment">
+                            <h4>Avantages</h4>
+                            <ul>
+                                <li>Parallélisation facile</li>
+                                
+                                <li>Structure creuse</li>
+                            </ul>
+                            <div class="highlight-box fragment">
+                                <strong>À retenir :</strong><br>
+                                L'assemblage transforme les problèmes locaux en un système global.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Exercice rapide</h2>
+                    <div style="display: flex; align-items: center; gap: 2rem;">
+                        <img src="triangle.png" alt="Triangle maillage éléments finis" style="max-width: 220px; background: #fff; border-radius: 6px; box-shadow: 0 2px 12px #0001;">
+                        <div>
+                            <h3>Questions :</h3>
+                            <ol>
+                                <li>Combien de <strong>nœuds</strong> et d'<strong>éléments</strong> voyez-vous ?</li>
+                                <li>Quelle est la dimension des matrices de rigidité locales ?</li>
+                                <li>Comment s'assemble la matrice globale ?</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Système linéaire -->
+                <section>
+                    <h2>Le système linéaire</h2>
+                    <div class="image-text-container">
+                        <div class="text-section">
+                            <h3>Formulation du problème</h3>
+                            <p class="fragment">Après assemblage, on obtient un système linéaire :</p>
+                            <div class="fragment" style="font-size: 1.5em; text-align: center;">
+                                $$K \mathbf{U} = \mathbf{F}$$
+                            </div>
+                            <ul>
+                                <li class="fragment"><strong>$K$</strong> : matrice de rigidité globale</li>
+                                <li class="fragment"><strong>$\mathbf{U}$</strong> : vecteur des inconnues (déplacements)</li>
+                                <li class="fragment"><strong>$\mathbf{F}$</strong> : vecteur des forces</li>
+                            </ul>
+                            <div class="fragment">
+                                <h4>Conditions aux limites</h4>
+                                <p>Intégration des conditions aux limites en supprimant des lignes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
 
-				<section>
-					<button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
-				</section>
+                <section>
+                    <h2>Une méthode puissante et polyvalente</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <h3>De multiples applications</h3>
+                            <ul>
+                                <li class="fragment">
+                                    <strong>Mécanique statique</strong> (déplacements, efforts)
+                                </li>
+                                <li class="fragment">
+                                    Thermique, dynamique, électromagnétisme, etc.
+                                </li>
+                                <li class="fragment">
+                                    <strong>Mécanique des fluides</strong> (écoulement, pression)
+                                </li>
+                                
+                            </ul>
+                            <p class="fragment">
+                                <em>La méthode des éléments finis s'applique à <strong>de nombreux domaines de la physique</strong> et de l'ingénierie.</em>
+                            </p>
+                        </div>
+                        <div class="content-sidebar fragment">
+                            <h4>Simulations numériques</h4>
+                            <p><strong>ponts</strong>, <strong>voitures</strong>, <strong>bâtiments</strong>, <strong>écoulements d'air</strong>, <strong>vagues</strong>, etc.</p>
+                            <iframe class="fragment" width="300" height="170" src="https://www.youtube.com/embed/aGlFwKXVQfc" title="Finite Element Simulation" style="border-radius: 8px; border: none;" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: Le problème de précision -->
+                <section>
+                    <h2>Quel est le problème avec cette méthode ?</h2>
+                    <div class="content-container">
+                        <div class="content-main">
+                            <p class="fragment">L'interpolation <strong>sous-estime les contraintes</strong> entre les nœuds.</p>
+                            <ul>
+                                <li class="fragment">Pics de contrainte masqués</li>
+                                <li class="fragment">Éléments grossiers</li>
+                            </ul>
+                            <h4 class="fragment">Comment améliorer la précision ?</h4>
+                            <div class="highlight-text fragment">
+                                Deux approches : raffinement $h$ ou augmentation de l'ordre $p$
+                            </div>
+                        </div>
+                        <div class="content-sidebar">
+                            <h4>Comparaison</h4>
+                            <div class="fragment">
+                                <strong>Maillage grossier</strong>
+                                <p>Solution peu précise</p>
+                            </div>
+                            <div class="fragment">
+                                <strong>Maillage fin</strong>
+                                <p>Solution plus précise, mais coûteuse</p>
+                            </div>
+                            <div class="highlight-box fragment">
+                                <strong>Coût :</strong><br>
+                                Doubler le nombre d'éléments multiplie la taille de la matrice par ~4
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Maintenant, TD3 </h3>
+                    <button onclick="RevealChalkboard.download()">📥 Exporter les annotations</button>
+                </section>
+
             </div>
 		</div>
 
-
+		
 	</body>
 </html>
+
+
+

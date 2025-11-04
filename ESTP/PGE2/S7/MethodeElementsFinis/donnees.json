@@ -1,0 +1,117 @@
+{
+  "titre": "Méthode des Éléments Finis — Parcours",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Introduction",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Motivation",
+          "description": "",
+          "lien": "1-Motivation/index.html",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Illustration",
+          "description": "",
+          "lien": "2-Illustration/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD1 - de la RdM à la MEF",
+          "lien": "3-Exemple/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD1",
+          "lien": "3-Exemple/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec2",
+      "numero": 1,
+      "titre": "Formulation variationnelle",
+      "description": "Formulation variationnelle · Matrices de rigidité · Vecteur de charges",
+      "lien": "#",
+      "sousParties": [
+
+      ],
+      "sexercer": [
+        {
+          "titre": "TD 2 - Une équation différentielle",
+          "lien": "4-TD2/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD 2",
+          "lien": "4-TD2/corrige.pdf",
+          "cible": "_blank"
+        }
+
+      ]
+    },
+    {
+      "id": "sec3",
+      "numero": 2,
+      "titre": "Procédure d'assemblage",
+      "description": "Matrices de rigidité · Vecteur de charges",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Augmenter la précision",
+          "description": "",
+          "lien": "5-CM2/index.html",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer": [
+        {
+          "titre": "TD 3 - Assemblage",
+          "lien": "6-TD3/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD 3",
+          "lien": "6-TD3/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    },
+    {
+      "id": "sec4",
+      "numero": 3,
+      "titre": "Dimension supérieure",
+      "description": "Des triangles, des carrés,  des tétraèdres, ...",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    },
+    {
+      "id": "sec5",
+      "numero": 4,
+      "titre": "Maillages",
+      "description": "Simulations numériques ",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer": [
+
+      ]
+    }
+  ]
+}
