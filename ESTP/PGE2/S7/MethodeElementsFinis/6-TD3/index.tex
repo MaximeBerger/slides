@@ -119,20 +119,22 @@ avec $u(0) = 0$ et $u(L) = 1$.
         \begin{solution}
             Voir la méthode dans le TD2, on multiplie par une fonction test $v(x)$ nulle aux bordset on intégre sur le domaine $\Omega = [0, L]$ :
             \[
-            \int_0^L - E A \,\frac{\partial^2 u}{\partial x^2} v(x) \, dx = \int_0^L f(x) v(x) \, dx
+            \int_0^h - E A \,\frac{\partial^2 u}{\partial x^2} v(x) \, dx = \int_0^h f(x) v(x) \, dx
             \]
             Une intégration par parties donne :
             \[
-            \int_0^L E A \, u'(x) v'(x) \, dx = \int_0^L f(x) v(x) \, dx
+            \int_0^h E A \, u'(x) v'(x) \, dx = \int_0^h f(x) v(x) \, dx
             \]
             On pose donc :
             \[
-            a(u, v) = \int_0^L E A \, u'(x) v'(x) \, dx
+            a(u, v) = \int_0^h E A \, u'(x) v'(x) \, dx
             \]
             et
             \[
-            \ell(v) = \int_0^L f(x) v(x) \, dx
+            \ell(v) = \int_0^h f(x) v(x) \, dx
             \]
+            La formulation variationnelle sur lepremier élément est donc $a(u, v) = \ell(v)$.\newline
+            Pour les autres éléments, il suffira de changer l'intervalle d'intégration.
         \end{solution}
     }{\vspace{1em}}
     

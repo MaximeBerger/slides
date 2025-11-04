@@ -126,7 +126,54 @@ $$
 \frac{\partial}{\partial x_i}=\frac{\partial \alpha_j}{\partial x_i} \frac{\partial}{\partial \alpha_j}
 $$
 
-
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
 En appliquant cette règle, on trouve
+En appliquant cette règle, on trouve
+- pour les coordonnées cylindriques
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial x_1} & =(\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z} \\
+\frac{\partial}{\partial x_2} & =(\sin \theta) \frac{\partial}{\partial r}+\left(\frac{\cos \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z} \\
+\frac{\partial}{\partial x_3} & =(0) \frac{\partial}{\partial r}+(0) \frac{\partial}{\partial \theta}+(1) \frac{\partial}{\partial z}
+\end{aligned}
+$$
+
+- pour les coordonnées sphériques
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial x_1} & =(\sin \theta \cos \phi) \frac{\partial}{\partial r}+\left(\frac{\cos \theta \cos \phi}{r}\right) \frac{\partial}{\partial \theta}+\left(-\frac{\sin \phi}{r \sin \theta}\right) \frac{\partial}{\partial z} \\
+\frac{\partial}{\partial x_2} & =(\sin \theta \sin \phi) \frac{\partial}{\partial r}+\left(\frac{\cos \theta \sin \phi}{r}\right) \frac{\partial}{\partial \theta}+\left(\frac{\cos \phi}{r \sin \theta}\right) \frac{\partial}{\partial z} \\
+\frac{\partial}{\partial x_3} & =(\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z}
+\end{aligned}
+$$
+
+
+En injectant les expressions (3.6) et (4.15) dans l'expression (4.13) du gradient en coord cartésiennes, on obtient l'expression de $\underline{\nabla}$ en coordonnées cylindriques:
+
+$$
+\begin{aligned}
+\underline{\nabla}= & \underline{e}_x \frac{\partial}{\partial x}+\underline{e}_y \frac{\partial}{\partial y}+\underline{e}_z \frac{\partial}{\partial z} \\
+= & \left(\underline{e}_r \cos \theta-\underline{e}_\theta \sin \theta\right)\left((\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}\right) \\
+& +\left(\underline{e}_r \sin \theta+\underline{e}_\theta \cos \theta\right)\left((\sin \theta) \frac{\partial}{\partial r}+\left(+\frac{\cos \theta}{r}\right) \frac{\partial}{\partial \theta}\right)+\underline{e}_z \frac{\partial}{\partial z}
+\end{aligned}
+$$
+
+et, après avoir simplifié, on trouve finalement
+
+$$
+\underline{\nabla}=\underline{e}_r \frac{\partial}{\partial r}+\underline{e}_\theta \frac{1}{r} \frac{\partial}{\partial \theta}+\underline{e}_z \frac{\partial}{\partial z}
+$$
+
+
+Un développement analogue utilisant les expressions (3.9) et (4.16) permet de trouver l'e de $\underline{\nabla}$ en coordonnées sphériques
+
+$$
+\underline{\nabla}=\underline{e}_r \frac{\partial}{\partial r}+\underline{e}_\phi \frac{1}{r} \frac{\partial}{\partial \phi}+\underline{e}_\theta \frac{1}{r \sin \phi} \frac{\partial}{\partial \theta}
+$$
+\end{solution}
+}{}
 
 \end{document}
