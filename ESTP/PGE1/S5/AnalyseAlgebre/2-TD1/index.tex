@@ -1,0 +1,112 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{MEF - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ MEF - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD1}}\\[1em]
+    {\large \textit{Calcul vectoriel et tensoriel}}
+\end{center}
+
+\section*{Exercice 1 :}
+
+
+\end{document}

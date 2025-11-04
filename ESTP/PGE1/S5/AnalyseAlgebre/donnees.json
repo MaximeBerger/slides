@@ -8,37 +8,10 @@
       "description": "Signification physique · Définition mathématique",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Calcul vectoriel",
-          "description": "Rappels · Opérations · Applications",
-          "lien": "0-Revisions/1-CalculVectoriel/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Calcul tensoriel",
-          "description": "A quoi servent les tenseurs ?",
-          "lien": "0-Revisions/2-CalculTensoriel/index.html",
-          "cible": "_blank"
-        }
+        
       ],
       "sexercer" : [
-        {
-          "titre": "QCM",
-          "lien": "0-Revisions/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Exercices",
-          "lien": "0-Revisions/Exercices/enonce.pdf",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Corrigés",
-          "lien": "0-Revisions/Exercices/corrige.pdf",
-          "cible": "_blank"
-        }
+        
       ]
     },
     {
@@ -48,37 +21,10 @@
       "description": "Espaces Lp · Espaces L∞",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Espaces Lp",
-          "description": "",
-          "lien": "1-EspacesLp/1-EspacesLp/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Espaces L∞",
-          "description": "",
-          "lien": "1-EspacesLp/2-EspacesLinfty/index.html",
-          "cible": "_blank"
-        }
+       
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "1-EspacesLp/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Exercices",
-          "lien": "1-EspacesLp/Exercices/enonce.pdf",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Corrigés",
-          "lien": "1-EspacesLp/Exercices/corrige.pdf",
-          "cible": "_blank"
-        }
+        
       ]
     },
     {
@@ -88,37 +34,10 @@
       "description": "Produit de convolution · Propriétés",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Produit de convolution",
-          "description": "",
-          "lien": "2-ProduitDeConvolution/1-ProduitDeConvolution/index.html",
-          "cible": "_blank"
-        },
-        {
-          "numero": 2,
-          "titre": "Propriétés",
-          "description": "",
-          "lien": "2-ProduitDeConvolution/2-Proprietes/index.html",
-          "cible": "_blank"
-        }
+        
       ],
       "sexercer": [
-        {
-          "titre": "QCM",
-          "lien": "2-ProduitDeConvolution/QCM/index.html",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Exercices",
-          "lien": "2-ProduitDeConvolution/Exercices/enonce.pdf",
-          "cible": "_blank"
-        },
-        {
-          "titre": "Corrigés",
-          "lien": "2-ProduitDeConvolution/Exercices/corrige.pdf",
-          "cible": "_blank"
-        }
+        
       ]
     },
     {
@@ -128,13 +47,7 @@
       "description": "Assemblage des matrices de rigidité",
       "lien": "#",
       "sousParties": [
-        {
-          "numero": 1,
-          "titre": "Transformées Fourier/Laplace",
-          "description": "",
-          "lien": "3-TransformeesFourierLaplace/1-TransformeesFourierLaplace/index.html",
-          "cible": "_blank"
-        }
+       
       ],
       "sexercer": [
       ]
