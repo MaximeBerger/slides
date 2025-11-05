@@ -15,6 +15,14 @@
           "description": "Calcul vectoriel · Calcul tensoriel",
           "lien": "1-Tenseurs/chapitre-1-vecteurs-et-tenseurs.html",
           "cible": "_blank"
+        }, 
+        {
+          "id": "sub2",
+          "numero": 1,
+          "titre": "Version pdf",
+          "description": "Calcul tensoriel · Calcul tensoriel",
+          "lien": "1-Tenseurs/chapitre-1-vecteurs-et-tenseurs.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
