@@ -8,7 +8,14 @@
       "description": "Signification physique · Définition mathématique",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "id": "sub1",
+          "numero": 0,
+          "titre": "Calcul vectoriel et tensoriel",
+          "description": "Calcul vectoriel · Calcul tensoriel",
+          "lien": "1-Tenseurs/chapitre-1-vecteurs-et-tenseurs.html",
+          "cible": "_blank"
+        }
       ],
       "sexercer" : [
         
