@@ -57,8 +57,9 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\color{Gray}\leftmark}
-\fancyhead[R]{\color{Gray}\textit{MEF - 2025/2026}}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
 \fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -78,7 +79,7 @@
 
 % -------------------- Page de titre ------------------------
 \title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
-\author{ MEF - 2025/2026 }
+\author{ Analyse-Algèbre - 2025/2026 }
 \date{\today}
 
 
@@ -106,80 +107,409 @@
     {\large \textit{Calcul vectoriel et tensoriel}}
 \end{center}
 
-\section*{Exercice 1 :}
-Importante remarque: En coordonnées cartésiennes, les coordonnées ( $x_i$ ) d'un point sont aussi les composantes de son vecteur position $\underline{x}$. Ceci n'est plus vrai en coordonnées curvilignes! Il est faux d'écrire
 
+
+\section*{Exercice 1 : Application directe}
+On se place dans \(\mathbb{R}^3\) muni de sa base canonique.
+    On définit également le vecteur \(\textbf{v}=(2,1,-3)\).
+
+    \begin{enumerate}
+    \item Rappeler les définitions puis déterminer les composantes covariantes \(v_i\) et contravariantes \(v^i\) de ce vecteur.
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Dans une base orthonormée, les composantes contravariantes et covariantes sont identiques :
+        \[
+        v_1 = v^1 = 2, \quad v_2 = v^2 = 1, \quad v_3 = v^3 = -3
+        \]
+        \end{solution}
+        }{\vspace{1em}}
+
+
+    \noindent Considérons maintenant une autre base qui n'est plus orthonormée \(\{\textbf{e}_1, \textbf{e}_2, \textbf{e}_3\}\). On donne les produits scalaires entre les vecteurs de la base :
+    \[
+      \langle \textbf{e}_1, \textbf{e}_1 \rangle = 4, \quad \langle \textbf{e}_1, \textbf{e}_2 \rangle = 1, \quad \langle \textbf{e}_1, \textbf{e}_3 \rangle = -1, \quad \langle \textbf{e}_2, \textbf{e}_2 \rangle = 2, \quad \langle \textbf{e}_2, \textbf{e}_3 \rangle = 1, \quad \langle \textbf{e}_3, \textbf{e}_3 \rangle = 1
+    \]
+    
+    \item Former la matrice \((g_{ij})\) avec \(g_{ij} = \langle \textbf{e}_i, \textbf{e}_j \rangle\).
+      \ifthenelse{\boolean{showSolutions}}{
+      \begin{solution}
+      Comme le produit scalaire est symétrique, la matrice \((g_{ij})\) est :
+      \[
+      (g_{ij}) = \begin{pmatrix} 4 & 1 & -1 \\ 1 & 2 & 1 \\ -1 & 1 & 1 \end{pmatrix}
+      \]
+      \end{solution}
+      }{}
+    \item Donner une condition sur la matrice \((g_{ij})\) pour que la base soit orthogonale.
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Pour que la base soit orthogonale, il faut que \(g_{ij} = 0\) si \(i \neq j\), donc que la matrice \((g_{ij})\) soit diagonale.
+        \end{solution}
+        }{}
+
+    \item Le tenseur représenté par la matrice $g$ est appelée tenseur métrique, il code la géométrie de l'espace et est très utilisé en physique relativiste. De quel ordre est ce tenseur ? 
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Le tenseur $g$ est décrit avec $n^2$ coefficients, il est donc d'ordre $2$.
+        \end{solution}
+        }{}
+
+    \item Soit le vecteur \(\textbf{w}=(1,2,1)\) exprimé dans la base \(\{\textbf{e}_1, \textbf{e}_2, \textbf{e}_3\}\). \newline
+        Calculer les composantes contravariantes \(w^i\) et covariantes \(w_i\) de ce vecteur.
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les composantes contravariantes sont les coordonnées données :
+        \[
+        w^1 = 1, \quad w^2 = 2, \quad w^3 = 1
+        \]
+        Les composantes covariantes se calculent avec le tenseur métrique :
+        \[
+        w_1 = \langle w, e_1 \rangle = g_{11}w^1 + g_{12}w^2 + g_{13}w^3 = 4 \cdot 1 + 1 \cdot 2 + (-1) \cdot 1 = 4 + 2 - 1 = 5
+        \]
+        \[
+        w_2 = \langle w, e_2 \rangle = g_{21}w^1 + g_{22}w^2 + g_{23}w^3 = 1 \cdot 1 + 2 \cdot 2 + 1 \cdot 1 = 1 + 4 + 1 = 6
+        \]
+        \[
+        w_3 = \langle w, e_3 \rangle = g_{31}w^1 + g_{32}w^2 + g_{33}w^3 = (-1) \cdot 1 + 1 \cdot 2 + 1 \cdot 1 = -1 + 2 + 1 = 2
+        \]
+        \end{solution}
+        }{}
+    \item Si les vecteurs de la base sont divisés par deux, quelles sont les nouvelles composantes contravariantes et covariantes du vecteur \(\textbf{w}\)?
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Les composantes contravariantes changent de manière inverse par rapport à la base, elles sont multipliées par deux. 
+
+      Les composantes covariantes changent comme la base, elles sont divisées par deux.
+     \end{solution}
+    }{}
+    \item Sous cette transformation, comment est modifié le premier coefficient de la matrice $g$ ? \newline 
+    On pourra noter $f_1$, $f_2$, $f_3$ les nouveaux vecteurs de la base. et $G_{ij}$ la matrice dans la nouvelle base.
+     Le tenseur métrique est-il 
+    \begin{itemize}[label=$\bullet$]
+        \item d'ordre $(2, 0)$ (2 fois contravariant) ?
+        \item d'ordre $(1, 1)$ (1 fois contravariant et 1 fois covariant) ?
+        \item ou d'ordre $(0, 2)$ (2 fois covariant) ?
+    \end{itemize}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On a :
+      \[
+      G_{11} = \langle f_1, f_1 \rangle = \langle \frac{1}{2}e_1, \frac{1}{2}e_1 \rangle = \frac{1}{4} \langle e_1, e_1 \rangle = \frac{1}{4} g_{11}
+      \]
+      Donc pour obtenir la nouvelle matrice, il faut appliquer la même transformation subie par la base à la matrice $g$. Le tenseur métrique est d'ordre $(0,2)$, 2 fois covariant.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 2 : Dans une vraie base}
+    On se place dans \(\mathbb{R}^3\) muni de son produit scalaire canonique, et de la base suivante donnée dans la base canonique : 
+    \[
+    \Big\{\textbf{e}_1=(1,1,1),\, \textbf{e}_2=(0,1,1),\, \textbf{e}_3=(0,0,1)\Big\}
+    \]
+    on considère \(\textbf{u}=\left(u^1, u^2, u^3\right)\) dans la base \(\{\textbf{e}_1, \textbf{e}_2, \textbf{e}_3\}\), 
+    \begin{enumerate}[itemsep=0.3em]
+        \item Quelles sont les composantes contravariantes de \(\textbf{u}\) ?
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les composantes contravariantes sont les coordonnées données \(u^1, u^2, u^3\).
+        \end{solution}
+        }{}
+
+        \item Déterminer les composantes covariantes $u_1, u_2, u_3$ de \(\textbf{u}\) en fonction de \(u^1, u^2, u^3\).
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les composantes covariantes sont obtenues par produit scalaire avec la base :
+        \[
+        u_i = \langle u, \textbf{e}_i \rangle
+        \]
+        Donc :
+        \[
+        u_1 = \langle u, \textbf{e}_1 \rangle = u^1\langle \textbf{e}_1, \textbf{e}_1 \rangle + u^2\langle \textbf{e}_2, \textbf{e}_1 \rangle + u^3\langle \textbf{e}_3, \textbf{e}_1 \rangle = 3u^1 + 2u^2 + u^3
+        \]
+        \[
+        u_2 = \langle u, \textbf{e}_2 \rangle = u^1\langle \textbf{e}_1, \textbf{e}_2 \rangle + u^2\langle \textbf{e}_2, \textbf{e}_2 \rangle + u^3\langle \textbf{e}_3, \textbf{e}_2 \rangle = 2u^1 + 2u^2 + u^3
+        \]
+        \[
+        u_3 = \langle u, \textbf{e}_3 \rangle = u^1\langle \textbf{e}_1, \textbf{e}_3 \rangle + u^2\langle \textbf{e}_2, \textbf{e}_3 \rangle + u^3\langle \textbf{e}_3, \textbf{e}_3 \rangle = u^1 + u^2 + u^3
+        \]
+        \end{solution}
+        }{}
+        \item Montrer que le produit scalaire de deux vecteurs \(\langle \textbf{u}, \textbf{v} \rangle\) est égal à \(u^1 v_1 + u^2 v_2 + u^3 v_3\). 
+
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On décompose le vecteur \(\textbf{u}\) dans la base :
+        \begin{align*}
+        \langle \textbf{u}, \textbf{v} \rangle 
+        &= \langle  u^1 e_1 + u^2 e_2 + u^3 e_3, v \rangle  \\
+        \end{align*}
+        On développe le produit scalaire par linéarité, les $u^1$, $u^2$, $u^3$ sont des nombres réels :
+        \begin{align*}
+        \langle \textbf{u}, \textbf{v} \rangle 
+        &= u^1 \langle e_1, v \rangle + u^2 \langle e_2, v \rangle + u^3 \langle e_3, v \rangle \\
+        \end{align*}
+        Par définition des composantes covariantes, on a :
+        \begin{align*}
+        \langle e_1, v \rangle = \langle v, e_1 \rangle = v_1, \qquad 
+        \langle e_2, v \rangle = \langle v, e_2 \rangle = v_2, \qquad \cdots        \end{align*}
+        Donc finalement : 
+        \begin{align*}
+        \langle \textbf{u}, \textbf{v} \rangle 
+        &= u^1 v_1 + u^2 v_2 + u^3 v_3
+        \end{align*}
+        \end{solution}
+        }{}
+        \item En utilisant toutes les questions précédentes, calculer le produit scalaire des deux vecteurs donnés dans la base \(\{e_1, e_2, e_3\}\) : \(\textbf{u} = (3,-1,2)\) et \(\textbf{v} = (1,3,5)\).
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les composantes contravariantes de \(\textbf{u}\) sont \((3,-1,2)\). 
+
+        Les composantes covariantes de \(\textbf{v}\) sont \((3\cdot 1 + 2 \cdot 3 + 5, 2 \cdot 1 + 2 \cdot 3 + 5, 1 \cdot 1 + 1 \cdot 3 + 5) = (14, 13, 9)\).
+
+        Le produit scalaire est donc :
+        \[
+        \langle \textbf{u}, \textbf{v} \rangle = \sum_{i=1}^3 u^i v_i = 3 \cdot 14 + (-1) \cdot 13 + 2 \cdot 9 = 42 - 13 + 18 = 47\,.
+        \]
+
+        \end{solution}
+        }{}
+        \item Calculer la norme du vecteur \(\textbf{v}\).
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        La norme du vecteur \(\textbf{v}\) est :
+        \[
+        \lVert \textbf{v} \rVert = \sqrt{\langle \textbf{v}, \textbf{v} \rangle} 
+        \]
+        En utilisant la formule précedente, on a : 
+        \[
+        \langle \textbf{v}, \textbf{v} \rangle = \sum_{i=1}^3 v^i v_i = 1\cdot 14 + 3\cdot 13 + 5\cdot 9 = 14 + 39 + 45 = 98
+        \]
+        Donc :
+        \[
+        \lVert \textbf{v} \rVert = \sqrt{98}
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+ 
+
+    \ifthenelse{\boolean{showSolutions}}{}{\newpage}
+    
+\section*{Exercice 3 : Quelques exemples de tenseurs.}
+
+On considère le plan muni d'une \textit{ancienne base} \(\mathcal{B} = (\vec{e}_1, \vec{e}_2)\) et d'une \textit{nouvelle base} \(\mathcal{B}' = (\vec{f}_1, \vec{f}_2)\). On note la \textit{matrice de passage} de la nouvelle base à l'ancienne
+
+$$P =
+\begin{pmatrix}
+\dfrac{\partial f_1}{\partial e_1} & \dfrac{\partial f_2}{\partial e_1} \\
+& \\
+\dfrac{\partial f_1}{\partial e_2} & \dfrac{\partial f_2}{\partial e_2}
+\end{pmatrix}
 $$
-\underline{x}=r \underline{g}_r+\theta \underline{g}_\theta+z \underline{g}_z
-$$
 
-Nous allons maintenant rechercher l'expression de l'opérateur $\underline{\nabla}$ en coordonnées curvilignes. En coordonnées rectangulaires, nous l'avions défini comme suit
+Dans cet exercice, on passe d'un référentiel cartésien orthonormé aux coordonnées polaires.
 
-$$
-\underline{\nabla}=\underline{e}_1 \frac{\partial}{\partial x_1}+\underline{e}_2 \frac{\partial}{\partial x_2}+\underline{e}_3 \frac{\partial}{\partial x_3} \quad \text { ou } \quad \underline{e}_i \frac{\partial}{\partial x_i} .
-$$
+\begin{enumerate}
+  \item Ecrivez les lois de transformation qui permettent de passer du système $(x, y)$ au système $(r, \theta)$, puis leurs inverses.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Les formules de changement de coordonnées du cartésien $(x, y)$ vers les coordonnées polaires $(r, \theta)$ sont :
+      \[
+      \left\{
+        \begin{array}{l}
+          x = r\cos\theta\\
+          y = r\sin\theta
+        \end{array}
+      \right.
+      \]
+      Inversement, pour passer de $(x, y)$ à $(r, \theta)$ :
+      \[
+      \left\{
+        \begin{array}{l}
+          r = \sqrt{x^2 + y^2}\\
+          \theta = \arctan\left(\dfrac{y}{x}\right)
+        \end{array}
+      \right.
+      \]
+      Ainsi, la transformation directe $(r, \theta) \to (x, y)$ consiste à utiliser les formules trigonométriques ci-dessus, et la transformation inverse $(x, y) \to (r, \theta)$ utilise le module et l’argument du point dans le plan.
+    \end{solution}
+  }{}
+
+  \item En déduire l'expression de la matrice de changement de base.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Pour obtenir la matrice de changement de base, il faut appliquer la transformation inverse à la base $\mathcal{B}$.
+      On a :
+      \[
+      \vec{f}_1 = \cos\theta \vec{e}_1 + \sin\theta \vec{e}_2
+      \]
+      \[
+      \vec{f}_2 = -\sin\theta \vec{e}_1 + \cos\theta \vec{e}_2
+      \]
+      Donc la matrice de changement de base est :
+      \[
+      P = \begin{pmatrix}
+      \cos\theta & -\sin\theta \\
+      \sin\theta & \cos\theta
+      \end{pmatrix}
+      \]
+      Pour passer des anciens vecteurs aux nouveaux, on écrit : 
+      \[
+      \vec{f}_1 = P \vec{e}_1
+      \]
+      \[
+      \vec{f}_2 = P \vec{e}_2
+      \]
+      \end{solution}
+    }{}
+    \noindent On considère une particule qui se déplace dans le plan avec le temps $t$ comme paramètre. \newline
+  Soit $M(t)$ la position de la particule à l'instant $t$.
+  On a donc le vecteur position de la particule $\vec{OM(t)} = x(t) \vec{e}_1 + y(t) \vec{e}_2$.
+      \item Ecrivez le vecteur position dans la base \(\mathcal{B}'\). Le vecteur position est-il un tenseur ?
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+              Le vecteur position dans la base $\mathcal{B}'$ est :
+              \[
+              \vec{OM(t)} = r(t) \vec{f}_1
+              \]
+              écrit avec $x$ et $y$ : 
+              \[
+              \vec{OM(t)} = \sqrt{x(t)^2 + y(t)^2} \vec{f}_1 
+              \]
+              On ne peut pas passer de la description cartésienne à la description polaire de manière linéaire, donc le vecteur position n'est pas un tenseur.
+            \end{solution}
+        }{}
+
+    \item Considérons maintenant le vecteur vitesse \(\vec{v} = \dfrac{d\vec{OM}}{dt}\).
+    \begin{enumerate}
+        \item Montrer comment se transforment les composantes du vecteur vitesse lors du changement de base.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+            Dans la base cartésienne $\mathcal{B} = (\vec{e}_1, \vec{e}_2)$, le vecteur vitesse s'écrit :
+            \[
+            \vec{v} = \frac{d\vec{OM}}{dt} = \dot{x}(t) \vec{e}_1 + \dot{y}(t) \vec{e}_2
+            \]
+            où $\dot{x} = \frac{dx}{dt}$ et $\dot{y} = \frac{dy}{dt}$.
+
+            Dans la base polaire $\mathcal{B}' = (\vec{f}_1, \vec{f}_2)$, le vecteur position est $\vec{OM} = r(t) \vec{f}_1$. 
+            En dérivant par rapport au temps, on obtient :
+            \[
+            \vec{v} = \frac{d}{dt}(r \vec{f}_1) = \dot{r} \vec{f}_1 + r \frac{d\vec{f}_1}{dt}
+            \]
+            
+            Or, $\vec{f}_1 = \cos\theta \vec{e}_1 + \sin\theta \vec{e}_2$ dépend de $\theta(t)$, donc :
+            \[
+            \frac{d\vec{f}_1}{dt} = \frac{d\vec{f}_1}{d\theta} \cdot \dot{\theta} = (-\sin\theta \vec{e}_1 + \cos\theta \vec{e}_2) \dot{\theta} = \dot{\theta} \vec{f}_2
+            \]
+            
+            Ainsi, dans la base polaire :
+            \[
+            \vec{v} = \dot{r} \vec{f}_1 + r\dot{\theta} \vec{f}_2
+            \]
+
+            Pour obtenir la transformation des composantes, on utilise la matrice de passage $P$ :
+            \[
+            \begin{pmatrix} \dot{x} \\ \dot{y} \end{pmatrix} = P \begin{pmatrix} \dot{r} \\ r\dot{\theta} \end{pmatrix}
+            \]
+            où $P = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$.
+
+            Inversement, les composantes dans la base polaire se transforment selon :
+            \[
+            \begin{pmatrix} \dot{r} \\ r\dot{\theta} \end{pmatrix} = P^{-1} \begin{pmatrix} \dot{x} \\ \dot{y} \end{pmatrix}
+            \]
+            avec $P^{-1} = \begin{pmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta \end{pmatrix}$.
+            \end{solution}
+        }{}
+        \item Le vecteur vitesse est-il un tenseur ? Justifier brièvement.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+            Oui, le vecteur vitesse est un tenseur (plus précisément un tenseur d'ordre 1, c'est-à-dire un vecteur).
+
+            En effet, les composantes du vecteur vitesse se transforment de manière linéaire lors d'un changement de base via la matrice de passage $P$ :
+            \[
+            \begin{pmatrix} v'^1 \\ v'^2 \end{pmatrix} = P^{-1} \begin{pmatrix} v^1 \\ v^2 \end{pmatrix}
+            \]
+            où $(v^1, v^2)$ sont les composantes dans l'ancienne base et $(v'^1, v'^2)$ dans la nouvelle base.
+
+            Cette transformation linéaire est exactement la définition d'un tenseur d'ordre 1 (vecteur contravariant). 
+            Contrairement au vecteur position qui n'est pas un tenseur (car sa transformation n'est pas linéaire), 
+            le vecteur vitesse, étant la dérivée du vecteur position, se comporte comme un tenseur.
+             \end{solution}
+        }{}
+
+    \end{enumerate}
+
+\end{enumerate}
 
 
-Pour exprimer les opérateurs différentiels relatifs aux coordonnées cartésiennes ( $x_i$ ) en fonction des opérateurs différentiels relatifs aux coordonnées curvilignes $\left(\alpha_i\right)$, on applique la règle de dérivation des fonctions composées:
+\section*{Exercice 4 : Symboles de Christoffel}
+    On se place dans l'espace euclidien \(\mathbb{R}^3\) muni d'une base quelconque \(\{\textbf{e}_1, \textbf{e}_2, \textbf{e}_3\}\).
+    On se donne un champ de vecteurs  
+    \[
+    \textbf{A} = A^1 \textbf{e}_1 + A^2 \textbf{e}_2 + A^3 \textbf{e}_3
+    \]
+    Si l'on considère la dérivée de \(\textbf{A}\) le long de \(\textbf{e}_1\), on a :
+    \[
+    \nabla_{\textbf{e}_1} \textbf{A} = \partial_1 \textbf{A} = \partial_1 \Big(A^1 \textbf{e}_1 + A^2 \textbf{e}_2 + A^3 \textbf{e}_3\Big)
+    \]
+    Dans un repère quelconque, il faut dériver les vecteurs de la base :
+    \[
+    \partial_1 \textbf{A}
+    = (\partial_1 A^1) \textbf{e}_1 + (\partial_1 A^2) \textbf{e}_2 + (\partial_1 A^3) \textbf{e}_3 + A^1 (\partial_1 \textbf{e}_1) + A^2 (\partial_1 \textbf{e}_2) + A^3 (\partial_1 \textbf{e}_3)
+    \]
 
-$$
-\frac{\partial}{\partial x_i}=\frac{\partial \alpha_j}{\partial x_i} \frac{\partial}{\partial \alpha_j}
-$$
+    Les symboles de Christoffel expriment les coordonnées de ces dérivées selon les vecteurs de la base :
+    \[
+    \partial_j \textbf{e}_i = \Gamma^1_{ij} \textbf{e}_1 + \Gamma^2_{ij} \textbf{e}_2 + \Gamma^3_{ij} \textbf{e}_3
+    \]
 
-\ifthenelse{\boolean{showSolutions}}{
-  \begin{solution}
-En appliquant cette règle, on trouve
-En appliquant cette règle, on trouve
-- pour les coordonnées cylindriques
+    Plaçons-nous par exemple en coordonnées polaires, avec \(\textbf{e}_1 = \textbf{e}_r\) et \(\textbf{e}_2 = \textbf{e}_\theta\).
 
-$$
-\begin{aligned}
-\frac{\partial}{\partial x_1} & =(\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z} \\
-\frac{\partial}{\partial x_2} & =(\sin \theta) \frac{\partial}{\partial r}+\left(\frac{\cos \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z} \\
-\frac{\partial}{\partial x_3} & =(0) \frac{\partial}{\partial r}+(0) \frac{\partial}{\partial \theta}+(1) \frac{\partial}{\partial z}
-\end{aligned}
-$$
-
-- pour les coordonnées sphériques
-
-$$
-\begin{aligned}
-\frac{\partial}{\partial x_1} & =(\sin \theta \cos \phi) \frac{\partial}{\partial r}+\left(\frac{\cos \theta \cos \phi}{r}\right) \frac{\partial}{\partial \theta}+\left(-\frac{\sin \phi}{r \sin \theta}\right) \frac{\partial}{\partial z} \\
-\frac{\partial}{\partial x_2} & =(\sin \theta \sin \phi) \frac{\partial}{\partial r}+\left(\frac{\cos \theta \sin \phi}{r}\right) \frac{\partial}{\partial \theta}+\left(\frac{\cos \phi}{r \sin \theta}\right) \frac{\partial}{\partial z} \\
-\frac{\partial}{\partial x_3} & =(\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}+(0) \frac{\partial}{\partial z}
-\end{aligned}
-$$
+    \begin{enumerate}
+        \item En vous ramenant au système de coordonnées cartésiennes \(\{\textbf{i}, \textbf{j}\}\), déterminer la dérivée de \(\textbf{e}_r\) par rapport à \(\theta\).
 
 
-En injectant les expressions (3.6) et (4.15) dans l'expression (4.13) du gradient en coord cartésiennes, on obtient l'expression de $\underline{\nabla}$ en coordonnées cylindriques:
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        En coordonnées cartésiennes, \(\textbf{e}_r = \cos(\theta) \textbf{i} + \sin(\theta) \textbf{j}\).
+        La dérivée de \(\textbf{e}_r\) par rapport à \(\theta\) est :
+        \[
+        \partial_\theta \textbf{e}_r = -\sin(\theta) \textbf{i} + \cos(\theta) \textbf{j} = -\textbf{e}_\theta
+        \]
+        \end{solution}
+        }{}
 
-$$
-\begin{aligned}
-\underline{\nabla}= & \underline{e}_x \frac{\partial}{\partial x}+\underline{e}_y \frac{\partial}{\partial y}+\underline{e}_z \frac{\partial}{\partial z} \\
-= & \left(\underline{e}_r \cos \theta-\underline{e}_\theta \sin \theta\right)\left((\cos \theta) \frac{\partial}{\partial r}+\left(-\frac{\sin \theta}{r}\right) \frac{\partial}{\partial \theta}\right) \\
-& +\left(\underline{e}_r \sin \theta+\underline{e}_\theta \cos \theta\right)\left((\sin \theta) \frac{\partial}{\partial r}+\left(+\frac{\cos \theta}{r}\right) \frac{\partial}{\partial \theta}\right)+\underline{e}_z \frac{\partial}{\partial z}
-\end{aligned}
-$$
+        \item Calculer tous les symboles de Christoffel pour les coordonnées cylindriques.
 
-et, après avoir simplifié, on trouve finalement
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La question précédente nous donne :
+            \[
+            \Gamma^1_{12} = 0, \qquad \Gamma^2_{12} = -1
+            \]
+            Les dérivées par rapport à \(r\) des vecteurs de base sont nulles donc :
+            \[
+            \Gamma^1_{11} = \Gamma^2_{11} = \Gamma^1_{21} = \Gamma^2_{21} = 0
+            \]
+            Par rapport à \(\theta\), on a :
+            \[
+            \partial_\theta \textbf{e}_\theta = -\cos(\theta) \textbf{i} - \sin(\theta) \textbf{j} = -\textbf{e}_r
+            \]
+            Ainsi :
+            \[
+            \Gamma^1_{12} = 0, \qquad \Gamma^2_{12} = -1. 
+            \]
+        \end{solution}
+        }{}
 
-$$
-\underline{\nabla}=\underline{e}_r \frac{\partial}{\partial r}+\underline{e}_\theta \frac{1}{r} \frac{\partial}{\partial \theta}+\underline{e}_z \frac{\partial}{\partial z}
-$$
-
-
-Un développement analogue utilisant les expressions (3.9) et (4.16) permet de trouver l'e de $\underline{\nabla}$ en coordonnées sphériques
-
-$$
-\underline{\nabla}=\underline{e}_r \frac{\partial}{\partial r}+\underline{e}_\phi \frac{1}{r} \frac{\partial}{\partial \phi}+\underline{e}_\theta \frac{1}{r \sin \phi} \frac{\partial}{\partial \theta}
-$$
-\end{solution}
-}{}
-
-
-Donner des vecteurs et demander l'ordre d'un tenseur.
-
-
-Produit tensoriel 
-
+    \end{enumerate}
 \end{document}

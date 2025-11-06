@@ -1,0 +1,317 @@
+
+
+\section*{Introduction}
+
+Les équations différentielles du premier ordre sont des équations de la forme :
+\[
+y' + a(x)y = b(x)
+\]
+où \( y \) est une fonction de \( x \). l'inconnue dans cette équation est \( y \), il faut trouver une fonction.
+
+La résolution de cette équation se fait en deux étapes :
+\begin{enumerate}
+    \item Trouver les solutions homogènes
+    \item Trouver une solution particulière
+\end{enumerate}
+
+\section*{Solutions Homogènes}
+
+Une équation différentielle est dite homogène si $b(x)=0$, elle peut être écrite sous la forme :
+\[
+y' + a(x)y = 0
+\]
+Les solutions sont de la forme \( y = Ce^{-A(x)} \) où \( C \) est une constante et \( A(x) \) est une primitive de \( a(x) \).
+
+\subsection*{Exemple}
+Donnez les solutions des équations :
+\begin{enumerate}
+    \item
+    \[
+    y' + 2y = 0
+    \]
+    \item
+    \[
+    y' + \frac{y}{x} = 0
+    \]
+    \item
+    \[
+    y' + \frac{x}{1+x^2}y = 0
+    \]
+\end{enumerate}
+
+
+\section*{Solutions Particulières}
+
+Lorsque l'équation différentielle n'est pas homogène, il faut chercher une solution particulière, c'est à dire une fonction qui satisfait l'équation différentielle complète.
+On obtient ensuite toutes les solutions en ajoutant la solution particulière à la solution générale de l'équation homogène.
+
+Pour trouver une solution particulière, on peut la chercher sous la forme d'une fonction simple (polynôme, exponentielle, etc.) et vérifier par identification.
+
+\subsection*{Exemple}
+Trouver toutes les solutions des équations :
+\begin{enumerate}
+    \item
+    \[
+    y' + 2y = 2x + 3
+    \]
+    On pourra chercher une solution particulière sous la forme $y_p(x)= Ax+B$.
+    \item
+    \[
+    x y'+(x-1) y=x^3
+    \]
+    On pourra chercher une solution particulière sous la forme $y_p(x)= Ax^3+Bx^2+Cx+D$.
+\end{enumerate}
+
+\subsection*{Exercices}
+Résoudre les équations :
+\begin{enumerate}
+    \item
+    \[
+    y^{\prime}+y=x e^{-x}
+    \]
+    \item
+    \[
+    y^{\prime}-2 y=\cos (x)+2 \sin (x)
+    \]
+    \item
+    \[
+    y^{\prime}-2 x y=-(2 x-1) e^x \text { sur } \mathbb{R}
+    \]
+    \item
+    \[
+    y^{\prime}-\frac{2}{t} y=t^2 \text { sur } ] 0,+\infty[
+    \]
+\end{enumerate}
+\subsection*{Point de cours : Méthode de variation de la constante}
+Parfois, on ne trouve pas de solution particulière évidente, on peut alors utiliser la méthode de variation de la constante.
+
+La méthode de variation de la constante est une technique utilisée pour trouver une solution particulière d'une équation différentielle linéaire non homogène. Cette méthode repose sur l'idée de remplacer les constantes de la solution générale de l'équation homogène associée par des fonctions variables.
+
+Considérons une équation différentielle linéaire non homogène de la forme :
+\[
+a y' + b y = f(x)
+\]
+
+1. Résoudre l'équation homogène associée :
+\[
+y' + a(x) y = 0
+\]
+et trouver la solution générale sous la forme :
+\[
+y_h(x) = C e^{- A(x)}
+\]
+où \(C\) est une constante.
+
+2. Pour trouver une solution particulière de l'équation non homogène, on suppose que la constante \(C\) devient une fonction de \(x\), c'est-à-dire :
+\[
+y_p(x) = C(x) e^{- A(x)}
+\]
+
+3. Déterminer la fonction \(C(x)\) en réinjectant \(y_p\) dans l'équation différentielle, on obtient toujours une équation sur \(C'\):
+\[
+C'(x) e^{- A(x)} = f(x)
+\]
+
+4. Intégrer la fonction \(C'(x)\) pour obtenir \(C(x)\).
+
+5. La solution générale de l'équation différentielle est alors donnée par :
+\[
+y(x) = y_h(x) + y_p(x) = C e^{- A(x)} + C(x) e^{- A(x)}
+\]
+
+Cette méthode permet de trouver une solution particulière sans avoir à deviner la forme de la solution, ce qui peut être utile pour des équations différentielles complexes.
+
+\section*{Équations Différentielles d'Ordre 2}
+Les équations différentielles d'ordre 2 sont des équations qui impliquent des dérivées secondes d'une fonction inconnue. Nous étudierons seulement les équations linéaires à coefficients constants.
+\[
+a y'' + b y' + c y = f(x)
+\]
+où \(a\), \(b\) et \(c\) sont des constantes. Dans le cas général, $a$, $b$ et $c$ pourraient être des fonctions de $x$.
+
+Pour trouver toutes les solutions, c'est le même principe que pour les équations d'ordre 1, on trouve d'abord les solutions homogènes, puis on trouve une solution particulière.
+
+\subsection*{Point de cours : Équation caractéristique et forme des solutions}
+Pour résoudre une équation différentielle linéaire homogène d'ordre 2 à coefficients constants de la forme :
+\[
+a y'' + b y' + c y = 0
+\]
+on utilise l'équation caractéristique associée :
+\[
+a r^2 + b r + c = 0
+\]
+Cette équation provient de la recherche de solutions de la forme $y = e^{rx}$.
+
+Les solutions de l'équation différentielle dépendent des racines de l'équation caractéristique :
+\begin{enumerate}
+    \item Si l'équation caractéristique a deux racines réelles distinctes \(r_1\) et \(r_2\), la solution générale est :
+    \[
+    y(x) = C_1 e^{r_1 x} + C_2 e^{r_2 x}
+    \]
+    \item Si l'équation caractéristique a une racine réelle double \(r\), la solution générale est :
+    \[
+    y(x) = (C_1 + C_2 x) e^{r x}
+    \]
+    \item Si l'équation caractéristique a deux racines complexes conjuguées \(r = \alpha \pm i\beta\), la solution générale est :
+    \[
+    y(x) = e^{\alpha x} (C_1 \cos(\beta x) + C_2 \sin(\beta x))
+    \]
+\end{enumerate}
+
+\subsection*{Exercices}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+    \item
+    \[
+    y'' - 3 y' + 2 y = 0
+    \]
+    \item
+    \[
+    y'' + 4 y' + 4 y = 0
+    \]
+    \item
+    \[
+    y'' + 2 y' + 5 y = 0
+    \]
+    \item
+    \[
+    y'' - 2 y' + y = \sin^2 x
+    \]
+    \item
+    \[
+    y'' + y' + y = e^x \cos x
+    \]
+\end{enumerate}
+
+\section*{Méthode de Séparation des Variables}
+Si on a de la chance et qu'on sait bien intégrer, on peut aussi utiliser une méthode différente pour obtenir toutes les solutions d'un coup.
+Cette méthode s'applique aux équations de la forme :
+\[
+y' = g(x)h(y)
+\]
+en réécrivant l'équation sous la forme :
+\[
+\frac{1}{h(y)}dy = g(x)dx
+\]
+et en intégrant des deux côtés.
+
+\subsection*{Exemple}
+Résoudre les équations :
+\begin{enumerate}
+    \item
+    \[
+    \frac{dy}{dx} = xy
+    \]
+    \item
+    \[
+    \frac{dy}{dx} = \frac{y}{x}
+    \]
+    \item
+    \[
+    \frac{dy}{dx} = \frac{x^2 + 1}{xy}
+    \]
+\end{enumerate}
+
+\section*{Exercices de Synthèse}
+
+Les exercices suivants permettent de mettre en pratique l'ensemble des méthodes vues dans ce chapitre. Pour chaque équation, identifiez d'abord le type d'équation et choisissez la méthode appropriée.
+
+\subsection*{Exercices sur les équations différentielles d'ordre 1}
+
+\begin{enumerate}
+    \item Résoudre l'équation différentielle :
+    \[
+    y' + 3y = e^{-3x}
+    \]
+    
+    \item Résoudre l'équation différentielle :
+    \[
+    y' - \frac{2}{x}y = x^3 \quad \text{sur } ]0, +\infty[
+    \]
+    
+    \item Résoudre l'équation différentielle en utilisant la méthode de variation de la constante :
+    \[
+    y' + \frac{y}{x} = \frac{\ln(x)}{x} \quad \text{sur } ]0, +\infty[
+    \]
+    
+    \item Résoudre l'équation différentielle par séparation des variables :
+    \[
+    y' = \frac{y^2}{1+x^2}
+    \]
+    
+    \item Résoudre l'équation différentielle :
+    \[
+    (1+x^2)y' + 2xy = 1
+    \]
+\end{enumerate}
+
+\subsection*{Exercices sur les équations différentielles d'ordre 2}
+
+\begin{enumerate}
+    \item Résoudre l'équation différentielle homogène :
+    \[
+    y'' - 5y' + 6y = 0
+    \]
+    
+    \item Résoudre l'équation différentielle homogène :
+    \[
+    y'' + 6y' + 9y = 0
+    \]
+    
+    \item Résoudre l'équation différentielle homogène :
+    \[
+    y'' - 4y' + 13y = 0
+    \]
+    
+    \item Résoudre l'équation différentielle complète :
+    \[
+    y'' - 3y' + 2y = e^{2x}
+    \]
+    Indication : chercher une solution particulière sous la forme $y_p(x) = Ax e^{2x}$.
+    
+    \item Résoudre l'équation différentielle complète :
+    \[
+    y'' + y = \cos(x)
+    \]
+    Indication : chercher une solution particulière sous la forme $y_p(x) = Ax \cos(x) + Bx \sin(x)$.
+    
+    \item Résoudre l'équation différentielle complète :
+    \[
+    y'' - 2y' + y = x e^x
+    \]
+\end{enumerate}
+
+\subsection*{Exercices mixtes}
+
+\begin{enumerate}
+    \item Déterminer toutes les solutions de l'équation différentielle :
+    \[
+    y' + y \tan(x) = \sin(2x) \quad \text{sur } ]-\frac{\pi}{2}, \frac{\pi}{2}[
+    \]
+    
+    \item Résoudre le problème de Cauchy :
+    \[
+    \begin{cases}
+    y'' + 4y = 0 \\
+    y(0) = 1 \\
+    y'(0) = 2
+    \end{cases}
+    \]
+    
+    \item Résoudre l'équation différentielle :
+    \[
+    y' = \frac{x+y}{x-y}
+    \]
+    Indication : effectuer le changement de variable $z = \frac{y}{x}$.
+    
+    \item Résoudre l'équation différentielle :
+    \[
+    y'' - y' - 2y = 3x^2 + 1
+    \]
+    
+    \item Déterminer la solution de l'équation différentielle qui vérifie $y(0) = 1$ :
+    \[
+    y' + 2xy = x e^{-x^2}
+    \]
+\end{enumerate}
+

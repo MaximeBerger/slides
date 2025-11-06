@@ -26,7 +26,22 @@
         }
       ],
       "sexercer" : [
-        
+        {
+          "id": "ex1",
+          "numero": 0,
+          "titre": "TD1",
+          "description": "Calcul tensoriel · Calcul tensoriel",
+          "lien": "2-TD1/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "id": "ex2",
+          "numero": 1,
+          "titre": "TD1 - corrigé",
+          "description": "Calcul tensoriel · Calcul tensoriel",
+          "lien": "2-TD1/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {
