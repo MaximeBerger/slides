@@ -1,0 +1,1047 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{MEF - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ MEF - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Méthode des éléments finis -- TD4}}\\[1em]
+    {\large \textit{Des éléments 2D}}
+\end{center}
+
+
+En dimension 2, les éléments finis de Lagrange sont des triangles et les fonctions de forme sont des polynômes à deux variables.
+Pour des éléments d'ordre $1$ (les seuls points du maillage sont les sommets du triangle), il faut $3$ polynômes par éléments.
+
+La première section vise à obtenir des formules pour calculer les expressions des polynômes sur chaque élément. 
+
+\section*{Préliminaires : élément de réference}
+
+Dans un repère $(O, r, s)$, prenons un triangle rectangle isocèle de côté $1$ et de sommets $A = (0,0)$, $B = (1,0)$, $C = (0,1)$, c'est notre élément de référence. 
+\begin{enumerate}[label=\arabic*.]
+\item Pour ce triangle, rappelez ou retrouvez les polynômes $\varphi_A(r,s)$, $\varphi_B(r,s)$, $\varphi_C(r,s)$ tels que
+\[
+\varphi_A(r_A,s_A) = 1, \quad \varphi_A(r_B,s_B) = 0, \quad \varphi_A(r_C,s_C) = 0.
+\]
+\[
+\varphi_B(r_A,s_A) = 0, \quad \varphi_B(r_B,s_B) = 1, \quad \varphi_B(r_C,s_C) = 0.
+\]
+\[
+\varphi_C(r_A,s_A) = 0, \quad \varphi_C(r_B,s_B) = 0, \quad \varphi_C(r_C,s_C) = 1.
+\]
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+   Les polynômes sont :
+   \[
+   \varphi_A(r,s) = 1 - r - s, \quad \varphi_B(r,s) = r, \quad \varphi_C(r,s) = s.
+   \]
+\end{solution}
+}{} 
+\vspace{1em}
+
+Plaçons-nous maintenant dans un autre repère orthonormé $(O, x, y)$ et considérons un triangle $T$ quelconque, de sommets $A=(x_A,y_A)$, $B=(x_B,y_B)$, $C=(x_C,y_C)$.
+\item Faites un dessin.
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{tikzpicture}[scale=1.5]
+        Par exemple :
+    % Axes
+    \draw[->] (-1,0) -- (3,0) node[right] {$x$};
+    \draw[->] (0,-1) -- (0,3) node[above] {$y$};
+    
+    % Triangle
+    \coordinate (A) at (1,1);
+    \coordinate (B) at (2.5,0.5);
+    \coordinate (C) at (0.5,2);
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+    
+    % Points labels
+    \node[below left] at (A) {$A(x_A,y_A)$};
+    \node[below right] at (B) {$B(x_B,y_B)$};
+    \node[above] at (C) {$C(x_C,y_C)$};
+    
+    % Points
+    \fill (A) circle (1.5pt);
+    \fill (B) circle (1.5pt);
+    \fill (C) circle (1.5pt);
+\end{tikzpicture}
+\end{solution}
+}{} 
+Nous allons définir un nouveau repère $(A, r, s)$ lié au triangle $T$ de la façon suivante :
+\begin{itemize}
+    \item $A$ est l'origine,
+    \item $r$ est le vecteur $\overrightarrow{AB}$,
+    \item $s$ est le vecteur $\overrightarrow{AC}$.
+\end{itemize}
+\item Donner les coordonnées de $A$, $B$ et $C$ dans ce repère. et déduisez-en les expressions des polynômes $\varphi_A(r,s)$, $\varphi_B(r,s)$, $\varphi_C(r,s)$ dans ce repère.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Dans ce repère, les coordonnées de $A$, $B$ et $C$ sont respectivement $(0,0)$, $(1,0)$ et $(0,1)$. 
+
+On retrouve notre élément de référence.
+
+Les polynômes sont :
+\[
+\varphi_A(r,s) = 1 - r - s, \quad \varphi_B(r,s) = r, \quad \varphi_C(r,s) = s.
+\]
+\end{solution}
+}{} 
+Notre but est maintenant de déterminer les polynômes $\varphi_A(x,y)$, $\varphi_B(x,y)$, $\varphi_C(x,y)$ dans le repère $(O, x, y)$. 
+Pour cela, nous cherchons le changement de base sous la forme
+\[
+\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} a_1 \\ b_1 \end{pmatrix} + \begin{pmatrix} a_2 \\ b_2 \end{pmatrix} r + \begin{pmatrix} a_3 \\ b_3 \end{pmatrix} s.
+\]
+où $(a_1, b_1)$, $(a_2, b_2)$ et $(a_3, b_3)$ sont des constantes que nous allons déterminer.
+
+\item Déterminez les constantes $(a_1, b_1)$, $(a_2, b_2)$ et $(a_3, b_3)$ en fonction des coordonnées de $A$, $B$ et $C$ dans les deux repères.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+
+    Les abscisses des points $A$, $B$ et $C$ doivent vérifier :
+    \[
+    x_A = a_1 , \quad x_B = a_1 + a_2, \quad x_C = a_1 + a_3.
+    \]
+    On en déduit :
+    \[
+    a_1 = x_A, \quad a_2 = x_B - x_A, \quad a_3 = x_C - x_A.
+    \]
+    De même pour les ordonnées :
+    \[
+    b_1 = y_A, \quad b_2 = y_B - y_A, \quad b_3 = y_C - y_A.
+    \]
+
+\end{solution}
+}{} 
+\item Déterminez les expressions des polynômes $\varphi_A(x,y)$, $\varphi_B(x,y)$, $\varphi_C(x,y)$ dans le cas où $A = (1,0)$, $B = (2,0)$, $C = (1,1)$.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+
+    
+    Dans ce cas, on a:
+    \[
+    \left\{
+    \begin{aligned}
+    x &= 1+r \\
+    y &= s
+    \end{aligned}
+    \right.
+    \] 
+    donc 
+    \[
+    \left\{
+    \begin{aligned}
+    r &= x-1 \\
+    s &= y
+    \end{aligned}
+    \right.
+    \]
+    On en déduit, si $\varphi'_A(r,s)$, $\varphi'_B(r,s)$ et $\varphi'_C(r,s)$ sont les polynômes de référence :
+    \[
+    \varphi_A(x,y) = \varphi'_A(r,s) = \varphi'_A(x-1,y) = 1 - (x-1) - y = 2-x-y, 
+    \]
+    \[
+    \varphi_B(x,y) = \varphi'_B(r,s) = \varphi'_B(x-1,y) = x-1,
+    \]
+    \[
+    \varphi_C(x,y) = \varphi'_C(r,s) = \varphi'_C(x-1,y) = y.
+    \]
+\end{solution}
+}{} 
+\item Faites de même dans le cas où $A = (2,2)$, $B = (1,2)$, $C = (2,1)$.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+
+    
+    On a :
+    \[
+    \left\{
+    \begin{aligned}
+    x &= 2-r \\
+    y &= 2-s
+    \end{aligned}
+    \right.
+    \]
+    donc 
+    \[
+    \left\{
+    \begin{aligned}
+    r &= 2-x \\
+    s &= 2-y
+    \end{aligned}
+    \right.
+    \]
+    On en déduit :
+    \[
+    \varphi_A(x,y) = \varphi'_A(r,s) = \varphi'_A(2-x,2-y) = 1 - (2-x) - (2-y) = x+y-3,
+    \]
+    \[
+    \varphi_B(x,y) = \varphi'_B(r,s) = \varphi'_B(2-x,2-y) = 2-x,
+    \]
+    \[
+    \varphi_C(x,y) = \varphi'_C(r,s) = \varphi'_C(2-x,2-y) = 2-y.
+    \]
+\end{solution}
+}{} 
+\end{enumerate}
+
+\section*{Une équation différentielle}
+
+Considérons l'équation différentielle suivante sur le domaine carré $\Omega = [0,1] \times [0,1]$ :
+\[
+-\Delta u = f \quad \text{dans } \Omega,
+\]
+avec les conditions aux limites de Dirichlet :
+\[
+u = 0 \quad \text{sur } \partial\Omega.
+\]
+
+
+\section*{Exercice 1 : des triangles rectangle isocèle}
+
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Formulation Variationnelle} : Donnez la formulation variationnelle du problème. On pourra utiliser la formule de Green, généralisation de l'intégration par parties en dimension 2 :
+    \[
+        \int_{\Omega} \nabla u \cdot \nabla v \, d \Omega=-\int_{\Omega} v \Delta u \, d \Omega+\int_{\partial \Omega} v \frac{\partial u}{\partial n} \, d S,
+    \] 
+    où $\partial \Omega$ est la frontière du domaine $\Omega$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    
+    
+        \begin{solution}
+           Pour la formulation variationnelle, on multiplie par une fonction test $v$ et on intègre:
+           \[
+           -\int_\Omega v \Delta u \, d \Omega = \int_\Omega f v \, d \Omega.
+           \]
+           En utilisant la formule de Green, on obtient:
+           \[
+           \int_\Omega \nabla u \cdot \nabla v \, d \Omega = -\int_{\Omega} v \Delta u \, d \Omega+\int_{\partial \Omega} v \frac{\partial u}{\partial n} \, d S,
+           \]
+           en choisissant $v = 0$ sur $\partial \Omega$, on obtient la formulation variationnelle :
+           \[
+           \int_\Omega \nabla u \cdot \nabla v \, d \Omega = \int_\Omega f v \, d \Omega.
+           \]
+           On pose donc 
+           \[
+           a(u,v) = \int_\Omega \nabla u \cdot \nabla v \, d \Omega, \quad L(v) = \int_\Omega f v \, d \Omega.
+           \]
+        \end{solution}
+        }{} 
+    \item \textbf{Maillage en triangles rectangle isocèle} :
+    \begin{enumerate}[label=\alph*.]
+        \item Découpez le domaines en $4$ carrés, puis en $8$ triangles rectangle isocèles. Nommez les noeuds et les éléments correspondant.
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Une possibilité :
+        \begin{center}
+        \includegraphics[width=0.6\textwidth]{maillage1.jpeg}
+        \end{center}
+
+        \end{solution}
+        }{} 
+        \item Etablissez le tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
+    \end{enumerate}
+    
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Ce maillage est associé aux tableaux suivants : 
+
+        Tableau de coordonnées des noeuds :
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Noeud & Coordonnées  \\
+            \hline
+            1 & (0,1) \\
+            2 & (1/2,1) \\
+            3 & (1,1) \\
+            4 & (0,1/2) \\
+            5 & (1/2,1/2) \\
+            6 & (1,1/2) \\
+            7 & (0,0) \\
+            8 & (1/2,0) \\
+            9 & (1,0) \\
+            \hline
+        \end{tabular}
+
+        Tableau de connectivité des éléments :
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Elément & noeuds  \\
+            \hline
+            1 & 1, 4, 5 \\
+            2 & 1, 5, 2 \\
+            3 & 2, 5, 6 \\
+            4 & 2, 6, 3 \\
+            5 & 4, 7, 8 \\
+            6 & 4, 8, 5 \\
+            7 & 5, 8, 9 \\
+            8 & 5, 9, 6 \\
+            \hline
+        \end{tabular}
+
+    \end{solution}
+    }{} 
+    \item \textbf{Calcul des Coefficients du Système Linéaire} :
+    \begin{enumerate}[label=\alph*.]
+        \item Placez-vous dans l'élément de votre choix, et déterminer les $3$ polynômes pour cet élément. \textit{On utilisera la première partie}
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+                On se place par exemple sur l'élément 1:
+                Les coordonnées des noeuds sont :
+                \begin{itemize}
+            \item $A = (0,1/2)$ est le sommet 4
+            \item $B = (1/2,1/2)$ est le sommet 5
+            \item $C = (0,1)$ est le sommet 1
+        \end{itemize}
+        Le changement de repère est :
+        \[
+        \left\{
+        \begin{aligned}
+        x &= \frac{r}{2} \\
+        y &= \frac{1}{2} + \frac{s}{2}  
+        \end{aligned}
+        \right.
+        \]
+        donc 
+        \[
+        \left\{
+        \begin{aligned}
+        r &= 2x \\
+        s &= 2y-1
+        \end{aligned}
+        \right.
+        \]
+        Les polynômes sont :
+        \[
+        \varphi_A(x, y) = 1 - 2x - (2y-1) = 2-2x-2y = 2-2x-2y, 
+        \]
+        \[
+        \varphi_B(x, y) = 2x,
+        \]
+        \[
+        \varphi_C(x, y) = 2(y-1).
+        \]
+
+
+        \end{solution}
+        }{} 
+        \item Exprimez puis calculer la matrice de rigidité $K_e$ pour cet élément.
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+
+            On cherche la solution approchée $u_h$ sous la forme $u_h = \sum_{i=1}^3 \alpha_i \varphi_i(x,y)$, la matrice de rigidité s'exprime :
+            \[
+            K_e = 
+            \begin{pmatrix}
+                a(\varphi_A, \varphi_A) & a(\varphi_A, \varphi_B) & a(\varphi_A, \varphi_C) \\
+                a(\varphi_B, \varphi_A) & a(\varphi_B, \varphi_B) & a(\varphi_B, \varphi_C) \\
+                a(\varphi_C, \varphi_A) & a(\varphi_C, \varphi_B) & a(\varphi_C, \varphi_C)
+            \end{pmatrix}
+            \]
+            avec, 
+            \[
+            a(\varphi_i, \varphi_j) = \int_0^1 \int_0^1 \nabla \varphi_i \cdot \nabla \varphi_j 1_{(x, y) \in ABC} \, dx \, dy.
+            \]
+            Commençons par déterminer les vecteurs gradients des polynômes :
+            \[
+            \nabla \varphi_A = \begin{pmatrix} -2 \\ -2 \end{pmatrix}, \quad \nabla \varphi_B = \begin{pmatrix} 2 \\ 0 \end{pmatrix}, \quad \nabla \varphi_C = \begin{pmatrix} 0 \\ 2 \end{pmatrix}.
+            \]
+            On en déduit :
+            \begin{align*}
+            a(\varphi_A, \varphi_A) &= \int_0^1 \int_0^1 \begin{pmatrix} -2 \\ -2 \end{pmatrix} \cdot \begin{pmatrix} -2 \\ -2 \end{pmatrix} 1_{(x, y) \in ABC}\, dx \, dy \\
+            &= 8 \int_0^1 \int_0^1 1_{(x, y) \in ABC} \, dx \, dy = 8 \, \text{Aire}(ABC) \\
+            &= 8 \times \frac{1}{8} = 1.
+            \end{align*}
+            De même, on trouve :
+            \[
+            a(\varphi_A, \varphi_B) = a(\varphi_A, \varphi_C) = a(\varphi_B, \varphi_A) = a(\varphi_C, \varphi_A) = -\frac{1}{2}
+            \]
+            et
+            \[
+            a(\varphi_B, \varphi_B) = a(\varphi_C, \varphi_C) = \frac{1}{2}.
+            \]
+            et enfin :
+            \[
+            a(\varphi_B, \varphi_C) = a(\varphi_C, \varphi_B) = 0.
+            \]
+            On en déduit la matrice de rigidité :
+            \[
+            K_e = \frac{1}{2} \begin{pmatrix} 2 & -1 & -1 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}.
+            \]
+            Elle conduira au système linéaire :
+            \[
+            K_e \begin{pmatrix} \alpha_4 \\ \alpha_5 \\ \alpha_1 \end{pmatrix} = \begin{pmatrix} L(\varphi_A) \\ L(\varphi_B) \\ L(\varphi_C) \end{pmatrix}.
+            \]
+        \end{solution}
+        }{} 
+        \item Choisissez un triangle qui n'est pas dans le même sens que votre premier choix, exprimez la matrice de rigidité pour ce triangle. 
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Choisissons maintenant un autre triangle, par exemple le triangle 8. Les coordonnées des noeuds sont :
+            \begin{itemize}[label=$\bullet$]
+             \item $A = (1,1/2)$ est le sommet 6
+             \item $B = (1/2,1/2)$ est le sommet 5
+             \item $C = (1,0)$ est le sommet 9
+            \end{itemize}
+            Le changement de repère est :
+            \[
+            \left\{
+            \begin{aligned}
+            x &= 1-\frac{r}{2} \\
+            y &= \frac{1}{2}-\frac{s}{2}
+            \end{aligned}
+            \right.
+            \]
+            donc 
+            \[
+            \left\{
+            \begin{aligned}
+            r &= 2-2x \\
+            s &= 1-2y
+            \end{aligned}
+            \right.
+            \]
+            Les polynômes sont :
+            \[
+            \varphi_A(x, y) = 1 - (2-2x) - (1-2y) = 2x+2y-2, \quad \varphi_B(x, y) = 2-2x, \quad \varphi_C(x, y) = 1-2y.
+            \]
+            Leur gradient :
+            \[
+             \nabla \varphi_A = \begin{pmatrix} 2 \\ 2 \end{pmatrix}, \quad \nabla \varphi_B = \begin{pmatrix} -2 \\ 0 \end{pmatrix}, \quad \nabla \varphi_C = \begin{pmatrix} 0 \\ -2 \end{pmatrix}.
+            \]
+            On en déduit la matrice de rigidité :
+            \[
+            K_e = \frac{1}{2} \begin{pmatrix} 2 & -1 & -1 \\ -1 & 1 & 0 \\ -1 & 0 & 1 \end{pmatrix}.
+            \]
+            C'est la même matrice que pour l'élément 1.
+            Le système linéaire associé est :
+            \[
+            K_e \begin{pmatrix} \alpha_6 \\ \alpha_5 \\ \alpha_9 \end{pmatrix} = \begin{pmatrix} L(\varphi_A) \\ L(\varphi_B) \\ L(\varphi_C) \end{pmatrix}.
+            \]
+        \end{solution}
+        }{} 
+        \item Ecrivez le système linéaire associé à votre maillage. 
+
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                Pour obtenir la matrice de rigidité globale, il faut suivre les étapes décrites dans le CM : 
+                \begin{itemize}[label = $\bullet$]
+                 \item On écrit une grosse matrice pleine de 0, de la bonne taille : ici $9 \times 9$.
+                 \item On place les matrices de rigidité élémentaires dans les endroits adéquats.
+                \end{itemize}
+                Par exemple, la matrice de rigidité qui prend en compte uniquement l'élément 1 est :
+                \[
+                K = \frac{1}{2} \begin{pmatrix} 
+                 1 & 0 & 0 & 0 & -1 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 2 & -1 & 0 & 0 & 0 & 0 \\ 
+                 -1 & 0 & 0 & -1 & 1 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+                \end{pmatrix}.
+                \]
+                En ajoutant celle pour l'élément 8, on obtient :
+                \[
+                K = \frac{1}{2} \begin{pmatrix} 
+                 1 & 0 & 0 & -1 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 -1 & 0 & 0 & 2 & -1 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & -1 & 2 & -1 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & -1 & 2 & 0 & 0 & -1 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 & 1 
+                \end{pmatrix}.
+                \]
+                Finalement, en ajoutant tous les éléments, on obtient : 
+                \[
+                K = \frac{1}{2} \begin{pmatrix} 
+                 2 & -1 & . & -1 & . & . & . & . & . \\ 
+                 -1 & 4 & -1 & . & -2 & . & . & . & . \\ 
+                 . & -1 & 2 & . & . & -1 & . & . & . \\ 
+                 -1 & . & . & 4 & -2 & . & -1 & . & . \\ 
+                 . & -2 & . & -2 & 8 & -2 & . & -2 & . \\ 
+                 . & . & -1 & . & -2 & 4 & . & . & -1 \\ 
+                 . & . & . & -1 & . & . & 2 & -1 & . \\ 
+                 . & . & . & . & -2 & . & -1 & 4 & -1 \\ 
+                 . & . & . & . & . & -1 & . & -1 & 2 
+                \end{pmatrix}.
+                \]
+                (Pour aller plus vite : 
+                \begin{itemize}[label = $\bullet$]
+                 \item Pour les coefficients diagonaux, on peut dire qu'un sommet marque 2 points s'il est sur un angle droit, un point sinon.
+                 \item Pour les coefficients non diagonaux, on peut dire qu'une paire de sommets marque 1 point si c'est un côté d'un triangle, mais pas l'hypothénuse.
+                \end{itemize}
+             )
+             Le système linéaire associé est :
+             \[
+             K \begin{pmatrix} \alpha_1 \\ \alpha_2 \\ \alpha_3 \\ \alpha_4 \\ \alpha_5 \\ \alpha_6 \\ \alpha_7 \\ \alpha_8 \\ \alpha_9 \end{pmatrix} = \begin{pmatrix} f_1 \\ f_2 \\ f_3 \\ f_4 \\ f_5 \\ f_6 \\ f_7 \\ f_8 \\ f_9 \end{pmatrix}.
+             \]
+             Pour les $f_i$, il faudra procéder de manière analogue.
+
+             \end{solution}
+             }{} 
+
+    \end{enumerate}
+\end{enumerate}
+
+
+\section*{Exercice 2 : des carrés}
+
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Préliminaires : élément de référence} :
+    \begin{enumerate}[label=\arabic*.]
+        Dans un repère $(O, r, s)$, prenons un carré de côté $2$ et de sommets $A = (-1,-1)$, $B = (1,-1)$, $C = (1,1)$, $D = (-1,1)$, c'est notre élément de référence. 
+
+        \item Pour ce carré, rappelez ou retrouvez les polynômes $\varphi_A(r,s)$, $\varphi_B(r,s)$, $\varphi_C(r,s)$, $\varphi_D(r,s)$.
+        \ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+   Les polynômes sont :
+   \[
+   \varphi_A(r,s) = \frac{1}{4}(1-r)(1-s), \quad \varphi_B(r,s) = \frac{1}{4}(1+r)(1-s),
+   \]
+   et
+   \[
+   \varphi_C(r,s) = \frac{1}{4}(1+r)(1+s), \quad \varphi_D(r,s) = \frac{1}{4}(1-r)(1+s).
+   \]
+\end{solution}
+}{} 
+        \vspace{1em}
+        
+        Plaçons-nous maintenant dans un autre repère orthonormé $(O, x, y)$ et considérons un quadrilatère $Q$ quelconque, de sommets $A=(x_A,y_A)$, $B=(x_B,y_B)$, $C=(x_C,y_C)$, $D=(x_D,y_D)$.
+        \item Faites un dessin.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Repère
+    \draw[->] (-1,0) -- (3,0) node[right] {$x$};
+    \draw[->] (0,-1) -- (0,3) node[above] {$y$};
+    
+    % Quadrilatère
+    \coordinate (A) at (0.5,0.8);
+    \coordinate (B) at (2.2,1);
+    \coordinate (C) at (1.8,2.3);
+    \coordinate (D) at (0.3,2);
+    
+    \draw (A) -- (B) -- (C) -- (D) -- cycle;
+    
+    % Points et labels
+    \fill (A) circle (1.5pt) node[below left] {$A(x_A,y_A)$};
+    \fill (B) circle (1.5pt) node[right] {$B(x_B,y_B)$};
+    \fill (C) circle (1.5pt) node[above] {$C(x_C,y_C)$};
+    \fill (D) circle (1.5pt) node[left] {$D(x_D,y_D)$};
+\end{tikzpicture}
+\end{center}
+            \end{solution}
+        }{} 
+        Nous allons définir un nouveau repère $(M, r, s)$ lié au quadrilatère $Q$ de la façon suivante :
+        \begin{itemize}
+            \item $M$ est l'origine, le centre du quadrilatère,
+            \item $r$ parallèle à $(AB)$,
+            \item $s$ parallèle à $(AC)$.
+        \end{itemize}
+        \item Donner les coordonnées de $A$, $B$, $C$, $D$ dans ce repère et déduisez-en les expressions des polynômes $\varphi_A(r,s)$, $\varphi_B(r,s)$, $\varphi_C(r,s)$, $\varphi_D(r,s)$ dans ce repère.
+        
+        \ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+   Dans ce repère, on retrouve notre élément de référence, les polynômes sont les mêmes qu'à la première question.
+\end{solution}
+}{} 
+        Notre but est maintenant de déterminer les polynômes $\varphi_A(x,y)$, $\varphi_B(x,y)$, $\varphi_C(x,y)$, $\varphi_D(x,y)$ dans le repère $(O, x, y)$. 
+        Pour cela, nous cherchons le changement de base sous la forme
+        \[
+        \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} a_1 \\ b_1 \end{pmatrix} + \begin{pmatrix} a_2 \\ b_2 \end{pmatrix} r + \begin{pmatrix} a_3 \\ b_3 \end{pmatrix} s + \begin{pmatrix} a_4 \\ b_4 \end{pmatrix} rs.
+        \]
+        où $(a_1, b_1)$, $(a_2, b_2)$, $(a_3, b_3)$ et $(a_4, b_4)$ sont des constantes que nous allons déterminer.
+        
+        \item Déterminez les constantes $(a_1, b_1)$, $(a_2, b_2)$, $(a_3, b_3)$ et $(a_4, b_4)$ en fonction des coordonnées de $A$, $B$, $C$ et $D$ dans les deux repères.
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour les abscisses : 
+            \[
+            x_A = a_1 - a_2 - a_3 + a_4, \quad x_B = a_1 + a_2 - a_3 - a_4, 
+            \]
+            \[
+            x_C = a_1 + a_2 + a_3 + a_4, \quad x_D = a_1 - a_2 + a_3 - a_4.
+            \]
+
+            Cela donne un système de $4$ équations à $4$ inconnues, qu'on peut écrire sous la forme matricielle : 
+            \[
+            \begin{pmatrix} 1 & -1 & -1 & 1 \\ 1 & 1 & -1 & -1 \\ 1 & 1 & 1 & 1 \\ 1 & -1 & 1 & -1 \end{pmatrix} \begin{pmatrix} a_1 \\ a_2 \\ a_3 \\ a_4 \end{pmatrix} = \begin{pmatrix} x_A \\ x_B \\ x_C \\ x_D \end{pmatrix}.
+            \]
+            L'inverse de la matrice du système est :
+            \[
+            \frac{1}{2}\left(\begin{array}{cccc}
+            1 & 0 & 1 & 0 \\
+            0 & 0 & 1 & -1 \\
+            0 & -1 & 1 & 0 \\
+            1 & -1 & 1 & -1
+            \end{array}\right)
+            \]
+            On trouve donc :
+            \[
+            \begin{pmatrix} a_1 \\ a_2 \\ a_3 \\ a_4 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} x_A + x_C  \\ x_C - x_D \\ -x_B + x_C \\ x_A-x_B+x_C-x_D \end{pmatrix}.
+            \]
+            les ordonnées se déduisent de manière analogue:
+            \[
+            \begin{pmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} y_A + y_C  \\ y_C - y_D \\ -y_B + y_C \\ y_A-y_B+y_C-y_D \end{pmatrix}.
+            \]
+\end{solution}
+}{} 
+        \item Déterminez les expressions des polynômes $\varphi_A(x,y)$, $\varphi_B(x,y)$, $\varphi_C(x,y)$, $\varphi_D(x,y)$ dans le cas où $A = (0,0)$, $B = (1,0)$, $C = (1,1)$, $D = (0,1)$.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+            Avec ces coordonnées, le système devient : 
+            \[
+            a_1 = \frac{1}{2}, \qquad a_2 = \frac{1}{2}, \qquad a_3=a_4=0
+            \]
+            et
+            \[
+            b_1 = \frac{1}{2}, \qquad b_3 = \frac{1}{2}, \qquad b_2=b_4=0.
+            \]
+            Le changement de repère s'écrit donc 
+            \[
+            \left\{
+            \begin{aligned}
+            x = \frac{1}{2} + \frac{1}{2}r \\
+            y = \frac{1}{2} + \frac{1}{2}s
+            \end{aligned}
+            \right.
+            \]
+            Donc 
+            \[
+            \left\{
+            \begin{aligned}
+            r = 2x-1 \\
+            s = 2y-1
+            \end{aligned}
+            \right.
+            \]
+            En notant, $\varphi'_A, \varphi'_B, \varphi'_C, \varphi'_D$ les polynômes associés à l'élément de référence, on a :
+            \begin{align*}
+            \varphi_A(x,y) &= \varphi'_A(r, s) = \varphi'_A(2x-1, 2y-1) \\
+            &= \frac{1}{4}(1-(2x-1))(1-(2y-1)) = (1-x)(1-y)
+            \end{align*}    
+            \begin{align*}
+            \varphi_B(x,y) &= \varphi'_B(r, s) = \varphi'_B(2x-1, 2y-1) \\
+            &= \frac{1}{4}(1+(2x-1))(1-(2y-1)) = x(1-y)
+            \end{align*}
+            \begin{align*}
+            \varphi_C(x,y) &= \varphi'_C(r, s) = \varphi'_C(2x-1, 2y-1) \\
+            &= \frac{1}{4}(1+(2x-1))(1+(2y-1)) = xy
+            \end{align*}
+            \begin{align*}
+            \varphi_D(x,y) &= \varphi'_D(r, s) = \varphi'_D(2x-1, 2y-1) \\
+            &= \frac{1}{4}(1-(2x-1))(1+(2y-1)) = (1-x)y
+            \end{align*}   
+\end{solution}
+}{} 
+        \item Faites de même dans le cas où $A = (1,1)$, $B = (2,1)$, $C = (2,2)$, $D = (1,2)$.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+
+            Avec ces coordonnées, on obtient 
+            \[
+            a_1 = \frac{3}{2}, \quad a_2 = \frac{1}{2}, \quad a_3 = a_4 = 0,
+            \]
+            \[
+            b_1 = \frac{3}{2}, \quad b_2 = 0, \quad b_3 = \frac{1}{2}, \quad b_4 = 0,
+            \]
+            le changement de repère s'écrit :
+            \[
+            \left\{
+            \begin{aligned}
+            x &= \frac{3}{2} + \frac{1}{2}r \\
+            y &= \frac{3}{2} + \frac{1}{2}s
+            \end{aligned}
+            \right.
+            \]
+            Donc 
+            \[
+            \left\{
+            \begin{aligned}
+            r &= 2x-3 \\
+            s &= 2y-3
+            \end{aligned}
+            \right.
+            \]
+            En notant $\varphi'_A, \varphi'_B, \varphi'_C, \varphi'_D$ les polynômes associés à l'élément de référence, on a :
+            \begin{align*}
+            \varphi_A(x,y) &= \varphi'_A(r, s) = \varphi'_A(2x-3, 2y-3) \\
+            &= \frac{1}{4}(1-(2x-3))(1-(2y-3)) = (2-x)(2-y)
+            \end{align*}    
+            \begin{align*}
+            \varphi_B(x,y) &= \varphi'_B(r, s) = \varphi'_B(2x-3, 2y-3) \\
+            &= \frac{1}{4}(1+(2x-3))(1-(2y-3)) = (x-1)(2-y)
+            \end{align*}  
+            \begin{align*}
+            \varphi_C(x,y) &= \varphi'_C(r, s) = \varphi'_C(2x-3, 2y-3) \\
+            &= \frac{1}{4}(1+(2x-3))(1+(2y-3)) = (x-1)(y-1)
+            \end{align*}  
+            \begin{align*}
+            \varphi_D(x,y) &= \varphi'_D(r, s) = \varphi'_D(2x-3, 2y-3) \\
+            &= \frac{1}{4}(1-(2x-3))(1+(2y-3)) = (2-x)(y-1)
+            \end{align*}  
+   
+\end{solution}
+}{} 
+
+    \end{enumerate}
+
+    \item \textbf{définir le maillage} :
+    \begin{enumerate}[label=\arabic*.]
+        \item Découpez le domaine $\Omega$ en $4$ carrés. Nommez les noeuds et les éléments correspondant.
+        \item Etablissez le nouveau tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
+    \end{enumerate}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par exemple : 
+        \begin{center}
+            \includegraphics[width=0.6\textwidth]{maillage2.jpeg}
+        \end{center}
+        
+        Pour ce maillage, le tableau de coordonnées des noeuds est le même que pour les triangles : ce sont les mêmes noeuds:
+
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Noeud & Coordonnées  \\
+            \hline
+            1 & (0,1) \\
+            2 & (1/2,1) \\
+            3 & (1,1) \\
+            4 & (0,1/2) \\
+            5 & (1/2,1/2) \\
+            6 & (1,1/2) \\
+            7 & (0,0) \\
+            8 & (1/2,0) \\
+            9 & (1,0) \\
+            \hline
+        \end{tabular}
+
+        Tableau de connectivité des éléments :
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Elément & noeuds  \\
+            \hline
+            1 & 4, 5, 2, 1 \\
+            2 & 5, 6, 3, 2 \\
+            3 & 7, 8, 5, 4 \\
+            4 & 8, 9, 6, 5 \\
+            \hline
+        \end{tabular}
+\end{solution}
+}{} 
+    \item \textbf{Obtention des fonctions de forme} :
+    \begin{enumerate}[label=\arabic*.]
+        \item Choisissez un élément fini, et exprimez les fonctions de forme pour cet élément.
+        \item Décrivez puis calculez la matrice élémentaire $K_e$ pour cet élément.
+        \item Comparez les résultats de cette méthode avec ceux obtenus dans l'Exercice 1. Les noeuds sont identiques, le système linéaire est-il le même ?
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{enumerate}[label=\arabic*.]
+                \item Prenons par exemple l'élément 1. Les coordonnées des points sont :
+                \begin{itemize}
+                    \item $A = (0, 1/2)$ pour le sommet $4$
+                    \item $B = (1/2, 1/2)$ pour le sommet $5$
+                    \item $C = (1/2, 1)$ pour le sommet $2$
+                    \item $D = (0, 1)$ pour le sommet $1$
+                \end{itemize}
+                Le changement de repère s'écrit :
+                \[
+                \left\{
+                    \begin{aligned}
+                        x &= \frac{1}{4} + \frac{1}{4}r  \\
+                        y &= \frac{3}{4} + \frac{1}{4}s
+                    \end{aligned}
+                \right.
+                \]
+                ce qui donne :
+                \[
+                \left\{
+                    \begin{aligned}
+                        r &= 4x-1 \\
+                        s &= 4y-3
+                    \end{aligned}
+                \right.
+                \]
+                En notant $\varphi'_A(r,s)$, $\varphi'_B(r,s)$, $\varphi'_C(r,s)$, $\varphi'_D(r,s)$ les polynômes associés à l'élément de référence, les polynômes sont :
+                \begin{align*}
+                \varphi_A(x,y) &= \varphi'_A(r,s) = \varphi'_A(4x-1,4y-3) \\
+                &= \frac{1}{4}(1-(4x-1))(1-(4y-3)) = \frac{1}{4}(2-4x)(4-4y) = 2(1-2x)(1-y)
+                \end{align*}
+                \begin{align*}
+                \varphi_B(x,y) &= \varphi'_B(r,s) = \varphi'_B(4x-1,4y-3) \\
+                &= \frac{1}{4}(1+(4x-1))(1-(4y-3)) = \frac{1}{4}(4x)(4-4y) = 4x(1-y)
+                \end{align*}
+                \begin{align*}
+                \varphi_C(x,y) &= \varphi'_C(r,s) = \varphi'_C(4x-1,4y-3) \\
+                &= \frac{1}{4}(1+(4x-1))(1+(4y-3)) = \frac{1}{4}(4x)(4y-2) = 4x(2y-1)
+                \end{align*}
+                \begin{align*}
+                \varphi_D(x,y) &= \varphi'_D(r,s) = \varphi'_D(4x-1,4y-3) \\
+                &= \frac{1}{4}(1-(4x-1))(1+(4y-3)) = \frac{1}{4}(2-4x)(4y-2) = (1-2x)(2y-1)
+                \end{align*}
+
+                \item La matrice de rigidité s'écrit :
+                \[
+                K_e = \begin{pmatrix}
+                a(\varphi_A, \varphi_A) & a(\varphi_A, \varphi_B) & a(\varphi_A, \varphi_C) & a(\varphi_A, \varphi_D) \\
+                a(\varphi_B, \varphi_A) & a(\varphi_B, \varphi_B) & a(\varphi_B, \varphi_C) & a(\varphi_B, \varphi_D) \\
+                a(\varphi_C, \varphi_A) & a(\varphi_C, \varphi_B) & a(\varphi_C, \varphi_C) & a(\varphi_C, \varphi_D) \\
+                a(\varphi_D, \varphi_A) & a(\varphi_D, \varphi_B) & a(\varphi_D, \varphi_C) & a(\varphi_D, \varphi_D)
+                \end{pmatrix}
+                \] 
+                avec 
+                \[
+                a(u,v) = \int_0^1 \int_0^1 \nabla u\cdot \nabla v\,  dx dy.
+                \]
+
+                Commençons par calculer les vecteurs gradients : 
+                \[
+                \nabla \varphi_A = \begin{pmatrix}
+                -4(1-y) \\
+                -2(1-2x)
+                \end{pmatrix}, \qquad 
+                \nabla \varphi_B = \begin{pmatrix}
+                4(1-y) \\
+                -4x
+                \end{pmatrix}, \qquad 
+                \]
+                \[
+                \nabla \varphi_C = \begin{pmatrix}
+                4(2y-1) \\
+                8x
+                \end{pmatrix}, \qquad 
+                \nabla \varphi_D = \begin{pmatrix}
+                -2(2y-1) \\
+                2(1-2x)
+                \end{pmatrix}.
+                \]
+
+                Pour le premier coefficient : 
+                \begin{align*}
+                a(\varphi_A, \varphi_A) &= \int_0^1 \int_0^1 \nabla \varphi_A \cdot \nabla \varphi_A dx dy \\
+                &= \int_0^1 \int_0^1 16(1-y)^2 + 4(1-2x)^2  dx dy \\
+                &= \int_{y=0}^{y=1} 16(1-y)^2 + \left[ -\frac{2}{3}(1-2x)^3 \right]_0^1 dy \\
+                &= \left[ -\frac{16}{3}(1-y)^3\right]_0^1 + \frac{2}{3} + \frac{2}{3} \\
+                &= \frac{16}{3} + \frac{4}{3}\\
+                &= \frac{20}{3}
+                \end{align*}
+
+            Il faudrait calculer les $9$ autres intégrales pour pouvoir obtenir une matrice. 
+    
+            \end{enumerate}
+        \end{solution}
+        }{} 
+    \item \textbf{maillage avec des triangles équilatéraux} :
+    \begin{enumerate}[label=\arabic*.]
+        \item Modifiez le domaine initial $\Omega$ en adaptant un maillage composé de triangles équilatéraux. \textit{Vous pouvez le faire avec $13$ noeuds.}
+        \item Numérotez les noeuds et les éléments correspondants.
+        \item Établissez le tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
+        \item Exprimez les fonctions de forme pour cet élément.
+        \item Décrivez puis calculez la matrice élémentaire $K_e$ pour cet élément.
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    
+    
+        \begin{solution}
+           L'énoncé est faux, on ne peut pas paver un carré avec des triangles équilatéraux. Un exemple de maillage qu'on puisse obtenir est le suivant : 
+           \begin{center}
+            \includegraphics[width=0.6\textwidth]{maillage3.jpeg}
+           \end{center}
+           On pourrait utiliser des triangles équilatéraux plus petits, pour couvrir une meilleure surface, mais il restera toujours des trous. 
+
+           L'objectif de cette partie est surtout de voir à quoi ressemble les polynômes avec des triangles équilatéraux. 
+           Plaçons-nous dans le triangle numéro 4, ses sommets sont 
+           \begin{itemize}
+            \item $A = (0,0)$ pour le sommet $6$
+            \item $B = (1/2,0)$ pour le sommet $7$
+            \item $C = (1/4, \sqrt{3}/4)$ pour le sommet $4$
+           \end{itemize}
+
+           En reprenant la partie préliminaire, le changement de repère s'écrit : 
+           \[
+           \left\{
+           \begin{aligned}
+           x &= \frac{1}{2}\, r + \frac{1}{4}\, s \\
+           y &= \frac{\sqrt{3}}{4}\, s
+           \end{aligned}
+           \right.
+           \]
+           ce qui donne : 
+           \[
+           \left\{
+           \begin{aligned}
+           r &= 2x-\frac{2}{\sqrt{3}}\, y \\
+           s &= \frac{4}{\sqrt{3}}\, y
+           \end{aligned}
+           \right.
+           \]
+           Si $\varphi'_A(r,s)$, $\varphi'_B(r,s)$, $\varphi'_C(r,s)$ sont les polynômes associés à l'élément de référence, alors les polynômes sont : 
+           \begin{align*}
+           \varphi_A(x,y) &= \varphi'_A(r,s) = \varphi'_A(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+           &= 1-(2x-\frac{2}{\sqrt{3}}\, y)-\frac{4}{\sqrt{3}}\, y = 1-2x-\frac{6}{\sqrt{3}}\, y
+           \end{align*}
+
+           \begin{align*}
+           \varphi_B(x,y) &= \varphi'_B(r,s) = \varphi'_B(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+           &= 2x-\frac{2}{\sqrt{3}}\, y
+           \end{align*}
+ 
+           \begin{align*}
+           \varphi_C(x,y) &= \varphi'_C(r,s) = \varphi'_C(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+           &= \frac{4}{\sqrt{3}}\, y
+           \end{align*}
+
+           Les gradients : 
+           \[
+           \nabla \varphi_A = \begin{pmatrix}
+           -2 \\
+           -\frac{6}{\sqrt{3}}
+           \end{pmatrix}, \qquad 
+           \nabla \varphi_B = \begin{pmatrix}
+           2 \\
+           -\frac{2}{\sqrt{3}}
+           \end{pmatrix}, \qquad 
+           \nabla \varphi_C = \begin{pmatrix}
+           0 \\
+           \frac{4}{\sqrt{3}}
+           \end{pmatrix}.
+           \]
+           Cette fois, aucun coefficient de la matrice de rigidité n'est nul. 
+        \end{solution}
+        }{} 
+    \item Quelle méthode préférez-vous ? Pourquoi ?
+
+
+\end{enumerate}
+ \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Si on doit faire les calculs à la main, la première méthode est clairement plus simple pour cette forme.
+            Avec des triangles équilatéraux on arrivera rarement à couvrir exactement la pièce. 
+
+            Pour des pièces complexes, les quadrilatères engendrent moins d'éléments donc moins d'erreurs d'arrondis.
+            Si on arrive à paver une pièce avec des quadrilatères, on pourra toujours le faire avec des triangles ( simplement en traçant une diagonale), mais pas l'inverse. 
+            
+            Les triangles sont donc plus flexibles mais demandent plus de calculs car ils ont plus d'éléments, ils servent pour ajuster le maillage à des formes complexes.
+
+
+        \end{solution}
+        }{} 
+
+\end{document}
