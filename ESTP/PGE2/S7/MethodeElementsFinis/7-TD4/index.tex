@@ -581,9 +581,9 @@ u = 0 \quad \text{sur } \partial\Omega.
                 (Pour aller plus vite : 
                 \begin{itemize}[label = $\bullet$]
                  \item Pour les coefficients diagonaux, on peut dire qu'un sommet marque 2 points s'il est sur un angle droit, un point sinon.
-                 \item Pour les coefficients non diagonaux, on peut dire qu'une paire de sommets marque 1 point si c'est un côté d'un triangle, mais pas l'hypothénuse.
+                 \item Pour les coefficients non diagonaux, on peut dire qu'une paire de sommets marque 1 point si c'est un côté d'un triangle, mais pas l'hypothénuse.)
                 \end{itemize}
-             )
+             
              Le système linéaire associé est :
              \[
              K \begin{pmatrix} \alpha_1 \\ \alpha_2 \\ \alpha_3 \\ \alpha_4 \\ \alpha_5 \\ \alpha_6 \\ \alpha_7 \\ \alpha_8 \\ \alpha_9 \end{pmatrix} = \begin{pmatrix} f_1 \\ f_2 \\ f_3 \\ f_4 \\ f_5 \\ f_6 \\ f_7 \\ f_8 \\ f_9 \end{pmatrix}.
@@ -804,15 +804,20 @@ u = 0 \quad \text{sur } \partial\Omega.
     \item \textbf{définir le maillage} :
     \begin{enumerate}[label=\arabic*.]
         \item Découpez le domaine $\Omega$ en $4$ carrés. Nommez les noeuds et les éléments correspondant.
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Par exemple : 
+        \begin{center}
+            \includegraphics[width=0.6\textwidth]{maillage2.jpeg}
+        \end{center}
+        
+        \end{solution}
+        }{} 
         \item Etablissez le nouveau tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
     \end{enumerate}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        Par exemple : 
-        \begin{center}
-            \includegraphics[width=0.6\textwidth]{maillage2.jpeg}
-        \end{center}
         
         Pour ce maillage, le tableau de coordonnées des noeuds est le même que pour les triangles : ce sont les mêmes noeuds:
 
@@ -848,13 +853,9 @@ u = 0 \quad \text{sur } \partial\Omega.
     \item \textbf{Obtention des fonctions de forme} :
     \begin{enumerate}[label=\arabic*.]
         \item Choisissez un élément fini, et exprimez les fonctions de forme pour cet élément.
-        \item Décrivez puis calculez la matrice élémentaire $K_e$ pour cet élément.
-        \item Comparez les résultats de cette méthode avec ceux obtenus dans l'Exercice 1. Les noeuds sont identiques, le système linéaire est-il le même ?
-    \end{enumerate}
-    \ifthenelse{\boolean{showSolutions}}{
+        \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            \begin{enumerate}[label=\arabic*.]
-                \item Prenons par exemple l'élément 1. Les coordonnées des points sont :
+            Prenons par exemple l'élément 1. Les coordonnées des points sont :
                 \begin{itemize}
                     \item $A = (0, 1/2)$ pour le sommet $4$
                     \item $B = (1/2, 1/2)$ pour le sommet $5$
@@ -896,136 +897,151 @@ u = 0 \quad \text{sur } \partial\Omega.
                 \varphi_D(x,y) &= \varphi'_D(r,s) = \varphi'_D(4x-1,4y-3) \\
                 &= \frac{1}{4}(1-(4x-1))(1+(4y-3)) = \frac{1}{4}(2-4x)(4y-2) = (1-2x)(2y-1)
                 \end{align*}
-
-                \item La matrice de rigidité s'écrit :
-                \[
-                K_e = \begin{pmatrix}
-                a(\varphi_A, \varphi_A) & a(\varphi_A, \varphi_B) & a(\varphi_A, \varphi_C) & a(\varphi_A, \varphi_D) \\
-                a(\varphi_B, \varphi_A) & a(\varphi_B, \varphi_B) & a(\varphi_B, \varphi_C) & a(\varphi_B, \varphi_D) \\
-                a(\varphi_C, \varphi_A) & a(\varphi_C, \varphi_B) & a(\varphi_C, \varphi_C) & a(\varphi_C, \varphi_D) \\
-                a(\varphi_D, \varphi_A) & a(\varphi_D, \varphi_B) & a(\varphi_D, \varphi_C) & a(\varphi_D, \varphi_D)
-                \end{pmatrix}
-                \] 
-                avec 
-                \[
-                a(u,v) = \int_0^1 \int_0^1 \nabla u\cdot \nabla v\,  dx dy.
-                \]
-
-                Commençons par calculer les vecteurs gradients : 
-                \[
-                \nabla \varphi_A = \begin{pmatrix}
-                -4(1-y) \\
-                -2(1-2x)
-                \end{pmatrix}, \qquad 
-                \nabla \varphi_B = \begin{pmatrix}
-                4(1-y) \\
-                -4x
-                \end{pmatrix}, \qquad 
-                \]
-                \[
-                \nabla \varphi_C = \begin{pmatrix}
-                4(2y-1) \\
-                8x
-                \end{pmatrix}, \qquad 
-                \nabla \varphi_D = \begin{pmatrix}
-                -2(2y-1) \\
-                2(1-2x)
-                \end{pmatrix}.
-                \]
-
-                Pour le premier coefficient : 
-                \begin{align*}
-                a(\varphi_A, \varphi_A) &= \int_0^1 \int_0^1 \nabla \varphi_A \cdot \nabla \varphi_A dx dy \\
-                &= \int_0^1 \int_0^1 16(1-y)^2 + 4(1-2x)^2  dx dy \\
-                &= \int_{y=0}^{y=1} 16(1-y)^2 + \left[ -\frac{2}{3}(1-2x)^3 \right]_0^1 dy \\
-                &= \left[ -\frac{16}{3}(1-y)^3\right]_0^1 + \frac{2}{3} + \frac{2}{3} \\
-                &= \frac{16}{3} + \frac{4}{3}\\
-                &= \frac{20}{3}
-                \end{align*}
-
-            Il faudrait calculer les $9$ autres intégrales pour pouvoir obtenir une matrice. 
-    
-            \end{enumerate}
         \end{solution}
         }{} 
+        \item Décrivez puis calculez la matrice élémentaire $K_e$ pour cet élément.
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice de rigidité s'écrit :
+            \[
+            K_e = \begin{pmatrix}
+            a(\varphi_A, \varphi_A) & a(\varphi_A, \varphi_B) & a(\varphi_A, \varphi_C) & a(\varphi_A, \varphi_D) \\
+            a(\varphi_B, \varphi_A) & a(\varphi_B, \varphi_B) & a(\varphi_B, \varphi_C) & a(\varphi_B, \varphi_D) \\
+            a(\varphi_C, \varphi_A) & a(\varphi_C, \varphi_B) & a(\varphi_C, \varphi_C) & a(\varphi_C, \varphi_D) \\
+            a(\varphi_D, \varphi_A) & a(\varphi_D, \varphi_B) & a(\varphi_D, \varphi_C) & a(\varphi_D, \varphi_D)
+            \end{pmatrix}
+            \] 
+            avec 
+            \[
+            a(u,v) = \int_0^1 \int_0^1 \nabla u\cdot \nabla v\,  dx dy.
+            \]
+
+            Commençons par calculer les vecteurs gradients : 
+            \[
+            \nabla \varphi_A = \begin{pmatrix}
+            -4(1-y) \\
+            -2(1-2x)
+            \end{pmatrix}, \qquad 
+            \nabla \varphi_B = \begin{pmatrix}
+            4(1-y) \\
+            -4x
+            \end{pmatrix}, \qquad 
+            \]
+            \[
+            \nabla \varphi_C = \begin{pmatrix}
+            4(2y-1) \\
+            8x
+            \end{pmatrix}, \qquad 
+            \nabla \varphi_D = \begin{pmatrix}
+            -2(2y-1) \\
+            2(1-2x)
+            \end{pmatrix}.
+            \]
+
+            Pour le premier coefficient : 
+            \begin{align*}
+            a(\varphi_A, \varphi_A) &= \int_0^1 \int_0^1 \nabla \varphi_A \cdot \nabla \varphi_A dx dy \\
+            &= \int_0^1 \int_0^1 16(1-y)^2 + 4(1-2x)^2  dx dy \\
+            &= \int_{y=0}^{y=1} 16(1-y)^2 + \left[ -\frac{2}{3}(1-2x)^3 \right]_0^1 dy \\
+            &= \left[ -\frac{16}{3}(1-y)^3\right]_0^1 + \frac{2}{3} + \frac{2}{3} \\
+            &= \frac{16}{3} + \frac{4}{3}\\
+            &= \frac{20}{3}
+            \end{align*}
+
+        Il faudrait calculer les $9$ autres intégrales pour pouvoir obtenir une matrice. 
+
+        \end{solution}
+        }{} 
+        \item Comparez les résultats de cette méthode avec ceux obtenus dans l'Exercice 1. Les noeuds sont identiques, le système linéaire est-il le même ?
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les deux méthodes utilisent les mêmes noeuds, mais le système linéaire obtenu n'est pas le même : avec les triangles, chaque matrice élémentaire relie seulement trois noeuds, alors qu'avec les carrés, elle relie quatre noeuds à la fois. Ainsi, la structure de la matrice globale diffère selon le type de maillage, même si les inconnues sont les mêmes.
+
+        \end{solution}
+        }{} 
+    
+    \end{enumerate}
+
     \item \textbf{maillage avec des triangles équilatéraux} :
     \begin{enumerate}[label=\arabic*.]
-        \item Modifiez le domaine initial $\Omega$ en adaptant un maillage composé de triangles équilatéraux. \textit{Vous pouvez le faire avec $13$ noeuds.}
+        \item Modifiez le domaine initial $\Omega$ en adaptant un maillage composé de $6$ triangles équilatéraux. 
+        \textit{Vous ne pourrez pas paver le carré, il restera des trous.}
         \item Numérotez les noeuds et les éléments correspondants.
-        \item Établissez le tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
-        \item Exprimez les fonctions de forme pour cet élément.
-        \item Décrivez puis calculez la matrice élémentaire $K_e$ pour cet élément.
-    \end{enumerate}
-    \ifthenelse{\boolean{showSolutions}}{
-    
-    
+        \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-           L'énoncé est faux, on ne peut pas paver un carré avec des triangles équilatéraux. Un exemple de maillage qu'on puisse obtenir est le suivant : 
+            On ne peut pas paver un carré avec des triangles équilatéraux. Un exemple de maillage qu'on puisse obtenir est le suivant : 
            \begin{center}
             \includegraphics[width=0.6\textwidth]{maillage3.jpeg}
            \end{center}
            On pourrait utiliser des triangles équilatéraux plus petits, pour couvrir une meilleure surface, mais il restera toujours des trous. 
 
-           L'objectif de cette partie est surtout de voir à quoi ressemble les polynômes avec des triangles équilatéraux. 
-           Plaçons-nous dans le triangle numéro 4, ses sommets sont 
-           \begin{itemize}
-            \item $A = (0,0)$ pour le sommet $6$
-            \item $B = (1/2,0)$ pour le sommet $7$
-            \item $C = (1/4, \sqrt{3}/4)$ pour le sommet $4$
-           \end{itemize}
-
-           En reprenant la partie préliminaire, le changement de repère s'écrit : 
-           \[
-           \left\{
-           \begin{aligned}
-           x &= \frac{1}{2}\, r + \frac{1}{4}\, s \\
-           y &= \frac{\sqrt{3}}{4}\, s
-           \end{aligned}
-           \right.
-           \]
-           ce qui donne : 
-           \[
-           \left\{
-           \begin{aligned}
-           r &= 2x-\frac{2}{\sqrt{3}}\, y \\
-           s &= \frac{4}{\sqrt{3}}\, y
-           \end{aligned}
-           \right.
-           \]
-           Si $\varphi'_A(r,s)$, $\varphi'_B(r,s)$, $\varphi'_C(r,s)$ sont les polynômes associés à l'élément de référence, alors les polynômes sont : 
-           \begin{align*}
-           \varphi_A(x,y) &= \varphi'_A(r,s) = \varphi'_A(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
-           &= 1-(2x-\frac{2}{\sqrt{3}}\, y)-\frac{4}{\sqrt{3}}\, y = 1-2x-\frac{6}{\sqrt{3}}\, y
-           \end{align*}
-
-           \begin{align*}
-           \varphi_B(x,y) &= \varphi'_B(r,s) = \varphi'_B(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
-           &= 2x-\frac{2}{\sqrt{3}}\, y
-           \end{align*}
- 
-           \begin{align*}
-           \varphi_C(x,y) &= \varphi'_C(r,s) = \varphi'_C(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
-           &= \frac{4}{\sqrt{3}}\, y
-           \end{align*}
-
-           Les gradients : 
-           \[
-           \nabla \varphi_A = \begin{pmatrix}
-           -2 \\
-           -\frac{6}{\sqrt{3}}
-           \end{pmatrix}, \qquad 
-           \nabla \varphi_B = \begin{pmatrix}
-           2 \\
-           -\frac{2}{\sqrt{3}}
-           \end{pmatrix}, \qquad 
-           \nabla \varphi_C = \begin{pmatrix}
-           0 \\
-           \frac{4}{\sqrt{3}}
-           \end{pmatrix}.
-           \]
-           Cette fois, aucun coefficient de la matrice de rigidité n'est nul. 
         \end{solution}
         }{} 
+        \item Établissez le tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
+        \item Exprimez les fonctions de forme pour cet élément.
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Plaçons-nous dans le triangle numéro 4, ses sommets sont 
+            \begin{itemize}
+             \item $A = (0,0)$ pour le sommet $6$
+             \item $B = (1/2,0)$ pour le sommet $7$
+             \item $C = (1/4, \sqrt{3}/4)$ pour le sommet $4$
+            \end{itemize}
+ 
+            En reprenant la partie préliminaire, le changement de repère s'écrit : 
+            \[
+            \left\{
+            \begin{aligned}
+            x &= \frac{1}{2}\, r + \frac{1}{4}\, s \\
+            y &= \frac{\sqrt{3}}{4}\, s
+            \end{aligned}
+            \right.
+            \]
+            ce qui donne : 
+            \[
+            \left\{
+            \begin{aligned}
+            r &= 2x-\frac{2}{\sqrt{3}}\, y \\
+            s &= \frac{4}{\sqrt{3}}\, y
+            \end{aligned}
+            \right.
+            \]
+            Si $\varphi'_A(r,s)$, $\varphi'_B(r,s)$, $\varphi'_C(r,s)$ sont les polynômes associés à l'élément de référence, alors les polynômes sont : 
+            \begin{align*}
+            \varphi_A(x,y) &= \varphi'_A(r,s) = \varphi'_A(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+            &= 1-(2x-\frac{2}{\sqrt{3}}\, y)-\frac{4}{\sqrt{3}}\, y = 1-2x-\frac{6}{\sqrt{3}}\, y
+            \end{align*}
+ 
+            \begin{align*}
+            \varphi_B(x,y) &= \varphi'_B(r,s) = \varphi'_B(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+            &= 2x-\frac{2}{\sqrt{3}}\, y
+            \end{align*}
+  
+            \begin{align*}
+            \varphi_C(x,y) &= \varphi'_C(r,s) = \varphi'_C(2x-\frac{2}{\sqrt{3}}\, y, \frac{4}{\sqrt{3}}\, y) \\
+            &= \frac{4}{\sqrt{3}}\, y
+            \end{align*}
+ 
+            Les gradients : 
+            \[
+            \nabla \varphi_A = \begin{pmatrix}
+            -2 \\
+            -\frac{6}{\sqrt{3}}
+            \end{pmatrix}, \qquad 
+            \nabla \varphi_B = \begin{pmatrix}
+            2 \\
+            -\frac{2}{\sqrt{3}}
+            \end{pmatrix}, \qquad 
+            \nabla \varphi_C = \begin{pmatrix}
+            0 \\
+            \frac{4}{\sqrt{3}}
+            \end{pmatrix}.
+            \]
+            Cette fois, aucun coefficient de la matrice de rigidité n'est nul. 
+        \end{solution}
+        }{} 
+    \end{enumerate}
+
     \item Quelle méthode préférez-vous ? Pourquoi ?
 
 
