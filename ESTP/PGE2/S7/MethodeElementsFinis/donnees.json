@@ -104,6 +104,11 @@
         },
         {
           "titre": "Corrigé TD 4",
+          "lien": "7-TD4/corrigeSansDetails.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD 4 avec plus de détails",
           "lien": "7-TD4/corrige.pdf",
           "cible": "_blank"
         }
