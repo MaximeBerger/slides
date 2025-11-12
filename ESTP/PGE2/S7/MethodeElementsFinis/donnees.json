@@ -97,7 +97,16 @@
         
       ],
       "sexercer": [
-
+        {
+          "titre": "TD 4 - Dimension supérieure",
+          "lien": "7-TD4/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Corrigé TD 4",
+          "lien": "7-TD4/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {
