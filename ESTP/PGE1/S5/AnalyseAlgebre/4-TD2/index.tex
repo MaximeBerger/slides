@@ -1,0 +1,543 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ Analyse-Algèbre - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+% Si vous voulez la même chose pour les sous-sous-sections :
+% \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% \renewcommand{\p@subsubsection}{}
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% \usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD2}}\\[1em]
+    {\large \textit{Espaces $L^p$}}
+\end{center}
+
+
+
+\section*{Exercice 1 : Application directe}
+On définit les fonctions suivantes :
+$$
+f_1: \left\{
+    \begin{array}{l}
+        \mathbb{R}^{*} \to \mathbb{R} \\
+        x \mapsto \frac{1}{x} \\
+    \end{array}
+\right., \qquad
+f_2: \left\{
+    \begin{array}{l}
+        \mathbb{R}^{*} \to \mathbb{R} \\
+        x \mapsto \frac{1}{\sqrt{x}} \\
+    \end{array}
+\right., \qquad 
+f_3: \left\{
+    \begin{array}{l}
+        \mathbb{R} \to \mathbb{C} \\
+        x \mapsto e^{3 i x}\\
+    \end{array}
+\right., \qquad
+f_4: \left\{
+    \begin{array}{l}
+        \mathbb{R} \to \mathbb{C} \\
+        x \mapsto e^{i x} e^{-x}
+    \end{array}
+\right.
+$$
+
+Pour chacun des espaces \(L^p\) suivants, déterminer si \(f_1, f_2, f_3,\) ou \(f_4\) appartiennent à cet espace. Si c'est le cas, donner sa norme \(L^p\).
+$$
+L^1(\mathbb{R}^*_+), \quad L^{\infty}(\mathbb{R}^*_+), 
+\quad L^1(]0, 1[), 
+\quad L^2(]0, 1[), \quad L^{1}(]1, +\infty[), \quad L^{2}(]1, +\infty[)
+$$
+
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Étudions chaque espace.
+
+\noindent\textbf{Pour $L^1(\mathbb{R}^*_+)$ :}
+Seule la fonction $f_4$ appartient à $L^1(\mathbb{R}^*_+)$:
+\[
+\int_0^\infty |e^{ix}e^{-x}| dx = \int_0^\infty e^{-x} = 1
+\]
+
+\vspace{1em}
+
+\noindent\textbf{Pour $L^{\infty}(\mathbb{R}^*_+)$ :}
+Seules $f_3$ et $f_4$ appartiennent à $L^{\infty}(\mathbb{R}^*_+)$, et on a 
+\[
+\|f_3\|_{\infty} = \sup_{x \in \mathbb{R}^*_+} |e^{3ix}| = 1
+\]
+
+\[
+    \|f_4\|_{\infty} = \sup_{x \in \mathbb{R}^*_+} |e^{ix}e^{-x}| = 1
+\]
+
+\vspace{1em}
+
+\noindent\textbf{Pour $L^1(]0,1[)$ :}
+$3$ fonctions appartiennent à $L^1(]0,1[)$ :
+\begin{itemize}
+    \item $f_2$ et $\|f_2\|_1 = \int_0^1 \frac{1}{\sqrt{x}} dx = 2$
+    \item $f_3$ et $\|f_3\|_1 = \int_0^1 |e^{3ix}| dx = 1$
+    \item $f_4$ et $\|f_4\|_1 = \int_0^1 |e^{ix}e^{-x}| dx = 1-e^{-1}$
+\end{itemize}
+
+\vspace{1em}
+
+\noindent\textbf{Pour $L^2(]0,1[)$ :}
+$2$ fonctions appartiennent à $L^2(]0,1[)$ :
+\begin{itemize}
+    \item $f_3$ et $\|f_3\|_2 = \left( \int_0^1 |e^{3ix}|^2 dx \right)^{1/2} = 1$
+    \item $f_4$ et $\|f_4\|_2 = \left( \int_0^1 |e^{ix}e^{-x}|^2 dx \right)^{1/2} = \left( \int_0^1 e^{-2x} dx \right)^{1/2} $
+    D'où
+    \[
+    \|f_4\|_2 = \sqrt{ \frac{1 - e^{-2}}{2} }
+    \]
+\end{itemize}
+
+\vspace{1em}
+
+\noindent\textbf{Pour $L^1(]1,+\infty[)$ :}
+La fonction $f_4$ est la seule fonction à appartenir à $L^1(]1,+\infty[)$:
+\[
+\int_1^\infty |f_4(x)|dx = \int_1^\infty e^{-x} dx = e^{-1}
+\]
+
+\vspace{1em}
+
+\noindent\textbf{Pour $L^2(]1,+\infty[)$ :}
+$2$ fonctions appartiennent à $L^2(]1,+\infty[)$ :
+\begin{itemize}
+    \item $f_1$ et $\|f_1\|_2 = \left( \int_1^{+\infty} \frac{1}{x^2} dx \right)^{1/2} = 1$
+    \item $f_4$ et $\|f_4\|_2 = \left( \int_1^{+\infty} |e^{ix}e^{-x}|^2 dx \right)^{1/2} = \left( \int_1^{+\infty} e^{-2x} dx \right)^{1/2} =  \sqrt{\frac{e^{-2}}{2}}$
+\end{itemize}
+\end{solution}
+}{}
+\vspace{1em}
+
+\section*{Exercice 2 : Convergences}
+Soit $(f_n)_{n \in \mathbb{N}}$ la suite de fonctions définie sur $[0,1]$ par :
+$$f_n(x) = \sqrt{n}\, \mathbf{1}_{[0,\frac{1}{n}]}(x)$$
+
+où $\mathbf{1}_{[0,\frac{1}{n}]}$ est la fonction indicatrice de l'intervalle $[0,\frac{1}{n}]$: 
+\[
+\mathbf{1}_{[0,\frac{1}{n}]}(x) = \left\{
+    \begin{array}{l}
+        1 \text{ si } x \in [0,\frac{1}{n}] \\
+        0 \text{ si } x \notin [0,\frac{1}{n}]
+    \end{array}
+\right.
+\]
+\begin{enumerate}
+    \item Représenter les graphes des fonctions $f_1, f_2, f_3$.
+    \item Montrer que $(f_n)$ converge simplement vers la fonction nulle sur $]0,1]$.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        Pour $x \in ]0,1]$ fixé, on a $f_n(x) = \sqrt{n} \mathbf{1}_{[0,\frac{1}{n}]}(x) = 0$ à partir d'un certain rang.
+    \end{solution}
+    }{}
+    \item Calculer $\|f_n\|_p$ pour tout $p > 1$ et $p=\infty$. En déduire que $(f_n)$ converge dans $L^1(]0, 1[)$ mais pas dans $L^2(]0, 1[)$, ni dans $L^\infty(]0, 1[)$.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        Pour $p > 1$, 
+        \[
+        \|f_n\|_p = \left( \int_0^1 |f_n(x)|^p dx \right)^{1/p} = \left( \int_0^{\frac{1}{n}} n^{p/2} dx \right)^{1/p} =  \frac{\sqrt{n}}{n^{1/p}} 
+        \]
+
+        Ainsi, si $p = 1$, $\|f_n\|_1 = 1/\sqrt{n} \to 0$ et $\|f_n\|_1 $ tend vers $0$ quand $n \to \infty$. La fonction converge donc dans $L^1(]0,1[)$.
+
+        Pour $p = 2$, $\|f_n\|_2 = 1$ donc $\|f_n\|_2$ ne tend pas vers $0$ quand $n \to \infty$. La fonction ne converge donc pas dans $L^2(]0,1[)$.
+
+        Pour $p = \infty$, $\|f_n\|_\infty = \sqrt{n} \to \infty$ quand $n \to \infty$. La fonction ne converge donc pas dans $L^\infty(]0,1[)$.
+    \end{solution}
+    }{}
+    
+\end{enumerate}
+
+\vspace{1em}        
+\section*{Exercice 3 : Inégalité de Hölder}
+Soit $p,q > 1$ tels que $\frac{1}{p} + \frac{1}{q} = 1$. \textbf{L'inégalité de Hölder} affirme que pour toutes fonctions $f \in L^p(\Omega)$ et $g \in L^q(\Omega)$, on a :
+$$ \int_\Omega |f(x)g(x)| dx \leq \|f\|_p \|g\|_q $$
+
+\begin{enumerate}
+    \item Montrer que si $f \in L^2(\Omega)$ et $g \in L^2(\Omega)$, alors $\int_\Omega|fg| \leq \sqrt{\int_\Omega|f|^2\cdot \int_\Omega |g|^2}$ et $fg \in L^1(\Omega)$.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        On applique l'inégalité de Hölder avec $p = q = 2$ ( ils vérifient bien $\frac{1}{p} + \frac{1}{q} = 1$ ):
+        \[
+        \int_\Omega |fg| \leq \left( \int_\Omega |f|^2 \right)^{1/2} \left( \int_\Omega |g|^2 \right)^{1/2} = \sqrt{\int_\Omega |f|^2} \sqrt{\int_\Omega |g|^2}
+        \]
+    \end{solution}
+    }{}
+    \item Les espaces $L^p$ sont fondamentaux en ingénierie pour caractériser différents aspects d'un signal ou d'une fonction physique. Considérons un signal électrique $I(t)$ représentant l'intensité du courant en fonction du temps $t \in [0,T]$.
+    
+    \begin{itemize}
+        \item La norme $L^1$ : $\|I\|_1 = \int_0^T |I(t)| dt$ représente la \textbf{charge totale} transportée par le courant.
+        \item La norme $L^2$ : $\|I\|_2 = \left(\int_0^T |I(t)|^2 dt\right)^{1/2}$ représente l'\textbf{énergie} du signal.
+        \item La norme $L^\infty$ : $\|I\|_\infty = \sup_{t \in [0,T]} |I(t)|$ représente l'\textbf{amplitude maximale} du signal (contrainte de sécurité).
+    \end{itemize}
+    
+    Soit $I(t) = A \sin(\omega t)$ pour $t \in [0, T]$ avec $A > 0$ et $\omega = \frac{2\pi}{T}$. Calculer $\|I\|_1$, $\|I\|_2$ et $\|I\|_\infty$. Que représentent ces valeurs ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        Calculons les trois normes :
+        
+        \textbf{Norme $L^\infty$ :}
+        \[
+        \|I\|_\infty = \sup_{t \in [0,T]} |A \sin(\omega t)| = A
+        \]
+        Cette valeur représente l'amplitude crête du courant, importante pour dimensionner les composants électriques (résistances, condensateurs, etc.).
+        
+        \textbf{Norme $L^2$ :}
+        \[
+        \|I\|_2^2 = \int_0^T A^2 \sin^2(\omega t) dt = A^2 \int_0^T \frac{1 - \cos(2\omega t)}{2} dt = A^2 \left[ \frac{t}{2} - \frac{\sin(2\omega t)}{4\omega} \right]_0^T
+        \]
+        Comme $\omega = \frac{2\pi}{T}$, on a $2\omega T = 4\pi$, donc $\sin(4\pi) = 0$. Ainsi :
+        \[
+        \|I\|_2^2 = A^2 \cdot \frac{T}{2} \quad \Rightarrow \quad \|I\|_2 = A \sqrt{\frac{T}{2}}
+        \]
+        Cette valeur est liée à l'énergie du signal. En ingénierie, on utilise souvent la valeur efficace (RMS) : $I_{\text{eff}} = \frac{\|I\|_2}{\sqrt{T}} = \frac{A}{\sqrt{2}}$, qui correspond à la valeur du courant continu qui produirait la même puissance moyenne.
+        
+        \textbf{Norme $L^1$ :}
+        \[
+        \|I\|_1 = \int_0^T A |\sin(\omega t)| dt = A \int_0^T |\sin(\omega t)| dt
+        \]
+        Sur une période complète, $\sin(\omega t)$ est positif sur $[0, T/2]$ et négatif sur $[T/2, T]$, donc :
+        \[
+        \|I\|_1 = A \left( \int_0^{T/2} \sin(\omega t) dt - \int_{T/2}^{T} \sin(\omega t) dt \right) = A \left[ -\frac{\cos(\omega t)}{\omega} \right]_0^{T/2} - A \left[ -\frac{\cos(\omega t)}{\omega} \right]_{T/2}^{T}
+        \]
+        \[
+        = \frac{A}{\omega} \left( -\cos(\pi) + \cos(0) + \cos(2\pi) - \cos(\pi) \right) = \frac{A}{\omega} \cdot 4 = \frac{2AT}{\pi}
+        \]
+        Cette valeur représente la charge totale transportée (en valeur absolue) sur la période, utile pour dimensionner les batteries ou les condensateurs.
+        
+        \textbf{Conclusion :} Les différentes normes $L^p$ capturent différents aspects du signal, chacun essentiel pour différentes applications en ingénierie : dimensionnement des composants ($L^\infty$), calcul de puissance ($L^2$), et gestion de l'énergie ($L^1$).
+    \end{solution}
+    }{}
+    \vspace{1em}
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{}{
+\newpage
+}
+
+\section*{Exercice 4 : $L^2$ et son produit scalaire}
+On rappelle que $L^2([a,b])$ est muni du produit scalaire :
+$$ \langle f,g \rangle = \int_a^b f(x)g(x)\,dx $$
+
+\begin{enumerate}
+    \item Montrer que ce produit scalaire vérifie bien les axiomes d'un produit scalaire :
+    \begin{itemize}
+        \item Symétrie : $\langle f,g \rangle = \langle g,f \rangle$
+        \item Linéarité : $\langle \alpha f + \beta g, h \rangle = \alpha\langle f,h \rangle + \beta\langle g,h \rangle$
+        \item Positivité : $\langle f,f \rangle \geq 0$ et $\langle f,f \rangle = 0 \Leftrightarrow f = 0$ p.p.
+    \end{itemize}
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        \begin{itemize}
+            \item Symétrie : $\langle f,g \rangle = \int_a^b f(x)g(x)\,dx = \int_a^b g(x)f(x)\,dx = \langle g,f \rangle$
+            \item Linéarité : $\langle \alpha f + \beta g, h \rangle = \int_a^b (\alpha f(x) + \beta g(x))h(x)\,dx = \alpha \int_a^b f(x)h(x)\,dx + \beta \int_a^b g(x)h(x)\,dx = \alpha\langle f,h \rangle + \beta\langle g,h \rangle$
+            \item Positivité : $\langle f,f \rangle = \int_a^b |f(x)|^2 dx \geq 0$ et $f^2$ est donc une fonction positive d'intégrale nulle, c'est la fonction nulle presque partout. Donc $\langle f,f \rangle = 0 \Leftrightarrow f = 0$ p.p.
+        \end{itemize}
+    \end{solution}
+    }{}
+    \item A l'aide de l'exercice précédent, retrouvez l'inégalité de Cauchy-Schwarz : $|\langle f,g \rangle| \leq \|f\|_2 \|g\|_2$.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        On applique l'inégalité de Hölder avec $p = q = 2$ :
+        \[
+        |\langle f,g \rangle| \leq \int |fg| \leq \|f\|_2 \|g\|_2
+        \]
+    \end{solution}
+    }{}
+    \item Soient $f$ et $g$ deux fonctions orthogonales, montrer que (théorème de Pythagore) :
+    $$ \|f + g\|_2^2 = \|f\|_2^2 + \|g\|_2^2 $$
+
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        C'est vrai dans tous les espaces munis d'un produit scalaire, en particulier dans $L^2$. En distribuant le produit scalaire par double linéarité, on obtient
+        \[
+        \|f+g\|_2^2 = \langle f+g, f+g \rangle = \|f\|_2^2 + \|g\|_2^2
+        \]
+        
+    \end{solution}
+    }{}
+    \vspace{1em}
+
+    Soit $n \in \mathbb{Z}$ et $f_n: ]0,1[ \to \mathbb{C}$ définie par $f_n(x) = e^{2 i \pi n x}$. Dans les espaces à valeurs complexes, on rappelle que le produit scalaire doit être sesquilinéaire:
+    $$ \langle f,g \rangle = \int_0^1 f(x)\overline{g(x)}\,dx $$
+
+    \item Montrer que $f_n \in L^2(]0,1[)$ et calculer $\|f_n\|_2$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        \[
+        \|f_n\|_2 = \left( \int_0^1 |f_n(x)|^2 dx \right)^{1/2} = \left( \int_0^1 1 dx \right)^{1/2} = 1
+        \]
+    \end{solution}
+    }{}
+
+    \item Montrer que $(f_n)$ est une famille orthogonale de $L^2(]0,1[)$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        Prenons $n \neq m$.
+        \[
+        \langle f_n, f_m \rangle = \int_0^1 e^{2 i \pi n x} e^{-2 i \pi m x} dx = \int_0^1 e^{2 i \pi (n-m) x} dx = \Big[ \frac{e^{2 i \pi (n-m) x}}{2 i \pi (n-m)} \Big]_0^1 = 0
+        \]
+        Donc $(f_n)$ est une famille orthogonale.
+    \end{solution}
+    }{}
+
+    \item \textbf{Introduction aux séries de Fourier.} Pour une fonction $f \in L^2(]0,1[)$, on définit les \textbf{coefficients de Fourier} de $f$ par :
+    $$ c_n = \langle f, f_n \rangle = \int_0^1 f(x) e^{-2 i \pi n x} dx, \quad n \in \mathbb{Z} $$
+    La \textbf{série de Fourier} de $f$ est alors définie comme la somme (formelle) :
+    $$ \sum_{n \in \mathbb{Z}} c_n f_n(x) = \sum_{n \in \mathbb{Z}} c_n e^{2 i \pi n x} $$
+    
+    Soit $f(x) = \sin(12 \pi x)$. Montrer que $f \in L^2(]0,1[)$ et calculer les coefficients de Fourier $c_n = \langle f, f_n \rangle$ pour tout $n \in \mathbb{Z}$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        Regardons le produit scalaire de $f$ avec chacun des $f_n$:
+        \[
+        c_n = \langle f, f_n \rangle = \int_0^1 \sin(12 \pi x) e^{-2 i \pi n x} dx 
+        \]
+        On peut écrire le sinus à l'aide d'exponentielles complexes :
+        \[
+        \sin(\alpha) = \frac{e^{i \alpha} - e^{-i \alpha}}{2i}
+        \]
+        Ainsi,
+        \[
+        c_n = \langle f, f_n \rangle = \int_0^1 \frac{e^{12 i \pi x} - e^{-12 i \pi x}}{2i} e^{-2 i \pi n x} dx = \frac{1}{2i} \Big( \langle f_6, f_n \rangle - \langle f_{-6}, f_n \rangle \Big)
+        \]
+        Ainsi, 
+        \begin{itemize}[label=$\bullet$]
+            \item Si $n$ est différent de $6$ ou $-6$, $c_n = 0$.
+            \item Si $n = 6$, $c_6 = \frac{1}{2i}$
+            \item Si $n = -6$, $c_{-6} = -\frac{1}{2i}$
+        \end{itemize}
+    \end{solution}
+    }{}
+
+    \item Soit $f$ la fonction 1-périodique définie sur $[0,1[$ par $f(x) = x$. Montrer que $f \in L^2(]0,1[)$ et calculer les coefficients de Fourier $c_n = \langle f, f_n \rangle$ pour tout $n \in \mathbb{Z}$.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        La fonction $f$ est bornée sur $[0,1[$, donc $f \in L^2(]0,1[)$.
+        
+        Calculons les coefficients de Fourier :
+        \[
+        c_n = \langle f, f_n \rangle = \int_0^1 x e^{-2 i \pi n x} dx
+        \]
+        
+        Pour $n = 0$ :
+        \[
+        c_0 = \int_0^1 x dx = \left[ \frac{x^2}{2} \right]_0^1 = \frac{1}{2}
+        \]
+        
+        Pour $n \neq 0$, on utilise une intégration par parties avec $u = x$ et $dv = e^{-2 i \pi n x} dx$ :
+        \[
+        c_n = \left[ x \cdot \frac{e^{-2 i \pi n x}}{-2 i \pi n} \right]_0^1 - \int_0^1 \frac{e^{-2 i \pi n x}}{-2 i \pi n} dx
+        \]
+        \[
+        c_n = \frac{e^{-2 i \pi n}}{-2 i \pi n} + \frac{1}{2 i \pi n} \int_0^1 e^{-2 i \pi n x} dx
+        \]
+        Comme $e^{-2 i \pi n} = 1$ pour tout $n \in \mathbb{Z}$, on obtient :
+        \[
+        c_n = \frac{1}{-2 i \pi n} + \frac{1}{2 i \pi n} \left[ \frac{e^{-2 i \pi n x}}{-2 i \pi n} \right]_0^1 = \frac{1}{-2 i \pi n} + \frac{1}{2 i \pi n} \cdot \frac{1 - 1}{-2 i \pi n} = -\frac{1}{2 i \pi n}
+        \]
+        
+        Ainsi, pour tout $n \in \mathbb{Z}$ :
+        \begin{itemize}[label=$\bullet$]
+            \item $c_0 = \frac{1}{2}$
+            \item Pour $n \neq 0$, $c_n = -\frac{1}{2 i \pi n}$
+        \end{itemize}
+    \end{solution}
+    }{}
+
+    \item Écrire la série de Fourier de $f(x) = x$ sous la forme $\sum_{n \in \mathbb{Z}} c_n e^{2 i \pi n x}$. Que peut-on dire de cette série ? On pourra exprimer le résultat en termes de sinus.
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        D'après la question précédente, la série de Fourier de $f$ est :
+        \[
+        \sum_{n \in \mathbb{Z}} c_n e^{2 i \pi n x} = c_0 + \sum_{n \neq 0} c_n e^{2 i \pi n x} = \frac{1}{2} + \sum_{n \neq 0} \left(-\frac{1}{2 i \pi n}\right) e^{2 i \pi n x}
+        \]
+        
+        En regroupant les termes $n$ et $-n$ pour $n > 0$, on obtient :
+        \[
+        \sum_{n \in \mathbb{Z}} c_n e^{2 i \pi n x} = \frac{1}{2} - \sum_{n=1}^{+\infty} \frac{1}{2 i \pi n} \left( e^{2 i \pi n x} - e^{-2 i \pi n x} \right)
+        \]
+        
+        En utilisant la relation $e^{i\theta} - e^{-i\theta} = 2i\sin(\theta)$, on trouve :
+        \[
+        \sum_{n \in \mathbb{Z}} c_n e^{2 i \pi n x} = \frac{1}{2} - \sum_{n=1}^{+\infty} \frac{\sin(2 \pi n x)}{\pi n}
+        \]
+        
+        Cette série de Fourier est une série infinie qui converge vers $f(x) = x$ (sauf aux points de discontinuité où elle converge vers la moyenne des limites à gauche et à droite, c'est-à-dire $\frac{1}{2}$). C'est un exemple classique où une fonction non sinusoïdale est décomposée en une somme infinie de sinusoïdes.
+    \end{solution}
+    }{}
+
+\end{enumerate}
+
+\vspace{2em}
+
+\section*{Exercice 5 : Vers le produit de convolution}
+
+    Pour deux fonctions $f$ et $g$ définies sur $\mathbb{R}$, on construit la fonction $h$ suivante :
+    $$\forall x \in \mathbb{R}, \qquad h(x) = \int_\mathbb{R} f(t)g(x-t)\,dt 
+    $$
+    \textit{Cette opération réalise une sorte de moyenne de la fonction $f$ par la fonction $g$.}
+
+    \begin{enumerate}
+        \item Si $f$ est intégrable et si $g$ est une fonction de $L^\infty(\mathbb{R})$, montrer que $h$ est une fonction bornée.
+        \ifthenelse{\boolean{showSolutions}}{
+
+        \begin{solution}
+            Par définition, $g$ est bornée, donc il existe $M \in \mathbb{R}$ tel que $|g(x)| \leq M$ pour tout $x \in \mathbb{R}$.
+            \[
+            |h(x)| = \left| \int_\mathbb{R} f(t)g(x-t)\,dt \right| \leq \int_\mathbb{R} |f(t)g(x-t)| dt \leq M \int_\mathbb{R} |f(t)| dt = M \|f\|_1
+            \]
+            Ainsi, $h$ est aussi bornée.
+        \end{solution}
+        }{}
+
+        \item Si $f$ est intégrable et si $g$ est la fonction $g=1$ constante, que vaut $h$ ?
+        \ifthenelse{\boolean{showSolutions}}{
+
+        \begin{solution}
+            Dans ce cas,
+        \[
+        h(x) = \int_\mathbb{R} f(t)g(x-t)\,dt = \int_\mathbb{R} f(t) dt
+        \]
+            Ainsi, $h$ est une fonction constante.
+        \end{solution}
+        }{}
+
+    \item Montrer que si $f$ et $g$ sont toutes les deux intégrables, alors $h$ l'est aussi et $\|h\|_1 \leq \|f\|_1 \|g\|_1$. On pourra séparer les intégrales et effectuer un changement de variable. 
+
+    \textit{Nous verrons tout l'intérêt de cette fonction dans la suite du cours.}
+
+    \ifthenelse{\boolean{showSolutions}}{
+
+    \begin{solution}
+        \[
+        \int_\mathbb{R} |h(x)| dx = \int_\mathbb{R} \left| \int_\mathbb{R} f(t)g(x-t)\,dt \right|dx \leq \int_\mathbb{R} \int_\mathbb{R} |f(t)|\, |g(x-t)| dt dx = \int_\mathbb{R} |f(t)|\bigg( \int_\mathbb{R} |g(x-t)| dx \bigg) dt
+        \]
+        En faisant le changement de variable $u = x-t$, on obtient
+        \[
+        \int_\mathbb{R} |h(x)| \leq \int_\mathbb{R} |f(t)| \bigg( \int_\mathbb{R} |g(u)| du \bigg) dt = \|f\|_1 \|g\|_1
+        \]
+    \end{solution}
+    }{}
+
+
+\end{enumerate}
+\end{document}
