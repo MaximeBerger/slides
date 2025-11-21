@@ -33,22 +33,22 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             color: var(--text-color);
         }
 
         .header h1 {
             font-family: var(--font-montserrat);
-            font-size: 2rem;
-            margin-top: 20px;
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-top: 30px;
+            margin-bottom: 90px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             color: var(--primary-color);
         }
@@ -56,7 +56,7 @@
         .chapters-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
         }
 
         .chapter {
@@ -65,6 +65,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             overflow: hidden;
             transition: all 0.3s ease;
+            cursor: pointer;
             margin: 10px;
         }
 
@@ -74,50 +75,61 @@
         }
 
         .chapter-header {
-            padding: 15px 20px;
+            padding: 30px;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: var(--white);
             position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .chapter-header h2 {
             font-family: var(--font-montserrat);
-            font-size: 1.4rem;
-            margin-bottom: 0;
-            flex: 1;
-            margin-right: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .chapter-header .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         .chapter-number {
-            position: static;
+            position: absolute;
+            top: 20px;
+            right: 25px;
             background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            flex-shrink: 0;
+            font-size: 1.1rem;
         }
 
         .chapter-content {
-            display: block;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .chapter-content.active {
+            max-height: 2000px;
         }
 
         .subsections {
-            padding: 15px 30px;
+            padding: 25px 30px;
             background: var(--light-bg);
         }
 
         .subsections h3 {
-            display: none;
+            font-family: var(--font-montserrat);
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
         }
 
         .subsection-list {
             list-style: none;
-            margin-bottom: 0;
+            margin-bottom: 20px;
         }
 
         .subsection-item {
@@ -138,7 +150,14 @@
 
         .subsection-title {
             font-weight: 600;
-            margin-bottom: 0;
+            margin-bottom: 5px;
+        }
+
+        .subsection-description {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 5px;
         }
 
         .subsection-link:hover {
@@ -148,12 +167,17 @@
         }
 
         .exercises {
-            padding: 15px 30px;
+            padding: 25px 30px;
             background: var(--secondary-color);
         }
 
         .exercises h3 {
-            display: none;
+            font-family: var(--font-montserrat);
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
         }
 
         .exercise-list {
@@ -255,8 +279,16 @@
             // Titre de la sous-partie
             const title = document.createElement('div');
             title.className = 'subsection-title';
-            title.textContent = subsection.titre;
+            title.textContent = `${subsection.numero}. ${subsection.titre}`;
             link.appendChild(title);
+            
+            // Description de la sous-partie (si elle existe)
+            if (subsection.description && subsection.description.trim() !== '') {
+                const description = document.createElement('div');
+                description.className = 'subsection-description';
+                description.textContent = subsection.description;
+                link.appendChild(description);
+            }
             
             li.appendChild(link);
             return li;
@@ -282,6 +314,10 @@
                 const subsectionsDiv = document.createElement('div');
                 subsectionsDiv.className = 'subsections';
                 
+                const subsectionsTitle = document.createElement('h3');
+                subsectionsTitle.textContent = 'Parties';
+                subsectionsDiv.appendChild(subsectionsTitle);
+                
                 const subsectionsList = document.createElement('ul');
                 subsectionsList.className = 'subsection-list';
                 
@@ -297,6 +333,10 @@
             if (chapter.sexercer && chapter.sexercer.length > 0) {
                 const exercisesDiv = document.createElement('div');
                 exercisesDiv.className = 'exercises';
+                
+                const exercisesTitle = document.createElement('h3');
+                exercisesTitle.textContent = 'S\'exercer';
+                exercisesDiv.appendChild(exercisesTitle);
                 
                 const exercisesList = document.createElement('div');
                 exercisesList.className = 'exercise-list';
@@ -335,6 +375,13 @@
             title.textContent = chapter.titre;
             header.appendChild(title);
             
+            if (chapter.description) {
+                const description = document.createElement('div');
+                description.className = 'description';
+                description.textContent = chapter.description;
+                header.appendChild(description);
+            }
+            
             const chapterNumber = document.createElement('div');
             chapterNumber.className = 'chapter-number';
             chapterNumber.textContent = `Chapitre ${chapter.numero+1}`;
@@ -345,6 +392,22 @@
             // Contenu du chapitre
             const content = createChapterContent(chapter);
             chapterDiv.appendChild(content);
+
+            // Gestionnaire de clic pour ouvrir/fermer
+            chapterDiv.addEventListener('click', function() {
+                const content = this.querySelector('.chapter-content');
+                const isActive = content.classList.contains('active');
+                
+                // Fermer tous les autres chapitres
+                document.querySelectorAll('.chapter-content.active').forEach(activeContent => {
+                    if (activeContent !== content) {
+                        activeContent.classList.remove('active');
+                    }
+                });
+                
+                // Toggle le chapitre actuel
+                content.classList.toggle('active');
+            });
 
             return chapterDiv;
         }

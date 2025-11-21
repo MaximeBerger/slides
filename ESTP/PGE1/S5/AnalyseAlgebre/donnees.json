@@ -11,7 +11,7 @@
         {
           "id": "sub1",
           "numero": 0,
-          "titre": "Cours - Calcul vectoriel et tensoriel",
+          "titre": "Calcul vectoriel et tensoriel",
           "description": "Calcul vectoriel · Calcul tensoriel",
           "lien": "3-EspacesLp/chapitre-1-vecteurs-et-tenseurs.html",
           "cible": "_blank"
@@ -47,14 +47,14 @@
     {
       "id": "sec2",
       "numero": 1,
-      "titre": "Espaces Lp",
+      "titre": "Cours - Espaces Lp",
       "description": "Espaces Lp · Espaces L∞",
       "lien": "#",
       "sousParties": [
        {
         "id": "sub1",
         "numero": 0,
-        "titre": "Cours - Espaces Lp",
+        "titre": "Espaces Lp",
         "description": "Espaces Lp · Espaces L∞",
         "lien": "3-EspacesLp/chapitre-2-espaces-lp.html",
         "cible": "_blank"
