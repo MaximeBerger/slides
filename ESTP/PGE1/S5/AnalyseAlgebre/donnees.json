@@ -76,6 +76,14 @@
           "description": "Espaces Lp",
           "lien": "4-TD2/corrige.pdf",
           "cible": "_blank"
+        }, 
+        {
+          "id": "ex3",
+          "numero": 2,
+          "titre": "Version interactive",
+          "description": "Espaces Lp",
+          "lien": "4-TD2/interactive/index.html",
+          "cible": "_blank"
         }
       ]
     },
