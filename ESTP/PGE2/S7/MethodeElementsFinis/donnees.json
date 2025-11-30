@@ -117,11 +117,17 @@
     {
       "id": "sec5",
       "numero": 4,
-      "titre": "Maillages",
-      "description": "Simulations numériques ",
+      "titre": "Simulations numériques ",
+      "description": "",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "numero": 1,
+          "titre": "TP SolidWorks",
+          "description": "",
+          "lien": "8-TP/tp-mef.html",
+          "cible": "_blank"
+        }
       ],
       "sexercer": [
 
