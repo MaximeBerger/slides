@@ -1,0 +1,106 @@
+\section{Rappels : Familles de vecteurs et Systèmes linéaires}
+
+Pour étudier une famille de vecteurs $\mathcal{F} = \{u_1, u_2, \dots, u_p\}$ de $\mathbb{R}^n$, on se ramène souvent à l'étude d'un système linéaire. 
+
+\begin{rappelsBox}
+    \textbf{Liens entre familles et systèmes linéaires ($AX=Y$)}
+    
+    \begin{niceitemize}
+        \item \textbf{Famille Libre :} La famille $\mathcal{F}$ est dite \textbf{libre} si le système linéaire homogène $\lambda_1 u_1 + \lambda_2 u_2 + \dots + \lambda_p u_p = 0$ admet \textbf{une unique solution} (la solution nulle $\lambda_1 = \lambda_2 = \dots = \lambda_p = 0$).
+        
+        \item \textbf{Famille Génératrice :} La famille $\mathcal{F}$ est dite \textbf{génératrice} si pour tout vecteur $y \in \mathbb{R}^n$, le système $\lambda_1 u_1 + \lambda_2 u_2 + \dots + \lambda_p u_p = y$ admet \textbf{au moins une solution}.
+        
+        \item \textbf{Base :} C'est une famille à la fois libre et génératrice. Pour tout vecteur $y \in \mathbb{R}^n$, le système $\lambda_1 u_1 + \lambda_2 u_2 + \dots + \lambda_p u_p = y$ admet \textbf{une unique solution}.
+    \end{niceitemize}
+\end{rappelsBox}
+
+\vspace{2em}
+\section{Applications Linéaires}
+
+Une application $f : E \to F$ est dite \textbf{linéaire} si elle conserve les combinaisons linéaires. 
+
+
+Pour le démontrer en pratique, on vérifie séparément la conservation de la somme et du produit par un scalaire.
+
+\begin{formulesBox}
+    \textbf{Méthode : Montrer qu'une application est linéaire}
+    
+    Soit $f : \mathbb{R}^n \to \mathbb{R}^m$. Pour prouver que $f$ est linéaire, on procède en deux étapes :
+    
+    \begin{enumerate}
+        \item \textbf{Conservation de l'addition :} \\
+        Soient $u, v \in \mathbb{R}^n$.
+        \begin{itemize}
+            \item D'un côté, on calcule l'image de la somme : \textcolor{Theme}{$\boldsymbol{f(u+v)}$}.
+            \item De l'autre, on calcule la somme des images : \textcolor{Theme}{$\boldsymbol{f(u) + f(v)}$}.
+            \item On constate que les deux résultats sont égaux.
+        \end{itemize}
+        
+        \item \textbf{Conservation de la multiplication scalaire :} \\
+        Soient $u \in \mathbb{R}^n$ et $\lambda \in \mathbb{R}$.
+        \begin{itemize}
+            \item D'un côté, on calcule l'image du vecteur multiplié : \textcolor{Theme}{$\boldsymbol{f(\lambda u)}$}.
+            \item De l'autre, on multiplie l'image par le scalaire : \textcolor{Theme}{$\boldsymbol{\lambda f(u)}$}.
+            \item On constate que les deux résultats sont égaux.
+        \end{itemize}
+    \end{enumerate}
+\end{formulesBox}
+
+\begin{formulesBox}
+    \textbf{Méthode alternative : Une seule vérification}
+
+    $f$ est linéaire si et seulement si pour tous $u, v \in E$ et tout $\lambda \in \mathbb{R}$,
+    \[
+        f( u + \lambda v) = f(u) + \lambda f(v)
+    \]
+    Cela permet de vérifier les deux propriétés (additivité et homogénéité) d'un seul coup !
+
+\end{formulesBox}
+
+
+\section{Exercices d'application}
+
+\textbf{Exercice 1}
+
+Soit $f : \mathbb{R} \to \mathbb{R}$ définie par $f(x) = 3x$.
+Cette application est-elle linéaire ?
+
+\vspace{0.5cm}
+
+\textbf{Exercice 2}
+
+Soit $g : \mathbb{R}^2 \to \mathbb{R}$ définie par $g(x, y) = x$.
+Cette application est-elle linéaire ?
+
+\emph{Indication : Tester $g((x_1, y_1) + (x_2, y_2))$ et $g(\lambda(x, y))$.}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 3}
+
+Soit $h : \mathbb{R}^2 \to \mathbb{R}^2$ définie par $h(x, y) = (0, 0)$.
+Cette application est-elle linéaire ?
+
+\vspace{0.5cm}
+
+\textbf{Exercice 4}
+
+L'application $k : \mathbb{R}^2 \to \mathbb{R}^2$ définie par $k(x, y) = (2x + y, x - 3y)$ est-elle linéaire ?
+
+\emph{Indication : Appliquer la méthode ci-dessus avec $u=(x,y)$ et $v=(x',y')$.}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 5}
+
+L'application $l : \mathbb{R} \to \mathbb{R}$ définie par $l(x) = x^2$ est-elle linéaire ?
+
+\emph{Indication : Calculer $l(1+1)$ et comparer avec $l(1)+l(1)$.}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 6}
+
+L'application $m : \mathbb{R}^3 \to \mathbb{R}$ définie par $m(x, y, z) = x + y + z + 1$ est-elle linéaire ?
+
+\emph{Indication : Vérifier si $m(0_{\mathbb{R}^3}) = 0$. Si ce n'est pas le cas, l'application ne peut pas être linéaire.}
