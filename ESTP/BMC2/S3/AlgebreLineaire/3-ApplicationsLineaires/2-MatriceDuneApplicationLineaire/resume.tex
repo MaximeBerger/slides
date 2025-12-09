@@ -1,0 +1,102 @@
+
+
+\section{Matrice d'une application linéaire}
+\textbf{idée générale :} \newline 
+Pour connaître une application linéaire, il suffit de connaître les images des vecteurs d'une base.
+
+Toute application linéaire $f: E \to F$ peut être décrite par un tableau de nombres, codant les images des vecteurs de la base de $E$.
+
+
+\begin{formulesBox}
+    \textbf{Comment construire la matrice d'une application linéaire ?}
+        
+    \begin{enumerate}[itemsep=1em]
+        \item \textbf{Identifier une base de l'espace de départ} $E$. Par exemple, la base canonique:
+        \begin{itemize}
+            \item Pour $\mathbb{R}^2$ : $e_1 = (1, 0)$ et $e_2 = (0, 1)$.
+            \item Pour $\mathbb{R}^3$ : $e_1 = (1, 0, 0)$, $e_2 = (0, 1, 0)$ et $e_3 = (0, 0, 1)$.
+            \item Pour $\mathbb{R}_2[X]$ : $e_1 = 1$, $e_2 = X$, $e_3 = X^2$.
+        \end{itemize}
+        
+        \item \textbf{Calculer les images} de ces vecteurs par l'application $f$ :
+        \[ f(e_1), \quad f(e_2), \quad f(e_3), \quad \dots \]
+
+        \item \textbf{Décomposer ces images dans une base} de l'espace d'arrivée. \newline
+        Quelles sont les coordonnées de $f(e_1)$ dans la base de $F$ ?
+        
+        \item \textbf{Remplir les colonnes} de la matrice avec ces coordonnées :\newline
+        La première colonne contient les coordonnées du vecteur $f(e_1)$, la deuxième les coordonnées de $f(e_2)$, etc.
+
+        \textit{Si $f$ va de $\mathbb{R}^n$ dans $\mathbb{R}^m$, la matrice aura $m$ lignes et $n$ colonnes.}
+    \end{enumerate}
+\end{formulesBox}
+
+\newpage
+
+\section{Exercices d'application}
+
+\textbf{Exercice 1 : Le cas standard}
+
+Soit $f : \mathbb{R}^2 \to \mathbb{R}^2$ définie par $f(x, y) = (2x - 3y, x + 4y)$.
+Déterminer la matrice $A$ de $f$ dans la base canonique.
+
+\emph{Calculez d'abord $f(1, 0)$, puis $f(0, 1)$.}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 2 : Changement de dimension}
+
+Soit $g : \mathbb{R}^3 \to \mathbb{R}^2$ définie par $g(x, y, z) = (x + y, y - z)$.
+Déterminer la matrice $B$ associée à $g$.
+
+\emph{Indication : L'espace de départ est $\mathbb{R}^3$, il y aura donc 3 colonnes ($g(e_1), g(e_2), g(e_3)$). L'espace d'arrivée est $\mathbb{R}^2$, il y aura donc 2 lignes.}
+
+
+\begin{formulesBox}
+    \textbf{Comment calculer l'image d'un vecteur par une application linéaire ?}
+    Pour calculer l'image d'un vecteur $X$ via une application linéaire $f$ représentée par une matrice~$A$, il suffit de faire le produit matrice-vecteur :
+    \[
+        f(X) = A \cdot X
+    \]
+    où $X$ est vu comme une colonne de coordonnées dans la base choisie.
+
+    \begin{itemize}
+        \item Écrire le vecteur $X$ sous forme de colonne : \[
+        X = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}
+        \]
+        \item Multiplier la matrice~$A$ par $X$ pour obtenir le vecteur image~$Y$ :
+        \[
+        Y = A \cdot X
+        \]
+        \item Les coordonnées de $Y$ donnent $f(X)$ dans la base de l'espace d'arrivée.
+    \end{itemize}
+
+    \textbf{Exemple~:} Si 
+    $
+        A = \begin{pmatrix} 2 & -3 \\ 1 & 4 \end{pmatrix}
+    $ 
+    et $X = \begin{pmatrix} x \\ y \end{pmatrix}$, alors
+    \[
+        f(x, y) = A \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2x - 3y \\ x + 4y \end{pmatrix}
+    \]
+
+      
+\end{formulesBox}
+
+\textbf{Exercice 3 : De la matrice à la formule}
+
+Soit $h$ une application linéaire de $\mathbb{R}^2$ dans $\mathbb{R}^2$ dont la matrice dans la base canonique est :
+\[
+C = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}
+\]
+Donner l'expression de $h(x, y)$.
+
+\vspace{0.5cm}
+
+\textbf{Exercice 4 : Cas général}
+
+Soit $k : \mathbb{R}^n \to \mathbb{R}$ définie par $k(x_1, \dots, x_n) = x_1$.
+Quelle est la forme de la matrice associée ?
+
+\emph{Indication : C'est une application qui va dans $\mathbb{R}$ (une seule composante), la matrice n'aura donc qu'une seule ligne (matrice ligne).}
+
