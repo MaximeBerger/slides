@@ -88,26 +88,19 @@
       ]
     },
     {
-      "id": "sec3",
-      "numero": 2,
-      "titre": "Produit de convolution",
-      "description": "Produit de convolution · Propriétés",
-      "lien": "#",
-      "sousParties": [
-        
-      ],
-      "sexercer": [
-        
-      ]
-    },
-    {
       "id": "sec4",
       "numero": 3,
       "titre": "Transformées Fourier/Laplace",
-      "description": "Assemblage des matrices de rigidité",
       "lien": "#",
       "sousParties": [
-       
+       {
+        "id": "sub1",
+        "numero": 0,
+        "titre": "Cours - Transformées Fourier/Laplace",
+        "description": "Transformées Fourier/Laplace",
+        "lien": "6-Laplace/chapitre-3-analyse-harmonique.html",
+        "cible": "_blank"
+       }
       ],
       "sexercer": [
       ]

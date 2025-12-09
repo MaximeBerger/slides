@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labo Maths-Ingé : Fourier & Résonance</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .slider { -webkit-appearance: none; width: 100%; height: 8px; border-radius: 5px; background: #d3d3d3; outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #3b82f6; cursor: pointer; }
+        .slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #3b82f6; cursor: pointer; }
+        .danger-zone { animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans p-6">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-blue-900 mb-2">Du Signal à la Rupture</h1>
+            <p class="text-lg text-gray-600">Pourquoi la Transformée de Fourier sauve des vies.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg col-span-1 border-l-4 border-blue-500">
+                <h2 class="text-xl font-bold mb-4">1. Le "Vent" (Excitation)</h2>
+                <p class="text-sm text-gray-500 mb-4">Simulez une force extérieure $F(t)$.</p>
+                
+                <label class="block mb-2 font-semibold">Fréquence Principale ($f_{wind}$): <span id="val-f1" class="text-blue-600">5</span> Hz</label>
+                <input type="range" min="1" max="20" step="0.5" value="5" class="slider mb-4" id="input-f1">
+
+                <label class="block mb-2 font-semibold">Bruit Aléatoire (Chaos): <span id="val-noise" class="text-blue-600">0</span></label>
+                <input type="range" min="0" max="2" step="0.1" value="0" class="slider mb-4" id="input-noise">
+                
+                <div class="bg-blue-50 p-3 rounded text-xs text-blue-800 mt-2">
+                    <strong>Note :</strong> Regardez comme le signal temporel devient illisible quand on augmente le bruit. C'est le problème de l'ingénieur.
+                </div>
+            </div>
+
+            <div class="bg-white p-2 rounded-lg shadow-lg col-span-2">
+                <h3 class="text-center font-bold text-gray-500">Domaine Temporel : $F(t)$</h3>
+                <div id="plot-time" style="width:100%;height:300px;"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg col-span-1 border-l-4 border-purple-500">
+                <h2 class="text-xl font-bold mb-4">2. L'Analyse (FFT)</h2>
+                <p class="text-sm text-gray-500 mb-4">Passage dans l'espace fréquentiel $\hat{F}(\xi)$.</p>
+                
+                <p class="mb-4 text-sm">L'ordinateur calcule :
+                $$ \hat{F}(\xi) = \int F(t)e^{-2i\pi \xi t} dt $$
+                </p>
+
+                <div class="bg-purple-50 p-3 rounded text-xs text-purple-800">
+                    <strong>Observation :</strong> Même avec beaucoup de bruit, la FFT retrouve le pic de fréquence exact. Le bruit (énergie répartie) reste au sol, le signal (énergie concentrée) émerge.
+                </div>
+            </div>
+
+            <div class="bg-white p-2 rounded-lg shadow-lg col-span-2">
+                <h3 class="text-center font-bold text-gray-500">Domaine Fréquentiel : $|\hat{F}(\xi)|$</h3>
+                <div id="plot-freq" style="width:100%;height:300px;"></div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-red-500">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h2 class="text-xl font-bold mb-4">3. La Structure (Le Pont)</h2>
+                    <p class="text-sm text-gray-500 mb-4">Réponse du système modélisé par l'EDP.</p>
+                    
+                    <label class="block mb-2 font-semibold">Fréquence Propre du Pont ($f_{struct}$): <span id="val-f0" class="text-red-600">10</span> Hz</label>
+                    <input type="range" min="1" max="20" step="0.5" value="10" class="slider mb-4" id="input-f0">
+
+                    <div class="mt-4">
+                        <p class="font-bold">Amplification : <span id="amp-val">1.0</span>x</p>
+                        <p class="text-sm text-gray-600 italic">Transfert: $H(\xi) = \frac{1}{|(2\pi f_{struct})^2 - (2\pi f_{wind})^2|}$</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center">
+                    <div id="bridge-container" class="relative w-full h-40 bg-gray-200 rounded-lg overflow-hidden border-b-8 border-gray-700 flex items-end justify-center">
+                        <div id="bridge-deck" class="w-3/4 h-4 bg-gray-500 rounded transition-transform duration-100 relative top-[-20px]"></div>
+                        <div class="absolute top-2 right-2 text-xs font-mono text-gray-500">Simulation RDM</div>
+                    </div>
+                    <div id="status-msg" class="mt-4 font-bold text-xl text-green-600">STRUCTURE STABLE</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="mt-10 text-center text-gray-400 text-sm">
+            Outil pédagogique interactif - Cours de Mathématiques Appliquées
+        </footer>
+    </div>
+
+    <script>
+        // Paramètres globaux
+        const nPoints = 512;
+        const duration = 2.0; // secondes
+        const dt = duration / nPoints;
+        let t = [];
+        for(let i=0; i<nPoints; i++) t.push(i*dt);
+
+        // Éléments DOM
+        const inF1 = document.getElementById('input-f1');
+        const inNoise = document.getElementById('input-noise');
+        const inF0 = document.getElementById('input-f0');
+        
+        const valF1 = document.getElementById('val-f1');
+        const valNoise = document.getElementById('val-noise');
+        const valF0 = document.getElementById('val-f0');
+        const ampVal = document.getElementById('amp-val');
+        const statusMsg = document.getElementById('status-msg');
+        const bridgeDeck = document.getElementById('bridge-deck');
+        const bridgeContainer = document.getElementById('bridge-container');
+
+        // Fonction principale de mise à jour
+        function update() {
+            // Récupération valeurs
+            const f1 = parseFloat(inF1.value);
+            const noiseLevel = parseFloat(inNoise.value);
+            const fStruct = parseFloat(inF0.value);
+
+            // UI Updates
+            valF1.innerText = f1;
+            valNoise.innerText = noiseLevel;
+            valF0.innerText = fStruct;
+
+            // 1. Génération Signal (Domaine Temporel)
+            let signal = [];
+            let signalPure = [];
+            for(let i=0; i<nPoints; i++) {
+                let valPure = Math.sin(2 * Math.PI * f1 * t[i]);
+                let noise = (Math.random() - 0.5) * 2 * noiseLevel;
+                signal.push(valPure + noise);
+                signalPure.push(valPure);
+            }
+
+            // 2. Calcul FFT (Discrete Fourier Transform basique pour démo)
+            // On calcule juste le spectre de magnitude jusqu'à Nyquist
+            let freqs = [];
+            let magnitudes = [];
+            let nyquist = nPoints / 2;
+            
+            // Pour l'affichage, on limite à 20Hz car c'est la plage des sliders
+            let maxFreqIndex = Math.floor(25 * duration); 
+
+            for(let k=0; k<maxFreqIndex; k++) {
+                let real = 0;
+                let imag = 0;
+                for(let n=0; n<nPoints; n++) {
+                    let angle = -2 * Math.PI * k * n / nPoints;
+                    real += signal[n] * Math.cos(angle);
+                    imag += signal[n] * Math.sin(angle);
+                }
+                // Magnitude normalisée
+                let mag = Math.sqrt(real*real + imag*imag) / nPoints; 
+                if(k>0) mag *= 2; // Correction énergie (sauf DC)
+                
+                freqs.push(k / duration); // f = k / T
+                magnitudes.push(mag);
+            }
+
+            // 3. Calcul Résonance (Approche simplifiée facteur d'amplification dynamique)
+            // Amplification = 1 / |1 - (f_wind / f_struct)^2|
+            let ratio = f1 / fStruct;
+            let denominator = Math.abs(1 - ratio * ratio);
+            // On ajoute un petit amortissement pour éviter division par zéro infini
+            let damping = 0.1; 
+            let amplification = 1 / Math.sqrt(Math.pow(1 - ratio*ratio, 2) + Math.pow(2*damping*ratio, 2));
+            
+            // Affichage graphiques
+            Plotly.newPlot('plot-time', [{
+                x: t.slice(0, 200), // Zoom sur le début pour voir la forme
+                y: signal.slice(0, 200),
+                type: 'scatter',
+                mode: 'lines',
+                line: {color: '#3b82f6', width: 2},
+                name: 'Signal'
+            }], {
+                margin: {t: 10, b: 40, l: 40, r: 10},
+                xaxis: {title: 'Temps (s)'},
+                yaxis: {range: [-3, 3]}
+            }, {displayModeBar: false});
+
+            Plotly.newPlot('plot-freq', [{
+                x: freqs,
+                y: magnitudes,
+                type: 'bar',
+                marker: {color: '#a855f7'},
+                name: 'Spectre'
+            }], {
+                margin: {t: 10, b: 40, l: 40, r: 10},
+                xaxis: {title: 'Fréquence (Hz)'},
+                yaxis: {range: [0, 1.2]}
+            }, {displayModeBar: false});
+
+            // 4. Animation Pont
+            ampVal.innerText = amplification.toFixed(2);
+            
+            // Simulation visuelle de la vibration
+            // On change la couleur et l'amplitude de l'animation CSS
+            if (amplification > 3.0) {
+                statusMsg.innerText = "DANGER : RÉSONANCE !";
+                statusMsg.className = "mt-4 font-bold text-xl text-red-600 danger-zone px-4 rounded";
+                bridgeDeck.style.backgroundColor = "#ef4444"; // Rouge
+                bridgeContainer.style.borderColor = "#ef4444";
+            } else if (amplification > 1.5) {
+                statusMsg.innerText = "VIBRATIONS IMPORTANTES";
+                statusMsg.className = "mt-4 font-bold text-xl text-orange-500";
+                bridgeDeck.style.backgroundColor = "#f97316"; // Orange
+                bridgeContainer.style.borderColor = "#374151";
+            } else {
+                statusMsg.innerText = "STRUCTURE STABLE";
+                statusMsg.className = "mt-4 font-bold text-xl text-green-600";
+                bridgeDeck.style.backgroundColor = "#6b7280"; // Gris
+                bridgeContainer.style.borderColor = "#374151";
+            }
+
+            // Astuce pour l'animation : on ne peut pas animer le JS à 60fps facilement ici sans requestAnimationFrame complexe
+            // On va tricher en tournant le pont pour montrer le stress
+            let rotation = (amplification > 5) ? 15 : amplification * 2;
+            bridgeDeck.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        // Listeners
+        inF1.addEventListener('input', update);
+        inNoise.addEventListener('input', update);
+        inF0.addEventListener('input', update);
+
+        // Init
+        update();
+
+        // Animation loop pour le pont (effet visuel simple)
+        let timeAnim = 0;
+        function animateBridge() {
+            timeAnim += 0.1;
+            const f1 = parseFloat(inF1.value);
+            const fStruct = parseFloat(inF0.value);
+            let ratio = f1 / fStruct;
+            let damping = 0.1; 
+            let amp = 1 / Math.sqrt(Math.pow(1 - ratio*ratio, 2) + Math.pow(2*damping*ratio, 2));
+            
+            // Limite visuelle pour ne pas casser l'écran
+            let visualAmp = Math.min(amp, 5) * 10; 
+            
+            let yOffset = Math.sin(timeAnim * f1 * 0.5) * visualAmp;
+            let rotOffset = Math.sin(timeAnim * f1 * 0.5 + Math.PI/4) * (visualAmp / 2);
+            
+            bridgeDeck.style.transform = `translateY(${yOffset}px) rotate(${rotOffset}deg)`;
+            
+            requestAnimationFrame(animateBridge);
+        }
+        requestAnimationFrame(animateBridge);
+
+    </script>
+</body>
+</html>
