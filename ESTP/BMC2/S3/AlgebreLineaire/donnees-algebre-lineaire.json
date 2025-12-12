@@ -151,7 +151,34 @@
       "description": "Noyau · Image · Matrices",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "numero": 1,
+          "titre": "1 - Définition d'une application linéaire",
+          "description": "",
+          "lien": "3-ApplicationsLineaires/1-Feuille-Intro/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "1 - Corrigés",
+          "description": "",
+          "lien": "3-ApplicationsLineaires/1-Feuille-Intro/corrige.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "2 - Ecrire la matrice d'une application linéaire",
+          "description": "",
+          "lien": "3-ApplicationsLineaires/2-MatriceDuneApplicationLineaire/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 3,
+          "titre": "2 - Corrigés",
+          "description": "",
+          "lien": "3-ApplicationsLineaires/2-MatriceDuneApplicationLineaire/corrige.pdf",
+          "cible": "_blank"
+        }
       ],
       "sexercer": [
         

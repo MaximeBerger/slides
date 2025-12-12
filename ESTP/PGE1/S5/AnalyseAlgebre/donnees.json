@@ -103,6 +103,22 @@
        }
       ],
       "sexercer": [
+        {
+          "id": "ex1",
+          "numero": 0,
+          "titre": "TD3",
+          "description": "Transformées Fourier/Laplace",
+          "lien": "7-TD3/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "id": "ex2",
+          "numero": 1,
+          "titre": "TD3 - corrigé",
+          "description": "Transformées Fourier/Laplace",
+          "lien": "7-TD3/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {

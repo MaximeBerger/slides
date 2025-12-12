@@ -42,6 +42,22 @@ Déterminer la matrice $A$ de $f$ dans la base canonique.
 
 \emph{Calculez d'abord $f(1, 0)$, puis $f(0, 1)$.}
 
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Dans la base canonique $(e_1,e_2)$ avec $e_1=(1,0)$ et $e_2=(0,1)$ :
+\[
+f(e_1)=f(1,0)=(2,1),\qquad f(e_2)=f(0,1)=(-3,4).
+\]
+La matrice de $f$ dans la base canonique a pour colonnes les coordonnées de $f(e_1)$ puis de $f(e_2)$ :
+\[
+A=\begin{pmatrix}
+2 & -3\\
+1 & 4
+\end{pmatrix}.
+\]
+\end{solution}
+}{}
+
 \vspace{0.5cm}
 
 \textbf{Exercice 2 : Changement de dimension}
@@ -50,6 +66,24 @@ Soit $g : \mathbb{R}^3 \to \mathbb{R}^2$ définie par $g(x, y, z) = (x + y, y - 
 Déterminer la matrice $B$ associée à $g$.
 
 \emph{Indication : L'espace de départ est $\mathbb{R}^3$, il y aura donc 3 colonnes ($g(e_1), g(e_2), g(e_3)$). L'espace d'arrivée est $\mathbb{R}^2$, il y aura donc 2 lignes.}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Dans les bases canoniques, avec $e_1=(1,0,0)$, $e_2=(0,1,0)$, $e_3=(0,0,1)$ :
+\[
+g(e_1)=g(1,0,0)=(1,0),\quad
+g(e_2)=g(0,1,0)=(1,1),\quad
+g(e_3)=g(0,0,1)=(0,-1).
+\]
+La matrice $B$ (2 lignes, 3 colonnes) a ces vecteurs comme colonnes :
+\[
+B=\begin{pmatrix}
+1 & 1 & 0\\
+0 & 1 & -1
+\end{pmatrix}.
+\]
+\end{solution}
+}{}
 
 
 \begin{formulesBox}
@@ -91,6 +125,22 @@ C = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}
 \]
 Donner l'expression de $h(x, y)$.
 
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Si la matrice de $h$ dans la base canonique est
+\(
+C=\begin{pmatrix}0&1\\-1&0\end{pmatrix},
+\)
+alors pour tout $(x,y)\in\mathbb{R}^2$ :
+\[
+h(x,y)=C\begin{pmatrix}x\\y\end{pmatrix}
+=\begin{pmatrix}0\cdot x+1\cdot y\\-1\cdot x+0\cdot y\end{pmatrix}
+=\begin{pmatrix}y\\-x\end{pmatrix}.
+\]
+Donc $\boxed{h(x,y)=(y,-x)}$.
+\end{solution}
+}{}
+
 \vspace{0.5cm}
 
 \textbf{Exercice 4 : Cas général}
@@ -99,4 +149,17 @@ Soit $k : \mathbb{R}^n \to \mathbb{R}$ définie par $k(x_1, \dots, x_n) = x_1$.
 Quelle est la forme de la matrice associée ?
 
 \emph{Indication : C'est une application qui va dans $\mathbb{R}$ (une seule composante), la matrice n'aura donc qu'une seule ligne (matrice ligne).}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On se place dans les bases canoniques. On calcule l'image des vecteurs de base $(e_1,\dots,e_n)$ :
+\[
+k(e_1)=1,\qquad k(e_2)=0,\qquad \dots,\qquad k(e_n)=0.
+\]
+La matrice associée (matrice ligne $1\times n$) a donc pour colonnes ces nombres, ce qui revient à :
+\[
+\boxed{\begin{pmatrix}1&0&0&\cdots&0\end{pmatrix}}.
+\]
+\end{solution}
+}{}
 

@@ -89,6 +89,7 @@
 \makeatletter
 \renewcommand{\thesubsection}{\arabic{subsection}}
 \renewcommand{\p@subsection}{}
+\makeatother
 % -------------------- Page de titre ------------------------
 \title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
 \author{ BMC2 }
@@ -97,6 +98,19 @@
 
 \usepackage{mdframed}
 \usepackage{ifthen}
+
+% -------------------- Corrections (solutions) ---------------
+% Copié depuis : ESTP/PGE1/S5/AnalyseAlgebre/8-TD4/index.tex
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
 
 % \usepackage[sf]{titlesec}
 % Définition de la variable pour afficher les corrections
@@ -145,6 +159,6 @@
 \chapter{Applications linéaires}
 % \input{3-ApplicationsLineaires/1-Feuille-Intro/resume.tex}
 
-\setcounter{section}{2}
+\setcounter{section}{3}
 \input{3-ApplicationsLineaires/2-MatriceDuneApplicationLineaire/resume.tex}
 \end{document}

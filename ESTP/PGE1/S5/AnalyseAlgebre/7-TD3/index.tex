@@ -1,0 +1,1025 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow, multicol}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+% Commande pour la transformée de Laplace
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\Four}{\mathcal{F}}
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ Analyse-Algèbre - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD3}}\\[1em]
+    {\large \textit{Transformée de Laplace}}
+\end{center}
+
+\textbf{Rappel :} Pour une fonction $f : \mathbb{R}^+ \to \mathbb{C}$, la \textbf{transformée de Laplace} de $f$ est définie par :
+\[
+\Lap\{f\}(s) = F(s) = \int_0^{+\infty} f(t) e^{-st} \, dt
+\]
+Cette intégrale converge pour $s \in \mathbb{C}$ tel que $\text{Re}(s) > \sigma_0$, où $\sigma_0$ dépend de $f$ et est appelée l'\textbf{abscisse de convergence}.
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 1 : Calcul direct de transformées}
+%==============================================================================
+
+L'objectif est de calculer des transformées de Laplace directement à partir de la définition.
+
+\begin{enumerate}
+    \item Calculer $\Lap\{1\}(s)$ pour $s > 0$ et déterminer l'abscisse de convergence.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \Lap\{1\}(s) = \int_0^{+\infty} 1 \cdot e^{-st} \, dt = \left[ -\frac{e^{-st}}{s} \right]_0^{+\infty} = 0 - \left( -\frac{1}{s} \right) = \frac{1}{s}
+        \]
+        Cette intégrale converge pour $\text{Re}(s) > 0$.
+    \end{solution}
+    }{}
+    
+    \item Calculer $\Lap\{e^{at}\}(s)$ pour $a \in \mathbb{R}$ et déterminer l'abscisse de convergence.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \Lap\{e^{at}\}(s) = \int_0^{+\infty} e^{at} e^{-st} \, dt = \int_0^{+\infty} e^{-(s-a)t} \, dt = \left[ -\frac{e^{-(s-a)t}}{s-a} \right]_0^{+\infty}
+        \]
+        Pour que l'intégrale converge, il faut $\text{Re}(s-a) > 0$, c'est-à-dire $\text{Re}(s) > a$.
+        
+        Ainsi : $\boxed{\Lap\{e^{at}\}(s) = \frac{1}{s-a}}$ pour $\text{Re}(s) > a$.
+    \end{solution}
+    }{}
+    
+    \item En utilisant les formules d'Euler, déduire $\Lap\{\cos(\omega t)\}$ et $\Lap\{\sin(\omega t)\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        D'après la question précédente, $\Lap\{e^{i\omega t}\} = \frac{1}{s - i\omega}$ et $\Lap\{e^{-i\omega t}\} = \frac{1}{s + i\omega}$.
+        
+        \textbf{Pour le cosinus :}
+        \begin{align*}
+        \Lap\{\cos(\omega t)\} &= \frac{1}{2}\left( \frac{1}{s-i\omega} + \frac{1}{s+i\omega} \right) = \frac{1}{2} \cdot \frac{(s+i\omega) + (s-i\omega)}{(s-i\omega)(s+i\omega)} \\
+        &= \frac{1}{2} \cdot \frac{2s}{s^2 + \omega^2} = \boxed{\frac{s}{s^2 + \omega^2}}
+        \end{align*}
+        
+        \textbf{Pour le sinus :}
+        \begin{align*}
+        \Lap\{\sin(\omega t)\} &= \frac{1}{2i}\left( \frac{1}{s-i\omega} - \frac{1}{s+i\omega} \right) = \frac{1}{2i} \cdot \frac{(s+i\omega) - (s-i\omega)}{s^2 + \omega^2} \\
+        &= \frac{1}{2i} \cdot \frac{2i\omega}{s^2 + \omega^2} = \boxed{\frac{\omega}{s^2 + \omega^2}}
+        \end{align*}
+    \end{solution}
+    }{}
+    
+    \item Montrer par récurrence que $\Lap\{t^n\}(s) = \frac{n!}{s^{n+1}}$ pour $n \in \mathbb{N}$.
+    
+    \textit{utiliser une intégration par parties.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Initialisation :} Pour $n = 0$, on a $\Lap\{1\} = \frac{1}{s} = \frac{0!}{s^1}$. OK.
+        
+        \textbf{Hérédité :} Supposons que $\Lap\{t^n\} = \frac{n!}{s^{n+1}}$. Calculons $\Lap\{t^{n+1}\}$ par intégration par parties :
+        \[
+        \Lap\{t^{n+1}\} = \int_0^{+\infty} t^{n+1} e^{-st} \, dt
+        \]
+        Posons $u = t^{n+1}$, $dv = e^{-st} dt$, donc $du = (n+1)t^n dt$ et $v = -\frac{e^{-st}}{s}$.
+        \[
+        \Lap\{t^{n+1}\} = \left[ -\frac{t^{n+1} e^{-st}}{s} \right]_0^{+\infty} + \frac{n+1}{s} \int_0^{+\infty} t^n e^{-st} \, dt = 0 + \frac{n+1}{s} \Lap\{t^n\}
+        \]
+        Par hypothèse de récurrence :
+        \[
+        \Lap\{t^{n+1}\} = \frac{n+1}{s} \cdot \frac{n!}{s^{n+1}} = \frac{(n+1)!}{s^{n+2}}
+        \]
+        \textbf{Conclusion :} Par récurrence, $\Lap\{t^n\} = \frac{n!}{s^{n+1}}$ pour tout $n \in \mathbb{N}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 2 : Propriétés fondamentales}
+%==============================================================================
+
+On souhaite démontrer les propriétés fondamentales de la transformée de Laplace.
+
+\begin{enumerate}
+    \item \textbf{Linéarité.} Soient $f$ et $g$ deux fonctions admettant des transformées de Laplace, et $\alpha, \beta \in \mathbb{C}$. Montrer que :
+    \[
+    \Lap\{\alpha f + \beta g\} = \alpha \Lap\{f\} + \beta \Lap\{g\}
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition :
+        \begin{align*}
+        \Lap\{\alpha f + \beta g\}(s) &= \int_0^{+\infty} (\alpha f(t) + \beta g(t)) e^{-st} \, dt \\
+        &= \alpha \int_0^{+\infty} f(t) e^{-st} \, dt + \beta \int_0^{+\infty} g(t) e^{-st} \, dt \\
+        &= \alpha \Lap\{f\}(s) + \beta \Lap\{g\}(s)
+        \end{align*}
+        La linéarité découle de celle de l'intégrale.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Dérivation.} Soit $f$ une fonction dérivable dont $f$ et $f'$ admettent des transformées de Laplace. Montrer que :
+    \[
+    \Lap\{f'\}(s) = s \Lap\{f\}(s) - f(0)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par intégration par parties avec $u = e^{-st}$ et $dv = f'(t) dt$ :
+        \begin{align*}
+        \Lap\{f'\}(s) &= \int_0^{+\infty} f'(t) e^{-st} \, dt \\
+        &= \left[ f(t) e^{-st} \right]_0^{+\infty} + s \int_0^{+\infty} f(t) e^{-st} \, dt \\
+        &= 0 - f(0) + s \Lap\{f\}(s) \\
+        &= s \Lap\{f\}(s) - f(0)
+        \end{align*}
+        (On suppose que $\lim_{t \to +\infty} f(t) e^{-st} = 0$ pour $s$ assez grand.)
+    \end{solution}
+    }{}
+    
+    \item En déduire que pour $f$ deux fois dérivable :
+    \[
+    \Lap\{f''\}(s) = s^2 \Lap\{f\}(s) - s f(0) - f'(0)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On applique la formule précédente à $f'$ :
+        \[
+        \Lap\{f''\} = \Lap\{(f')'\} = s \Lap\{f'\} - f'(0)
+        \]
+        En remplaçant $\Lap\{f'\} = s\Lap\{f\} - f(0)$ :
+        \[
+        \Lap\{f''\} = s(s\Lap\{f\} - f(0)) - f'(0) = s^2 \Lap\{f\} - sf(0) - f'(0)
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Décalage en fréquence.} Montrer que si $\Lap\{f\}(s) = F(s)$, alors :
+    \[
+    \Lap\{e^{at} f(t)\}(s) = F(s-a)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{align*}
+        \Lap\{e^{at} f(t)\}(s) &= \int_0^{+\infty} e^{at} f(t) e^{-st} \, dt \\
+        &= \int_0^{+\infty} f(t) e^{-(s-a)t} \, dt \\
+        &= F(s-a)
+        \end{align*}
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application.} En utilisant les résultats précédents, calculer $\Lap\{t^2 e^{3t}\}$ et $\Lap\{e^{-2t}\cos(5t)\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Pour $t^2 e^{3t}$ :} On utilise le décalage en fréquence avec $f(t) = t^2$ et $a = 3$.
+        
+        On sait que $\Lap\{t^2\} = \frac{2}{s^3}$, donc :
+        \[
+        \Lap\{t^2 e^{3t}\} = \frac{2}{(s-3)^3}
+        \]
+        
+        \textbf{Pour $e^{-2t}\cos(5t)$ :} On utilise le décalage avec $f(t) = \cos(5t)$ et $a = -2$.
+        
+        On sait que $\Lap\{\cos(5t)\} = \frac{s}{s^2 + 25}$, donc :
+        \[
+        \Lap\{e^{-2t}\cos(5t)\} = \frac{s+2}{(s+2)^2 + 25}
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Dérivation de la transformée.} Montrer que :
+    \[
+    \Lap\{t f(t)\}(s) = -\frac{d}{ds} F(s)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On dérive $F(s) = \int_0^{+\infty} f(t) e^{-st} dt$ par rapport à $s$ :
+        \[
+        \frac{dF}{ds} = \int_0^{+\infty} f(t) \frac{\partial}{\partial s}(e^{-st}) \, dt = \int_0^{+\infty} f(t) (-t) e^{-st} \, dt = -\Lap\{t f(t)\}
+        \]
+        Donc $\Lap\{t f(t)\} = -\frac{dF}{ds}$.
+        
+        Par récurrence, on peut montrer : $\Lap\{t^n f(t)\} = (-1)^n \frac{d^n F}{ds^n}$.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application.} En utilisant la propriété précédente, calculer $\Lap\{t \sin(\omega t)\}$ et $\Lap\{t \cos(\omega t)\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Pour $t\sin(\omega t)$ :} On a $\Lap\{\sin(\omega t)\} = \frac{\omega}{s^2 + \omega^2}$.
+        \[
+        \Lap\{t \sin(\omega t)\} = -\frac{d}{ds}\left( \frac{\omega}{s^2 + \omega^2} \right) = -\omega \cdot \frac{-2s}{(s^2 + \omega^2)^2} = \frac{2\omega s}{(s^2 + \omega^2)^2}
+        \]
+        
+        \textbf{Pour $t\cos(\omega t)$ :} On a $\Lap\{\cos(\omega t)\} = \frac{s}{s^2 + \omega^2}$.
+        \[
+        \Lap\{t \cos(\omega t)\} = -\frac{d}{ds}\left( \frac{s}{s^2 + \omega^2} \right) = -\frac{(s^2+\omega^2) - s \cdot 2s}{(s^2 + \omega^2)^2} = \frac{s^2 - \omega^2}{(s^2 + \omega^2)^2}
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+\newpage
+
+%==============================================================================
+\section*{Exercice 3 : Abscisse de convergence}
+%==============================================================================
+
+L'\textbf{abscisse de convergence} $\sigma_0$ d'une fonction $f$ est le réel tel que l'intégrale $\int_0^{+\infty} f(t) e^{-st} dt$ converge si et seulement si $\text{Re}(s) > \sigma_0$.
+
+\begin{enumerate}
+    \item Déterminer l'abscisse de convergence des fonctions suivantes :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item $f(t) = 1$
+        \item $f(t) = e^{at}$ avec $a \in \mathbb{R}$
+        \item $f(t) = e^{t^2}$
+        \item $f(t) = \sin(t)$
+    \end{enumerate}
+    \end{multicols}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}[label=(\alph*)]
+            \item Pour $f(t) = 1$ : $\int_0^{+\infty} e^{-st} dt$ converge si $\text{Re}(s) > 0$. Donc $\sigma_0 = 0$.
+            
+            \item Pour $f(t) = e^{at}$ : $\int_0^{+\infty} e^{at} e^{-st} dt = \int_0^{+\infty} e^{-(s-a)t} dt$ converge si $\text{Re}(s-a) > 0$, soit $\text{Re}(s) > a$. Donc $\sigma_0 = a$.
+            
+            \item Pour $f(t) = e^{t^2}$ : Cette fonction croît plus vite que toute exponentielle $e^{st}$ (quel que soit $s$). L'intégrale $\int_0^{+\infty} e^{t^2} e^{-st} dt$ diverge pour tout $s \in \mathbb{C}$. Cette fonction \textbf{n'admet pas de transformée de Laplace} ($\sigma_0 = +\infty$).
+            
+            \item Pour $f(t) = \sin(t)$ : $|\sin(t)| \leq 1$, donc $|f(t) e^{-st}| \leq e^{-\text{Re}(s) t}$, qui est intégrable pour $\text{Re}(s) > 0$. Donc $\sigma_0 = 0$.
+        \end{enumerate}
+    \end{solution}
+    }{}
+    
+    \item On considère la fonction $f(t) = e^{2t} + 3e^{-t} + \cos(t)$. Déterminer son abscisse de convergence.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        L'abscisse de convergence d'une somme est le maximum des abscisses de convergence de chaque terme :
+        \begin{itemize}
+            \item $e^{2t}$ : abscisse $\sigma_1 = 2$
+            \item $3e^{-t}$ : abscisse $\sigma_2 = -1$
+            \item $\cos(t)$ : abscisse $\sigma_3 = 0$
+        \end{itemize}
+        Donc $\sigma_0 = \max(2, -1, 0) = 2$.
+    \end{solution}
+    }{}
+    
+    \item Soit $f$ une fonction à croissance polynomiale, c'est-à-dire qu'il existe $M > 0$ et $n \in \mathbb{N}$ tels que $|f(t)| \leq M t^n$ pour $t$ assez grand. Montrer que $f$ admet une transformée de Laplace et déterminer une majoration de son abscisse de convergence.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour $\text{Re}(s) > 0$ et $t$ assez grand :
+        \[
+        |f(t) e^{-st}| \leq M t^n e^{-\text{Re}(s) t}
+        \]
+        Or $\int_0^{+\infty} t^n e^{-\sigma t} dt$ converge pour tout $\sigma > 0$ (c'est $\frac{n!}{\sigma^{n+1}}$).
+        
+        Donc l'intégrale $\int_0^{+\infty} f(t) e^{-st} dt$ converge absolument pour $\text{Re}(s) > 0$.
+        
+        Ainsi, toute fonction à croissance polynomiale admet une transformée de Laplace avec $\sigma_0 \leq 0$.
+    \end{solution}
+    }{}
+    
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 4 : Équations différentielles d'ordre 1}
+%==============================================================================
+
+\begin{enumerate}
+    \item En appliquant la transformée de Laplace, résoudre l'équation différentielle $y' + 2y = 3e^{-t}$ avec $y(0) = 1$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Étape 1 : Transformation.} En appliquant $\Lap$ à l'équation :
+        \[
+        \Lap\{y'\} + 2\Lap\{y\} = 3\Lap\{e^{-t}\}
+        \]
+        \[
+        sY(s) - y(0) + 2Y(s) = \frac{3}{s+1}
+        \]
+        \[
+        (s+2)Y(s) - 1 = \frac{3}{s+1}
+        \]
+        
+        \textbf{Étape 2 : Résolution algébrique.}
+        \[
+        Y(s) = \frac{1}{s+2} + \frac{3}{(s+1)(s+2)}
+        \]
+        
+        Décomposons $\frac{3}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}$ :
+        \begin{itemize}
+            \item $s = -1$ : $3 = A(1)$, donc $A = 3$
+            \item $s = -2$ : $3 = B(-1)$, donc $B = -3$
+        \end{itemize}
+        
+        Donc :
+        \[
+        Y(s) = \frac{1}{s+2} + \frac{3}{s+1} - \frac{3}{s+2} = \frac{3}{s+1} - \frac{2}{s+2}
+        \]
+        
+        \textbf{Étape 3 : Transformation inverse.}
+        \[
+        y(t) = 3e^{-t} - 2e^{-2t}
+        \]
+        
+        \textbf{Vérification :} $y(0) = 3 - 2 = 1$ ✓ et $y' + 2y = -3e^{-t} + 4e^{-2t} + 6e^{-t} - 4e^{-2t} = 3e^{-t}$ ✓
+    \end{solution}
+    }{}
+    
+    \item Résoudre l'équation différentielle avec paramètre $y' + ay = be^{ct}$ avec $y(0) = y_0$, où $a, b, c, y_0 \in \mathbb{R}$ et $a \neq c$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        sY(s) - y_0 + aY(s) = \frac{b}{s-c}
+        \]
+        \[
+        (s+a)Y(s) = y_0 + \frac{b}{s-c}
+        \]
+        \[
+        Y(s) = \frac{y_0}{s+a} + \frac{b}{(s-c)(s+a)}
+        \]
+        
+        \textbf{Décomposition en éléments simples :}
+        \[
+        \frac{b}{(s-c)(s+a)} = \frac{A}{s-c} + \frac{B}{s+a}
+        \]
+        \begin{itemize}
+            \item $s = c$ : $b = A(c+a)$, donc $A = \frac{b}{a+c}$
+            \item $s = -a$ : $b = B(-a-c)$, donc $B = -\frac{b}{a+c}$
+        \end{itemize}
+        
+        Donc :
+        \[
+        Y(s) = \frac{y_0}{s+a} + \frac{b}{a+c} \cdot \frac{1}{s-c} - \frac{b}{a+c} \cdot \frac{1}{s+a} = \left( y_0 - \frac{b}{a+c} \right) \frac{1}{s+a} + \frac{b}{a+c} \cdot \frac{1}{s-c}
+        \]
+        
+        \textbf{Transformation inverse :}
+        \[
+        \boxed{y(t) = \left( y_0 - \frac{b}{a+c} \right) e^{-at} + \frac{b}{a+c} e^{ct}}
+        \]
+        
+        \textit{Cas particulier $a = c$ :} On obtient $Y(s) = \frac{y_0}{s+a} + \frac{b}{(s-a)^2}$, d'où $y(t) = y_0 e^{-at} + bt e^{at}$ (résonance).
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 5 : Équations différentielles d'ordre 2}
+%==============================================================================
+
+\begin{enumerate}
+    \item Résoudre $y'' + 4y = 0$ avec $y(0) = 1$ et $y'(0) = 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        s^2 Y(s) - sy(0) - y'(0) + 4Y(s) = 0
+        \]
+        \[
+        (s^2 + 4)Y(s) = s
+        \]
+        \[
+        Y(s) = \frac{s}{s^2 + 4}
+        \]
+        
+        \textbf{Transformation inverse :} On reconnaît $\Lap\{\cos(2t)\}$.
+        \[
+        \boxed{y(t) = \cos(2t)}
+        \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre $y'' + 3y' + 2y = 0$ avec $y(0) = 1$ et $y'(0) = 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        s^2 Y(s) - s - 0 + 3(sY(s) - 1) + 2Y(s) = 0
+        \]
+        \[
+        (s^2 + 3s + 2)Y(s) = s + 3
+        \]
+        \[
+        Y(s) = \frac{s+3}{s^2 + 3s + 2} = \frac{s+3}{(s+1)(s+2)}
+        \]
+        
+        \textbf{Décomposition :}
+        \[
+        \frac{s+3}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
+        \]
+        \begin{itemize}
+            \item $s = -1$ : $2 = A(1)$, donc $A = 2$
+            \item $s = -2$ : $1 = B(-1)$, donc $B = -1$
+        \end{itemize}
+        
+        \[
+        Y(s) = \frac{2}{s+1} - \frac{1}{s+2}
+        \]
+        
+        \textbf{Transformation inverse :}
+        \[
+        \boxed{y(t) = 2e^{-t} - e^{-2t}}
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Oscillateur amorti avec second membre.} Résoudre l'équation :
+    \[
+    y'' + 2\lambda y' + \omega_0^2 y = F_0 \cos(\omega t)
+    \]
+    avec $y(0) = 0$ et $y'(0) = 0$, où $\lambda > 0$, $\omega_0 > 0$ et $\omega \neq \omega_0$.
+    
+    On prendra $\lambda = 1$, $\omega_0 = 2$ et $\omega = 3$, $F_0 = 10$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Avec les valeurs numériques : $y'' + 2y' + 4y = 10\cos(3t)$.
+        
+        \textbf{Transformation :}
+        \[
+        (s^2 + 2s + 4)Y(s) = \frac{10s}{s^2 + 9}
+        \]
+        \[
+        Y(s) = \frac{10s}{(s^2 + 2s + 4)(s^2 + 9)}
+        \]
+        
+        \textbf{Décomposition :}
+        \[
+        Y(s) = \frac{As + B}{s^2 + 2s + 4} + \frac{Cs + D}{s^2 + 9}
+        \]
+        
+        En multipliant et identifiant les coefficients :
+        \begin{align*}
+        10s &= (As+B)(s^2+9) + (Cs+D)(s^2+2s+4)
+        \end{align*}
+        
+        On obtient le système :
+        \begin{itemize}
+            \item $s^3$ : $A + C = 0$
+            \item $s^2$ : $B + 2C + D = 0$
+            \item $s^1$ : $9A + 4C + 2D = 10$
+            \item $s^0$ : $9B + 4D = 0$
+        \end{itemize}
+        
+        En résolvant : $A = 2$, $B = \frac{4}{5}$, $C = -2$, $D = -\frac{9}{5}$.
+        
+        \textbf{Transformation inverse :}
+        
+        Pour $\frac{2s + \frac{4}{5}}{s^2 + 2s + 4} = \frac{2(s+1) - \frac{6}{5}}{(s+1)^2 + 3}$ :
+        \[
+        \Lap^{-1} = 2e^{-t}\cos(\sqrt{3}t) - \frac{6}{5\sqrt{3}} e^{-t}\sin(\sqrt{3}t)
+        \]
+        
+        Pour $\frac{-2s - \frac{9}{5}}{s^2 + 9}$ :
+        \[
+        \Lap^{-1} = -2\cos(3t) - \frac{3}{5}\sin(3t)
+        \]
+        
+        \textbf{Solution finale :}
+        \[
+        y(t) = 2e^{-t}\cos(\sqrt{3}t) - \frac{2\sqrt{3}}{5} e^{-t}\sin(\sqrt{3}t) - 2\cos(3t) - \frac{3}{5}\sin(3t)
+        \]
+        
+        \textit{Le premier terme est le régime transitoire (qui s'amortit), le second est le régime permanent.}
+    \end{solution}
+    }{}
+    
+    \item \textbf{Cas de résonance.} Résoudre $y'' + 4y = 2\sin(2t)$ avec $y(0) = 0$ et $y'(0) = 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        (s^2 + 4)Y(s) = \frac{4}{s^2 + 4}
+        \]
+        \[
+        Y(s) = \frac{4}{(s^2 + 4)^2}
+        \]
+        
+        On utilise la formule : $\Lap\{t\sin(\omega t)\} = \frac{2\omega s}{(s^2 + \omega^2)^2}$.
+        
+        Ici, on a besoin de $\Lap^{-1}\left\{ \frac{1}{(s^2+4)^2} \right\}$.
+        
+        En utilisant la propriété de dérivation de la transformée et des manipulations, on peut montrer :
+        \[
+        \Lap^{-1}\left\{ \frac{1}{(s^2+4)^2} \right\} = \frac{1}{16}(\sin(2t) - 2t\cos(2t))
+        \]
+        
+        Donc :
+        \[
+        \boxed{y(t) = \frac{1}{4}(\sin(2t) - 2t\cos(2t))}
+        \]
+        
+        \textit{Remarque :} Le terme $t\cos(2t)$ croît sans limite : c'est le phénomène de \textbf{résonance}.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 6 : Équations différentielles avec paramètres}
+%==============================================================================
+
+\textbf{Système masse-ressort-amortisseur.} Un système mécanique vérifie :
+    \[
+    m x'' + c x' + k x = F_0 u(t)
+    \]
+    où $u(t)$ est la fonction de Heaviside, $m$ la masse, $c$ le coefficient d'amortissement, $k$ la raideur du ressort, et $F_0$ la force appliquée.
+    
+    Avec $x(0) = 0$, $x'(0) = 0$, trouver $x(t)$ en fonction des paramètres dans le cas sur-amorti ($c^2 > 4mk$).
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        (ms^2 + cs + k)X(s) = \frac{F_0}{s}
+        \]
+        \[
+        X(s) = \frac{F_0}{s(ms^2 + cs + k)}
+        \]
+        
+        Les racines de $ms^2 + cs + k = 0$ sont :
+        \[
+        r_{1,2} = \frac{-c \pm \sqrt{c^2 - 4mk}}{2m}
+        \]
+        
+        Dans le cas sur-amorti, $c^2 > 4mk$, donc $r_1$ et $r_2$ sont réels négatifs distincts.
+        
+        Posons $r_1 = -\alpha$ et $r_2 = -\beta$ avec $\alpha, \beta > 0$ et $\alpha \neq \beta$.
+        
+        \textbf{Décomposition :}
+        \[
+        X(s) = \frac{F_0}{m} \cdot \frac{1}{s(s+\alpha)(s+\beta)} = \frac{A}{s} + \frac{B}{s+\alpha} + \frac{C}{s+\beta}
+        \]
+        
+        \begin{itemize}
+            \item $A = \frac{F_0}{m\alpha\beta} = \frac{F_0}{k}$
+            \item $B = \frac{F_0}{m \cdot (-\alpha)(\beta - \alpha)} = \frac{F_0}{m\alpha(\alpha - \beta)}$
+            \item $C = \frac{F_0}{m \cdot (-\beta)(\alpha - \beta)} = \frac{F_0}{m\beta(\beta - \alpha)}$
+        \end{itemize}
+        
+        \textbf{Transformation inverse :}
+        \[
+        \boxed{x(t) = \frac{F_0}{k} \left[ 1 + \frac{\beta e^{-\alpha t} - \alpha e^{-\beta t}}{\alpha - \beta} \right]}
+        \]
+        
+        où $\alpha = \frac{c - \sqrt{c^2-4mk}}{2m}$ et $\beta = \frac{c + \sqrt{c^2-4mk}}{2m}$.
+    \end{solution}
+    }{}
+
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 7 : Fonction échelon et fonctions discontinues}
+%==============================================================================
+
+La fonction échelon de Heaviside $u(t-a)$ est définie par :
+\[
+u(t-a) = \begin{cases} 0 & \text{si } t < a \\ 1 & \text{si } t \geq a \end{cases}
+\]
+
+\begin{enumerate}
+    \item Montrer que $\Lap\{u(t-a)\} = \frac{e^{-as}}{s}$ pour $a \geq 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \Lap\{u(t-a)\} = \int_0^{+\infty} u(t-a) e^{-st} dt = \int_a^{+\infty} e^{-st} dt = \left[ -\frac{e^{-st}}{s} \right]_a^{+\infty} = \frac{e^{-as}}{s}
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Théorème du décalage temporel.} Montrer que si $\Lap\{f(t)\} = F(s)$, alors :
+    \[
+    \Lap\{f(t-a) u(t-a)\} = e^{-as} F(s)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{align*}
+        \Lap\{f(t-a) u(t-a)\} &= \int_0^{+\infty} f(t-a) u(t-a) e^{-st} dt \\
+        &= \int_a^{+\infty} f(t-a) e^{-st} dt
+        \end{align*}
+        
+        Changement de variable $\tau = t - a$, donc $t = \tau + a$ et $dt = d\tau$ :
+        \[
+        = \int_0^{+\infty} f(\tau) e^{-s(\tau+a)} d\tau = e^{-as} \int_0^{+\infty} f(\tau) e^{-s\tau} d\tau = e^{-as} F(s)
+        \]
+    \end{solution}
+    }{}
+    
+    \item Calculer $\Lap\{(t-2)^2 u(t-2)\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On utilise le théorème précédent avec $f(t) = t^2$ et $a = 2$ :
+        \[
+        \Lap\{(t-2)^2 u(t-2)\} = e^{-2s} \Lap\{t^2\} = e^{-2s} \cdot \frac{2}{s^3} = \frac{2e^{-2s}}{s^3}
+        \]
+    \end{solution}
+    }{}
+    
+    \item Soit $f(t) = \begin{cases} 0 & \text{si } t < 1 \\ t & \text{si } 1 \leq t < 3 \\ 0 & \text{si } t \geq 3 \end{cases}$. Exprimer $f$ à l'aide de fonctions échelon et calculer sa transformée de Laplace.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut écrire : $f(t) = t \cdot (u(t-1) - u(t-3))$.
+        
+        Mais attention, pour utiliser le décalage, il faut écrire :
+        \[
+        f(t) = (t-1+1) u(t-1) - (t-3+3) u(t-3)
+        \]
+        \[
+        f(t) = (t-1) u(t-1) + u(t-1) - (t-3) u(t-3) - 3u(t-3)
+        \]
+        
+        \textbf{Transformée :}
+        \begin{align*}
+        F(s) &= e^{-s} \Lap\{t\} + \frac{e^{-s}}{s} - e^{-3s} \Lap\{t\} - \frac{3e^{-3s}}{s} \\
+        &= \frac{e^{-s}}{s^2} + \frac{e^{-s}}{s} - \frac{e^{-3s}}{s^2} - \frac{3e^{-3s}}{s} \\
+        &= e^{-s}\left( \frac{1}{s^2} + \frac{1}{s} \right) - e^{-3s}\left( \frac{1}{s^2} + \frac{3}{s} \right)
+        \end{align*}
+    \end{solution}
+    }{}
+    
+    \item Résoudre l'équation $y' + y = u(t-1)$ avec $y(0) = 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Transformation :}
+        \[
+        sY(s) + Y(s) = \frac{e^{-s}}{s}
+        \]
+        \[
+        Y(s) = \frac{e^{-s}}{s(s+1)}
+        \]
+        
+        \textbf{Décomposition :}
+        \[
+        \frac{1}{s(s+1)} = \frac{1}{s} - \frac{1}{s+1}
+        \]
+        
+        Donc :
+        \[
+        Y(s) = e^{-s}\left( \frac{1}{s} - \frac{1}{s+1} \right)
+        \]
+        
+        \textbf{Transformation inverse :} Par le théorème de décalage,
+        \[
+        y(t) = (1 - e^{-(t-1)}) u(t-1)
+        \]
+        
+        Soit :
+        \[
+        y(t) = \begin{cases} 0 & \text{si } t < 1 \\ 1 - e^{-(t-1)} & \text{si } t \geq 1 \end{cases}
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 8 : Produit de convolution}
+%==============================================================================
+
+Le \textbf{produit de convolution} de deux fonctions $f$ et $g$ est défini par :
+\[
+(f * g)(t) = \int_0^t f(\tau) g(t - \tau) \, d\tau
+\]
+
+\begin{enumerate}
+    \item Montrer que $\Lap\{f * g\} = \Lap\{f\} \cdot \Lap\{g\}$.
+    
+    \textit{échanger les deux intégrales et faire un changement de variables.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{align*}
+        \Lap\{f * g\}(s) &= \int_0^{+\infty} \left( \int_0^t f(\tau) g(t-\tau) d\tau \right) e^{-st} dt
+        \end{align*}
+        
+        Par Fubini, en échangeant l'ordre d'intégration (domaine : $0 \leq \tau \leq t < +\infty$) :
+        \[
+        = \int_0^{+\infty} f(\tau) \left( \int_\tau^{+\infty} g(t-\tau) e^{-st} dt \right) d\tau
+        \]
+        
+        Changement de variable $u = t - \tau$ dans l'intégrale intérieure :
+        \[
+        = \int_0^{+\infty} f(\tau) \left( \int_0^{+\infty} g(u) e^{-s(u+\tau)} du \right) d\tau
+        \]
+        \[
+        = \int_0^{+\infty} f(\tau) e^{-s\tau} d\tau \cdot \int_0^{+\infty} g(u) e^{-su} du = F(s) \cdot G(s)
+        \]
+    \end{solution}
+    }{}
+    
+    \item En déduire $\Lap^{-1}\left\{ \frac{1}{s(s+1)} \right\}$ par convolution.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a $\frac{1}{s(s+1)} = \frac{1}{s} \cdot \frac{1}{s+1} = \Lap\{1\} \cdot \Lap\{e^{-t}\}$.
+        
+        Par le théorème de convolution :
+        \[
+        \Lap^{-1}\left\{ \frac{1}{s(s+1)} \right\} = 1 * e^{-t} = \int_0^t 1 \cdot e^{-(t-\tau)} d\tau = e^{-t} \int_0^t e^{\tau} d\tau = e^{-t}(e^t - 1) = 1 - e^{-t}
+        \]
+        
+        \textit{Vérification par décomposition :} $\frac{1}{s(s+1)} = \frac{1}{s} - \frac{1}{s+1}$, donc $\Lap^{-1} = 1 - e^{-t}$. ✓
+    \end{solution}
+    }{}
+    
+    \item Calculer $(t * \sin(t))$ de deux manières : par le calcul direct et par la transformée de Laplace.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Méthode 1 : Calcul direct}
+        \begin{align*}
+        (t * \sin(t)) &= \int_0^t \tau \sin(t - \tau) d\tau
+        \end{align*}
+        
+        Intégration par parties avec $u = \tau$ et $dv = \sin(t-\tau) d\tau$ :
+        \begin{align*}
+        &= [\tau \cos(t-\tau)]_0^t - \int_0^t \cos(t-\tau) d\tau \\
+        &= t\cos(0) - 0 - [\sin(t-\tau)]_0^t \\
+        &= t - (\sin(0) - \sin(t)) = t - \sin(t)
+        \end{align*}
+        
+        \textbf{Méthode 2 : Transformée de Laplace}
+        \[
+        \Lap\{t * \sin(t)\} = \Lap\{t\} \cdot \Lap\{\sin(t)\} = \frac{1}{s^2} \cdot \frac{1}{s^2+1} = \frac{1}{s^2(s^2+1)}
+        \]
+        
+        Décomposition : $\frac{1}{s^2(s^2+1)} = \frac{1}{s^2} - \frac{1}{s^2+1}$
+        
+        Donc : $\Lap^{-1} = t - \sin(t)$. ✓
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 9 : Lien avec la transformée de Fourier}
+%==============================================================================
+
+La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C}$ est définie par :
+\[
+\Four\{f\}(\omega) = \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(t) e^{-i\omega t} \, dt
+\]
+
+\begin{enumerate}
+    \item Soit $f : \mathbb{R}^+ \to \mathbb{C}$ une fonction \textbf{causale} (nulle pour $t < 0$). Montrer que :
+    \[
+    \Four\{f\}(\omega) = \Lap\{f\}(i\omega)
+    \]
+    c'est-à-dire que la transformée de Fourier s'obtient en évaluant la transformée de Laplace sur l'axe imaginaire $s = i\omega$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour une fonction causale, $f(t) = 0$ pour $t < 0$, donc :
+        \[
+        \Four\{f\}(\omega) = \int_{-\infty}^{+\infty} f(t) e^{-i\omega t} dt = \int_0^{+\infty} f(t) e^{-i\omega t} dt
+        \]
+        
+        Or, la transformée de Laplace est :
+        \[
+        \Lap\{f\}(s) = \int_0^{+\infty} f(t) e^{-st} dt
+        \]
+        
+        En posant $s = i\omega$ (avec $\text{Re}(s) = 0$) :
+        \[
+        \Lap\{f\}(i\omega) = \int_0^{+\infty} f(t) e^{-i\omega t} dt = \Four\{f\}(\omega)
+        \]
+        
+        \textbf{Remarque :} Cette relation n'est valide que si l'abscisse de convergence $\sigma_0 \leq 0$, sinon l'intégrale de Laplace ne converge pas pour $s = i\omega$.
+    \end{solution}
+    }{}
+    
+    \item Calculer la transformée de Fourier de $f(t) = e^{-at} u(t)$ pour $a > 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a $\Lap\{e^{-at} u(t)\} = \frac{1}{s+a}$ pour $\text{Re}(s) > -a$.
+        
+        Comme $a > 0$, l'abscisse de convergence est $-a < 0$, donc on peut évaluer en $s = i\omega$ :
+        \[
+        \Four\{e^{-at} u(t)\}(\omega) = \frac{1}{i\omega + a} = \frac{a - i\omega}{a^2 + \omega^2}
+        \]
+        
+        Le module est $|\hat{f}(\omega)| = \frac{1}{\sqrt{a^2 + \omega^2}}$ (filtre passe-bas du premier ordre).
+    \end{solution}
+    }{}
+    
+    \item Calculer la transformée de Fourier de $g(t) = e^{-a|t|}$ pour $a > 0$ (fonction non causale).
+    
+    \textit{Indication : séparer l'intégrale en $t < 0$ et $t > 0$.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{align*}
+        \Four\{e^{-a|t|}\}(\omega) &= \int_{-\infty}^{+\infty} e^{-a|t|} e^{-i\omega t} dt \\
+        &= \int_{-\infty}^{0} e^{at} e^{-i\omega t} dt + \int_0^{+\infty} e^{-at} e^{-i\omega t} dt \\
+        &= \int_{-\infty}^{0} e^{(a-i\omega)t} dt + \int_0^{+\infty} e^{-(a+i\omega)t} dt \\
+        &= \left[ \frac{e^{(a-i\omega)t}}{a-i\omega} \right]_{-\infty}^{0} + \left[ \frac{e^{-(a+i\omega)t}}{-(a+i\omega)} \right]_0^{+\infty} \\
+        &= \frac{1}{a-i\omega} + \frac{1}{a+i\omega} = \frac{(a+i\omega) + (a-i\omega)}{a^2 + \omega^2} = \frac{2a}{a^2 + \omega^2}
+        \end{align*}
+        
+        C'est une fonction lorentzienne, caractéristique des systèmes résonants.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application : fonction de transfert.} Un système soumis à une entrée $x(t)$, répond avec une sortie $y(t)$. Il est décrit par $y'' + 2y' + 2y = x(t)$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Déterminer la fonction de transfert $H(s) = \frac{Y(s)}{X(s)}$ en Laplace.
+        \item En déduire la réponse en fréquence $H(i\omega)$ et calculer son module.
+        \item Pour quelles fréquences $\omega$ le système amplifie-t-il le signal d'entrée ?
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{(a)} En appliquant Laplace (conditions initiales nulles) :
+        \[
+        (s^2 + 2s + 2)Y(s) = X(s)
+        \]
+        \[
+        H(s) = \frac{Y(s)}{X(s)} = \frac{1}{s^2 + 2s + 2}
+        \]
+        
+        \textbf{(b)} Réponse en fréquence ($s = i\omega$) :
+        \[
+        H(i\omega) = \frac{1}{(i\omega)^2 + 2(i\omega) + 2} = \frac{1}{-\omega^2 + 2i\omega + 2} = \frac{1}{(2-\omega^2) + 2i\omega}
+        \]
+        
+        Module :
+        \[
+        |H(i\omega)| = \frac{1}{\sqrt{(2-\omega^2)^2 + 4\omega^2}} = \frac{1}{\sqrt{\omega^4 + 4}}
+        \]
+        
+        \textbf{(c)} Le système amplifie si $|H(i\omega)| > 1$, c'est-à-dire $\omega^4 + 4 < 1$, soit $\omega^4 < -3$.
+        
+        C'est impossible pour $\omega \in \mathbb{R}$. Donc ce système n'amplifie jamais le signal : c'est un \textbf{filtre passe-bas} atténuateur.
+        
+        Le maximum du gain est $|H(0)| = \frac{1}{2}$, atteint en $\omega = 0$ (DC).
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+\newpage
+
+%==============================================================================
+\section*{Formulaire : Transformées de Laplace usuelles}
+%==============================================================================
+
+\renewcommand{\arraystretch}{1.6}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Fonction} $f(t)$ & \textbf{Transformée} $\Lap\{f\}(s) = F(s)$ & \textbf{Domaine} \\
+\hline\hline
+$1$ & $\displaystyle \frac{1}{s}$ & $\text{Re}(s) > 0$ \\
+\hline
+$t$ & $\displaystyle \frac{1}{s^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$t^n$ & $\displaystyle \frac{n!}{s^{n+1}}$ & $\text{Re}(s) > 0$ \\
+\hline
+$e^{at}$ & $\displaystyle \frac{1}{s-a}$ & $\text{Re}(s) > a$ \\
+\hline
+$t^n e^{at}$ & $\displaystyle \frac{n!}{(s-a)^{n+1}}$ & $\text{Re}(s) > a$ \\
+\hline
+$\sin(\omega t)$ & $\displaystyle \frac{\omega}{s^2 + \omega^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$\cos(\omega t)$ & $\displaystyle \frac{s}{s^2 + \omega^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$e^{at}\sin(\omega t)$ & $\displaystyle \frac{\omega}{(s-a)^2 + \omega^2}$ & $\text{Re}(s) > a$ \\
+\hline
+$e^{at}\cos(\omega t)$ & $\displaystyle \frac{s-a}{(s-a)^2 + \omega^2}$ & $\text{Re}(s) > a$ \\
+\hline
+$t\sin(\omega t)$ & $\displaystyle \frac{2\omega s}{(s^2 + \omega^2)^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$t\cos(\omega t)$ & $\displaystyle \frac{s^2 - \omega^2}{(s^2 + \omega^2)^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$\sinh(at)$ & $\displaystyle \frac{a}{s^2 - a^2}$ & $\text{Re}(s) > |a|$ \\
+\hline
+$\cosh(at)$ & $\displaystyle \frac{s}{s^2 - a^2}$ & $\text{Re}(s) > |a|$ \\
+\hline
+$u(t-a)$ (Heaviside) & $\displaystyle \frac{e^{-as}}{s}$ & $\text{Re}(s) > 0$ \\
+\hline
+$\delta(t)$ (Dirac) & $1$ & $\forall s$ \\
+\hline
+$\delta(t-a)$ & $e^{-as}$ & $\forall s$ \\
+\hline
+\end{tabular}
+\caption{Transformées de Laplace élémentaires}
+\end{table}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Propriété} & \textbf{Formule} \\
+\hline\hline
+Dérivation temporelle & $\Lap\{f'\} = sF(s) - f(0)$ \\
+\hline
+Dérivation seconde & $\Lap\{f''\} = s^2F(s) - sf(0) - f'(0)$ \\
+\hline
+Intégration temporelle & $\displaystyle \Lap\left\{\int_0^t f(\tau)d\tau\right\} = \frac{F(s)}{s}$ \\
+\hline
+Décalage fréquentiel & $\Lap\{e^{at}f(t)\} = F(s-a)$ \\
+\hline
+Multiplication par $t$ & $\Lap\{tf(t)\} = -F'(s)$ \\
+\hline
+Multiplication par $t^n$ & $\Lap\{t^nf(t)\} = (-1)^n F^{(n)}(s)$ \\
+\hline
+Convolution & $\Lap\{f * g\} = F(s) \cdot G(s)$ \\
+\hline
+\end{tabular}
+\caption{Propriétés de la transformée de Laplace}
+\end{table}
+
+\end{document}

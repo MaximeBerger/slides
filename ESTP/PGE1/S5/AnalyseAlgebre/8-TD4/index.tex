@@ -1,0 +1,1070 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow, multicol}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+\usepackage{fontawesome5}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+% Commande pour la transformée de Laplace
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\Four}{\mathcal{F}}
+\newcommand{\Distr}{\mathcal{D}}
+\newcommand{\Schwartz}{\mathcal{S}}
+\newcommand{\Sha}{\text{Ш}} % Peigne de Dirac
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ Analyse-Algèbre - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD4}}\\[1em]
+    {\large \textit{Introduction aux distributions}}
+\end{center}
+
+%==============================================================================
+\section*{Rappels de cours}
+%==============================================================================
+
+\subsection*{Motivation : pourquoi les distributions ?}
+
+En physique et en ingénierie, on rencontre souvent des phénomènes que les fonctions classiques ne peuvent pas modéliser : une force ponctuelle, une impulsion ou un choc
+Les \textbf{distributions} généralisent la notion de fonction pour traiter ces cas.
+
+\subsection*{Fonctions test et espace $\Distr(\mathbb{R})$}
+
+\begin{tcolorbox}[colback=ThemeLight, colframe=Theme, title=Définition : Fonction test]
+Une \textbf{fonction test} est une fonction $\varphi : \mathbb{R} \to \mathbb{R}$ qui est :
+\begin{enumerate}
+    \item \textbf{Infiniment dérivable} ($C^\infty$)
+    \item \textbf{À support compact} : il existe $[a,b]$ tel que $\varphi(x) = 0$ pour $x \notin [a,b]$
+\end{enumerate}
+L'ensemble des fonctions test est noté $\Distr(\mathbb{R})$.
+\end{tcolorbox}
+
+\textbf{Exemple fondamental :} La fonction bosse (bump function)
+\[
+\varphi(x) = \begin{cases}
+e^{-\frac{1}{1-x^2}} & \text{si } |x| < 1 \\
+0 & \text{si } |x| \geq 1
+\end{cases}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+    \draw[thick, Theme, domain=-0.99:0.99, samples=100] plot (\x, {exp(-1/(1-\x*\x))});
+    \draw[thick, Theme] (-2.5,0) -- (-1,0);
+    \draw[thick, Theme] (1,0) -- (2.5,0);
+    \draw[dashed, gray] (-1,0) -- (-1,0.4);
+    \draw[dashed, gray] (1,0) -- (1,0.4);
+    \node at (-1,-0.3) {$-1$};
+    \node at (1,-0.3) {$1$};
+    \fill[Theme!20, domain=-0.99:0.99, samples=100] plot (\x, {exp(-1/(1-\x*\x))}) -- (1,0) -- (-1,0) -- cycle;
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Définition d'une distribution}
+
+\begin{tcolorbox}[colback=ThemeLight, colframe=Theme, title=Définition : Distribution]
+Une \textbf{distribution} $T$ est une forme linéaire continue sur $\Distr(\mathbb{R})$, c'est-à-dire une application $T : \Distr(\mathbb{R}) \to \mathbb{R}$ vérifiant :
+\begin{enumerate}
+    \item \textbf{Linéarité :} $\langle T, \alpha\varphi + \beta\psi \rangle = \alpha \langle T, \varphi \rangle + \beta \langle T, \psi \rangle$
+    \item \textbf{Continuité :} Si $\varphi_n \to \varphi$ dans $\Distr$, alors $\langle T, \varphi_n \rangle \to \langle T, \varphi \rangle$
+\end{enumerate}
+\end{tcolorbox}
+
+\textbf{Interprétation :} Une distribution attribue un nombre réel à chaque fonction test. C'est une façon de « sonder » un objet mathématique avec des fonctions lisses localisées.
+
+\subsection*{Distributions régulières}
+
+Toute fonction $f$ localement intégrable définit une distribution $T_f$ par :
+\[
+\langle T_f, \varphi \rangle = \int_{\mathbb{R}} f(x) \varphi(x) \, dx
+\]
+
+\textbf{Exemples :}
+\begin{itemize}
+    \item $f(x) = 1$ : $\langle T_1, \varphi \rangle = \int_{\mathbb{R}} \varphi(x) \, dx$
+    \item Fonction de Heaviside $H(x)$ : $\langle T_H, \varphi \rangle = \int_0^{+\infty} \varphi(x) \, dx$
+\end{itemize}
+
+\subsection*{Distribution de Dirac}
+
+\begin{tcolorbox}[colback=ThemeLight, colframe=Theme, title=Définition : Distribution de Dirac]
+La \textbf{distribution de Dirac} $\delta$ est définie par :
+\[
+\langle \delta, \varphi \rangle = \varphi(0)
+\]
+Plus généralement, le Dirac en $a$ est : $\langle \delta_a, \varphi \rangle = \varphi(a)$
+\end{tcolorbox}
+
+\textbf{Propriété fondamentale :} $\delta$ n'est \textbf{pas} une fonction ! Aucune fonction $f$ ne vérifie $\int f(x)\varphi(x)dx = \varphi(0)$ pour toute $\varphi$.
+
+\subsection*{Dérivation des distributions}
+
+\begin{tcolorbox}[colback=ThemeLight, colframe=Theme, title=Définition : Dérivée d'une distribution]
+La dérivée d'une distribution $T$ est la distribution $T'$ définie par :
+\[
+\langle T', \varphi \rangle = -\langle T, \varphi' \rangle
+\]
+\end{tcolorbox}
+
+\textbf{Résultat fondamental :} $H' = \delta$ (la dérivée de Heaviside est le Dirac).
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 1 : Fonctions test}
+%==============================================================================
+
+\begin{enumerate}
+    \item Pour chacune des fonctions suivantes, tracer son graphe et dire si c'est une fonction de $\mathcal{D}(\mathbb{R})$.
+    \begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\varphi(x) = e^{-x^2}$
+        \item $\varphi(x) = \begin{cases} (1-x^2)^3 & |x| \leq 1 \\ 0 & |x| > 1 \end{cases}$
+        \item $\varphi(x) = \begin{cases} e^{-1/(1-x^2)} & |x| < 1 \\ 0 & |x| \geq 1 \end{cases}$
+        \item $\varphi(x) = \sin(x) \cdot \mathbf{1}_{[-\pi, \pi]}(x)$
+    \end{enumerate}
+    \end{multicols}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}[label=(\alph*)]
+            \item $e^{-x^2}$ est $C^\infty$ mais son support est $\mathbb{R}$ tout entier (elle ne s'annule jamais). \textbf{Ce n'est pas une fonction test.}
+            
+            \begin{center}
+            \begin{tikzpicture}[scale=0.9]
+                \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+                \draw[->] (0,-0.3) -- (0,1.5);
+                \draw[thick, red, domain=-2.5:2.5, samples=100] plot (\x, {exp(-\x*\x)});
+                \node[red] at (2,0.8) {$e^{-x^2}$};
+                \draw[<->, gray, dashed] (-2.8,0.1) -- (2.8,0.1);
+                \node[gray] at (0,-0.5) {Support $= \mathbb{R}$};
+            \end{tikzpicture}
+            \end{center}
+            
+            \item $(1-x^2)^3$ pour $|x| \leq 1$ : le support est compact $[-1,1]$. En $x = \pm 1$, on a $\varphi(\pm 1) = 0$ et $\varphi'(x) = -6x(1-x^2)^2$, donc $\varphi'(\pm 1) = 0$. On peut montrer que toutes les dérivées s'annulent en $\pm 1$, donc $\varphi$ est $C^\infty$. \textbf{C'est une fonction test.}
+            
+            \begin{center}
+            \begin{tikzpicture}[scale=0.9]
+                \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+                \draw[->] (0,-0.3) -- (0,1.5);
+                \draw[thick, Theme, domain=-1:1, samples=100] plot (\x, {(1-\x*\x)^3});
+                \draw[thick, Theme] (-2.5,0) -- (-1,0);
+                \draw[thick, Theme] (1,0) -- (2.5,0);
+                \draw[dashed, gray] (-1,0) -- (-1,0.1);
+                \draw[dashed, gray] (1,0) -- (1,0.1);
+                \node at (-1,-0.3) {$-1$};
+                \node at (1,-0.3) {$1$};
+                \node[Theme] at (1.8,0.8) {$(1-x^2)^3$};
+                \fill[Theme!20, domain=-1:1, samples=100] plot (\x, {(1-\x*\x)^3}) -- (1,0) -- (-1,0) -- cycle;
+            \end{tikzpicture}
+            \end{center}
+            
+            \item $e^{-1/(1-x^2)}$ pour $|x| < 1$ : c'est l'exemple fondamental. Support compact $[-1,1]$, $C^\infty$ car toutes les dérivées tendent vers 0 quand $x \to \pm 1$. \textbf{C'est une fonction test.}
+            
+            \begin{center}
+            \begin{tikzpicture}[scale=0.9]
+                \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+                \draw[->] (0,-0.3) -- (0,1.5);
+                \draw[thick, Theme, domain=-0.99:0.99, samples=100] plot (\x, {exp(-1/(1-\x*\x))});
+                \draw[thick, Theme] (-2.5,0) -- (-1,0);
+                \draw[thick, Theme] (1,0) -- (2.5,0);
+                \draw[dashed, gray] (-1,0) -- (-1,0.4);
+                \draw[dashed, gray] (1,0) -- (1,0.4);
+                \node at (-1,-0.3) {$-1$};
+                \node at (1,-0.3) {$1$};
+                \node[Theme] at (1.8,0.6) {$e^{-1/(1-x^2)}$};
+                \fill[Theme!20, domain=-0.99:0.99, samples=100] plot (\x, {exp(-1/(1-\x*\x))}) -- (1,0) -- (-1,0) -- cycle;
+            \end{tikzpicture}
+            \end{center}
+            
+            \item $\sin(x) \cdot \mathbf{1}_{[-\pi, \pi]}$ : le support est compact $[-\pi, \pi]$. Mais en $x = \pm\pi$, $\sin(\pm\pi) = 0$ mais la dérivée $\cos(\pm\pi) = -1 \neq 0$. La fonction n'est pas dérivable en ces points (angle). \textbf{Ce n'est pas une fonction test.}
+            
+            \begin{center}
+            \begin{tikzpicture}[scale=0.7]
+                \draw[->] (-4.5,0) -- (4.5,0) node[right] {$x$};
+                \draw[->] (0,-1.5) -- (0,1.5);
+                \draw[thick, red, domain=-3.14159:3.14159, samples=100] plot (\x, {sin(\x r)});
+                \draw[thick, red] (-4.5,0) -- (-3.14159,0);
+                \draw[thick, red] (3.14159,0) -- (4.5,0);
+                \draw[red, fill=red] (-3.14159,0) circle (0.06);
+                \draw[red, fill=red] (3.14159,0) circle (0.06);
+                \node at (-3.14159,-0.4) {$-\pi$};
+                \node at (3.14159,-0.4) {$\pi$};
+                \node[red] at (2,1.3) {$\sin(x)$};
+                \draw[->, gray, thick] (-3.14159,0.5) -- (-3.14159,0.1);
+                \node[gray] at (-3.14159,0.8) {\small angle !};
+            \end{tikzpicture}
+            \end{center}
+        \end{enumerate}
+    \end{solution}
+    }{}
+    
+    \item Soit $\varphi \in \Distr(\mathbb{R})$ et $a \in \mathbb{R}$. Montrer que la fonction $\psi(x) = \varphi(x-a)$ (translatée) est aussi une fonction test. Quel est son support ?
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{$C^\infty$ :} Si $\varphi$ est $C^\infty$, alors $\psi(x) = \varphi(x-a)$ l'est aussi car c'est une composée de $\varphi$ (qui est $C^\infty$) avec la translation $x \mapsto x-a$ (qui est $C^\infty$).
+        
+        \textbf{Support compact :} Si $\text{supp}(\varphi) \subset [b, c]$, alors $\varphi(x-a) = 0$ si $x - a \notin [b,c]$, c'est-à-dire si $x \notin [a+b, a+c]$.
+        
+        Donc $\text{supp}(\psi) = \text{supp}(\varphi) + a$ (translaté de $a$).
+        
+        \textbf{Conclusion :} $\psi \in \Distr(\mathbb{R})$.
+    \end{solution}
+    }{}
+    
+    \item Soit $\varphi \in \Distr(\mathbb{R})$ et $\lambda > 0$. On pose $\psi(x) = \varphi(\lambda x)$ (dilatée). Montrer que $\psi \in \Distr(\mathbb{R})$ et déterminer son support.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{$C^\infty$ :} $\psi(x) = \varphi(\lambda x)$ est $C^\infty$ car composée de fonctions $C^\infty$.
+        
+        \textbf{Support :} $\psi(x) = 0$ si et seulement si $\varphi(\lambda x) = 0$, c'est-à-dire $\lambda x \notin \text{supp}(\varphi)$.
+        
+        Si $\text{supp}(\varphi) \subset [a, b]$, alors $\psi(x) = 0$ pour $x \notin [a/\lambda, b/\lambda]$.
+        
+        Donc $\text{supp}(\psi) = \frac{1}{\lambda} \text{supp}(\varphi)$ (support contracté d'un facteur $\lambda$).
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 2 : Distributions régulières}
+%==============================================================================
+
+\begin{enumerate}
+    \item Soit $f(x) = |x|$. Calculer $\langle T_f, \varphi \rangle$ pour $\varphi \in \Distr(\mathbb{R})$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition :
+        \[
+        \langle T_f, \varphi \rangle = \int_{\mathbb{R}} |x| \varphi(x) \, dx = \int_{-\infty}^{0} (-x) \varphi(x) \, dx + \int_0^{+\infty} x \varphi(x) \, dx
+        \]
+        
+        Comme $\varphi$ est à support compact, ces intégrales sont en fait sur un intervalle borné et donc bien définies.
+    \end{solution}
+    }{}
+    
+    \item Soit $H$ la fonction de Heaviside. Calculer explicitement $\langle T_H, \varphi \rangle$ pour les fonctions test suivantes (on suppose $\text{supp}(\varphi) \subset [-2, 2]$) :
+    \begin{enumerate}[label=(\alph*)]
+        \item $\varphi(x) = \begin{cases} e^{-1/(1-x^2)} & |x| < 1 \\ 0 & |x| \geq 1 \end{cases}$
+        \item $\varphi(x) = \begin{cases} (1-x^2)^2 & |x| \leq 1 \\ 0 & |x| > 1 \end{cases}$
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{(a)} On a :
+        \[
+        \langle T_H, \varphi \rangle = \int_0^{+\infty} \varphi(x) \, dx = \int_0^{1} e^{-1/(1-x^2)} \, dx
+        \]
+        Cette intégrale n'a pas de forme explicite simple, mais elle vaut environ $0.221$.
+        
+        \textbf{(b)} On a :
+        \[
+        \langle T_H, \varphi \rangle = \int_0^{1} (1-x^2)^2 \, dx = \int_0^{1} (1 - 2x^2 + x^4) \, dx
+        \]
+        \[
+        = \left[ x - \frac{2x^3}{3} + \frac{x^5}{5} \right]_0^1 = 1 - \frac{2}{3} + \frac{1}{5} = \frac{15 - 10 + 3}{15} = \boxed{\frac{8}{15}}
+        \]
+    \end{solution}
+    }{}
+    
+    \item La fonction $f(x) = \frac{1}{x}$ définit-elle une distribution régulière sur $\mathbb{R}$ ? Justifier.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour que $f$ définisse une distribution régulière, il faut que l'intégrale $\int_{\mathbb{R}} \frac{\varphi(x)}{x} dx$ converge pour toute $\varphi \in \Distr(\mathbb{R})$.
+        
+        Prenons $\varphi$ une fonction test avec $\varphi(0) \neq 0$ et $\text{supp}(\varphi) \subset [-1, 1]$.
+        
+        Au voisinage de 0, $\varphi(x) \approx \varphi(0)$, donc $\frac{\varphi(x)}{x} \approx \frac{\varphi(0)}{x}$.
+        
+        L'intégrale $\int_{-\epsilon}^{\epsilon} \frac{1}{x} dx$ diverge (intégrale impropre).
+        
+        \textbf{Conclusion :} $\frac{1}{x}$ ne définit \textbf{pas} directement une distribution régulière. Il faut utiliser la notion de \textbf{valeur principale} (vp) : $\text{vp}\frac{1}{x}$ est la distribution définie par :
+        \[
+        \left\langle \text{vp}\frac{1}{x}, \varphi \right\rangle = \lim_{\epsilon \to 0^+} \left( \int_{-\infty}^{-\epsilon} + \int_{\epsilon}^{+\infty} \right) \frac{\varphi(x)}{x} dx
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 3 : Distribution de Dirac}
+%==============================================================================
+
+\begin{enumerate}
+    \item Calculer les quantités suivantes :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\langle \delta, x^2 + 3x + 5 \rangle$
+        \item $\langle \delta_2, e^{-x} \rangle$
+        \item $\langle \delta_{-1}, \cos(\pi x) \rangle$
+        \item $\langle \delta_\pi, \sin(x) \rangle$
+    \end{enumerate}
+    \end{multicols}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}[label=(\alph*)]
+            \item $\langle \delta, x^2 + 3x + 5 \rangle = (0)^2 + 3(0) + 5 = \boxed{5}$
+            \item $\langle \delta_2, e^{-x} \rangle = e^{-2} = \boxed{e^{-2}}$
+            \item $\langle \delta_{-1}, \cos(\pi x) \rangle = \cos(-\pi) = \boxed{-1}$
+            \item $\langle \delta_\pi, \sin(x) \rangle = \sin(\pi) = \boxed{0}$
+        \end{enumerate}
+    \end{solution}
+    }{}
+    
+    \item \textbf{Propriété de filtrage.} Soit $f$ une fonction continue. Montrer que :
+    \[
+    \langle f \cdot \delta_a, \varphi \rangle = f(a) \langle \delta_a, \varphi \rangle = f(a) \varphi(a)
+    \]
+    On note cette propriété $f(x) \delta_a = f(a) \delta_a$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition du produit d'une fonction par une distribution :
+        \[
+        \langle f \cdot \delta_a, \varphi \rangle = \langle \delta_a, f \cdot \varphi \rangle
+        \]
+        
+        Or $\langle \delta_a, f \cdot \varphi \rangle = (f \cdot \varphi)(a) = f(a) \varphi(a)$.
+        
+        D'autre part, $f(a) \langle \delta_a, \varphi \rangle = f(a) \varphi(a)$.
+        
+        \textbf{Conclusion :} $\langle f \cdot \delta_a, \varphi \rangle = f(a) \varphi(a) = f(a) \langle \delta_a, \varphi \rangle$.
+        
+        On peut donc écrire symboliquement : $f(x) \delta_a = f(a) \delta_a$.
+        
+        \textit{Cas particulier :} $x \delta_0 = 0$ (car $0 \cdot \delta_0 = 0$).
+    \end{solution}
+    }{}
+    
+    \item En utilisant la propriété précédente, simplifier :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=(\alph*)]
+        \item $x^2 \delta_3$
+        \item $(x-1) \delta_1$
+        \item $e^x \delta_0$
+        \item $\sin(x) \delta_{\pi/2}$
+    \end{enumerate}
+    \end{multicols}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}[label=(\alph*)]
+            \item $x^2 \delta_3 = (3)^2 \delta_3 = \boxed{9 \delta_3}$
+            \item $(x-1) \delta_1 = (1-1) \delta_1 = \boxed{0}$
+            \item $e^x \delta_0 = e^0 \delta_0 = \boxed{\delta_0}$
+            \item $\sin(x) \delta_{\pi/2} = \sin(\pi/2) \delta_{\pi/2} = \boxed{\delta_{\pi/2}}$
+        \end{enumerate}
+    \end{solution}
+    }{}
+    
+    \item \textbf{Suite régularisante.} On considère la suite de fonctions :
+    \[
+    \delta_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2 x^2}
+    \]
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item Vérifier que $\int_{\mathbb{R}} \delta_n(x) dx = 1$ pour tout $n$.
+        \item Montrer que pour toute fonction test $\varphi$ : $\displaystyle \lim_{n \to +\infty} \int_{\mathbb{R}} \delta_n(x) \varphi(x) dx = \varphi(0)$.
+    \end{enumerate}
+    
+    \textit{On pourra utiliser le fait que $\int_{\mathbb{R}} e^{-u^2} du = \sqrt{\pi}$.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{(a)} Changement de variable $u = nx$, donc $du = n \, dx$ :
+        \[
+        \int_{\mathbb{R}} \delta_n(x) dx = \int_{\mathbb{R}} \frac{n}{\sqrt{\pi}} e^{-n^2 x^2} dx = \frac{n}{\sqrt{\pi}} \cdot \frac{1}{n} \int_{\mathbb{R}} e^{-u^2} du = \frac{1}{\sqrt{\pi}} \cdot \sqrt{\pi} = 1
+        \]
+        
+        \textbf{(b)} On a :
+        \[
+        \int_{\mathbb{R}} \delta_n(x) \varphi(x) dx = \frac{n}{\sqrt{\pi}} \int_{\mathbb{R}} e^{-n^2 x^2} \varphi(x) dx
+        \]
+        
+        Changement de variable $u = nx$ :
+        \[
+        = \frac{1}{\sqrt{\pi}} \int_{\mathbb{R}} e^{-u^2} \varphi(u/n) du
+        \]
+        
+        Quand $n \to +\infty$, $\varphi(u/n) \to \varphi(0)$ uniformément (car $\varphi$ est continue et à support compact). Par convergence dominée :
+        \[
+        \lim_{n \to +\infty} \frac{1}{\sqrt{\pi}} \int_{\mathbb{R}} e^{-u^2} \varphi(u/n) du = \frac{\varphi(0)}{\sqrt{\pi}} \int_{\mathbb{R}} e^{-u^2} du = \varphi(0)
+        \]
+        
+        \textbf{Conclusion :} $\delta_n \to \delta$ au sens des distributions.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 4 : Dérivation des distributions}
+%==============================================================================
+
+\textbf{Rappel :} La dérivée d'une distribution $T$ est définie par $\langle T', \varphi \rangle = -\langle T, \varphi' \rangle$.
+
+\begin{enumerate}
+    \item \textbf{Dérivée de Heaviside.} Montrer que $H' = \delta$ au sens des distributions.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On calcule $\langle H', \varphi \rangle$ pour toute fonction test $\varphi$ :
+        \[
+        \langle H', \varphi \rangle = -\langle H, \varphi' \rangle = -\int_{\mathbb{R}} H(x) \varphi'(x) dx = -\int_0^{+\infty} \varphi'(x) dx
+        \]
+        
+        Comme $\varphi$ est à support compact, $\varphi(x) \to 0$ quand $x \to +\infty$ :
+        \[
+        = -[\varphi(x)]_0^{+\infty} = -(0 - \varphi(0)) = \varphi(0) = \langle \delta, \varphi \rangle
+        \]
+        
+        \textbf{Conclusion :} $H' = \delta$.
+    \end{solution}
+    }{}
+    
+    \item Calculer la dérivée (au sens des distributions) de $H_a(x) = H(x-a)$ (Heaviside décalé).
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \langle H_a', \varphi \rangle = -\langle H_a, \varphi' \rangle = -\int_{\mathbb{R}} H(x-a) \varphi'(x) dx = -\int_a^{+\infty} \varphi'(x) dx
+        \]
+        \[
+        = -[\varphi(x)]_a^{+\infty} = -(0 - \varphi(a)) = \varphi(a) = \langle \delta_a, \varphi \rangle
+        \]
+        
+        \textbf{Conclusion :} $H(x-a)' = \delta_a$ (Dirac en $a$).
+    \end{solution}
+    }{}
+    
+    \item \textbf{Dérivée du Dirac.} Calculer $\langle \delta', \varphi \rangle$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition :
+        \[
+        \langle \delta', \varphi \rangle = -\langle \delta, \varphi' \rangle = -\varphi'(0)
+        \]
+        
+        La distribution $\delta'$ (appelée \textbf{doublet}) agit donc en évaluant l'opposé de la dérivée en 0.
+        
+        Plus généralement : $\langle \delta^{(n)}, \varphi \rangle = (-1)^n \varphi^{(n)}(0)$.
+    \end{solution}
+    }{}
+    
+    \item Soit la fonction « rampe » $R(x) = x \cdot H(x) = \max(0, x)$.
+    
+    \begin{center}
+    \begin{tikzpicture}[scale=0.8]
+        \draw[->] (-2,0) -- (3,0) node[right] {$x$};
+        \draw[->] (0,-0.5) -- (0,2.5) node[above] {$R(x)$};
+        \draw[thick, Theme] (-2,0) -- (0,0) -- (2.5,2.5);
+        \node at (2,1.5) {$R(x) = x H(x)$};
+    \end{tikzpicture}
+    \end{center}
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item Calculer $R'$ au sens des distributions.
+        \item Calculer $R''$ au sens des distributions.
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{(a)} On a $R(x) = xH(x)$. Par la règle de Leibniz pour les distributions :
+        \[
+        R' = (xH)' = H + xH' = H + x\delta
+        \]
+        
+        Or $x\delta = 0$ (propriété de filtrage : $x\delta_0 = 0 \cdot \delta_0 = 0$).
+        
+        Donc $\boxed{R' = H}$.
+        
+        \textit{Vérification directe :}
+        \[
+        \langle R', \varphi \rangle = -\langle R, \varphi' \rangle = -\int_0^{+\infty} x \varphi'(x) dx
+        \]
+        
+        Intégration par parties ($u = x$, $dv = \varphi'dx$) :
+        \[
+        = -[x\varphi(x)]_0^{+\infty} + \int_0^{+\infty} \varphi(x) dx = 0 + \int_0^{+\infty} \varphi(x) dx = \langle H, \varphi \rangle
+        \]
+        
+        \textbf{(b)} $R'' = H' = \delta$.
+        
+        Donc $\boxed{R'' = \delta}$.
+    \end{solution}
+    }{}
+    
+    \item Soit $f(x) = |x|$.
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item Exprimer $f$ en fonction de la fonction rampe $R$.
+        \item En déduire $f'$ et $f''$ au sens des distributions.
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{(a)} On a :
+        \[
+        |x| = \begin{cases} -x & x < 0 \\ x & x \geq 0 \end{cases}
+        \]
+        
+        On peut écrire : $|x| = xH(x) - x(1-H(x)) = xH(x) - x + xH(x) = 2xH(x) - x$.
+        
+        Donc $|x| = 2R(x) - x$.
+        
+        \textbf{(b)} $f' = 2R' - 1 = 2H - 1$.
+        
+        On reconnaît la fonction \textbf{signe} : $\text{sgn}(x) = \begin{cases} -1 & x < 0 \\ 1 & x > 0 \end{cases}$
+        
+        Donc $\boxed{|x|' = \text{sgn}(x) = 2H(x) - 1}$.
+        
+        Et $f'' = 2H' = 2\delta$.
+        
+        Donc $\boxed{|x|'' = 2\delta}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+\newpage
+
+%==============================================================================
+\section*{Exercice 5 : Calculs de dérivées distributionnelles}
+%==============================================================================
+
+\begin{enumerate}
+    \item Calculer la dérivée au sens des distributions de :
+    \[
+    f(x) = \begin{cases} 0 & x < 0 \\ x^2 & 0 \leq x < 1 \\ 1 & x \geq 1 \end{cases}
+    \]
+    
+    \textit{Indication : écrire $f$ comme somme de fonctions plus simples.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Méthode 1 : Décomposition}
+        
+        On peut écrire : $f(x) = x^2 (H(x) - H(x-1)) + H(x-1) = x^2 H(x) - x^2 H(x-1) + H(x-1)$.
+        
+        \textbf{Méthode 2 : Analyse des discontinuités}
+        
+        La fonction $f$ est continue sur $\mathbb{R}$ (en $x=0$ : $f(0^-) = 0 = f(0^+)$ ; en $x=1$ : $f(1^-) = 1 = f(1^+)$).
+        
+        Sa dérivée au sens classique est :
+        \[
+        f'_{\text{class}}(x) = \begin{cases} 0 & x < 0 \\ 2x & 0 < x < 1 \\ 0 & x > 1 \end{cases}
+        \]
+        
+        Mais en $x=0$, $f'(0^-) = 0$ et $f'(0^+) = 0$ : pas de saut.
+        En $x=1$, $f'(1^-) = 2$ et $f'(1^+) = 0$ : saut de $-2$.
+        
+        Donc au sens des distributions :
+        \[
+        \boxed{f' = 2x (H(x) - H(x-1)) - 2\delta_1 = 2x \cdot \mathbf{1}_{[0,1]}(x) - 2\delta_1}
+        \]
+        
+        \textit{Le terme $-2\delta_1$ vient du saut de la dérivée en $x=1$.}
+    \end{solution}
+    }{}
+    
+    \item Soit $f(x) = e^{-|x|}$. Calculer $f'$ et $f''$ au sens des distributions.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Calcul de $f'$ :}
+        
+        On a $f(x) = e^{-|x|}$, donc :
+        - Pour $x > 0$ : $f(x) = e^{-x}$, $f'(x) = -e^{-x}$
+        - Pour $x < 0$ : $f(x) = e^{x}$, $f'(x) = e^{x}$
+        
+        Aux limites en 0 : $f'(0^-) = e^0 = 1$ et $f'(0^+) = -e^0 = -1$.
+        
+        La fonction $f$ est continue en 0 ($f(0) = 1$), donc pas de Dirac dans $f'$.
+        
+        On peut écrire : $f'(x) = -\text{sgn}(x) e^{-|x|}$ pour $x \neq 0$.
+        
+        \[
+        \boxed{f'(x) = -\text{sgn}(x) e^{-|x|}}
+        \]
+        
+        \textbf{Calcul de $f''$ :}
+        
+        $f'(x) = e^x$ pour $x < 0$ et $f'(x) = -e^{-x}$ pour $x > 0$.
+        
+        Donc $f''_{\text{class}}(x) = e^x$ pour $x < 0$ et $f''_{\text{class}}(x) = e^{-x}$ pour $x > 0$.
+        
+        Saut de $f'$ en 0 : $f'(0^+) - f'(0^-) = -1 - 1 = -2$.
+        
+        Donc :
+        \[
+        \boxed{f'' = e^{-|x|} - 2\delta_0 = f - 2\delta}
+        \]
+        
+        On a la relation remarquable : $f'' - f = -2\delta$.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application : EDP avec source ponctuelle.} On considère l'équation :
+    \[
+    -u''(x) = \delta_0
+    \]
+    Trouver une solution $u$ continue sur $\mathbb{R}$, en utilisant le résultat de la question précédente.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        D'après la question précédente, si $f(x) = e^{-|x|}$, alors $f'' = f - 2\delta$.
+        
+        Donc $-f'' = 2\delta - f$, soit $(-f/2)'' = \delta - f/2$.
+        
+        Cherchons plutôt directement. On veut $-u'' = \delta$.
+        
+        Pour $x \neq 0$, on a $u'' = 0$, donc $u(x) = ax + b$ pour $x > 0$ et $u(x) = cx + d$ pour $x < 0$.
+        
+        \textbf{Continuité en 0 :} $u(0^+) = b$ et $u(0^-) = d$, donc $b = d$.
+        
+        \textbf{Saut de la dérivée :} La relation $-u'' = \delta$ implique que le saut de $u'$ en 0 vaut $-1$ :
+        $u'(0^+) - u'(0^-) = -1$, soit $a - c = -1$.
+        
+        \textbf{Conditions aux limites :} Pour une solution bornée, on impose $a \leq 0$ et $c \geq 0$.
+        
+        La solution la plus simple est $a = 0$, $c = 1$, $b = d = 0$ :
+        \[
+        u(x) = \begin{cases} x & x < 0 \\ 0 & x \geq 0 \end{cases}
+        \]
+        
+        Mais si on veut une solution symétrique et bornée : $a = -1/2$, $c = 1/2$, ce qui donne :
+        \[
+        \boxed{u(x) = -\frac{|x|}{2} + C}
+        \]
+        
+        \textit{Application physique :} C'est le potentiel créé par une charge ponctuelle en dimension 1.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 6 : Peigne de Dirac}
+%==============================================================================
+
+Le \textbf{peigne de Dirac} de période $T$ est la distribution :
+\[
+\Sha_T(x) = \sum_{n=-\infty}^{+\infty} \delta_{nT}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    \draw[->] (-5,0) -- (5,0) node[right] {$x$};
+    \draw[->] (0,-0.5) -- (0,2.5);
+    \foreach \n in {-4,-3,-2,-1,0,1,2,3,4} {
+        \draw[thick, Theme, ->] (\n,0) -- (\n,1.8);
+    }
+    \node at (-4,-0.4) {$-4T$};
+    \node at (-2,-0.4) {$-2T$};
+    \node at (0,-0.4) {$0$};
+    \node at (2,-0.4) {$2T$};
+    \node at (4,-0.4) {$4T$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Calculer $\langle \Sha_T, \varphi \rangle$ pour une fonction test $\varphi \in \Distr(\mathbb{R})$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par linéarité et définition du Dirac :
+        \[
+        \langle \Sha_T, \varphi \rangle = \sum_{n=-\infty}^{+\infty} \langle \delta_{nT}, \varphi \rangle = \sum_{n=-\infty}^{+\infty} \varphi(nT)
+        \]
+        
+        Comme $\varphi$ est à support compact, seul un nombre fini de termes sont non nuls.
+        
+        \textbf{Interprétation :} Le peigne de Dirac « échantillonne » la fonction $\varphi$ aux points $nT$.
+    \end{solution}
+    }{}
+    
+    \item Montrer que $\Sha_T$ est $T$-périodique : $\Sha_T(x-T) = \Sha_T(x)$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a :
+        \[
+        \Sha_T(x-T) = \sum_{n=-\infty}^{+\infty} \delta_{nT}(x-T) = \sum_{n=-\infty}^{+\infty} \delta((x-T) - nT) = \sum_{n=-\infty}^{+\infty} \delta(x - (n+1)T)
+        \]
+        
+        En posant $m = n+1$ :
+        \[
+        = \sum_{m=-\infty}^{+\infty} \delta(x - mT) = \Sha_T(x)
+        \]
+        
+        \textbf{Conclusion :} $\Sha_T$ est $T$-périodique.
+    \end{solution}
+    }{}
+    
+    \item Calculer la dérivée $\Sha_T'$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par linéarité de la dérivation :
+        \[
+        \Sha_T' = \sum_{n=-\infty}^{+\infty} \delta_{nT}' = \sum_{n=-\infty}^{+\infty} \delta'_{nT}
+        \]
+        
+        C'est un « peigne de doublets ».
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application : échantillonnage.} Soit $f$ une fonction continue. On définit la fonction échantillonnée $f_e = f \cdot \Sha_T$. Exprimer $\langle f_e, \varphi \rangle$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition du produit :
+        \[
+        \langle f \cdot \Sha_T, \varphi \rangle = \langle \Sha_T, f \cdot \varphi \rangle = \sum_{n=-\infty}^{+\infty} (f \cdot \varphi)(nT) = \sum_{n=-\infty}^{+\infty} f(nT) \varphi(nT)
+        \]
+        
+        On peut aussi écrire :
+        \[
+        f \cdot \Sha_T = \sum_{n=-\infty}^{+\infty} f(nT) \delta_{nT}
+        \]
+        
+        \textbf{Interprétation :} $f_e$ est une « version discrète » de $f$, constituée de Diracs pondérés par les valeurs de $f$ aux points d'échantillonnage.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+\newpage
+
+%==============================================================================
+\section*{Exercice 7 : Transformée de Fourier des distributions}
+%==============================================================================
+
+\textbf{Rappel :} La transformée de Fourier d'une fonction $f \in L^1(\mathbb{R})$ est :
+\[
+\Four\{f\}(\xi) = \hat{f}(\xi) = \int_{\mathbb{R}} f(x) e^{-2\pi i \xi x} \, dx
+\]
+
+Pour les distributions, on définit : $\langle \hat{T}, \varphi \rangle = \langle T, \hat{\varphi} \rangle$.
+
+\begin{enumerate}
+    \item \textbf{Transformée de Fourier du Dirac.} Calculer $\hat{\delta}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour toute fonction test $\varphi$ :
+        \[
+        \langle \hat{\delta}, \varphi \rangle = \langle \delta, \hat{\varphi} \rangle = \hat{\varphi}(0) = \int_{\mathbb{R}} \varphi(x) e^{-2\pi i \cdot 0 \cdot x} dx = \int_{\mathbb{R}} \varphi(x) dx = \langle 1, \varphi \rangle
+        \]
+        
+        \textbf{Conclusion :} $\boxed{\hat{\delta} = 1}$
+        
+        \textit{Interprétation :} Le Dirac (impulsion infiniment localisée en espace) a un spectre constant (toutes les fréquences avec la même amplitude).
+    \end{solution}
+    }{}
+    
+    \item En déduire la transformée de Fourier de la fonction constante $f(x) = 1$.
+    
+    \textit{Indication : utiliser que $\Four\{\Four\{f\}\}(x) = f(-x)$ pour les distributions.}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        D'après la formule d'inversion, $\Four\{\Four\{f\}\}(x) = f(-x)$.
+        
+        On a $\hat{\delta} = 1$, donc $\Four\{1\} = \Four\{\hat{\delta}\}$.
+        
+        Or $\Four\{\hat{f}\}(x) = f(-x)$, donc $\Four\{1\}(x) = \delta(-x) = \delta(x)$ (car $\delta$ est paire).
+        
+        \textbf{Conclusion :} $\boxed{\hat{1} = \delta}$
+        
+        \textit{Interprétation :} Un signal constant (DC) a un spectre qui est un Dirac à la fréquence 0.
+    \end{solution}
+    }{}
+    
+    \item Calculer la transformée de Fourier de $\delta_a$ (Dirac en $a$).
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour toute fonction test $\varphi$ :
+        \[
+        \langle \hat{\delta_a}, \varphi \rangle = \langle \delta_a, \hat{\varphi} \rangle = \hat{\varphi}(a) = \int_{\mathbb{R}} \varphi(x) e^{-2\pi i a x} dx
+        \]
+        
+        Or $\int_{\mathbb{R}} \varphi(x) e^{-2\pi i a x} dx = \langle e^{-2\pi i a \cdot}, \varphi \rangle$.
+        
+        \textbf{Conclusion :} $\boxed{\hat{\delta_a}(\xi) = e^{-2\pi i a \xi}}$
+        
+        \textit{C'est la propriété de décalage en Fourier : un décalage en espace donne une modulation en fréquence.}
+    \end{solution}
+    }{}
+    
+    \item Calculer la transformée de Fourier de $e^{2\pi i \nu_0 x}$ (exponentielle complexe de fréquence $\nu_0$).
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par dualité avec le résultat précédent :
+        
+        Si $\hat{\delta_a}(\xi) = e^{-2\pi i a \xi}$, alors $\Four\{e^{-2\pi i a x}\} = \delta_a$.
+        
+        En remplaçant $a$ par $-\nu_0$ :
+        \[
+        \Four\{e^{2\pi i \nu_0 x}\} = \delta_{-\nu_0}(-\xi) = \delta_{\nu_0}(\xi)
+        \]
+        
+        \textbf{Conclusion :} $\boxed{\Four\{e^{2\pi i \nu_0 x}\} = \delta_{\nu_0}}$
+        
+        \textit{Une sinusoïde pure de fréquence $\nu_0$ a un spectre qui est un Dirac en $\nu_0$.}
+    \end{solution}
+    }{}
+    
+    \item En déduire la transformée de Fourier de $\cos(2\pi \nu_0 x)$ et $\sin(2\pi \nu_0 x)$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Pour le cosinus :}
+        \[
+        \cos(2\pi \nu_0 x) = \frac{e^{2\pi i \nu_0 x} + e^{-2\pi i \nu_0 x}}{2}
+        \]
+        
+        Par linéarité :
+        \[
+        \Four\{\cos(2\pi \nu_0 x)\} = \frac{1}{2}(\delta_{\nu_0} + \delta_{-\nu_0})
+        \]
+        
+        \textbf{Pour le sinus :}
+        \[
+        \sin(2\pi \nu_0 x) = \frac{e^{2\pi i \nu_0 x} - e^{-2\pi i \nu_0 x}}{2i}
+        \]
+        
+        \[
+        \Four\{\sin(2\pi \nu_0 x)\} = \frac{1}{2i}(\delta_{\nu_0} - \delta_{-\nu_0}) = \frac{i}{2}(\delta_{-\nu_0} - \delta_{\nu_0})
+        \]
+        
+        \textbf{Conclusions :}
+        \[
+        \boxed{\hat{\cos}(2\pi \nu_0 x) = \frac{1}{2}(\delta_{\nu_0} + \delta_{-\nu_0})}
+        \]
+        \[
+        \boxed{\hat{\sin}(2\pi \nu_0 x) = \frac{1}{2i}(\delta_{\nu_0} - \delta_{-\nu_0})}
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Transformée de la dérivée.} Montrer que $\Four\{T'\} = 2\pi i \xi \cdot \hat{T}$.
+    
+    En déduire $\Four\{\delta'\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Soit $\varphi$ une fonction test. On a :
+        \[
+        \langle \Four\{T'\}, \varphi \rangle = \langle T', \hat{\varphi} \rangle = -\langle T, \hat{\varphi}' \rangle
+        \]
+        
+        Or, par dérivation sous l'intégrale :
+        \[
+        \hat{\varphi}'(\xi) = \frac{d}{d\xi} \int_{\mathbb{R}} \varphi(x) e^{-2\pi i \xi x} dx = \int_{\mathbb{R}} \varphi(x) (-2\pi i x) e^{-2\pi i \xi x} dx = \Four\{-2\pi i x \varphi(x)\}(\xi)
+        \]
+        
+        Donc :
+        \[
+        -\langle T, \hat{\varphi}' \rangle = -\langle T, \Four\{-2\pi i x \varphi\} \rangle = \langle \hat{T}, 2\pi i x \varphi \rangle = \langle 2\pi i \xi \hat{T}, \varphi \rangle
+        \]
+        
+        \textbf{Conclusion :} $\Four\{T'\} = 2\pi i \xi \cdot \hat{T}$.
+        
+        \textbf{Application à $\delta'$ :}
+        \[
+        \Four\{\delta'\} = 2\pi i \xi \cdot \hat{\delta} = 2\pi i \xi \cdot 1 = \boxed{2\pi i \xi}
+        \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Formule de Poisson.} Admettre que la transformée de Fourier du peigne de Dirac $\Sha_T = \sum_{n \in \mathbb{Z}} \delta_{nT}$ est :
+    \[
+    \hat{\Sha}_T = \frac{1}{T} \Sha_{1/T} = \frac{1}{T} \sum_{k \in \mathbb{Z}} \delta_{k/T}
+    \]
+    
+    En déduire la \textbf{formule de Poisson} : pour une fonction $f$ suffisamment régulière,
+    \[
+    \sum_{n \in \mathbb{Z}} f(nT) = \frac{1}{T} \sum_{k \in \mathbb{Z}} \hat{f}\left(\frac{k}{T}\right)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Soit $f$ une fonction (régulière et à décroissance rapide). Le produit de convolution $f * \Sha_T$ donne :
+        \[
+        (f * \Sha_T)(x) = \sum_{n \in \mathbb{Z}} f(x - nT)
+        \]
+        
+        En Fourier : $\Four\{f * \Sha_T\} = \hat{f} \cdot \hat{\Sha}_T = \hat{f} \cdot \frac{1}{T} \Sha_{1/T}$.
+        
+        En évaluant en $x = 0$ (ou en appliquant à une fonction test appropriée) :
+        \[
+        \sum_{n \in \mathbb{Z}} f(-nT) = \sum_{n \in \mathbb{Z}} f(nT)
+        \]
+        
+        correspond à
+        \[
+        \frac{1}{T} \sum_{k \in \mathbb{Z}} \hat{f}(k/T)
+        \]
+        
+        \textbf{Formule de Poisson :}
+        \[
+        \boxed{\sum_{n \in \mathbb{Z}} f(nT) = \frac{1}{T} \sum_{k \in \mathbb{Z}} \hat{f}\left(\frac{k}{T}\right)}
+        \]
+        
+        \textit{Application :} Cette formule est fondamentale en traitement du signal (théorème d'échantillonnage de Shannon-Nyquist) et en théorie des nombres.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Formulaire : Distributions}
+%==============================================================================
+
+\renewcommand{\arraystretch}{1.6}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Distribution} & \textbf{Définition} \\
+\hline\hline
+$\delta$ (Dirac en 0) & $\langle \delta, \varphi \rangle = \varphi(0)$ \\
+\hline
+$\delta_a$ (Dirac en $a$) & $\langle \delta_a, \varphi \rangle = \varphi(a)$ \\
+\hline
+$\delta'$ (doublet) & $\langle \delta', \varphi \rangle = -\varphi'(0)$ \\
+\hline
+$\delta^{(n)}$ & $\langle \delta^{(n)}, \varphi \rangle = (-1)^n \varphi^{(n)}(0)$ \\
+\hline
+$T_f$ (dist. régulière) & $\langle T_f, \varphi \rangle = \int_{\mathbb{R}} f(x) \varphi(x) \, dx$ \\
+\hline
+\end{tabular}
+\caption{Distributions fondamentales}
+\end{table}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Fonction} & \textbf{Dérivée au sens des distributions} \\
+\hline\hline
+$H(x)$ (Heaviside) & $H' = \delta$ \\
+\hline
+$H(x-a)$ & $(H(x-a))' = \delta_a$ \\
+\hline
+$|x|$ & $|x|' = \text{sgn}(x)$, \quad $|x|'' = 2\delta$ \\
+\hline
+$xH(x)$ (rampe) & $(xH)' = H$, \quad $(xH)'' = \delta$ \\
+\hline
+$e^{-|x|}$ & $(e^{-|x|})'' = e^{-|x|} - 2\delta$ \\
+\hline
+\end{tabular}
+\caption{Dérivées distributionnelles usuelles}
+\end{table}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Distribution} & \textbf{Transformée de Fourier} \\
+\hline\hline
+$\delta$ & $\hat{\delta} = 1$ \\
+\hline
+$1$ & $\hat{1} = \delta$ \\
+\hline
+$\delta_a$ & $\hat{\delta_a}(\xi) = e^{-2\pi i a \xi}$ \\
+\hline
+$e^{2\pi i \nu_0 x}$ & $\delta_{\nu_0}$ \\
+\hline
+$\cos(2\pi \nu_0 x)$ & $\frac{1}{2}(\delta_{\nu_0} + \delta_{-\nu_0})$ \\
+\hline
+$\sin(2\pi \nu_0 x)$ & $\frac{1}{2i}(\delta_{\nu_0} - \delta_{-\nu_0})$ \\
+\hline
+$\delta'$ & $2\pi i \xi$ \\
+\hline
+$\Sha_T$ (peigne) & $\frac{1}{T} \Sha_{1/T}$ \\
+\hline
+\end{tabular}
+\caption{Transformées de Fourier de distributions}
+\end{table}
+
+\end{document}
