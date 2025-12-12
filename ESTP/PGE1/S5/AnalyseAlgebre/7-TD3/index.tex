@@ -855,7 +855,7 @@ La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C
 \]
 
 \begin{enumerate}
-    \item Soit $f : \mathbb{R}^+ \to \mathbb{C}$ une fonction \textbf{causale} (nulle pour $t < 0$). Montrer que :
+    \item Soit $f : \mathbb{R}^+ \to \mathbb{C}$ une fonction \textbf{causale} (c'est-à-dire nulle pour $t < 0$). Montrer que :
     \[
     \Four\{f\}(\omega) = \Lap\{f\}(i\omega)
     \]
@@ -895,9 +895,8 @@ La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C
     \end{solution}
     }{}
     
-    \item Calculer la transformée de Fourier de $g(t) = e^{-a|t|}$ pour $a > 0$ (fonction non causale).
+    \item Calculer la transformée de Fourier de $g(t) = e^{-a|t|}$ pour $a > 0$.
     
-    \textit{Indication : séparer l'intégrale en $t < 0$ et $t > 0$.}
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
         \begin{align*}
@@ -908,7 +907,7 @@ La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C
         &= \frac{1}{a-i\omega} + \frac{1}{a+i\omega} = \frac{(a+i\omega) + (a-i\omega)}{a^2 + \omega^2} = \frac{2a}{a^2 + \omega^2}
         \end{align*}
         
-        C'est une fonction lorentzienne, caractéristique des systèmes résonants.
+        (C'est une fonction lorentzienne, caractéristique des systèmes résonants.)
     \end{solution}
     }{}
     
@@ -920,7 +919,7 @@ La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C
     \end{enumerate}
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        \textbf{(a)} En appliquant Laplace (conditions initiales nulles) :
+        \textbf{(a)} En appliquant Laplace (les conditions initiales sont nulles) :
         \[
         (s^2 + 2s + 2)Y(s) = X(s)
         \]
@@ -942,7 +941,7 @@ La \textbf{transformée de Fourier} d'une fonction $f : \mathbb{R} \to \mathbb{C
         
         C'est impossible pour $\omega \in \mathbb{R}$. Donc ce système n'amplifie jamais le signal : c'est un \textbf{filtre passe-bas} atténuateur.
         
-        Le maximum du gain est $|H(0)| = \frac{1}{2}$, atteint en $\omega = 0$ (DC).
+        Le maximum du gain est $|H(0)| = \frac{1}{2}$, atteint en $\omega = 0$.
     \end{solution}
     }{}
 \end{enumerate}

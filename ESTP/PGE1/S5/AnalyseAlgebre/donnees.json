@@ -89,7 +89,7 @@
     },
     {
       "id": "sec4",
-      "numero": 3,
+      "numero": 2,
       "titre": "Transformées Fourier/Laplace",
       "lien": "#",
       "sousParties": [
@@ -118,12 +118,20 @@
           "description": "Transformées Fourier/Laplace",
           "lien": "7-TD3/corrige.pdf",
           "cible": "_blank"
+        }, 
+        {
+          "id": "ex3",
+          "numero": 2,
+          "titre": "Résoudre une équation différentielle avec Laplace",
+          "description": "Transformées Fourier/Laplace",
+          "lien": "7-TD3/IMG_4825.jpeg",
+          "cible": "_blank"
         }
       ]
     },
     {
       "id": "sec5",
-      "numero": 4,
+      "numero": 3,
       "titre": "Distributions",
       "description": "Déterminants · Polynômes",
       "lien": "#",
@@ -136,7 +144,7 @@
     },
     {
       "id": "sec6",
-      "numero": 5,
+      "numero": 4,
       "titre": "Equations aux dérivées partielles",
       "description": "Equations aux dérivées partielles · Problèmes aux limites",
       "lien": "#",
