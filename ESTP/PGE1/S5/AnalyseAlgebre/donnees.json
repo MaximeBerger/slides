@@ -13,15 +13,7 @@
           "numero": 0,
           "titre": "Cours - Calcul vectoriel et tensoriel",
           "description": "Calcul vectoriel · Calcul tensoriel",
-          "lien": "3-EspacesLp/chapitre-1-vecteurs-et-tenseurs.html",
-          "cible": "_blank"
-        }, 
-        {
-          "id": "sub2",
-          "numero": 1,
-          "titre": "Version pdf",
-          "description": "Calcul tensoriel · Calcul tensoriel",
-          "lien": "1-Tenseurs/chapitre-1-vecteurs-et-tenseurs.pdf",
+          "lien": "Cours/chapitre-1-vecteurs-et-tenseurs.html",
           "cible": "_blank"
         }
       ],
@@ -56,7 +48,7 @@
         "numero": 0,
         "titre": "Cours - Espaces Lp",
         "description": "Espaces Lp · Espaces L∞",
-        "lien": "3-EspacesLp/chapitre-2-espaces-lp.html",
+        "lien": "Cours/chapitre-2-espaces-lp.html",
         "cible": "_blank"
        }
       ],
@@ -98,7 +90,7 @@
         "numero": 0,
         "titre": "Cours - Transformées Fourier/Laplace",
         "description": "Transformées Fourier/Laplace",
-        "lien": "6-Laplace/chapitre-3-analyse-harmonique.html",
+        "lien": "Cours/chapitre-3-analyse-harmonique.html",
         "cible": "_blank"
        }
       ],
@@ -136,7 +128,14 @@
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
-        
+        {
+          "id": "sub1",
+          "numero": 0,
+          "titre": "Cours - Distributions",
+          "description": "Distributions",
+          "lien": "Cours/chapitre-4-distributions.html",
+          "cible": "_blank"
+        }
       ],
       "sexercer": [
 
