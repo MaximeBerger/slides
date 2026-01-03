@@ -153,6 +153,22 @@
       "sexercer": [
 
       ]
+    },
+    {
+      "id": "sec7",
+      "numero": 5,
+      "titre": "Corrigé vidéo du partiel 2425",
+      "description": "",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Corrigé vidéo du partiel",
+          "description": "",
+          "lien": "https://entestp-my.sharepoint.com/:v:/g/personal/mberger_estp_fr/IQACDmEgX67xT7VCZJtPHpuhAXf9ykR7SjWkZE8WGOILzuE?e=7HUWct",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
