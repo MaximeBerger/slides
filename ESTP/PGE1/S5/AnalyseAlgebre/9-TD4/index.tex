@@ -1,0 +1,698 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow, multicol}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+% Commande pour la transformée de Laplace
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\Four}{\mathcal{F}}
+\newcommand{\Distr}{\mathcal{D}}
+\newcommand{\Schwartz}{\mathcal{S}}
+\newcommand{\Sha}{\text{Ш}} % Peigne de Dirac
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ Analyse-Algèbre - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD4}}\\[1em]
+    {\large \textit{Dérivées partielles et équations}}
+\end{center}
+
+
+\section*{Exercice 1 : Calcul de dérivées partielles}
+Calculer les dérivées partielles à l'ordre 2 des fonctions suivantes :
+\begin{enumerate}
+    \item $f(x, y)=e^{3y^3} \cos (xy)$
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \textbf{Dérivées partielles d'ordre 1 :}
+    \[
+    \frac{\partial f}{\partial x} = e^{3y^3} \cdot (-y\sin(xy)) = -y e^{3y^3} \sin(xy)
+    \]
+    \[
+    \frac{\partial f}{\partial y} = 9y^2 e^{3y^3} \cos(xy) + e^{3y^3} \cdot (-x\sin(xy)) = e^{3y^3}(9y^2 \cos(xy) - x\sin(xy))
+    \]
+    
+    \textbf{Dérivées partielles d'ordre 2 :}
+    \[
+    \frac{\partial^2 f}{\partial x^2} = -y e^{3y^3} \cdot y\cos(xy) = -y^2 e^{3y^3} \cos(xy)
+    \]
+    \[
+    \frac{\partial^2 f}{\partial y^2} = e^{3y^3}\Big[(18y + 81y^4)\cos(xy) - (9y^2 \cdot x + 9y^2 \cdot x)\sin(xy) - x^2\cos(xy)\Big]
+    \]
+    \[
+    = e^{3y^3}\Big[(18y + 81y^4 - x^2)\cos(xy) - 18xy^2\sin(xy)\Big]
+    \]
+    \[
+    \frac{\partial^2 f}{\partial x \partial y} = -e^{3y^3}\sin(xy) - y \cdot 9y^2 e^{3y^3}\sin(xy) - y e^{3y^3} \cdot x\cos(xy)
+    \]
+    \[
+    = -e^{3y^3}\Big[(1 + 9y^3)\sin(xy) + xy\cos(xy)\Big]
+    \]
+    \end{solution}
+    }{}
+    
+    \item $f(x, y)=(x^2+y^2) \cos (x^2 - y)$
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \textbf{Dérivées partielles d'ordre 1 :}
+    \[
+    \frac{\partial f}{\partial x} = 2x\cos(x^2-y) + (x^2+y^2)(-2x\sin(x^2-y)) = 2x\cos(x^2-y) - 2x(x^2+y^2)\sin(x^2-y)
+    \]
+    \[
+    \frac{\partial f}{\partial y} = 2y\cos(x^2-y) + (x^2+y^2)\sin(x^2-y)
+    \]
+    
+    \textbf{Dérivées partielles d'ordre 2 :}
+    \[
+    \frac{\partial^2 f}{\partial x^2} = 2\cos(x^2-y) - 4x^2\sin(x^2-y) - 2(3x^2+y^2)\sin(x^2-y) - 4x^2(x^2+y^2)\cos(x^2-y)
+    \]
+    \[
+    = (2 - 4x^2(x^2+y^2))\cos(x^2-y) - (4x^2 + 6x^2 + 2y^2)\sin(x^2-y)
+    \]
+    \[
+    \frac{\partial^2 f}{\partial y^2} = 2\cos(x^2-y) + 2y\sin(x^2-y) + 2y\sin(x^2-y) - (x^2+y^2)\cos(x^2-y)
+    \]
+    \[
+    = (2 - x^2 - y^2)\cos(x^2-y) + 4y\sin(x^2-y)
+    \]
+    \[
+    \frac{\partial^2 f}{\partial x \partial y} = 2x\sin(x^2-y) + 2x\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
+    \]
+    \[
+    = 4x\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
+    \]
+    \end{solution}
+    }{}
+    
+    \item $f(x, y)=\sqrt{2-x^2 y^2}$
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On écrit $f(x,y) = (2 - x^2y^2)^{1/2}$.
+    
+    \textbf{Dérivées partielles d'ordre 1 :}
+    \[
+    \frac{\partial f}{\partial x} = \frac{1}{2}(2-x^2y^2)^{-1/2} \cdot (-2xy^2) = \frac{-xy^2}{\sqrt{2-x^2y^2}}
+    \]
+    \[
+    \frac{\partial f}{\partial y} = \frac{1}{2}(2-x^2y^2)^{-1/2} \cdot (-2x^2y) = \frac{-x^2y}{\sqrt{2-x^2y^2}}
+    \]
+    
+    \textbf{Dérivées partielles d'ordre 2 :}
+    \[
+    \frac{\partial^2 f}{\partial x^2} = \frac{-y^2 \sqrt{2-x^2y^2} - (-xy^2) \cdot \frac{-xy^2}{\sqrt{2-x^2y^2}}}{2-x^2y^2}
+    \]
+    \[
+    = \frac{-y^2(2-x^2y^2) - x^2y^4}{(2-x^2y^2)^{3/2}} = \frac{-2y^2 + x^2y^4 - x^2y^4}{(2-x^2y^2)^{3/2}} = \frac{-2y^2}{(2-x^2y^2)^{3/2}}
+    \]
+    
+    Par symétrie :
+    \[
+    \frac{\partial^2 f}{\partial y^2} = \frac{-2x^2}{(2-x^2y^2)^{3/2}}
+    \]
+    \[
+    \frac{\partial^2 f}{\partial x \partial y} = \frac{-2xy \sqrt{2-x^2y^2} - (-xy^2) \cdot \frac{-x^2y}{\sqrt{2-x^2y^2}}}{2-x^2y^2}
+    \]
+    \[
+    = \frac{-2xy(2-x^2y^2) - x^3y^3}{(2-x^2y^2)^{3/2}} = \frac{-4xy + 2x^3y^3 - x^3y^3}{(2-x^2y^2)^{3/2}} = \frac{-4xy + x^3y^3}{(2-x^2y^2)^{3/2}}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{Exercice 2 :  Dériver des composées}
+Soit $f: \mathbb{R}^2 \rightarrow \mathbb{R}$ une fonction de classe $C^1$
+\begin{enumerate}
+    \item On définit $g: \mathbb{R} \rightarrow \mathbb{R}$ par $g(t)=f\left(2+2 t, t^2\right)$. 
+    Calculer $g^{\prime}(t)$ en fonction des dérivées partielles de $f$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $x(t) = 2 + 2t$ et $y(t) = t^2$. Alors $g(t) = f(x(t), y(t))$.
+    
+    Par la règle de la chaîne :
+    \[
+    g'(t) = \frac{\partial f}{\partial x}(x(t), y(t)) \cdot x'(t) + \frac{\partial f}{\partial y}(x(t), y(t)) \cdot y'(t)
+    \]
+    
+    On a $x'(t) = 2$ et $y'(t) = 2t$, donc :
+    \[
+    \boxed{g'(t) = 2\frac{\partial f}{\partial x}(2+2t, t^2) + 2t\frac{\partial f}{\partial y}(2+2t, t^2)}
+    \]
+    \end{solution}
+    }{}
+    
+    \item On définit $h: \mathbb{R}^2 \rightarrow \mathbb{R}$ par $h(u, v)=f\left(u v, u^2+v^2\right)$. 
+    Exprimer les dérivées partielles $\frac{\partial h}{\partial u}$ et $\frac{\partial h}{\partial v}$ en fonction des dérivées partielles $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $x(u,v) = uv$ et $y(u,v) = u^2 + v^2$. Alors $h(u,v) = f(x(u,v), y(u,v))$.
+    
+    Par la règle de la chaîne :
+    \[
+    \frac{\partial h}{\partial u} = \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial u} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial u}
+    \]
+    
+    On a $\frac{\partial x}{\partial u} = v$ et $\frac{\partial y}{\partial u} = 2u$, donc :
+    \[
+    \boxed{\frac{\partial h}{\partial u} = v\frac{\partial f}{\partial x}(uv, u^2+v^2) + 2u\frac{\partial f}{\partial y}(uv, u^2+v^2)}
+    \]
+    
+    De même :
+    \[
+    \frac{\partial h}{\partial v} = \frac{\partial f}{\partial x} \cdot \frac{\partial x}{\partial v} + \frac{\partial f}{\partial y} \cdot \frac{\partial y}{\partial v}
+    \]
+    
+    On a $\frac{\partial x}{\partial v} = u$ et $\frac{\partial y}{\partial v} = 2v$, donc :
+    \[
+    \boxed{\frac{\partial h}{\partial v} = u\frac{\partial f}{\partial x}(uv, u^2+v^2) + 2v\frac{\partial f}{\partial y}(uv, u^2+v^2)}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+\vspace{1em}
+
+\section*{Exercice 3 : Méthode de séparation des variables}
+On rappelle l'équation de la chaleur :
+\begin{equation}
+    \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}
+\end{equation}
+On cherche une solution $u$ définie sur $[0,L]\times \mathbb{R_+}$ avec conditions initiales $u(x,0)=f(x)$ et conditions aux bords $u(0,t)=u(L,t)=0$.
+
+\begin{enumerate}
+    \item Cette équation est-elle elliptique, parabolique ou hyperbolique ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation de la chaleur s'écrit sous la forme générale $Au_{xx} + Bu_{xt} + Cu_{tt} + \ldots = 0$ avec $A = -1$, $B = 0$, $C = 0$.
+    
+    Le discriminant est $\Delta = B^2 - 4AC = 0 - 4(-1)(0) = 0$.
+    
+    Comme $\Delta = 0$, l'équation est \textbf{parabolique}.
+    
+    \textit{Remarque : Les équations paraboliques décrivent des phénomènes de diffusion, où l'information se propage instantanément mais avec atténuation.}
+    \end{solution}
+    }{}
+    
+    \item Essayons de trouver une solution sous la forme $u(x,t)=X(x)T(t)$. Que devient l'équation différentielle ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On substitue $u(x,t) = X(x)T(t)$ dans l'équation :
+    \[
+    \frac{\partial u}{\partial t} = X(x)T'(t) \quad \text{et} \quad \frac{\partial^2 u}{\partial x^2} = X''(x)T(t)
+    \]
+    
+    L'équation devient :
+    \[
+    X(x)T'(t) = X''(x)T(t)
+    \]
+    \end{solution}
+    }{}
+    
+    \item Ecrivez cette équation sous la forme $f(t)=g(x)$.
+
+    Comme $x$ et $t$ sont des variables indépendantes, on en déduit que $f(t)=g(x)$ est une constante $\lambda$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    En divisant par $X(x)T(t)$ (supposés non nuls) :
+    \[
+    \frac{T'(t)}{T(t)} = \frac{X''(x)}{X(x)}
+    \]
+    
+    Le membre de gauche ne dépend que de $t$, le membre de droite ne dépend que de $x$. Pour que l'égalité soit vraie pour tout $(x,t)$, les deux membres doivent être égaux à une même constante. On pose cette constante égale à $-\lambda$ (convention classique) :
+    \[
+    \frac{T'(t)}{T(t)} = -\lambda \quad \text{et} \quad \frac{X''(x)}{X(x)} = -\lambda
+    \]
+    \end{solution}
+    }{}
+    
+    \item Déterminer les deux équations différentielles vérifiées par $X$ et $T$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    D'après la question précédente :
+    \begin{itemize}
+        \item Pour $T$ : $T'(t) = -\lambda T(t)$, soit $\boxed{T' + \lambda T = 0}$
+        \item Pour $X$ : $X''(x) = -\lambda X(x)$, soit $\boxed{X'' + \lambda X = 0}$
+    \end{itemize}
+    \end{solution}
+    }{}
+    
+    \item Si $\lambda<0$, pouvez-vous trouver une solution pour $X$ vérifiant les conditions aux bords ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Si $\lambda < 0$, posons $\lambda = -\omega^2$ avec $\omega > 0$. L'équation $X'' + \lambda X = 0$ devient $X'' - \omega^2 X = 0$, qui a pour solution générale :
+    \[
+    X(x) = A\cosh(\omega x) + B\sinh(\omega x)
+    \]
+    
+    Avec les conditions aux bords :
+    \begin{itemize}
+        \item $X(0) = 0$ : $A\cosh(0) + B\sinh(0) = A = 0$
+        \item $X(L) = 0$ : $B\sinh(\omega L) = 0$
+    \end{itemize}
+    
+    Comme $\sinh(\omega L) \neq 0$ pour $\omega L \neq 0$, on a $B = 0$.
+    
+    Donc $X \equiv 0$ : \textbf{pas de solution non triviale} pour $\lambda < 0$.
+    \end{solution}
+    }{}
+    
+    \item Et si $\lambda=0$ ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Si $\lambda = 0$, l'équation $X'' = 0$ a pour solution générale :
+    \[
+    X(x) = Ax + B
+    \]
+    
+    Avec les conditions aux bords :
+    \begin{itemize}
+        \item $X(0) = 0$ : $B = 0$
+        \item $X(L) = 0$ : $AL = 0$, donc $A = 0$
+    \end{itemize}
+    
+    Donc $X \equiv 0$ : \textbf{pas de solution non triviale} pour $\lambda = 0$.
+    \end{solution}
+    }{}
+    
+    \item Il est donc nécéssaire que $\lambda$ soit positif, en écrivant $\lambda = \mu^2$, quelles sont les solutions $X$ possibles ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Si $\lambda = \mu^2 > 0$, l'équation $X'' + \lambda X = 0$ devient $X'' + \mu^2 X = 0$.
+    
+    La solution générale est :
+    \[
+    X(x) = A\cos(\mu x) + B\sin(\mu x)
+    \]
+    \end{solution}
+    }{}
+    
+    \item Pour que les conditions aux bords soient vérifiées, il faut que $X(0)=X(L)=0$. Quelle contrainte cela impose-t-il sur $\mu$ ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Avec $X(x) = A\cos(\mu x) + B\sin(\mu x)$ :
+    \begin{itemize}
+        \item $X(0) = 0$ : $A\cos(0) + B\sin(0) = A = 0$
+        \item $X(L) = 0$ : $B\sin(\mu L) = 0$
+    \end{itemize}
+    
+    Pour avoir $B \neq 0$ (solution non triviale), il faut $\sin(\mu L) = 0$, c'est-à-dire :
+    \[
+    \mu L = n\pi \quad \text{pour } n \in \mathbb{N}^*
+    \]
+    
+    Donc :
+    \[
+    \boxed{\mu_n = \frac{n\pi}{L}, \quad n = 1, 2, 3, \ldots}
+    \]
+    
+    Les fonctions propres sont $X_n(x) = \sin\left(\frac{n\pi x}{L}\right)$.
+    \end{solution}
+    }{}
+    
+    \item En déduire les fonctions $T$ possibles et en déduire les solutions $u$ possibles qui s'écrivent $u(x,t)=X(x)T(t)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Pour chaque $\mu_n = \frac{n\pi}{L}$, on a $\lambda_n = \mu_n^2 = \frac{n^2\pi^2}{L^2}$.
+    
+    L'équation $T' + \lambda_n T = 0$ donne :
+    \[
+    T_n(t) = C_n e^{-\frac{n^2\pi^2}{L^2} t}
+    \]
+    
+    Les solutions élémentaires sont donc :
+    \[
+    \boxed{u_n(x,t) = B_n \sin\left(\frac{n\pi x}{L}\right) e^{-\frac{n^2\pi^2}{L^2} t}}
+    \]
+    
+    où $B_n$ est une constante arbitraire.
+    \end{solution}
+    }{}
+    
+    \item En utilisant le principe de superposition, donner toutes les solutions qu'on peut construire avec cette méthode. 
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation de la chaleur étant linéaire, toute combinaison linéaire de solutions est encore solution.
+    
+    La solution générale est donc :
+    \[
+    \boxed{u(x,t) = \sum_{n=1}^{+\infty} B_n \sin\left(\frac{n\pi x}{L}\right) e^{-\frac{n^2\pi^2}{L^2} t}}
+    \]
+    
+    Les coefficients $B_n$ sont déterminés par la condition initiale $u(x,0) = f(x)$ :
+    \[
+    f(x) = \sum_{n=1}^{+\infty} B_n \sin\left(\frac{n\pi x}{L}\right)
+    \]
+    
+    C'est le développement en série de Fourier (en sinus) de $f$. Les coefficients sont :
+    \[
+    B_n = \frac{2}{L} \int_0^L f(x) \sin\left(\frac{n\pi x}{L}\right) dx
+    \]
+    
+    \textit{Remarque : Le facteur $e^{-n^2\pi^2 t/L^2}$ montre que les hautes fréquences ($n$ grand) s'atténuent rapidement : c'est la diffusion thermique.}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{Exercice 4 : Changements de variables}
+On cherche toutes les fonctions $g: \mathbb{R}^2 \rightarrow \mathbb{R}$ vérifiant :
+
+$$
+\frac{\partial g}{\partial x}-\frac{\partial g}{\partial y}=c
+$$
+
+où $c$ est un réel.
+\begin{enumerate}
+    \item On pose $f$ la fonction de $\mathbb{R}^2$ dans $\mathbb{R}$ définie par :
+
+$$
+f(u, v)=g\left(\frac{u+v}{2}, \frac{v-u}{2}\right) .
+$$
+
+
+En utilisant le théorème de composition, montrer que $\frac{\partial f}{\partial u}=\frac{c}{2}$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $x(u,v) = \frac{u+v}{2}$ et $y(u,v) = \frac{v-u}{2}$. Alors $f(u,v) = g(x(u,v), y(u,v))$.
+    
+    Par la règle de la chaîne :
+    \[
+    \frac{\partial f}{\partial u} = \frac{\partial g}{\partial x} \cdot \frac{\partial x}{\partial u} + \frac{\partial g}{\partial y} \cdot \frac{\partial y}{\partial u}
+    \]
+    
+    On calcule :
+    \[
+    \frac{\partial x}{\partial u} = \frac{1}{2} \quad \text{et} \quad \frac{\partial y}{\partial u} = -\frac{1}{2}
+    \]
+    
+    Donc :
+    \[
+    \frac{\partial f}{\partial u} = \frac{1}{2}\frac{\partial g}{\partial x} - \frac{1}{2}\frac{\partial g}{\partial y} = \frac{1}{2}\left(\frac{\partial g}{\partial x} - \frac{\partial g}{\partial y}\right)
+    \]
+    
+    Or, par hypothèse, $\frac{\partial g}{\partial x} - \frac{\partial g}{\partial y} = c$, donc :
+    \[
+    \boxed{\frac{\partial f}{\partial u} = \frac{c}{2}}
+    \]
+    \end{solution}
+    }{}
+    
+\item Intégrer cette équation pour en déduire l'expression de $f$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation $\frac{\partial f}{\partial u} = \frac{c}{2}$ signifie que la dérivée partielle de $f$ par rapport à $u$ est constante.
+    
+    En intégrant par rapport à $u$ :
+    \[
+    f(u,v) = \frac{c}{2} u + \varphi(v)
+    \]
+    
+    où $\varphi$ est une fonction arbitraire de $v$ (la « constante » d'intégration peut dépendre de $v$).
+    \end{solution}
+    }{}
+    
+\item En déduire les solutions de l'équation initiale.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $f(u,v) = \frac{c}{2}u + \varphi(v)$ avec $f(u,v) = g\left(\frac{u+v}{2}, \frac{v-u}{2}\right)$.
+    
+    Pour revenir aux variables $(x,y)$, on inverse le changement de variables :
+    \[
+    \begin{cases}
+    x = \frac{u+v}{2} \\
+    y = \frac{v-u}{2}
+    \end{cases}
+    \Longleftrightarrow
+    \begin{cases}
+    u = x - y \\
+    v = x + y
+    \end{cases}
+    \]
+    
+    Donc :
+    \[
+    g(x,y) = f(x-y, x+y) = \frac{c}{2}(x-y) + \varphi(x+y)
+    \]
+    
+    En posant $h = \varphi$ une fonction arbitraire de classe $C^1$, la solution générale est :
+    \[
+    \boxed{g(x,y) = \frac{c}{2}(x-y) + h(x+y)}
+    \]
+    
+    où $h : \mathbb{R} \to \mathbb{R}$ est une fonction $C^1$ quelconque.
+    
+    \textbf{Vérification :} $\frac{\partial g}{\partial x} = \frac{c}{2} + h'(x+y)$ et $\frac{\partial g}{\partial y} = -\frac{c}{2} + h'(x+y)$.
+    
+    Donc $\frac{\partial g}{\partial x} - \frac{\partial g}{\partial y} = \frac{c}{2} + h' + \frac{c}{2} - h' = c$. 
+    \end{solution}
+    }{}
+\end{enumerate}
+\vspace{1em}
+
+\section*{Exercice 5 : Pour aller plus loin}
+Une fonction $f: U \rightarrow \mathbb{R}$ de classe $C^2$, définie sur un ouvert $U$ de $\mathbb{R}^2$, est dite harmonique si son laplacien est nul:
+
+$$
+\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}=0
+$$
+
+
+Dans toute la suite, on fixe $f$ une fonction harmonique.
+\begin{enumerate}
+    \item On suppose que $f$ est de classe $C^3$.Démontrer que $\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}$ et $x \frac{\partial f}{\partial x}+y \frac{\partial f}{\partial y}$ sont harmoniques.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \textbf{Pour $\frac{\partial f}{\partial x}$ :}
+    
+    Posons $g = \frac{\partial f}{\partial x}$. Alors :
+    \[
+    \frac{\partial^2 g}{\partial x^2} + \frac{\partial^2 g}{\partial y^2} = \frac{\partial^3 f}{\partial x^3} + \frac{\partial^3 f}{\partial x \partial y^2}
+    \]
+    
+    Or $f$ est harmonique, donc $\frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = 0$. En dérivant par rapport à $x$ :
+    \[
+    \frac{\partial^3 f}{\partial x^3} + \frac{\partial^3 f}{\partial x \partial y^2} = 0
+    \]
+    
+    Donc $\Delta g = 0$ : $\frac{\partial f}{\partial x}$ est harmonique.
+    
+    \textbf{Pour $\frac{\partial f}{\partial y}$ :} Par un raisonnement analogue (dériver l'équation $\Delta f = 0$ par rapport à $y$), $\frac{\partial f}{\partial y}$ est harmonique.
+    
+    \textbf{Pour $h = x\frac{\partial f}{\partial x} + y\frac{\partial f}{\partial y}$ :}
+    
+    Calculons $\frac{\partial h}{\partial x}$ :
+    \[
+    \frac{\partial h}{\partial x} = \frac{\partial f}{\partial x} + x\frac{\partial^2 f}{\partial x^2} + y\frac{\partial^2 f}{\partial x \partial y}
+    \]
+    
+    Puis $\frac{\partial^2 h}{\partial x^2}$ :
+    \[
+    \frac{\partial^2 h}{\partial x^2} = 2\frac{\partial^2 f}{\partial x^2} + x\frac{\partial^3 f}{\partial x^3} + y\frac{\partial^3 f}{\partial x^2 \partial y}
+    \]
+    
+    De même :
+    \[
+    \frac{\partial^2 h}{\partial y^2} = 2\frac{\partial^2 f}{\partial y^2} + x\frac{\partial^3 f}{\partial x \partial y^2} + y\frac{\partial^3 f}{\partial y^3}
+    \]
+    
+    Donc :
+    \[
+    \Delta h = 2\left(\frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}\right) + x\left(\frac{\partial^3 f}{\partial x^3} + \frac{\partial^3 f}{\partial x \partial y^2}\right) + y\left(\frac{\partial^3 f}{\partial x^2 \partial y} + \frac{\partial^3 f}{\partial y^3}\right)
+    \]
+    
+    Le premier terme est $2\Delta f = 0$. Les deux autres termes sont $x \cdot \frac{\partial}{\partial x}(\Delta f) = 0$ et $y \cdot \frac{\partial}{\partial y}(\Delta f) = 0$.
+    
+    Donc $\Delta h = 0$ : $x\frac{\partial f}{\partial x} + y\frac{\partial f}{\partial y}$ est harmonique.
+    \end{solution}
+    }{}
+    
+    \item On suppose désormais que $f$ est définie sur $\mathbb{R}^2 \backslash\{(0,0)\}$ est radiale, c'est-à-dire qu'il existe une fonction $\varphi: \mathbb{R}^* \rightarrow \mathbb{R}$ de classe $C^2$ telle que $f(x, y)=\varphi\left(x^2+y^2\right)$. Démontrer que $\varphi^{\prime}$ est solution d'une équation différentielle linéaire du premier ordre.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $r^2 = x^2 + y^2$, donc $f(x,y) = \varphi(r^2)$.
+    
+    \textbf{Calcul des dérivées partielles :}
+    \[
+    \frac{\partial f}{\partial x} = \varphi'(r^2) \cdot 2x
+    \]
+    \[
+    \frac{\partial^2 f}{\partial x^2} = \varphi''(r^2) \cdot 4x^2 + \varphi'(r^2) \cdot 2 = 4x^2 \varphi''(r^2) + 2\varphi'(r^2)
+    \]
+    
+    Par symétrie :
+    \[
+    \frac{\partial^2 f}{\partial y^2} = 4y^2 \varphi''(r^2) + 2\varphi'(r^2)
+    \]
+    
+    \textbf{Condition d'harmonicité :}
+    \[
+    \Delta f = 4(x^2 + y^2)\varphi''(r^2) + 4\varphi'(r^2) = 0
+    \]
+    \[
+    4r^2 \varphi''(r^2) + 4\varphi'(r^2) = 0
+    \]
+    
+    En posant $s = r^2$ et $\psi(s) = \varphi'(s)$ :
+    \[
+    s\psi'(s) + \psi(s) = 0
+    \]
+    
+    C'est bien une \textbf{équation différentielle linéaire du premier ordre} en $\psi = \varphi'$ :
+    \[
+    \boxed{s\varphi''(s) + \varphi'(s) = 0}
+    \]
+    
+    Ou sous forme plus standard : $(s\varphi')' = 0$.
+    \end{solution}
+    }{}
+    
+    \item En déduire toutes les fonctions harmoniques radiales.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation $s\varphi'(s) + \varphi'(s) = 0$ peut s'écrire $(s\varphi')' = 0$, donc :
+    \[
+    s\varphi'(s) = C_1
+    \]
+    
+    où $C_1$ est une constante. Ainsi :
+    \[
+    \varphi'(s) = \frac{C_1}{s}
+    \]
+    
+    En intégrant :
+    \[
+    \varphi(s) = C_1 \ln(s) + C_2
+    \]
+    
+    où $C_2$ est une autre constante.
+    
+    En revenant aux variables $(x,y)$ avec $s = x^2 + y^2 = r^2$ :
+    \[
+    f(x,y) = C_1 \ln(x^2 + y^2) + C_2 = 2C_1 \ln(r) + C_2
+    \]
+    
+    En posant $A = 2C_1$ et $B = C_2$ :
+    \[
+    \boxed{f(x,y) = A\ln\sqrt{x^2+y^2} + B = A\ln(r) + B}
+    \]
+    
+    où $r = \sqrt{x^2 + y^2}$ et $A, B \in \mathbb{R}$.
+    
+    \textit{Remarque : La fonction $\ln(r)$ est, à une constante multiplicative près, le potentiel créé par une charge ponctuelle en dimension 2 (ou une ligne de charge en dimension 3).}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

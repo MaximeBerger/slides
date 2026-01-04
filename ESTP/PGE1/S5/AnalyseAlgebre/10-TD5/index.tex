@@ -1,0 +1,432 @@
+\documentclass[11pt,a4paper]{report}
+
+% -------------------- Encodage & langue --------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{multirow, multicol}
+\usepackage{tikz}
+% -------------------- Mise en page --------------------------
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{parskip}      % espace entre paragraphes
+\setlength{\parindent}{0pt}
+
+% -------------------- Couleurs & liens ----------------------
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+% -------------------- Graphiques / décor --------------------
+\usepackage{tikz}
+\usetikzlibrary{patterns,positioning,calc}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,hooks,most}
+
+% -------------------- Titres -------------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\color{Theme}}
+  {\filright\rule{0.75\linewidth}{1.2pt}\\[3pt]{Algèbre linéaire - Chapitre~\thechapter}}
+  {0.2ex}
+  {\filright}
+  [\vspace{0.1ex}\rule{0.35\linewidth}{1.2pt}]
+
+\titleformat{\section}
+  {\Large\bfseries\color{Gray}}
+  {\thesection}{0.6em}{}
+
+% -------------------- En-têtes / pieds ---------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Gray}\leftmark}
+\fancyhead[R]{\color{Gray}\textit{Analyse-Algèbre - 2025/2026}}
+\fancyfoot[R]{\color{Gray}\small p.\ \thepage}
+\fancyfoot[L]{\color{Gray}\small \textit{Maxime Berger}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------------------- Macros utilitaires -------------------
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+% Commande pour la transformée de Laplace
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\Four}{\mathcal{F}}
+\newcommand{\Distr}{\mathcal{D}}
+\newcommand{\Schwartz}{\mathcal{S}}
+\newcommand{\Sha}{\text{Ш}} % Peigne de Dirac
+
+% -------------------- Page de titre ------------------------
+\title{\textbf{Traces de cours}\\\large (résumés, formules, exemples, mini-exercices)}
+\author{ Analyse-Algèbre - 2025/2026 }
+\date{\today}
+
+
+\makeatletter
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\p@subsection}{}% supprime le préfixe section/chapter dans \ref
+\makeatother
+
+\usepackage{mdframed}
+\usepackage{ifthen}
+
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% -------------------- Document ----------------------------
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Analyse et Algèbre - TD5}}\\[1em]
+    {\large \textit{Distributions}}
+\end{center}
+
+
+
+
+\section*{Exercice 1 : Manipulation de distributions}
+On considère la fonction 
+$$
+\psi(x)= \begin{cases}
+    \mathrm{e}^{-1 /(1-x^2)} & \text { si }|x|<1 \\ 
+    0 & \text { sinon }
+\end{cases}
+$$
+\begin{enumerate}
+    \item Déterminer le support de la fonction $\psi$. La fonction $\psi$ est-elle dans $\mathbb{D}$ ? \newline
+    \textit{On pourra étudier $\psi(-1+h)$ et $\psi(1-h)$, avec $h$ un réel positif qui tend vers $0$.}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a $\psi(-1+h) = \mathrm{e}^{-1/(1-(1-h)^2)} = \mathrm{e}^{-1/(h^2)} \to 0$ quand $h \to 0$ car $-1/(h^2) \to -\infty$. Aussi $\psi(1-h) = 0$. Donc le support de $\psi$ est $[-1,1]$.
+    \end{solution}
+}{
+}
+    \item En déduire une fonction $\varphi\in \mathbb{D}$ dont le maximum est $3$ et dont le support est $[-2,2]$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Au point $x=0$, la fonction $\psi$ atteint son maximum qui vaut $\psi(0) = 1/e$, 
+        On définit alors $\varphi(x) = 3e \psi(x/2)$ pour $x \in [-2,2]$, $0$ ailleurs. 
+    \end{solution}
+}{
+}
+
+On définit les distributions suivantes :
+$$
+T_1 = \delta_0, \quad T_2 = \delta_{-1}+\delta_1, \quad T_3(\varphi) = \int_{-\infty}^\infty x \varphi(x) dx, \quad T_4(\varphi) = \int_{5}^{10} \sqrt{x} \varphi(x) dx
+$$
+
+\item Quelles valeurs associent-elles à la fonction $\psi$ et à la fonction $\varphi$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    On a 
+    
+    \[
+    T_1(\psi) = \psi(0) = 1/e \quad \text{et} \quad T_1(\varphi) = \varphi(0) = 3e \psi(0) = 3e/e = 3
+    \]
+    Pour $T_2$, on a
+    \[
+    T_2(\psi) = \psi(-1) + \psi(1) = 0 \quad \text{et} \quad T_2(\varphi) = \varphi(-1) + \varphi(1) = 3e \psi(-1/2) + 3e \psi(1/2) = 6 e e^{-4/3} = 6 e^{-1/3}
+    \]
+    Pour $T_3$:
+    \[
+    T_3(\psi) = \int_{-\infty}^\infty x \psi(x) dx = \int_{-1}^1 x \mathrm{e}^{-1/(1-x^2)} dx = 0
+    \]
+    puisque la fonction intégrée est impaire.
+    De même, $T_3(\varphi) = \int_{-\infty}^\infty x \varphi(x) dx = 0$.
+
+    Pour $T_4$, on a
+    \[
+    T_4(\psi) = \int_5^{10} x \psi(x) dx = 0
+    \]
+    car $\psi$ est nulle en dehors de $[-1,1]$.
+    De même, $T_4(\varphi) = \int_5^{10} x \varphi(x) dx = 0$.
+\end{solution}
+}{
+}
+\item Pour chaque distribution ci-dessus, existe-t-il une fonction $f$ localement intégrable telle que $T(\varphi) = \int f \varphi$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    Les diracs ne peuvent pas être représentés par une fonction localement intégrable, il faudrait trouver une fonction $f$ telle que $\int_\mathbb{R} f \varphi = \varphi(0)$ pour tout $\varphi \in \mathbb{D}$. Donc que $f$ soit nulle en dehors du point $0$, donc nulle presque partout.
+
+    Pour $T_3$, on a $T_3(\varphi) = \int_{-\infty}^\infty x \varphi(x) dx$, donc $T_3$ est construite à partir de la fonction $f(x) = x$.
+    Pour $T_4$, on a $T_4(\varphi) = \int_5^{10} \sqrt{x} \varphi(x) dx$, donc $T_4$ est construite à partir de la fonction $f(x) = \sqrt{x}1_{[5,10]}(x)$.
+\end{solution}
+}{
+}
+\item Les fonctions $\mathbb{D}\rightarrow \mathbb{R}$ suivantes sont-elles des distributions ?
+\[
+T_1(\varphi) = \frac{1}{\varphi(0)}, \quad T_2(\varphi) = \int_{-\infty}^\infty \frac{\varphi(x)}{x^2} dx
+\]
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    La fonction $T_1$ n'est pas définie pour toutes les fonctions de $\mathbb{D}$, donc elle n'est pas une distribution.
+    La fonction $T_2$ n'est pas une distribution non plus, elle conduit à une intégrale qui n'est pas définie si $\varphi$ est une fonction non nulle au voisinage de $0$.
+\end{solution}
+}{
+}
+\end{enumerate}
+Il n'est pas facile de calculer les intégrales issues des distributions, le but de cette théorie n'est pas d'effectuer des calculs sur les fonctions $\mathbb{C}^\infty$ à support compact, on n'explicitera plus jamais de telle fonction $\varphi$.
+
+
+
+\section*{Exercice 2 : Dériver une distribution}
+\begin{enumerate}
+    \item Soit $T_1$ la distribution associée à la fonction $f(x)=\operatorname{signe}(x)$. C'est-à-dire: si $\varphi$ est une fonction $\mathbb{C}^\infty$ à support compact,
+    \[
+    T_1(\varphi) = \int_{-\infty}^\infty \operatorname{signe}(x) \varphi(x) dx = -\int_{-\infty}^0 \varphi(x) dx + \int_0^\infty \varphi(x) dx
+    \]
+    Calculer la dérivée de $T_1$ de deux manières différentes:
+    \begin{enumerate}
+        \item En utilisant la définition de la dérivée d'une distribution.
+        \item En utilisant la formule des sauts.
+    \end{enumerate}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \textbf{Par définition.}Prenons $\varphi \in \mathcal{D}(\mathbb{R})$. On a
+
+$$
+T_1^{\prime}\big(\varphi\big) = -T_1\big(\varphi^{\prime}\big)=\int_{-\infty}^0 \varphi^{\prime}(x) d x-\int_0^{+\infty} \varphi^{\prime}(x) d x=2 \varphi(0) .
+$$
+
+
+Ainsi, $T_1^{\prime}=2 \delta_0$.
+
+        \textbf{Par la formule des sauts.} On a un seul saut dans cette fonction, en $x=0$. De plus, la dérivée sur les deux intervalles $]-\infty,0]$ et $[0,\infty[$ est nulle car la fonction est constante, la formule des sauts donne donc
+\[
+T_1^{\prime}= \sigma \delta_0
+\]
+où $\sigma$ est la valeur du saut en $x=0$ : $\sigma = \operatorname{signe}(0^+) - \operatorname{signe}(0^-) = 2$.
+    \end{solution}
+}{
+}
+    \item Soit $T_2$ la distribution associée à la fonction $g(x)=|x|$. Calculer la dérivée de $T_2$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Prenons $\varphi \in \mathcal{D}(\mathbb{R})$. On a
+
+$$
+T_2^{\prime}\big(\varphi\big) = -T_2\big(\varphi^{\prime}\big)=\int_{-\infty}^0 x \varphi^{\prime}(x) d x-\int_0^{+\infty} x \varphi^{\prime}(x) d x .
+$$
+
+
+On exprime alors chacune de ces intervalles à l'aide d'une intégration par parties. Par exemple, on a
+
+$$
+\int_0^{+\infty} x \varphi^{\prime}(x) d x=[x \varphi(x)]_0^{+\infty}-\int_0^{+\infty} \varphi(x) d x=-\int_0^{+\infty} \varphi(x) d x .
+$$
+
+
+On a de même
+
+$$
+\int_{-\infty}^0 x \varphi^{\prime}(x) d x=-\int_{-\infty}^0 \varphi(x) d x
+$$
+
+soit
+
+$$
+T_2^{\prime}\big(\varphi\big) = -\int_{-\infty}^0 \varphi(x) d x+\int_0^{+\infty} \varphi(x) d x
+$$
+
+
+Ainsi, $T_2^{\prime}$ est la distribution associée à la fonction $u=\mathbf{1}_{[0,+\infty[ }-\mathbf{1}_{]-\infty, 0]}$.
+\end{solution}
+}{
+}
+    \item Soit $T_3$ la distribution associée à la fonction $h(x)=x^2$. Calculer la dérivée de $T_3$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Prenons $\varphi \in \mathcal{D}(\mathbb{R})$. On a
+
+\begin{align*}
+T_3^{\prime}\big(\varphi\big) = -T_3\big(\varphi^{\prime}\big)
+&=-\int_{-\infty}^\infty x^2 \varphi^{\prime}(x) d x = -\lim_{A \to \infty} \int_{-A}^A x^2 \varphi^{\prime}(x) d x \\
+&= -\lim_{A \to \infty} \Big[ x^2 \varphi(x) \Big]_{-A}^A + \int_{-A}^A 2x \varphi(x) d x
+\end{align*}
+Quand $A$ tend vers l'infini, les deux termes tendent vers $0$ car $\varphi$ est à support compact. Donc la dérivée de $T_3$ est la distribution associée à la fonction $2x$:
+\[
+T_3^{\prime}(\varphi) = \int_{-\infty}^\infty 2x \varphi(x) d x 
+\]
+
+
+    \end{solution}
+}{
+}
+\end{enumerate}
+
+
+\section*{Exercice 3 : Multiplication par une fonction}
+Soit $T$ une distribution et $\psi$ une fonction de classe $\mathcal{C}^\infty$, $\varphi$ une fonction $\mathbb{C}^\infty$ à support compact.
+\begin{enumerate}
+    \item Montrer que $S(\varphi) = T(\psi \varphi)$ est bien une application de $\mathbb{D}$ dans $\mathbb{R}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a $S(\varphi) = T(\psi \varphi)$, et $\psi \varphi$ est encore une fonction $\mathbb{C}^\infty$ à support compact, donc $S$ associe bien à chaque fonction de $\mathbb{D}$ un réel.
+    \end{solution}
+}{
+}
+    \item Que vaut alors $S'$ ? 
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a $S'(\varphi) = -S(\varphi') = -T(\psi \varphi') $.
+    \end{solution}
+}{
+}
+    \vspace{1em}
+    \item Soit $\left(T_n\right)$ une suite de distributions qui converge vers $T$, c'est-à-dire que $T_n\big(\varphi\big) \to T\big(\varphi\big)$ pour tout $\varphi \in \mathcal{D}(\mathbb{R})$, montrer que $(T_n^{\prime})$ converge vers $T^{\prime}$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Soit $\phi \in \mathcal{D}(\mathbb{R})$. On a :
+
+        $$
+        \left\langle T_n^{\prime}, \varphi\right\rangle=-\left\langle T_n, \varphi^{\prime}\right\rangle \rightarrow-\left\langle T, \varphi^{\prime}\right\rangle=\left\langle T^{\prime}, \varphi\right\rangle .
+        $$
+            \end{solution}
+}{
+}
+\end{enumerate}
+
+
+\section*{Exercice 4 : La valeur principale}
+Le but de cet exercice est de déterminer la dérivée de la distribution associée à ln $|x|$. 
+\begin{enumerate}
+    \item Soit $\varphi \in \mathcal{D}(\mathbb{R})$ et $a>0$ tel que le support de $\varphi$ soit contenu dans $[-a, a]$. 
+    Notons $T$ la distribution associée à la fonction $\ln |x|$. Explicitez l'intégrale définissant $T'(\varphi)$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $$
+        \begin{aligned}
+        \left\langle T^{\prime}, \varphi\right\rangle & =-\left\langle T, \varphi^{\prime}\right\rangle \\
+        & =-\int_{-a}^a \varphi^{\prime}(x) \ln |x| d x \\
+        \end{aligned}
+        $$
+        
+    \end{solution}
+}{
+}
+\item La fonction logarithme pose problème au voisinage de $0$, nous allons définir $\varepsilon$ et écrire
+\[
+    \int_{-a}^a \ln |x|\varphi'(x) d x = \lim_{\varepsilon \to 0^+} \bigg(\int_{-a}^{-\varepsilon} \ln (-x) \varphi'(x) d x + \int_{\varepsilon}^a \ln (x) \varphi'(x) d x\bigg)
+\]
+Traiter les deux intégrales séparément pour un $\varepsilon$ fixé et intégrer par parties.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $$
+        \int_{\varepsilon}^a \varphi^{\prime}(x) \ln (x) d x=[\varphi(x) \ln (x)]_{\varepsilon}^a-\int_{\varepsilon}^a \frac{\varphi(x)}{x} d x=-\varphi(\varepsilon) \ln (\varepsilon)-\int_{\varepsilon}^a \frac{\varphi(x)}{x} d x .
+        $$
+        
+        et
+        
+        $$
+        \int_{-a}^{-\varepsilon} \varphi^{\prime}(x) \ln (-x) d x=[\varphi(x) \ln (-x)]_{-a}^{-\varepsilon}-\int_{-a}^{-\varepsilon} \frac{\varphi(x)}{x} d x=\varphi(-\varepsilon) \ln (\varepsilon)-\int_{-a}^{-\varepsilon} \frac{\varphi(x)}{x} d x .
+        $$
+    \end{solution}
+}{
+}
+    \item Certains termes se simplifient quand $\varepsilon$ tend vers $0$, simplifiez au maximum.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        
+            
+            $$
+            (\varphi(-\varepsilon)-\varphi(\varepsilon)) \ln (\varepsilon)=\left(\varphi(0)-\varepsilon \varphi^{\prime}(0)-\varphi(0)-\varepsilon \varphi^{\prime}(0)+o(\varepsilon)\right) \ln (\varepsilon)=-2 \varphi^{\prime}(0) \varepsilon \ln (\varepsilon)+o(\varepsilon \ln (\varepsilon))
+            $$
+            
+            
+            Mais comme $\varepsilon \ln (\varepsilon) \rightarrow 0$ quand $\varepsilon \rightarrow 0$, on conclut finalement que
+            
+            $$
+            \left\langle T^{\prime}, \varphi\right\rangle=\lim _{\varepsilon \rightarrow 0}\left(\int_{-a}^{-\varepsilon} \frac{\varphi(x)}{x} d x+\int_{\varepsilon}^a \frac{\varphi(x)}{x} d x\right)=\left\langle\operatorname{vp} \frac{1}{x}, \varphi\right\rangle .
+            $$
+            \end{solution}
+        }{
+        }
+    \end{enumerate}
+
+\textit{La distribution $S(\varphi) = \lim_{\epsilon \to 0^+} \int_{|x|>\epsilon} \frac{\varphi(x)}{x} dx$ est appelée la valeur principale.}
+
+
+\section*{Exercice 5 : Encore plus de Diracs}
+Calculer explicitement $\left\langle x^\alpha \partial^\beta \delta_p, \phi\right\rangle$ pour tout $\phi \in \mathcal{D}\left(\mathbb{R}^n\right)$, où $\alpha$ et $\beta$ sont des entiers et $\delta_p$ est la masse de Dirac au point $p \in \mathbb{R}$.
+
+Quel est le support de $x^\alpha \partial^\beta \delta_p$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    On a
+
+    $$
+    \begin{gathered}
+    \left\langle x^\alpha \partial^\beta \delta_p, \phi\right\rangle=\left\langle\partial^\beta \delta_p, x^\alpha \phi\right\rangle=(-1)^\beta\left\langle\delta_p, \partial^\beta\left(x^\alpha \phi\right)\right\rangle \\
+    \partial^\beta\left(x^\alpha \phi\right)=\sum_{k=0}^{\min (\alpha, \beta)}\binom{\beta}{k} \alpha \ldots(\alpha-k+1) x^{\alpha-k} \partial^{\beta-k} \phi
+    \end{gathered}
+    $$
+    
+    
+    Donc,
+    
+    $$
+    \left\langle x^\alpha \partial^\beta \delta_p, \phi\right\rangle=(-1)^\beta \sum_{k=0}^{\min (\alpha, \beta)}\binom{\beta}{k} \alpha \ldots(\alpha-k+1) p^{\alpha-k} \partial^{\beta-k} \phi(p) .
+    $$
+    
+    
+    En particulier, le support est $\{p\}$ si $p \neq 0$, il est vide si $p=0$ et $\alpha>\beta$.
+\end{solution}
+}{
+}
+
+\section*{Exercice 6 : Limites de distributions}
+
+On considère la fonction $\chi: \mathbb{R} \longrightarrow \mathbb{R}$ définie par $\chi(x)=1$ si $x \in[-1,1], \chi(x)=0$ sinon.
+\begin{enumerate}
+    \item Dire pourquoi la fonction $\chi$ définit donc une distribution $T_\chi \in \mathcal{D}^{\prime}(\mathbb{R})$ et rappeler la définition de $T_\chi$.
+    \item On définit la suite ( $\chi_n$ ) par $\chi_n(x)=\frac{n}{2} \chi(n x)$. Déterminer la limite de $\left(\chi_n\right)$ au sens des distributions (i.e trouver la limite dans $\mathcal{D}^{\prime}(\mathbb{R})$ de la suite de distributions $\left(T_{\chi_n}\right)$ associées à $\left(\chi_n\right)$ ).
+    \item On définit la suite $\left(\xi_n\right)$ par $\xi_n(x)=\chi(x-n)$. Déterminer la limite de $\left(\xi_n\right)$ au sens des distributions (i.e trouver la limite dans $\mathcal{D}^{\prime}(\mathbb{R})$ de distributions $\left(T_{\xi_n}\right)$ associées à $\left(\xi_n\right)$ ).
+\end{enumerate}
+Soit $p_\epsilon$ définie par
+
+$$
+p_\epsilon=\left\{\begin{array}{l}
+0 \text { si } x \in\left[0, \frac{1}{2}-\frac{\epsilon}{2}[\cup] \frac{1}{2}+\frac{\epsilon}{2}, 1\right] \\
+\frac{1}{\epsilon} \text { si } x \in\left[\frac{1}{2}-\frac{\epsilon}{2}, \frac{1}{2}+\frac{\epsilon}{2}\right]
+\end{array}\right.
+$$
+
+
+Montrer que $\lim _{\epsilon \rightarrow 0} p_\epsilon=\delta_{\frac{1}{2}}$ dans $\mathcal{D}^{\prime}([0,1[)$.
+\end{document}
