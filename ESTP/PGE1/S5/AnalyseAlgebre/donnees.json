@@ -124,7 +124,7 @@
     {
       "id": "sec5",
       "numero": 3,
-      "titre": "Distributions",
+      "titre": "Distributions et dérivées partielles",
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
@@ -138,20 +138,22 @@
         }
       ],
       "sexercer": [
-
-      ]
-    },
-    {
-      "id": "sec6",
-      "numero": 4,
-      "titre": "Equations aux dérivées partielles",
-      "description": "Equations aux dérivées partielles · Problèmes aux limites",
-      "lien": "#",
-      "sousParties": [
-        
-      ],
-      "sexercer": [
-
+        {
+          "id": "ex1",
+          "numero": 0,
+          "titre": "TD4",
+          "description": "TD 4",
+          "lien": "9-TD4/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "id": "ex1",
+          "numero": 0,
+          "titre": "TD4",
+          "description": "TD 4 - corrigé",
+          "lien": "9-TD4/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {
