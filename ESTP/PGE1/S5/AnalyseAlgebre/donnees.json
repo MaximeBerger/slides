@@ -135,6 +135,14 @@
           "description": "Distributions",
           "lien": "Cours/chapitre-4-distributions.html",
           "cible": "_blank"
+        }, 
+        {
+          "id": "sub2",
+          "numero": 1,
+          "titre": "Cours - But des distributions",
+          "description": "Dérivées partielles",
+          "lien": "Cours/dériver-toutes-les-fonctions.html",
+          "cible": "_blank"
         }
       ],
       "sexercer": [
