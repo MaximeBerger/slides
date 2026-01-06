@@ -1,0 +1,285 @@
+
+
+\section{Matrice de passage d'une base à une autre}
+\textbf{Idée générale :} \newline 
+Lorsqu'on travaille dans un espace vectoriel, on peut choisir différentes bases pour exprimer les vecteurs. La \textbf{matrice de passage} permet de traduire les coordonnées d'un vecteur d'une base à une autre.
+
+C'est comme un "dictionnaire" qui convertit les coordonnées : si on connaît les coordonnées d'un vecteur dans une base $\mathcal{B}$, la matrice de passage nous donne ses coordonnées dans une autre base $\mathcal{B'}$.
+
+
+\begin{formulesBox}
+    \textbf{Comment construire la matrice de passage ?}
+        
+    Soient $\mathcal{B} = (e_1, e_2, \dots, e_n)$ et $\mathcal{B'} = (e'_1, e'_2, \dots, e'_n)$ deux bases d'un espace vectoriel $E$.
+
+    La \textbf{matrice de passage} de $\mathcal{B}$ vers $\mathcal{B'}$, notée $P_{\mathcal{B} \to \mathcal{B'}}$, se construit ainsi :
+
+    \begin{enumerate}[itemsep=1em]
+        \item \textbf{Exprimer chaque vecteur de la nouvelle base $\mathcal{B'}$} dans l'ancienne base $\mathcal{B}$ :
+        \begin{itemize}
+            \item Quelles sont les coordonnées de $e'_1$ dans $\mathcal{B}$ ?
+            \item Quelles sont les coordonnées de $e'_2$ dans $\mathcal{B}$ ?
+            \item etc.
+        \end{itemize}
+        
+        \item \textbf{Remplir les colonnes} de la matrice :
+        \begin{itemize}
+            \item La 1ère colonne contient les coordonnées de $e'_1$ dans $\mathcal{B}$.
+            \item La 2ème colonne contient les coordonnées de $e'_2$ dans $\mathcal{B}$.
+            \item etc.
+        \end{itemize}
+    \end{enumerate}
+
+    \textbf{Attention à l'ordre !} Les colonnes contiennent les vecteurs de la \textbf{nouvelle} base exprimés dans l'\textbf{ancienne} base.
+\end{formulesBox}
+
+\newpage
+
+\section{Exercices d'application}
+
+\textbf{Exercice 1 : Cas simple dans $\mathbb{R}^2$}
+
+Dans $\mathbb{R}^2$, on considère la base canonique $\mathcal{B} = (e_1, e_2)$ avec $e_1 = (1,0)$ et $e_2 = (0,1)$, et une nouvelle base $\mathcal{B'} = (v_1, v_2)$ avec $v_1 = (1,1)$ et $v_2 = (1,-1)$.
+
+Déterminer la matrice de passage $P$ de $\mathcal{B}$ vers $\mathcal{B'}$.
+
+\emph{Indication : Il faut exprimer $v_1$ et $v_2$ comme combinaisons linéaires de $e_1$ et $e_2$.}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+C'est simple car on exprime les vecteurs de $\mathcal{B'}$ dans la base canonique $\mathcal{B}$ !
+
+$v_1 = (1,1) = 1 \cdot e_1 + 1 \cdot e_2$, donc ses coordonnées dans $\mathcal{B}$ sont $(1,1)$.
+
+$v_2 = (1,-1) = 1 \cdot e_1 + (-1) \cdot e_2$, donc ses coordonnées dans $\mathcal{B}$ sont $(1,-1)$.
+
+La matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$ est :
+\[
+P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+\]
+
+\textbf{Remarque :} Quand on part de la base canonique, les colonnes sont simplement les coordonnées des vecteurs de la nouvelle base !
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 2 : Matrice de passage inverse}
+
+Avec les mêmes bases que l'exercice 1, déterminer la matrice de passage $Q$ de $\mathcal{B'}$ vers $\mathcal{B}$.
+
+\emph{Indication : Cette fois, il faut exprimer $e_1$ et $e_2$ comme combinaisons linéaires de $v_1$ et $v_2$.}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On cherche $\alpha, \beta$ tels que $e_1 = \alpha v_1 + \beta v_2$, c'est-à-dire :
+\[
+(1,0) = \alpha(1,1) + \beta(1,-1) = (\alpha + \beta, \alpha - \beta)
+\]
+On obtient le système : $\alpha + \beta = 1$ et $\alpha - \beta = 0$, d'où $\alpha = \beta = \frac{1}{2}$.
+
+Donc $e_1 = \frac{1}{2}v_1 + \frac{1}{2}v_2$, ses coordonnées dans $\mathcal{B'}$ sont $\left(\frac{1}{2}, \frac{1}{2}\right)$.
+
+De même, pour $e_2 = \gamma v_1 + \delta v_2$ :
+\[
+(0,1) = \gamma(1,1) + \delta(1,-1) = (\gamma + \delta, \gamma - \delta)
+\]
+On obtient : $\gamma + \delta = 0$ et $\gamma - \delta = 1$, d'où $\gamma = \frac{1}{2}$ et $\delta = -\frac{1}{2}$.
+
+Donc $e_2 = \frac{1}{2}v_1 - \frac{1}{2}v_2$, ses coordonnées dans $\mathcal{B'}$ sont $\left(\frac{1}{2}, -\frac{1}{2}\right)$.
+
+La matrice de passage de $\mathcal{B'}$ vers $\mathcal{B}$ est :
+\[
+Q = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{pmatrix}
+\]
+
+\textbf{Remarque :} On peut vérifier que $P \cdot Q = I_2$ (matrice identité), ce qui confirme que $Q = P^{-1}$.
+\end{solution}
+}{}
+
+
+\begin{formulesBox}
+    \textbf{Comment changer les coordonnées d'un vecteur ?}
+
+    Soit $v$ un vecteur de $E$, et soient $X$ ses coordonnées dans $\mathcal{B}$ et $X'$ ses coordonnées dans $\mathcal{B'}$.
+
+    Si $P$ est la matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$, alors :
+    \[
+        \boxed{X = P \cdot X'}
+    \]
+
+    Autrement dit : pour obtenir les coordonnées dans l'ancienne base, on multiplie les nouvelles coordonnées par la matrice de passage.
+
+    \textbf{Propriétés importantes :}
+    \begin{itemize}
+        \item La matrice de passage est \textbf{toujours inversible}.
+        \item $(P_{\mathcal{B} \to \mathcal{B'}})^{-1} = P_{\mathcal{B'} \to \mathcal{B}}$
+        \item Pour obtenir les nouvelles coordonnées : $X' = P^{-1} \cdot X$
+    \end{itemize}
+      
+\end{formulesBox}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 3 : Changement de coordonnées}
+
+On reprend les bases de l'exercice 1. Soit $v = (3, 1)$ un vecteur de $\mathbb{R}^2$ (coordonnées dans la base canonique $\mathcal{B}$).
+
+Quelles sont les coordonnées de $v$ dans la base $\mathcal{B'} = (v_1, v_2)$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On utilise la formule $X' = P^{-1} \cdot X$ avec $X = \begin{pmatrix} 3 \\ 1 \end{pmatrix}$ et la matrice $P$ calculée à l'exercice 1.
+
+On calcule d'abord $P^{-1}$. Le déterminant de $P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$ est $\det(P) = -1 - 1 = -2$, donc :
+\[
+P^{-1} = \frac{1}{-2} \begin{pmatrix} -1 & -1 \\ -1 & 1 \end{pmatrix} = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{pmatrix}
+\]
+
+Puis :
+\[
+X' = P^{-1} \cdot X = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{pmatrix} \begin{pmatrix} 3 \\ 1 \end{pmatrix}
+= \begin{pmatrix} \frac{3}{2} + \frac{1}{2} \\ \frac{3}{2} - \frac{1}{2} \end{pmatrix}
+= \begin{pmatrix} 2 \\ 1 \end{pmatrix}
+\]
+
+Donc les coordonnées de $v$ dans $\mathcal{B'}$ sont $(2, 1)$.
+
+\textbf{Vérification :} $2 \cdot v_1 + 1 \cdot v_2 = 2(1,1) + 1(1,-1) = (2,2) + (1,-1) = (3,1)$ ✓
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 4 : Dans $\mathbb{R}^3$}
+
+Dans $\mathbb{R}^3$, on considère la base canonique $\mathcal{B} = (e_1, e_2, e_3)$ et la base $\mathcal{B'} = (f_1, f_2, f_3)$ avec :
+\[
+f_1 = (1, 0, 1), \quad f_2 = (0, 1, 1), \quad f_3 = (1, 1, 0)
+\]
+
+Déterminer la matrice de passage $P$ de $\mathcal{B}$ vers $\mathcal{B'}$.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On exprime les vecteurs de $\mathcal{B'}$ dans la base canonique $\mathcal{B}$ :
+\begin{itemize}
+    \item $f_1 = (1, 0, 1)$ a pour coordonnées $(1, 0, 1)$ dans $\mathcal{B}$.
+    \item $f_2 = (0, 1, 1)$ a pour coordonnées $(0, 1, 1)$ dans $\mathcal{B}$.
+    \item $f_3 = (1, 1, 0)$ a pour coordonnées $(1, 1, 0)$ dans $\mathcal{B}$.
+\end{itemize}
+
+La matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$ est donc :
+\[
+P = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 1 & 0 \end{pmatrix}
+\]
+
+\textbf{Remarque :} Quand on part \textbf{de} la base canonique, les colonnes sont simplement les coordonnées des vecteurs de la nouvelle base !
+\end{solution}
+}{}
+
+\newpage
+
+\begin{formulesBox}
+    \textbf{Formule de changement de base pour une matrice}
+
+    Soit $f : E \to E$ une application linéaire. Si $A$ est la matrice de $f$ dans la base $\mathcal{B}$ et $A'$ est la matrice de $f$ dans la base $\mathcal{B'}$, alors :
+    \[
+        \boxed{A' = P^{-1} A P}
+    \]
+    où $P$ est la matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$.
+
+    \textbf{Interprétation :} Pour exprimer $f$ dans une nouvelle base :
+    \begin{enumerate}
+        \item On traduit de $\mathcal{B'}$ vers $\mathcal{B}$ (multiplication par $P$, car $X = P \cdot X'$)
+        \item On applique $f$ dans $\mathcal{B}$ (multiplication par $A$)
+        \item On traduit de $\mathcal{B}$ vers $\mathcal{B'}$ (multiplication par $P^{-1}$)
+    \end{enumerate}
+      
+\end{formulesBox}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 5 : Changement de base d'une matrice}
+
+Soit $f : \mathbb{R}^2 \to \mathbb{R}^2$ l'application linéaire dont la matrice dans la base canonique $\mathcal{B}$ est :
+\[
+A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}
+\]
+
+On considère la base $\mathcal{B'} = (v_1, v_2)$ avec $v_1 = (1, 1)$ et $v_2 = (1, -1)$.
+
+Déterminer la matrice $A'$ de $f$ dans la base $\mathcal{B'}$.
+
+\emph{Indication : Utiliser la formule $A' = P^{-1} A P$ avec $P$ la matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$.}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+La matrice de passage de $\mathcal{B}$ vers $\mathcal{B'}$ est (voir exercice 1) :
+\[
+P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+\]
+
+On calcule $P^{-1}$. Le déterminant de $P$ est $\det(P) = -1 - 1 = -2$, donc :
+\[
+P^{-1} = \frac{1}{-2} \begin{pmatrix} -1 & -1 \\ -1 & 1 \end{pmatrix} = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{pmatrix}
+\]
+
+Calculons $AP$ :
+\[
+AP = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} = \begin{pmatrix} 4 & 2 \\ 4 & -2 \end{pmatrix}
+\]
+
+Puis $A' = P^{-1}(AP)$ :
+\[
+A' = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & -\frac{1}{2} \end{pmatrix} \begin{pmatrix} 4 & 2 \\ 4 & -2 \end{pmatrix} = \begin{pmatrix} 4 & 0 \\ 0 & 2 \end{pmatrix}
+\]
+
+\textbf{Remarque :} La matrice $A'$ est diagonale ! Cela signifie que $v_1$ et $v_2$ sont des vecteurs propres de $f$, avec pour valeurs propres $4$ et $2$ respectivement.
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 6 : Application géométrique}
+
+Soit $r$ la rotation d'angle $\frac{\pi}{2}$ dans $\mathbb{R}^2$. Sa matrice dans la base canonique $\mathcal{B}$ est :
+\[
+R = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
+\]
+
+On considère la base $\mathcal{B'} = (u_1, u_2)$ avec $u_1 = (1, 1)$ et $u_2 = (-1, 1)$.
+
+\begin{enumerate}
+    \item Déterminer la matrice de passage $P$ de $\mathcal{B}$ vers $\mathcal{B'}$.
+    \item Calculer $P^{-1}$.
+    \item Déterminer la matrice $R'$ de $r$ dans la base $\mathcal{B'}$.
+    \item Interpréter géométriquement le résultat.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} On exprime les vecteurs de $\mathcal{B'}$ dans la base canonique :
+\[
+P = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}
+\]
+
+\textbf{2.} Le déterminant est $\det(P) = 1 \times 1 - (-1) \times 1 = 2$, donc :
+\[
+P^{-1} = \frac{1}{2} \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}
+\]
+
+\textbf{3.} Calculons $RP$ :
+\[
+RP = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} -1 & -1 \\ 1 & -1 \end{pmatrix}
+\]
+
+Puis $R' = P^{-1}(RP)$ :
+\[
+R' = \frac{1}{2} \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix} \begin{pmatrix} -1 & -1 \\ 1 & -1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 0 & -2 \\ 2 & 0 \end{pmatrix} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
+\]
+
+\textbf{4.} On remarque que $R' = R$ : la matrice de la rotation est la même dans les deux bases ! C'est parce que $\mathcal{B'}$ est aussi une base orthonormée (à un facteur $\sqrt{2}$ près) obtenue par rotation de $\frac{\pi}{4}$ de la base canonique. Une rotation commute avec un changement de base qui est lui-même une rotation.
+\end{solution}
+}{}
+

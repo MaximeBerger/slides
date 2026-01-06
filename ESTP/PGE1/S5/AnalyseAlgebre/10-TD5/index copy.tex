@@ -113,15 +113,13 @@
 
 \section*{Exercice 1 : Le Dirac et la fonction de Heaviside}
 
-On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \delta_a, \varphi \rangle = \varphi(a)$ pour toute fonction test $\varphi \in \mathcal{D}(\mathbb{R})$. \newline
-(Rappel : une fonction test est une fonction $\varphi \in \mathcal{C}^\infty(\mathbb{R})$ à support compact.)
+On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \delta_a, \varphi \rangle = \varphi(a)$ pour toute fonction test $\varphi \in \mathcal{D}(\mathbb{R})$.
 
 On note également la fonction de Heaviside :
 \[
 H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
 \]
 
-\textit{Les fonctions $\varphi$ suivante n'apppartiennent pas à $\mathcal{D}(\mathbb{R})$, l'objectif de cet exercice est purement pédagogique.}
 \begin{enumerate}
     \item Calculer $\langle \delta_0, \varphi \rangle$ pour $\varphi(x) = x^2 + 3x + 1$.
     
@@ -146,19 +144,7 @@ H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
         $\langle \delta_{-1} + 2\delta_3, \varphi \rangle = \varphi(-1) + 2\varphi(3) = \cos(-\pi) + 2\cos(3\pi) = -1 + 2(-1) = -3$.
     \end{solution}
     }{}
-
-    \item Calculer $\langle H, \varphi \rangle$ pour $\varphi(x) = e^{-x}$.
-
-    \textit{Indication : on rappelle l'action d'une distribution sur une fonction test : $\langle T, \varphi \rangle = \int_{-\infty}^{+\infty} T(x) \varphi(x) dx$.}
-   
-
-    \item Calculer $\langle H + 2\delta_{-\pi}, \varphi \rangle$ pour $\varphi(x) = \cos(x)$.
-\end{enumerate}
-
-
-\section*{Exercice 2 : Dérivées des fonctions discontinues}
-
-\begin{enumerate}
+    
     \item Montrer que la dérivée (au sens des distributions) de la fonction de Heaviside $H$ est égale à $\delta_0$.
     
     \textit{Indication : Utiliser la définition $\langle H', \varphi \rangle = -\langle H, \varphi' \rangle$.}
@@ -177,12 +163,63 @@ H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
         
         Ainsi $H' = \delta_0$.
     \end{solution}
- }{}
-
- \item 
+    }{}
 \end{enumerate}
 
-\section*{Exercice 3 : avec la formule des sauts}
+
+\section*{Exercice 2 : Propriétés élémentaires du Dirac}
+
+\begin{enumerate}
+    \item Soit $f$ une fonction continue. Montrer que $f(x) \delta_a = f(a) \delta_a$.
+    
+    \textit{Indication : Calculer $\langle f \delta_a, \varphi \rangle = \langle \delta_a, f\varphi \rangle$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour toute fonction test $\varphi$ :
+        \[
+        \langle f \delta_a, \varphi \rangle = \langle \delta_a, f\varphi \rangle = (f\varphi)(a) = f(a)\varphi(a) = f(a) \langle \delta_a, \varphi \rangle = \langle f(a)\delta_a, \varphi \rangle
+        \]
+        Donc $f(x)\delta_a = f(a)\delta_a$.
+    \end{solution}
+    }{}
+    
+    \item En déduire que $x \cdot \delta_0 = 0$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        En appliquant la question précédente avec $f(x) = x$ et $a = 0$ :
+        \[
+        x \cdot \delta_0 = 0 \cdot \delta_0 = 0
+        \]
+    \end{solution}
+    }{}
+    
+    \item Calculer $(x^2 - 4) \cdot \delta_2$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        En appliquant la propriété avec $f(x) = x^2 - 4$ et $a = 2$ :
+        \[
+        (x^2 - 4) \cdot \delta_2 = f(2) \cdot \delta_2 = (4 - 4) \delta_2 = 0
+        \]
+    \end{solution}
+    }{}
+    
+    \item Soit $\delta'_0$ la dérivée de $\delta_0$. Montrer que $\langle \delta'_0, \varphi \rangle = -\varphi'(0)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Par définition de la dérivée d'une distribution :
+        \[
+        \langle \delta'_0, \varphi \rangle = -\langle \delta_0, \varphi' \rangle = -\varphi'(0)
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+\section*{Exercice 3 : Dérivées de fonctions discontinues}
 
 Pour chaque fonction $f$, calculer sa dérivée au sens des distributions en utilisant la formule des sauts :
 \[
@@ -241,6 +278,94 @@ où $\{f'\}$ désigne la dérivée classique de $f$ là où elle existe, et $\si
     }{}
 \end{enumerate}
 
+
+%============================================================
+% PARTIE 2 : EXERCICES INTERMÉDIAIRES
+%============================================================
+
+\section*{Exercice 4 : Manipulation de distributions}
+On considère la fonction 
+$$
+\psi(x)= \begin{cases}
+    \mathrm{e}^{-1 /(1-x^2)} & \text { si }|x|<1 \\ 
+    0 & \text { sinon }
+\end{cases}
+$$
+\begin{enumerate}
+    \item Déterminer le support de la fonction $\psi$. La fonction $\psi$ est-elle dans $\mathbb{D}$ ? \newline
+    \textit{On pourra étudier $\psi(-1+h)$ et $\psi(1-h)$, avec $h$ un réel positif qui tend vers $0$.}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour $|x| < 1$, on a $\psi(x) = e^{-1/(1-x^2)} > 0$.
+        
+        Étudions le comportement aux bords :
+        \begin{itemize}
+            \item $\psi(1-h) = e^{-1/(1-(1-h)^2)} = e^{-1/(2h - h^2)} \to 0$ quand $h \to 0^+$ car $2h - h^2 \to 0^+$.
+            \item De même, $\psi(-1+h) \to 0$.
+        \end{itemize}
+        
+        Le support de $\psi$ est $[-1,1]$. La fonction $\psi$ est $\mathcal{C}^\infty$ à support compact, donc $\psi \in \mathbb{D}$.
+    \end{solution}
+}{}
+    \item En déduire une fonction $\varphi\in \mathbb{D}$ dont le maximum est $3$ et dont le support est $[-2,2]$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Le maximum de $\psi$ est atteint en $x=0$ et vaut $\psi(0) = e^{-1}$.
+        
+        On pose $\varphi(x) = 3e \cdot \psi(x/2)$.
+        \begin{itemize}
+            \item Le support de $\varphi$ est $[-2,2]$ (dilatation par 2).
+            \item Le maximum vaut $\varphi(0) = 3e \cdot e^{-1} = 3$.
+        \end{itemize}
+    \end{solution}
+}{}
+
+On définit les distributions suivantes :
+$$
+T_1 = \delta_0, \quad T_2 = \delta_{-1}+\delta_1, \quad T_3(\varphi) = \int_{-\infty}^\infty x \varphi(x) dx, \quad T_4(\varphi) = \int_{5}^{10} \sqrt{x} \varphi(x) dx
+$$
+
+\item Quelles valeurs associent-elles à la fonction $\psi$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    \begin{itemize}
+        \item $T_1(\psi) = \psi(0) = e^{-1}$
+        \item $T_2(\psi) = \psi(-1) + \psi(1) = 0 + 0 = 0$
+        \item $T_3(\psi) = \int_{-1}^1 x \, e^{-1/(1-x^2)} dx = 0$ (fonction impaire)
+        \item $T_4(\psi) = \int_5^{10} \sqrt{x} \psi(x) dx = 0$ (car $\psi = 0$ sur $[5,10]$)
+    \end{itemize}
+\end{solution}
+}{}
+
+\item Pour chaque distribution ci-dessus, existe-t-il une fonction $f$ localement intégrable telle que $T(\varphi) = \int f \varphi$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    \begin{itemize}
+        \item $T_1 = \delta_0$ : Non, le Dirac n'est pas une fonction.
+        \item $T_2 = \delta_{-1} + \delta_1$ : Non, même raison.
+        \item $T_3$ : Oui, c'est la distribution associée à $f(x) = x$.
+        \item $T_4$ : Oui, c'est la distribution associée à $f(x) = \sqrt{x} \cdot \mathbf{1}_{[5,10]}(x)$.
+    \end{itemize}
+\end{solution}
+}{}
+
+\item Les fonctions $\mathbb{D}\rightarrow \mathbb{R}$ suivantes sont-elles des distributions ?
+\[
+S_1(\varphi) = \frac{1}{\varphi(0)}, \quad S_2(\varphi) = \int_{-\infty}^\infty \frac{\varphi(x)}{x^2} dx
+\]
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+    \begin{itemize}
+        \item $S_1$ n'est pas une distribution : elle n'est pas définie si $\varphi(0) = 0$.
+        \item $S_2$ n'est pas une distribution : l'intégrale diverge au voisinage de $0$ si $\varphi(0) \neq 0$.
+    \end{itemize}
+\end{solution}
+}{}
+\end{enumerate}
 
 
 \section*{Exercice 5 : Dériver une distribution}
@@ -442,102 +567,44 @@ y'' + y = \delta_0
 \end{enumerate}
 
 
-\section*{Exercice 4 : Manipulations de fonctions test}
-On considère la fonction 
-$$
-\psi(x)= \begin{cases}
-    \mathrm{e}^{-1 /(1-x^2)} & \text { si }|x|<1 \\ 
-    0 & \text { sinon }
-\end{cases}
-$$
+\section*{Exercice 8 : Multiplication par une fonction}
+Soit $T$ une distribution et $\psi$ une fonction de classe $\mathcal{C}^\infty$, $\varphi$ une fonction $\mathbb{C}^\infty$ à support compact.
 \begin{enumerate}
-    \item Déterminer le support de la fonction $\psi$. La fonction $\psi$ est-elle dans $\mathbb{D}$ ? \newline
-    \textit{On pourra étudier $\psi(-1+h)$ et $\psi(1-h)$, avec $h$ un réel positif qui tend vers $0$.}
-
+    \item Montrer que $S(\varphi) = T(\psi \varphi)$ est bien une distribution.
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        Pour $|x| < 1$, on a $\psi(x) = e^{-1/(1-x^2)} > 0$.
+        Le produit $\psi \varphi$ est $\mathcal{C}^\infty$ (car $\psi$ et $\varphi$ le sont) et à support compact (car le support de $\psi\varphi$ est inclus dans celui de $\varphi$). Donc $\psi\varphi \in \mathcal{D}$ et $S$ est bien définie de $\mathcal{D}$ dans $\mathbb{R}$.
         
-        Étudions le comportement aux bords :
-        \begin{itemize}
-            \item $\psi(1-h) = e^{-1/(1-(1-h)^2)} = e^{-1/(2h - h^2)} \to 0$ quand $h \to 0^+$ car $2h - h^2 \to 0^+$.
-            \item De même, $\psi(-1+h) \to 0$.
-        \end{itemize}
+        La linéarité et la continuité de $S$ se déduisent de celles de $T$.
+    \end{solution}
+}{}
+    \item Que vaut alors $S'$ en fonction de $T$ et $\psi$ ? 
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $\langle S', \varphi \rangle = -\langle S, \varphi' \rangle = -T(\psi \varphi')$
         
-        Le support de $\psi$ est $[-1,1]$. 
+        Or $(\psi\varphi)' = \psi'\varphi + \psi\varphi'$, donc $\psi\varphi' = (\psi\varphi)' - \psi'\varphi$.
         
-        
-        Pour vérifier que la fonction $\psi$ est de classe $\mathcal{C}^\infty$ à support compact, il faudrait montrer que toutes les dérivées de $\psi$ sont continues et que le support de $\psi$ est compact. 
-        Il faudrait pour cela exprimer la dérivée $n$-ième de $\psi$ et vérifier que toutes les dérivées sont continues.
-
-        Contentons-nous de vérifier que la dérivée première est continue:
+        Ainsi :
         \[
-        \psi'(x) = \frac{2x}{(1-x^2)^2} e^{-1/(1-x^2)}
+        \langle S', \varphi \rangle = -T((\psi\varphi)' - \psi'\varphi) = \langle T', \psi\varphi \rangle + T(\psi'\varphi) = \langle \psi T', \varphi \rangle + \langle \psi' T, \varphi \rangle
         \]
-        qui tend bien vers $0$ quand $x \to \pm 1$.
-
-
+        
+        On retrouve la formule de Leibniz : $(\psi T)' = \psi' T + \psi T'$.
     \end{solution}
 }{}
-    \item En déduire une fonction $\varphi\in \mathbb{D}$ dont le maximum est $3$ et dont le support est $[-2,2]$.
-
+    
+    \item Soit $\left(T_n\right)$ une suite de distributions qui converge vers $T$. Montrer que $(T_n^{\prime})$ converge vers $T^{\prime}$.
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        Le maximum de $\psi$ est atteint en $x=0$ et vaut $\psi(0) = e^{-1}$.
-        
-        On pose $\varphi(x) = 3e \cdot \psi(x/2)$.
-        \begin{itemize}
-            \item Le support de $\varphi$ est $[-2,2]$ (dilatation par 2).
-            \item Le maximum vaut $\varphi(0) = 3e \cdot e^{-1} = 3$.
-        \end{itemize}
+        Pour tout $\varphi \in \mathcal{D}(\mathbb{R})$ :
+        \[
+        \langle T_n', \varphi \rangle = -\langle T_n, \varphi' \rangle \xrightarrow{n \to \infty} -\langle T, \varphi' \rangle = \langle T', \varphi \rangle
+        \]
+        Donc $T_n' \to T'$ au sens des distributions.
     \end{solution}
-}{}
-
-On définit les distributions suivantes :
-$$
-T_1 = \delta_0, \quad T_2 = \delta_{-1}+\delta_1, \quad T_3(\varphi) = \int_{-\infty}^\infty x \varphi(x) dx, \quad T_4(\varphi) = \int_{5}^{10} \sqrt{x} \varphi(x) dx
-$$
-
-\item Quelles valeurs associent-elles à la fonction $\psi$ ?
-
-\ifthenelse{\boolean{showSolutions}}{
-\begin{solution}
-    \begin{itemize}
-        \item $T_1(\psi) = \psi(0) = e^{-1}$
-        \item $T_2(\psi) = \psi(-1) + \psi(1) = 0 + 0 = 0$
-        \item $T_3(\psi) = \int_{-1}^1 x \, e^{-1/(1-x^2)} dx = 0$ (fonction impaire)
-        \item $T_4(\psi) = \int_5^{10} \sqrt{x} \psi(x) dx = 0$ (car $\psi = 0$ sur $[5,10]$)
-    \end{itemize}
-\end{solution}
-}{}
-
-\item Pour chaque distribution ci-dessus, existe-t-il une fonction $f$ localement intégrable telle que $T(\varphi) = \int f \varphi$ ?
-
-\ifthenelse{\boolean{showSolutions}}{
-\begin{solution}
-    \begin{itemize}
-        \item $T_1 = \delta_0$ : Non, le Dirac n'est pas une fonction.
-        \item $T_2 = \delta_{-1} + \delta_1$ : Non, même raison.
-        \item $T_3$ : Oui, c'est la distribution associée à $f(x) = x$.
-        \item $T_4$ : Oui, c'est la distribution associée à $f(x) = \sqrt{x} \cdot \mathbf{1}_{[5,10]}(x)$.
-    \end{itemize}
-\end{solution}
-}{}
-
-\item Les fonctions $\mathbb{D}\rightarrow \mathbb{R}$ suivantes sont-elles des distributions ?
-\[
-S_1(\varphi) = \frac{1}{\varphi(0)}, \quad S_2(\varphi) = \int_{-\infty}^\infty \frac{\varphi(x)}{x^2} dx
-\]
-\ifthenelse{\boolean{showSolutions}}{
-\begin{solution}
-    \begin{itemize}
-        \item $S_1$ n'est pas une distribution : elle n'est pas définie si $\varphi(0) = 0$.
-        \item $S_2$ n'est pas une distribution : l'intégrale diverge au voisinage de $0$ si $\varphi(0) \neq 0$.
-    \end{itemize}
-\end{solution}
 }{}
 \end{enumerate}
-
 
 
 \end{document}
