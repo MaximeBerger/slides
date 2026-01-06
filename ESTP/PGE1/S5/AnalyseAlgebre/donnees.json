@@ -124,7 +124,7 @@
     {
       "id": "sec5",
       "numero": 3,
-      "titre": "Distributions",
+      "titre": "Distributions et dérivées partielles",
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
@@ -135,23 +135,33 @@
           "description": "Distributions",
           "lien": "Cours/chapitre-4-distributions.html",
           "cible": "_blank"
+        }, 
+        {
+          "id": "sub2",
+          "numero": 1,
+          "titre": "Cours - But des distributions",
+          "description": "Dérivées partielles",
+          "lien": "Cours/dériver-toutes-les-fonctions.html",
+          "cible": "_blank"
         }
       ],
       "sexercer": [
-
-      ]
-    },
-    {
-      "id": "sec6",
-      "numero": 4,
-      "titre": "Equations aux dérivées partielles",
-      "description": "Equations aux dérivées partielles · Problèmes aux limites",
-      "lien": "#",
-      "sousParties": [
-        
-      ],
-      "sexercer": [
-
+        {
+          "id": "ex1",
+          "numero": 0,
+          "titre": "TD4",
+          "description": "TD 4",
+          "lien": "9-TD4/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "id": "ex2",
+          "numero": 0,
+          "titre": "TD4 - corrigé",
+          "description": "TD 4 - corrigé",
+          "lien": "9-TD4/corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     },
     {

@@ -168,10 +168,10 @@ Calculer les dérivées partielles à l'ordre 2 des fonctions suivantes :
     = (2 - x^2 - y^2)\cos(x^2-y) + 4y\sin(x^2-y)
     \]
     \[
-    \frac{\partial^2 f}{\partial x \partial y} = 2x\sin(x^2-y) + 2x\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
+    \frac{\partial^2 f}{\partial x \partial y} = 2x\sin(x^2-y) - 4xy\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
     \]
     \[
-    = 4x\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
+    = 2x(1-2y)\sin(x^2-y) + 2x(x^2+y^2)\cos(x^2-y)
     \]
     \end{solution}
     }{}
@@ -341,18 +341,20 @@ On cherche une solution $u$ définie sur $[0,L]\times \mathbb{R_+}$ avec conditi
     \begin{solution}
     Si $\lambda < 0$, posons $\lambda = -\omega^2$ avec $\omega > 0$. L'équation $X'' + \lambda X = 0$ devient $X'' - \omega^2 X = 0$, qui a pour solution générale :
     \[
-    X(x) = A\cosh(\omega x) + B\sinh(\omega x)
+    X(x) = Ae^{-\omega x} + Be^{\omega x}
     \]
     
     Avec les conditions aux bords :
     \begin{itemize}
-        \item $X(0) = 0$ : $A\cosh(0) + B\sinh(0) = A = 0$
-        \item $X(L) = 0$ : $B\sinh(\omega L) = 0$
+        \item $X(0) = 0$ : $Ae^{-\omega \cdot 0} + Be^{\omega \cdot 0} = A + B = 0$
+        \item $X(L) = 0$ : $Ae^{-\omega L} + Be^{\omega L} = 0$
     \end{itemize}
     
-    Comme $\sinh(\omega L) \neq 0$ pour $\omega L \neq 0$, on a $B = 0$.
+    C'est un système de deux équations à deux inconnues. Les deux équations ne sont pas linéairement indépendantes, donc le système admet une unique solution. 
+
+    Comme la solution nulle est solution, c'est la seule. 
     
-    Donc $X \equiv 0$ : \textbf{pas de solution non triviale} pour $\lambda < 0$.
+    Donc $X = 0$ : \textbf{pas de solution non triviale} pour $\lambda < 0$.
     \end{solution}
     }{}
     
