@@ -161,11 +161,11 @@ On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \d
     \end{solution}
     }{}
 
-    \item Calculer $\langle H + 2\delta_{-\pi}, \varphi \rangle$ pour $\varphi(x) = \cos(x)$.
+    \item Calculer $\langle H + 2\delta_{-\pi}, \varphi \rangle$ pour $\varphi(x) = \frac{1}{1+x^2}$.
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        $\langle H + 2\delta_{-\pi}, \varphi \rangle = \langle H, \varphi \rangle + 2\langle \delta_{-\pi}, \varphi \rangle = 1 + 2\cos(-\pi) = 1 + 2(-1) = -1$.
+        $\langle H + 2\delta_{-\pi}, \varphi \rangle = \langle H, \varphi \rangle + 2\langle \delta_{-\pi}, \varphi \rangle = \int_0^{+\infty} \frac{1}{1+x^2} dx + 2 \cdot \frac{1}{1+\pi^2} = \frac{\pi}{2} + \frac{2}{1+\pi^2}$.
     \end{solution}
     }{}
 
