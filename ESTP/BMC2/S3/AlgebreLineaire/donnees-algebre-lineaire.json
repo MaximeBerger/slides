@@ -191,7 +191,29 @@
       "description": "Déterminants · Polynômes",
       "lien": "#",
       "sousParties": [
-      
+      {
+        "numero": 1,
+        "titre": "Matrices de passage",
+        "description": "",
+        "lien": "3-ApplicationsLineaires/3-Matrice-de-Passage/enonce.pdf",
+        "cible": "_blank"
+      },
+      {
+        "numero": 2,
+        "titre": "Matrices de passage - Corrigés",
+        "description": "",
+        "lien": "3-ApplicationsLineaires/3-Matrice-de-Passage/corrige.pdf",
+        "cible": "_blank"
+      }, 
+      {
+        "numero": 3,
+        "titre": "Visualiser une application linéaire",
+        "description": "",
+        "lien": "3-ApplicationsLineaires/4-Noyau-Image/index.html",
+        "cible": "_blank"
+      },
+      {
+        "numero": 4,
       ],
       "sexercer": [
         

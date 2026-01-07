@@ -116,12 +116,8 @@
 On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \delta_a, \varphi \rangle = \varphi(a)$ pour toute fonction test $\varphi \in \mathcal{D}(\mathbb{R})$. \newline
 (Rappel : une fonction test est une fonction $\varphi \in \mathcal{C}^\infty(\mathbb{R})$ à support compact.)
 
-On note également la fonction de Heaviside :
-\[
-H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
-\]
 
-\textit{Les fonctions $\varphi$ suivante n'apppartiennent pas à $\mathcal{D}(\mathbb{R})$, l'objectif de cet exercice est purement pédagogique.}
+\textit{Les fonctions $\varphi$ suivantes n'appartiennent pas à $\mathcal{D}(\mathbb{R})$, l'objectif de cet exercice est purement pédagogique.}
 \begin{enumerate}
     \item Calculer $\langle \delta_0, \varphi \rangle$ pour $\varphi(x) = x^2 + 3x + 1$.
     
@@ -147,19 +143,38 @@ H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
     \end{solution}
     }{}
 
+    \vspace{1em}
+    
+    On note $H$ la fonction de Heaviside :
+    \[
+    H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
+    \]
+
     \item Calculer $\langle H, \varphi \rangle$ pour $\varphi(x) = e^{-x}$.
 
     \textit{Indication : on rappelle l'action d'une distribution sur une fonction test : $\langle T, \varphi \rangle = \int_{-\infty}^{+\infty} T(x) \varphi(x) dx$.}
    
 
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $\langle H, \varphi \rangle = \int_{-\infty}^{+\infty} H(x) \varphi(x) dx = \int_0^{+\infty} \varphi(x) dx = \int_0^{+\infty} e^{-x} dx = [e^{-x}]_0^{+\infty} = 1$.
+    \end{solution}
+    }{}
+
     \item Calculer $\langle H + 2\delta_{-\pi}, \varphi \rangle$ pour $\varphi(x) = \cos(x)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $\langle H + 2\delta_{-\pi}, \varphi \rangle = \langle H, \varphi \rangle + 2\langle \delta_{-\pi}, \varphi \rangle = 1 + 2\cos(-\pi) = 1 + 2(-1) = -1$.
+    \end{solution}
+    }{}
+
 \end{enumerate}
 
+\vspace{1em}
+\section*{Exercice 2 : Dériver des fonctions discontinues}
 
-\section*{Exercice 2 : Dérivées des fonctions discontinues}
-
-\begin{enumerate}
-    \item Montrer que la dérivée (au sens des distributions) de la fonction de Heaviside $H$ est égale à $\delta_0$.
+Montrer que la dérivée (au sens des distributions) de la fonction de Heaviside $H$ est égale à $\delta_0$.
     
     \textit{Indication : Utiliser la définition $\langle H', \varphi \rangle = -\langle H, \varphi' \rangle$.}
     
@@ -179,12 +194,12 @@ H(x) = \begin{cases} 1 & \text{si } x \geq 0 \\ 0 & \text{si } x < 0 \end{cases}
     \end{solution}
  }{}
 
- \item 
-\end{enumerate}
+ \vspace{1em}
 
-\section*{Exercice 3 : avec la formule des sauts}
+ On peut aussi calculer la dérivée des distributions en utilisant nos connaissances sur les dérivées classiques : On dérive quand c'est possible et ajoute des diracs aux points de discontinuité. Voir dans le dernier cours pour un exemple. 
+\vspace{1em}
 
-Pour chaque fonction $f$, calculer sa dérivée au sens des distributions en utilisant la formule des sauts :
+Pour chaque fonction $f$ suivante, calculer sa dérivée au sens des distributions en utilisant la formule des sauts :
 \[
 f' = \{f'\} + \sum_k \sigma_k \delta_{a_k}
 \]
@@ -218,7 +233,7 @@ où $\{f'\}$ désigne la dérivée classique de $f$ là où elle existe, et $\si
     \end{solution}
     }{}
     
-    \item $f(x) = \begin{cases} 0 & \text{si } x < 0 \\ x & \text{si } x \geq 0 \end{cases}$ (rampe)
+    \item $f(x) = xH(x)$ (rampe)
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -229,7 +244,7 @@ où $\{f'\}$ désigne la dérivée classique de $f$ là où elle existe, et $\si
     \end{solution}
     }{}
     
-    \item $f(x) = \begin{cases} 0 & \text{si } x < 0 \\ x^2 & \text{si } x \geq 0 \end{cases}$
+    \item $f(x) = x^2H(x)$
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -242,60 +257,11 @@ où $\{f'\}$ désigne la dérivée classique de $f$ là où elle existe, et $\si
 \end{enumerate}
 
 
-
-\section*{Exercice 5 : Dériver une distribution}
-\begin{enumerate}
-    \item Soit $T_1$ la distribution associée à la fonction $f(x)=\operatorname{signe}(x)$. Calculer la dérivée de $T_1$ de deux manières différentes:
-    \begin{enumerate}
-        \item En utilisant la définition de la dérivée d'une distribution.
-        \item En utilisant la formule des sauts.
-    \end{enumerate}
-
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-        \textbf{Par définition.} Pour $\varphi \in \mathcal{D}(\mathbb{R})$ :
-        \begin{align*}
-        \langle T_1', \varphi \rangle &= -\langle T_1, \varphi' \rangle = -\int_{-\infty}^{+\infty} \text{signe}(x) \varphi'(x) dx \\
-        &= \int_{-\infty}^0 \varphi'(x) dx - \int_0^{+\infty} \varphi'(x) dx \\
-        &= \varphi(0) - \varphi(-\infty) - (\varphi(+\infty) - \varphi(0)) = 2\varphi(0)
-        \end{align*}
-        Donc $T_1' = 2\delta_0$.
-
-        \textbf{Par la formule des sauts.} La dérivée classique est nulle. Le saut en $0$ vaut $\sigma = 1 - (-1) = 2$.
-        
-        Donc $T_1' = 2\delta_0$.
-    \end{solution}
-}{}
-    \item Soit $T_2$ la distribution associée à la fonction $g(x)=|x|$. Calculer la dérivée de $T_2$.
-
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-        Par la formule des sauts :
-        \begin{itemize}
-            \item La dérivée classique est $-1$ pour $x < 0$ et $+1$ pour $x > 0$, soit $\{g'\} = \text{signe}(x)$.
-            \item Pas de saut car $g$ est continue en $0$.
-        \end{itemize}
-        
-        Donc $T_2' = \text{signe}(x)$ (au sens des distributions).
-    \end{solution}
-}{}
-    \item Soit $T_3$ la distribution associée à la fonction $h(x)=x^2$. Calculer la dérivée de $T_3$.
-
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-        La fonction $h(x) = x^2$ est $\mathcal{C}^\infty$, sans discontinuité.
-        
-        Donc $T_3' = 2x$ (distribution associée à la fonction $2x$).
-    \end{solution}
-}{}
-\end{enumerate}
-
-
 %============================================================
 % PARTIE 3 : ÉQUATIONS DIFFÉRENTIELLES AVEC DISTRIBUTIONS
 %============================================================
-
-\section*{Exercice 6 : Équation différentielle avec second membre impulsionnel}
+\vspace{1em}
+\section*{Exercice 3 : Équation différentielle avec second membre impulsionnel}
 
 On cherche à résoudre l'équation différentielle au sens des distributions :
 \[
@@ -378,8 +344,8 @@ où $y$ est une distribution.
     }{}
 \end{enumerate}
 
-
-\section*{Exercice 7 : Équation du second ordre}
+\vspace{1em}
+\section*{Exercice 4 : Équation du second ordre}
 
 On cherche à résoudre l'équation différentielle au sens des distributions :
 \[
@@ -441,8 +407,8 @@ y'' + y = \delta_0
     }{}
 \end{enumerate}
 
-
-\section*{Exercice 4 : Manipulations de fonctions test}
+\vspace{1em}
+\section*{Exercice 5 : Manipulations de fonctions test}
 On considère la fonction 
 $$
 \psi(x)= \begin{cases}
@@ -510,33 +476,8 @@ $$
     \end{itemize}
 \end{solution}
 }{}
-
-\item Pour chaque distribution ci-dessus, existe-t-il une fonction $f$ localement intégrable telle que $T(\varphi) = \int f \varphi$ ?
-
-\ifthenelse{\boolean{showSolutions}}{
-\begin{solution}
-    \begin{itemize}
-        \item $T_1 = \delta_0$ : Non, le Dirac n'est pas une fonction.
-        \item $T_2 = \delta_{-1} + \delta_1$ : Non, même raison.
-        \item $T_3$ : Oui, c'est la distribution associée à $f(x) = x$.
-        \item $T_4$ : Oui, c'est la distribution associée à $f(x) = \sqrt{x} \cdot \mathbf{1}_{[5,10]}(x)$.
-    \end{itemize}
-\end{solution}
-}{}
-
-\item Les fonctions $\mathbb{D}\rightarrow \mathbb{R}$ suivantes sont-elles des distributions ?
-\[
-S_1(\varphi) = \frac{1}{\varphi(0)}, \quad S_2(\varphi) = \int_{-\infty}^\infty \frac{\varphi(x)}{x^2} dx
-\]
-\ifthenelse{\boolean{showSolutions}}{
-\begin{solution}
-    \begin{itemize}
-        \item $S_1$ n'est pas une distribution : elle n'est pas définie si $\varphi(0) = 0$.
-        \item $S_2$ n'est pas une distribution : l'intégrale diverge au voisinage de $0$ si $\varphi(0) \neq 0$.
-    \end{itemize}
-\end{solution}
-}{}
 \end{enumerate}
+
 
 
 

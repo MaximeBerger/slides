@@ -1,0 +1,451 @@
+
+
+\section{Noyau d'une application linéaire}
+
+\textbf{Idée générale :} \newline
+Le \textbf{noyau} d'une application linéaire $f$ est l'ensemble de tous les vecteurs qui sont envoyés sur le vecteur nul. C'est l'ensemble des "solutions de $f(x) = 0$".
+
+Le noyau nous renseigne sur l'\textbf{injectivité} de l'application : plus le noyau est "petit", plus l'application est "proche" d'être injective.
+
+\begin{formulesBox}
+    \textbf{Définition du noyau}
+
+    Soit $f : E \to F$ une application linéaire entre deux espaces vectoriels.
+
+    Le \textbf{noyau} de $f$, noté $\ker(f)$ (de l'allemand \emph{Kern}), est défini par :
+    \[
+        \boxed{\ker(f) = \{ x \in E \mid f(x) = 0_F \}}
+    \]
+
+    C'est l'ensemble des \textbf{antécédents} du vecteur nul $0_F$.
+
+    \textbf{Propriétés fondamentales :}
+    \begin{itemize}
+        \item $\ker(f)$ est un \textbf{sous-espace vectoriel} de $E$.
+        \item $0_E \in \ker(f)$ (le vecteur nul est toujours dans le noyau).
+        \item $f$ est \textbf{injective} si et seulement si $\ker(f) = \{0_E\}$.
+    \end{itemize}
+\end{formulesBox}
+
+\vspace{0.5cm}
+
+\textbf{Méthode pour déterminer le noyau :}
+\begin{enumerate}
+    \item Écrire le système d'équations $f(x) = 0$.
+    \item Résoudre ce système homogène.
+    \item Exprimer l'ensemble des solutions comme combinaisons linéaires de vecteurs de base.
+\end{enumerate}
+
+
+
+
+\textbf{Exercice 1 : Noyau d'une application linéaire}
+
+Soit $f : \mathbb{R}^3 \to \mathbb{R}^2$ l'application linéaire définie par :
+\[
+f(x, y, z) = (x + y - z, 2x + 2y - 2z)
+\]
+
+\begin{enumerate}
+    \item Déterminer $\ker(f)$.
+    \item En déduire la dimension de $\ker(f)$.
+    \item L'application $f$ est-elle injective ?
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} On cherche les $(x, y, z) \in \mathbb{R}^3$ tels que $f(x, y, z) = (0, 0)$.
+
+On résout le système :
+\[
+\begin{cases}
+x + y - z = 0 \\
+2x + 2y - 2z = 0
+\end{cases}
+\]
+
+La deuxième équation est le double de la première, donc le système se réduit à :
+\[
+x + y - z = 0 \Leftrightarrow z = x + y
+\]
+
+Les solutions sont de la forme $(x, y, x+y)$ avec $x, y \in \mathbb{R}$.
+
+On peut écrire : $(x, y, x+y) = x(1, 0, 1) + y(0, 1, 1)$.
+
+Donc :
+\[
+\boxed{\ker(f) = \text{Vect}((1, 0, 1), (0, 1, 1))}
+\]
+
+\textbf{2.} Les vecteurs $(1, 0, 1)$ et $(0, 1, 1)$ sont linéairement indépendants (non proportionnels), donc $\dim(\ker(f)) = 2$.
+
+\textbf{3.} Comme $\ker(f) \neq \{0\}$, l'application $f$ n'est \textbf{pas injective}.
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+
+
+\section{Image d'une application linéaire}
+
+\textbf{Idée générale :} \newline
+L'\textbf{image} d'une application linéaire $f$ est l'ensemble de tous les vecteurs qu'on peut atteindre en appliquant $f$. C'est l'espace "d'arrivée effectif" de l'application.
+
+L'image nous renseigne sur la \textbf{surjectivité} de l'application : si l'image est tout l'espace d'arrivée, l'application est surjective.
+
+\begin{formulesBox}
+    \textbf{Définition de l'image}
+
+    Soit $f : E \to F$ une application linéaire entre deux espaces vectoriels.
+
+    L'\textbf{image} de $f$, notée $\text{Im}(f)$, est définie par :
+    \[
+        \boxed{\text{Im}(f) = \{ f(x) \mid x \in E \} = \{ y \in F \mid \exists x \in E, f(x) = y \}}
+    \]
+
+    C'est l'ensemble des \textbf{valeurs} prises par $f$.
+
+    \textbf{Propriétés fondamentales :}
+    \begin{itemize}
+        \item $\text{Im}(f)$ est un \textbf{sous-espace vectoriel} de $F$.
+        \item $0_F \in \text{Im}(f)$ (car $f(0_E) = 0_F$).
+        \item $f$ est \textbf{surjective} si et seulement si $\text{Im}(f) = F$.
+    \end{itemize}
+\end{formulesBox}
+
+\vspace{0.5cm}
+
+\textbf{Méthode pour déterminer l'image :}
+\begin{enumerate}
+    \item Si $(e_1, \dots, e_n)$ est une base de $E$, alors $\text{Im}(f) = \text{Vect}(f(e_1), \dots, f(e_n))$.
+    \item Calculer les images des vecteurs de base.
+    \item Extraire une base de l'image en éliminant les vecteurs dépendants.
+\end{enumerate}
+
+
+
+\textbf{Exercice 2 : Image d'une application linéaire}
+
+Soit $g : \mathbb{R}^2 \to \mathbb{R}^3$ l'application linéaire définie par :
+\[
+g(x, y) = (x + y, x - y, 2x)
+\]
+
+\begin{enumerate}
+    \item Déterminer $\text{Im}(g)$ en calculant les images des vecteurs de la base canonique.
+    \item Donner une base de $\text{Im}(g)$ et sa dimension.
+    \item L'application $g$ est-elle surjective ?
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} Calculons les images des vecteurs de la base canonique de $\mathbb{R}^2$ :
+\begin{itemize}
+    \item $g(1, 0) = (1, 1, 2)$
+    \item $g(0, 1) = (1, -1, 0)$
+\end{itemize}
+
+Donc $\text{Im}(g) = \text{Vect}((1, 1, 2), (1, -1, 0))$.
+
+\textbf{2.} Vérifions que ces vecteurs sont indépendants. Cherchons $\alpha, \beta$ tels que :
+\[
+\alpha(1, 1, 2) + \beta(1, -1, 0) = (0, 0, 0)
+\]
+
+Le système donne : $\alpha + \beta = 0$, $\alpha - \beta = 0$, $2\alpha = 0$.
+
+La seule solution est $\alpha = \beta = 0$, donc les vecteurs sont indépendants.
+
+Une base de $\text{Im}(g)$ est $\{(1, 1, 2), (1, -1, 0)\}$ et $\dim(\text{Im}(g)) = 2$.
+
+\textbf{3.} Comme $\dim(\text{Im}(g)) = 2 \neq 3 = \dim(\mathbb{R}^3)$, l'application $g$ n'est \textbf{pas surjective}.
+
+\textbf{Remarque :} On peut vérifier avec le théorème du rang : $\dim(\mathbb{R}^2) = \dim(\ker(g)) + \dim(\text{Im}(g))$, soit $2 = \dim(\ker(g)) + 2$, donc $\dim(\ker(g)) = 0$ et $g$ est injective.
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+
+\section{Le théorème du rang}
+
+\begin{formulesBox}
+    \textbf{Théorème du rang (formule fondamentale)}
+
+    Soit $f : E \to F$ une application linéaire avec $E$ de dimension finie $n$.
+
+    Alors :
+    \[
+        \boxed{\dim(E) = \dim(\ker(f)) + \dim(\text{Im}(f))}
+    \]
+
+    Autrement dit :
+    \[
+        \boxed{n = \dim(\ker(f)) + \text{rg}(f)}
+    \]
+
+    où $\text{rg}(f) = \dim(\text{Im}(f))$ est le \textbf{rang} de $f$.
+
+    \textbf{Interprétation :} 
+    \begin{itemize}
+        \item Si $\ker(f)$ est "grand", alors $\text{Im}(f)$ est "petit" (et vice versa).
+        \item Cette formule permet souvent de déduire une dimension connaissant l'autre.
+    \end{itemize}
+\end{formulesBox}
+
+\vspace{0.5cm}
+
+\begin{formulesBox}
+    \textbf{Conséquences importantes}
+
+    Soit $f : E \to F$ une application linéaire avec $\dim(E) = n$ et $\dim(F) = p$.
+
+    \textbf{1. Condition d'injectivité :}
+    \[
+        f \text{ injective} \Leftrightarrow \ker(f) = \{0\} \Leftrightarrow \text{rg}(f) = n
+    \]
+
+    \textbf{2. Condition de surjectivité :}
+    \[
+        f \text{ surjective} \Leftrightarrow \text{Im}(f) = F \Leftrightarrow \text{rg}(f) = p
+    \]
+
+    \textbf{3. Cas particulier $n = p$ (endomorphisme) :}
+    \[
+        f \text{ injective} \Leftrightarrow f \text{ surjective} \Leftrightarrow f \text{ bijective}
+    \]
+\end{formulesBox}
+
+\newpage
+
+\section{Exercices d'application}
+
+
+
+\textbf{Exercice 3 : Application du théorème du rang}
+
+Soit $h : \mathbb{R}^4 \to \mathbb{R}^3$ l'application linéaire de matrice (dans les bases canoniques) :
+\[
+A = \begin{pmatrix} 1 & 2 & 1 & 0 \\ 0 & 1 & 1 & 1 \\ 1 & 3 & 2 & 1 \end{pmatrix}
+\]
+
+\begin{enumerate}
+    \item Calculer le rang de $h$ (rang de la matrice $A$).
+    \item En déduire la dimension de $\ker(h)$ grâce au théorème du rang.
+    \item Déterminer une base de $\ker(h)$.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} On échelonne la matrice $A$ :
+\[
+A = \begin{pmatrix} 1 & 2 & 1 & 0 \\ 0 & 1 & 1 & 1 \\ 1 & 3 & 2 & 1 \end{pmatrix}
+\xrightarrow{L_3 \leftarrow L_3 - L_1}
+\begin{pmatrix} 1 & 2 & 1 & 0 \\ 0 & 1 & 1 & 1 \\ 0 & 1 & 1 & 1 \end{pmatrix}
+\xrightarrow{L_3 \leftarrow L_3 - L_2}
+\begin{pmatrix} 1 & 2 & 1 & 0 \\ 0 & 1 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{pmatrix}
+\]
+
+Il y a 2 pivots, donc $\text{rg}(h) = 2$.
+
+\textbf{2.} Par le théorème du rang :
+\[
+\dim(\ker(h)) = \dim(\mathbb{R}^4) - \text{rg}(h) = 4 - 2 = 2
+\]
+
+\textbf{3.} On résout $AX = 0$. Le système échelonné donne :
+\[
+\begin{cases}
+x_1 + 2x_2 + x_3 = 0 \\
+x_2 + x_3 + x_4 = 0
+\end{cases}
+\]
+
+Avec $x_3 = s$ et $x_4 = t$ comme paramètres libres :
+\begin{itemize}
+    \item $x_2 = -s - t$
+    \item $x_1 = -2x_2 - x_3 = 2s + 2t - s = s + 2t$
+\end{itemize}
+
+Donc $(x_1, x_2, x_3, x_4) = (s + 2t, -s - t, s, t) = s(1, -1, 1, 0) + t(2, -1, 0, 1)$.
+
+Une base de $\ker(h)$ est $\boxed{\{(1, -1, 1, 0), (2, -1, 0, 1)\}}$.
+\end{solution}
+}{}
+
+\newpage
+
+\textbf{Exercice 4 : Noyau et image avec des polynômes}
+
+Soit $\varphi : \mathbb{R}_2[X] \to \mathbb{R}_2[X]$ l'application linéaire définie par :
+\[
+\varphi(P) = P - P(0) - P'(0) \cdot X
+\]
+
+où $\mathbb{R}_2[X]$ désigne l'espace des polynômes de degré au plus 2.
+
+\begin{enumerate}
+    \item Calculer $\varphi(1)$, $\varphi(X)$ et $\varphi(X^2)$.
+    \item Déterminer la matrice de $\varphi$ dans la base canonique $(1, X, X^2)$.
+    \item Déterminer $\ker(\varphi)$ et $\text{Im}(\varphi)$.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} Calculons les images des vecteurs de base :
+
+Pour $P = 1$ : $P(0) = 1$, $P'(X) = 0$ donc $P'(0) = 0$.
+\[
+\varphi(1) = 1 - 1 - 0 \cdot X = 0
+\]
+
+Pour $P = X$ : $P(0) = 0$, $P'(X) = 1$ donc $P'(0) = 1$.
+\[
+\varphi(X) = X - 0 - 1 \cdot X = 0
+\]
+
+Pour $P = X^2$ : $P(0) = 0$, $P'(X) = 2X$ donc $P'(0) = 0$.
+\[
+\varphi(X^2) = X^2 - 0 - 0 \cdot X = X^2
+\]
+
+\textbf{2.} La matrice de $\varphi$ dans la base $(1, X, X^2)$ est :
+\[
+M = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+
+Les colonnes sont les coordonnées de $\varphi(1)$, $\varphi(X)$, $\varphi(X^2)$ dans la base.
+
+\textbf{3.} 
+\begin{itemize}
+    \item $\ker(\varphi)$ : On cherche les $P = a + bX + cX^2$ tels que $\varphi(P) = 0$.
+    
+    $\varphi(P) = a \cdot \varphi(1) + b \cdot \varphi(X) + c \cdot \varphi(X^2) = cX^2 = 0$
+    
+    Donc $c = 0$, et $a, b$ sont quelconques.
+    
+    $\boxed{\ker(\varphi) = \text{Vect}(1, X)}$ avec $\dim(\ker(\varphi)) = 2$.
+    
+    \item $\text{Im}(\varphi) = \text{Vect}(\varphi(1), \varphi(X), \varphi(X^2)) = \text{Vect}(0, 0, X^2) = \text{Vect}(X^2)$.
+    
+    $\boxed{\text{Im}(\varphi) = \text{Vect}(X^2)}$ avec $\dim(\text{Im}(\varphi)) = 1$.
+\end{itemize}
+
+\textbf{Vérification :} $\dim(\ker(\varphi)) + \dim(\text{Im}(\varphi)) = 2 + 1 = 3 = \dim(\mathbb{R}_2[X])$ ✓
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 5 : Injectivité et surjectivité}
+
+Pour chacune des applications linéaires suivantes, déterminer si elle est injective, surjective, bijective, ou aucune de ces propriétés.
+
+\textbf{a)} $f_1 : \mathbb{R}^2 \to \mathbb{R}^3$, $f_1(x, y) = (x, y, x + y)$
+
+\textbf{b)} $f_2 : \mathbb{R}^3 \to \mathbb{R}^2$, $f_2(x, y, z) = (x + z, y + z)$
+
+\textbf{c)} $f_3 : \mathbb{R}^2 \to \mathbb{R}^2$, $f_3(x, y) = (2x - y, -4x + 2y)$
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{a)} $f_1 : \mathbb{R}^2 \to \mathbb{R}^3$
+
+\underline{Noyau :} $f_1(x, y) = (0, 0, 0) \Rightarrow x = 0, y = 0, x + y = 0$. Donc $\ker(f_1) = \{(0, 0)\}$.
+
+$f_1$ est \textbf{injective}.
+
+\underline{Image :} $\text{rg}(f_1) = \dim(\mathbb{R}^2) - \dim(\ker(f_1)) = 2 - 0 = 2 \neq 3$.
+
+$f_1$ n'est \textbf{pas surjective} (car $\dim(\text{Im}(f_1)) = 2 < 3$).
+
+\vspace{0.3cm}
+\textbf{b)} $f_2 : \mathbb{R}^3 \to \mathbb{R}^2$
+
+\underline{Noyau :} $f_2(x, y, z) = (0, 0) \Rightarrow x + z = 0$ et $y + z = 0$, soit $x = -z$ et $y = -z$.
+
+$\ker(f_2) = \{(-z, -z, z) \mid z \in \mathbb{R}\} = \text{Vect}((-1, -1, 1))$. Donc $\dim(\ker(f_2)) = 1$.
+
+$f_2$ n'est \textbf{pas injective}.
+
+\underline{Image :} $\text{rg}(f_2) = 3 - 1 = 2 = \dim(\mathbb{R}^2)$.
+
+$f_2$ est \textbf{surjective}.
+
+\vspace{0.3cm}
+\textbf{c)} $f_3 : \mathbb{R}^2 \to \mathbb{R}^2$
+
+\underline{Noyau :} $f_3(x, y) = (0, 0) \Rightarrow 2x - y = 0$ et $-4x + 2y = 0$.
+
+Ces deux équations sont équivalentes (la seconde est $-2$ fois la première), donc $y = 2x$.
+
+$\ker(f_3) = \{(x, 2x) \mid x \in \mathbb{R}\} = \text{Vect}((1, 2))$. Donc $\dim(\ker(f_3)) = 1 \neq 0$.
+
+$f_3$ n'est \textbf{ni injective ni surjective}.
+
+(Puisque $\dim(E) = \dim(F) = 2$, non injective $\Leftrightarrow$ non surjective.)
+\end{solution}
+}{}
+
+\vspace{0.5cm}
+
+\textbf{Exercice 6 : Détermination complète}
+
+Soit $\psi : \mathbb{R}^3 \to \mathbb{R}^3$ l'application linéaire définie par :
+\[
+\psi(x, y, z) = (x + y + z, x + y + z, x + y + z)
+\]
+
+\begin{enumerate}
+    \item Déterminer la matrice de $\psi$ dans la base canonique.
+    \item Calculer $\ker(\psi)$ et en donner une base.
+    \item Calculer $\text{Im}(\psi)$ et en donner une base.
+    \item Vérifier le théorème du rang.
+    \item Interpréter géométriquement $\ker(\psi)$ et $\text{Im}(\psi)$.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+\textbf{1.} Calculons les images de la base canonique :
+\begin{itemize}
+    \item $\psi(1, 0, 0) = (1, 1, 1)$
+    \item $\psi(0, 1, 0) = (1, 1, 1)$
+    \item $\psi(0, 0, 1) = (1, 1, 1)$
+\end{itemize}
+
+La matrice de $\psi$ est :
+\[
+M = \begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{pmatrix}
+\]
+
+\textbf{2.} On résout $\psi(x, y, z) = (0, 0, 0)$, soit $x + y + z = 0$.
+
+L'équation $x + y + z = 0$ définit un plan passant par l'origine.
+
+Avec $y = s$ et $z = t$ comme paramètres : $x = -s - t$.
+
+$(x, y, z) = (-s - t, s, t) = s(-1, 1, 0) + t(-1, 0, 1)$
+
+Une base de $\ker(\psi)$ est $\boxed{\{(-1, 1, 0), (-1, 0, 1)\}}$ et $\dim(\ker(\psi)) = 2$.
+
+\textbf{3.} $\text{Im}(\psi) = \text{Vect}((1, 1, 1), (1, 1, 1), (1, 1, 1)) = \text{Vect}((1, 1, 1))$.
+
+Une base de $\text{Im}(\psi)$ est $\boxed{\{(1, 1, 1)\}}$ et $\dim(\text{Im}(\psi)) = 1$.
+
+\textbf{4.} Vérification du théorème du rang :
+\[
+\dim(\ker(\psi)) + \dim(\text{Im}(\psi)) = 2 + 1 = 3 = \dim(\mathbb{R}^3) \quad \checkmark
+\]
+
+\textbf{5.} Interprétation géométrique :
+\begin{itemize}
+    \item $\ker(\psi)$ est le plan d'équation $x + y + z = 0$ (plan passant par l'origine, de vecteur normal $(1, 1, 1)$).
+    \item $\text{Im}(\psi)$ est la droite dirigée par $(1, 1, 1)$ (la "diagonale de l'espace").
+\end{itemize}
+
+$\psi$ est la \textbf{projection} sur la droite $(1, 1, 1)$ parallèlement au plan $x + y + z = 0$.
+\end{solution}
+}{}
+
