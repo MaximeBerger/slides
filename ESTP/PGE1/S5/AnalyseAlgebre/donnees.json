@@ -149,7 +149,7 @@
         {
           "id": "ex1",
           "numero": 0,
-          "titre": "TD4",
+          "titre": "TD4 - Dérivées partielles",
           "description": "TD 4",
           "lien": "9-TD4/enonce.pdf",
           "cible": "_blank"
@@ -160,6 +160,22 @@
           "titre": "TD4 - corrigé",
           "description": "TD 4 - corrigé",
           "lien": "9-TD4/corrige.pdf",
+          "cible": "_blank"
+        }, 
+        {
+          "id": "ex3",
+          "numero": 2,
+          "titre": "TD 5 - Distributions",
+          "description": "TD 5 - Distributions",
+          "lien": "10-TD5/enonce.pdf",
+          "cible": "_blank"
+        }, 
+        {
+          "id": "ex4",
+          "numero": 3,
+          "titre": "TD 5 - corrigé",
+          "description": "TD 5 - corrigé",
+          "lien": "10-TD5/corrige.pdf",
           "cible": "_blank"
         }
       ]
