@@ -1,0 +1,1100 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}           % Police Latin Modern (plus nette)
+\usepackage{charter}           % Police Charter (très lisible)
+\usepackage[scaled=0.95]{inconsolata} % Police mono lisible
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+% Formules en ligne en mode displaystyle (plus grandes et plus lisibles)
+\everymath{\displaystyle}
+
+% Couleurs personnalisées
+\definecolor{defcolor}{RGB}{0, 100, 148}
+\definecolor{propcolor}{RGB}{148, 60, 0}
+\definecolor{thmcolor}{RGB}{100, 0, 100}
+\definecolor{excolor}{RGB}{0, 120, 60}
+\definecolor{exocolor}{RGB}{60, 60, 60}
+\definecolor{corrcolor}{RGB}{0, 80, 120}
+\definecolor{remcolor}{RGB}{120, 80, 0}
+\definecolor{demcolor}{RGB}{80, 80, 80}
+
+% Compteurs (numérotation continue sans préfixe de section)
+\newcounter{definition}
+\newcounter{proposition}
+\newcounter{theoreme}
+\newcounter{exemple}
+\newcounter{exercice}
+\newcounter{remarque}
+
+\renewcommand{\thedefinition}{\arabic{definition}}
+\renewcommand{\theproposition}{\arabic{proposition}}
+\renewcommand{\thetheoreme}{\arabic{theoreme}}
+\renewcommand{\theexemple}{\arabic{exemple}}
+\renewcommand{\theexercice}{\arabic{exercice}}
+\renewcommand{\theremarque}{\arabic{remarque}}
+
+% Environnement Définition
+\newtcolorbox[use counter=definition]{definition}[1][]{
+  enhanced,
+  colback=defcolor!5,
+  colframe=defcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Définition~\thedefinition,
+  #1
+}
+
+% Environnement Proposition
+\newtcolorbox[use counter=proposition]{proposition}[1][]{
+  enhanced,
+  colback=propcolor!5,
+  colframe=propcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Proposition~\theproposition,
+  #1
+}
+
+% Environnement Théorème
+\newtcolorbox[use counter=theoreme]{theoreme}[1][]{
+  enhanced,
+  colback=thmcolor!5,
+  colframe=thmcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Théorème~\thetheoreme,
+  #1
+}
+
+% Environnement Exemple
+\newtcolorbox[use counter=exemple]{exemple}[1][]{
+  enhanced,
+  colback=excolor!5,
+  colframe=excolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Exemple~\theexemple,
+  #1
+}
+
+% Environnement Exercice
+\newtcolorbox[use counter=exercice]{exercice}[1][]{
+  enhanced,
+  colback=exocolor!5,
+  colframe=exocolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Exercice~\theexercice,
+  #1
+}
+
+% Environnement Corrigé
+\newtcolorbox{corrige}[1][]{
+  enhanced,
+  colback=corrcolor!5,
+  colframe=corrcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Corrigé,
+  breakable,
+  #1
+}
+
+% Environnement Remarque
+\newtcolorbox[use counter=remarque]{remarque}[1][]{
+  enhanced,
+  colback=remcolor!5,
+  colframe=remcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Remarque~\theremarque,
+  #1
+}
+
+% Environnement Démonstration
+\newtcolorbox{demonstration}[1][]{
+  enhanced,
+  colback=demcolor!5,
+  colframe=demcolor,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=Démonstration,
+  breakable,
+  #1
+}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries Équations aux dérivées partielles}\\[1em]
+\rule{\textwidth}{1pt}
+\end{center}
+\vspace{1em}
+
+\section{Les équations exactes}
+
+\subsection{Différentielle totale}
+
+\begin{definition}
+Si $F$ est une fonction de deux variables, sa différentielle est :
+$$
+dF = \frac{\partial F}{\partial x} dx + \frac{\partial F}{\partial y} dy
+$$
+\end{definition}
+
+\begin{proposition}
+Une expression de la forme $f(x, y) dx + g(x, y) dy$ est la différentielle d'une fonction si et seulement si
+$$
+\frac{\partial f}{\partial y}(x, y) = \frac{\partial g}{\partial x}(x, y)
+$$
+\end{proposition}
+
+\begin{exemple}
+\begin{itemize}
+  \item $(2x+4) dx + 2 dy$
+  \item $\left(e^{y}-1\right) dx + \left(x e^{y}+4\right) dy$
+  \item $\left(9 x^{2}+2 x y\right) dx + \left(2 y+x^{2}+1\right) dy$
+\end{itemize}
+\end{exemple}
+
+\begin{exercice}
+Déterminer dans les cas suivants si l'expression $f(x, y) dx + g(x, y) dy$ est une différentielle.\\
+(a) $2\left(x^{2} y-3\right) dy + \left(2 x y^{2}+4\right) dx$\\
+(b) $y^{2} e^{x y} dy + \left(2 x y^{2}+4\right) dx$\\
+(c) $\left(3 y^{3} e^{3 x y}-1\right) dx + \left(2 y e^{3 x y}+3 x y^{2} e^{3 x y}\right) dy$
+\end{exercice}
+
+\subsection{Équation exacte}
+
+\begin{definition}
+L'équation
+$$
+f(x, y) dx + g(x, y) dy = 0
+$$
+est dite \textbf{exacte}, lorsque l'expression $f(x, y) dx + g(x, y) dy$ est celle d'une différentielle totale.
+\end{definition}
+
+\begin{proposition}
+Les solutions $y$ de l'équation différentielle $(E)$ :
+$$
+f(x, y) dx + g(x, y) dy = 0
+$$
+lorsque $f(x, y) dx + g(x, y) dy$ est la différentielle d'une fonction $F$ sont définies par la relation fonctionnelle
+$$
+F(x, y) = K
+$$
+où $K$ est une constante quelconque.\\
+On dit que $F$ est « une intégrale première de $(E)$ ».
+\end{proposition}
+
+\begin{demonstration}
+L'équation $(E)$ peut s'écrire $f(x, y) + g(x, y) y^{\prime} = 0$.
+
+Soit $y$ une fonction dérivable,
+$$
+dF(x, y(x)) = \frac{\partial F}{\partial x} dx + \frac{\partial F}{\partial y} dy \Longleftrightarrow \frac{d}{dx}(F(x, y(x))) = \frac{\partial F}{\partial x} + \frac{\partial F}{\partial y} \frac{dy}{dx} = f(x, y) + g(x, y) y^{\prime}
+$$
+
+Donc $y$ est solution de $(E)$ si et seulement si $F(x, y(x))$ est constant.
+\end{demonstration}
+
+\begin{exercice}
+On cherche la solution de $\left(3 x^{2} y^{4}+y\right) dx + \left(4 x^{3} y^{3}+x+1\right) dy = 0$.
+\end{exercice}
+
+\begin{corrige}
+On peut commencer par vérifier que l'expression définit bien la différentielle d'une fonction :
+$$
+\frac{\partial}{\partial x}\left(4 x^{3} y^{3}+x+1\right) = \frac{\partial}{\partial y}\left(3 x^{2} y^{4}+y\right)
+$$
+
+Cherchons maintenant à déterminer cette fonction $F$, elle doit vérifier
+$$
+\frac{\partial F}{\partial x} = 3 x^{2} y^{4}+y
+$$
+elle est donc de la forme
+$$
+F(x, y) = x^{3} y^{4}+xy+H(y)
+$$
+où $H$ est une fonction quelconque. En dérivant par rapport à $y$, on obtient
+$$
+\frac{\partial F}{\partial y} = 4 x^{3} y^{3}+x+H^{\prime}(y)
+$$
+or cette quantité doit être égale à $4 x^{3} y^{3}+x+1$, on en déduit que $H^{\prime}(y)=1$, d'où
+$$
+F(x, y) = x^{3} y^{4}+xy+y+C
+$$
+où $C$ est un réel.
+
+Les fonctions $y(x)$ qui vérifient $x^{3} y^{4}+xy+y=K$, où $K$ est un réel, sont solutions de l'équation différentielle.
+\end{corrige}
+
+\begin{theoreme}[title=Théorème de Cauchy (admis)]
+L'équation différentielle $(E): y^{\prime}=f(x, y)$ où $f$ est une fonction de classe $\mathcal{C}^{1}$ définie sur un domaine $I \times J$ de $\mathbb{R}^{2}$ possède une unique solution vérifiant $y\left(x_{0}\right)=y_{0}$ lorsque $\left(x_{0}, y_{0}\right) \in I \times J$, la fonction $y$ est alors définie sur un intervalle contenant $x_{0}$ et inclus dans $I$.
+\end{theoreme}
+
+\subsection{Exercices}
+
+\begin{exercice}
+Vérifiez que les équations différentielles suivantes sont exactes et trouvez ensuite la solution.
+\begin{enumerate}
+  \item $2 x y-9 x^{2}+\left(2 y+x^{2}+1\right) \frac{dy}{dx}=0$
+  \item $2 x y^{2}+4=2\left(3-x^{2} y\right) y^{\prime}$
+  \item $\frac{2 t y}{t^{2}+1}-2 t-\left(2-\ln \left(t^{2}+1\right)\right) y^{\prime}=0, \quad$ si $y(5)=0$
+  \item $3 y^{3} e^{3 x y}-1+\left(2 y e^{3 x y}+3 x y^{2} e^{3 x y}\right) y^{\prime}=0, \quad$ si $y(0)=1$
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}
+\begin{enumerate}
+  \item $x^{2} y-3 x^{3}+y^{2}+y=c$
+  \item $x^{2} y^{2}+4 x-6 y=c$
+  \item $y \ln \left(t^{2}+1\right)-t^{2}-2 y=-25$ puis on isole $y$.
+  \item $y^{2} e^{3 x y}-x=1$
+\end{enumerate}
+\end{corrige}
+
+\subsection{Le facteur intégrant}
+
+Si $f(x, y) dx + g(x, y) dy$ n'est pas la différentielle d'une fonction, mais que
+$$
+h(x, y)(f(x, y) dx + g(x, y) dy)
+$$
+l'est, alors on dit que $h$ est le \textbf{facteur intégrant} de l'équation différentielle
+$$
+f(x, y) dx + g(x, y) dy = 0
+$$
+Il peut permettre de la résoudre.
+
+\begin{exercice}
+On cherche la solution de $x dy - \left(y+1-x^{2}\right) dx = 0$.
+\end{exercice}
+
+\begin{corrige}
+On vérifie que
+$$
+\frac{\partial}{\partial x}(x) = 1 \neq -1 = \frac{\partial}{\partial y}\left(-\left(y+1-x^{2}\right)\right)
+$$
+
+Son facteur intégrant est $\frac{1}{x^{2}}$ : en multipliant l'équation par ce facteur, on obtient une nouvelle équation
+$$
+\frac{1}{x} dy - \frac{y+1-x^{2}}{x^{2}} dx = 0
+$$
+
+À présent l'expression est la différentielle d'une fonction $F$, puisque
+$$
+\frac{\partial}{\partial x}\left(\frac{1}{x}\right) = \frac{\partial}{\partial y}\left(-\frac{y+1-x^{2}}{x^{2}}\right)
+$$
+
+En intégrant $\frac{\partial F}{\partial x} = -\frac{y+1-x^{2}}{x^{2}}$ par rapport à $x$, on obtient
+$$
+F(x, y) = \frac{y}{x}+\frac{1}{x}+x+H(y)
+$$
+
+En dérivant par rapport à $y$, on obtient
+$$
+\frac{1}{x}+H^{\prime}(y) = \frac{1}{x} \Longrightarrow H(y) = C
+$$
+où $C$ est un réel.
+
+Les fonctions $y(x)$ qui vérifient $\frac{y}{x}+\frac{1}{x}+x=K$, où $K$ est un réel, sont solutions de l'équation différentielle.
+\end{corrige}
+
+\begin{exercice}
+Vérifier si les équations différentielles suivantes sont exactes, sinon utiliser le facteur intégrant proposé, trouvez ensuite la solution.
+\begin{enumerate}
+  \item $\left(x^{2}+y^{2}+x\right) dx + xy\, dy = 0$, facteur intégrant $x$.
+  \item $x\, dx + y\, dy + 4 y^{3}\left(x^{2}+y^{2}\right) dy = 0, \quad$ facteur intégrant $\frac{1}{x^{2}+y^{2}}$.
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}
+\begin{enumerate}
+  \item $\frac{x^{2} y^{2}}{2}+\frac{x^{4}}{4}+\frac{x^{3}}{3}=c$
+  \item $\frac{1}{2} \ln \left(x^{2}+y^{2}\right)+y^{4}=c$
+\end{enumerate}
+\end{corrige}
+
+\section{Rappels et mise en garde}
+
+\begin{enumerate}
+  \item Soit $f$ une fonction de deux variables, définie sur une partie $U$ de $\mathbb{R}^{2}$, $\frac{\partial f}{\partial x}\left(x_{0}, y_{0}\right)$ représente la dérivée de la fonction $x \longmapsto f\left(x, y_{0}\right)$ au point $x_{0}$. Dans la pratique cela revient à calculer la dérivée de $f$ par rapport à $x$ en considérant $y$ comme une constante.
+\end{enumerate}
+
+\begin{exemple}
+Si $f(x, y)=\ln \left(x^{2}+y^{2}\right)$, alors $\frac{\partial f}{\partial x}(x, y)=\frac{2 x}{x^{2}+y^{2}}$.
+\end{exemple}
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Si $F(x, y)$, $g(x, y)$ et $h(x, y)$ sont des fonctions de deux variables alors
+$$
+\frac{\partial}{\partial x} F(g(x, y), h(x, y)) = \frac{\partial F}{\partial x}(g(x, y), h(x, y)) \frac{\partial g}{\partial x}(x, y) + \frac{\partial F}{\partial y}(g(x, y), h(x, y)) \frac{\partial h}{\partial x}(x, y)
+$$
+
+  \item Résoudre l'équation aux dérivées partielles (ou EDP)
+$$
+(E): \frac{\partial f}{\partial x} = 0
+$$
+revient à déterminer toutes les fonctions dont la dérivée par rapport à $x$ est nulle. On voit que toutes les fonctions qui ne dépendent que de $y$ sont solutions. On la résout ainsi : pour un $y_{0}$ fixé la fonction $x \longmapsto f\left(x, y_{0}\right)$ a une dérivée nulle, elle est donc constante, finalement $f$ ne dépend que de $y_{0}$ et donc $f$ est de la forme :
+$$
+f(x, y) = K(y)
+$$
+Réciproquement les fonctions de la forme $f(x, y)=K(y)$ vérifient bien $(E)$.
+
+  \item La fonction d'une variable définie par $f(x)=1$ si $x \in[-2 ;-1]$ et $2$ si $x \in[1 ; 2]$ est une fonction dérivable de dérivée nulle, et elle n'est pas constante. Ceci peut arriver lorsque l'on résout des équations aux dérivées partielles aussi simple que $(E)$. Ceci n'est plus possible si l'on travaille sur une partie convexe de $\mathbb{R}^{2}$. Dans la suite du cours nous ne nous préoccuperons plus de ce genre de problèmes qui peuvent exister.
+\end{enumerate}
+
+\section{EDP linéaires d'ordre 1 à coefficients constants}
+
+\begin{definition}
+Ce sont les équations aux dérivées partielles de la forme
+$$
+(E): \alpha \frac{\partial f}{\partial x} + \beta \frac{\partial f}{\partial y} = h(x, y, f)
+$$
+où $\alpha, \beta$ sont des réels.
+\end{definition}
+
+\subsection{Cas particulier n°1}
+
+$$
+(E): \frac{\partial f}{\partial x} = 0
+$$
+
+Les solutions sont les fonctions $f(x, y)=K(y)$ où $K$ est une fonction quelconque d'une variable. Si l'on veut se limiter aux solutions de classe $\mathcal{C}^{1}$, il faut prendre $K$ quelconque de classe $\mathcal{C}^{1}$.
+
+\subsection{Cas particulier n°2}
+
+$$
+(E): \frac{\partial f}{\partial x} = h(x, y)
+$$
+
+En intégrant par rapport à $x$ on trouve que les solutions sont les fonctions de la forme
+$$
+f(x, y) = \int^{x} h(x, y)\, dx + K(y)
+$$
+où $K$ est une fonction quelconque.
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial f}{\partial x} = e^{3xy}$.
+\end{exercice}
+
+\begin{corrige}
+En intégrant par rapport à $x$, on trouve
+$$
+f(x, y) = \frac{1}{3y} e^{3xy} + K(y)
+$$
+\end{corrige}
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial f}{\partial x} = f(x, y) e^{3xy}$.
+\end{exercice}
+
+\begin{corrige}
+On peut écrire
+$$
+\frac{\frac{\partial f}{\partial x}}{f} = e^{3xy}
+$$
+En intégrant par rapport à $x$, on trouve
+$$
+\ln |f(x, y)| = \frac{1}{3y} e^{3xy} + K(y)
+$$
+d'où
+$$
+f(x, y) = H(y) e^{\frac{1}{3y} e^{3xy}}
+$$
+\end{corrige}
+
+\subsection{Cas particulier n°3}
+
+$$
+(E): \alpha \frac{\partial f}{\partial x} + \beta \frac{\partial f}{\partial y} = 0
+$$
+
+On peut chercher des solutions (mais pas toutes) avec la méthode de séparation de variables, en posant $f(x, y)=X(x) Y(y)$, si bien que
+$$
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = X^{\prime} Y \\
+\frac{\partial f}{\partial y} = X Y^{\prime}
+\end{array}\right.
+$$
+
+L'équation $(E)$ est donc équivalente à l'équation
+$$
+\begin{array}{ll} 
+& \alpha X^{\prime} Y + \beta X Y^{\prime} = 0 \\
+\Longrightarrow & \alpha X^{\prime} Y = -\beta X Y^{\prime} \\
+\Longrightarrow & \alpha \frac{X^{\prime}}{X} = -\beta \frac{Y^{\prime}}{Y}
+\end{array}
+$$
+
+Or la fonction $\alpha \frac{X^{\prime}}{X}$ est de la variable $x$ et $-\beta \frac{Y^{\prime}}{Y}$ de la variable $y$. L'égalité implique qu'elles sont toutes deux égales à une constante $k$ :
+
+$$
+\begin{array}{ll} 
+& \alpha \frac{X^{\prime}}{X} = k \\
+\Longrightarrow & \frac{X^{\prime}}{X} = k / \alpha \\
+\Longrightarrow & X^{\prime} = (k / \alpha) X \\
+\Longrightarrow & X(x) = C_{1} e^{(k / \alpha) x}
+\end{array}
+$$
+
+$$
+\begin{array}{ll} 
+& -\beta \frac{Y^{\prime}}{Y} = k \\
+\Longrightarrow & \frac{Y^{\prime}}{Y} = -k / \beta \\
+\Longrightarrow & Y^{\prime} = -(k / \beta) Y \\
+\Longrightarrow & Y(y) = C_{2} e^{-(k / \beta) y}
+\end{array}
+$$
+
+Les solutions sont de la forme $f(x, y) = C e^{(k / \alpha) x} e^{-(k / \beta) y}$.
+
+\subsection{Cas particulier n°4}
+
+$$
+(E): \alpha \frac{\partial f}{\partial x} + \beta \frac{\partial f}{\partial y} = \gamma f
+$$
+
+On peut chercher des solutions (mais pas toutes) avec la méthode de séparation de variables, en posant $f(x, y)=X(x) Y(y)$, si bien que
+$$
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = X^{\prime} Y \\
+\frac{\partial f}{\partial y} = X Y^{\prime}
+\end{array}\right.
+$$
+
+L'équation $(E)$ est donc équivalente à l'équation
+$$
+\begin{array}{ll} 
+& \alpha X^{\prime} Y + \beta X Y^{\prime} = \gamma X Y \\
+\Longrightarrow \quad & \left(\alpha X^{\prime} - \gamma X\right) Y = -\beta X Y^{\prime} \\
+\Longrightarrow \quad & \frac{\alpha X^{\prime} - \gamma X}{X} = -\beta \frac{Y^{\prime}}{Y}
+\end{array}
+$$
+
+Or la fonction $\frac{\alpha X^{\prime} - \gamma X}{X}$ est de la variable $x$ et $-\beta \frac{Y^{\prime}}{Y}$ de la variable $y$. L'égalité implique qu'elles sont toutes deux égales à une constante $k$ :
+
+$$
+\begin{array}{l|ll} 
+& \frac{\alpha X^{\prime} - \gamma X}{X} = k & \\
+\Longrightarrow & \alpha \frac{X^{\prime}}{X} - \gamma = k \\
+\Longrightarrow & \frac{X^{\prime}}{X} = \frac{k+\gamma}{\alpha} \\
+\Longrightarrow & X^{\prime} = \frac{k+\gamma}{\alpha} X \\
+\Longrightarrow & X(x) = C_{1} e^{\frac{k+\gamma}{\alpha} x}
+\end{array} \quad \begin{aligned}
+& Y^{\prime} = -k / \beta \\
+& \Longrightarrow \\
+& Y^{\prime} = -(k / \beta) Y \\
+& \Longrightarrow Y(y) = C_{2} e^{-(k / \beta) y}
+\end{aligned}
+$$
+
+Les solutions sont de la forme $f(x, y) = C e^{\frac{k+\gamma}{\alpha} x} e^{-(k / \beta) y}$.
+
+\subsection{Cas général}
+
+On se ramène par un changement de variable linéaire au cas $\frac{\partial f}{\partial x} = h(x, y, f)$, en posant
+$$
+\left\{\begin{array}{l}
+X = ax + by \\
+Y = cx + dy
+\end{array} \quad \text{et} \quad f(x, y) = F(X, Y) = F(ax+by, cx+dy)\right.
+$$
+
+On a alors
+$$
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = \frac{\partial F}{\partial X} \frac{\partial X}{\partial x} + \frac{\partial F}{\partial Y} \frac{\partial Y}{\partial x} = \frac{\partial F}{\partial X} a + \frac{\partial F}{\partial Y} c \\
+\frac{\partial f}{\partial y} = \frac{\partial F}{\partial X} \frac{\partial X}{\partial y} + \frac{\partial F}{\partial Y} \frac{\partial Y}{\partial y} = \frac{\partial F}{\partial X} b + \frac{\partial F}{\partial Y} d
+\end{array}\right.
+$$
+
+L'équation $(E)$ est donc équivalente à l'équation
+$$
+\begin{array}{ll} 
+& \alpha\left(\frac{\partial F}{\partial X} a + \frac{\partial F}{\partial Y} c\right) + \beta\left(\frac{\partial F}{\partial X} b + \frac{\partial F}{\partial Y} d\right) = h(x, y, f) \\
+\Longleftrightarrow & (a \alpha + b \beta) \frac{\partial F}{\partial X} + (c \alpha + d \beta) \frac{\partial F}{\partial Y} = h(x, y, f)
+\end{array}
+$$
+
+Il suffit de choisir $a, b, c$ et $d$ tels que $\left\{\begin{array}{l}a \alpha + b \beta = 1 \\ c \alpha + d \beta = 0\end{array} \quad\right.$ pour résoudre
+$$
+\frac{\partial F}{\partial X} = H(X, Y, F)
+$$
+
+\begin{exercice}
+On cherche la solution de $2 \frac{\partial f}{\partial x} + 3 \frac{\partial f}{\partial y} = 3f$.
+\end{exercice}
+
+\begin{corrige}
+On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array} \quad\right.$ et $f(x, y) = F(X, Y) = F(ax+by, cx+dy)$; l'équation est équivalente à
+$$
+(2a+3b) \frac{\partial F}{\partial X} + (2c+3d) \frac{\partial F}{\partial Y} = 3F
+$$
+
+Posons $c=3, d=-2, a=-1, b=1$, on a alors
+$$
+\frac{\partial F}{\partial X} = 3F
+$$
+
+Donc
+$$
+F(X, Y) = K(Y) e^{3X}
+$$
+où $K$ est une fonction quelconque ; finalement en remplaçant $X$ et $Y$ on obtient
+$$
+f(x, y) = K(3x-2y) e^{3(-x+y)}
+$$
+
+Par exemple les fonctions $e^{3(y-x)}$ et $(3x-2y) e^{3(y-x)}$ sont solutions de l'équation différentielle respectivement avec $K(u)=1$ et $K(u)=u$.
+\end{corrige}
+
+\begin{remarque}
+On retrouve les solutions des cas particuliers parmi les solutions du cas général.
+\end{remarque}
+
+\subsection{Exercices}
+
+\begin{exercice}
+Résoudre les équations aux dérivées partielles suivantes. CVL indique un changement de variables linéaire, MSV indique la méthode de séparation de variables.
+\begin{enumerate}
+  \item $\frac{\partial f}{\partial x} + 3 \frac{\partial f}{\partial y} = 0$ (CVL)
+  \item $5 \frac{\partial f}{\partial x} - 6 \frac{\partial f}{\partial y} = 0$ (CVL)
+  \item $\frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} = 2x - 3y$ (CVL)
+  \item $2 \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = xy$ (CVL)
+  \item $\frac{\partial f}{\partial x} + 5 \frac{\partial f}{\partial y} = \cos(x+y)$ (CVL)
+  \item $\frac{\partial f}{\partial y} = f$
+  \item $\frac{\partial f}{\partial x} + 3 \frac{\partial f}{\partial y} = f$ (MSV)
+  \item $\frac{\partial f}{\partial x} - 2 \frac{\partial f}{\partial y} = yf$ (MSV)
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+Résoudre l'équation aux dérivées partielles suivante
+$$
+\frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} + 3(x-y) f = 0
+$$
+avec $u = xy$ et $v = x+y$ et $x > y$.
+\end{exercice}
+
+\begin{corrige}[title=Corrigé des exercices précédents]
+\begin{enumerate}
+  \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(a+3b) \frac{\partial F}{\partial X} + (c+3d) \frac{\partial F}{\partial Y} = 0$ on choisit $a=4, b=-1$ et $c=3, d=-1$. On trouve $f(x, y) = K(3x-y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+  
+  \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(5a-6b) \frac{\partial F}{\partial X} + (5c-6d) \frac{\partial F}{\partial Y} = 0$ on choisit $a=-1, b=-1$ et $c=6, d=5$. On trouve $f(x, y) = K(6x+5y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+  
+  \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(a+b) \frac{\partial F}{\partial X} + (c+d) \frac{\partial F}{\partial Y} = 2x-3y$ on choisit $a=2$, $b=-3$ et $c=1, d=-1$. On obtient comme équation en $F$ :
+$$
+F_{X}^{\prime} = -X \Longrightarrow F(X, Y) = -\frac{X^{2}}{2} + K(Y)
+$$
+Finalement, on trouve $f(x, y) = -\frac{(2x-3y)^{2}}{2} + K(x-y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+
+  \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(2a-b) \frac{\partial F}{\partial X} + (2c-d) \frac{\partial F}{\partial Y} = xy$ on choisit $a=1$, $b=1$ et $c=1$, $d=2$. On obtient comme équation en $F$ :
+$$
+F_{X}^{\prime} = \frac{-1}{25} X^{2} + \frac{3}{25} XY + \frac{2}{25} Y^{2} \Longrightarrow F(X, Y) = \frac{-1}{75} X^{3} + \frac{3}{50} X^{2} Y + \frac{2}{25} XY^{2} + K(Y)
+$$
+Finalement, on trouve $f(x, y) = \frac{-1}{75}(x+y)^{3} + \frac{3}{50}(x+y)^{2}(x+2y) + \frac{2}{25}(x+y)(x+2y)^{2} + K(x+2y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+
+  \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(a+5b) \frac{\partial F}{\partial X} + (c+5d) \frac{\partial F}{\partial Y} = \cos(x+y)$ on choisit $a=6, b=-1$ et $c=5, d=-1$. On obtient comme équation en $F$ :
+$$
+F_{X}^{\prime} = \cos(6X - 2Y)
+$$
+Finalement, on trouve $f(x, y) = \frac{1}{6} \sin(x+y) + K(5x-y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+
+  \item $f(x, y) = C(x) e^{y}$
+  
+  \item $f(x, y) = C e^{(k+1) x} e^{-(k/3) y}$ par la méthode de séparation de variables.
+  
+  \item $f(x, y) = C e^{x/2} e^{(y-y^{2})/4}$ par la méthode de séparation de variables (avec $k = 1/2$).
+\end{enumerate}
+
+Pour l'exercice suivant : $f(x, y) = e^{3xy} K(x+y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+\end{corrige}
+
+\section{EDP linéaires d'ordre 1, à coefficients non constants}
+
+\begin{definition}
+Ce sont les équations aux dérivées partielles de la forme
+$$
+(E): \alpha \frac{\partial f}{\partial x} + \beta \frac{\partial f}{\partial y} = h(x, y, f)
+$$
+où $\alpha, \beta$ sont des fonctions de $x, y$ et $f$.
+\end{definition}
+
+Il existe une méthode générale, qui dépasse le niveau de ce cours pour trouver de bons changements de variables lorsque les coefficients ne sont pas constants.
+
+\subsection{Cas particulier parmi d'autres}
+
+On résout sur $\mathbb{R} \times ]0, +\infty[$
+$$
+(E): x \frac{\partial f}{\partial x} - y \frac{\partial f}{\partial y} = 0
+$$
+
+En posant $\left\{\begin{array}{l}x = ue^{v} \\ y = e^{-v}\end{array} \quad\right.$ soit (on l'admettra sans difficulté) $\left\{\begin{array}{l}u = xy \\ v = -\ln y\end{array} \quad\right.$, et $F(u, v) = f(x, y)$ on obtient le système
+$$
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = \frac{\partial F}{\partial u} \frac{\partial u}{\partial x} + \frac{\partial F}{\partial v} \frac{\partial v}{\partial x} = \frac{\partial F}{\partial u} y + 0 \\
+\frac{\partial f}{\partial y} = \frac{\partial F}{\partial u} \frac{\partial u}{\partial y} + \frac{\partial F}{\partial v} \frac{\partial v}{\partial y} = \frac{\partial F}{\partial u} x + \frac{\partial F}{\partial v}\left(-\frac{1}{y}\right)
+\end{array}\right.
+$$
+
+Il suit que $F$ est solution de $\frac{\partial F}{\partial v} = 0$, soit $F(u, v) = K(u)$ et finalement
+$$
+f(x, y) = K(xy)
+$$
+où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+
+\subsection{Cas particuliers}
+
+Le changement de variable est proposé, sinon il faut employer la méthode des caractéristiques.
+
+\begin{exercice}
+On cherche la solution de $x \frac{\partial f}{\partial x} + y \frac{\partial f}{\partial y} = yf$.
+\end{exercice}
+
+\begin{corrige}
+On pose $\left\{\begin{array}{l}x = r \cos \theta \\ y = r \sin \theta\end{array} \quad\right.$ et $f(x, y) = F(r, \theta)$. On a alors :
+$$
+\left\{\begin{array}{l}
+\frac{\partial F}{\partial r} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial r} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial r} = \cos \theta \frac{\partial f}{\partial x} + \sin \theta \frac{\partial f}{\partial y} \\
+\frac{\partial F}{\partial \theta} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial \theta} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial \theta} = -r \sin \theta \frac{\partial f}{\partial x} + r \cos \theta \frac{\partial f}{\partial y}
+\end{array}\right.
+$$
+
+On déduit par la méthode de Cramer relative à la résolution de systèmes d'équations linéaires :
+$$
+\begin{gathered}
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = \cos \theta \frac{\partial F}{\partial r} - \frac{1}{r} \sin \theta \frac{\partial F}{\partial \theta} \\
+\frac{\partial f}{\partial y} = \sin \theta \frac{\partial F}{\partial r} + \frac{1}{r} \cos \theta \frac{\partial F}{\partial \theta}
+\end{array}\right. \\
+\text{Autrement} \mid \text{On pose}\left\{\begin{array}{l} 
+r = \sqrt{x^{2} + y^{2}} \\
+\theta = \arctan\left(\frac{y}{x}\right)
+\end{array} \quad \text{alors} \left\{\begin{array}{l}
+\frac{\partial r}{\partial x} = \frac{x}{\sqrt{x^{2}+y^{2}}} = \cos \theta \quad \text{et} \quad \frac{\partial r}{\partial y} = \frac{y}{\sqrt{x^{2}+y^{2}}} = \sin \theta \\
+\frac{\partial \theta}{\partial x} = -\frac{y}{x^{2}+y^{2}} = -\frac{\sin \theta}{r} \quad \text{et} \quad \frac{\partial \theta}{\partial y} = \frac{x}{x^{2}+y^{2}} = \frac{\cos \theta}{r}
+\end{array}\right.\right. \\
+\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} = \frac{\partial F}{\partial r} \frac{\partial r}{\partial x} + \frac{\partial F}{\partial \theta} \frac{\partial \theta}{\partial x} = \cos \theta \frac{\partial F}{\partial r} - \frac{1}{r} \sin \theta \frac{\partial F}{\partial \theta} \\
+\frac{\partial f}{\partial y} = \frac{\partial F}{\partial r} \frac{\partial r}{\partial y} + \frac{\partial F}{\partial \theta} \frac{\partial \theta}{\partial y} = \sin \theta \frac{\partial F}{\partial r} + \frac{1}{r} \cos \theta \frac{\partial F}{\partial \theta}
+\end{array}\right.
+\end{gathered}
+$$
+
+ce qui, en remplaçant dans l'équation initiale, donne :
+$$
+\begin{aligned}
+\cos \theta\left(r \cos \theta \frac{\partial F}{\partial r} - \sin \theta \frac{\partial F}{\partial \theta}\right) + \sin \theta\left(r \sin \theta \frac{\partial F}{\partial r} + \cos \theta \frac{\partial F}{\partial \theta}\right) & = rF \sin \theta \\
+\frac{\partial F}{\partial r} & = F \sin \theta \\
+\frac{\frac{\partial F}{\partial r}}{F} & = \sin \theta
+\end{aligned}
+$$
+
+qui s'intègre par rapport à $r$ et donne
+$$
+\ln |F(r, \theta)| = r \sin \theta + K(\theta)
+$$
+
+soit, avec $\theta = \arctan(y/x)$ :
+$$
+f(x, y) = K(y/x) e^{y}
+$$
+où $K$ est une fonction dérivable quelconque.
+\end{corrige}
+
+\subsection{L'équation de transport -- méthode des caractéristiques}
+
+Si $u_{0}$ est une fonction $\mathcal{C}^{1}(\mathbb{R}, \mathbb{R})$ et $\beta$ une fonction $\mathcal{C}^{1}\left(\mathbb{R}^{2}, \mathbb{R}\right)$, on considère le problème de Cauchy
+$$
+(E):\left\{\begin{array}{l}
+\frac{\partial f}{\partial x} + \beta(x, y) \frac{\partial f}{\partial y} = 0 \quad (x, y) \in \mathbb{R}^{*} \times \mathbb{R} \\
+f(0, y) = u_{0}(y)
+\end{array}\right.
+$$
+
+Une caractéristique du problème est une courbe paramétrique de $\mathbb{R}^{2}$ d'équation $(x, y(x))$ vérifiant le problème de Cauchy
+$$
+\left\{\begin{array}{l}
+y^{\prime}(x) = \beta(x, y(x)) \\
+y(0) = \xi
+\end{array}\right.
+$$
+
+\begin{theoreme}[title=Théorème (admis)]
+Si le problème de Cauchy admet une courbe caractéristique, et si $f$ de classe $\mathcal{C}^{1}$ est solution de l'équation de transport, alors la fonction $x \longmapsto f(x, y(x))$ est constante et égale à $f(0, y(0)) = f(0, \xi) = u_{0}(\xi)$.
+\end{theoreme}
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial f}{\partial x} + c \frac{\partial f}{\partial y} = 0, \quad c \in \mathbb{R}$.
+\end{exercice}
+
+\begin{remarque}
+Cas d'une « vitesse constante ».
+\end{remarque}
+
+\begin{corrige}
+Les courbes caractéristiques sont définies pour tout $\xi \in \mathbb{R}$ par $y(x) = cx + \xi$.\\
+Les solutions du problème de Cauchy sont
+$$
+f(x, y) = u_{0}(y - cx)
+$$
+\end{corrige}
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial f}{\partial x} + \left(\frac{y}{1+x^{2}}\right) \frac{\partial f}{\partial y} = 0$.
+\end{exercice}
+
+\begin{remarque}
+Cas d'une « vitesse non constante ».
+\end{remarque}
+
+\begin{corrige}
+Les courbes caractéristiques sont définies pour tout $(x, y)$ par $y(x) = \xi e^{\arctan(x)}$.\\
+Les solutions du problème de Cauchy sont
+$$
+f(x, y) = u_{0}\left(y e^{-\arctan(x)}\right)
+$$
+\end{corrige}
+
+\subsection{Exercices}
+
+\begin{exercice}
+Résoudre les équations aux dérivées partielles suivantes.
+\begin{enumerate}
+  \item $2y \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = 0$ poser $f(x, y) = X(x) Y(y)$. Déterminer l'équation différentielle vérifiée par $X$ et $Y$, puis par séparation des variables, déterminer $X$ et $Y$, enfin $f(x, y)$.
+  \item $x \frac{\partial f}{\partial x} - y \frac{\partial f}{\partial y} = xy^{2}$ poser $u = x, v = xy$
+  \item $x \frac{\partial f}{\partial x} + y \frac{\partial f}{\partial y} = \frac{y^{2}}{x}$ poser $u = x, v = \frac{y}{x}$
+  \item $y \frac{\partial f}{\partial x} + x \frac{\partial f}{\partial y} = x$ poser $x = r \cos \theta, y = r \sin \theta$
+  \item $x \frac{\partial f}{\partial x} + y \frac{\partial f}{\partial y} = \sqrt{x^{2}+y^{2}}$ poser $x = r \cos \theta, y = r \sin \theta$
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}
+Résoudre les équations aux dérivées partielles suivantes. MdC indique par la méthode des caractéristiques.
+\begin{enumerate}
+  \item $\frac{\partial f}{\partial x} + yx \frac{\partial f}{\partial y} = 0$ avec $f(0, y) = y^{2}$ (MdC)
+  \item $x \frac{\partial f}{\partial x} + 2 \frac{\partial f}{\partial y} = 2f$ (MdC, variante)
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}[title=Corrigé des exercices]
+\textbf{Exercice 1 :}
+
+1) L'équation différentielle vérifiée par $X$ et $Y$ est $\frac{X^{\prime}}{X} = \frac{1}{2y} \frac{Y^{\prime}}{Y}$. Or $\frac{X^{\prime}}{X}$ est une fonction de $x$ et $\frac{1}{y} \frac{Y^{\prime}}{Y}$ une fonction de $y$, si bien que chacune est nécessairement égale à une constante $k \in \mathbb{R}$. On est ramené au système
+$$
+\left\{\begin{array}{l}
+\frac{X^{\prime}}{X} = k \\
+\frac{1}{2y} \frac{Y^{\prime}}{Y} = k
+\end{array} \Longleftrightarrow \left\{\begin{array}{l}
+X(x) = C_{1} e^{kx} \\
+Y(y) = C_{2} e^{ky^{2}}
+\end{array}\right.\right.
+$$
+Finalement, $f(x, y) = C e^{k\left(x+y^{2}\right)}$.
+
+2) $f(x, y) = -xy^{2} + K(xy)$ où $K$ est une fonction quelconque de classe $\mathcal{C}^{1}$.
+
+3) $f(x, y) = \frac{y^{2}}{x} + K(y/x)$ où $K$ est une fonction quelconque de classe $\mathcal{C}^{1}$.
+
+4) En coordonnées polaires, l'équation devient $\sin(2\theta)\frac{\partial F}{\partial r} + \frac{\cos(2\theta)}{r}\frac{\partial F}{\partial \theta} = r\cos\theta$. La solution est $f(x, y) = \frac{x^2-y^2}{2}\ln(x^2+y^2) + K(x^2-y^2)$ où $K$ est une fonction quelconque de classe $\mathcal{C}^{1}$.
+
+5) $f(x, y) = \sqrt{x^{2}+y^{2}} + K\left(\frac{y}{x}\right)$ où $K$ est une fonction quelconque de classe $\mathcal{C}^{1}$.
+
+\textbf{Exercice 2 :}
+
+1) Dans notre cas $u_{0}(y) = y^{2}$. La caractéristique du problème vérifie
+$$
+\left\{\begin{array}{l}
+y^{\prime}(x) = xy \\
+y(0) = \xi
+\end{array} \Longleftrightarrow y = \xi e^{x^{2}/2}\right.
+$$
+Alors $f(x, y) = u_{0}\left(y e^{-x^{2}/2}\right) = y^{2} e^{-x^{2}}$.
+
+2) Écrivons $df = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy = \frac{\partial f}{\partial x} dx + \frac{1}{2}\left(2f - x \frac{\partial f}{\partial x}\right) dy = \frac{\partial f}{\partial x}\left(dx - \frac{x}{2} dy\right) + f\, dy$.
+
+Quand $dx - \frac{x}{2} dy = 0 \Longleftrightarrow \frac{dx}{x} = \frac{dy}{2} \Longleftrightarrow x = \xi e^{y/2}$, alors $df = f\, dy \Longrightarrow f(x, y) = C e^{y}$, donc finalement
+$$
+f(x, y) = e^{y} C\left(x e^{-y/2}\right)
+$$
+où $C$ est fonction quelconque.
+\end{corrige}
+
+\section{EDP linéaires d'ordre 2}
+
+\begin{definition}
+Ce sont les équations aux dérivées partielles de la forme
+$$
+(E): A \frac{\partial^{2} f}{\partial x^{2}} + B \frac{\partial^{2} f}{\partial x \partial y} + C \frac{\partial^{2} f}{\partial y^{2}} + D \frac{\partial f}{\partial x} + E \frac{\partial f}{\partial y} = h(x, y, f)
+$$
+où $A, B, C, D, E$ sont des fonctions de $x, y$ et $f$.
+\end{definition}
+
+\subsection{Exemples fondamentaux}
+
+\subsubsection{Le cas $\frac{\partial^{2} f}{\partial x^{2}} = h(x, y)$}
+
+En intégrant une première fois on obtient
+$$
+\frac{\partial f}{\partial x} = \int^{x} h(x, y)\, dx + K(y)
+$$
+
+Ce qui en intégrant une deuxième fois donne
+$$
+f(x, y) = \int^{x} \int^{x} h(x, y)\, dx\, dx + K(y) x + L(y)
+$$
+où $K$ et $L$ sont des fonctions quelconques. Réciproquement si l'on dérive deux fois la fonction définie par la formule précédente par rapport à $x$ on obtient bien l'équation différentielle de départ.
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial^{2} f}{\partial x^{2}} = xy^{2}$.
+\end{exercice}
+
+\begin{corrige}
+En intégrant une première fois, on obtient
+$$
+\frac{\partial f}{\partial x} = \frac{x^{2} y^{2}}{2} + C_{1}(y)
+$$
+
+En intégrant une seconde fois, on obtient
+$$
+f(x, y) = \frac{x^{3} y^{2}}{6} + C_{1}(y) x + C_{2}(y)
+$$
+\end{corrige}
+
+\subsubsection{Le cas $\frac{\partial^{2} f}{\partial x \partial y} = h(x, y)$}
+
+En intégrant une première fois par rapport à la variable $x$ on obtient
+$$
+\frac{\partial f}{\partial y} = \int^{x} h(x, y)\, dx + K(y)
+$$
+
+Ce qui en intégrant une deuxième fois par rapport à la variable $y$ donne
+$$
+f(x, y) = \int^{y} \int^{x} h(x, y)\, dx\, dy + \underbrace{L(y) + R(x)}_{= \int^{y} K(y)\, dy}
+$$
+où $L$ et $R$ sont des fonctions quelconques. Réciproquement si l'on dérive deux fois la fonction définie par la formule précédente par rapport à $y$ puis $x$ on obtient bien l'équation différentielle de départ.
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial^{2} f}{\partial x \partial y} = y e^{x}$.
+\end{exercice}
+
+\begin{corrige}
+En intégrant une première fois par rapport à $x$, on obtient
+$$
+\frac{\partial f}{\partial y} = y e^{x} + C_{1}(y)
+$$
+
+En intégrant une seconde fois par rapport à $y$, on obtient
+$$
+f(x, y) = \frac{y^{2} e^{x}}{2} + \int^{y} C_{1}(y)\, dy + C_{2}(x)
+$$
+\end{corrige}
+
+\subsection{Cas des coefficients constants, sans second membre}
+
+Notons $D_{x}$ l'opérateur de dérivation par rapport à la variable $x$, et $D_{y}$ l'opérateur de dérivation par rapport à la variable $y$. On remarque que ces deux opérateurs commutent, car pour une fonction $f$ deux fois différentiables on a $\frac{\partial^{2} f}{\partial x \partial y} = \frac{\partial^{2} f}{\partial y \partial x}$.
+
+\subsubsection{Première méthode}
+
+On peut essayer d'écrire l'équation aux dérivées partielles à l'aide d'un opérateur différentiel et de factoriser cet opérateur pour se ramener à des EDP d'ordre 1.
+
+\begin{exercice}
+On cherche la solution de $\frac{\partial^{2} f}{\partial x^{2}} - \frac{\partial^{2} f}{\partial y^{2}} = xy$.
+\end{exercice}
+
+\begin{corrige}
+Cette équation peut s'écrire
+$$
+\left(\frac{\partial^{2}}{\partial x^{2}} - \frac{\partial^{2}}{\partial y^{2}}\right) f = xy \Longleftrightarrow \left(D_{x}^{2} - D_{y}^{2}\right) f = xy
+$$
+
+Or comme $D_{x}$ et $D_{y}$ commutent, $D_{x}^{2} - D_{y}^{2} = \left(D_{x} - D_{y}\right)\left(D_{x} + D_{y}\right)$, l'équation s'écrit
+$$
+\left(D_{x} - D_{y}\right)\left(D_{x} + D_{y}\right) f = xy
+$$
+
+Notons $g = \left(D_{x} + D_{y}\right)(f)$. Pour résoudre $(E): \left(D_{x} - D_{y}\right) g = xy$, il suffit de faire un changement de variables, comme dans le paragraphe précédent. En posant
+$$
+\left\{\begin{array}{l}
+X = x \\
+Y = x + y \\
+G(X, Y) = g(x, y)
+\end{array}\right.
+$$
+
+Il suit que
+$$
+\begin{aligned}
+\left(D_{x} - D_{y}\right) g = D_{x} g - D_{y} g = \frac{\partial g}{\partial x} - \frac{\partial g}{\partial y} & = \frac{\partial G}{\partial X} \frac{\partial X}{\partial x} + \frac{\partial G}{\partial Y} \frac{\partial Y}{\partial x} - \left(\frac{\partial G}{\partial X} \frac{\partial X}{\partial y} + \frac{\partial G}{\partial Y} \frac{\partial Y}{\partial y}\right) \\
+& = \frac{\partial G}{\partial X} 1 + \frac{\partial G}{\partial Y} 1 - \left(\frac{\partial G}{\partial X} 0 + \frac{\partial G}{\partial Y} 1\right) \\
+& = \frac{\partial G}{\partial X}
+\end{aligned}
+$$
+
+Alors, l'équation $(E)$ devient $\frac{\partial G}{\partial X} = X(Y-X) = XY - X^{2}$ ce qui en intégrant donne :
+$$
+G(X, Y) = \frac{1}{2} X^{2} Y - \frac{1}{3} X^{3} + C(Y)
+$$
+
+en revenant aux variables initiales on obtient $g(x, y) = \frac{1}{2} x^{2}(x+y) - \frac{1}{3} x^{3} + C(x+y)$; il nous reste à résoudre l'EDP
+$$
+\left(D_{x} + D_{y}\right) f = -\frac{1}{6} x^{3} + \frac{1}{2} x^{2} y + C(x+y)
+$$
+
+On pose un second changement de variables $\left\{\begin{array}{l}U = x \\ V = x - y\end{array}\right.$ et $F(U, V) = f(x, y)$, si bien que
+$$
+\begin{aligned}
+\left(D_{x} + D_{y}\right) f = D_{x} f + D_{y} f = \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} & = \frac{\partial F}{\partial U} \frac{\partial U}{\partial x} + \frac{\partial F}{\partial V} \frac{\partial V}{\partial x} + \left(\frac{\partial F}{\partial U} \frac{\partial U}{\partial y} + \frac{\partial F}{\partial V} \frac{\partial V}{\partial y}\right) \\
+& = \frac{\partial F}{\partial U} 1 + \frac{\partial F}{\partial V} 1 + \left(\frac{\partial F}{\partial U} 0 + \frac{\partial F}{\partial V}(-1)\right) \\
+& = \frac{\partial F}{\partial U}
+\end{aligned}
+$$
+
+ce qui nous ramène à l'équation
+$$
+\frac{\partial F}{\partial U} = -\frac{1}{6} U^{3} + \frac{1}{2} U^{2}(U-V) + C(2U-V) = \frac{2}{3} U^{3} - \frac{1}{2} U^{2} V + C(2U-V)
+$$
+
+qui s'intègre en
+$$
+F(U, V) = \frac{1}{6} U^{4} - \frac{1}{6} U^{3} V + \int^{U} C(2U-V)\, dU + C_{2}(V)
+$$
+
+ce qui donne en repassant aux variables initiales :
+$$
+f(x, y) = \frac{1}{6} x^{4} - \frac{1}{6} x^{3}(x-y) + \int^{x} C(x+y)\, dx + C_{2}(x-y)
+$$
+\end{corrige}
+
+\subsubsection{Méthode des séries de Fourier}
+
+Cette méthode s'utilise lorsque le polynôme caractéristique ne possède pas de racine réelle, on se contentera d'un exemple : l'équation de la chaleur.
+
+\begin{definition}
+Le polynôme caractéristique associé à l'équation
+$$
+A \frac{\partial^{2} f}{\partial x^{2}} + B \frac{\partial^{2} f}{\partial x \partial y} + C \frac{\partial^{2} f}{\partial y^{2}} = h(x, y, f)
+$$
+est
+$$
+A X^{2} + BX + C = 0
+$$
+\end{definition}
+
+\begin{exercice}
+On cherche la solution de l'équation de la chaleur $(E): \frac{\partial T}{\partial t} = a^{2} \frac{\partial^{2} T}{\partial x^{2}}$.
+
+où $T(x, t)$ représente la température à l'instant $t$ au point d'abscisse $x$ dans une barre de longueur $l$. On se donne la condition initiale suivante :
+$$
+(CI): T(x, 0) = \varphi(x)
+$$
+on connaît la température de la barre en chacun de ses points à l'instant 0. Ainsi que des conditions aux limites :
+$$
+(CL): T(0, t) = T(l, t) = 0
+$$
+la température de la barre à ses extrémités est nulle.
+\end{exercice}
+
+\begin{corrige}
+\textbf{1.} On cherche les solutions de $(E)$ de la forme $T(x, t) = U(x) V(t)$.
+
+\textbf{2.} On ne conserve que les solutions, non nulles, bornées lorsque $t$ croît vers l'infini.
+
+\textbf{3.} On regarde ce que les conditions aux bords (CL) imposent comme conditions aux constantes d'intégrations.
+
+\textbf{4.} On cherche une solution du problème sous forme de somme de solutions trouvées précédemment, en écrivant la condition initiale (CI) à l'aide d'une série de Fourier.
+
+C'est-à-dire :
+
+\textbf{1)} $(E)$ équivaut à $U V^{\prime} = a^{2} U^{\prime \prime} V$ qui s'écrit
+$$
+\frac{V^{\prime}}{V} = a^{2} \frac{U^{\prime \prime}}{U}
+$$
+
+Le membre de gauche de l'égalité est une fonction de $t$ et le membre de droite est une fonction de $x$, chacune des parties est donc une constante que l'on note $K$. On s'est ramené au système
+$$
+\left\{\begin{array}{l}
+V^{\prime} = K V \\
+U^{\prime \prime} = a^{2} K U
+\end{array}\right.
+$$
+
+qui se résout facilement, suivant le signe de $K$ en :
+$$
+\left\{\begin{array}{l}
+V = C e^{Kt} \\
+U = C_{1} e^{\sqrt{K} ax} + C_{2} e^{-\sqrt{K} ax} \text{ ou } U = C_{1} \cos\left(\frac{\sqrt{-K}}{a} x\right) + C_{2} \sin\left(\frac{\sqrt{-K}}{a} x\right)
+\end{array}\right.
+$$
+
+\textbf{2)} $V$ doit être borné lorsque $t$ tend vers l'infini, $K$ est donc négatif, notons $K = -k^{2}$. Les solutions sont donc :
+$$
+\left\{\begin{array}{l}
+V = C e^{-k^{2} t} \\
+U = C_{1} \cos\left(\frac{kx}{a}\right) + C_{2} \sin\left(\frac{kx}{a}\right)
+\end{array}\right.
+$$
+
+\textbf{3)} $T(0, t) = U(0) V(t) = C e^{-k^{2} t} C_{1} = 0$, avec $C \neq 0$ par hypothèse 2., donc $C_{1} = 0$. 
+
+$T(l, t) = U(l) V(t) = C e^{-k^{2} t} C_{2} \sin\left(\frac{kl}{a}\right) = 0$, toujours avec $C \neq 0$ par hypothèse 2., et comme $C_{1} = 0$, nécessairement $C_{2} \neq 0$ toujours par hypothèse 2.; si bien que nécessairement
+$$
+\sin\left(\frac{kl}{a}\right) = 0 \Longleftrightarrow k = \frac{n \pi a}{l}
+$$
+avec $n$ un entier. On a donc les solutions de la forme
+$$
+T(x, t) = C e^{-\frac{n^{2} \pi^{2} a^{2}}{l^{2}} t} \sin\left(\frac{n \pi x}{l}\right)
+$$
+
+\textbf{4)} On cherche une solution du problème sous forme de somme de solutions trouvées précédemment :
+$$
+\psi(x, t) = \sum_{n=0}^{\infty} C_{n} e^{-\frac{n^{2} \pi^{2} a^{2}}{l^{2}} t} \sin\left(\frac{n \pi x}{l}\right)
+$$
+
+Les conditions aux bords (CL) sont clairement vérifiées. Écrivons la condition initiale (CI) pour la fonction $\psi$. On obtient
+$$
+\psi(x, 0) = \sum_{n=0}^{\infty} C_{n} \sin\left(\frac{n \pi x}{l}\right)
+$$
+
+Comme on peut choisir les $C_{n}$, il suffit de les choisir de telle sorte que $\sum_{n=0}^{\infty} C_{n} \sin\left(\frac{n \pi x}{l}\right) = \varphi(x)$.
+
+Soit $\sum_{n=1}^{\infty} b_{n} \sin\left(\frac{n \pi x}{l}\right)$ la série de Fourier de la fonction $2l$-périodique, impaire, égale à $\varphi$ sur $[0, l]$ et posons :
+$$
+\psi(x, t) = \sum_{n=0}^{\infty} b_{n} e^{-\frac{n^{2} \pi^{2} a^{2}}{l^{2}} t} \sin\left(\frac{n \pi x}{l}\right)
+$$
+
+On a donc $\psi(x, 0) = \sum_{n=0}^{\infty} b_{n} \sin\left(\frac{n \pi x}{l}\right) = \varphi(x)$ d'après le théorème de Dirichlet.
+
+On devrait vérifier que la fonction $\psi$ aux variables $x, t$ vérifie bien l'équation $(E)$... ADMIS !
+
+On a résolu dans un cas particulier l'équation de la chaleur.
+\end{corrige}
+
+\section{Exercices finaux}
+
+\begin{exercice}
+Résoudre les équations aux dérivées partielles suivantes.
+\begin{enumerate}
+  \item $\frac{\partial^{2} f}{\partial x^{2}} - 3 \frac{\partial^{2} f}{\partial x \partial y} + 2 \frac{\partial^{2} f}{\partial y^{2}} = 0$
+  \item $5 \frac{\partial^{2} f}{\partial x^{2}} - \frac{\partial^{2} f}{\partial x \partial y} - 6 \frac{\partial^{2} f}{\partial y^{2}} = xy$
+  \item $\frac{\partial^{2} f}{\partial x^{2}} - 2 \frac{\partial^{2} f}{\partial y^{2}} = \cos x$
+  \item $\frac{\partial^{2} f}{\partial x^{2}} - \frac{\partial^{2} f}{\partial y^{2}} + \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = 0$
+  \item $\frac{\partial^{2} f}{\partial x \partial y} - \frac{\partial^{2} f}{\partial y^{2}} - 3 \frac{\partial f}{\partial x} + 5 \frac{\partial f}{\partial y} - 6f = 12$
+\end{enumerate}
+\end{exercice}
+
+\end{document}

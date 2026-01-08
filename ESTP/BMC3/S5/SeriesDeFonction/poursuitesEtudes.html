@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poursuites d'études - Concours Écoles d'Ingénieurs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-card: #1a2028;
+            --bg-card-hover: #232b36;
+            --accent-ensea: #22c55e;
+            --accent-centrale: #3b82f6;
+            --accent-gei: #f59e0b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .concours-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .concours-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-badge {
+            width: 4px;
+            height: 2.5rem;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .ensea .card-badge { background: var(--accent-ensea); }
+        .centrale .card-badge { background: var(--accent-centrale); }
+        .gei .card-badge { background: var(--accent-gei); }
+
+        h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .ensea h2 { color: var(--accent-ensea); }
+        .centrale h2 { color: var(--accent-centrale); }
+        .gei h2 { color: var(--accent-gei); }
+
+        .schools {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .schools strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.65rem;
+            font-size: 0.9rem;
+        }
+
+        .info-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .highlight {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gei);
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .links-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .links-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-primary);
+        }
+
+        .ensea .link-item:hover { border-color: var(--accent-ensea); }
+        .centrale .link-item:hover { border-color: var(--accent-centrale); }
+        .gei .link-item:hover { border-color: var(--accent-gei); }
+
+        .link-icon {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        .link-arrow {
+            margin-left: auto;
+            opacity: 0.4;
+            font-size: 0.9rem;
+        }
+
+        .dominantes {
+            margin: 1rem 0;
+        }
+
+        .dominantes-title {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .dominante-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            background: rgba(59, 130, 246, 0.08);
+            border-radius: 8px;
+            margin-bottom: 0.4rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            transition: all 0.15s ease;
+            border-left: 2px solid var(--accent-centrale);
+        }
+
+        .dominante-link:hover {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--text-primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 0.75rem;
+            }
+
+            .concours-card {
+                padding: 1.25rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .schools {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Poursuites d'études</h1>
+            <p>Concours d'accès aux écoles d'ingénieurs 2026</p>
+        </header>
+
+        <!-- Concours ENSEA -->
+        <article class="concours-card ensea">
+            <div class="card-header">
+                <div class="card-badge"></div>
+                <h2>Concours ENSEA BUT-BTS</h2>
+            </div>
+            
+            <div class="schools">
+                <strong>Écoles accessibles :</strong> Arts et Métiers, ENSEA, ENS Paris-Saclay, ISAT, ESEO, ICAM Strasbourg
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">📅</span>
+                <span>Inscription du <strong>11 février au 11 mars</strong></span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">📝</span>
+                <span>Pas d'écrit, oraux de sélection selon les écoles</span>
+            </div>
+
+            <div class="links-section">
+                <div class="links-title">Ressources</div>
+                <a href="https://concours.ensea.fr/portail/but.html" target="_blank" class="link-item">
+                    <span class="link-icon">🌐</span>
+                    <span>Page du concours</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="https://concours.ensea.fr/pdfs/dutbts/Brochure%20B.U.T.%202026.pdf" target="_blank" class="link-item">
+                    <span class="link-icon">📄</span>
+                    <span>Notice du concours 2026</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="https://concours.ensea.fr/pdfs/dutbts/annales/" target="_blank" class="link-item">
+                    <span class="link-icon">📚</span>
+                    <span>Annales et rapports de jury</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+
+        <!-- Concours Centrale -->
+        <article class="concours-card centrale">
+            <div class="card-header">
+                <div class="card-badge"></div>
+                <h2>Concours Centrale</h2>
+            </div>
+            
+            <div class="schools">
+                <strong>12 écoles Centrale :</strong> CentraleSupélec (Paris), Lyon, Marseille, Lille, Nantes, Casablanca
+            </div>
+
+            <div class="dominantes">
+                <div class="dominantes-title">📐 Choisir une dominante parmi 5 :</div>
+                <a href="https://www.groupe-centrale.com/wp-content/uploads/2026/01/Programmes-des-epreuves-de-la-dominante-Mathematiques-du-Concours-Universitaire-des-Ecoles-Centrale-2026.pdf" target="_blank" class="dominante-link">
+                    Programme dominante Mathématiques →
+                </a>
+                <a href="https://www.groupe-centrale.com/wp-content/uploads/2026/01/Programmes-des-epreuves-de-la-dominante-Mecanique-et-Genie-Civil-du-Concours-Universitaire-des-Ecoles-Centrale-2026.pdf" target="_blank" class="dominante-link">
+                    Programme dominante Mécanique et Génie Civil →
+                </a>
+            </div>
+
+            <div class="links-section">
+                <div class="links-title">Ressources</div>
+                <a href="https://www.groupe-centrale.com/concours-universitaire/" target="_blank" class="link-item">
+                    <span class="link-icon">🌐</span>
+                    <span>Page du concours universitaire</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+
+        <!-- Concours GEI-Univ -->
+        <article class="concours-card gei">
+            <div class="card-header">
+                <div class="card-badge"></div>
+                <h2>Concours GEI-Univ</h2>
+            </div>
+            
+            <div class="schools">
+                <strong>15 écoles :</strong> Ponts, ISAE (aéronautique), ENSTA, Télécom, Mines (Paris, Saint-Étienne, Nancy), ENSAE (Statistiques), Chimie Paris, Polytechnique, ESPCI, Institut d'Optique, ESTP
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">⚠️</span>
+                <span>Inscriptions <span class="highlight">ouvertes</span> jusqu'au <strong>19 février</strong></span>
+            </div>
+
+            <div class="links-section">
+                <div class="links-title">Ressources</div>
+                <a href="https://www.geiuniv.com/" target="_blank" class="link-item">
+                    <span class="link-icon">🌐</span>
+                    <span>Page du concours</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="https://www.geiuniv.com/wp-content/uploads/2025/11/Notice-GEI-UNIV-2026.pdf" target="_blank" class="link-item">
+                    <span class="link-icon">📄</span>
+                    <span>Notice GEI-UNIV 2026</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+
+        <footer>
+            ESTP — BMC3 — S5
+        </footer>
+    </div>
+</body>
+</html>
+
