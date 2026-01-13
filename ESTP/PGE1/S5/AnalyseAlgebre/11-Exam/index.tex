@@ -1,0 +1,600 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}           % Police Latin Modern (plus nette)
+\usepackage{charter}           % Police Charter (très lisible)
+\usepackage[scaled=0.95]{inconsolata} % Police mono lisible
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\setboolean{showSolutions}{true}
+% \setboolean{showSolutions}{false}
+
+\title{Examen S5 - Mathématiques - Analyse et Algèbre }
+
+\author{}
+\date{}
+
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{16/01/2026}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 1}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime Berger \\
+        \hline 
+        \textbf{Matière} & Mathématiques - Analyse et Algèbre \\
+        \hline 
+        \textbf{Durée de l'examen} & 2h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{center}
+
+
+
+
+
+
+
+\newpage 
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/6}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+%==============================================================================
+\section*{Exercice 1 : Calcul tensoriel (4 points)}
+%==============================================================================
+
+On se place dans $\mathbb{R}^3$ muni d'une base $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$ qui n'est pas orthonormée. On donne les produits scalaires entre les vecteurs de la base :
+\[
+\langle \mathbf{e}_1, \mathbf{e}_1 \rangle = 2, \quad \langle \mathbf{e}_1, \mathbf{e}_2 \rangle = 1, \quad \langle \mathbf{e}_1, \mathbf{e}_3 \rangle = 0
+\]
+\[
+\langle \mathbf{e}_2, \mathbf{e}_2 \rangle = 3, \quad \langle \mathbf{e}_2, \mathbf{e}_3 \rangle = -1, \quad \langle \mathbf{e}_3, \mathbf{e}_3 \rangle = 1
+\]
+
+\begin{enumerate}
+    \item Former la matrice $(g_{ij})$ avec $g_{ij} = \langle \mathbf{e}_i, \mathbf{e}_j \rangle$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Comme le produit scalaire est symétrique, la matrice $(g_{ij})$ est :
+    \[
+    (g_{ij}) = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 3 & -1 \\ 0 & -1 & 1 \end{pmatrix}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Soit le vecteur $\mathbf{v} = (1, -1, 2)$ exprimé dans la base $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$.
+    Quelles sont les composantes contravariantes de $\mathbf{v}$ ? \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Les composantes contravariantes sont directement les coordonnées données dans la base :
+    \[
+    v^1 = 1, \quad v^2 = -1, \quad v^3 = 2
+    \]
+    \end{solution}
+    }{}
+    
+    \item Calculer les composantes covariantes $v_1$, $v_2$, $v_3$ de ce vecteur. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Les composantes covariantes se calculent avec le tenseur métrique : $v_i = g_{ij} v^j$.
+    \[
+    v_1 = g_{11}v^1 + g_{12}v^2 + g_{13}v^3 = 2 \cdot 1 + 1 \cdot (-1) + 0 \cdot 2 = 2 - 1 = 1
+    \]
+    \[
+    v_2 = g_{21}v^1 + g_{22}v^2 + g_{23}v^3 = 1 \cdot 1 + 3 \cdot (-1) + (-1) \cdot 2 = 1 - 3 - 2 = -4
+    \]
+    \[
+    v_3 = g_{31}v^1 + g_{32}v^2 + g_{33}v^3 = 0 \cdot 1 + (-1) \cdot (-1) + 1 \cdot 2 = 1 + 2 = 3
+    \]
+    \end{solution}
+    }{}
+    
+    \item Calculer la norme du vecteur $\mathbf{v}$ en utilisant la formule $\|\mathbf{v}\|^2 = \sum_i v^i v_i$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \|\mathbf{v}\|^2 = v^1 v_1 + v^2 v_2 + v^3 v_3 = 1 \cdot 1 + (-1) \cdot (-4) + 2 \cdot 3 = 1 + 4 + 6 = 11
+    \]
+    Donc $\|\mathbf{v}\| = \sqrt{11}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 2 : Espaces $L^p$ (4 points)}
+%==============================================================================
+
+On considère les fonctions suivantes :
+\[
+f(x) = \frac{1}{x^2}, \qquad g(x) = e^{-2x}, \qquad h(x) = \sin(x)
+\]
+
+\begin{enumerate}
+    \item Déterminer si $f$ appartient à $L^1(]1, +\infty[)$. Si oui, calculer sa norme. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \int_1^{+\infty} \frac{1}{x^2} dx = \left[ -\frac{1}{x} \right]_1^{+\infty} = 0 - (-1) = 1
+    \]
+    L'intégrale converge, donc $f \in L^1(]1, +\infty[)$ et $\|f\|_1 = 1$.
+    \end{solution}
+    }{}
+    
+    \item Déterminer si $g$ appartient à $L^2(\mathbb{R}^*_+)$. Si oui, calculer sa norme. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \int_0^{+\infty} |e^{-2x}|^2 dx = \int_0^{+\infty} e^{-4x} dx = \left[ -\frac{e^{-4x}}{4} \right]_0^{+\infty} = \frac{1}{4}
+    \]
+    L'intégrale converge, donc $g \in L^2(\mathbb{R}^*_+)$ et $\|g\|_2 = \sqrt{1/4} = \frac{1}{2}$.
+    \end{solution}
+    }{}
+    
+    \item Déterminer si $h$ appartient à $L^\infty(\mathbb{R})$. Si oui, donner sa norme. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $|\sin(x)| \leq 1$ pour tout $x \in \mathbb{R}$, et cette borne est atteinte (par exemple en $x = \pi/2$).
+    
+    Donc $h \in L^\infty(\mathbb{R})$ et $\|h\|_\infty = 1$.
+    \end{solution}
+    }{}
+    
+    \item Soit $p, q > 1$ tels que $\frac{1}{p} + \frac{1}{q} = 1$. Énoncer l'inégalité de Hölder pour deux fonctions $u \in L^p(\Omega)$ et $w \in L^q(\Omega)$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'inégalité de Hölder affirme que :
+    \[
+    \int_\Omega |u(x) w(x)| dx \leq \|u\|_p \|w\|_q
+    \]
+    \end{solution}
+    }{}
+    
+    \item En déduire que si $u, w \in L^2(\Omega)$, alors $uw \in L^1(\Omega)$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On applique Hölder avec $p = q = 2$ (qui vérifient bien $\frac{1}{2} + \frac{1}{2} = 1$) :
+    \[
+    \int_\Omega |u w| \leq \|u\|_2 \|w\|_2 < +\infty
+    \]
+    Donc $uw$ est intégrable, i.e. $uw \in L^1(\Omega)$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/6}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 3 : Transformée de Laplace (4 points)}
+%==============================================================================
+
+On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
+
+\begin{enumerate}
+    \item Calculer $\mathcal{L}\{e^{-3t}\}(s)$ directement à partir de la définition et préciser le domaine de convergence. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \mathcal{L}\{e^{-3t}\}(s) = \int_0^{+\infty} e^{-3t} e^{-st} dt = \int_0^{+\infty} e^{-(s+3)t} dt = \left[ -\frac{e^{-(s+3)t}}{s+3} \right]_0^{+\infty} = \frac{1}{s+3}
+    \]
+    Cette intégrale converge pour $\text{Re}(s) > -3$.
+    \end{solution}
+    }{}
+    
+    \item En utilisant la propriété de décalage en fréquence $\mathcal{L}\{e^{at}f(t)\} = F(s-a)$, calculer $\mathcal{L}\{t^2 e^{-3t}\}$. \textit{(1 pt)}
+    
+    \textit{On rappelle que $\mathcal{L}\{t^n\} = \frac{n!}{s^{n+1}}$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise le décalage avec $f(t) = t^2$ et $a = -3$.
+    
+    On a $\mathcal{L}\{t^2\} = \frac{2!}{s^3} = \frac{2}{s^3}$.
+    
+    Par décalage en fréquence :
+    \[
+    \mathcal{L}\{t^2 e^{-3t}\} = \frac{2}{(s+3)^3}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre l'équation différentielle $y' + 2y = e^{-t}$ avec $y(0) = 0$ en utilisant la transformée de Laplace. \textit{(2 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \textbf{Étape 1 : Transformation.} En appliquant $\mathcal{L}$ à l'équation :
+    \[
+    sY(s) - y(0) + 2Y(s) = \frac{1}{s+1}
+    \]
+    Avec $y(0) = 0$ :
+    \[
+    (s+2)Y(s) = \frac{1}{s+1}
+    \]
+    
+    \textbf{Étape 2 : Résolution algébrique.}
+    \[
+    Y(s) = \frac{1}{(s+1)(s+2)}
+    \]
+    
+    Décomposition en éléments simples :
+    \[
+    \frac{1}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
+    \]
+    \begin{itemize}
+        \item $s = -1$ : $1 = A(1)$, donc $A = 1$
+        \item $s = -2$ : $1 = B(-1)$, donc $B = -1$
+    \end{itemize}
+    
+    Donc $Y(s) = \frac{1}{s+1} - \frac{1}{s+2}$.
+    
+    \textbf{Étape 3 : Transformation inverse.}
+    \[
+    y(t) = e^{-t} - e^{-2t}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 4 : Équations aux dérivées partielles (4 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item Soit $f(x, y) = e^{2x} \sin(3y)$. Calculer les dérivées partielles $\frac{\partial f}{\partial x}$, $\frac{\partial f}{\partial y}$, $\frac{\partial^2 f}{\partial x^2}$ et $\frac{\partial^2 f}{\partial y^2}$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \frac{\partial f}{\partial x} = 2e^{2x}\sin(3y), \qquad \frac{\partial f}{\partial y} = 3e^{2x}\cos(3y)
+    \]
+    \[
+    \frac{\partial^2 f}{\partial x^2} = 4e^{2x}\sin(3y), \qquad \frac{\partial^2 f}{\partial y^2} = -9e^{2x}\sin(3y)
+    \]
+    \end{solution}
+    }{}
+    
+    \item Vérifier que $f$ est solution de l'équation $\frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = -5f$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = 4e^{2x}\sin(3y) - 9e^{2x}\sin(3y) = -5e^{2x}\sin(3y) = -5f
+    \]
+    L'équation est bien vérifiée.
+    \end{solution}
+    }{}
+    
+    \item On considère l'équation de la chaleur $\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}$ sur $[0, L] \times \mathbb{R}_+$ avec conditions aux bords $u(0,t) = u(L,t) = 0$.
+    
+    On cherche une solution sous la forme $u(x,t) = X(x)T(t)$. Montrer que l'équation devient :
+    \[
+    \frac{T'(t)}{T(t)} = \frac{X''(x)}{X(x)} = -\lambda
+    \]
+    où $\lambda$ est une constante. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    En substituant $u(x,t) = X(x)T(t)$ :
+    \[
+    X(x)T'(t) = X''(x)T(t)
+    \]
+    En divisant par $X(x)T(t)$ :
+    \[
+    \frac{T'(t)}{T(t)} = \frac{X''(x)}{X(x)}
+    \]
+    Le membre de gauche ne dépend que de $t$, le membre de droite ne dépend que de $x$. Pour que l'égalité soit vraie pour tout $(x,t)$, les deux membres doivent être égaux à une constante $-\lambda$.
+    \end{solution}
+    }{}
+    
+    \item En déduire les deux équations différentielles vérifiées par $X$ et $T$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \begin{itemize}
+        \item Pour $T$ : $T' + \lambda T = 0$
+        \item Pour $X$ : $X'' + \lambda X = 0$
+    \end{itemize}
+    \end{solution}
+    }{}
+    
+    \item En prenant $\lambda = \mu^2 > 0$, montrer que les conditions aux bords imposent $\mu = \frac{n\pi}{L}$ avec $n \in \mathbb{N}^*$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Pour $\lambda = \mu^2 > 0$, la solution générale de $X'' + \mu^2 X = 0$ est :
+    \[
+    X(x) = A\cos(\mu x) + B\sin(\mu x)
+    \]
+    
+    Avec les conditions aux bords :
+    \begin{itemize}
+        \item $X(0) = 0$ : $A = 0$
+        \item $X(L) = 0$ : $B\sin(\mu L) = 0$
+    \end{itemize}
+    
+    Pour avoir $B \neq 0$ (solution non triviale), il faut $\sin(\mu L) = 0$, soit $\mu L = n\pi$ pour $n \in \mathbb{N}^*$.
+    
+    Donc $\mu_n = \frac{n\pi}{L}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/6}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 5 : Distributions (4 points)}
+%==============================================================================
+
+On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \delta_a, \varphi \rangle = \varphi(a)$ pour toute fonction test $\varphi$.
+
+On note $H$ la fonction de Heaviside : $H(x) = 1$ si $x \geq 0$, $H(x) = 0$ si $x < 0$.
+
+\begin{enumerate}
+    \item Calculer $\langle \delta_0 + 3\delta_2, \varphi \rangle$ pour $\varphi(x) = x^2 - x + 1$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \langle \delta_0 + 3\delta_2, \varphi \rangle = \varphi(0) + 3\varphi(2) = (0 - 0 + 1) + 3(4 - 2 + 1) = 1 + 9 = 10
+    \]
+    \end{solution}
+    }{}
+    
+    \item Soit $f(x) = H(x) - H(x-3)$ (fonction porte sur $[0,3]$). Calculer la dérivée de $f$ au sens des distributions. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    La fonction $f$ vaut $1$ sur $[0,3[$ et $0$ ailleurs.
+    
+    \begin{itemize}
+        \item La dérivée classique est nulle partout où $f$ est continue.
+        \item Saut en $x = 0$ : $\sigma_0 = 1 - 0 = 1$
+        \item Saut en $x = 3$ : $\sigma_3 = 0 - 1 = -1$
+    \end{itemize}
+    
+    Donc $f' = \delta_0 - \delta_3$.
+    \end{solution}
+    }{}
+    
+    \item On cherche à résoudre $y' + y = \delta_0$ où $y$ est une distribution.
+    
+    On cherche $y$ sous la forme $y = f(t) \cdot H(t)$ où $f$ est une fonction continue. Montrer que la dérivée de $y$ au sens des distributions est :
+    \[
+    y' = f'(t) \cdot H(t) + f(0) \delta_0
+    \]
+    \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise la règle de dérivation d'un produit au sens des distributions.
+    
+    Si $y = f \cdot H$, alors :
+    \[
+    y' = f' \cdot H + f \cdot H'
+    \]
+    
+    Or $H' = \delta_0$ et pour une distribution $g \cdot \delta_0$, on a $g(x)\delta_0 = g(0)\delta_0$.
+    
+    Donc : $y' = f' \cdot H + f(0)\delta_0$.
+    \end{solution}
+    }{}
+    
+    \item En substituant dans l'équation $y' + y = \delta_0$, trouver l'équation différentielle que doit vérifier $f$ ainsi que la condition sur $f(0)$. En déduire $y$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    En substituant $y = fH$ :
+    \[
+    f'H + f(0)\delta_0 + fH = \delta_0
+    \]
+    Soit :
+    \[
+    (f' + f)H + f(0)\delta_0 = \delta_0
+    \]
+    
+    En identifiant :
+    \begin{itemize}
+        \item Partie régulière : $f' + f = 0$ sur $]0, +\infty[$
+        \item Partie singulière : $f(0) = 1$
+    \end{itemize}
+    
+    L'équation $f' + f = 0$ a pour solution $f(t) = Ce^{-t}$.
+    
+    Avec $f(0) = 1$ : $C = 1$, donc $f(t) = e^{-t}$.
+    
+    \textbf{Solution :} $y(t) = e^{-t} H(t)$
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 5/6}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+\textbf{\Large FORMULAIRE}
+\end{center}
+
+\vspace{1em}
+
+\subsection*{Transformées de Laplace usuelles}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Fonction} $f(t)$ & \textbf{Transformée} $\mathcal{L}\{f\}(s)$ & \textbf{Domaine} \\
+\hline\hline
+$1$ & $\displaystyle \frac{1}{s}$ & $\text{Re}(s) > 0$ \\
+\hline
+$t^n$ & $\displaystyle \frac{n!}{s^{n+1}}$ & $\text{Re}(s) > 0$ \\
+\hline
+$e^{at}$ & $\displaystyle \frac{1}{s-a}$ & $\text{Re}(s) > a$ \\
+\hline
+$\sin(\omega t)$ & $\displaystyle \frac{\omega}{s^2 + \omega^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$\cos(\omega t)$ & $\displaystyle \frac{s}{s^2 + \omega^2}$ & $\text{Re}(s) > 0$ \\
+\hline
+$u(t-a)$ (Heaviside) & $\displaystyle \frac{e^{-as}}{s}$ & $\text{Re}(s) > 0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\subsection*{Propriétés de la transformée de Laplace}
+
+\renewcommand{\arraystretch}{1.6}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Propriété} & \textbf{Formule} \\
+\hline\hline
+Dérivation temporelle & $\mathcal{L}\{f'\} = sF(s) - f(0)$ \\
+\hline
+Dérivation seconde & $\mathcal{L}\{f''\} = s^2F(s) - sf(0) - f'(0)$ \\
+\hline
+Décalage fréquentiel & $\mathcal{L}\{e^{at}f(t)\} = F(s-a)$ \\
+\hline
+Multiplication par $t$ & $\mathcal{L}\{tf(t)\} = -F'(s)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\subsection*{Espaces $L^p$}
+
+\begin{itemize}
+    \item Norme $L^p$ : $\|f\|_p = \left( \int_\Omega |f(x)|^p dx \right)^{1/p}$
+    \item Norme $L^\infty$ : $\|f\|_\infty = \sup_{x \in \Omega} |f(x)|$
+    \item \textbf{Inégalité de Hölder} : Si $\frac{1}{p} + \frac{1}{q} = 1$ avec $p, q > 1$, alors :
+    \[
+    \int_\Omega |fg| \leq \|f\|_p \|g\|_q
+    \]
+\end{itemize}
+
+\vspace{2em}
+
+\subsection*{Distributions}
+
+\begin{itemize}
+    \item Distribution de Dirac : $\langle \delta_a, \varphi \rangle = \varphi(a)$
+    \item Dérivée d'une distribution : $\langle T', \varphi \rangle = -\langle T, \varphi' \rangle$
+    \item Dérivée de Heaviside : $H' = \delta_0$
+    \item Formule des sauts : $f' = \{f'\} + \sum_k \sigma_k \delta_{a_k}$ où $\sigma_k = f(a_k^+) - f(a_k^-)$
+\end{itemize}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 6/6}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{3cm}
+
+\begin{center}
+\textit{Page laissée intentionnellement vide pour les brouillons.}
+\end{center}
+
+\end{document}
