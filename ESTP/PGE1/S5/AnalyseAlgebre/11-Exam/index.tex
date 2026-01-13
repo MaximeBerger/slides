@@ -11,7 +11,6 @@
 \usepackage{amsthm}
 \usepackage[version=4]{mhchem}
 \usepackage{stmaryrd}
-\usepackage{bbold}
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
 \usepackage{geometry}
@@ -19,11 +18,12 @@
 
 \usepackage{mdframed}
 \usepackage[sf]{titlesec}
+\usepackage{array}
+\usepackage{ifthen}
 % Définition de la variable pour afficher les corrections
 \newboolean{showSolutions}
 % Décommentez la ligne suivante pour afficher les solutions
-\setboolean{showSolutions}{true}
-% \setboolean{showSolutions}{false}
+\input \jobname.adr
 
 \title{Examen S5 - Mathématiques - Analyse et Algèbre }
 
@@ -42,11 +42,11 @@
     \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
     \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
         \hline 
-        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logoestp.png}} \vspace{5mm}  & 
         \textbf{Contrôle de connaissances et de compétences} & 
         \textbf{FO-002-VLA-XX-001} \\
         \hline
-        \textbf{16/01/2026}  &  & \textbf{Page 1/2} \\
+        \textbf{16/01/2026}  &  & \textbf{Page 1/3} \\
         \hline
     \end{tabular}
 \end{center}
@@ -65,31 +65,17 @@
         \textbf{Durée de l'examen} & 2h00 \\
         \hline 
         \textbf{Consignes} & 
+        \vspace{0.5em}
         \begin{itemize}
             \item Calculatrice \textbf{NON} autorisée
-            \item Aucun document n'est autorisé
-        \end{itemize} \\
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        
         \hline
     \end{tabular}
 \end{center}
 
-
-
-
-
-
-
-\newpage 
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5} 
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/6}\\
-            \hline
-    \end{tabular}
-\end{center}
-
+\vspace{2em}
 %==============================================================================
 \section*{Exercice 1 : Calcul tensoriel (4 points)}
 %==============================================================================
@@ -126,7 +112,7 @@ On se place dans $\mathbb{R}^3$ muni d'une base $\{\mathbf{e}_1, \mathbf{e}_2, \
     \end{solution}
     }{}
     
-    \item Calculer les composantes covariantes $v_1$, $v_2$, $v_3$ de ce vecteur. \textit{(1.5 pts)}
+    \item Calculer les composantes covariantes $v_1$, $v_2$, $v_3$ de ce vecteur. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -143,7 +129,7 @@ On se place dans $\mathbb{R}^3$ muni d'une base $\{\mathbf{e}_1, \mathbf{e}_2, \
     \end{solution}
     }{}
     
-    \item Calculer la norme du vecteur $\mathbf{v}$ en utilisant la formule $\|\mathbf{v}\|^2 = \sum_i v^i v_i$. \textit{(1 pt)}
+    \item Calculer la norme du vecteur $\mathbf{v}$. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -153,9 +139,25 @@ On se place dans $\mathbb{R}^3$ muni d'une base $\{\mathbf{e}_1, \mathbf{e}_2, \
     Donc $\|\mathbf{v}\| = \sqrt{11}$.
     \end{solution}
     }{}
+
+    \item Rappelez la définition d'un tenseur, puis donner un exemple de quantité qui est un tenseur et une quantité qui n'est pas un tenseur. \textit{(0.5 pt)}
 \end{enumerate}
 
 \vspace{2em}
+
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
 
 %==============================================================================
 \section*{Exercice 2 : Espaces $L^p$ (4 points)}
@@ -163,11 +165,11 @@ On se place dans $\mathbb{R}^3$ muni d'une base $\{\mathbf{e}_1, \mathbf{e}_2, \
 
 On considère les fonctions suivantes :
 \[
-f(x) = \frac{1}{x^2}, \qquad g(x) = e^{-2x}, \qquad h(x) = \sin(x)
+f(x) = \frac{1}{x^2}, \qquad g(x) = e^{ix -2x}, \qquad h(x) = \sin(3x^2)
 \]
 
 \begin{enumerate}
-    \item Déterminer si $f$ appartient à $L^1(]1, +\infty[)$. Si oui, calculer sa norme. \textit{(1 pt)}
+    \item Déterminer si $f$ appartient à $L^1(]1, +\infty[)$. Si oui, calculer sa norme. \textit{(1.5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -178,18 +180,18 @@ f(x) = \frac{1}{x^2}, \qquad g(x) = e^{-2x}, \qquad h(x) = \sin(x)
     \end{solution}
     }{}
     
-    \item Déterminer si $g$ appartient à $L^2(\mathbb{R}^*_+)$. Si oui, calculer sa norme. \textit{(1 pt)}
+    \item Déterminer si $g$ appartient à $L^2(\mathbb{R}^*_+)$. Si oui, calculer sa norme. \textit{(1.5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
     \[
-    \int_0^{+\infty} |e^{-2x}|^2 dx = \int_0^{+\infty} e^{-4x} dx = \left[ -\frac{e^{-4x}}{4} \right]_0^{+\infty} = \frac{1}{4}
+    \int_0^{+\infty} |e^{ix -2x}|^2 dx = \int_0^{+\infty} e^{-4x} dx = \left[ -\frac{e^{-4x}}{4} \right]_0^{+\infty} = \frac{1}{4}
     \]
     L'intégrale converge, donc $g \in L^2(\mathbb{R}^*_+)$ et $\|g\|_2 = \sqrt{1/4} = \frac{1}{2}$.
     \end{solution}
     }{}
     
-    \item Déterminer si $h$ appartient à $L^\infty(\mathbb{R})$. Si oui, donner sa norme. \textit{(0.5 pt)}
+    \item Déterminer si $h$ appartient à $L^\infty(\mathbb{R})$. Si oui, donner sa norme. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -199,43 +201,8 @@ f(x) = \frac{1}{x^2}, \qquad g(x) = e^{-2x}, \qquad h(x) = \sin(x)
     \end{solution}
     }{}
     
-    \item Soit $p, q > 1$ tels que $\frac{1}{p} + \frac{1}{q} = 1$. Énoncer l'inégalité de Hölder pour deux fonctions $u \in L^p(\Omega)$ et $w \in L^q(\Omega)$. \textit{(0.5 pt)}
-    
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-    L'inégalité de Hölder affirme que :
-    \[
-    \int_\Omega |u(x) w(x)| dx \leq \|u\|_p \|w\|_q
-    \]
-    \end{solution}
-    }{}
-    
-    \item En déduire que si $u, w \in L^2(\Omega)$, alors $uw \in L^1(\Omega)$. \textit{(1 pt)}
-    
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-    On applique Hölder avec $p = q = 2$ (qui vérifient bien $\frac{1}{2} + \frac{1}{2} = 1$) :
-    \[
-    \int_\Omega |u w| \leq \|u\|_2 \|w\|_2 < +\infty
-    \]
-    Donc $uw$ est intégrable, i.e. $uw \in L^1(\Omega)$.
-    \end{solution}
-    }{}
 \end{enumerate}
-
-\newpage
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5} 
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/6}\\
-            \hline
-    \end{tabular}
-\end{center}
-
-\vspace{1em}
-
+\vspace{2em}
 %==============================================================================
 \section*{Exercice 3 : Transformée de Laplace (4 points)}
 %==============================================================================
@@ -400,7 +367,7 @@ On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
     \renewcommand{\arraystretch}{1.5} 
     \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
         \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/6}\\
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/3}\\
             \hline
     \end{tabular}
 \end{center}
@@ -416,17 +383,9 @@ On rappelle que la distribution de Dirac $\delta_a$ est définie par $\langle \d
 On note $H$ la fonction de Heaviside : $H(x) = 1$ si $x \geq 0$, $H(x) = 0$ si $x < 0$.
 
 \begin{enumerate}
-    \item Calculer $\langle \delta_0 + 3\delta_2, \varphi \rangle$ pour $\varphi(x) = x^2 - x + 1$. \textit{(0.5 pt)}
     
-    \ifthenelse{\boolean{showSolutions}}{
-    \begin{solution}
-    \[
-    \langle \delta_0 + 3\delta_2, \varphi \rangle = \varphi(0) + 3\varphi(2) = (0 - 0 + 1) + 3(4 - 2 + 1) = 1 + 9 = 10
-    \]
-    \end{solution}
-    }{}
     
-    \item Soit $f(x) = H(x) - H(x-3)$ (fonction porte sur $[0,3]$). Calculer la dérivée de $f$ au sens des distributions. \textit{(1 pt)}
+    \item Soit $f(x) = H(x) - H(x-3)$ (\og fonction porte \fg{} sur $[0,3]$). Calculer la dérivée de $f$ au sens des distributions. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -442,81 +401,91 @@ On note $H$ la fonction de Heaviside : $H(x) = 1$ si $x \geq 0$, $H(x) = 0$ si $
     \end{solution}
     }{}
     
-    \item On cherche à résoudre $y' + y = \delta_0$ où $y$ est une distribution.
-    
-    On cherche $y$ sous la forme $y = f(t) \cdot H(t)$ où $f$ est une fonction continue. Montrer que la dérivée de $y$ au sens des distributions est :
+    \item Soit $g$ la fonction définie par :
     \[
-    y' = f'(t) \cdot H(t) + f(0) \delta_0
+    g(x) = \begin{cases}
+    x^2 & \text{si } x < 1 \\
+    2x + 1 & \text{si } x \geq 1
+    \end{cases}
     \]
-    \textit{(1 pt)}
+    Calculer la dérivée de $g$ au sens des distributions en utilisant la formule des sauts. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-    On utilise la règle de dérivation d'un produit au sens des distributions.
+    On calcule d'abord le saut en $x = 1$ :
+    \begin{itemize}
+        \item Limite à gauche : $\lim_{x \to 1^-} g(x) = 1$
+        \item Limite à droite : $\lim_{x \to 1^+} g(x) = 3$
+        \item Saut : $\sigma_1 = 3 - 1 = 2$
+    \end{itemize}
     
-    Si $y = f \cdot H$, alors :
+    La dérivée classique (partie régulière) est :
     \[
-    y' = f' \cdot H + f \cdot H'
+    \{g'\}(x) = \begin{cases}
+    2x & \text{si } x < 1 \\
+    2 & \text{si } x > 1
+    \end{cases}
     \]
     
-    Or $H' = \delta_0$ et pour une distribution $g \cdot \delta_0$, on a $g(x)\delta_0 = g(0)\delta_0$.
+    Par la formule des sauts : $g' = \{g'\} + \sigma_1 \delta_1$
     
-    Donc : $y' = f' \cdot H + f(0)\delta_0$.
+    \textbf{Donc :} $g'(x) = \{g'\}(x) + 2\delta_1$
     \end{solution}
     }{}
     
-    \item En substituant dans l'équation $y' + y = \delta_0$, trouver l'équation différentielle que doit vérifier $f$ ainsi que la condition sur $f(0)$. En déduire $y$. \textit{(1.5 pts)}
+    \item Soit $h$ la fonction définie par :
+    \[
+    h(x) = \begin{cases}
+    e^x & \text{si } x < 0 \\
+    x + 1 & \text{si } 0 \leq x < 2 \\
+    5 & \text{si } x \geq 2
+    \end{cases}
+    \]
+    Calculer la dérivée de $h$ au sens des distributions et écrivez $\langle h', \varphi \rangle$ pour une fonction test $\varphi$. \textit{(2 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-    En substituant $y = fH$ :
-    \[
-    f'H + f(0)\delta_0 + fH = \delta_0
-    \]
-    Soit :
-    \[
-    (f' + f)H + f(0)\delta_0 = \delta_0
-    \]
+    On identifie les points de discontinuité et on calcule les sauts :
     
-    En identifiant :
+    \textbf{En $x = 0$ :}
     \begin{itemize}
-        \item Partie régulière : $f' + f = 0$ sur $]0, +\infty[$
-        \item Partie singulière : $f(0) = 1$
+        \item Limite à gauche : $\lim_{x \to 0^-} h(x) = e^0 = 1$
+        \item Limite à droite : $\lim_{x \to 0^+} h(x) = 0 + 1 = 1$
+        \item Saut : $\sigma_0 = 1 - 1 = 0$ (pas de discontinuité)
     \end{itemize}
     
-    L'équation $f' + f = 0$ a pour solution $f(t) = Ce^{-t}$.
+    \textbf{En $x = 2$ :}
+    \begin{itemize}
+        \item Limite à gauche : $\lim_{x \to 2^-} h(x) = 2 + 1 = 3$
+        \item Limite à droite : $\lim_{x \to 2^+} h(x) = 5$
+        \item Saut : $\sigma_2 = 5 - 3 = 2$
+    \end{itemize}
     
-    Avec $f(0) = 1$ : $C = 1$, donc $f(t) = e^{-t}$.
+    La dérivée classique est :
+    \[
+    \{h'\}(x) = \begin{cases}
+    e^x & \text{si } x < 0 \\
+    1 & \text{si } 0 < x < 2 \\
+    0 & \text{si } x > 2
+    \end{cases}
+    \]
     
-    \textbf{Solution :} $y(t) = e^{-t} H(t)$
+    \textbf{Donc :} $h'(x) = \{h'\}(x) + 2\delta_2$
+
+    Donc 
+    $$\langle h', \varphi \rangle = \int_{-\infty}^{+\infty} \{h'\}(x) \varphi(x) dx + 2\varphi(2) = 
+    \int_{-\infty}^{0} e^x \varphi(x) dx + \int_{0}^{2} \varphi(x) dx + 2\varphi(2)$$
     \end{solution}
     }{}
 \end{enumerate}
-
-\newpage
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5} 
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 5/6}\\
-            \hline
-    \end{tabular}
-\end{center}
-
-\vspace{1em}
-
-\begin{center}
-\textbf{\Large FORMULAIRE}
-\end{center}
 
 \vspace{1em}
 
 \subsection*{Transformées de Laplace usuelles}
 
-\renewcommand{\arraystretch}{1.6}
+\renewcommand{\arraystretch}{3}
 \begin{center}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|>{\centering\arraybackslash}m{3.5cm}|>{\centering\arraybackslash}m{5cm}|>{\centering\arraybackslash}m{3cm}|}
 \hline
 \textbf{Fonction} $f(t)$ & \textbf{Transformée} $\mathcal{L}\{f\}(s)$ & \textbf{Domaine} \\
 \hline\hline
@@ -537,64 +506,5 @@ $u(t-a)$ (Heaviside) & $\displaystyle \frac{e^{-as}}{s}$ & $\text{Re}(s) > 0$ \\
 
 \vspace{1em}
 
-\subsection*{Propriétés de la transformée de Laplace}
-
-\renewcommand{\arraystretch}{1.6}
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Propriété} & \textbf{Formule} \\
-\hline\hline
-Dérivation temporelle & $\mathcal{L}\{f'\} = sF(s) - f(0)$ \\
-\hline
-Dérivation seconde & $\mathcal{L}\{f''\} = s^2F(s) - sf(0) - f'(0)$ \\
-\hline
-Décalage fréquentiel & $\mathcal{L}\{e^{at}f(t)\} = F(s-a)$ \\
-\hline
-Multiplication par $t$ & $\mathcal{L}\{tf(t)\} = -F'(s)$ \\
-\hline
-\end{tabular}
-\end{center}
-
-\vspace{2em}
-
-\subsection*{Espaces $L^p$}
-
-\begin{itemize}
-    \item Norme $L^p$ : $\|f\|_p = \left( \int_\Omega |f(x)|^p dx \right)^{1/p}$
-    \item Norme $L^\infty$ : $\|f\|_\infty = \sup_{x \in \Omega} |f(x)|$
-    \item \textbf{Inégalité de Hölder} : Si $\frac{1}{p} + \frac{1}{q} = 1$ avec $p, q > 1$, alors :
-    \[
-    \int_\Omega |fg| \leq \|f\|_p \|g\|_q
-    \]
-\end{itemize}
-
-\vspace{2em}
-
-\subsection*{Distributions}
-
-\begin{itemize}
-    \item Distribution de Dirac : $\langle \delta_a, \varphi \rangle = \varphi(a)$
-    \item Dérivée d'une distribution : $\langle T', \varphi \rangle = -\langle T, \varphi' \rangle$
-    \item Dérivée de Heaviside : $H' = \delta_0$
-    \item Formule des sauts : $f' = \{f'\} + \sum_k \sigma_k \delta_{a_k}$ où $\sigma_k = f(a_k^+) - f(a_k^-)$
-\end{itemize}
-
-\newpage
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5} 
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 6/6}\\
-            \hline
-    \end{tabular}
-\end{center}
-
-\vspace{3cm}
-
-\begin{center}
-\textit{Page laissée intentionnellement vide pour les brouillons.}
-\end{center}
 
 \end{document}
