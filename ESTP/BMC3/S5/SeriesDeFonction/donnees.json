@@ -1,10 +1,10 @@
 {
-  "titre": "Séries de fonctions — Parcours",
+  "titre": "Mathématiques — Parcours",
   "chapitres": [
     {
       "id": "sec1",
       "numero": 0,
-      "titre": "Révisions",
+      "titre": "Suites et séries numériques",
       "description": "Suites · Séries · Suites de fonctions",
       "lien": "#",
       "sousParties": [

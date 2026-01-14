@@ -1,0 +1,646 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}           % Police Latin Modern (plus nette)
+\usepackage{charter}           % Police Charter (très lisible)
+\usepackage[scaled=0.95]{inconsolata} % Police mono lisible
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\usepackage{array}
+\usepackage{ifthen}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+
+\title{Examen S3 - Mathématiques }
+
+\author{}
+\date{}
+
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logoestp.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{26/01/2026}  &  & \textbf{Page 1/3} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 1}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime Berger \& Karine Serier \\
+        \hline 
+        \textbf{Promotion} & BMC2 - S3\\
+        \hline 
+        \textbf{Matière} & Mathématiques \\
+        \hline 
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{3em}
+
+%==============================================================================
+\section*{Exercice 1 : Séries numériques (6 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Série géométrique.} On considère la série $\displaystyle \sum_{n=0}^{+\infty} \left(\frac{2}{3}\right)^n$.
+    \begin{enumerate}
+        \item Rappeler le critère de convergence d'une série géométrique $\sum q^n$. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        La série géométrique $\sum_{n=0}^{+\infty} q^n$ converge si et seulement si $|q| < 1$. Dans ce cas, sa somme vaut $\frac{1}{1-q}$.
+        \end{solution}
+        }{}
+        
+        \item En déduire que la série converge et calculer sa somme. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Ici $q = \frac{2}{3}$ et $|q| = \frac{2}{3} < 1$, donc la série converge.
+        
+        Sa somme vaut :
+        \[
+        \sum_{n=0}^{+\infty} \left(\frac{2}{3}\right)^n = \frac{1}{1 - \frac{2}{3}} = \frac{1}{\frac{1}{3}} = 3
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{Critère de D'Alembert.} Étudier la convergence de la série $\displaystyle \sum_{n=1}^{+\infty} \frac{n!}{3^n}$ à l'aide du critère de D'Alembert. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $u_n = \frac{n!}{3^n}$ et on calcule :
+    \[
+    \frac{u_{n+1}}{u_n} = \frac{(n+1)!}{3^{n+1}} \cdot \frac{3^n}{n!} = \frac{(n+1) \cdot n!}{3 \cdot 3^n} \cdot \frac{3^n}{n!} = \frac{n+1}{3}
+    \]
+    
+    On a :
+    \[
+    \lim_{n \to +\infty} \frac{u_{n+1}}{u_n} = \lim_{n \to +\infty} \frac{n+1}{3} = +\infty > 1
+    \]
+    
+    Par le critère de D'Alembert, la série \textbf{diverge}.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Série télescopique.} Calculer la somme de la série $\displaystyle \sum_{n=1}^{+\infty} \frac{1}{n(n+1)}$. \textit{(1.5 pts)}
+    
+    \textit{Indication : décomposer $\frac{1}{n(n+1)}$ en éléments simples.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On décompose en éléments simples :
+    \[
+    \frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}
+    \]
+    
+    La somme partielle s'écrit :
+    \[
+    S_N = \sum_{n=1}^{N} \left(\frac{1}{n} - \frac{1}{n+1}\right) = \left(1 - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \cdots + \left(\frac{1}{N} - \frac{1}{N+1}\right)
+    \]
+    
+    C'est une somme télescopique : $S_N = 1 - \frac{1}{N+1}$.
+    
+    Donc :
+    \[
+    \sum_{n=1}^{+\infty} \frac{1}{n(n+1)} = \lim_{N \to +\infty} S_N = 1
+    \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Équivalent.} On considère la série $\displaystyle \sum_{n=1}^{+\infty} u_n$ où $u_n = \frac{n^2 + 3n}{n^4 + 2}$.
+    \begin{enumerate}
+        \item Trouver un équivalent simple de $u_n$ quand $n \to +\infty$. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Quand $n \to +\infty$ :
+        \[
+        u_n = \frac{n^2 + 3n}{n^4 + 2} = \frac{n^2(1 + \frac{3}{n})}{n^4(1 + \frac{2}{n^4})} \sim \frac{n^2}{n^4} = \frac{1}{n^2}
+        \]
+        \end{solution}
+        }{}
+        
+        \item En déduire la nature de la série. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On a $u_n \sim \frac{1}{n^2}$ avec $u_n > 0$.
+        
+        La série de Riemann $\sum \frac{1}{n^2}$ converge (car $2 > 1$).
+        
+        Par le critère d'équivalence pour les séries à termes positifs, la série $\sum u_n$ \textbf{converge}.
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 2 : Calcul différentiel vectoriel (4 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item Soit le champ scalaire $f : \mathbb{R}^3 \to \mathbb{R}$ défini par :
+    \[
+    f(x, y, z) = x^2 y + y z^3 - 2xz
+    \]
+    
+    \begin{enumerate}
+        \item Rappeler la définition du gradient d'un champ scalaire. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Le gradient d'un champ scalaire $f$ est le vecteur des dérivées partielles :
+        \[
+        \nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)
+        \]
+        Il pointe dans la direction de plus grande croissance de $f$.
+        \end{solution}
+        }{}
+        
+        \item Calculer $\nabla f(x,y,z)$. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \frac{\partial f}{\partial x} = 2xy - 2z, \quad \frac{\partial f}{\partial y} = x^2 + z^3, \quad \frac{\partial f}{\partial z} = 3yz^2 - 2x
+        \]
+        Donc :
+        \[
+        \nabla f = (2xy - 2z, \, x^2 + z^3, \, 3yz^2 - 2x)
+        \]
+        \end{solution}
+        }{}
+        
+        \item Évaluer $\nabla f$ au point $P = (1, 2, -1)$. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \nabla f(1, 2, -1) = (2 \cdot 1 \cdot 2 - 2 \cdot (-1), \, 1^2 + (-1)^3, \, 3 \cdot 2 \cdot 1 - 2 \cdot 1)
+        \]
+        \[
+        = (4 + 2, \, 1 - 1, \, 6 - 2) = (6, 0, 4)
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item Soit le champ de vecteurs $\vec{F} : \mathbb{R}^3 \to \mathbb{R}^3$ défini par :
+    \[
+    \vec{F}(x, y, z) = (x^2 z, \, xy + z^2, \, yz - x)
+    \]
+    
+    \begin{enumerate}
+        \item Rappeler la définition de la divergence d'un champ de vecteurs. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        La divergence d'un champ de vecteurs $\vec{F} = (F_1, F_2, F_3)$ est le scalaire :
+        \[
+        \text{div}(\vec{F}) = \nabla \cdot \vec{F} = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z}
+        \]
+        Elle mesure le taux d'expansion (ou de contraction) local du champ.
+        \end{solution}
+        }{}
+        
+        \item Calculer $\text{div}(\vec{F})$. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \frac{\partial F_1}{\partial x} = \frac{\partial}{\partial x}(x^2 z) = 2xz
+        \]
+        \[
+        \frac{\partial F_2}{\partial y} = \frac{\partial}{\partial y}(xy + z^2) = x
+        \]
+        \[
+        \frac{\partial F_3}{\partial z} = \frac{\partial}{\partial z}(yz - x) = y
+        \]
+        Donc :
+        \[
+        \text{div}(\vec{F}) = 2xz + x + y
+        \]
+        \end{solution}
+        }{}
+        
+        \item Évaluer la divergence au point $Q = (2, -1, 3)$. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \text{div}(\vec{F})(2, -1, 3) = 2 \cdot 2 \cdot 3 + 2 + (-1) = 12 + 2 - 1 = 13
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 3 : Algèbre linéaire (6 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Système linéaire.} Résoudre le système suivant : \textit{(1.5 pts)}
+    \[
+    \begin{cases}
+    x + 2y - z = 3 \\
+    2x + y + z = 4 \\
+    x - y + 2z = 1
+    \end{cases}
+    \]
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise la méthode du pivot de Gauss :
+    \[
+    \begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 2 & 1 & 1 & | & 4 \\ 1 & -1 & 2 & | & 1 \end{pmatrix}
+    \xrightarrow{L_2 \leftarrow L_2 - 2L_1}
+    \begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 0 & -3 & 3 & | & -2 \\ 1 & -1 & 2 & | & 1 \end{pmatrix}
+    \]
+    \[
+    \xrightarrow{L_3 \leftarrow L_3 - L_1}
+    \begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 0 & -3 & 3 & | & -2 \\ 0 & -3 & 3 & | & -2 \end{pmatrix}
+    \xrightarrow{L_3 \leftarrow L_3 - L_2}
+    \begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 0 & -3 & 3 & | & -2 \\ 0 & 0 & 0 & | & 0 \end{pmatrix}
+    \]
+    
+    De $L_2$ : $-3y + 3z = -2 \Rightarrow y = z + \frac{2}{3}$.
+    
+    En posant $z = t$ (paramètre libre), on a $y = t + \frac{2}{3}$.
+    
+    De $L_1$ : $x = 3 - 2y + z = 3 - 2(t + \frac{2}{3}) + t = 3 - 2t - \frac{4}{3} + t = \frac{5}{3} - t$.
+    
+    \textbf{Solution :} $(x, y, z) = \left(\frac{5}{3} - t, \, t + \frac{2}{3}, \, t\right)$, $t \in \mathbb{R}$.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Espace vectoriel.} On considère l'ensemble :
+    \[
+    E = \{(x, y, z) \in \mathbb{R}^3 \mid x + 2y - z = 0\}
+    \]
+    Montrer que $E$ est un sous-espace vectoriel de $\mathbb{R}^3$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On vérifie les trois conditions :
+    
+    \textbf{1. Non vide :} $(0, 0, 0) \in E$ car $0 + 2 \cdot 0 - 0 = 0$. \checkmark
+    
+    \textbf{2. Stabilité par addition :} Soient $(x_1, y_1, z_1), (x_2, y_2, z_2) \in E$.
+    
+    On a $x_1 + 2y_1 - z_1 = 0$ et $x_2 + 2y_2 - z_2 = 0$.
+    
+    Alors $(x_1 + x_2) + 2(y_1 + y_2) - (z_1 + z_2) = (x_1 + 2y_1 - z_1) + (x_2 + 2y_2 - z_2) = 0$.
+    
+    Donc $(x_1 + x_2, y_1 + y_2, z_1 + z_2) \in E$. \checkmark
+    
+    \textbf{3. Stabilité par multiplication :} Soit $(x, y, z) \in E$ et $\lambda \in \mathbb{R}$.
+    
+    On a $x + 2y - z = 0$.
+    
+    Alors $\lambda x + 2(\lambda y) - \lambda z = \lambda(x + 2y - z) = 0$.
+    
+    Donc $(\lambda x, \lambda y, \lambda z) \in E$. \checkmark
+    
+    \textbf{Conclusion :} $E$ est un sous-espace vectoriel de $\mathbb{R}^3$.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Application linéaire.} Soit $\varphi : \mathbb{R}^2 \to \mathbb{R}^3$ définie par :
+    \[
+    \varphi(x, y) = (2x - y, \, x + 3y, \, x - y)
+    \]
+    
+    \begin{enumerate}
+        \item Montrer que $\varphi$ est une application linéaire. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Soient $(x_1, y_1), (x_2, y_2) \in \mathbb{R}^2$ et $\lambda, \mu \in \mathbb{R}$.
+        \begin{align*}
+        \varphi(\lambda(x_1, y_1) + \mu(x_2, y_2)) &= \varphi(\lambda x_1 + \mu x_2, \lambda y_1 + \mu y_2) \\
+        &= (2(\lambda x_1 + \mu x_2) - (\lambda y_1 + \mu y_2), \ldots) \\
+        &= (2\lambda x_1 - \lambda y_1 + 2\mu x_2 - \mu y_2, \ldots) \\
+        &= \lambda(2x_1 - y_1, x_1 + 3y_1, x_1 - y_1) + \mu(2x_2 - y_2, x_2 + 3y_2, x_2 - y_2) \\
+        &= \lambda \varphi(x_1, y_1) + \mu \varphi(x_2, y_2)
+        \end{align*}
+        Donc $\varphi$ est linéaire.
+        \end{solution}
+        }{}
+        
+        \item Écrire la matrice $A$ de $\varphi$ dans les bases canoniques de $\mathbb{R}^2$ et $\mathbb{R}^3$. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On calcule $\varphi(1, 0) = (2, 1, 1)$ et $\varphi(0, 1) = (-1, 3, -1)$.
+        
+        La matrice est :
+        \[
+        A = \begin{pmatrix} 2 & -1 \\ 1 & 3 \\ 1 & -1 \end{pmatrix}
+        \]
+        \end{solution}
+        }{}
+        
+        \item Déterminer $\ker(\varphi)$. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On résout $\varphi(x, y) = (0, 0, 0)$ :
+        \[
+        \begin{cases}
+        2x - y = 0 \\
+        x + 3y = 0 \\
+        x - y = 0
+        \end{cases}
+        \]
+        De la 1ère équation : $y = 2x$. De la 3ème : $y = x$.
+        
+        Donc $2x = x \Rightarrow x = 0$, puis $y = 0$.
+        
+        \textbf{Conclusion :} $\ker(\varphi) = \{(0, 0)\}$.
+        \end{solution}
+        }{}
+        
+        \item Déterminer une base de $\text{Im}(\varphi)$ et sa dimension. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Puisque $\ker(\varphi) = \{0\}$, on a $\dim(\ker(\varphi)) = 0$.
+        
+        Par le théorème du rang : $\dim(\text{Im}(\varphi)) = \dim(\mathbb{R}^2) - \dim(\ker(\varphi)) = 2 - 0 = 2$.
+        
+        Une base de $\text{Im}(\varphi)$ est formée des images des vecteurs de la base canonique :
+        \[
+        \text{Im}(\varphi) = \text{Vect}\{(2, 1, 1), (-1, 3, -1)\}
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Problème : Étude d'une famille de séries et application (4 points)}
+%==============================================================================
+
+On considère, pour $\alpha \in \mathbb{R}$, la série :
+\[
+S(\alpha) = \sum_{n=2}^{+\infty} \frac{1}{n^\alpha \ln(n)}
+\]
+
+\subsection*{Partie A : Étude de la convergence}
+
+\begin{enumerate}
+    \item \textbf{Cas $\alpha > 1$.}
+    \begin{enumerate}
+        \item Montrer que pour tout $n \geq 2$ : $\displaystyle \frac{1}{n^\alpha \ln(n)} \leq \frac{1}{n^\alpha}$. \textit{(0.25 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Pour $n \geq 2$, on a $\ln(n) \geq \ln(2) > 0$.
+        
+        Donc $n^\alpha \ln(n) \geq n^\alpha$, ce qui donne $\frac{1}{n^\alpha \ln(n)} \leq \frac{1}{n^\alpha}$.
+        \end{solution}
+        }{}
+        
+        \item En déduire que la série $S(\alpha)$ converge pour $\alpha > 1$. \textit{(0.25 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        La série de Riemann $\sum \frac{1}{n^\alpha}$ converge pour $\alpha > 1$.
+        
+        Par comparaison, puisque $0 < \frac{1}{n^\alpha \ln(n)} \leq \frac{1}{n^\alpha}$, la série $S(\alpha)$ \textbf{converge}.
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{Cas $\alpha < 1$.}
+    \begin{enumerate}
+        \item Trouver un équivalent de $\frac{1}{n^\alpha \ln(n)}$ quand $n \to +\infty$ et le comparer à $\frac{1}{n^\beta}$ pour un $\beta$ bien choisi. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Pour $\alpha < 1$, prenons $\beta = \frac{\alpha + 1}{2}$ (on a alors $\alpha < \beta < 1$).
+        
+        On a :
+        \[
+        \frac{1/n^\alpha \ln(n)}{1/n^\beta} = \frac{n^\beta}{n^\alpha \ln(n)} = \frac{n^{\beta - \alpha}}{\ln(n)}
+        \]
+        
+        Comme $\beta - \alpha > 0$, on a $n^{\beta - \alpha} \to +\infty$ et $\frac{n^{\beta - \alpha}}{\ln(n)} \to +\infty$.
+        
+        Donc $\frac{1}{n^\alpha \ln(n)} \gg \frac{1}{n^\beta}$ pour $n$ grand.
+        \end{solution}
+        }{}
+        
+        \item En déduire que la série $S(\alpha)$ diverge pour $\alpha < 1$. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Puisque $\beta < 1$, la série de Riemann $\sum \frac{1}{n^\beta}$ diverge.
+        
+        Comme $\frac{1}{n^\alpha \ln(n)} \geq \frac{1}{n^\beta}$ pour $n$ assez grand (puisque le rapport tend vers $+\infty$), la série $S(\alpha)$ \textbf{diverge} par comparaison.
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{Cas critique $\alpha = 1$.} On étudie $\displaystyle \sum_{n=2}^{+\infty} \frac{1}{n \ln(n)}$.
+    \begin{enumerate}
+        \item En utilisant le critère de D'Alembert, peut-on conclure ? Justifier. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On calcule :
+        \[
+        \frac{u_{n+1}}{u_n} = \frac{n \ln(n)}{(n+1) \ln(n+1)} = \frac{n}{n+1} \cdot \frac{\ln(n)}{\ln(n+1)} \to 1 \times 1 = 1
+        \]
+        
+        Le critère de D'Alembert ne permet pas de conclure (limite = 1).
+        \end{solution}
+        }{}
+        
+        \item En utilisant une comparaison série-intégrale, montrer que la série diverge. \textit{(0.5 pt)}
+        
+        \textit{Indication : on rappelle que si $f$ est positive décroissante, $\sum f(n)$ et $\int f(x)\,dx$ ont même nature.}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        La fonction $f(x) = \frac{1}{x \ln(x)}$ est positive et décroissante sur $[2, +\infty[$.
+        
+        On calcule :
+        \[
+        \int_2^{N} \frac{dx}{x \ln(x)} = [\ln(\ln(x))]_2^N = \ln(\ln(N)) - \ln(\ln(2)) \xrightarrow[N \to +\infty]{} +\infty
+        \]
+        
+        L'intégrale diverge, donc la série $\sum \frac{1}{n \ln(n)}$ \textbf{diverge}.
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\subsection*{Partie B : Application à l'algèbre linéaire}
+
+On considère l'espace vectoriel $E$ des suites réelles $(u_n)_{n \geq 2}$ et l'application $T : E \to E$ définie par :
+\[
+T((u_n)) = \left(\frac{u_n}{n \ln(n)}\right)_{n \geq 2}
+\]
+
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item Montrer que $T$ est une application linéaire. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Soient $(u_n), (v_n) \in E$ et $\lambda, \mu \in \mathbb{R}$.
+    \[
+    T(\lambda(u_n) + \mu(v_n)) = T((\lambda u_n + \mu v_n)) = \left(\frac{\lambda u_n + \mu v_n}{n \ln(n)}\right)
+    \]
+    \[
+    = \lambda \left(\frac{u_n}{n \ln(n)}\right) + \mu \left(\frac{v_n}{n \ln(n)}\right) = \lambda T((u_n)) + \mu T((v_n))
+    \]
+    Donc $T$ est linéaire.
+    \end{solution}
+    }{}
+    
+    \item Déterminer $\ker(T)$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $(u_n) \in \ker(T)$ si et seulement si $\frac{u_n}{n \ln(n)} = 0$ pour tout $n \geq 2$.
+    
+    Comme $n \ln(n) \neq 0$ pour $n \geq 2$, cela équivaut à $u_n = 0$ pour tout $n$.
+    
+    Donc $\ker(T) = \{(0, 0, 0, \ldots)\}$ : la suite nulle.
+    \end{solution}
+    }{}
+    
+    \item $T$ est-elle injective ? Justifier. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Une application linéaire est injective si et seulement si son noyau est réduit à $\{0\}$.
+    
+    Comme $\ker(T) = \{0\}$, $T$ est \textbf{injective}.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\subsection*{Rappels et formulaire}
+
+\textbf{Séries de Riemann :} La série $\displaystyle \sum_{n=1}^{+\infty} \frac{1}{n^\alpha}$ converge si et seulement si $\alpha > 1$.
+
+\vspace{1em}
+
+\textbf{Critère de D'Alembert :} Soit $\sum u_n$ une série à termes strictement positifs.
+\begin{itemize}
+    \item Si $\displaystyle \lim_{n \to +\infty} \frac{u_{n+1}}{u_n} = \ell < 1$, la série converge.
+    \item Si $\displaystyle \lim_{n \to +\infty} \frac{u_{n+1}}{u_n} = \ell > 1$ (ou $+\infty$), la série diverge.
+    \item Si $\ell = 1$, on ne peut pas conclure.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{Série géométrique :} Pour $|q| < 1$, $\displaystyle \sum_{n=0}^{+\infty} q^n = \frac{1}{1-q}$.
+
+\vspace{1em}
+
+\textbf{Opérateurs différentiels en coordonnées cartésiennes :}
+
+\begin{itemize}
+    \item Gradient : $\displaystyle \nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)$
+    
+    \item Divergence : $\displaystyle \text{div}(\vec{F}) = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z}$
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{Théorème du rang :} Si $f : E \to F$ est une application linéaire avec $\dim(E) < +\infty$, alors :
+\[
+\dim(E) = \dim(\ker(f)) + \dim(\text{Im}(f))
+\]
+
+\end{document}

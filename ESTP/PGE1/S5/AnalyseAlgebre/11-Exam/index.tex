@@ -75,7 +75,7 @@
     \end{tabular}
 \end{center}
 
-\vspace{2em}
+\vspace{3em}
 %==============================================================================
 \section*{Exercice 1 : Calcul tensoriel (4 points)}
 %==============================================================================
@@ -306,11 +306,11 @@ On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
     \end{solution}
     }{}
     
-    \item On considère l'équation de la chaleur $\frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2}$ sur $[0, L] \times \mathbb{R}_+$ avec conditions aux bords $u(0,t) = u(L,t) = 0$.
+    \item On considère l'équation des ondes $\frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}$ sur $[0, L] \times \mathbb{R}_+$ avec conditions aux bords $u(0,t) = u(L,t) = 0$.
     
     On cherche une solution sous la forme $u(x,t) = X(x)T(t)$. Montrer que l'équation devient :
     \[
-    \frac{T'(t)}{T(t)} = \frac{X''(x)}{X(x)} = -\lambda
+    \frac{T''(t)}{c^2 T(t)} = \frac{X''(x)}{X(x)} = -\lambda
     \]
     où $\lambda$ est une constante. \textit{(1 pt)}
     
@@ -318,11 +318,11 @@ On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
     \begin{solution}
     En substituant $u(x,t) = X(x)T(t)$ :
     \[
-    X(x)T'(t) = X''(x)T(t)
+    X(x)T''(t) = c^2 X''(x)T(t)
     \]
-    En divisant par $X(x)T(t)$ :
+    En divisant par $c^2 X(x)T(t)$ :
     \[
-    \frac{T'(t)}{T(t)} = \frac{X''(x)}{X(x)}
+    \frac{T''(t)}{c^2 T(t)} = \frac{X''(x)}{X(x)}
     \]
     Le membre de gauche ne dépend que de $t$, le membre de droite ne dépend que de $x$. Pour que l'égalité soit vraie pour tout $(x,t)$, les deux membres doivent être égaux à une constante $-\lambda$.
     \end{solution}
@@ -333,13 +333,13 @@ On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
     \begin{itemize}
-        \item Pour $T$ : $T' + \lambda T = 0$
+        \item Pour $T$ : $T'' + \lambda c^2 T = 0$
         \item Pour $X$ : $X'' + \lambda X = 0$
     \end{itemize}
     \end{solution}
     }{}
     
-    \item En prenant $\lambda = \mu^2 > 0$, montrer que les conditions aux bords imposent $\mu = \frac{n\pi}{L}$ avec $n \in \mathbb{N}^*$. \textit{(1 pt)}
+    \item En prenant $\lambda = \mu^2 > 0$, montrer que les conditions aux bords imposent $\mu = \frac{n\pi}{L}$ avec $n \in \mathbb{N}^*$, puis donner la forme générale de $T(t)$. \textit{(1 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -357,6 +357,11 @@ On note $\mathcal{L}\{f\}(s)$ la transformée de Laplace de $f$.
     Pour avoir $B \neq 0$ (solution non triviale), il faut $\sin(\mu L) = 0$, soit $\mu L = n\pi$ pour $n \in \mathbb{N}^*$.
     
     Donc $\mu_n = \frac{n\pi}{L}$.
+    
+    Pour $T$, l'équation $T'' + \mu_n^2 c^2 T = 0$ a pour solution générale :
+    \[
+    T_n(t) = C_n \cos\left(\frac{n\pi c}{L} t\right) + D_n \sin\left(\frac{n\pi c}{L} t\right)
+    \]
     \end{solution}
     }{}
 \end{enumerate}
