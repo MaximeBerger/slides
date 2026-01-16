@@ -195,6 +195,29 @@
           "cible": "_blank"
         }
       ]
+    }, 
+    {
+      "id": "sec8",
+      "numero": 6,
+      "titre": "Partiel 25-26",
+      "description": "",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1, 
+          "titre": "Partiel 25-26 - enoncé",
+          "description": "",
+          "lien": "11-Partiel/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Partiel 25-26 - corrigé",
+          "description": "",
+          "lien": "11-Partiel/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
