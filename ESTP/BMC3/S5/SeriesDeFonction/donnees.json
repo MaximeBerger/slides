@@ -149,6 +149,23 @@
           "cible": "_blank"
         }
       ]
+    },
+
+    {
+      "id": "sec5",
+      "numero": 3,
+      "titre": "TP - Modélisation de l'évolution de populations",
+      "description": "Modélisation de l'évolution de populations",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Modélisation de l'évolution de populations",
+          "description": "",
+          "lien": "Modelisation/tp-modélisation-de-l'évolution-de-populations.html",
+          "cible": "_blank"
+        }
+      ]
     }
 
     

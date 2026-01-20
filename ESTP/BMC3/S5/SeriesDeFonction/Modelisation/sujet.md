@@ -1,0 +1,833 @@
+# TP : Modélisation de l'évolution de populations
+
+## Introduction
+
+Le but de ce projet est de modéliser l'évolution dans le temps d'une population (ou plusieurs) interagissant avec son environnement. Ces modèles permettent notamment de comprendre :
+
+- L'évolution d'une maladie dans une population (épidémiologie)
+- L'interaction existant entre les proies et les prédateurs dans le monde animal
+- La dynamique de croissance des bactéries en laboratoire
+
+**Mots clés** : simulation, équations différentielles ordinaires, suites, Python, visualisation.
+
+---
+
+## Partie 0 : Introduction à Python
+
+Cette section vous présente les outils Python dont vous aurez besoin pour ce TP. Nous utiliserons trois bibliothèques principales :
+
+- **NumPy** : pour les calculs numériques et les tableaux
+- **Matplotlib** : pour tracer des graphiques
+- **SciPy** : pour résoudre des équations différentielles
+
+### 0.1 Importation des bibliothèques
+
+```python
+# Importation des bibliothèques nécessaires
+import numpy as np                  # Calculs numériques
+import matplotlib.pyplot as plt     # Tracé de graphiques
+from scipy.integrate import odeint  # Résolution d'équations différentielles
+```
+
+### 0.2 Création de tableaux avec NumPy
+
+NumPy permet de créer des tableaux de valeurs très facilement :
+
+```python
+# Créer un tableau de 100 valeurs entre 0 et 10
+t = np.linspace(0, 10, 100)
+print(t)
+
+# Créer un tableau de 0 à 9 avec un pas de 1
+indices = np.arange(0, 10, 1)
+print(indices)
+
+# Opérations sur les tableaux
+y = 2 * t + 1  # Applique l'opération à chaque élément
+print(y)
+```
+
+> **Questions :**
+>
+> **Q1.** Quelle est la différence entre `np.linspace(0, 10, 5)` et `np.arange(0, 10, 5)` ? Donnez le résultat de chaque commande.
+>
+> **Q2.** On définit `t = np.linspace(0, 1, 11)`. Combien d'éléments contient le tableau `t` ? Quelle est la valeur de `t[0]` et `t[10]` ?
+>
+> **Q3.** Si `x = np.array([1, 2, 3, 4])`, que retourne `x**2 + 1` ?
+>
+> **Q4.** Quelle commande permet de créer un tableau de 20 zéros ?
+
+### 0.3 Tracer un graphique simple
+
+```python
+# Données
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+# Création du graphique
+plt.figure(figsize=(10, 6))  # Taille de la figure
+plt.plot(x, y, label='sin(x)', color='blue', linewidth=2)
+plt.xlabel('x')              # Légende axe x
+plt.ylabel('y')              # Légende axe y
+plt.title('Ma première courbe')
+plt.legend()                 # Affiche la légende
+plt.grid(True)               # Affiche une grille
+plt.show()
+```
+
+> **Exercices :** En vous inspirant de l'exemple ci-dessus, tracez les fonctions suivantes :
+>
+> **Exercice 1.** $y = \cos(x)$ sur l'intervalle $[0, 4\pi]$
+>
+> **Exercice 2.** $y = e^{-x}$ sur l'intervalle $[0, 5]$ (utiliser `np.exp()`)
+>
+> **Exercice 3.** $y = \ln(x)$ sur l'intervalle $[0.1, 10]$ (utiliser `np.log()`)
+
+### 0.4 Tracer plusieurs courbes
+
+```python
+x = np.linspace(0, 2*np.pi, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure(figsize=(10, 6))
+plt.plot(x, y1, label='sin(x)', color='blue')
+plt.plot(x, y2, label='cos(x)', color='red', linestyle='--')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Sinus et Cosinus')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+> **Exercice 4.** Tracez sur un même graphique les fonctions $y_1 = x$, $y_2 = x^2$ et $y_3 = x^3$ pour $x \in [-2, 2]$, avec une légende et des couleurs différentes.
+
+### 0.5 Définir une fonction
+
+```python
+# Définition d'une fonction simple
+def ma_fonction(x):
+    return x**2 + 2*x + 1
+
+# Utilisation
+resultat = ma_fonction(3)
+print(resultat)  # Affiche 16
+
+# Application sur un tableau NumPy
+x = np.linspace(-5, 5, 100)
+y = ma_fonction(x)
+plt.plot(x, y)
+plt.show()
+```
+
+> **Questions :**
+>
+> **Q5.** Écrivez une fonction Python `cube(x)` qui retourne le cube de `x`.
+>
+> **Q6.** Définissez une fonction `polynome(x)` qui calcule $x^3 - 2x^2 + x - 1$ et tracez-la sur $[-2, 3]$.
+
+### 0.6 Boucles et suites
+
+```python
+# Calcul des termes d'une suite
+n_termes = 50
+u = np.zeros(n_termes)  # Crée un tableau de zéros
+u[0] = 1  # Premier terme
+
+for n in range(n_termes - 1):
+    u[n+1] = 0.5 * u[n] + 1  # Relation de récurrence
+
+# Affichage
+plt.figure(figsize=(10, 6))
+plt.plot(range(n_termes), u, 'o-', markersize=4)
+plt.xlabel('n')
+plt.ylabel('u_n')
+plt.title('Évolution de la suite')
+plt.grid(True)
+plt.show()
+```
+
+> **Questions :**
+>
+> **Q7.** Pourquoi utilise-t-on `range(n_termes - 1)` et non `range(n_termes)` dans la boucle ?
+>
+> **Q8.** Quelle est la différence entre `range(5)` et `range(1, 6)` ?
+>
+> **Q9.** Que fait `np.zeros(n_termes)` ?
+>
+> **Exercice 5.** Une suite est définie par $u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Écrivez le code pour calculer et afficher les 15 premiers termes.
+
+### 0.7 Résolution d'équations différentielles avec SciPy
+
+Pour résoudre une équation différentielle $y' = f(y, t)$, on utilise `odeint` :
+
+```python
+from scipy.integrate import odeint
+
+# Exemple : y' = -2*y avec y(0) = 1
+def equation(y, t):
+    return -2 * y
+
+# Conditions initiales et temps
+y0 = 1
+t = np.linspace(0, 5, 100)
+
+# Résolution
+solution = odeint(equation, y0, t)
+
+# Tracé
+plt.plot(t, solution, label='Solution numérique')
+plt.plot(t, np.exp(-2*t), '--', label='Solution exacte')
+plt.legend()
+plt.show()
+```
+
+> **Questions :**
+>
+> **Q10.** Pour résoudre $y' = 3y - 2$ avec `odeint`, comment définir la fonction `equation(y, t)` ?
+>
+> **Q11.** Dans `odeint(equation, y0, t)`, que représentent `y0` et `t` ?
+>
+> **Exercice 6.** Résolvez $y' = -y + \sin(t)$ avec $y(0) = 0$ sur $[0, 10]$ et tracez la solution.
+
+---
+
+## Partie 1 : Le modèle "bactérien" (Verhulst)
+
+### 1.1 Contexte
+
+Notons par $y(t)$ l'évolution au cours du temps d'une population. On supposera continue la fonction $y(t)$ et même dérivable par rapport au temps, ce qui est justifiable pour une population de grande taille.
+
+Les premiers modèles d'évolution de la population étaient simplement décrits par $y'(t) = a \cdot y(t)$ où $a$ est une constante positive indiquant le **taux d'accroissement**. Ce modèle correspond à supposer que la population possède une possibilité d'expansion illimitée.
+
+Afin de proposer un modèle plus réaliste, le mathématicien **Verhulst** a proposé de prendre en compte la capacité d'accueil du milieu dans lequel la population vit, ce qui conduit au modèle suivant :
+
+$$
+y'(t) = a \cdot y(t) \left( 1 - \dfrac{y(t)}{K} \right), \quad \text{où} \quad a,K >0
+$$
+
+- $a$ : taux d'accroissement de la population
+- $K$ : capacité d'accueil du milieu (nombre maximum d'individus que le milieu peut supporter)
+
+Par exemple, on peut modéliser ainsi l'évolution d'une population de bactéries dans une boîte de Petri limitant leur expansion à la capacité $K$.
+
+### 1.2 Questions théoriques
+
+**Q12.** Pour $t=0$, on note $y_0 = y(0)>0$ la population initiale. Que se passe-t-il si $y_0 = 0$ ou $y_0 = K$ ? Maintenant, si $y_0 < K$, comment évolue la population ? De même, si $y_0 > K$, comment évolue la population ? Conjecturer la limite de $y(t)$ quand $t$ tend vers $+\infty$.
+
+**Q13.** Vérifier que la fonction :
+
+$$
+y(t) = K \dfrac{1}{1+\left( \frac{K}{y_0} - 1 \right)e^{-a t} }
+$$
+
+est solution de l'équation de Verhulst. Donner le comportement asymptotique de la solution en $t=+\infty$.
+
+### 1.3 Simulation du modèle de Verhulst
+
+**Exercice 7** : Compléter le code suivant pour tracer la solution exacte du modèle de Verhulst.
+
+> *Aide :* La formule de la solution est donnée à la question Q13. Traduisez-la en Python en utilisant `np.exp()` pour l'exponentielle.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Paramètres du modèle
+a = 0.5    # Taux d'accroissement
+K = 100    # Capacité d'accueil
+
+# Conditions initiales à tester
+y0_liste = [10, 50, 100, 150]
+
+# Temps
+t = np.linspace(0, 20, 500)
+
+def solution_verhulst(t, y0, a, K):
+    """
+    Calcule la solution exacte du modèle de Verhulst.
+  
+    Paramètres:
+    -----------
+    t : array - tableau des temps
+    y0 : float - population initiale
+    a : float - taux d'accroissement
+    K : float - capacité d'accueil
+  
+    Retourne:
+    ---------
+    y : array - population au cours du temps
+    """
+    # TODO : Compléter avec la formule de la solution exacte
+    # y = K / (1 + (...) * np.exp(-a * t))
+    pass
+
+# Tracé des courbes pour différentes conditions initiales
+plt.figure(figsize=(12, 7))
+
+for y0 in y0_liste:
+    y = solution_verhulst(t, y0, a, K)
+    plt.plot(t, y, label=f'$y_0$ = {y0}', linewidth=2)
+
+# Tracé de l'asymptote y = K
+plt.axhline(y=K, color='black', linestyle='--', label=f'K = {K}')
+
+plt.xlabel('Temps t', fontsize=12)
+plt.ylabel('Population y(t)', fontsize=12)
+plt.title('Modèle de Verhulst - Évolution de la population', fontsize=14)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+**Exercice 8** : Résoudre numériquement l'équation de Verhulst avec `odeint` et comparer avec la solution exacte.
+
+> *Questions intermédiaires :*
+>
+> - **Q14.** En regardant l'équation de Verhulst $y' = a \cdot y \cdot (1 - y/K)$, quelle expression faut-il retourner dans la fonction `verhulst(y, t, a, K)` ?
+> - **Q15.** Comment passer les paramètres `a` et `K` à `odeint` ? (indice : utiliser `args=(a, K)`)
+
+```python
+from scipy.integrate import odeint
+
+# Paramètres
+a = 0.5
+K = 100
+y0 = 10
+
+# Temps
+t = np.linspace(0, 20, 500)
+
+def verhulst(y, t, a, K):
+    """
+    Second membre de l'équation de Verhulst : y' = a*y*(1 - y/K)
+    """
+    # TODO : Compléter avec l'équation de Verhulst
+    # dydt = ...
+    pass
+
+# Résolution numérique
+# TODO : Utiliser odeint pour résoudre l'équation
+# y_num = odeint(verhulst, y0, t, args=(a, K))
+
+# Tracé comparatif
+plt.figure(figsize=(12, 7))
+# TODO : Tracer la solution numérique et la solution exacte
+# plt.plot(t, y_num, label='Solution numérique')
+# plt.plot(t, solution_verhulst(t, y0, a, K), '--', label='Solution exacte')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+---
+
+## Partie 2 : La suite logistique
+
+### 2.1 Contexte
+
+Une version discrète du modèle de Verhulst est donnée par la **suite logistique** :
+
+$$
+u_{n+1} - u_n = a \cdot u_n \left(1 - \frac{u_n}{K}\right)
+$$
+
+On peut interpréter ce modèle comme l'évolution de la population d'une année à l'autre.
+
+En posant $\mu = a+1$ et $v_n = \frac{a \cdot u_n}{\mu \cdot K}$, on obtient la relation de récurrence :
+
+$$
+v_{n+1} = \mu \cdot v_n \cdot (1 - v_n)
+$$
+
+Cette suite est célèbre car elle présente un comportement **chaotique** pour certaines valeurs de $\mu$.
+
+### 2.2 Questions théoriques
+
+**Q16.** Montrer que si $v_n \in [0,1]$, alors $v_{n+1} \in [0,1]$ pour $\mu \in [0,4]$.
+
+**Q17.** En cas de convergence de la suite $v_n$, déterminer sa limite.
+
+### 2.3 Simulation de la suite logistique
+
+**Exercice 9** : Compléter le code pour visualiser le comportement de la suite logistique.
+
+> *Questions intermédiaires :*
+>
+> - **Q18.** Quelle est la relation de récurrence à programmer ? Écrivez $v_{n+1}$ en fonction de $v_n$ et $\mu$.
+> - **Q19.** Dans la boucle `for`, à quelle ligne du tableau `v` accède-t-on pour calculer le terme suivant ?
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def suite_logistique(v0, mu, n_termes):
+    """
+    Calcule les termes de la suite logistique.
+  
+    Paramètres:
+    -----------
+    v0 : float - terme initial (entre 0 et 1)
+    mu : float - paramètre de la suite (entre 0 et 4)
+    n_termes : int - nombre de termes à calculer
+  
+    Retourne:
+    ---------
+    v : array - tableau des termes de la suite
+    """
+    v = np.zeros(n_termes)
+    v[0] = v0
+  
+    # TODO : Compléter la boucle pour calculer les termes
+    for n in range(n_termes - 1):
+        # v[n+1] = mu * v[n] * (1 - v[n])
+        pass
+  
+    return v
+
+# Test pour différentes valeurs de mu
+v0 = 0.2
+n_termes = 100
+
+# Valeurs de mu à tester
+mu_valeurs = [1.5, 2.5, 3.2, 3.5, 3.8, 4.0]
+
+fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+axes = axes.flatten()
+
+for i, mu in enumerate(mu_valeurs):
+    v = suite_logistique(v0, mu, n_termes)
+    axes[i].plot(range(n_termes), v, 'b-', linewidth=0.8)
+    axes[i].plot(range(n_termes), v, 'ro', markersize=2)
+    axes[i].set_xlabel('n')
+    axes[i].set_ylabel('$v_n$')
+    axes[i].set_title(f'$\\mu$ = {mu}')
+    axes[i].set_ylim([0, 1])
+    axes[i].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+**Q20.** Après avoir exécuté le code, décrivez le comportement de la suite pour $\mu = 2.5$ et pour $\mu = 3.8$. Que remarquez-vous ?
+
+**Exercice 10** : Tracer le diagramme de bifurcation (limite de la suite en fonction de $\mu$).
+
+> *Aide :* Le diagramme de bifurcation montre, pour chaque valeur de $\mu$, les valeurs vers lesquelles la suite converge (ou oscille). L'algorithme est le suivant :
+>
+> 1. Pour chaque $\mu$, on itère la suite un grand nombre de fois (phase de "chauffe")
+> 2. On garde les dernières valeurs obtenues
+> 3. On trace ces valeurs en fonction de $\mu$
+>
+> *Questions intermédiaires :*
+>
+> - **Q21.** Pourquoi fait-on une "phase de chauffe" avant de garder les valeurs ?
+> - **Q22.** Quelle est la formule pour calculer le terme suivant de la suite ?
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def diagramme_bifurcation(mu_min, mu_max, n_mu, n_iter, n_last):
+    """
+    Calcule les données pour le diagramme de bifurcation.
+  
+    Paramètres:
+    -----------
+    mu_min, mu_max : float - intervalle de mu
+    n_mu : int - nombre de valeurs de mu
+    n_iter : int - nombre d'itérations totales
+    n_last : int - nombre de dernières valeurs à garder
+  
+    Retourne:
+    ---------
+    mu_list, v_list : arrays - données pour le tracé
+    """
+    mu_list = []
+    v_list = []
+  
+    for mu in np.linspace(mu_min, mu_max, n_mu):
+        v = np.random.random()  # Valeur initiale aléatoire
+    
+        # Phase de "chauffe" : on itère sans garder les valeurs
+        for _ in range(n_iter - n_last):
+            # TODO : Calculer le terme suivant
+            # v = mu * v * (1 - v)
+            pass
+    
+        # On garde les n_last dernières valeurs
+        for _ in range(n_last):
+            # TODO : Calculer le terme suivant
+            # v = mu * v * (1 - v)
+            mu_list.append(mu)
+            v_list.append(v)
+  
+    return np.array(mu_list), np.array(v_list)
+
+# Calcul du diagramme
+mu_list, v_list = diagramme_bifurcation(2.5, 4.0, 1000, 1000, 100)
+
+# Tracé
+plt.figure(figsize=(14, 8))
+plt.plot(mu_list, v_list, 'k,', markersize=0.1)
+plt.xlabel('$\\mu$', fontsize=14)
+plt.ylabel('$v_\\infty$', fontsize=14)
+plt.title('Diagramme de bifurcation de la suite logistique', fontsize=16)
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+---
+
+## Partie 3 : Le modèle Proies-Prédateurs (Lotka-Volterra)
+
+### 3.1 Contexte
+
+Dans la nature, il existe une étroite corrélation entre l'évolution de toutes les espèces. Si une espèce disparaît, l'impact sur les autres peut être catastrophique.
+
+Nous allons maintenant étudier l'interaction entre deux populations $x(t)$ (proies) et $y(t)$ (prédateurs). Le modèle de **Lotka-Volterra** décrit leur évolution :
+
+$$
+\begin{cases}
+x'(t) = \alpha \cdot x(t) - \beta \cdot x(t) \cdot y(t)\\
+y'(t) = -\gamma \cdot y(t) + \delta \cdot x(t) \cdot y(t)
+\end{cases}
+$$
+
+où :
+
+- $\alpha$ : taux d'accroissement des proies (naissances)
+- $\beta$ : taux de mortalité des proies due aux prédateurs
+- $\gamma$ : taux de mortalité naturelle des prédateurs
+- $\delta$ : taux d'accroissement des prédateurs en mangeant les proies
+
+### 3.2 Questions théoriques
+
+**Q23.** Interprétons ce modèle. Que se passe-t-il si l'une des deux espèces disparaît ? Que se passe-t-il si la population de proies (ou de prédateurs) est très grande ?
+
+**Q24.** Déterminer les points d'équilibre $(x^*, y^*)$ tels que $x'(t) = 0$ et $y'(t) = 0$.
+
+**Q25.** Montrer que la quantité :
+
+$$
+V(x,y) = -\delta \cdot x + \gamma \cdot \ln(x) - \beta \cdot y + \alpha \cdot \ln(y)
+$$
+
+est conservée au cours du temps (i.e. $\frac{dV}{dt} = 0$).
+
+### 3.3 Simulation du modèle Proies-Prédateurs
+
+**Exercice 11** : Résoudre numériquement le système de Lotka-Volterra.
+
+> *Différence avec les exercices précédents :* Ici, on résout un **système** de deux équations. La fonction doit retourner une **liste** `[dxdt, dydt]` et la condition initiale est aussi une liste `[x0, y0]`.
+>
+> *Questions intermédiaires :*
+>
+> - **Q26.** Comment extraire `x` et `y` de la variable `z = [x, y]` ? (indice : `x, y = z`)
+> - **Q27.** Quelle est l'expression de `dxdt` en fonction de `x`, `y` et des paramètres ?
+> - **Q28.** La solution retournée par `odeint` est un tableau 2D. Comment accéder à la colonne des proies ? (indice : `solution[:, 0]`)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Paramètres du modèle
+alpha = 1.0   # Taux de croissance des proies
+beta = 0.1    # Taux de prédation
+gamma = 1.5   # Taux de mortalité des prédateurs
+delta = 0.075 # Taux de reproduction des prédateurs
+
+def lotka_volterra(z, t, alpha, beta, gamma, delta):
+    """
+    Système d'équations de Lotka-Volterra.
+  
+    Paramètres:
+    -----------
+    z : array [x, y] - populations actuelles
+    t : float - temps
+    alpha, beta, gamma, delta : float - paramètres du modèle
+  
+    Retourne:
+    ---------
+    [dx/dt, dy/dt] : dérivées
+    """
+    x, y = z  # Extraction des populations
+  
+    # TODO : Compléter avec les équations du modèle
+    # dxdt = alpha * x - beta * x * y
+    # dydt = -gamma * y + delta * x * y
+  
+    return [dxdt, dydt]
+
+# Conditions initiales
+x0 = 40  # Population initiale de proies
+y0 = 9   # Population initiale de prédateurs
+z0 = [x0, y0]
+
+# Temps
+t = np.linspace(0, 50, 1000)
+
+# Résolution numérique
+# TODO : Utiliser odeint pour résoudre le système
+# solution = odeint(lotka_volterra, z0, t, args=(alpha, beta, gamma, delta))
+# x = solution[:, 0]  # Colonne des proies
+# y = solution[:, 1]  # Colonne des prédateurs
+
+# Tracé de l'évolution temporelle
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+
+# Graphique 1 : x(t) et y(t)
+ax1.plot(t, x, 'b-', label='Proies x(t)', linewidth=2)
+ax1.plot(t, y, 'r-', label='Prédateurs y(t)', linewidth=2)
+ax1.set_xlabel('Temps', fontsize=12)
+ax1.set_ylabel('Population', fontsize=12)
+ax1.set_title('Évolution des populations', fontsize=14)
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+# Graphique 2 : Portrait de phase (y en fonction de x)
+ax2.plot(x, y, 'g-', linewidth=2)
+ax2.plot(x0, y0, 'ko', markersize=10, label='Condition initiale')
+ax2.set_xlabel('Proies x', fontsize=12)
+ax2.set_ylabel('Prédateurs y', fontsize=12)
+ax2.set_title('Portrait de phase', fontsize=14)
+ax2.legend()
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+**Exercice 12** : Tracer les lignes de niveau de la fonction $V(x,y)$.
+
+> *Aide :* Les lignes de niveau sont les courbes où $V(x,y) = C$ (constante). On utilise `plt.contour()` pour les tracer.
+>
+> *Questions intermédiaires :*
+>
+> - **Q29.** Qu'est-ce qu'un `meshgrid` ? À quoi servent `X` et `Y` créés par `np.meshgrid(x, y)` ?
+> - **Q30.** Pourquoi utilise-t-on `np.log()` et non `log()` pour calculer $V$ ?
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Paramètres
+alpha = 1.0
+beta = 0.1
+gamma = 1.5
+delta = 0.075
+
+def V(x, y, alpha, beta, gamma, delta):
+    """
+    Fonction conservée V(x,y).
+    """
+    # TODO : Compléter avec la formule de V
+    # return -delta*x + gamma*np.log(x) - beta*y + alpha*np.log(y)
+    pass
+
+# Grille de valeurs
+x = np.linspace(0.1, 100, 500)
+y = np.linspace(0.1, 50, 500)
+X, Y = np.meshgrid(x, y)
+
+# Calcul de V sur la grille
+Z = V(X, Y, alpha, beta, gamma, delta)
+
+# Tracé des lignes de niveau
+plt.figure(figsize=(10, 8))
+contours = plt.contour(X, Y, Z, levels=20, cmap='viridis')
+plt.clabel(contours, inline=True, fontsize=8)
+plt.colorbar(contours, label='V(x,y)')
+
+# Point d'équilibre
+x_eq = gamma / delta
+y_eq = alpha / beta
+plt.plot(x_eq, y_eq, 'ro', markersize=10, label=f'Équilibre ({x_eq:.1f}, {y_eq:.1f})')
+
+plt.xlabel('Proies x', fontsize=12)
+plt.ylabel('Prédateurs y', fontsize=12)
+plt.title('Lignes de niveau de V(x,y) - Portrait de phase', fontsize=14)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+**Démonstration : Animation de l'évolution des populations**
+
+Le code suivant est donné complet pour que vous puissiez visualiser l'animation. Exécutez-le directement pour voir l'évolution dynamique des populations de proies et de prédateurs.
+
+> *Note :* Ce code utilise `FuncAnimation` de Matplotlib. L'animation s'affiche dans une fenêtre interactive. Si vous utilisez Jupyter Notebook, ajoutez `%matplotlib notebook` au début de votre cellule.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from scipy.integrate import odeint
+
+# Paramètres du modèle
+alpha = 1.0    # Taux de croissance des proies
+beta = 0.1     # Taux de prédation
+gamma = 1.5    # Taux de mortalité des prédateurs
+delta = 0.075  # Taux de reproduction des prédateurs
+
+def f_lotka(z, t):
+    """Système de Lotka-Volterra"""
+    x, y = z
+    dxdt = alpha * x - beta * x * y
+    dydt = -gamma * y + delta * x * y
+    return [dxdt, dydt]
+
+# Conditions initiales et résolution
+z0 = [40, 9]  # 40 proies, 9 prédateurs
+t = np.linspace(0, 50, 500)
+sol = odeint(f_lotka, z0, t)
+x, y = sol[:, 0], sol[:, 1]
+
+# Création de la figure avec deux sous-graphiques
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+
+# --- Graphique de gauche : évolution temporelle ---
+line_proies, = ax1.plot([], [], 'b-', label='Proies', linewidth=2)
+line_pred, = ax1.plot([], [], 'r-', label='Prédateurs', linewidth=2)
+ax1.set_xlim(0, 50)
+ax1.set_ylim(0, max(max(x), max(y)) * 1.1)
+ax1.set_xlabel('Temps', fontsize=12)
+ax1.set_ylabel('Population', fontsize=12)
+ax1.set_title('Évolution des populations', fontsize=14)
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+# --- Graphique de droite : portrait de phase ---
+ax2.plot(x, y, 'g-', alpha=0.3, linewidth=1)  # Trajectoire complète en fond
+point, = ax2.plot([], [], 'ko', markersize=10)
+ax2.set_xlabel('Proies x', fontsize=12)
+ax2.set_ylabel('Prédateurs y', fontsize=12)
+ax2.set_title('Portrait de phase', fontsize=14)
+ax2.grid(True, alpha=0.3)
+
+def init():
+    """Initialisation de l'animation"""
+    line_proies.set_data([], [])
+    line_pred.set_data([], [])
+    point.set_data([], [])
+    return line_proies, line_pred, point
+
+def animate(i):
+    """Mise à jour à chaque frame"""
+    line_proies.set_data(t[:i], x[:i])
+    line_pred.set_data(t[:i], y[:i])
+    point.set_data([x[i]], [y[i]])
+    return line_proies, line_pred, point
+
+# Création et lancement de l'animation
+anim = FuncAnimation(fig, animate, init_func=init, frames=len(t), 
+                     interval=20, blit=True)
+
+plt.tight_layout()
+plt.show()
+
+# Pour sauvegarder l'animation en GIF (décommenter si besoin) :
+# anim.save('lotka_volterra.gif', writer='pillow', fps=30)
+```
+
+> **Exercice 13 (optionnel) :** Modifiez les conditions initiales `z0 = [40, 9]` pour observer comment l'animation change. Essayez par exemple `z0 = [20, 5]` ou `z0 = [60, 15]`.
+
+---
+
+## Partie 4 : Extensions
+
+### 4.1 Modèle Proies-Prédateurs avec compétition
+
+Dans le modèle de base, les proies ont une croissance illimitée en l'absence de prédateurs. Un modèle plus réaliste inclut une **compétition intraspécifique** :
+
+$$
+\begin{cases}
+x'(t) = \alpha \cdot x \left(1 - \frac{x}{K}\right) - \beta \cdot x \cdot y\\
+y'(t) = -\gamma \cdot y + \delta \cdot x \cdot y
+\end{cases}
+$$
+
+**Exercice 14** : Adapter le code de l'exercice 11 pour ce nouveau modèle et comparer les comportements.
+
+> *Question intermédiaire :*
+>
+> - **Q31.** Quelle est la différence entre l'équation des proies dans ce modèle et dans le modèle de base ?
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Paramètres
+alpha = 1.0
+beta = 0.1
+gamma = 0.5
+delta = 0.02
+K = 200  # Capacité d'accueil pour les proies
+
+def lotka_volterra_competition(z, t):
+    """
+    Modèle de Lotka-Volterra avec compétition intraspécifique.
+    """
+    x, y = z
+  
+    # TODO : Compléter avec les équations modifiées
+    # dxdt = alpha * x * (1 - x/K) - beta * x * y
+    # dydt = -gamma * y + delta * x * y
+  
+    return [dxdt, dydt]
+
+# Résolution et tracé
+# TODO : Compléter le code pour comparer ce modèle avec le modèle de base
+```
+
+### 4.2 Autres extensions possibles
+
+Vous pouvez explorer d'autres extensions du modèle :
+
+1. **Modèle avec refuge** : les proies peuvent se cacher
+2. **Modèle avec saisonnalité** : les paramètres varient au cours du temps
+3. **Modèle à trois espèces** : proie - prédateur - super-prédateur
+
+---
+
+## Annexe : Aide-mémoire Python
+
+### Fonctions NumPy utiles
+
+| Fonction                     | Description                                      |
+| ---------------------------- | ------------------------------------------------ |
+| `np.linspace(a, b, n)`     | n valeurs régulièrement espacées entre a et b |
+| `np.arange(a, b, h)`       | Valeurs de a à b avec un pas h                  |
+| `np.zeros(n)`              | Tableau de n zéros                              |
+| `np.ones(n)`               | Tableau de n uns                                 |
+| `np.random.random()`       | Nombre aléatoire entre 0 et 1                   |
+| `np.exp(x)`                | Exponentielle                                    |
+| `np.log(x)`                | Logarithme naturel                               |
+| `np.sin(x)`, `np.cos(x)` | Fonctions trigonométriques                      |
+
+### Fonctions Matplotlib utiles
+
+| Fonction                                     | Description                           |
+| -------------------------------------------- | ------------------------------------- |
+| `plt.figure(figsize=(w, h))`               | Crée une figure de taille w×h       |
+| `plt.plot(x, y, ...)`                      | Trace une courbe                      |
+| `plt.xlabel('...')`, `plt.ylabel('...')` | Légendes des axes                    |
+| `plt.title('...')`                         | Titre du graphique                    |
+| `plt.legend()`                             | Affiche la légende                   |
+| `plt.grid(True)`                           | Affiche une grille                    |
+| `plt.show()`                               | Affiche le graphique                  |
+| `plt.subplot(n, m, k)`                     | Sous-graphique k dans une grille n×m |
+| `plt.contour(X, Y, Z)`                     | Lignes de niveau                      |
+
+### Options de style pour plot
+
+```python
+plt.plot(x, y, 'b-')      # Bleu, trait continu
+plt.plot(x, y, 'r--')     # Rouge, pointillés
+plt.plot(x, y, 'go')      # Vert, points
+plt.plot(x, y, 'k.-')     # Noir, points reliés
+plt.plot(x, y, linewidth=2, label='Ma courbe')
+```
