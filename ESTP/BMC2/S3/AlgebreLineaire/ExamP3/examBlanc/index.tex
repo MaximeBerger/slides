@@ -295,11 +295,13 @@ Soit $E = \{(x, y, z) \in \mathbb{R}^3 \mid x + y - z = 0\}$.
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-    De $x + y - z = 0$, on tire $z = x + y$. Donc :
+    De $x + y - z = 0$, on tire $z = x + y$. Donc on peut choisir $x$ et $y$ comme paramètres libres :
     \[
     (x, y, z) = (x, y, x+y) = x(1, 0, 1) + y(0, 1, 1)
     \]
-    
+
+    Donc $E = \text{Vect}\{(1, 0, 1), (0, 1, 1)\}$.
+
     Les vecteurs $e_1 = (1, 0, 1)$ et $e_2 = (0, 1, 1)$ sont clairement linéairement indépendants.
     
     \textbf{Base de $E$ :} $\mathcal{B}_E = \{(1, 0, 1), (0, 1, 1)\}$
@@ -389,7 +391,8 @@ g(x, y, z) = (x + 2y - z, 2x + 4y - 2z)
     \end{cases}
     \]
     
-    La deuxième équation est le double de la première, donc on a une seule contrainte : $x = z - 2y$.
+    La deuxième équation est le double de la première, donc on a une seule contrainte. On choisira deux paramètres libres $y$ et $z$. 
+    On exprime alors $x$ en fonction de $y$ et $z$ : $x = z - 2y$.
     
     Les solutions sont :
     \[
@@ -451,7 +454,11 @@ g(x, y, z) = (x + 2y - z, 2x + 4y - 2z)
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
     \[
-    \nabla g = \begin{pmatrix} \frac{\partial g}{\partial x} \\ \frac{\partial g}{\partial y} \\ \frac{\partial g}{\partial z} \end{pmatrix} = \begin{pmatrix} 2x \\ 2yz \\ y^2 - 3z^2 \end{pmatrix}
+    \nabla g = \begin{pmatrix} 
+    \dfrac{\partial g}{\partial x} \\[0.8em] 
+    \dfrac{\partial g}{\partial y} \\[0.8em] 
+    \dfrac{\partial g}{\partial z} 
+    \end{pmatrix} = \begin{pmatrix} 2x \\[0.5em] 2yz \\[0.5em] y^2 - 3z^2 \end{pmatrix}
     \]
     \end{solution}
     }{}
@@ -463,9 +470,9 @@ g(x, y, z) = (x + 2y - z, 2x + 4y - 2z)
     La matrice jacobienne est :
     \[
     J_{\vec{F}} = \begin{pmatrix}
-    \frac{\partial F_1}{\partial x} & \frac{\partial F_1}{\partial y} & \frac{\partial F_1}{\partial z} \\[0.3em]
-    \frac{\partial F_2}{\partial x} & \frac{\partial F_2}{\partial y} & \frac{\partial F_2}{\partial z} \\[0.3em]
-    \frac{\partial F_3}{\partial x} & \frac{\partial F_3}{\partial y} & \frac{\partial F_3}{\partial z}
+    \dfrac{\partial F_1}{\partial x} & \dfrac{\partial F_1}{\partial y} & \dfrac{\partial F_1}{\partial z} \\[0.8em]
+    \dfrac{\partial F_2}{\partial x} & \dfrac{\partial F_2}{\partial y} & \dfrac{\partial F_2}{\partial z} \\[0.8em]
+    \dfrac{\partial F_3}{\partial x} & \dfrac{\partial F_3}{\partial y} & \dfrac{\partial F_3}{\partial z}
     \end{pmatrix} = \begin{pmatrix}
     2x & 0 & 0 \\
     yz & xz & xy \\
