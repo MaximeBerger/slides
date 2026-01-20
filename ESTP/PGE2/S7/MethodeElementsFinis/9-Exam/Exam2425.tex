@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{ifthen}
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+
+\newmdenv[linewidth=1pt]{solutionbox}
+\geometry{a4paper, margin=2.5cm}
+
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\setboolean{showSolutions}{true}
+% \setboolean{showSolutions}{false}
+
+\title{Méthode des Éléments Finis : Examen}
+
+\newtheorem{definition}{Définition}[section]
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{lemma}{Lemme}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollaire}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remarque}
+
+\begin{document}
+\sffamily
+
+\date{}
+
+\begin{center}
+    \begin{tabular}{|p{4cm}|c|p{4cm}|}
+        \hline 
+        \raisebox{-0.5\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} & 
+        \textbf{Contrôle de connaissances et de compétences} & FO-002-VLA-XX-001 \\
+        \hline
+        & & 21/01/2025 \\
+        \hline
+        & & Page 1/2 \\
+        \hline
+    \end{tabular}
+
+\vspace{1em}
+
+\begin{tabular}{|c|p{10cm}|}
+    \hline & \rule{0pt}{3ex} {\textbf{ANNÉE SCOLAIRE 2024-2025 Semestre 7}} \\
+    \hline \textbf{Nom de l'enseignant} & Maxime BERGER \\
+    \hline \textbf{Matière} & Méthode des Éléments Finis \\
+    \hline \textbf{Durée de l'examen} & 2h00 \\
+    \hline \textbf{Consignes} & 
+    \begin{tabular}{l}
+    Calculatrice NON autorisée \\
+    Aucun document n'est autorisé
+    \end{tabular} \\
+    \hline \textbf{NOM - PRENOM de l'étudiant} : & \\
+    & \\
+    \hline
+\end{tabular}
+\end{center}
+
+\vspace{5em}
+\section*{Exercice 1}
+On considère une barre de longueur $1$. On la découpe en $n$ éléments finis de longueur $h$, d'ordre $1$. 
+
+On cherche les polynômes de Hermite qui permettront d'interpoler la valeur de la fonction solution et de sa dérivée en chaque noeud. 
+Considérons l'élément $[0, h]$. 
+\begin{enumerate}
+    \item Rappelez les conditions que doivent vérifier les polynômes de Hermite $\varphi_0$, $\varphi_1$, $\psi_0$ et $\psi_1$.
+    \item Voici les polynômes, déterminer les éléments manquants $a_1, a_2, a_3, a_4$ dans ces formules. Justifier votre choix :
+    \begin{align*}
+    \varphi_0(x) &= a_1 - 3\Big(\frac{x}{h}\Big)^2 + 2 \Big(\frac{x}{h}\Big)^3 \\
+    \varphi_1(x) &= 3\Big(\frac{x}{h}\Big)^2 + a_2 \Big(\frac{x}{h}\Big)^3 \\
+    \psi_0(x) &= a_3x\Big(1-2\frac{x}{h} + \big(\frac{x}{h}\big)^2\Big) \\
+    \psi_1(x) &= x\Big(-\frac{x}{h} + a_4\big(\frac{x}{h}\big)^2\Big)
+\end{align*}
+\end{enumerate}
+\newpage 
+\section*{Exercice 2}
+Voici une pièce d'acier de forme trapézoïdale, trouée en son centre avec un trou carré de $0.5$ mètre de côté.
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Contour extérieur
+    \draw[thick] (0,0) -- (4,0) -- (4,1) -- (3,2) -- (1,2) -- (0,1) -- cycle;
+    
+    % Trou carré
+    \draw[thick] (1.75,0.75) rectangle (2.25,1.25);
+    
+    %% Cotations
+    \draw[<->] (0,-0.3) -- (4,-0.3) node[midway,below] {4 m};
+    \draw[<->] (-0.3,0) -- (-0.3,2) node[midway,left] {2 m};
+    \draw[<->] (1,2.3) -- (3,2.3) node[midway,above] {2 m};
+    \draw[<->] (4.3,0) -- (4.3,1) node[midway,right] {1 m};
+% Ajouter une grille en pointillés
+\draw[help lines,gray!30] (0,0) grid (4,2);
+    
+% Ajouter des suggestions de points pour le maillage
+\foreach \x in {0,1,2,3,4} {
+    \foreach \y in {0,1,2} {
+        \fill[gray] (\x,\y) circle (0.02);
+    }
+}
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+    \item Créez un maillage de cette pièce en triangles puis établissez les tableaux de coordonnées et de connectivités.
+
+\textit{Vous représenterez sur votre copie le dessin soigné en donnant une notation claire aux éléments et aux noeuds.}
+
+    \item Rappelez la méthode pour obtenir les polynômes de Lagrange associés à un maillage triangulaire en dimension $2$.
+    \item Expliquez comment est construite la matrice de rigidité globale avec un tel maillage.
+\end{enumerate}
+\section*{Problème}
+Considérons l'équation différentielle suivante en dimension $1$ :
+\[
+- \Delta u + q(x) u = 0, \quad x \in ]0, 1[
+\]
+avec \(q\) une fonction positive.
+
+Avec les conditions aux limites de Dirichlet: \( u(0) = u(1) = 0 \).
+\begin{enumerate}
+    \item Etablir la formulation variationnelle du problème.
+
+    \item Définissez un maillage avec $3$ éléments finis de longueur $h$ et d'ordre $1$.
+    
+    \item Donner les polynômes de Lagrange associés à chaque élément de ce maillage.
+
+    \item A partir de cette question, on prendra \(q(x) = 0\). Calculez la matrice de rigidité associée au problème de Dirichlet sur le premier élément $[0,h]$.
+        
+    \item Etablissez la matrice de rigidité globale \( K \), puis appliquez les conditions de bord.
+
+    \item Ecrivez le système linéaire puis donner la solution approchée du problème. 
+
+    \item Comment le système linéaire est-il modifié si le second membre de l'équation différentielle est maintenant \(f(x) = \cos(\pi x)\) ?
+
+    \item Si maintenant $q(x) = 1$, ecrire la nouvelle matrice de rigidité du système, sans vous préoccuper de sa résolution ou du second membre.
+\end{enumerate}
+
+\end{document}

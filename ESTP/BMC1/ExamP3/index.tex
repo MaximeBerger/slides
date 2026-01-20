@@ -28,6 +28,12 @@
 \usepackage{eurosym}
 \usepackage{textcomp}
 \usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
 
 \usepackage{mdframed}
 \usepackage[sf]{titlesec}
@@ -44,9 +50,15 @@
 
 
 \newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
-    {\end{mdframed}\par\vspace{0.5em}}
-
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
 \begin{document}
 \sffamily
 
@@ -72,6 +84,8 @@
         \hline 
         \textbf{Nom de l'enseignant} & Maxime BERGER \\
         \hline 
+        \textbf{Promotion} & BMC1 - S1 \\
+        \hline 
         \textbf{Matière} & Probabilités et statistiques  \\
         \hline 
         \textbf{Durée de l'examen} & 2h00 \\
@@ -84,3 +98,64 @@
         \hline
     \end{tabular}
 \end{center}
+
+
+
+\section{Exercice 1 : Équations}
+Résoudre :
+\begin{enumerate}
+    \item $$z-2i=iz+1$$
+    \item $$z^4-2z^3-z+2=0$$ 
+    \item $$2z^2-(7+3i)z+(2+4i)=0$$
+    \item $$z^4=-1$$
+    \item $$z^6=\frac{3}{1-i \sqrt{3}}$$
+\end{enumerate}
+
+\section{Exercice 2 : Lieux géométriques}
+Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ vérifie la relation demandée :
+\begin{enumerate}
+    \item $$\arg \left( \frac{z}{1+i} \right )=\frac{\pi}{4}[2\pi]$$
+    \item $$\left|\frac{z+1}{z-2}\right|=1$$
+    \item $$\frac{2z-i}{z-2i} \in \mathbb{R}$$
+    
+\end{enumerate}
+
+\section{Exercice 3 : Polynômes}
+\begin{enumerate}
+    \item Trouver $a,b,c$ réels tel que $X^2+X+1$ divise $X^4+aX^2+bX+c$.
+    \item Déterminer tous les polynômes $P$ qui vérifient :
+    $$P(X^2)=(X^2+1)P(X)$$
+    \item Décomposer en éléments simples la fraction rationnelle :
+    $$F(X)=\frac{X^4}{(X^2-1)(X+3)}$$
+\end{enumerate}
+
+\section{Exercice 4: Suites}
+Donner une expression en fonction de $n$ des suites suivantes puis calculer leurs limites :
+\begin{enumerate}
+    \item 
+   $$ \begin{cases}
+    u_0=2\\
+    u_{n+1}=2u_n-6
+    \end{cases}$$
+    \item $$\begin{cases}
+    u_0=1\\
+    u_1=0\\
+    u_{n+2}=3u_{n+1}-2u_n
+    \end{cases}$$
+    \item $$\begin{cases}
+    u_0=1\\
+    u_{n+1}=\frac{4u_n+3}{2+u_n}
+    \end{cases}$$
+   On montera dans un premier temps, que la suite $(v_n)$ définie par :
+    $$v_n=\frac{u_n-3}{u_n+1}$$
+    est géométrique.
+\end{enumerate}
+
+\section{Exercice 5 : Barycentre}
+Sur la figure ci-dessous, $ABCD$ représente une plaque métallique homogène carrée de centre $O$. on retire la partie triangulaire $OAB$ pour obtenir la plaque pentagonale $ADCBO$.\\
+\includegraphics[]{barycentres.jpg}
+\\
+On appelle $H$ le centre d'inertie de la plaque $OAB$ et $G$ celui de la plaque $ADCBO$ que l'on cherche.\\
+Justifier dans un premier temps que $O$ barycentre de $(H,1), (G,3)$ et en déduire que $G$ barycentre de $(O,4), (H,-1)$. 
+
+\end{document}

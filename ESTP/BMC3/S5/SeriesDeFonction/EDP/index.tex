@@ -604,9 +604,9 @@ Finalement, on trouve $f(x, y) = -\frac{(2x-3y)^{2}}{2} + K(x-y)$ où $K$ est un
 
   \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(2a-b) \frac{\partial F}{\partial X} + (2c-d) \frac{\partial F}{\partial Y} = xy$ on choisit $a=1$, $b=1$ et $c=1$, $d=2$. On obtient comme équation en $F$ :
 $$
-F_{X}^{\prime} = \frac{-1}{25} X^{2} + \frac{3}{25} XY + \frac{2}{25} Y^{2} \Longrightarrow F(X, Y) = \frac{-1}{75} X^{3} + \frac{3}{50} X^{2} Y + \frac{2}{25} XY^{2} + K(Y)
+\frac{\partial F}{\partial X} = -2 X^{2} + 3 XY - Y^{2} \Longrightarrow F(X, Y) = -\frac{2}{3} X^{3} + \frac{3}{2} X^{2} Y - XY^{2} + K(Y)
 $$
-Finalement, on trouve $f(x, y) = \frac{-1}{75}(x+y)^{3} + \frac{3}{50}(x+y)^{2}(x+2y) + \frac{2}{25}(x+y)(x+2y)^{2} + K(x+2y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
+Finalement, on trouve $f(x, y) = -\frac{2}{3}(x+y)^{3} + \frac{3}{2}(x+y)^{2}(x+2y) -(x+y)(x+2y)^{2} + K(x+2y)$ où $K$ est une fonction de classe $\mathcal{C}^{1}$.
 
   \item On pose $\left\{\begin{array}{l}X = ax + by \\ Y = cx + dy\end{array}\right.$, puis dans $(a+5b) \frac{\partial F}{\partial X} + (c+5d) \frac{\partial F}{\partial Y} = \cos(x+y)$ on choisit $a=6, b=-1$ et $c=5, d=-1$. On obtient comme équation en $F$ :
 $$
@@ -778,7 +778,7 @@ Résoudre les équations aux dérivées partielles suivantes.
   \item $2y \frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = 0$ poser $f(x, y) = X(x) Y(y)$. Déterminer l'équation différentielle vérifiée par $X$ et $Y$, puis par séparation des variables, déterminer $X$ et $Y$, enfin $f(x, y)$.
   \item $x \frac{\partial f}{\partial x} - y \frac{\partial f}{\partial y} = xy^{2}$ poser $u = x, v = xy$
   \item $x \frac{\partial f}{\partial x} + y \frac{\partial f}{\partial y} = \frac{y^{2}}{x}$ poser $u = x, v = \frac{y}{x}$
-  \item $y \frac{\partial f}{\partial x} + x \frac{\partial f}{\partial y} = x$ poser $x = r \cos \theta, y = r \sin \theta$
+  \item $y \frac{\partial f}{\partial x} - x \frac{\partial f}{\partial y} = x$ poser $x = r \cos \theta, y = r \sin \theta$
   \item $x \frac{\partial f}{\partial x} + y \frac{\partial f}{\partial y} = \sqrt{x^{2}+y^{2}}$ poser $x = r \cos \theta, y = r \sin \theta$
 \end{enumerate}
 \end{exercice}

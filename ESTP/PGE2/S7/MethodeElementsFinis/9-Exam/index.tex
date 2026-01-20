@@ -1,0 +1,370 @@
+\documentclass[12pt]{article}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}           % Police Latin Modern (plus nette)
+\usepackage{charter}           % Police Charter (très lisible)
+\usepackage[scaled=0.95]{inconsolata} % Police mono lisible
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\usepackage{array}
+\usepackage{ifthen}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+
+\title{Examen S7 - Méthode des éléments finis }
+
+\author{}
+\date{}
+
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logoestp.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{22/01/2026}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 1}} \\
+        \hline 
+
+        \textbf{Nom de l'enseignant} & Maxime Berger \\
+        \hline 
+        \textbf{Matière} & Méthode des éléments finis \\
+        \hline 
+        \textbf{Promotion} & PGE2 - S7 \\
+        \hline 
+        \textbf{Durée de l'examen} & 1h30 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        
+        \hline
+    \end{tabular}
+\end{center}
+
+
+\vspace{1em}
+
+\section*{Problème}
+Considérons l'équation différentielle suivante en dimension $1$ :
+\[
+- u''(x) + u(x) = f(x), \quad x \in ]0, 1[
+\]
+avec les conditions aux limites de Dirichlet : $u(0) = 0$ et $u(1) = 0$.
+
+\begin{enumerate}
+    \item Établissez la formulation variationnelle du problème. On introduira une forme bilinéaire $a(u,v)$ et une forme linéaire $L(v)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On multiplie par une fonction test $v$ nulle aux bords et on intègre sur $[0,1]$ :
+        $$\int_0^1 (-u'' + u) v \, dx = \int_0^1 f v \, dx$$
+        
+        Intégration par parties sur le terme $-u''v$ :
+        $$\int_0^1 u' v' \, dx - [u'v]_0^1 + \int_0^1 uv \, dx = \int_0^1 fv \, dx$$
+        
+        Comme $v(0) = v(1) = 0$, le terme de bord s'annule.
+        
+        On obtient : $a(u,v) = L(v)$ avec :
+        $$a(u,v) = \int_0^1 u'v' \, dx + \int_0^1 uv \, dx$$
+        $$L(v) = \int_0^1 fv \, dx$$
+    \end{solution}
+    }{}
+    
+    \item Définissez un maillage avec $2$ éléments finis de longueur $h = 1/2$ et d'ordre $1$. Donnez les noeuds $x_0, x_1, x_2$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Les noeuds sont : $x_0 = 0$, $x_1 = 1/2$, $x_2 = 1$.
+        
+        Élément 1 : $[0, 1/2]$, Élément 2 : $[1/2, 1]$.
+    \end{solution}
+    }{}
+    
+    \item Donnez les polynômes de Lagrange $\varphi_0$, $\varphi_1$ et $\varphi_2$ associés à ce maillage.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Sur l'élément $[0, h]$ : $\varphi_0(x) = 1 - x/h$, $\varphi_1(x) = x/h$
+        
+        Sur l'élément $[h, 2h]$ : $\varphi_1(x) = 1 - (x-h)/h$, $\varphi_2(x) = (x-h)/h$
+        
+        Avec $h = 1/2$ :
+        \begin{itemize}
+            \item $\varphi_0(x) = 1 - 2x$ sur $[0, 1/2]$, $0$ ailleurs
+            \item $\varphi_1(x) = 2x$ sur $[0, 1/2]$ et $\varphi_1(x) = 2 - 2x$ sur $[1/2, 1]$
+            \item $\varphi_2(x) = 2x - 1$ sur $[1/2, 1]$, $0$ ailleurs
+        \end{itemize}
+    \end{solution}
+    }{}
+    
+    \item Calculez la matrice de rigidité élémentaire $K_e$ sur le premier élément $[0, h]$.
+    On donne : $\int_0^h (1-x/h)^2 dx = h/3$ et $\int_0^h (x/h)(1-x/h) dx = h/6$.
+    
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La matrice de rigidité élémentaire est :
+        $$K_e = \begin{pmatrix} a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_1) \\ a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_1) \end{pmatrix}$$
+        
+        Avec $a(u,v) = \int_0^h u'v' dx + \int_0^h uv dx$.
+        
+        Calcul des dérivées : $\varphi_0' = -1/h = -2$, $\varphi_1' = 1/h = 2$.
+        
+        Terme de rigidité (dérivées) : $\int_0^h \varphi_0' \varphi_0' dx = 4h = 2$, etc.
+        
+        Terme de masse : $\int_0^h \varphi_0^2 dx = h/3 = 1/6$, $\int_0^h \varphi_0\varphi_1 dx = h/6 = 1/12$.
+        
+        $$K_e = \frac{1}{h}\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix} + \frac{h}{6}\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix} = \begin{pmatrix} 2 + 1/12 & -2 + 1/24 \\ -2 + 1/24 & 2 + 1/12 \end{pmatrix}$$
+        
+        $$K_e = \begin{pmatrix} 25/12 & -47/24 \\ -47/24 & 25/12 \end{pmatrix}$$
+    \end{solution}
+    }{}
+    
+    \item Après l'avoir brièvement expliqué, on pourra utiliser le fait que les deux matrices de rigidité locales sont identiques.\newline 
+    Établissez la matrice de rigidité globale $K$, puis appliquez les conditions aux limites pour obtenir le système réduit.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut passer des intégrales sur le premier élément aux intégrales sur le second élément en utilisant la symétrie des fonctions $\varphi_i$. Le changement de variable est $u=1-x$.
+
+        Par assemblage, avec les deux éléments identiques :
+        $$K = \begin{pmatrix} 25/12 & -47/24 & 0 \\ -47/24 & 25/6 & -47/24 \\ 0 & -47/24 & 25/12 \end{pmatrix}$$
+        
+        Avec $u(0) = u(1) = 0$, donc $\alpha_0 = \alpha_2 = 0$, le système réduit est :
+        $$\frac{25}{6} \alpha_1 = L(\varphi_1)$$
+    \end{solution}
+    }{}
+    
+    \item En prenant $f(x) = 1$, calculez le second membre $L(\varphi_1)$ et donnez la valeur de la solution approchée au noeud $x_1$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        $$L(\varphi_1) = \int_0^1 f \varphi_1 dx = \int_0^{1/2} 2x \, dx + \int_{1/2}^1 (2-2x) dx$$
+        $$= [x^2]_0^{1/2} + [2x - x^2]_{1/2}^1 = 1/4 + (2-1) - (1 - 1/4) = 1/4 + 1 - 3/4 = 1/2$$
+        
+        Donc : $\frac{25}{6} \alpha_1 = \frac{1}{2}$
+        
+        $$\alpha_1 = \frac{3}{25} = 0.12$$
+    \end{solution}
+    }{}
+    
+    \item La méthode des éléments finis a-t-elle plutôt tendance à sur-estimer ou à sous-estimer les contraintes appliquées sur une pièce ? Illustrez votre réponse avec un exemple.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La méthode des éléments finis a tendance à sous-estimer les contraintes appliquées sur une pièce. Voir l'exemple du TD1.
+    \end{solution}
+    }{}
+\end{enumerate}
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\section*{Exercice 1 : Polynômes de Lagrange d'ordre 2}
+On considère une barre de longueur $L$, découpée en $n$ éléments finis de longueur $h = L/n$.
+
+On souhaite améliorer la précision de la méthode des éléments finis en utilisant des éléments d'ordre $2$ : on ajoute un noeud intermédiaire au milieu de chaque élément.
+
+Considérons le premier élément $[0, h]$ avec trois noeuds : $x_0$, $x_{1/2}$ et $x_1$.
+
+
+\begin{enumerate}
+    \item Rappelez les conditions que doivent vérifier les polynômes de Lagrange $\varphi_0$, $\varphi_{1/2}$ et $\varphi_1$ pour interpoler correctement la solution aux noeuds.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Les polynômes de Lagrange doivent vérifier la propriété d'interpolation :
+        $$\varphi_i(x_j) = \delta_{ij}$$
+        C'est-à-dire que $\varphi_i$ vaut $1$ au noeud $x_i$ et $0$ aux autres noeuds.
+        
+        Plus précisément :
+        \begin{itemize}
+            \item $\varphi_0(0) = 1$, $\varphi_0(h/2) = 0$, $\varphi_0(h) = 0$
+            \item $\varphi_{1/2}(0) = 0$, $\varphi_{1/2}(h/2) = 1$, $\varphi_{1/2}(h) = 0$
+            \item $\varphi_1(0) = 0$, $\varphi_1(h/2) = 0$, $\varphi_1(h) = 1$
+        \end{itemize}
+    \end{solution}
+    }{}
+    
+    \item Voici les polynômes. Déterminez les éléments manquants $a_1, a_2, a_3, a_4, a_5, a_6$ en justifiant votre choix :
+    \begin{align*}
+    \varphi_0(x) &= a_1 \frac{(x-h/2)(x-h)}{h^2} \\
+    \varphi_{1/2}(x) &= a_2 \frac{x(x-a_3)}{h^2} \\
+    \varphi_1(x) &= a_4 \frac{x(x-a_5)}{a_6}
+    \end{align*}
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        En utilisant la formule de Lagrange et les conditions d'interpolation :
+        
+        \textbf{Pour $\varphi_0$ :} On doit avoir $\varphi_0(0) = 1$.
+        $$\varphi_0(0) = a_1 \frac{(0-h/2)(0-h)}{h^2} = a_1 \frac{h^2/2}{h^2} = \frac{a_1}{2} = 1$$
+        Donc $a_1 = 2$.
+        
+        \textbf{Pour $\varphi_{1/2}$ :} On doit avoir $\varphi_{1/2}(h/2) = 1$ et $\varphi_{1/2}(h) = 0$.
+        La condition $\varphi_{1/2}(h) = 0$ impose $a_3 = h$.
+        $$\varphi_{1/2}(h/2) = a_2 \frac{(h/2)(h/2-h)}{h^2} = a_2 \frac{(h/2)(-h/2)}{h^2} = -\frac{a_2}{4} = 1$$
+        Donc $a_2 = -4$.
+        
+        \textbf{Pour $\varphi_1$ :} On doit avoir $\varphi_1(h) = 1$ et $\varphi_1(h/2) = 0$.
+        La condition $\varphi_1(h/2) = 0$ impose $a_5 = h/2$.
+        $$\varphi_1(h) = a_4 \frac{h(h-h/2)}{a_6} = a_4 \frac{h^2/2}{a_6} = 1$$
+        En normalisant avec $a_6 = h^2$, on obtient $a_4 = 2$.
+        
+        \textbf{Réponses :} $a_1 = 2$, $a_2 = -4$, $a_3 = h$, $a_4 = 2$, $a_5 = h/2$, $a_6 = h^2$.
+    \end{solution}
+    }{}
+    
+    \item Quelles sont les dimensions de la matrice de rigidité élémentaire pour cet élément d'ordre $2$ ?\newline
+    Quelles sont les dimensions de la matrice de rigidité globale ?
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La matrice de rigidité élémentaire est de taille $3 \times 3$.
+
+        La matrice de rigidité globale est de taille $2n +1 \times 2n +1$.
+    \end{solution}
+    }{}
+    
+    \item Donnez l'expression générale de la matrice de rigidité élémentaire pour l'équation $-u'' = f$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La matrice de rigidité élémentaire est :
+        $$K_e = \begin{pmatrix}
+            a(\varphi_0, \varphi_0) & a(\varphi_0, \varphi_{1/2}) & a(\varphi_0, \varphi_1) \\
+            a(\varphi_{1/2}, \varphi_0) & a(\varphi_{1/2}, \varphi_{1/2}) & a(\varphi_{1/2}, \varphi_1) \\
+            a(\varphi_1, \varphi_0) & a(\varphi_1, \varphi_{1/2}) & a(\varphi_1, \varphi_1)
+        \end{pmatrix}$$
+        où $a(u,v) = \int_0^h u'(x) v'(x) \, dx$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{Exercice 2 : Maillage 2D}
+Voici une pièce en forme de \og L \fg{} qu'on souhaite mailler pour une analyse par éléments finis.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Contour de la pièce en L
+    \draw[thick] (0,0) -- (3,0) -- (3,1) -- (1,1) -- (1,3) -- (0,3) -- cycle;
+    
+    % Cotations
+    \draw[<->] (0,-0.4) -- (3,-0.4) node[midway,below] {3 m};
+    \draw[<->] (-0.4,0) -- (-0.4,3) node[midway,left] {3 m};
+    \draw[<->] (1,3.3) -- (0,3.3) node[midway,above] {1 m};
+    \draw[<->] (3.3,0) -- (3.3,1) node[midway,right] {1 m};
+    
+    % Grille en pointillés
+    \draw[help lines,gray!40] (0,0) grid (3,3);
+    
+    % Points suggérés
+    \foreach \x in {0,1,2,3} {
+        \foreach \y in {0,1,2,3} {
+            \fill[gray] (\x,\y) circle (0.03);
+        }
+    }
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Proposez un maillage de cette pièce en utilisant des triangles. Numérotez clairement les noeuds et les éléments sur votre dessin.
+    
+
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Une solution possible avec 8 triangles et 7 noeuds :
+        
+        Noeuds : 1=(0,0), 2=(1,0), 3=(2,0), 4=(3,0), 5=(1,1), 6=(2,1), 7=(3,1), 8=(0,1), 9=(1,2), 10=(0,2), 11=(1,3), 12=(0,3)
+        
+        Éléments triangulaires reliant les noeuds appropriés.
+    \end{solution}
+    }{}
+    
+    \item Établissez le tableau de coordonnées des noeuds et le tableau de connectivité des éléments.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Tableaux dépendant du maillage choisi par l'étudiant.
+    \end{solution}
+    }{}
+    
+    \item Pour un triangle de sommets $A=(x_A, y_A)$, $B=(x_B, y_B)$, $C=(x_C, y_C)$, rappelez la méthode pour obtenir les polynômes de Lagrange $\varphi_A(x,y)$, $\varphi_B(x,y)$, $\varphi_C(x,y)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On utilise l'élément de référence (triangle $A'=(0,0)$, $B'=(1,0)$, $C'=(0,1)$) avec les polynômes :
+        $$\varphi'_A(r,s) = 1-r-s, \quad \varphi'_B(r,s) = r, \quad \varphi'_C(r,s) = s$$
+        
+        Puis on effectue un changement de variables affine pour passer au triangle réel :
+        $$\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} x_A \\ y_A \end{pmatrix} + (x_B-x_A) r + (x_C-x_A) s$$
+        
+        On inverse ce changement pour exprimer $(r,s)$ en fonction de $(x,y)$, puis on substitue dans les polynômes de référence.
+    \end{solution}
+    }{}
+    
+    \item Expliquez brièvement comment est construite la matrice de rigidité globale à partir des matrices élémentaires.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La matrice globale est construite par assemblage :
+        \begin{enumerate}
+            \item Initialiser une matrice $N \times N$ (N = nombre de noeuds) remplie de zéros
+            \item Pour chaque élément, calculer sa matrice élémentaire $K_e$
+            \item Ajouter les coefficients de $K_e$ dans la matrice globale aux positions correspondant aux indices globaux des noeuds de l'élément
+            \item Les contributions des éléments partageant des noeuds communs s'additionnent
+        \end{enumerate}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+
+
+\end{document}

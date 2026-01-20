@@ -16,23 +16,29 @@
 \usepackage{geometry}
 \geometry{margin=1.5cm}
 
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
 \usepackage{mdframed}
 \usepackage[sf]{titlesec}
 \usepackage{array}
 \usepackage{ifthen}
-% Définition de la variable pour afficher les corrections
+\usepackage{enumitem}
+
 \newboolean{showSolutions}
 % Décommentez la ligne suivante pour afficher les solutions
 \input \jobname.adr
 
-\title{Examen S3 - Mathématiques }
-
+\title{Examen S5 - Mathématiques }
 \author{}
 \date{}
 
-
 \newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\par\vspace{0.5em}\begin{mdframed}[backgroundcolor=ThemeLight,linewidth=0.5pt]\noindent\textbf{Solution :}\par}
     {\end{mdframed}\par\vspace{0.5em}}
 
 \begin{document}
@@ -46,7 +52,7 @@
         \textbf{Contrôle de connaissances et de compétences} & 
         \textbf{FO-002-VLA-XX-001} \\
         \hline
-        \textbf{26/01/2026}  &  & \textbf{Page 1/3} \\
+        \textbf{26/01/2026}  &  & \textbf{Page 1/5} \\
         \hline
     \end{tabular}
 \end{center}
@@ -58,7 +64,7 @@
         \hline 
         \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 1}} \\
         \hline 
-        \textbf{Nom de l'enseignant} & Maxime Berger \& Karine Serier \\
+        \textbf{Nom de l'enseignant} & Maxime Berger \& Antoine Perney \\
         \hline 
         \textbf{Promotion} & BMC3 - S5 \\
         \hline 
@@ -77,8 +83,613 @@
     \end{tabular}
 \end{center}
 
-\vspace{3em}
+\vspace{2em}
 
+%==============================================================================
+\section*{Exercice 1 : Développements limités (5 points)}
+%==============================================================================
 
+\begin{enumerate}
+    \item \textbf{Calculs de développements limités.}
+    \begin{enumerate}
+        \item Donner le développement limité de $e^x$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + o(x^4)
+        \]
+        \end{solution}
+        }{}
+        
+        \item Donner le développement limité de $\ln(1+x)$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + o(x^4)
+        \]
+        \end{solution}
+        }{}
+        
+        \item En déduire le développement limité de $f(x) = e^x \ln(1+x)$ à l'ordre 3 au voisinage de 0. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On multiplie les DL en ne gardant que les termes d'ordre $\leq 3$ :
+        \begin{align*}
+        e^x \ln(1+x) &= \left(1 + x + \frac{x^2}{2} + \frac{x^3}{6}\right)\left(x - \frac{x^2}{2} + \frac{x^3}{3}\right) + o(x^3) \\
+        &= x - \frac{x^2}{2} + \frac{x^3}{3} + x^2 - \frac{x^3}{2} + \frac{x^3}{2} + o(x^3) \\
+        &= x + \frac{x^2}{2} + \frac{x^3}{3} + o(x^3)
+        \end{align*}
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{Calcul de limite.} Calculer la limite suivante à l'aide d'un développement limité : \textit{(1.5 pts)}
+    \[
+    \lim_{x \to 0} \frac{\sin x - x + \frac{x^3}{6}}{x^5}
+    \]
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise le DL de $\sin x$ à l'ordre 5 :
+    \[
+    \sin x = x - \frac{x^3}{6} + \frac{x^5}{120} + o(x^5)
+    \]
+    Donc :
+    \[
+    \sin x - x + \frac{x^3}{6} = \frac{x^5}{120} + o(x^5)
+    \]
+    Et :
+    \[
+    \frac{\sin x - x + \frac{x^3}{6}}{x^5} = \frac{1}{120} + o(1) \xrightarrow[x \to 0]{} \boxed{\frac{1}{120}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Étude d'une fonction.} Soit $g(x) = \dfrac{1 - \cos x}{x^2}$ pour $x \neq 0$.
+    \begin{enumerate}
+        \item À l'aide d'un développement limité, montrer que $g$ admet un prolongement par continuité en 0 et déterminer sa valeur. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On a $\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)$, donc :
+        \[
+        1 - \cos x = \frac{x^2}{2} - \frac{x^4}{24} + o(x^4)
+        \]
+        Ainsi :
+        \[
+        g(x) = \frac{1 - \cos x}{x^2} = \frac{1}{2} - \frac{x^2}{24} + o(x^2) \xrightarrow[x \to 0]{} \frac{1}{2}
+        \]
+        On peut prolonger $g$ par continuité en posant $g(0) = \frac{1}{2}$.
+        \end{solution}
+        }{}
+        
+        \item En déduire la position de la courbe de $g$ par rapport à sa tangente horizontale en 0. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Le DL de $g$ en 0 est :
+        \[
+        g(x) = \frac{1}{2} - \frac{x^2}{24} + o(x^2)
+        \]
+        La tangente en 0 est $y = \frac{1}{2}$ (horizontale car le terme en $x$ est nul).
+        
+        On a $g(x) - \frac{1}{2} = -\frac{x^2}{24} + o(x^2) \sim -\frac{x^2}{24} < 0$ pour $x \neq 0$ petit.
+        
+        Donc la courbe est \textbf{en dessous} de sa tangente au voisinage de 0.
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 2 : Équations aux dérivées partielles (5 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Équation exacte.} On considère l'équation différentielle :
+    \[
+    (2xy + 3) \, dx + (x^2 + 4y) \, dy = 0
+    \]
+    \begin{enumerate}
+        \item Vérifier que cette équation est exacte, c'est-à-dire que l'expression $f(x,y)\,dx + g(x,y)\,dy$ est une différentielle totale. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On pose $f(x,y) = 2xy + 3$ et $g(x,y) = x^2 + 4y$.
+        \[
+        \frac{\partial f}{\partial y} = 2x \qquad \text{et} \qquad \frac{\partial g}{\partial x} = 2x
+        \]
+        Comme $\frac{\partial f}{\partial y} = \frac{\partial g}{\partial x}$, l'équation est exacte.
+        \end{solution}
+        }{}
+        
+        \item Trouver une fonction $F(x,y)$ telle que $dF = f\,dx + g\,dy$. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On cherche $F$ telle que $\frac{\partial F}{\partial x} = 2xy + 3$.
+        
+        En intégrant par rapport à $x$ : $F(x,y) = x^2 y + 3x + H(y)$
+        
+        On vérifie avec $\frac{\partial F}{\partial y} = x^2 + H'(y) = x^2 + 4y$.
+        
+        Donc $H'(y) = 4y$, soit $H(y) = 2y^2 + C$.
+        
+        \textbf{Conclusion :} $F(x,y) = x^2 y + 3x + 2y^2$
+        \end{solution}
+        }{}
+        
+        \item En déduire la solution générale de l'équation différentielle. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les solutions sont données par $F(x,y) = K$ où $K$ est une constante :
+        \[
+        \boxed{x^2 y + 3x + 2y^2 = K}
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{EDP linéaire d'ordre 1.} Résoudre l'équation aux dérivées partielles :
+    \[
+    \frac{\partial f}{\partial x} + 2\frac{\partial f}{\partial y} = 0
+    \]
+    en utilisant un changement de variables linéaire. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $\begin{cases} X = ax + by \\ Y = cx + dy \end{cases}$ et $F(X,Y) = f(x,y)$.
+    
+    L'équation devient $(a + 2b)\frac{\partial F}{\partial X} + (c + 2d)\frac{\partial F}{\partial Y} = 0$.
+    
+    On choisit $a = 2$, $b = -1$ (donc $a + 2b = 0$) et $c = 1$, $d = 0$ (donc $c + 2d = 1$).
+    
+    L'équation devient $\frac{\partial F}{\partial Y} = 0$, dont les solutions sont $F(X,Y) = K(X)$.
+    
+    En revenant aux variables initiales avec $X = 2x - y$ :
+    \[
+    \boxed{f(x,y) = K(2x - y)}
+    \]
+    où $K$ est une fonction de classe $\mathcal{C}^1$ quelconque.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Méthode de séparation de variables.} On considère l'équation :
+    \[
+    \frac{\partial f}{\partial x} - 3\frac{\partial f}{\partial y} = 2f
+    \]
+    En cherchant des solutions sous la forme $f(x,y) = X(x)Y(y)$, déterminer les solutions de cette équation. \textit{(1.25 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    En posant $f(x,y) = X(x)Y(y)$, on obtient :
+    \[
+    X'Y - 3XY' = 2XY
+    \]
+    En divisant par $XY$ :
+    \[
+    \frac{X'}{X} - 3\frac{Y'}{Y} = 2 \quad \Rightarrow \quad \frac{X' - 2X}{X} = 3\frac{Y'}{Y}
+    \]
+    Le membre de gauche ne dépend que de $x$, le membre de droite que de $y$. Ils sont donc tous deux égaux à une constante $k$.
+    
+    \textbf{Pour $X$ :} $\frac{X' - 2X}{X} = k \Rightarrow X' = (k+2)X \Rightarrow X(x) = C_1 e^{(k+2)x}$
+    
+    \textbf{Pour $Y$ :} $3\frac{Y'}{Y} = k \Rightarrow Y' = \frac{k}{3}Y \Rightarrow Y(y) = C_2 e^{ky/3}$
+    
+    \textbf{Solutions :} $\boxed{f(x,y) = C \, e^{(k+2)x} e^{ky/3}}$ pour $k \in \mathbb{R}$, $C \in \mathbb{R}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/5}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 3 : Modélisation -- Refroidissement d'une pièce métallique (5 points)}
+%==============================================================================
+
+Une pièce métallique de masse $m = 2$ kg et de capacité thermique massique $c = 500$ J/(kg$\cdot$K) est initialement à la température $T_0 = 400$ K. Elle est plongée dans un bain thermostaté à la température constante $T_{\infty} = 300$ K.
+
+Le transfert thermique entre la pièce et le bain suit la loi de Newton :
+\[
+\frac{dQ}{dt} = -hS(T - T_{\infty})
+\]
+où $Q$ est l'énergie thermique de la pièce, $h = 25$ W/(m$^2\cdot$K) est le coefficient d'échange et $S = 0{,}04$ m$^2$ est la surface d'échange.
+
+On rappelle que $Q = mcT$ (à constante près).
+
+\begin{enumerate}
+    \item Montrer que la température $T(t)$ de la pièce vérifie l'équation différentielle : \textit{(1 pt)}
+    \[
+    \frac{dT}{dt} = -\frac{hS}{mc}(T - T_{\infty})
+    \]
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $Q = mcT + \text{cste}$, donc $\frac{dQ}{dt} = mc\frac{dT}{dt}$.
+    
+    En substituant dans la loi de Newton :
+    \[
+    mc\frac{dT}{dt} = -hS(T - T_{\infty})
+    \]
+    
+    Soit :
+    \[
+    \frac{dT}{dt} = -\frac{hS}{mc}(T - T_{\infty})
+    \]
+    \end{solution}
+    }{}
+    
+    \item On pose $\tau = \frac{mc}{hS}$ (constante de temps). Calculer la valeur numérique de $\tau$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \tau = \frac{mc}{hS} = \frac{2 \times 500}{25 \times 0{,}04} = \frac{1000}{1} = 1000 \text{ s}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre l'équation différentielle avec la condition initiale $T(0) = T_0$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $\theta(t) = T(t) - T_{\infty}$. L'équation devient :
+    \[
+    \frac{d\theta}{dt} = -\frac{1}{\tau}\theta
+    \]
+    
+    C'est une équation linéaire du premier ordre. La solution est :
+    \[
+    \theta(t) = \theta_0 e^{-t/\tau}
+    \]
+    
+    Avec $\theta_0 = T_0 - T_{\infty} = 400 - 300 = 100$ K.
+    
+    Donc :
+    \[
+    \boxed{T(t) = T_{\infty} + (T_0 - T_{\infty})e^{-t/\tau} = 300 + 100\,e^{-t/1000}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Au bout de combien de temps la pièce atteint-elle la température de 320 K ? \textit{(1 pt)}
+    
+    \textit{On donne $\ln(5) \approx 1{,}6$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $T(t) = 320$ :
+    \[
+    300 + 100\,e^{-t/1000} = 320
+    \]
+    \[
+    100\,e^{-t/1000} = 20 \quad \Rightarrow \quad e^{-t/1000} = 0{,}2 = \frac{1}{5}
+    \]
+    \[
+    -\frac{t}{1000} = \ln\left(\frac{1}{5}\right) = -\ln(5)
+    \]
+    \[
+    t = 1000 \ln(5) \approx 1000 \times 1{,}6 = \boxed{1600 \text{ s} \approx 27 \text{ min}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Vers quelle valeur tend $T(t)$ quand $t \to +\infty$ ? Interpréter physiquement. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \lim_{t \to +\infty} T(t) = \lim_{t \to +\infty} \left(300 + 100\,e^{-t/1000}\right) = 300 \text{ K}
+    \]
+    
+    \textbf{Interprétation :} La pièce métallique tend vers l'équilibre thermique avec le bain thermostaté. Elle atteint asymptotiquement la température $T_{\infty} = 300$ K du bain.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 4 : Calcul intégral et géométrie (3 points)}
+%==============================================================================
+
+On considère le domaine $\mathcal{D}$ délimité par la parabole $y = x^2$ et la droite $y = 2x$ pour $x \geq 0$.
+
+\begin{enumerate}
+    \item Déterminer les points d'intersection de la parabole et de la droite. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $x^2 = 2x \Rightarrow x^2 - 2x = 0 \Rightarrow x(x-2) = 0$.
+    
+    Donc $x = 0$ ou $x = 2$.
+    
+    Les points d'intersection sont $(0, 0)$ et $(2, 4)$.
+    \end{solution}
+    }{}
+    
+    \item Calculer l'aire du domaine $\mathcal{D}$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Pour $x \in [0, 2]$, on a $2x \geq x^2$ (la droite est au-dessus de la parabole).
+    
+    L'aire est :
+    \[
+    \mathcal{A} = \int_0^2 (2x - x^2) \, dx = \left[ x^2 - \frac{x^3}{3} \right]_0^2 = 4 - \frac{8}{3} = \frac{12 - 8}{3} = \boxed{\frac{4}{3}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item En faisant tourner ce domaine autour de l'axe des abscisses, on obtient un solide de révolution. Calculer son volume. \textit{(1 pt)}
+    
+    \textit{Rappel : $V = \pi \int_a^b \left( f(x)^2 - g(x)^2 \right) dx$ où $f(x) \geq g(x)$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Le volume est :
+    \[
+    V = \pi \int_0^2 \left( (2x)^2 - (x^2)^2 \right) dx = \pi \int_0^2 \left( 4x^2 - x^4 \right) dx
+    \]
+    \[
+    V = \pi \left[ \frac{4x^3}{3} - \frac{x^5}{5} \right]_0^2 = \pi \left( \frac{32}{3} - \frac{32}{5} \right) = \pi \cdot 32 \left( \frac{1}{3} - \frac{1}{5} \right)
+    \]
+    \[
+    V = 32\pi \cdot \frac{5-3}{15} = \boxed{\frac{64\pi}{15}}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/5}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 5 : QCM -- Type concours (2 points)}
+%==============================================================================
+
+\textit{Pour chaque question, une seule réponse est correcte. Aucune justification n'est demandée. Bonne réponse : +0.5 pt, mauvaise réponse : $-0.25$ pt, pas de réponse : 0 pt.}
+
+\vspace{1em}
+
+\begin{enumerate}
+    \item La limite $\displaystyle \lim_{x \to 0} \frac{\tan x - x}{x^3}$ vaut :
+    
+    \begin{tabular}{llll}
+    $\square$ (a) $0$ & $\square$ (b) $\dfrac{1}{3}$ & $\square$ (c) $1$ & $\square$ (d) $+\infty$
+    \end{tabular}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise le DL de $\tan x = x + \frac{x^3}{3} + o(x^3)$.
+    
+    Donc $\tan x - x = \frac{x^3}{3} + o(x^3)$ et $\frac{\tan x - x}{x^3} \to \frac{1}{3}$.
+    
+    \textbf{Réponse : (b)}
+    \end{solution}
+    }{}
+    
+    \vspace{1em}
+    
+    \item L'intégrale $\displaystyle \int_1^{+\infty} \frac{dx}{x^2 + 1}$ :
+    
+    \begin{tabular}{llll}
+    $\square$ (a) diverge & $\square$ (b) vaut $\dfrac{\pi}{4}$ & $\square$ (c) vaut $\dfrac{\pi}{2}$ & $\square$ (d) vaut $\pi$
+    \end{tabular}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \int_1^{+\infty} \frac{dx}{x^2 + 1} = \left[ \arctan(x) \right]_1^{+\infty} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}
+    \]
+    
+    \textbf{Réponse : (b)}
+    \end{solution}
+    }{}
+    
+    \vspace{1em}
+    
+    \item L'équation différentielle $y' + y = e^x$ a pour solution générale :
+    
+    \begin{tabular}{ll}
+    $\square$ (a) $y = Ce^{-x} + \dfrac{e^x}{2}$ & $\square$ (b) $y = Ce^x + \dfrac{e^{-x}}{2}$ \\[1em]
+    $\square$ (c) $y = Ce^{-x} + e^x$ & $\square$ (d) $y = Ce^x + xe^x$
+    \end{tabular}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Solution homogène : $y_h = Ce^{-x}$.
+    
+    Solution particulière : on cherche $y_p = Ae^x$. Alors $y_p' = Ae^x$.
+    
+    $Ae^x + Ae^x = e^x \Rightarrow 2A = 1 \Rightarrow A = \frac{1}{2}$.
+    
+    Donc $y = Ce^{-x} + \frac{e^x}{2}$.
+    
+    \textbf{Réponse : (a)}
+    \end{solution}
+    }{}
+    
+    \vspace{1em}
+    
+    \item Soit $f : \mathbb{R}^2 \to \mathbb{R}$ définie par $f(x,y) = x^3 y - xy^3$. On a $\dfrac{\partial^2 f}{\partial x \partial y}$ :
+    
+    \begin{tabular}{llll}
+    $\square$ (a) $3x^2 - 3y^2$ & $\square$ (b) $6xy$ & $\square$ (c) $3x^2 - y^3$ & $\square$ (d) $x^3 - 3xy^2$
+    \end{tabular}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $\frac{\partial f}{\partial x} = 3x^2 y - y^3$
+    
+    $\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial y}(3x^2 y - y^3) = 3x^2 - 3y^2$
+    
+    \textbf{Réponse : (a)}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/5}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Formulaire}
+%==============================================================================
+
+\subsection*{Développements limités usuels (au voisinage de 0)}
+
+\renewcommand{\arraystretch}{2}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Fonction} & \textbf{DL à l'ordre $n$} \\
+\hline\hline
+$e^x$ & $\displaystyle 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} + o(x^n)$ \\
+\hline
+$\ln(1+x)$ & $\displaystyle x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots + \frac{(-1)^{n+1}x^n}{n} + o(x^n)$ \\
+\hline
+$\sin x$ & $\displaystyle x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots + o(x^{2n})$ \\
+\hline
+$\cos x$ & $\displaystyle 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots + o(x^{2n+1})$ \\
+\hline
+$\tan x$ & $\displaystyle x + \frac{x^3}{3} + \frac{2x^5}{15} + o(x^5)$ \\
+\hline
+$(1+x)^\alpha$ & $\displaystyle 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots + o(x^n)$ \\
+\hline
+$\dfrac{1}{1-x}$ & $\displaystyle 1 + x + x^2 + \cdots + x^n + o(x^n)$ \\
+\hline
+$\dfrac{1}{1+x}$ & $\displaystyle 1 - x + x^2 - \cdots + (-1)^n x^n + o(x^n)$ \\
+\hline
+$\sqrt{1+x}$ & $\displaystyle 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + o(x^3)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\subsection*{Équations différentielles partielles}
+
+\textbf{Équation exacte :} $f(x,y)\,dx + g(x,y)\,dy = 0$ est exacte si $\dfrac{\partial f}{\partial y} = \dfrac{\partial g}{\partial x}$.
+
+\vspace{1em}
+
+\textbf{EDP linéaire d'ordre 1 :} $\alpha \dfrac{\partial f}{\partial x} + \beta \dfrac{\partial f}{\partial y} = h(x,y,f)$
+
+\vspace{0.5em}
+
+Changement de variables : on pose $\begin{cases} X = ax + by \\ Y = cx + dy \end{cases}$ avec $\begin{cases} a\alpha + b\beta = 1 \\ c\alpha + d\beta = 0 \end{cases}$
+
+\vspace{0.5em}
+
+L'équation devient $\dfrac{\partial F}{\partial X} = H(X, Y, F)$.
+
+\vspace{1em}
+
+\textbf{Séparation de variables :} Pour $\alpha \dfrac{\partial f}{\partial x} + \beta \dfrac{\partial f}{\partial y} = \gamma f$
+
+On pose $f(x,y) = X(x)Y(y)$ et on aboutit à des équations différentielles ordinaires.
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 5/5}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\subsection*{Intégrales et primitives usuelles}
+
+\renewcommand{\arraystretch}{2}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Fonction} & \textbf{Primitive} \\
+\hline\hline
+$x^n$ ($n \neq -1$) & $\dfrac{x^{n+1}}{n+1}$ \\
+\hline
+$\dfrac{1}{x}$ & $\ln|x|$ \\
+\hline
+$e^{ax}$ & $\dfrac{e^{ax}}{a}$ \\
+\hline
+$\sin(ax)$ & $-\dfrac{\cos(ax)}{a}$ \\
+\hline
+$\cos(ax)$ & $\dfrac{\sin(ax)}{a}$ \\
+\hline
+$\dfrac{1}{1+x^2}$ & $\arctan(x)$ \\
+\hline
+$\dfrac{1}{\sqrt{1-x^2}}$ & $\arcsin(x)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\subsection*{Volumes de révolution}
+
+\textbf{Rotation autour de l'axe $Ox$ :}
+\[
+V = \pi \int_a^b \left( f(x)^2 - g(x)^2 \right) dx \quad \text{où } f(x) \geq g(x)
+\]
+
+\textbf{Rotation autour de l'axe $Oy$ :}
+\[
+V = 2\pi \int_a^b x \cdot |f(x) - g(x)| \, dx
+\]
+
+\vspace{2em}
+
+\subsection*{Équations différentielles ordinaires}
+
+\textbf{Équation linéaire du 1er ordre :} $y' + a(x)y = b(x)$
+
+Solution : $y = e^{-A(x)} \left( C + \int b(x) e^{A(x)} dx \right)$ où $A(x) = \int a(x) dx$
+
+\vspace{1em}
+
+\textbf{Équation à variables séparables :} $\dfrac{dy}{dx} = f(x)g(y)$
+
+Séparation : $\dfrac{dy}{g(y)} = f(x) dx$
 
 \end{document}

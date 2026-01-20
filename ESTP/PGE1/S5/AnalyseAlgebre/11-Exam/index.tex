@@ -32,9 +32,15 @@
 
 
 \newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
-    {\end{mdframed}\par\vspace{0.5em}}
-
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
 \begin{document}
 \sffamily
 
@@ -61,6 +67,8 @@
         \textbf{Nom de l'enseignant} & Maxime Berger \\
         \hline 
         \textbf{Matière} & Mathématiques - Analyse et Algèbre \\
+        \hline 
+        \textbf{Promotion} & PGE1 - S5 \\
         \hline 
         \textbf{Durée de l'examen} & 2h00 \\
         \hline 

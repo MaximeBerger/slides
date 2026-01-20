@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétences - Partiel P3</title>
+    <!-- MathJax pour les formules mathématiques -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Chargement des polices ESTP */
+        @import url("https://use.typekit.net/fxl2egi.css");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --font-montserrat: 'Montserrat', Arial, sans-serif;
+            --font-roboto: 'Roboto', Arial, sans-serif;
+            --primary-color: #479280;
+            --secondary-color: #ccc6c8;
+            --accent-color: #574255;
+            --text-color: #000000;
+            --light-bg: #f8f8f8;
+            --white: #ffffff;
+            --series-color: #2e7d32;
+            --algebra-color: #1565c0;
+            --curvilinear-color: #c62828;
+        }
+
+        body {
+            font-family: var(--font-roboto);
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        .header h1 {
+            font-family: var(--font-montserrat);
+            font-size: 2.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: var(--primary-color);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .sections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .section-header {
+            padding: 18px 25px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header.series {
+            background: linear-gradient(135deg, var(--series-color) 0%, #1b5e20 100%);
+        }
+
+        .section-header.algebra {
+            background: linear-gradient(135deg, var(--algebra-color) 0%, #0d47a1 100%);
+        }
+
+        .section-header.curvilinear {
+            background: linear-gradient(135deg, var(--curvilinear-color) 0%, #b71c1c 100%);
+        }
+
+        .section-icon {
+            font-size: 1.8rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-montserrat);
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .section-content {
+            padding: 20px 25px;
+        }
+
+        .competence-list {
+            list-style: none;
+        }
+
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.2s ease;
+        }
+
+        .competence-item:hover {
+            background: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .competence-item.series {
+            border-left-color: var(--series-color);
+        }
+
+        .competence-item.algebra {
+            border-left-color: var(--algebra-color);
+        }
+
+        .competence-item.curvilinear {
+            border-left-color: var(--curvilinear-color);
+        }
+
+        .check-icon {
+            margin-right: 12px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .competence-item.series .check-icon {
+            color: var(--series-color);
+        }
+
+        .competence-item.algebra .check-icon {
+            color: var(--algebra-color);
+        }
+
+        .competence-item.curvilinear .check-icon {
+            color: var(--curvilinear-color);
+        }
+
+        .competence-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .competence-item {
+                padding: 10px 12px;
+            }
+
+            .competence-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Animation d'apparition */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Compétences à maîtriser - Partiel P3</h1>
+            <p>Algèbre linéaire, Séries & Calcul différentiel</p>
+        </div>
+        
+        <div class="sections-container">
+            <!-- Section Séries -->
+            <div class="section">
+                <div class="section-header series">
+                    <span class="section-icon">∑</span>
+                    <h2>Séries</h2>
+                </div>
+                <div class="section-content">
+                    <ul class="competence-list">
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Critère et calcul pour la <strong>convergence des séries géométriques</strong></span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Séries alternées</strong> : critère spécial des séries alternées</span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Critère de D'Alembert</strong> pour la convergence</span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Calcul d'une <strong>série télescopique</strong></span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Savoir trouver un <strong>équivalent simple du terme général</strong> pour montrer la convergence</span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Séries de Riemann</strong> : convergence de \(\displaystyle\sum \frac{1}{n^\alpha}\)</span>
+                        </li>
+                        <li class="competence-item series">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Comparaison séries/intégrales</strong> (avec des intégrales dont on sait calculer la primitive)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section Algèbre linéaire -->
+            <div class="section">
+                <div class="section-header algebra">
+                    <span class="section-icon">⊕</span>
+                    <h2>Algèbre linéaire</h2>
+                </div>
+                <div class="section-content">
+                    <ul class="competence-list">
+                        <li class="competence-item algebra">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Montrer qu'un ensemble est un <strong>espace vectoriel</strong></span>
+                        </li>
+                        <li class="competence-item algebra">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Montrer qu'une <strong>application est linéaire</strong></span>
+                        </li>
+                        <li class="competence-item algebra">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Écrire la <strong>matrice d'une application linéaire</strong> dans une base</span>
+                        </li>
+                        <li class="competence-item algebra">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Calculer le <strong>noyau</strong> et l'<strong>image</strong> d'une application linéaire</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section Abscisses curvilignes -->
+            <div class="section">
+                <div class="section-header curvilinear">
+                    <span class="section-icon">∮</span>
+                    <h2>Abscisses curvilignes & Calcul différentiel</h2>
+                </div>
+                <div class="section-content">
+                    <ul class="competence-list">
+                        <li class="competence-item curvilinear">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Calcul de <strong>différentielle</strong></span>
+                        </li>
+                        <li class="competence-item curvilinear">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Gradient</strong>, calcul de <strong>jacobienne</strong>, <strong>divergence</strong></span>
+                        </li>
+                        <li class="competence-item curvilinear">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text">Calcul de <strong>potentiels scalaires</strong></span>
+                        </li>
+                        <li class="competence-item curvilinear">
+                            <span class="check-icon">✓</span>
+                            <span class="competence-text"><strong>Intégrales curvilignes</strong> : calculer \(\displaystyle\int_{C^{+}} xy\, dx + (x+y)\, dy\)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>ESTP - BMC2 - S3 - Algèbre Linéaire & Analyse</p>
+            <p><a href="../index.html">← Retour au parcours</a></p>
+        </div>
+    </div>
+</body>
+</html>

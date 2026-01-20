@@ -239,6 +239,36 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec7",
+      "numero": 6,
+      "titre": "Partiel d'entraînement",
+      "description": "",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 0,
+          "titre": "Programme",
+          "description": "",
+          "lien": "ExamP3/examBlanc/competences.html",
+          "cible": "_blank"
+        },
+        {
+          "numero": 1,
+          "titre": "Partiel d'entraînement",
+          "description": "",
+          "lien": "ExamP3/examBlanc/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Partiel d'entraînement - Corrigés",
+          "description": "",
+          "lien": "ExamP3/examBlanc/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
     
   ]

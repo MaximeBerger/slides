@@ -1,0 +1,531 @@
+\documentclass[12pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{eurosym}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\usepackage{xcolor}
+\definecolor{Theme}{HTML}{0E7490} % teal-700
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+\definecolor{Accent}{HTML}{F59E0B} % amber-500
+\definecolor{Gray}{HTML}{374151}
+\usepackage[colorlinks=true,linkcolor=Theme,urlcolor=Theme,citecolor=Theme]{hyperref}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+\title{Mathématiques : Examen}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logoestp.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{21/05/2025}  &  & \textbf{Page 1/3} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2024-2025 -- Semestre 6}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime BERGER, Karine Serier \\
+        \hline 
+        \textbf{Promotion} & BMC2 - S3 \\
+        \hline 
+        \textbf{Matière} & Mathématiques  \\
+        \hline 
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+
+
+%==============================================================================
+\section*{Exercice 1 : Convergence de séries (4 points)}
+%==============================================================================
+
+Étudier la nature (convergence ou divergence) des séries suivantes. Justifier soigneusement chaque réponse.
+\ifthenelse{\boolean{showSolutions}}{}{
+\begin{multicols}{2}
+}
+
+\begin{enumerate}
+    \item $\displaystyle \sum_{n=0}^{+\infty} \left(\frac{2}{3}\right)^n$ \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    C'est une série géométrique de raison $r = \frac{2}{3}$.
+    
+    Comme $|r| = \frac{2}{3} < 1$, la série \textbf{converge}.
+    
+    Sa somme vaut : $S = \frac{1}{1 - \frac{2}{3}} = \frac{1}{\frac{1}{3}} = 3$
+    \end{solution}
+    }{}
+    
+    \item $\displaystyle \sum_{n=1}^{+\infty} \frac{(-1)^n}{\sqrt{n}}$ \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    C'est une série alternée de la forme $\sum (-1)^n a_n$ avec $a_n = \frac{1}{\sqrt{n}}$.
+    
+    Vérifions le critère des séries alternées (Leibniz) :
+    \begin{itemize}
+        \item $(a_n)$ est décroissante : $\frac{1}{\sqrt{n+1}} < \frac{1}{\sqrt{n}}$ \checkmark
+        \item $\lim_{n \to +\infty} a_n = 0$ \checkmark
+    \end{itemize}
+    
+    Par le critère de Leibniz, la série \textbf{converge}.
+    
+    \textit{Remarque : elle ne converge pas absolument car $\sum \frac{1}{\sqrt{n}}$ diverge (Riemann avec $\alpha = 1/2 < 1$).}
+    \end{solution}
+    }{}
+    
+    \item $\displaystyle \sum_{n=1}^{+\infty} \frac{n!}{3^n}$ \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Utilisons le critère de D'Alembert. Posons $u_n = \frac{n!}{3^n}$.
+    \[
+    \frac{u_{n+1}}{u_n} = \frac{(n+1)!}{3^{n+1}} \cdot \frac{3^n}{n!} = \frac{(n+1) \cdot n!}{3 \cdot 3^n} \cdot \frac{3^n}{n!} = \frac{n+1}{3}
+    \]
+    
+    Donc $\lim_{n \to +\infty} \frac{u_{n+1}}{u_n} = +\infty > 1$.
+    
+    Par le critère de D'Alembert, la série \textbf{diverge}.
+    \end{solution}
+    }{}
+    
+    \item $\displaystyle \sum_{n=2}^{+\infty} \frac{1}{n^2 - 1}$ \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Cherchons un équivalent du terme général :
+    \[
+    \frac{1}{n^2 - 1} = \frac{1}{n^2(1 - \frac{1}{n^2})} \sim \frac{1}{n^2} \quad \text{quand } n \to +\infty
+    \]
+    
+    Or $\sum \frac{1}{n^2}$ est une série de Riemann avec $\alpha = 2 > 1$, donc convergente.
+    
+    Par équivalence de séries à termes positifs, la série $\sum \frac{1}{n^2-1}$ \textbf{converge}.
+    \end{solution}
+    }{}
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{}{
+\end{multicols}
+}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 2 : Série télescopique et comparaison (4 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item Décomposer $\frac{1}{n(n+1)}$ en éléments simples. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \frac{1}{n(n+1)} = \frac{A}{n} + \frac{B}{n+1}
+    \]
+    En multipliant par $n(n+1)$ : $1 = A(n+1) + Bn$
+    \begin{itemize}
+        \item $n = 0$ : $A = 1$
+        \item $n = -1$ : $B = -1$
+    \end{itemize}
+    Donc $\frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}$
+    \end{solution}
+    }{}
+    
+    \item En déduire la valeur de la somme partielle $S_N = \sum_{n=1}^{N} \frac{1}{n(n+1)}$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    S_N = \sum_{n=1}^{N} \left(\frac{1}{n} - \frac{1}{n+1}\right)
+    \]
+    C'est une série télescopique. En développant :
+    \[
+    S_N = \left(1 - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \cdots + \left(\frac{1}{N} - \frac{1}{N+1}\right) = 1 - \frac{1}{N+1}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Calculer $\sum_{n=1}^{+\infty} \frac{1}{n(n+1)}$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \sum_{n=1}^{+\infty} \frac{1}{n(n+1)} = \lim_{N \to +\infty} S_N = \lim_{N \to +\infty} \left(1 - \frac{1}{N+1}\right) = 1
+    \]
+    \end{solution}
+    }{}
+    
+    \item À l'aide d'une comparaison série/intégrale, montrer que $\sum_{n=1}^{+\infty} \frac{1}{n^3}$ converge. \textit{(2 pts)}
+    
+    \textit{Indication : comparer avec $\int_1^{+\infty} \frac{1}{x^3} dx$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    La fonction $f(x) = \frac{1}{x^3}$ est positive, continue et décroissante sur $[1, +\infty[$.
+    
+    Par comparaison série/intégrale, on a pour tout $N \geq 1$ :
+    \[
+    \int_1^{N+1} \frac{1}{x^3} dx \leq \sum_{n=1}^{N} \frac{1}{n^3} \leq 1 + \int_1^{N} \frac{1}{x^3} dx
+    \]
+    
+    Calculons l'intégrale :
+    \[
+    \int_1^{+\infty} \frac{1}{x^3} dx = \left[-\frac{1}{2x^2}\right]_1^{+\infty} = 0 - \left(-\frac{1}{2}\right) = \frac{1}{2}
+    \]
+    
+    L'intégrale converge, donc par comparaison, la série $\sum \frac{1}{n^3}$ \textbf{converge}.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 3 : Algèbre linéaire (4 points)}
+%==============================================================================
+
+Soit $E = \{(x, y, z) \in \mathbb{R}^3 \mid x + y - z = 0\}$.
+
+\begin{enumerate}
+    \item Montrer que $E$ est un sous-espace vectoriel de $\mathbb{R}^3$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Vérifions les trois axiomes d'un sous-espace vectoriel :
+    
+    \textbf{1) Non vide :} $(0, 0, 0) \in E$ car $0 + 0 - 0 = 0$. \checkmark
+    
+    \textbf{2) Stabilité par addition :} Soient $u = (x_1, y_1, z_1)$ et $v = (x_2, y_2, z_2)$ dans $E$.
+    \begin{itemize}
+        \item $x_1 + y_1 - z_1 = 0$ et $x_2 + y_2 - z_2 = 0$
+        \item $u + v = (x_1 + x_2, y_1 + y_2, z_1 + z_2)$
+        \item $(x_1 + x_2) + (y_1 + y_2) - (z_1 + z_2) = (x_1 + y_1 - z_1) + (x_2 + y_2 - z_2) = 0$
+    \end{itemize}
+    Donc $u + v \in E$. \checkmark
+    
+    \textbf{3) Stabilité par multiplication :} Soit $\lambda \in \mathbb{R}$ et $u = (x, y, z) \in E$.
+    \begin{itemize}
+        \item $\lambda u = (\lambda x, \lambda y, \lambda z)$
+        \item $\lambda x + \lambda y - \lambda z = \lambda(x + y - z) = 0$
+    \end{itemize}
+    Donc $\lambda u \in E$. \checkmark
+    
+    $E$ est bien un sous-espace vectoriel de $\mathbb{R}^3$.
+    \end{solution}
+    }{}
+    
+    \item Ecrire $E$ avec le mot clé "Vect", donner une base et la dimension. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    De $x + y - z = 0$, on tire $z = x + y$. Donc :
+    \[
+    (x, y, z) = (x, y, x+y) = x(1, 0, 1) + y(0, 1, 1)
+    \]
+    
+    Les vecteurs $e_1 = (1, 0, 1)$ et $e_2 = (0, 1, 1)$ sont clairement linéairement indépendants.
+    
+    \textbf{Base de $E$ :} $\mathcal{B}_E = \{(1, 0, 1), (0, 1, 1)\}$
+    
+    \textbf{Dimension :} $\dim(E) = 2$
+    \end{solution}
+    }{}
+    
+    \item Soit $f : \mathbb{R}^2 \to \mathbb{R}^3$ définie par $f(x, y) = (x + y, x - y, 2x)$.
+    
+    Montrer que $f$ est une application linéaire. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Soient $(x_1, y_1), (x_2, y_2) \in \mathbb{R}^2$ et $\lambda \in \mathbb{R}$.
+    
+    \textbf{Additivité :}
+    \begin{align*}
+    f((x_1, y_1) + (x_2, y_2)) &= f(x_1 + x_2, y_1 + y_2) \\
+    &= ((x_1+x_2) + (y_1+y_2), (x_1+x_2) - (y_1+y_2), 2(x_1+x_2)) \\
+    &= (x_1+y_1, x_1-y_1, 2x_1) + (x_2+y_2, x_2-y_2, 2x_2) \\
+    &= f(x_1, y_1) + f(x_2, y_2) \quad \checkmark
+    \end{align*}
+    
+    \textbf{Homogénéité :}
+    \begin{align*}
+    f(\lambda(x, y)) &= f(\lambda x, \lambda y) \\
+    &= (\lambda x + \lambda y, \lambda x - \lambda y, 2\lambda x) \\
+    &= \lambda(x + y, x - y, 2x) = \lambda f(x, y) \quad \checkmark
+    \end{align*}
+    
+    $f$ est bien une application linéaire.
+    \end{solution}
+    }{}
+    
+    \item Écrire la matrice $A$ de $f$ dans les bases canoniques de $\mathbb{R}^2$ et $\mathbb{R}^3$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On calcule les images des vecteurs de la base canonique de $\mathbb{R}^2$ :
+    \begin{itemize}
+        \item $f(1, 0) = (1, 1, 2)$
+        \item $f(0, 1) = (1, -1, 0)$
+    \end{itemize}
+    
+    La matrice de $f$ est :
+    \[
+    A = \begin{pmatrix} 1 & 1 \\ 1 & -1 \\ 2 & 0 \end{pmatrix}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 4 : Noyau et image (4 points)}
+%==============================================================================
+
+Soit $g : \mathbb{R}^3 \to \mathbb{R}^2$ l'application linéaire définie par :
+\[
+g(x, y, z) = (x + 2y - z, 2x + 4y - 2z)
+\]
+
+\begin{enumerate}
+    \item Écrire la matrice $B$ de $g$ dans les bases canoniques. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    B = \begin{pmatrix} 1 & 2 & -1 \\ 2 & 4 & -2 \end{pmatrix}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Déterminer le noyau $\ker(g)$. Donner une base et la dimension. \textit{(2 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $(x, y, z) \in \ker(g) \Leftrightarrow g(x, y, z) = (0, 0)$
+    
+    On résout le système :
+    \[
+    \begin{cases}
+    x + 2y - z = 0 \\
+    2x + 4y - 2z = 0
+    \end{cases}
+    \]
+    
+    La deuxième équation est le double de la première, donc on a une seule contrainte : $x = z - 2y$.
+    
+    Les solutions sont :
+    \[
+    (x, y, z) = (z - 2y, y, z) = y(-2, 1, 0) + z(1, 0, 1)
+    \]
+    
+    \textbf{Base de $\ker(g)$ :} $\{(-2, 1, 0), (1, 0, 1)\}$
+    
+    \textbf{Dimension :} $\dim(\ker(g)) = 2$
+    \end{solution}
+    }{}
+    
+    \item Déterminer l'image $\text{Im}(g)$. Donner une base et la dimension. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'image de $g$ est engendrée par les colonnes de $B$ :
+    \[
+    \text{Im}(g) = \text{Vect}\left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix}, \begin{pmatrix} 2 \\ 4 \end{pmatrix}, \begin{pmatrix} -1 \\ -2 \end{pmatrix}\right\}
+    \]
+    
+    On remarque que $(2, 4) = 2(1, 2)$ et $(-1, -2) = -(1, 2)$.
+    
+    Donc $\text{Im}(g) = \text{Vect}\{(1, 2)\}$.
+    
+    \textbf{Base de $\text{Im}(g)$ :} $\{(1, 2)\}$
+    
+    \textbf{Dimension :} $\dim(\text{Im}(g)) = 1$
+    
+    \textit{Vérification par le théorème du rang :} $\dim(\ker(g)) + \dim(\text{Im}(g)) = 2 + 1 = 3 = \dim(\mathbb{R}^3)$ \checkmark
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 5 : Calcul différentiel et intégrales curvilignes (4 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item Soit $f(x, y) = x^2 y + e^{xy}$. Calculer la différentielle $df$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \frac{\partial f}{\partial x} = 2xy + ye^{xy}, \qquad \frac{\partial f}{\partial y} = x^2 + xe^{xy}
+    \]
+    
+    Donc :
+    \[
+    df = (2xy + ye^{xy})dx + (x^2 + xe^{xy})dy
+    \]
+    \end{solution}
+    }{}
+    
+    \item Soit $g(x, y, z) = x^2 + y^2 z - z^3$. Calculer le gradient $\nabla g$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \nabla g = \begin{pmatrix} \frac{\partial g}{\partial x} \\ \frac{\partial g}{\partial y} \\ \frac{\partial g}{\partial z} \end{pmatrix} = \begin{pmatrix} 2x \\ 2yz \\ y^2 - 3z^2 \end{pmatrix}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Soit $\vec{F}(x, y, z) = (x^2, xyz, z^2)$. Calculer la matrice jacobienne de $\vec{F}$ et la divergence $\text{div}(\vec{F})$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    La matrice jacobienne est :
+    \[
+    J_{\vec{F}} = \begin{pmatrix}
+    \frac{\partial F_1}{\partial x} & \frac{\partial F_1}{\partial y} & \frac{\partial F_1}{\partial z} \\[0.3em]
+    \frac{\partial F_2}{\partial x} & \frac{\partial F_2}{\partial y} & \frac{\partial F_2}{\partial z} \\[0.3em]
+    \frac{\partial F_3}{\partial x} & \frac{\partial F_3}{\partial y} & \frac{\partial F_3}{\partial z}
+    \end{pmatrix} = \begin{pmatrix}
+    2x & 0 & 0 \\
+    yz & xz & xy \\
+    0 & 0 & 2z
+    \end{pmatrix}
+    \]
+    
+    La divergence est :
+    \[
+    \text{div}(\vec{F}) = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z} = 2x + xz + 2z
+    \]
+    \end{solution}
+    }{}
+    
+    \item Soit $\vec{G}(x, y) = (2xy + y^2, x^2 + 2xy)$. 
+    
+    Montrer que $\vec{G}$ dérive d'un potentiel scalaire et déterminer ce potentiel. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Vérifions la condition d'irrotationnalité : $\frac{\partial G_1}{\partial y} = \frac{\partial G_2}{\partial x}$
+    \[
+    \frac{\partial G_1}{\partial y} = 2x + 2y, \qquad \frac{\partial G_2}{\partial x} = 2x + 2y \quad \checkmark
+    \]
+    
+    Donc $\vec{G}$ dérive d'un potentiel $\varphi$ tel que $\nabla \varphi = \vec{G}$.
+    
+    On intègre :
+    \[
+    \frac{\partial \varphi}{\partial x} = 2xy + y^2 \implies \varphi(x, y) = x^2 y + xy^2 + h(y)
+    \]
+    
+    On vérifie avec la deuxième composante :
+    \[
+    \frac{\partial \varphi}{\partial y} = x^2 + 2xy + h'(y) = x^2 + 2xy \implies h'(y) = 0 \implies h(y) = C
+    \]
+    
+    \textbf{Potentiel :} $\varphi(x, y) = x^2 y + xy^2 + C$
+    \end{solution}
+    }{}
+    
+    \item Calculer l'intégrale curviligne $\displaystyle \int_{C^+} xy \, dx + (x + y) \, dy$
+    
+    où $C$ est le segment de droite allant de $(0, 0)$ à $(1, 2)$, parcouru dans ce sens. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Paramétrons le segment : $\gamma(t) = (t, 2t)$ pour $t \in [0, 1]$.
+    
+    On a : $x = t$, $y = 2t$, $dx = dt$, $dy = 2dt$.
+    
+    \begin{align*}
+    \int_{C^+} xy \, dx + (x + y) \, dy &= \int_0^1 (t)(2t) \, dt + (t + 2t)(2 \, dt) \\
+    &= \int_0^1 2t^2 \, dt + \int_0^1 6t \, dt \\
+    &= \left[\frac{2t^3}{3}\right]_0^1 + \left[3t^2\right]_0^1 \\
+    &= \frac{2}{3} + 3 = \frac{11}{3}
+    \end{align*}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+\end{document}
