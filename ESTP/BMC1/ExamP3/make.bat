@@ -3,3 +3,4 @@ xelatex -jobname=enonce index.tex
 
 del *.aux
 del *.log
+del *.out

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 20 Jan 2026 18:25:38 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 20 Jan 2026 18:25:37 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[TP - Modélisation de l'évolution de populations]]></title><description><![CDATA[Le but de ce projet est de modéliser l'évolution dans le temps d'une population (ou plusieurs) interagissant avec son environnement. Ces modèles permettent notamment de comprendre :
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Wed, 21 Jan 2026 08:33:59 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 21 Jan 2026 08:33:54 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[TP - Modélisation de l'évolution de populations]]></title><description><![CDATA[Le but de ce projet est de modéliser l'évolution dans le temps d'une population (ou plusieurs) interagissant avec son environnement. Ces modèles permettent notamment de comprendre :
 L'évolution d'une maladie dans une population (épidémiologie)
 L'interaction existant entre les proies et les prédateurs dans le monde animal
 La dynamique de croissance des bactéries en laboratoire
@@ -78,24 +78,5 @@ solution = odeint(equation, y0, t) # Tracé
 plt.plot(t, solution, label='Solution numérique')
 plt.plot(t, np.exp(-2*t), '--', label='Solution exacte')
 plt.legend()
-plt.show() Questions :
-Q10. Pour résoudre avec odeint, comment définir la fonction equation(y, t) ?
-Q11. Dans odeint(equation, y0, t), que représentent y0 et t ?
-Exercice 6. Résolvez avec sur et tracez la solution.
-Notons par l'évolution au cours du temps d'une population. On supposera continue la fonction et même dérivable par rapport au temps, ce qui est justifiable pour une population de grande taille.Les premiers modèles d'évolution de la population étaient simplement décrits par où est une constante positive indiquant le taux d'accroissement. Ce modèle correspond à supposer que la population possède une possibilité d'expansion illimitée.Afin de proposer un modèle plus réaliste, le mathématicien Verhulst a proposé de prendre en compte la capacité d'accueil du milieu dans lequel la population vit, ce qui conduit au modèle suivant : : taux d'accroissement de la population : capacité d'accueil du milieu (nombre maximum d'individus que le milieu peut supporter)
-Par exemple, on peut modéliser ainsi l'évolution d'une population de bactéries dans une boîte de Petri limitant leur expansion à la capacité .Q12. Pour , on note la population initiale. Que se passe-t-il si ou ? Maintenant, si , comment évolue la population ? De même, si , comment évolue la population ? Conjecturer la limite de quand tend vers .Q13. Vérifier que la fonction :est solution de l'équation de Verhulst. Donner le comportement asymptotique de la solution en .Exercice 7 : Compléter le code suivant pour tracer la solution exacte du modèle de Verhulst.
-Aide : La formule de la solution est donnée à la question Q13. Traduisez-la en Python en utilisant np.exp() pour l'exponentielle.
-import numpy as np
-import matplotlib.pyplot as plt # Paramètres du modèle
-a = 0.5 # Taux d'accroissement
-K = 100 # Capacité d'accueil # Conditions initiales à tester
-y0_liste = [10, 50, 100, 150] # Temps
-t = np.linspace(0, 20, 500) def solution_verhulst(t, y0, a, K): """ Calcule la solution exacte du modèle de Verhulst. Paramètres: ----------- t : array - tableau des temps y0 : float - population initiale a : float - taux d'accroissement K : float - capacité d'accueil Retourne: --------- y : array - population au cours du temps """ # TODO : Compléter avec la formule de la solution exacte # y = K / (1 + (...) * np.exp(-a * t)) pass # Tracé des courbes pour différentes conditions initiales
-plt.figure(figsize=(12, 7)) for y0 in y0_liste: y = solution_verhulst(t, y0, a, K) plt.plot(t, y, label=f'$y_0$ = {y0}', linewidth=2) # Tracé de l'asymptote y = K
-plt.axhline(y=K, color='black', linestyle='--', label=f'K = {K}') plt.xlabel('Temps t', fontsize=12)
-plt.ylabel('Population y(t)', fontsize=12)
-plt.title('Modèle de Verhulst - Évolution de la population', fontsize=14)
-plt.legend()
-plt.grid(True, alpha=0.3)
 plt.show()
-Exercice 8 : Résoudre numériquement l'équation de Verhulst avec odeint et comparer avec la solution exacte.]]></description><link>tp-modélisation-de-l&apos;évolution-de-populations.html</link><guid isPermaLink="false">Maths/Bachelor/S5/TP - Modélisation de l&apos;évolution de populations.md</guid><pubDate>Tue, 20 Jan 2026 18:25:03 GMT</pubDate></item></channel></rss>
+]]></description><link>tp-modélisation-de-l&apos;évolution-de-populations.html</link><guid isPermaLink="false">Maths/Bachelor/S5/TP - Modélisation de l&apos;évolution de populations.md</guid><pubDate>Tue, 20 Jan 2026 18:25:03 GMT</pubDate></item></channel></rss>

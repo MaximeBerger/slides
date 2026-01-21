@@ -2,10 +2,10 @@
 
 % Packages pour les marges
 \usepackage[
-    top=2cm,
-    bottom=2cm,
-    left=2cm,
-    right=2cm
+    top=1.5cm,
+    bottom=1.5cm,
+    left=1.5cm,
+    right=1.5cm
 ]{geometry}
 
 % Police sans serif
@@ -29,6 +29,7 @@
 \usepackage{textcomp}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{multicol}
 \definecolor{Theme}{HTML}{0E7490} % teal-700
 \definecolor{ThemeLight}{HTML}{E0F2F1}
 \definecolor{Accent}{HTML}{F59E0B} % amber-500
@@ -37,27 +38,28 @@
 
 \usepackage{mdframed}
 \usepackage[sf]{titlesec}
+\usepackage{environ}
+
 % Définition de la variable pour afficher les corrections
 \newboolean{showSolutions}
 % Décommentez la ligne suivante pour afficher les solutions
-\setboolean{showSolutions}{true}
-% \setboolean{showSolutions}{false}
+\input \jobname.adr
 
-\title{Probabilités : Examen}
+\title{Mathématiques : Examen}
 
 \author{}
 \date{}
 
-
-\newenvironment{solution}
-{
-    \vspace{0.5em}
-    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
-    \textbf{Solution.}\\[0.5em]
-}
-{
-    \end{mdframed}
-    \vspace{0.5em}
+% Environnement solution (affiché uniquement si showSolutions est vrai)
+\NewEnviron{solution}{%
+    \ifthenelse{\boolean{showSolutions}}{%
+        \vspace{0.5em}
+        \begin{mdframed}[backgroundcolor=ThemeLight,linecolor=Theme,linewidth=1pt,leftmargin=0,rightmargin=0,skipabove=0.5em,skipbelow=0.5em,innertopmargin=0.5em,innerbottommargin=0.5em]
+        \textcolor{Theme}{\textbf{Solution.}}\\[0.3em]
+        \BODY
+        \end{mdframed}
+        \vspace{0.5em}
+    }{}%
 }
 \begin{document}
 \sffamily
@@ -66,7 +68,7 @@
     \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
     \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
         \hline 
-        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{logoestp.png}} \vspace{5mm}  & 
         \textbf{Contrôle de connaissances et de compétences} & 
         \textbf{FO-002-VLA-XX-001} \\
         \hline
@@ -82,19 +84,20 @@
         \hline 
         \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2024-2025 -- Semestre 6}} \\
         \hline 
-        \textbf{Nom de l'enseignant} & Maxime BERGER \\
+        \textbf{Nom de l'enseignant} & Rémi Blanquet, Karine Serier \\
         \hline 
         \textbf{Promotion} & BMC1 - S1 \\
         \hline 
-        \textbf{Matière} & Probabilités et statistiques  \\
+        \textbf{Matière} & Mathématiques  \\
         \hline 
         \textbf{Durée de l'examen} & 2h00 \\
         \hline 
         \textbf{Consignes} & 
+        \vspace{0.5em}
         \begin{itemize}
             \item Calculatrice \textbf{NON} autorisée
-            \item Aucun document n'est autorisé
-        \end{itemize} \\
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
         \hline
     \end{tabular}
 \end{center}
@@ -103,59 +106,209 @@
 
 \section{Exercice 1 : Équations}
 Résoudre :
-\begin{enumerate}
-    \item $$z-2i=iz+1$$
-    \item $$z^4-2z^3-z+2=0$$ 
-    \item $$2z^2-(7+3i)z+(2+4i)=0$$
-    \item $$z^4=-1$$
-    \item $$z^6=\frac{3}{1-i \sqrt{3}}$$
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0.8em]
+    \item $z-2i=iz+1$
+    \item $z^4-2z^3-z+2=0$ 
+    \item $2z^2-(7+3i)z+(2+4i)=0$
+    \item $z^4=-1$
+    \item $z^6=\dfrac{3}{1-i \sqrt{3}}$
 \end{enumerate}
+\end{multicols}
+
+\begin{solution}
+\begin{enumerate}
+    \item $z-2i=iz+1 \Leftrightarrow z(1-i)=1+2i \Leftrightarrow z=\dfrac{1+2i}{1-i}=\dfrac{(1+2i)(1+i)}{2}=\dfrac{-1+3i}{2}$
+    
+    \textbf{Solution :} $\boxed{z = \dfrac{-1+3i}{2}}$
+    
+    \item On remarque que $z=1$ et $z=2$ sont racines. On factorise :
+    
+    $z^4-2z^3-z+2=(z-1)(z-2)(z^2+z+1)$
+    
+    Les racines de $z^2+z+1=0$ sont $j=e^{i\frac{2\pi}{3}}$ et $\bar{j}=e^{-i\frac{2\pi}{3}}$.
+    
+    \textbf{Solutions :} $\boxed{z \in \{1, 2, j, \bar{j}\}}$
+    
+    \item $\Delta = (7+3i)^2 - 8(2+4i) = 49+42i-9-16-32i = 24+10i$
+    
+    On cherche $\delta = a+bi$ tel que $\delta^2 = 24+10i$, d'où $a=5, b=1$, donc $\delta=5+i$.
+    
+    $z = \dfrac{7+3i \pm (5+i)}{4}$ donne $z_1 = 3+i$ et $z_2 = \dfrac{1}{2}+\dfrac{i}{2}$
+    
+    \textbf{Solutions :} $\boxed{z \in \left\{3+i, \dfrac{1+i}{2}\right\}}$
+    
+    \item $z^4=-1=e^{i\pi}$ donc $z=e^{i\frac{\pi+2k\pi}{4}}$ pour $k \in \{0,1,2,3\}$
+    
+    \textbf{Solutions :} $\boxed{z \in \left\{e^{i\frac{\pi}{4}}, e^{i\frac{3\pi}{4}}, e^{i\frac{5\pi}{4}}, e^{i\frac{7\pi}{4}}\right\}}$
+    
+    \item $\dfrac{3}{1-i\sqrt{3}} = \dfrac{3(1+i\sqrt{3})}{4} = \dfrac{3}{2}e^{i\frac{\pi}{3}}$
+    
+    Donc $z^6 = \dfrac{3}{2}e^{i\frac{\pi}{3}}$ et $z = \sqrt[6]{\dfrac{3}{2}}e^{i\frac{\pi+6k\pi}{18}}$ pour $k \in \{0,1,2,3,4,5\}$
+    
+    \textbf{Solutions :} $\boxed{z_k = \sqrt[6]{\dfrac{3}{2}}e^{i\frac{\pi(1+6k)}{18}}, \quad k \in \{0,1,2,3,4,5\}}$
+\end{enumerate}
+\end{solution}
 
 \section{Exercice 2 : Lieux géométriques}
-Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ vérifie la relation demandée :
-\begin{enumerate}
-    \item $$\arg \left( \frac{z}{1+i} \right )=\frac{\pi}{4}[2\pi]$$
-    \item $$\left|\frac{z+1}{z-2}\right|=1$$
-    \item $$\frac{2z-i}{z-2i} \in \mathbb{R}$$
-    
+Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ vérifie :
+\begin{multicols}{3}
+\begin{enumerate}[itemsep=0.5em]
+    \item $\arg \left( \dfrac{z}{1+i} \right )=\dfrac{\pi}{4}[2\pi]$
+    \item $\left|\dfrac{z+1}{z-2}\right|=1$
+    \item $\dfrac{2z-i}{z-2i} \in \mathbb{R}$
 \end{enumerate}
+\end{multicols}
+
+\begin{solution}
+\begin{enumerate}
+    \item $\arg\left(\dfrac{z}{1+i}\right) = \arg(z) - \arg(1+i) = \arg(z) - \dfrac{\pi}{4} = \dfrac{\pi}{4}$
+    
+    Donc $\arg(z) = \dfrac{\pi}{2}$. C'est la \textbf{demi-droite d'origine $O$ (exclu) et de direction $\vec{u}(0,1)$}, soit l'axe des imaginaires purs strictement positifs.
+    
+    \item $|z+1| = |z-2|$ signifie que $M$ est équidistant de $A(-1,0)$ et $B(2,0)$.
+    
+    C'est la \textbf{médiatrice du segment $[AB]$}, soit la droite d'équation $x = \dfrac{1}{2}$.
+    
+    \item Posons $z = x+iy$. On a $\dfrac{2z-i}{z-2i} = \dfrac{2x+i(2y-1)}{x+i(y-2)}$
+    
+    En multipliant par le conjugué du dénominateur et en annulant la partie imaginaire :
+    
+    $(2y-1)x - 2x(y-2) = 0 \Leftrightarrow 2xy - x - 2xy + 4x = 0 \Leftrightarrow 3x = 0$
+    
+    Donc $x = 0$ avec $z \neq 2i$. C'est l'\textbf{axe des imaginaires purs privé du point $2i$}.
+\end{enumerate}
+\end{solution}
 
 \section{Exercice 3 : Polynômes}
-\begin{enumerate}
+\begin{enumerate}[itemsep=0.5em]
     \item Trouver $a,b,c$ réels tel que $X^2+X+1$ divise $X^4+aX^2+bX+c$.
-    \item Déterminer tous les polynômes $P$ qui vérifient :
-    $$P(X^2)=(X^2+1)P(X)$$
-    \item Décomposer en éléments simples la fraction rationnelle :
-    $$F(X)=\frac{X^4}{(X^2-1)(X+3)}$$
+    \item Déterminer tous les polynômes $P$ qui vérifient : $P(X^2)=(X^2+1)P(X)$
+    \item Décomposer en éléments simples : $F(X)=\dfrac{X^4}{(X^2-1)(X+3)}$
 \end{enumerate}
 
-\section{Exercice 4: Suites}
-Donner une expression en fonction de $n$ des suites suivantes puis calculer leurs limites :
+\begin{solution}
 \begin{enumerate}
-    \item 
-   $$ \begin{cases}
+    \item Les racines de $X^2+X+1$ sont $j$ et $\bar{j}$. Si $X^2+X+1$ divise $P(X)=X^4+aX^2+bX+c$, alors :
+    
+    $P(j) = j^4 + aj^2 + bj + c = j + a\bar{j} + bj + c = 0$
+    
+    Comme $j + \bar{j} = -1$ et $j\bar{j} = 1$, on obtient en séparant parties réelles et imaginaires :
+    
+    $c - \dfrac{a}{2} - \dfrac{b}{2} - \dfrac{1}{2} = 0$ et $\dfrac{\sqrt{3}}{2}(1-a+b) = 0$
+    
+    Donc $a - b = 1$ et $2c = a + b + 1$. En prenant $a = 1, b = 0$, on a $c = 1$.
+    
+    \textbf{Solution :} $\boxed{a=1, b=0, c=1}$ (on vérifie : $X^4+X^2+1 = (X^2+X+1)(X^2-X+1)$)
+    
+    \item En posant $X=0$ : $P(0) = P(0)$ (ok). En posant $X=i$ : $P(-1) = 0$.
+    
+    Donc $(X+1)$ divise $P$. Soit $P(X) = (X+1)Q(X)$, alors :
+    
+    $(X^2+1)Q(X^2) = (X^2+1)(X+1)Q(X)$, donc $Q(X^2) = (X+1)Q(X)$.
+    
+    Par récurrence, $Q(X) = \lambda(X+1)^n$ et donc $P(X) = \lambda(X+1)^{n+1}$.
+    
+    \textbf{Solutions :} $\boxed{P(X) = \lambda(X+1)^n, \quad \lambda \in \mathbb{R}, n \in \mathbb{N}}$
+    
+    \item Division euclidienne : $X^4 = (X^2-1)(X+3)(X-3) + 10X^2 - 9X - 27 + ...$
+    
+    Après calcul : $F(X) = X - 3 + \dfrac{A}{X-1} + \dfrac{B}{X+1} + \dfrac{C}{X+3}$
+    
+    $A = \dfrac{1}{1 \cdot 4} = \dfrac{1}{4}$, $B = \dfrac{1}{(-2) \cdot 2} = -\dfrac{1}{4}$, $C = \dfrac{81}{8 \cdot (-2)} = -\dfrac{81}{16}$
+    
+    \textbf{Décomposition :} $\boxed{F(X) = X - 3 + \dfrac{1/4}{X-1} - \dfrac{1/4}{X+1} - \dfrac{81/16}{X+3}}$
+\end{enumerate}
+\end{solution}
+
+\section{Exercice 4 : Suites}
+Donner une expression en fonction de $n$ puis calculer les limites :
+\begin{multicols}{2}
+\begin{enumerate}[itemsep=0.5em]
+    \item $\begin{cases}
     u_0=2\\
     u_{n+1}=2u_n-6
-    \end{cases}$$
-    \item $$\begin{cases}
-    u_0=1\\
-    u_1=0\\
+    \end{cases}$
+    
+    \item $\begin{cases}
+    u_0=1, \quad u_1=0\\
     u_{n+2}=3u_{n+1}-2u_n
-    \end{cases}$$
-    \item $$\begin{cases}
+    \end{cases}$
+    
+    \columnbreak
+    
+    \item $\begin{cases}
     u_0=1\\
-    u_{n+1}=\frac{4u_n+3}{2+u_n}
-    \end{cases}$$
-   On montera dans un premier temps, que la suite $(v_n)$ définie par :
-    $$v_n=\frac{u_n-3}{u_n+1}$$
-    est géométrique.
+    u_{n+1}=\dfrac{4u_n+3}{2+u_n}
+    \end{cases}$
+    
+    On montrera que $v_n=\dfrac{u_n-3}{u_n+1}$ est géométrique.
 \end{enumerate}
+\end{multicols}
+
+\begin{solution}
+\begin{enumerate}
+    \item Suite arithmético-géométrique. Point fixe : $\ell = 2\ell - 6 \Rightarrow \ell = 6$.
+    
+    Posons $v_n = u_n - 6$, alors $v_{n+1} = 2v_n$, donc $v_n = v_0 \cdot 2^n = -4 \cdot 2^n$.
+    
+    \textbf{Expression :} $\boxed{u_n = 6 - 4 \cdot 2^n = 6 - 2^{n+2}}$ \quad \textbf{Limite :} $\boxed{-\infty}$
+    
+    \item Équation caractéristique : $r^2 - 3r + 2 = 0 \Rightarrow r = 1$ ou $r = 2$.
+    
+    Donc $u_n = \alpha + \beta \cdot 2^n$. Avec $u_0 = 1$ et $u_1 = 0$ : $\alpha + \beta = 1$ et $\alpha + 2\beta = 0$.
+    
+    D'où $\beta = -1$ et $\alpha = 2$.
+    
+    \textbf{Expression :} $\boxed{u_n = 2 - 2^n}$ \quad \textbf{Limite :} $\boxed{-\infty}$
+    
+    \item Calculons $v_{n+1}$ :
+    
+    $v_{n+1} = \dfrac{u_{n+1}-3}{u_{n+1}+1} = \dfrac{\frac{4u_n+3}{2+u_n}-3}{\frac{4u_n+3}{2+u_n}+1} = \dfrac{4u_n+3-3(2+u_n)}{4u_n+3+2+u_n} = \dfrac{u_n-3}{5u_n+5} = \dfrac{1}{5}v_n$
+    
+    Donc $(v_n)$ est géométrique de raison $\dfrac{1}{5}$ et $v_0 = \dfrac{1-3}{1+1} = -1$.
+    
+    $v_n = -\left(\dfrac{1}{5}\right)^n$ et $u_n = \dfrac{3+v_n}{1-v_n} = \dfrac{3-\left(\frac{1}{5}\right)^n}{1+\left(\frac{1}{5}\right)^n}$
+    
+    \textbf{Expression :} $\boxed{u_n = \dfrac{3 \cdot 5^n - 1}{5^n + 1}}$ \quad \textbf{Limite :} $\boxed{3}$
+\end{enumerate}
+\end{solution}
 
 \section{Exercice 5 : Barycentre}
-Sur la figure ci-dessous, $ABCD$ représente une plaque métallique homogène carrée de centre $O$. on retire la partie triangulaire $OAB$ pour obtenir la plaque pentagonale $ADCBO$.\\
-\includegraphics[]{barycentres.jpg}
-\\
-On appelle $H$ le centre d'inertie de la plaque $OAB$ et $G$ celui de la plaque $ADCBO$ que l'on cherche.\\
-Justifier dans un premier temps que $O$ barycentre de $(H,1), (G,3)$ et en déduire que $G$ barycentre de $(O,4), (H,-1)$. 
+Sur la figure ci-dessous, $ABCD$ est une plaque métallique homogène carrée de centre $O$. On retire la partie triangulaire $OAB$ pour obtenir la plaque pentagonale $ADCBO$.
+
+\begin{center}
+\includegraphics[width=6cm]{barycentres.jpg}
+\end{center}
+
+On appelle $H$ le centre d'inertie de la plaque $OAB$ et $G$ celui de la plaque $ADCBO$ que l'on cherche.
+
+Justifier que $O$ est barycentre de $(H,1), (G,3)$ et en déduire que $G$ est barycentre de $(O,4), (H,-1)$.
+
+\begin{solution}
+\textbf{Partie 1 :} La plaque carrée $ABCD$ a une aire proportionnelle à 4 (si on prend l'aire du triangle $OAB$ comme unité). Le triangle $OAB$ a une aire proportionnelle à 1. Donc le pentagone $ADCBO$ a une aire proportionnelle à 3.
+
+Le centre d'inertie d'une plaque homogène est le barycentre des centres d'inertie de ses parties, pondérés par leurs aires.
+
+Donc $O$ (centre du carré $ABCD$) est le barycentre de $(H, 1)$ et $(G, 3)$ car :
+\begin{itemize}
+    \item $H$ est le centre d'inertie de la partie retirée (aire 1)
+    \item $G$ est le centre d'inertie de la partie restante (aire 3)
+\end{itemize}
+
+\textbf{Partie 2 :} Puisque $O = \text{bar}\{(H,1), (G,3)\}$, on a :
+$$1 \cdot \vec{OH} + 3 \cdot \vec{OG} = \vec{0}$$
+
+On cherche $G$ comme barycentre de $(O, \alpha)$ et $(H, \beta)$ :
+$$\alpha \cdot \vec{GO} + \beta \cdot \vec{GH} = \vec{0}$$
+
+De $3\vec{OG} = -\vec{OH}$, on tire $\vec{OG} = -\dfrac{1}{3}\vec{OH}$, donc :
+$$\vec{GO} = \dfrac{1}{3}\vec{OH} \quad \text{et} \quad \vec{GH} = \vec{GO} + \vec{OH} = \dfrac{4}{3}\vec{OH}$$
+
+Ainsi $\vec{GO} = \dfrac{1}{4}\vec{GH}$, ce qui donne $4\vec{GO} = \vec{GH}$, soit :
+$$4\vec{GO} + (-1)\vec{GH} = \vec{0}$$
+
+\textbf{Conclusion :} $\boxed{G = \text{bar}\{(O, 4), (H, -1)\}}$
+\end{solution}
 
 \end{document}
