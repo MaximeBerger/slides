@@ -150,6 +150,29 @@
         }
       ]
     },
+    {
+      "id": "sec5",
+      "numero": 3,
+      "titre": "Partiel d'entraînement",
+      "description": "Modélisation de l'évolution de populations",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Enoncé",
+          "description": "",
+          "lien": "ExamP3/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Corrigé",
+          "description": "",
+          "lien": "ExamP3/corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    },
 
     {
       "id": "sec5",
