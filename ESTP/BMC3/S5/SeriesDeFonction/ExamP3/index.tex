@@ -403,4 +403,147 @@ On rappelle que $Q = mcT$ (à constante près).
     }{}
 \end{enumerate}
 
+%==============================================================================
+\section*{Exercice 4 : Modélisation -- Dynamique des populations (5 points)}
+%==============================================================================
+
+On étudie l'évolution d'une population $N(t)$ au cours du temps $t$ (exprimé en années).
+
+\textbf{Partie A -- Modèle de Malthus (croissance exponentielle)}
+
+Dans un premier temps, on suppose que le taux de croissance de la population est proportionnel à la population elle-même :
+\[
+\frac{dN}{dt} = rN
+\]
+où $r > 0$ est le taux de croissance intrinsèque.
+
+\begin{enumerate}
+    \item Résoudre cette équation différentielle avec la condition initiale $N(0) = N_0$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    C'est une équation différentielle linéaire du premier ordre à variables séparables.
+    
+    On sépare les variables : $\frac{dN}{N} = r\,dt$
+    
+    En intégrant : $\ln|N| = rt + C$
+    
+    Donc : $N(t) = Ae^{rt}$ où $A = e^C$
+    
+    Avec la condition initiale $N(0) = N_0$ : $A = N_0$
+    
+    \[
+    \boxed{N(t) = N_0 e^{rt}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Calculer le temps de doublement $T_2$ de la population (temps pour que $N(T_2) = 2N_0$). \textit{(0.5 pt)}
+    
+    \textit{On donne $\ln(2) \approx 0{,}7$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $N(T_2) = 2N_0$ :
+    \[
+    N_0 e^{rT_2} = 2N_0 \quad \Rightarrow \quad e^{rT_2} = 2 \quad \Rightarrow \quad rT_2 = \ln(2)
+    \]
+    \[
+    \boxed{T_2 = \frac{\ln(2)}{r} \approx \frac{0{,}7}{r}}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\textbf{Partie B -- Modèle de Verhulst (croissance logistique)}
+
+Le modèle de Malthus prédit une croissance infinie, ce qui n'est pas réaliste. On introduit une capacité limite $K$ (population maximale que l'environnement peut supporter). L'équation devient :
+\[
+\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)
+\]
+
+\begin{enumerate}[resume]
+    \item Vérifier que $N = 0$ et $N = K$ sont des solutions d'équilibre (solutions constantes). \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Une solution d'équilibre vérifie $\frac{dN}{dt} = 0$.
+    
+    On résout : $rN\left(1 - \frac{N}{K}\right) = 0$
+    
+    Ce produit est nul si et seulement si $N = 0$ ou $1 - \frac{N}{K} = 0$, c'est-à-dire $N = K$.
+    
+    \[
+    \boxed{\text{Les solutions d'équilibre sont } N = 0 \text{ et } N = K}
+    \]
+    \end{solution}
+    }{}
+    
+    \item On pose $u = \frac{1}{N}$. Montrer que $u$ vérifie l'équation différentielle linéaire : \textit{(1 pt)}
+    \[
+    \frac{du}{dt} = -ru + \frac{r}{K}
+    \]
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $u = \frac{1}{N}$, donc $N = \frac{1}{u}$.
+    
+    En dérivant par rapport à $t$ : $\frac{dN}{dt} = -\frac{1}{u^2}\frac{du}{dt}$
+    
+    On substitue dans l'équation de Verhulst :
+    \[
+    -\frac{1}{u^2}\frac{du}{dt} = r \cdot \frac{1}{u}\left(1 - \frac{1}{uK}\right) = \frac{r}{u} - \frac{r}{u^2 K}
+    \]
+    
+    En multipliant par $-u^2$ :
+    \[
+    \frac{du}{dt} = -ru + \frac{r}{K}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre cette équation et en déduire l'expression de $N(t)$ avec $N(0) = N_0$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation $\frac{du}{dt} + ru = \frac{r}{K}$ est une EDO linéaire du premier ordre.
+    
+    \textbf{Solution homogène :} $u_h = Ce^{-rt}$
+    
+    \textbf{Solution particulière :} $u_p = \frac{1}{K}$ (constante)
+    
+    \textbf{Solution générale :} $u(t) = Ce^{-rt} + \frac{1}{K}$
+    
+    Condition initiale : $u(0) = \frac{1}{N_0}$, donc $C + \frac{1}{K} = \frac{1}{N_0}$, soit $C = \frac{1}{N_0} - \frac{1}{K} = \frac{K - N_0}{N_0 K}$
+    
+    Donc : $u(t) = \frac{K - N_0}{N_0 K}e^{-rt} + \frac{1}{K}$
+    
+    En revenant à $N = \frac{1}{u}$ :
+    \[
+    N(t) = \frac{1}{\frac{K - N_0}{N_0 K}e^{-rt} + \frac{1}{K}} = \frac{N_0 K}{(K - N_0)e^{-rt} + N_0}
+    \]
+    
+    En multipliant numérateur et dénominateur par $e^{rt}$ :
+    \[
+    \boxed{N(t) = \frac{K N_0 e^{rt}}{K + N_0(e^{rt} - 1)} = \frac{K}{1 + \left(\frac{K}{N_0} - 1\right)e^{-rt}}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Déterminer $\lim_{t \to +\infty} N(t)$. Interpréter biologiquement ce résultat. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Quand $t \to +\infty$, on a $e^{-rt} \to 0$ (car $r > 0$).
+    
+    Donc :
+    \[
+    \lim_{t \to +\infty} N(t) = \frac{K}{1 + 0} = \boxed{K}
+    \]
+    
+    \textbf{Interprétation :} La population tend vers la capacité limite $K$ de l'environnement. Contrairement au modèle de Malthus, la croissance est régulée et la population se stabilise à un niveau d'équilibre déterminé par les ressources disponibles.
+    \end{solution}
+    }{}
+\end{enumerate}
+
 \end{document}

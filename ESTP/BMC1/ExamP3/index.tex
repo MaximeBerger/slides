@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 
 % Packages pour les marges
 \usepackage[
@@ -103,7 +103,7 @@
 \end{center}
 
 
-
+\vspace{2em}
 \section{Exercice 1 : Équations}
 Résoudre :
 \begin{multicols}{2}
@@ -150,6 +150,8 @@ Résoudre :
 \end{enumerate}
 \end{solution}
 
+\vspace{2em}
+
 \section{Exercice 2 : Lieux géométriques}
 Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ vérifie :
 \begin{multicols}{3}
@@ -179,6 +181,19 @@ Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ v
     Donc $x = 0$ avec $z \neq 2i$. C'est l'\textbf{axe des imaginaires purs privé du point $2i$}.
 \end{enumerate}
 \end{solution}
+
+\ifthenelse{\boolean{showSolutions}}{}{
+\newpage
+}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
 
 \section{Exercice 3 : Polynômes}
 \begin{enumerate}[itemsep=0.5em]
@@ -221,9 +236,11 @@ Dans le plan complexe, déterminer l'ensemble des points $M$ dont l'affixe $z$ v
 \end{enumerate}
 \end{solution}
 
+
+\vspace{1em}
 \section{Exercice 4 : Suites}
-Donner une expression en fonction de $n$ puis calculer les limites :
-\begin{multicols}{2}
+Donner une expression en fonction de $n$ puis calculer les limites des suites suivantes, définies par récurrence :
+
 \begin{enumerate}[itemsep=0.5em]
     \item $\begin{cases}
     u_0=2\\
@@ -235,16 +252,12 @@ Donner une expression en fonction de $n$ puis calculer les limites :
     u_{n+2}=3u_{n+1}-2u_n
     \end{cases}$
     
-    \columnbreak
-    
     \item $\begin{cases}
     u_0=1\\
     u_{n+1}=\dfrac{4u_n+3}{2+u_n}
-    \end{cases}$
-    
-    On montrera que $v_n=\dfrac{u_n-3}{u_n+1}$ est géométrique.
+    \end{cases} \qquad $ On montrera que $v_n=\dfrac{u_n-3}{u_n+1}$ est géométrique.
 \end{enumerate}
-\end{multicols}
+
 
 \begin{solution}
 \begin{enumerate}
@@ -274,6 +287,7 @@ Donner une expression en fonction de $n$ puis calculer les limites :
 \end{enumerate}
 \end{solution}
 
+\vspace{1em}
 \section{Exercice 5 : Barycentre}
 Sur la figure ci-dessous, $ABCD$ est une plaque métallique homogène carrée de centre $O$. On retire la partie triangulaire $OAB$ pour obtenir la plaque pentagonale $ADCBO$.
 
