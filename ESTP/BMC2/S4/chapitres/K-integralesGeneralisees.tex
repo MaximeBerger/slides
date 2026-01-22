@@ -1,0 +1,709 @@
+
+\thispagestyle{empty}
+
+\section{Définitions et premières propriétés}
+
+\subsection{Intégrales sur un intervalle non borné}
+
+\begin{Def}
+\textbf{Intégrale impropre sur $[a, +\infty[$}
+
+Soit $f:[a,+\infty[\rightarrow \mathbb{R}$ une fonction continue par morceaux. On dit que l'intégrale :
+$$\int_{a}^{+\infty} f(t) \, dt$$
+est \textbf{convergente} si la fonction $F : x \mapsto \int_{a}^{x} f(t) \, dt$ admet une limite finie lorsque $x$ tend vers $+\infty$.
+
+Dans ce cas, on note :
+$$\int_{a}^{+\infty} f(t) \, dt = \lim_{x \to +\infty} \int_{a}^{x} f(t) \, dt$$
+
+Une telle intégrale est appelée \textbf{intégrale généralisée} ou \textbf{intégrale impropre}.
+\end{Def}
+
+\begin{Ex}
+Étudions la convergence de $\displaystyle\int_{1}^{+\infty} \frac{1}{t^2} \, dt$.
+
+Pour $x > 1$, on a :
+$$\int_{1}^{x} \frac{1}{t^2} \, dt = \left[-\frac{1}{t}\right]_{1}^{x} = -\frac{1}{x} + 1 = 1 - \frac{1}{x}$$
+
+Quand $x \to +\infty$, cette expression tend vers $1$. Donc l'intégrale converge et :
+$$\int_{1}^{+\infty} \frac{1}{t^2} \, dt = 1$$
+\end{Ex}
+
+\begin{Ex}
+Étudions la convergence de $\displaystyle\int_{1}^{+\infty} \frac{1}{t} \, dt$.
+
+Pour $x > 1$, on a :
+$$\int_{1}^{x} \frac{1}{t} \, dt = \left[\ln t\right]_{1}^{x} = \ln x$$
+
+Quand $x \to +\infty$, $\ln x \to +\infty$. L'intégrale \textbf{diverge}.
+\end{Ex}
+
+\begin{Rmq}$\,$
+
+Lorsque l'intégrale ne converge pas, on dit qu'elle \textbf{diverge}. Elle peut diverger vers $+\infty$, $-\infty$, ou ne pas avoir de limite.
+\end{Rmq}
+
+\subsection{Intégrales au voisinage d'un point}
+
+\begin{Def}
+\textbf{Intégrale impropre sur $[a, b[$}
+
+Soit $f:[a, b[\rightarrow \mathbb{R}$ une fonction continue par morceaux. On dit que l'intégrale :
+$$\int_{a}^{b} f(t) \, dt$$
+est \textbf{convergente} si la fonction $F : x \mapsto \int_{a}^{x} f(t) \, dt$ admet une limite finie lorsque $x$ tend vers $b^{-}$.
+
+Dans ce cas, on note :
+$$\int_{a}^{b} f(t) \, dt = \lim_{x \to b^{-}} \int_{a}^{x} f(t) \, dt$$
+\end{Def}
+
+\begin{Ex}
+Étudions la convergence de $\displaystyle\int_{0}^{1} \frac{1}{\sqrt{t}} \, dt$.
+
+La fonction $t \mapsto \frac{1}{\sqrt{t}}$ n'est pas définie en $0$. Pour $0 < \varepsilon < 1$, on a :
+$$\int_{\varepsilon}^{1} \frac{1}{\sqrt{t}} \, dt = \left[2\sqrt{t}\right]_{\varepsilon}^{1} = 2 - 2\sqrt{\varepsilon}$$
+
+Quand $\varepsilon \to 0^{+}$, cette expression tend vers $2$. Donc l'intégrale converge et :
+$$\int_{0}^{1} \frac{1}{\sqrt{t}} \, dt = 2$$
+\end{Ex}
+
+\subsection{Intégrales sur un intervalle ouvert}
+
+\begin{Def}
+\textbf{Intégrale impropre sur $]a, b[$}
+
+Soit $f:]a, b[\rightarrow \mathbb{R}$ une fonction continue par morceaux. On dit que l'intégrale :
+$$\int_{a}^{b} f(t) \, dt$$
+est \textbf{convergente} s'il existe $c \in ]a, b[$ tel que les deux intégrales $\displaystyle\int_{c}^{b} f(t) \, dt$ et $\displaystyle\int_{a}^{c} f(t) \, dt$ convergent.
+
+Dans ce cas, on note :
+$$\int_{a}^{b} f(t) \, dt = \lim_{x \rightarrow a^{+}} \int_{x}^{c} f(t) \, dt + \lim_{x \rightarrow b^{-}} \int_{c}^{x} f(t) \, dt$$
+
+Cette valeur ne dépend pas du choix de $c$.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Pour étudier la convergence d'une intégrale sur un intervalle $]a, b[$, on doit vérifier \textbf{séparément} la convergence aux deux bornes. L'intégrale converge si et seulement si elle converge en chaque borne.
+\end{Rmq}
+
+\subsection{Propriétés fondamentales}
+
+Dans la suite, on considère $I = (a, b)$ un intervalle de $\mathbb{R}$ ouvert ou semi-ouvert et $f, g$ deux fonctions continues par morceaux sur cet intervalle.
+
+\begin{Prop}
+\textbf{Positivité}
+
+Si $\displaystyle\int_{I} f$ converge et si $f \geq 0$ sur $I$, alors $\displaystyle\int_{I} f \geq 0$.
+\end{Prop}
+
+\begin{Prop}
+\textbf{Linéarité}
+
+Si $\displaystyle\int_{I} f$ et $\displaystyle\int_{I} g$ convergent, alors pour tout $\lambda \in \mathbb{R}$, $\displaystyle\int_{I}(f + \lambda g)$ converge et :
+$$\int_{I}(f + \lambda g) = \int_{I} f + \lambda \int_{I} g$$
+\end{Prop}
+
+\begin{Prop}
+\textbf{Relation de Chasles}
+
+Si $\displaystyle\int_{I} f$ converge, alors pour tout $c \in ]a, b[$, les intégrales $\displaystyle\int_{a}^{c} f$ et $\displaystyle\int_{c}^{b} f$ convergent et on a :
+$$\int_{a}^{b} f = \int_{a}^{c} f + \int_{c}^{b} f$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Calcul par primitive}
+
+Si $F$ est une primitive de $f$ sur $]a, b[$, alors $\displaystyle\int_{a}^{b} f$ converge si et seulement si $F$ admet des limites finies en $a^{+}$ et en $b^{-}$. Dans ce cas :
+$$\int_{a}^{b} f(t) \, dt = \lim_{x \rightarrow b^{-}} F(x) - \lim_{x \rightarrow a^{+}} F(x)$$
+\end{Thm}
+
+\begin{Ex}
+Calculons $\displaystyle\int_{0}^{+\infty} e^{-t} \, dt$.
+
+Une primitive de $e^{-t}$ est $F(t) = -e^{-t}$. On a :
+\begin{itemize}
+\item $\displaystyle\lim_{t \to 0^{+}} F(t) = -1$
+\item $\displaystyle\lim_{t \to +\infty} F(t) = 0$
+\end{itemize}
+
+Donc l'intégrale converge et :
+$$\int_{0}^{+\infty} e^{-t} \, dt = 0 - (-1) = 1$$
+\end{Ex}
+
+\subsection{Intégrales de référence}
+
+\begin{Thm}
+\textbf{Intégrales de Riemann}
+
+Les intégrales de référence suivantes sont fondamentales :
+
+\begin{enumerate}
+\item \textbf{En $+\infty$ (exponentielle) :} $\displaystyle\int_{0}^{+\infty} e^{-\alpha t} \, dt$ converge $\Leftrightarrow \alpha > 0$
+
+\item \textbf{En $+\infty$ (puissance) :} $\displaystyle\int_{1}^{+\infty} \frac{dt}{t^{\alpha}}$ converge $\Leftrightarrow \alpha > 1$
+
+\item \textbf{En un point fini :} $\displaystyle\int_{a}^{b} \frac{dt}{(t-a)^{\alpha}}$ converge $\Leftrightarrow \alpha < 1$
+\end{enumerate}
+\end{Thm}
+
+\begin{Rmq}$\,$
+
+Attention, $\displaystyle\int_{0}^{+\infty} \frac{dt}{t^{\alpha}}$ n'est \textbf{jamais} convergente, quelle que soit la valeur de $\alpha$. En effet, si $\alpha \leq 1$, l'intégrale diverge en $+\infty$, et si $\alpha > 1$, elle diverge en $0$.
+\end{Rmq}
+
+\begin{Ex}
+\textbf{Calcul de l'intégrale de Riemann en $+\infty$}
+
+Pour $\alpha \neq 1$ et $x > 1$ :
+$$\int_{1}^{x} \frac{dt}{t^{\alpha}} = \left[\frac{t^{1-\alpha}}{1-\alpha}\right]_{1}^{x} = \frac{x^{1-\alpha} - 1}{1-\alpha}$$
+
+\begin{itemize}
+\item Si $\alpha > 1$ : $1-\alpha < 0$, donc $x^{1-\alpha} \to 0$ quand $x \to +\infty$, et l'intégrale converge vers $\dfrac{1}{\alpha - 1}$.
+\item Si $\alpha < 1$ : $1-\alpha > 0$, donc $x^{1-\alpha} \to +\infty$, et l'intégrale diverge.
+\end{itemize}
+\end{Ex}
+
+\begin{Meth}
+Pour étudier une intégrale généralisée :
+\begin{enumerate}
+\item Identifier les points où la fonction n'est pas définie ou les bornes infinies.
+\item Découper l'intégrale si nécessaire (relation de Chasles).
+\item Essayer de calculer explicitement une primitive.
+\item Si le calcul direct est impossible, utiliser les théorèmes de comparaison.
+\end{enumerate}
+\end{Meth}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item L'intégrale $\displaystyle\int_{1}^{+\infty} \frac{dt}{t^2}$ :
+\begin{enumerate}
+\item diverge
+\item converge vers $1$
+\item converge vers $2$
+\item converge vers $\frac{1}{2}$
+\end{enumerate}
+
+\item L'intégrale $\displaystyle\int_{0}^{1} \frac{dt}{\sqrt{t}}$ :
+\begin{enumerate}
+\item diverge car $\frac{1}{\sqrt{t}} \to +\infty$ quand $t \to 0$
+\item converge vers $2$
+\item converge vers $1$
+\item n'est pas définie
+\end{enumerate}
+
+\item L'intégrale de Riemann $\displaystyle\int_{1}^{+\infty} \frac{dt}{t^{\alpha}}$ converge si et seulement si :
+\begin{enumerate}
+\item $\alpha > 0$
+\item $\alpha < 1$
+\item $\alpha > 1$
+\item $\alpha = 1$
+\end{enumerate}
+
+\item L'intégrale $\displaystyle\int_{0}^{+\infty} e^{-2t} \, dt$ vaut :
+\begin{enumerate}
+\item $2$
+\item $1$
+\item $\frac{1}{2}$
+\item diverge
+\end{enumerate}
+\end{enumerate}
+
+\section{Fonctions intégrables}
+
+\begin{Def}
+\textbf{Intégrabilité}
+
+Une fonction $f$ est dite \textbf{intégrable} sur $I$, ou l'intégrale $\displaystyle\int_{I} f$ est dite \textbf{absolument convergente}, si $\displaystyle\int_{I}|f|$ converge.
+\end{Def}
+
+\begin{Thm}
+\textbf{Convergence absolue implique convergence}
+
+Si $f$ est intégrable sur $I$, alors $\displaystyle\int_{I} f(t) \, dt$ converge.
+\end{Thm}
+
+\begin{Rmq}$\,$
+
+La réciproque est fausse ! Une intégrale peut converger sans converger absolument. On parle alors de \textbf{convergence semi-convergente}.
+\end{Rmq}
+
+\begin{Ex}
+L'intégrale $\displaystyle\int_{1}^{+\infty} \frac{\sin t}{t} \, dt$ converge (semi-convergence), mais $\displaystyle\int_{1}^{+\infty} \frac{|\sin t|}{t} \, dt$ diverge.
+
+La fonction $\frac{\sin t}{t}$ n'est donc pas intégrable sur $[1, +\infty[$.
+\end{Ex}
+
+\begin{Prop}
+\textbf{Inégalité triangulaire}
+
+Si $f$ et $g$ sont intégrables sur $I$, alors $f + g$ est intégrable sur $I$ et on a :
+$$\left|\int_{I}(f + g)\right| \leq \int_{I}|f + g| \leq \int_{I}|f| + \int_{I}|g|$$
+\end{Prop}
+
+\begin{Prop}
+\textbf{Fonction continue intégrable}
+
+Si $f$ est continue et intégrable sur $I$, alors :
+$$\int_{I}|f(t)| \, dt = 0 \Rightarrow f \equiv 0$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Critère de convergence pour les fonctions positives}
+
+Si $f$ est positive sur $[a, b[$, alors $\displaystyle\int_{a}^{b} f$ converge si et seulement si la fonction $x \mapsto \int_{a}^{x} f(t) \, dt$ est majorée sur $]a, b[$.
+\end{Thm}
+
+\begin{Ex}
+Montrons que $\displaystyle\int_{0}^{+\infty} e^{-t^2} \, dt$ converge.
+
+Pour $t \geq 1$, on a $t^2 \geq t$, donc $e^{-t^2} \leq e^{-t}$.
+
+Comme $\displaystyle\int_{1}^{+\infty} e^{-t} \, dt$ converge (vers $e^{-1}$), et $e^{-t^2} \geq 0$, on en déduit que $\displaystyle\int_{1}^{+\infty} e^{-t^2} \, dt$ converge.
+
+Sur $[0, 1]$, $e^{-t^2}$ est continue bornée, donc $\displaystyle\int_{0}^{1} e^{-t^2} \, dt$ converge.
+
+Par relation de Chasles, $\displaystyle\int_{0}^{+\infty} e^{-t^2} \, dt$ converge.
+\end{Ex}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une fonction intégrable sur $I$ est une fonction telle que :
+\begin{enumerate}
+\item $\displaystyle\int_{I} f$ converge
+\item $\displaystyle\int_{I} |f|$ converge
+\item $f$ est bornée
+\item $f$ est continue
+\end{enumerate}
+
+\item Si $\displaystyle\int_{I} f$ converge mais $\displaystyle\int_{I} |f|$ diverge, on dit que l'intégrale est :
+\begin{enumerate}
+\item absolument convergente
+\item divergente
+\item semi-convergente
+\item indéterminée
+\end{enumerate}
+
+\item L'intégrale $\displaystyle\int_{1}^{+\infty} \frac{\cos t}{t^2} \, dt$ :
+\begin{enumerate}
+\item diverge
+\item converge absolument
+\item est semi-convergente
+\item n'existe pas
+\end{enumerate}
+\end{enumerate}
+
+\section{Intégrabilité et comparaison}
+
+\subsection{Théorèmes de comparaison}
+
+\begin{Thm}
+\textbf{Comparaison de fonctions positives}
+
+Soient $f$ et $g$ deux fonctions continues par morceaux sur $[a, b[$ telles que $0 \leq f \leq g$.
+
+Si $\displaystyle\int_{a}^{b} g$ converge, alors $\displaystyle\int_{a}^{b} f$ converge.
+
+Contraposée : Si $\displaystyle\int_{a}^{b} f$ diverge, alors $\displaystyle\int_{a}^{b} g$ diverge.
+\end{Thm}
+
+\begin{Ex}
+Étudions $\displaystyle\int_{1}^{+\infty} \frac{\ln t}{t^2} \, dt$.
+
+Pour $t \geq 1$, on a $\ln t \leq t$, donc $\dfrac{\ln t}{t^2} \leq \dfrac{1}{t}$.
+
+Mais cette majoration ne suffit pas car $\displaystyle\int_{1}^{+\infty} \frac{dt}{t}$ diverge.
+
+Pour $t$ assez grand, $\ln t \leq \sqrt{t}$, donc $\dfrac{\ln t}{t^2} \leq \dfrac{1}{t^{3/2}}$.
+
+Comme $\dfrac{3}{2} > 1$, $\displaystyle\int_{1}^{+\infty} \frac{dt}{t^{3/2}}$ converge, donc $\displaystyle\int_{1}^{+\infty} \frac{\ln t}{t^2} \, dt$ converge.
+\end{Ex}
+
+\begin{Thm}
+\textbf{Comparaison par équivalents}
+
+Soient $f$ et $g$ deux fonctions continues par morceaux sur $[a, b[$ telles que $g$ garde un signe constant au voisinage de $b$ et $f(x) \sim_{b} g(x)$.
+
+Alors $\displaystyle\int_{a}^{b} f$ et $\displaystyle\int_{a}^{b} g$ sont de même nature (toutes deux convergentes ou toutes deux divergentes).
+\end{Thm}
+
+\begin{Ex}
+Étudions $\displaystyle\int_{0}^{1} \frac{1}{1 - \cos t} \, dt$.
+
+Au voisinage de $0$ : $1 - \cos t \sim \dfrac{t^2}{2}$, donc $\dfrac{1}{1 - \cos t} \sim \dfrac{2}{t^2}$.
+
+Comme $\displaystyle\int_{0}^{1} \frac{dt}{t^2}$ diverge (exposant $2 \geq 1$), l'intégrale $\displaystyle\int_{0}^{1} \frac{dt}{1 - \cos t}$ diverge.
+\end{Ex}
+
+\subsection{Critères de Riemann}
+
+\begin{Thm}
+\textbf{Critères de Riemann en $+\infty$}
+
+Soit $f$ une fonction continue par morceaux sur $[a, +\infty[$.
+
+\begin{enumerate}
+\item S'il existe $\alpha > 1$ tel que $t^{\alpha} f(t) \to 0$ quand $t \to +\infty$, alors $f$ est intégrable sur $[a, +\infty[$.
+
+\item S'il existe $c > 0$ tel que $t f(t) \geq c$ quand $t \to +\infty$, alors $\displaystyle\int_{a}^{+\infty} f(t) \, dt$ diverge.
+\end{enumerate}
+\end{Thm}
+
+\begin{Thm}
+\textbf{Critères de Riemann en un point}
+
+Soit $f$ une fonction continue par morceaux sur $]a, b]$.
+
+\begin{enumerate}
+\item S'il existe $\alpha < 1$ tel que $(t-a)^{\alpha} f(t) \to 0$ quand $t \to a^{+}$, alors $f$ est intégrable sur $]a, b]$.
+
+\item S'il existe $c > 0$ tel que $(t-a) f(t) \geq c$ quand $t \to a^{+}$, alors $\displaystyle\int_{a}^{b} f(t) \, dt$ diverge.
+\end{enumerate}
+\end{Thm}
+
+\begin{Ex}
+Étudions $\displaystyle\int_{2}^{+\infty} \frac{dt}{t(\ln t)^2}$.
+
+Calculons $t^{\alpha} \cdot \dfrac{1}{t(\ln t)^2} = \dfrac{t^{\alpha - 1}}{(\ln t)^2}$.
+
+Pour $\alpha = 1$ : $\dfrac{1}{(\ln t)^2} \to 0$ quand $t \to +\infty$.
+
+Ce n'est pas suffisant (il faut $\alpha > 1$).
+
+Pour tout $\alpha > 1$ : $\dfrac{t^{\alpha - 1}}{(\ln t)^2} \to +\infty$ car $t^{\alpha - 1}$ croît plus vite que $(\ln t)^2$.
+
+Le critère de Riemann ne s'applique pas directement. Utilisons un changement de variable $u = \ln t$ :
+$$\int_{2}^{x} \frac{dt}{t(\ln t)^2} = \int_{\ln 2}^{\ln x} \frac{du}{u^2} = \left[-\frac{1}{u}\right]_{\ln 2}^{\ln x} = \frac{1}{\ln 2} - \frac{1}{\ln x} \to \frac{1}{\ln 2}$$
+
+L'intégrale converge.
+\end{Ex}
+
+\begin{Meth}
+\textbf{Pour utiliser les critères de Riemann :}
+\begin{itemize}
+\item En $+\infty$ : chercher un $\alpha > 1$ tel que $t^{\alpha} |f(t)| \to 0$.
+\item En un point $a$ : chercher un $\alpha < 1$ tel que $(t-a)^{\alpha} |f(t)| \to 0$.
+\item Si on trouve le bon $\alpha$, l'intégrale converge absolument.
+\end{itemize}
+\end{Meth}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Pour montrer que $\displaystyle\int_{1}^{+\infty} f(t) \, dt$ converge avec $f \geq 0$, on peut :
+\begin{enumerate}
+\item trouver $g \leq f$ avec $\int g$ convergente
+\item trouver $g \geq f$ avec $\int g$ convergente
+\item trouver $g \sim f$ avec $\int g$ divergente
+\item montrer que $f$ est bornée
+\end{enumerate}
+
+\item L'intégrale $\displaystyle\int_{1}^{+\infty} \frac{dt}{t^2 + 1}$ :
+\begin{enumerate}
+\item diverge
+\item converge car $\frac{1}{t^2+1} \leq \frac{1}{t^2}$ et $\int \frac{dt}{t^2}$ converge
+\item converge car $\frac{1}{t^2+1} \sim \frac{1}{t^2}$
+\item les réponses b) et c) sont correctes
+\end{enumerate}
+
+\item Pour $\displaystyle\int_{0}^{1} \frac{dt}{t^{\alpha}}$, la condition de convergence est :
+\begin{enumerate}
+\item $\alpha > 1$
+\item $\alpha < 1$
+\item $\alpha = 1$
+\item $\alpha \leq 0$
+\end{enumerate}
+
+\item L'intégrale $\displaystyle\int_{0}^{1} \frac{dt}{\sqrt{1-t}}$ :
+\begin{enumerate}
+\item diverge car $\frac{1}{\sqrt{1-t}} \to +\infty$
+\item converge car $\frac{1}{\sqrt{1-t}} = \frac{1}{(1-t)^{1/2}}$ avec $\frac{1}{2} < 1$
+\item converge vers $1$
+\item converge vers $2$
+\end{enumerate}
+\end{enumerate}
+
+\section{Techniques de calcul}
+
+\subsection{Intégration par parties}
+
+\begin{Thm}
+\textbf{Intégration par parties généralisée}
+
+Soient $u$ et $v$ deux fonctions de classe $\mathcal{C}^1$ sur $]a, b[$. Si deux des trois quantités suivantes existent (sont finies) :
+\begin{itemize}
+\item $\displaystyle\int_{a}^{b} u'(t) v(t) \, dt$
+\item $\displaystyle\int_{a}^{b} u(t) v'(t) \, dt$
+\item $\displaystyle\lim_{t \to a^{+}} [u(t)v(t)] - \lim_{t \to b^{-}} [u(t)v(t)]$
+\end{itemize}
+alors la troisième existe aussi et on a :
+$$\int_{a}^{b} u'(t) v(t) \, dt = \left[u(t)v(t)\right]_{a}^{b} - \int_{a}^{b} u(t) v'(t) \, dt$$
+\end{Thm}
+
+\begin{Ex}
+Calculons $\displaystyle\int_{0}^{+\infty} t e^{-t} \, dt$.
+
+Posons $u'(t) = e^{-t}$ et $v(t) = t$, donc $u(t) = -e^{-t}$ et $v'(t) = 1$.
+
+On a $[u(t)v(t)]_{0}^{+\infty} = \left[-te^{-t}\right]_{0}^{+\infty} = 0 - 0 = 0$.
+
+Donc :
+$$\int_{0}^{+\infty} t e^{-t} \, dt = 0 - \int_{0}^{+\infty} (-e^{-t}) \, dt = \int_{0}^{+\infty} e^{-t} \, dt = 1$$
+\end{Ex}
+
+\subsection{Changement de variable}
+
+\begin{Thm}
+\textbf{Changement de variable}
+
+Soit $\phi : [\alpha, \beta] \to [a, b]$ une fonction de classe $\mathcal{C}^1$, bijective et strictement monotone. Soit $f$ une fonction continue par morceaux sur $[a, b]$.
+
+Si $\displaystyle\int_{a}^{b} f(t) \, dt$ converge, alors $\displaystyle\int_{\alpha}^{\beta} f(\phi(u)) \phi'(u) \, du$ converge et :
+$$\int_{a}^{b} f(t) \, dt = \int_{\alpha}^{\beta} f(\phi(u)) \phi'(u) \, du$$
+\end{Thm}
+
+\begin{Ex}
+Calculons $\displaystyle\int_{0}^{+\infty} \frac{\ln t}{1 + t^2} \, dt$.
+
+Décomposons : $\displaystyle\int_{0}^{+\infty} = \int_{0}^{1} + \int_{1}^{+\infty}$.
+
+Pour $\displaystyle\int_{1}^{+\infty} \frac{\ln t}{1 + t^2} \, dt$, posons $u = \frac{1}{t}$, donc $t = \frac{1}{u}$ et $dt = -\frac{du}{u^2}$.
+
+Quand $t \to 1^{+}$, $u \to 1^{-}$ et quand $t \to +\infty$, $u \to 0^{+}$.
+
+$$\int_{1}^{+\infty} \frac{\ln t}{1 + t^2} \, dt = \int_{1}^{0} \frac{\ln(1/u)}{1 + 1/u^2} \cdot \left(-\frac{1}{u^2}\right) \, du = \int_{0}^{1} \frac{-\ln u}{u^2 + 1} \, du = -\int_{0}^{1} \frac{\ln u}{1 + u^2} \, du$$
+
+Donc :
+$$\int_{0}^{+\infty} \frac{\ln t}{1 + t^2} \, dt = \int_{0}^{1} \frac{\ln t}{1 + t^2} \, dt - \int_{0}^{1} \frac{\ln t}{1 + t^2} \, dt = 0$$
+\end{Ex}
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Convergence simple}
+
+Les intégrales impropres suivantes sont-elles convergentes ? Justifier.
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{1} \ln t \, dt$
+\item $\displaystyle\int_{0}^{+\infty} e^{-t^{2}} \, dt$
+\item $\displaystyle\int_{0}^{+\infty} x(\sin x) e^{-x} \, dx$
+\item $\displaystyle\int_{0}^{+\infty}(\ln t) e^{-t} \, dt$
+\item $\displaystyle\int_{0}^{1} \frac{dt}{(1-t) \sqrt{t}}$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Nature d'intégrales}
+
+Les intégrales impropres suivantes sont-elles convergentes ?
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{+\infty} \frac{dt}{e^{t}-1}$
+\item $\displaystyle\int_{0}^{+\infty} \frac{t e^{-\sqrt{t}}}{1+t^{2}} \, dt$
+\item $\displaystyle\int_{0}^{1} \cos ^{2}\left(\frac{1}{t}\right) \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Convergence et calculs}
+
+Les intégrales impropres suivantes sont-elles convergentes ?
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{+\infty} \frac{\ln t}{t^{2}+1} \, dt$
+\item $\displaystyle\int_{1}^{+\infty} \frac{\sqrt{\ln t}}{(t-1) \sqrt{t}} \, dt$
+\item $\displaystyle\int_{1}^{+\infty} e^{-\sqrt{\ln t}} \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Intégrales de Bertrand}
+
+On s'intéresse aux intégrales de Bertrand :
+$$\int_{e}^{+\infty} \frac{dx}{x^{\alpha}(\ln x)^{\beta}}$$
+On souhaite déterminer sa nature en fonction de $\alpha, \beta$ réels.
+
+\begin{enumerate}
+\item On suppose $\alpha > 1$. En comparant avec une intégrale de Riemann, montrer que l'intégrale converge.
+\item On suppose $\alpha = 1$. Calculer pour $X > e$ :
+$$\int_{e}^{X} \frac{dx}{x(\ln x)^{\beta}}$$
+En déduire les valeurs de $\beta$ pour lesquelles l'intégrale converge.
+\item On suppose $\alpha < 1$. En comparant à $\frac{1}{x}$, démontrer que l'intégrale diverge.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Discussion selon un paramètre}
+
+Discuter selon les valeurs de $\alpha$ réel, la convergence des intégrales suivantes :
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{+\infty} \frac{t \ln t}{(1+t^{2})^{\alpha}} \, dt$
+\item $\displaystyle\int_{0}^{+\infty} x^{\alpha} \ln \left(x+e^{\alpha x}\right) \, dx$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Calcul par changement de variable}
+
+\begin{enumerate}
+\item Montrer que $\displaystyle\int_{0}^{+\infty} \frac{\ln t}{1+t^{2}} \, dt$ converge.
+\item Avec le changement de variable $u = 1/t$, montrer que :
+$$\int_{0}^{+\infty} \frac{\ln t}{1+t^{2}} \, dt = 0$$
+\item Soit $\alpha > 0$, calculer :
+$$\int_{0}^{+\infty} \frac{\ln t}{\alpha^{2}+t^{2}} \, dt$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Calculs d'intégrales}
+
+Justifier la convergence et calculer la valeur des intégrales suivantes :
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{1} \frac{\ln t}{\sqrt{1-t}} \, dt$
+\item $\displaystyle\int_{0}^{+\infty} t e^{-\sqrt{t}} \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Intégrale et paramètre}
+
+Pour quelles valeurs de $\alpha \in \mathbb{R}$, l'intégrale suivante converge-t-elle ?
+$$\int_{0}^{1} \frac{1 - \cos t}{t^{\alpha}} \, dt$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Équivalents et convergence}
+
+Déterminer un équivalent simple au voisinage de la borne problématique et en déduire la nature de l'intégrale :
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{1} \frac{dt}{\sqrt{t(1-t)}}$
+\item $\displaystyle\int_{1}^{+\infty} \frac{dt}{\sqrt{t^3 - 1}}$
+\item $\displaystyle\int_{0}^{+\infty} \frac{t^2}{(1+t)^4} \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Intégration par parties}
+
+À l'aide d'une intégration par parties, calculer les intégrales suivantes :
+
+\begin{enumerate}
+\item $\displaystyle\int_{0}^{+\infty} t^2 e^{-t} \, dt$
+\item $\displaystyle\int_{0}^{1} t \ln t \, dt$
+\item $\displaystyle\int_{1}^{+\infty} \frac{\ln t}{t^2} \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Intégrale de Gauss}
+
+On admet que $\displaystyle\int_{0}^{+\infty} e^{-t^2} \, dt = \frac{\sqrt{\pi}}{2}$.
+
+\begin{enumerate}
+\item Calculer $\displaystyle\int_{0}^{+\infty} e^{-at^2} \, dt$ pour $a > 0$.
+\item À l'aide d'une intégration par parties, calculer $\displaystyle\int_{0}^{+\infty} t^2 e^{-t^2} \, dt$.
+\item Plus généralement, pour $n \in \mathbb{N}$, exprimer $I_n = \displaystyle\int_{0}^{+\infty} t^{2n} e^{-t^2} \, dt$ en fonction de $I_{n-1}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Fonction Gamma}
+
+On définit la fonction Gamma par :
+$$\Gamma(x) = \int_{0}^{+\infty} t^{x-1} e^{-t} \, dt$$
+
+\begin{enumerate}
+\item Montrer que cette intégrale converge pour tout $x > 0$.
+\item À l'aide d'une intégration par parties, montrer que pour tout $x > 0$ :
+$$\Gamma(x+1) = x \Gamma(x)$$
+\item Calculer $\Gamma(1)$ et en déduire que $\Gamma(n+1) = n!$ pour tout $n \in \mathbb{N}$.
+\item Montrer que $\Gamma(1/2) = \sqrt{\pi}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Convergence et divergence}
+
+Pour chacune des intégrales suivantes, déterminer si elle converge ou diverge :
+
+\begin{enumerate}
+\item $\displaystyle\int_{2}^{+\infty} \frac{dt}{t \ln t}$
+\item $\displaystyle\int_{2}^{+\infty} \frac{dt}{t (\ln t)^2}$
+\item $\displaystyle\int_{0}^{1} \frac{e^t - 1}{t^2} \, dt$
+\item $\displaystyle\int_{0}^{+\infty} \frac{\sin^2 t}{t^2} \, dt$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Calcul direct}
+
+Calculer les intégrales suivantes (après avoir justifié leur convergence) :
+
+\begin{enumerate}
+\item $\displaystyle\int_{1}^{+\infty} \frac{dt}{t(t+1)}$
+\item $\displaystyle\int_{0}^{+\infty} \frac{dt}{(1+t)(1+t^2)}$
+\item $\displaystyle\int_{0}^{1} \frac{dt}{\sqrt{t}(1+t)}$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Intégrale dépendant d'un paramètre}
+
+Soit $a > 0$. On pose :
+$$F(a) = \int_{0}^{+\infty} \frac{e^{-at} - e^{-t}}{t} \, dt$$
+
+\begin{enumerate}
+\item Montrer que cette intégrale est bien définie.
+\item À l'aide du changement de variable $u = at$, montrer que $F(a) = \ln a$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Intégrale de Dirichlet}
+
+On pose $I = \displaystyle\int_{0}^{+\infty} \frac{\sin t}{t} \, dt$.
+
+\begin{enumerate}
+\item Montrer que cette intégrale converge (semi-convergence).
+\item On admet que $I = \frac{\pi}{2}$. En déduire la valeur de $\displaystyle\int_{0}^{+\infty} \frac{\sin^2 t}{t^2} \, dt$.
+
+\textit{Indication : utiliser l'identité $\sin^2 t = \frac{1 - \cos(2t)}{2}$ et une intégration par parties.}
+\end{enumerate}
+

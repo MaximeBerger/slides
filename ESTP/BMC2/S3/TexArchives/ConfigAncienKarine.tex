@@ -1,0 +1,627 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[standard,framed]{ntheorem}
+\usepackage{needspace}
+\usepackage{pifont}
+\usepackage{lastpage}
+\usepackage{multicol} 
+\usepackage{verbatim}
+%\usepackage{esint} 
+
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize,
+                      labelsep=period}
+\captionsetup[table]{font={footnotesize,sc},
+                     labelsep=newline,
+                     justification=centering}
+
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{sectsty}
+\usepackage{afterpage}
+%	Tous les packages pour francisation compl\'ete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[french]{babel}
+\usepackage[blur,pstricks,tikz]{bclogo}
+\usepackage[standard]{ntheorem}
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs,stmaryrd,bm}
+\usepackage{pgfplots}%pour tracer les surfaces
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym,pifont,centernot}
+%\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+\usepackage{tabvar}
+%\usepackage{auto-pst-pdf}
+
+\setlength{\textwidth} {18cm}
+\setlength{\textheight} {20cm}
+\addtolength{\topmargin} {-3.cm}
+\setlength{\oddsidemargin} {-1.cm}
+\setlength{\evensidemargin} {-1.cm}
+
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\K} {\ensuremath{\mathbb{K}}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\ds}{\displaystyle}
+
+\def \equi#1{\mathrel{\mathop{\kern 0pt\sim}\limits_{#1}}}
+\newcommand{\Un}{\left(U_n\right)}
+\def\baselinestretch{1.1} 
+\newcommand{\Ass}{\longmapsto}
+\newcommand{\RE}{(O ;\Vec{i},\Vec{j})}
+\newcommand{\ab}{[a,b]}\newcommand{\cd}{[c,d]}
+\newcommand{\ixj}{I\times J}
+\def\noi{\noindent}
+
+\newcommand{\e}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\p}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\cro}[1]{\ensuremath{\left[ #1 \rig}}
+
+\newcommand{\eps}{\epsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\la}{\lambda}
+\newcommand{\Om}{\Omega}
+
+\newcommand{\cra}{\hookrightarrow}
+\newcommand{\dra}{\dashrightarrow}
+\newcommand{\dla}{\dashleftarrow}
+\newcommand{\lora}{\longrightarrow}
+\newcommand{\lola}{\longleftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\hra}{\hookrightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\Lra}{\Leftrightarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\f}[2]{\dfrac{#1}{#2}}
+
+%%%LIMITES FREQUENTES
+\newcommand{\limxi}{\ds\lim_{x\ra+\infty}}
+\newcommand{\limxm}{\ds\lim_{x\ra-\infty}}
+\newcommand{\limxz}{\ds\lim_{x\ra 0}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\tendz}{\underset{x\to 0}{\longrightarrow}}
+\newcommand{\tendinf}{\underset{x\to +\infty}{\longrightarrow}}
+
+\newcommand{\limyi}{\ds\lim_{y\ra+\infty}}
+\newcommand{\limym}{\ds\lim_{y\ra-\infty}}
+\newcommand{\limyz}{\ds\lim_{y\ra 0}}
+
+\newcommand{\limni}{\ds\lim_{n\ra+\infty}}
+\newcommand{\limnm}{\ds\lim_{n\ra-\infty}}
+\newcommand{\limnz}{\ds\lim_{n\ra 0}}
+
+\newcommand{\rem}[1]{\par\noindent\textbf{Remarque}\quad #1$\;$\\ }
+\newcommand{\gen}[1]{\par\noindent\textbf{G\'en\'eralit\'e}\quad #1$\;$\\ }
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+%\addtolength{\topmargin} {-2.5cm}
+%\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+%gras pour les definitions
+\newcommand{\defemph}[1]%
+{{\textbf{#1}}}
+
+\newsavebox{\boitprop}
+\newcommand{\titre}{Titre}
+\newcommand{\texte}{Texte}
+
+
+%Theoreme A retenir
+%DEFINITION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+%    \begin{tikzpicture}
+%    \node [draw=green!30,very thick,fill=green!30,rectangle% , rounded corners
+%    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+%    \end{tikzpicture}
+ \begin{bclogo}[couleur = yellow!10, arrondi = 0.1, ombre = true, couleurOmbre=black!30, logo=\bcattention] {\usebox{\boitprop}}
+  \end{bclogo}
+ %   \end{center}
+}
+\newtheorem{Thm}{Théorème}[section]
+
+
+
+
+
+
+%DEFINITION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+%    \begin{tikzpicture}
+%    \node [draw=green!30,very thick,fill=green!30,rectangle% , rounded corners
+%    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+%    \end{tikzpicture}
+ \begin{bclogo}[couleur = green!10, arrondi = 0.1, ombre = true, couleurOmbre=black!30, logo=\bcfleur] {\usebox{\boitprop}}
+  \end{bclogo}
+ %   \end{center}
+}
+\newtheorem{Def}{D\'efinition}[section]
+
+%PROPOSITION
+
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+ \begin{bclogo}[couleur = blue!10, arrondi = 0.1, ombre = true, couleurOmbre=black!30, logo=\bcetoile] {\usebox{\boitprop}}
+    \end{bclogo}
+ %   \end{center}
+}
+\newtheorem{Prop}{Proposition}[section]
+
+%{%
+%\theoremstyle{break}
+%\theoremprework{%
+%\textcolor{red}{\begin{center}\rule{0.6\linewidth}{3pt}\end{center}}}
+%\theorempostwork{\hfill%
+%\textcolor{red}{\begin{center}\rule{0.6\linewidth}{3pt}\end{center}}}
+%\theoremheaderfont{\scshape}
+%\theoremseparator{ ---}
+%\newtheorem{Prop}{%
+%\textcolor{red}{Proposition}}[section]
+%}
+
+%METHODE
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+    \begin{tikzpicture}
+    \node [draw=yellow!10,very thick,fill=yellow!10,rectangle% , rounded corners
+    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+    \end{tikzpicture}
+ %   \end{center}
+}
+\newtheorem{Meth}{M\'ethode}[section]
+
+%NOTATION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+    \begin{tikzpicture}
+    \node [draw=blue!10,very thick,fill=blue!10,rectangle% , rounded corners
+    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+    \end{tikzpicture}
+ %   \end{center}
+}
+\newtheorem{Not}{Notation}[section]
+
+\newenvironment{Rem}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{red} $\textbf{\textcolor{red}{Remarque}}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Voc}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Vocabulaire}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Ex}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Exemple}$ &  \begin{minipage}[l]{.8\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Exs}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Exemples}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{CEx}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Contre exemple}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Dem}{\textcolor{red}{\bf{D\'emonstration}}
+
+\textcolor{red}{\ding{110}}}
+
+%FIN DEMONSTRATION
+\newcommand{\findem}{\textcolor{red}{\rule{0.9\linewidth}{2pt} \ding{110}}}
+
+\newenvironment{Sol}{\vspace{.1cm}\begin{tabular}{c|r}
+    \arrayrulecolor{blue} \textbf{\textcolor{blue}{Solution}} &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Rep}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{R\'eponse}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Rap}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Rappel}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{App}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textcolor{black}{\bf{Application}}$ &  \begin{minipage}[l]{.85\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Att}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{red} $\textcolor{red}{\bf{Attention\ !}}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Aut}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{blue} $\textcolor{blue}{\bf{Autrement\ dit}}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{Prec}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Compl\'ement}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+%AUTRE VERSION
+\newenvironment{Cplt}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{Compl\'ement}$ &  \begin{minipage}[l]{.7\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+\newenvironment{ques}{\vspace{.5cm}\begin{tabular}{c|r}
+    \arrayrulecolor{black} $\textbf{\textcolor{orange}{Petite question}}$ &  \begin{minipage}[l]{.8\textwidth}}
+{\end{minipage}\end{tabular}\vspace{.2cm}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\corps}[1]{\mathbb{#1}}
+%\newcommand{\R}{\corps{R}}
+%\newcommand{\C}{\corps{C}}
+%\newcommand{\N}{\corps{N}}
+%\newcommand{\Z}{\corps{Z}}
+
+%%%%
+%%%%
+\newcounter{nexe}
+\setcounter{nexe}{0}
+\newcommand{\exe}{%
+\stepcounter{nexe}
+{\textbf{\textcolor{orange}{\ding{42} Exemple %
+\arabic{nexe}} }}
+}
+
+\newcounter{nexo}
+\setcounter{nexo}{0}
+\newcommand{\exo}{%
+\stepcounter{nexo}
+{\textbf{\textcolor{orange}{\ding{110} Exercice %
+\arabic{nexo}} }}
+}
+
+%\def\logouniversite{figs/upmc.png}%LOGO
+
+% ----------------------------------------------------
+
+% Poner "índice" en vez de "index"
+\addto\captionsspanish{\renewcommand{\contentsname}{Índice}}
+
+
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhf{}
+
+% Añade una cabecera con el logo de la UPCT
+\lhead{
+    \includegraphics[height=40pt]{LOGOS3.jpg}
+    % Aquí puedes añadir contenido a tu cabecera
+} 
+% Puedes añadir contenido en la parte derecha de la cabecera de forma análoga con \rhead{}
+
+% Linea negra bajo la cabecera
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{orange}\leaders\hrule height \headrulewidth\hfill}}
+
+% Mejor formateo de los capítulos
+%\titleformat{\chapter}[display]
+%  {\normalfont\centering\bfseries}{\vspace{-100pt}}{0pt}{\Huge}
+
+% Mejor formateo de secciones 
+%\titleformat{\section}
+%    {\normalfont\scshape}{1em}{\thesection}{\Large}
+
+% Función para crear hoja en blanco
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\newcommand{\titulo}{\color{black}   BACHELOR Semestre 3
+}
+
+\newcommand{\autor}{Karine SERIER}
+\newcommand{\fecha}{ESTP Dijon}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%        RACCOURCIS               %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\be}{\begin{equation*}}
+\newcommand{\ee}{\end{equation*}}
+\newcommand{\ben}{\begin{equation}}
+\newcommand{\een}{\end{equation}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\indic}{\operatorname{l\negthinspace l}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\trace}{\operatorname{trace}}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\id}{\operatorname{Id}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\re}{\operatorname{Re}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\pagestyle{headandfoot}
+\everymath{\displaystyle}
+\newcounter{compteur}
+\setcounter{compteur}{1}
+%%%%%%%%%%%%%%%%%%%% GERE PYTHON
+\usepackage{listings}
+\lstset{
+literate=
+{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+{Á}{{\'A}}1 {É}{{\'E}}1{Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1{ù}{{\`u}}1
+{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+{€}{{\EUR}}1 {£}{{\pounds}}1
+}
+\lstdefinestyle{stylepython}{
+        language=Python, 
+        basicstyle=\ttfamily,
+%       name=iciNOM,
+%        title={Un programme Python}, 
+%       caption={iciTitre},
+%       label={iciNom},
+        commentstyle=\footnotesize\color{green!50!black}, 
+        keywordstyle=\color{blue},   
+        stringstyle=\color{olive},   
+        numberstyle=\tiny,  
+%       mathescape,  
+%       showstringspaces=false,   
+%       tabsize=2,   
+        framexleftmargin=5mm,  
+%       framexrightmargin=5pt,
+%       framexbottommargin=5pt
+        xleftmargin=0mm,  
+        keepspaces=false,   
+        classoffset=1,     
+        numbers=left,    
+        stepnumber=1,    
+        numbersep=8pt,   
+        showstringspaces=false,  
+        frame=single,
+        framerule=1pt,
+        rulecolor=\color{blue}, 
+%       breaklines=true,  
+%       rulesepcolor=\color{blue}, %avec frame=shadowsbox
+%        backgroundcolor=\color{yellow!30}
+}
+
+
+%%%%%%%%%%%
+%definition
+%%%%%%
+
+
+
+%%gras pour les definitions
+%\newcommand{\defemph}[1]%
+%{{\textbf{#1}}}
+%
+%\newsavebox{\boitprop}
+%\newcommand{\titre}{Titre}
+%\newcommand{\texte}{Texte}
+
+%DEFINITION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+%    \begin{tikzpicture}
+%    \node [draw=green!30,very thick,fill=green!30,rectangle% , rounded corners
+%    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+%    \end{tikzpicture}
+ \begin{bclogo}[couleur = green!10, arrondi = 0.1, ombre = true, couleurOmbre=green!30, logo=\bcfleur] {\usebox{\boitprop}\vspace{.2cm} }
+  \end{bclogo}
+ %   \end{center}
+}
+%\newtheorem{Def}{D\'efinition}[section]
+
+%PROPOSITION
+
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+ \begin{bclogo}[couleur = yellow!10, arrondi = 0.1, ombre = true, couleurOmbre=yellow!30, logo=\bcetoile] {\usebox{\boitprop}\vspace{.2cm}}
+    \end{bclogo}
+ %   \end{center}
+}
+%\newtheorem{Prop}{Proposition}[section]
+
+
+
+%\newtheorem{Not}{Notation}[section]
+
+
+
+%Theoreme A retenir
+%DEFINITION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+     \vspace{.5cm} 
+    \end{lrbox}
+%        \begin{center}
+%    \begin{tikzpicture}
+%    \node [draw=green!30,very thick,fill=green!30,rectangle% , rounded corners
+%    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+%    \end{tikzpicture}
+ \begin{bclogo}[couleur = yellow!10, arrondi = 0.1, ombre = true, couleurOmbre=black!30, logo=\bcattention] {\usebox{\boitprop}}
+ \vspace{.5cm} 
+  \end{bclogo}
+ %   \end{center}
+}
+%\newtheorem{thm}{}[section]
+
+
+
+
+
+%NOTATION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+    \begin{tikzpicture}
+    \node [draw=blue!10,very thick,fill=blue!10,rectangle% , rounded corners
+    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+    \end{tikzpicture}
+ %   \end{center}
+}
+
+
+\begin{document}
+    % Añadir contador de páginas en el pie de página
+    %\cfoot{\thepage}
+    \chead{\textbf{\textcolor{orange}\thepage}}
+    % Crear la portada
+    \begin{titlepage}
+        \reversemarginpar\marginpar{%
+            \vspace{-80pt}
+            \hspace*{25pt}
+            \includegraphics[height=1.5cm]{LOGOS3.jpg}%
+        }
+        
+        {\centering
+            \vspace{1cm} % edita esta distancia para subir/bajar el logo
+            \hspace{3cm} \includegraphics[width=1.\textwidth]{estp.jpg} %comenta esta línea si no quieres el logo en la portada
+            \par\vspace{3cm}
+            {\scshape\huge\textbf{\hspace{1cm}\titulo}} \par\vspace{2cm}
+            
+            {%\LARGE
+            \begin{flushright}
+                    \item \autor 
+                    \item \textit{\fecha}
+            \end{flushright}
+            }
+        }
+    \end{titlepage}
+
+  
+    \afterpage{\blankpage}
+    
+\begingroup
+    \tableofcontents
+
+\endgroup    
+    % Inicio del texto
+
+            
+            
+ 
+
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+
+
+%\input{0_resume}
+%\input{0_remerciements}
+%\newpage
+\chapter{Développements limités}
+\input{0_dl}
+\chapter{Courbes du plan}
+\input{0_cb}
+%\newpage
+\chapter{Calculs de champs de vecteurs}
+\input{0_ic}
+%\newpage
+\chapter{Système différentiel}
+\input{0_sysdiff}
+\newpage
+\chapter{Puissances de matrice}
+\input{0_puissance}
+% \listoffigures
+%\listoftables      
+%\renewcommand{\bibname}{Bibliography}
+%\bibliographystyle{alpha}
+%%\bibliography{biblio}
+
+
+%\input{0_abstract}
+\end{document}

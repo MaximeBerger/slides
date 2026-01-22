@@ -1,0 +1,712 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+L'intégrale double généralise la notion d'intégrale simple à des fonctions de deux variables. Elle permet de calculer des volumes, des aires, des masses, des centres d'inertie et bien d'autres grandeurs physiques.
+
+\textit{Dans tout ce chapitre, l'espace est muni d'un repère orthonormé $(O;\vec i,\vec j,\vec k)$.}
+
+\section{Rappel : calcul de volume par intégrale simple}
+
+\begin{Prop}\textbf{Volume d'un solide}
+
+On considère un solide délimité par les plans d'équations respectives $z = a$ et $z = b$.
+
+On désigne par $B(z)$ la section plane de ce solide avec le plan perpendiculaire à $(Oz)$ de cote $z$ $(a \leq z \leq b)$.
+
+On note $S(z)$ l'aire de la section $B(z)$.
+
+Le volume $V$, en unités de volume, de ce solide est égal à :
+$$V = \int_a^b S(z) \, dz$$
+\end{Prop}
+
+\begin{center}
+\includegraphics{images/volume}
+\end{center}
+
+\begin{Ex}\textbf{Volume de la sphère}
+
+\begin{minipage}{0.55\linewidth}
+Considérons la sphère de centre $O$ et de rayon $R$. Elle est située entre les plans de cotes $-R$ et $R$.
+
+Soit $z$ un réel de $[-R,R]$.
+
+L'intersection de la sphère et du plan de cote $z$ est le disque $B(z)$ de rayon $r = \sqrt{R^2-z^2}$ dont l'aire est :
+$$S(z) = \pi r^2 = \pi(R^2-z^2)$$
+
+Le volume de la sphère est donc égal à :
+$$V = \int_{-R}^R \pi(R^2-z^2) \, dz = \pi\left[R^2z - \frac{z^3}{3}\right]_{-R}^{R} = \frac{4}{3}\pi R^3$$
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.6]{images/sphere.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[1]{\textbf{Volume d'un paraboloïde}}
+
+Quel est le volume $V$ du solide ci-dessous, obtenu par révolution autour de l'axe $(Oz)$ du morceau de parabole d'équation (dans le plan $(yOz)$) $z = y^2$ (avec $0 \leq y \leq 2$) ?
+
+\begin{center}
+\includegraphics[scale=0.5]{images/fig1.png}
+\end{center}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[1]{\textbf{Volume d'un cône}}
+
+Déterminer le volume d'un cône circulaire de révolution, de hauteur $h$ et de génératrice d'équation (dans le plan $(yOz)$) $z = ay$ où $a$ est un nombre réel strictement positif donné.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Intégrale double}
+
+\subsection{Définition et interprétation géométrique}
+
+\begin{Def}\textbf{Intégrale double}
+
+Soit $f$ une fonction continue sur un domaine fermé $D$ de $\mathbb{R}^2$. On dit que $f$ est intégrable sur $D$ si la limite suivante existe :
+$$\lim_{m,n \to +\infty} \sum_{i=1}^m \sum_{j=1}^n f(a_i, b_j) \Delta x_i \Delta y_j$$
+
+Cette limite, notée $\displaystyle\iint_D f(x,y) \, dxdy$, est appelée \textbf{intégrale double} de $f$ sur $D$.
+\end{Def}
+
+\begin{Rmq}\textbf{Interprétation géométrique}
+
+Si $f(x,y) \geq 0$ sur $D$, alors $\displaystyle\iint_D f(x,y) \, dxdy$ représente le \textbf{volume} du solide délimité par :
+\begin{itemize}
+\item le plan $(xOy)$ en dessous
+\item la surface $z = f(x,y)$ au-dessus
+\item les "murs" verticaux au-dessus du bord de $D$
+\end{itemize}
+\end{Rmq}
+
+\begin{center}
+\begin{minipage}{0.45\linewidth}
+\includegraphics[scale=0.05]{images/Expl1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+\includegraphics[scale=0.07]{images/Expl1Vol}
+\end{minipage}
+\end{center}
+
+\subsection{Théorème de Fubini}
+
+\begin{Thm}\textbf{Théorème de Fubini (sur un pavé)}
+
+Soit $f$ une fonction continue sur le pavé $[a,b] \times [c,d]$. Alors :
+$$\iint_{[a,b] \times [c,d]} f(x,y) \, dxdy = \int_a^b \left( \int_c^d f(x,y) \, dy \right) dx = \int_c^d \left( \int_a^b f(x,y) \, dx \right) dy$$
+\end{Thm}
+
+\begin{Rmq}
+Le théorème de Fubini affirme que l'on peut calculer une intégrale double en effectuant \textbf{deux intégrales simples successives}, et que l'ordre d'intégration n'importe pas (le résultat est le même).
+\end{Rmq}
+
+\begin{center}
+\begin{minipage}{0.45\linewidth}
+\includegraphics[scale=0.07]{images/Fubini1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+\includegraphics[scale=0.07]{images/Fubini2}
+\end{minipage}
+\end{center}
+
+\begin{Ex}
+Calculer $\displaystyle\iint_{[0,4]^2} \left(-\frac{x}{2} - \frac{y}{4} + 7\right) dxdy$.
+
+\begin{align*}
+\iint_{[0,4]^2} \left(-\frac{x}{2} - \frac{y}{4} + 7\right) dxdy &= \int_0^4 \left( \int_0^4 \left(-\frac{x}{2} - \frac{y}{4} + 7\right) dx \right) dy \\
+&= \int_0^4 \left[-\frac{x^2}{4} - \frac{yx}{4} + 7x\right]_0^4 dy \\
+&= \int_0^4 (24-y) \, dy = \left[24y - \frac{y^2}{2}\right]_0^4 = 88
+\end{align*}
+\end{Ex}
+
+\begin{Prop}\textbf{Cas des variables séparables}
+
+Si $f(x,y) = h(x) \times k(y)$, alors :
+$$\iint_{[a,b] \times [c,d]} h(x) k(y) \, dxdy = \left(\int_a^b h(x) \, dx\right) \times \left(\int_c^d k(y) \, dy\right)$$
+\end{Prop}
+
+\begin{Ex}
+Calculer $\displaystyle\iint_{[0,2] \times [0,1]} x^2 y \, dxdy$.
+
+$$\iint_{[0,2] \times [0,1]} x^2 y \, dxdy = \int_0^2 x^2 \, dx \times \int_0^1 y \, dy = \left[\frac{x^3}{3}\right]_0^2 \times \left[\frac{y^2}{2}\right]_0^1 = \frac{8}{3} \times \frac{1}{2} = \frac{4}{3}$$
+\end{Ex}
+
+\newpage 
+
+\exo[1]{\textbf{QCM - Intégrales doubles}}
+
+\begin{enumerate}
+\item $\displaystyle\iint_{[0,1]^2} (x+y) \, dxdy$ vaut :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $\dfrac{1}{2}$
+\item $1$
+\item $2$
+\end{enumerate}
+\end{multicols}
+
+\item $\displaystyle\iint_{[0,\pi] \times [0,\pi]} \sin x \cos y \, dxdy$ vaut :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $0$
+\item $2$
+\item $4$
+\end{enumerate}
+\end{multicols}
+
+\item Si $D = [0,1]^2$, alors $\displaystyle\iint_D 1 \, dxdy$ vaut :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $0$
+\item $1$
+\item $2$
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\subsection{Intégrale sur un domaine élémentaire}
+
+\begin{Def}\textbf{Domaine élémentaire}
+
+Un domaine $D$ de $\mathbb{R}^2$ est dit \textbf{élémentaire} si on peut l'écrire :
+\begin{itemize}
+\item $D = \{ (x,y) \in \mathbb{R}^2 \mid a \leq x \leq b \text{ et } \varphi_1(x) \leq y \leq \varphi_2(x) \}$
+
+ou bien
+
+\item $D = \{ (x,y) \in \mathbb{R}^2 \mid c \leq y \leq d \text{ et } \psi_1(y) \leq x \leq \psi_2(y) \}$
+\end{itemize}
+où les fonctions $\varphi_1, \varphi_2$ (resp. $\psi_1, \psi_2$) sont continues.
+\end{Def}
+
+\begin{center}
+\includegraphics[scale=0.3]{images/fig3.png}
+\end{center}
+
+\begin{Thm}\textbf{Théorème de Fubini (sur un domaine élémentaire)}
+
+Soit $f$ une fonction continue sur un domaine élémentaire $D$. Alors :
+$$\iint_D f(x,y) \, dxdy = \int_a^b \left( \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) \, dy \right) dx = \int_c^d \left( \int_{\psi_1(y)}^{\psi_2(y)} f(x,y) \, dx \right) dy$$
+\end{Thm}
+
+\begin{Meth}\textbf{En pratique}
+
+\begin{enumerate}
+\item \textbf{Dessiner le domaine} $D$ et identifier ses frontières.
+\item \textbf{Choisir l'ordre d'intégration} :
+\begin{itemize}
+\item Intégration à "$x$ constant" : on fixe $x$, on fait varier $y$ entre les frontières
+\item Intégration à "$y$ constant" : on fixe $y$, on fait varier $x$ entre les frontières
+\end{itemize}
+\item \textbf{Tracer une flèche} traversant le domaine pour visualiser les bornes.
+\item \textbf{Calculer} l'intégrale intérieure, puis l'intégrale extérieure.
+\end{enumerate}
+\end{Meth}
+
+\begin{center}
+\includegraphics[scale=0.7]{images/fig4.png}
+\end{center}
+
+\begin{Ex}
+Calculer $\displaystyle\iint_{D} y^2 \, dxdy$, avec $D = \{(x,y) \in \mathbb{R}^2 \mid y \geq 0, 0 \leq x \leq 2, y \leq x\}$.
+
+\begin{minipage}{0.55\linewidth}
+On intègre à $x$ constant. Pour $x$ fixé dans $[0,2]$, $y$ varie de $0$ à $x$.
+
+\begin{align*}
+\iint_{D} y^2 \, dxdy &= \int_0^2 \left( \int_0^x y^2 \, dy \right) dx \\
+&= \int_0^2 \left[\frac{y^3}{3}\right]_0^x dx \\
+&= \int_0^2 \frac{x^3}{3} \, dx \\
+&= \left[\frac{x^4}{12}\right]_0^2 = \frac{4}{3}
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig5.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\begin{Ex}
+Calculer $\displaystyle\iint_{D} (x+2y) \, dxdy$, avec $D$ le domaine délimité par les paraboles $y = 2x^2$ et $y = 1+x^2$.
+
+\begin{minipage}{0.55\linewidth}
+Les paraboles se coupent en $2x^2 = 1+x^2$, soit $x^2 = 1$, donc $x = \pm 1$.
+
+Pour $x \in [-1,1]$, $y$ varie de $2x^2$ à $1+x^2$.
+
+\begin{align*}
+&\iint_{D} (x+2y) \, dxdy = \int_{-1}^1 \left( \int_{2x^2}^{1+x^2} (x+2y) \, dy \right) dx \\
+&= \int_{-1}^1 \left[xy+y^2\right]_{2x^2}^{1+x^2} dx \\
+&= \int_{-1}^1 (-3x^4-x^3+2x^2+x+1) \, dx = \frac{32}{15}
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig6.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Calculs d'intégrales doubles}}
+
+Calculer les intégrales doubles suivantes :
+
+\begin{enumerate}
+\item $\displaystyle\iint_D xy \, dxdy$ où $D = \{(x,y) \mid 0 \leq x \leq 1, x^2 \leq y \leq x\}$
+
+\item $\displaystyle\iint_D (x^2+y^2) \, dxdy$ où $D = \{(x,y) \mid x \geq 0, y \geq 0, x+y \leq 1\}$
+
+\item $\displaystyle\iint_D e^{x+y} \, dxdy$ où $D = \{(x,y) \mid 0 \leq x \leq 1, 0 \leq y \leq x\}$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Aire d'un domaine}
+
+\begin{Def}\textbf{Aire d'un domaine}
+
+L'aire $S$ d'un domaine $D$ de $\mathbb{R}^2$ est définie par :
+$$S = \iint_D dxdy = \iint_D 1 \, dxdy$$
+\end{Def}
+
+\begin{Rmq}
+L'intégrale $\displaystyle\iint_D 1 \, dxdy$ représente le volume du cylindre de hauteur 1 et de base $D$, qui vaut bien $1 \times S = S$.
+\end{Rmq}
+
+\begin{Ex}
+Calculer l'aire intérieure du triangle défini par les trois points $O(0,0)$, $A(2,2)$, $B(0,6)$.
+
+\begin{minipage}{0.6\linewidth}
+Le domaine est :
+$D = \{(x,y) \in \mathbb{R}^2 \mid 0 \leq x \leq 2, x \leq y \leq -2x+6\}$
+
+\begin{align*}
+A &= \iint_D dxdy = \int_0^2 \left(\int_x^{-2x+6} dy\right) dx \\
+&= \int_0^2 (-3x+6) \, dx = \left[-\frac{3}{2}x^2+6x\right]_0^2 = 6 \text{ u.a.}
+\end{align*}
+
+On retrouve ce résultat avec la formule $\frac{B \times h}{2} = \frac{6 \times 2}{2} = 6$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.35\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig10.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Aire d'une ellipse}}
+
+Calculer l'aire intérieure de l'ellipse d'équation $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$.
+
+\textit{Indication : utiliser un changement de variable $x = a\cos\phi$.}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Intégration en coordonnées polaires}
+
+\subsection{Rappel : coordonnées polaires}
+
+\begin{center}
+\begin{minipage}{0.45\linewidth}
+\includegraphics[scale=0.6]{images/fig35.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth}
+$$\rho = OM = \sqrt{x^2+y^2}$$
+$$\theta = (\vec{i}, \overrightarrow{OM})$$
+
+\textbf{Formules de passage :}
+$$x = \rho \cos \theta$$
+$$y = \rho \sin \theta$$
+\end{minipage}
+\end{center}
+
+\subsection{Formule d'intégration en polaires}
+
+\begin{Thm}\textbf{Changement de variables en coordonnées polaires}
+
+$$\colorbox{yellow}{$\displaystyle\iint_D f(x,y) \, dxdy = \iint_D f(\rho \cos \theta, \rho \sin \theta) \cdot \rho \, d\rho \, d\theta$}$$
+\end{Thm}
+
+\begin{Rmq}\textbf{Attention !}
+\begin{enumerate}
+\item L'élément différentiel $dxdy$ est remplacé par $\rho \, d\rho \, d\theta$ (facteur $\rho$ supplémentaire).
+\item Après substitution, il faut \textbf{simplifier au maximum} en utilisant $\cos^2\theta + \sin^2\theta = 1$.
+\item Ne pas oublier de \textbf{convertir les bornes} du domaine en coordonnées polaires.
+\end{enumerate}
+\end{Rmq}
+
+\begin{Ex}
+Calculer $I = \displaystyle\iint_D \dfrac{dxdy}{\sqrt{x^2+y^2}(1+x^2+y^2)}$, où $D$ est le disque de centre $O$ et de rayon $a$.
+
+\begin{minipage}{0.55\linewidth}
+En coordonnées polaires :
+\begin{itemize}
+\item $D = \{(\rho,\theta) \mid 0 \leq \rho \leq a, 0 \leq \theta \leq 2\pi\}$
+\item $\sqrt{x^2+y^2} = \rho$ et $1+x^2+y^2 = 1+\rho^2$
+\end{itemize}
+
+\begin{align*}
+I &= \int_0^{2\pi} \int_0^a \frac{\rho \, d\rho \, d\theta}{\rho(1+\rho^2)} \\
+&= \int_0^{2\pi} \left(\int_0^a \frac{d\rho}{1+\rho^2}\right) d\theta \\
+&= \int_0^{2\pi} \arctan(a) \, d\theta = 2\pi \arctan(a)
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig25.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\begin{Ex}\textbf{Volume d'une demi-boule de rayon $R$}
+
+\begin{minipage}{0.55\linewidth}
+$D$ est le disque de centre $O$ et de rayon $R$.
+
+L'équation de la demi-sphère est $z = \sqrt{R^2-\rho^2}$.
+
+\begin{align*}
+V &= \iint_D \sqrt{R^2-\rho^2} \cdot \rho \, d\rho \, d\theta \\
+&= \int_0^{2\pi} d\theta \int_0^R \sqrt{R^2-\rho^2} \cdot \rho \, d\rho \\
+&= 2\pi \times \left[-\frac{1}{3}(R^2-\rho^2)^{3/2}\right]_0^R \\
+&= 2\pi \times \frac{R^3}{3} = \frac{2\pi R^3}{3}
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig23.png}
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Intégrales en polaires}}
+
+\begin{enumerate}
+\item Calculer $\displaystyle\iint_D (x^2+y^2) \, dxdy$ où $D$ est le disque de centre $(0,1)$ et de rayon 1.
+
+\item Calculer $\displaystyle\iint_D \sqrt{x^2+y^2} \, dxdy$ où $D = \{(x,y) \mid x^2+y^2-2x \leq 0\}$.
+
+\item Calculer $\displaystyle\iint_D \frac{xy}{x^2+y^2} \, dxdy$ où $D$ est le quart de couronne $\{x \geq 0, y \geq 0, 1 \leq x^2+y^2 \leq 4\}$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Intégrale de Gauss}}
+
+On considère $J = \displaystyle\iint_D e^{-(x^2+y^2)} dxdy$ où $D$ est le quart de plan $x \geq 0$, $y \geq 0$.
+
+\begin{enumerate}
+\item Calculer $J$ en coordonnées polaires.
+\item Calculer $J$ en coordonnées cartésiennes en fonction de $I = \displaystyle\int_0^{+\infty} e^{-x^2} dx$.
+\item En déduire que $\displaystyle\int_0^{+\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Applications de l'intégrale double}
+
+\subsection{Masse d'un solide}
+
+\begin{Def}\textbf{Masse}
+
+Si un domaine $D$ possède une \textbf{densité surfacique} $\mu(x,y)$, la masse du solide est :
+$$M = \iint_D \mu(x,y) \, dxdy$$
+\end{Def}
+
+\begin{Ex}
+Calculer la masse d'un disque de centre $O$, de rayon $R$, sachant que la densité surfacique $\mu(x,y)$ au point $M(x,y)$ est proportionnelle à la distance de $M$ au centre.
+
+$$M = \iint_D k\sqrt{x^2+y^2} \, dxdy = k\int_0^{2\pi} d\theta \int_0^R \rho^2 \, d\rho = \frac{2\pi kR^3}{3}$$
+\end{Ex}
+
+\subsection{Centre d'inertie d'un solide}
+
+\begin{Def}\textbf{Centre d'inertie (ou centre de gravité)}
+
+Pour une figure plane de densité surfacique $\mu(x,y)$, les coordonnées du centre de gravité $G$ sont :
+
+$$x_G = \frac{\displaystyle\iint_D x \cdot \mu(x,y) \, dxdy}{\displaystyle\iint_D \mu(x,y) \, dxdy} \qquad y_G = \frac{\displaystyle\iint_D y \cdot \mu(x,y) \, dxdy}{\displaystyle\iint_D \mu(x,y) \, dxdy}$$
+
+\vspace{1em}
+
+\textbf{Cas homogène} ($\mu$ constante) :
+$$x_G = \frac{\displaystyle\iint_D x \, dxdy}{\displaystyle\iint_D dxdy} \qquad y_G = \frac{\displaystyle\iint_D y \, dxdy}{\displaystyle\iint_D dxdy}$$
+\end{Def}
+
+\begin{Ex}
+Déterminer les coordonnées du centre d'inertie du domaine homogène défini par $\{y \geq 0, y \leq 4-x^2\}$.
+
+\begin{minipage}{0.55\linewidth}
+\begin{enumerate}
+\item \textbf{Aire :}
+$$S = \int_{-2}^2 (4-x^2) \, dx = \left[4x-\frac{x^3}{3}\right]_{-2}^2 = \frac{32}{3}$$
+
+\item \textbf{Par symétrie :} $x_G = 0$
+
+\item \textbf{Calcul de $y_G$ :}
+\begin{align*}
+\iint_D y \, dxdy &= \int_{-2}^2 \left[\frac{y^2}{2}\right]_0^{4-x^2} dx \\
+&= \frac{1}{2}\int_{-2}^2 (4-x^2)^2 \, dx = \frac{256}{15}
+\end{align*}
+
+Ainsi : $y_G = \dfrac{256/15}{32/3} = \dfrac{8}{5} = 1,6$
+\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[scale=0.7]{images/fig13.png}
+
+$G(0; 1,6)$
+\end{center}
+\end{minipage}
+\end{Ex}
+
+\subsection{Moment d'inertie d'un solide}
+
+\begin{Def}\textbf{Moment d'inertie}
+
+Le moment d'inertie caractérise la résistance d'un solide à la mise en rotation. Plus les masses sont éloignées de l'axe de rotation, plus le moment d'inertie est grand.
+
+\begin{itemize}
+\item \textbf{Par rapport à l'origine :}
+$$I_O = \iint_D \mu(x,y)(x^2+y^2) \, dxdy$$
+
+\item \textbf{Par rapport à l'axe $Ox$ :}
+$$I_{Ox} = \iint_D \mu(x,y) y^2 \, dxdy$$
+
+\item \textbf{Par rapport à l'axe $Oy$ :}
+$$I_{Oy} = \iint_D \mu(x,y) x^2 \, dxdy$$
+
+\item \textbf{Relation :} $I_O = I_{Ox} + I_{Oy}$
+\end{itemize}
+\end{Def}
+
+\begin{Ex}
+Calculer le moment d'inertie d'un disque homogène de rayon $r$ et de masse $M$ par rapport à son centre.
+
+$$I_O = \frac{M}{\pi r^2} \iint_D (x^2+y^2) \, dxdy = \frac{M}{\pi r^2} \int_0^{2\pi} \int_0^r \rho^3 \, d\rho \, d\theta = \frac{M}{\pi r^2} \times 2\pi \times \frac{r^4}{4} = \frac{Mr^2}{2}$$
+\end{Ex}
+
+\begin{Thm}\textbf{Théorème de Huygens}
+
+Soit $G$ le centre de gravité d'un solide de masse $M$. Si $I_G$ est le moment d'inertie par rapport à un axe passant par $G$, et $I_\Delta$ le moment d'inertie par rapport à un axe parallèle distant de $d$, alors :
+$$I_\Delta = I_G + Md^2$$
+\end{Thm}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Centre d'inertie d'un demi-disque}}
+
+Déterminer les coordonnées du centre d'inertie d'un demi-disque homogène de rayon $R$ (partie $y \geq 0$).
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Moment d'inertie d'un carré}}
+
+Calculer le moment d'inertie d'un carré homogène de côté $a$ et de masse $M$ par rapport à un de ses sommets.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Changement de variables dans les intégrales doubles}
+
+\subsection{Matrice jacobienne et jacobien}
+
+\begin{Def}\textbf{Matrice jacobienne}
+
+Soit $\varphi : U \to V$ un changement de variables défini par :
+$$\varphi(u,v) = (x(u,v), y(u,v))$$
+
+La \textbf{matrice jacobienne} de $\varphi$ au point $(u,v)$ est :
+$$J_\varphi(u,v) = \begin{pmatrix} \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\ \\ \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v} \end{pmatrix}$$
+
+Le \textbf{jacobien} est le déterminant de cette matrice :
+$$\text{Jac}_\varphi(u,v) = \det(J_\varphi) = \frac{\partial x}{\partial u} \cdot \frac{\partial y}{\partial v} - \frac{\partial x}{\partial v} \cdot \frac{\partial y}{\partial u}$$
+\end{Def}
+
+\begin{Thm}\textbf{Formule de changement de variables}
+
+Soit $\varphi$ un $C^1$-difféomorphisme de $A$ sur $B$. Alors :
+$$\iint_B f(x,y) \, dxdy = \iint_A f(x(u,v), y(u,v)) \cdot |\text{Jac}_\varphi(u,v)| \, dudv$$
+\end{Thm}
+
+\subsection{Coordonnées polaires}
+
+\begin{Prop}\textbf{Jacobien en coordonnées polaires}
+
+Pour $x = \rho \cos\theta$ et $y = \rho \sin\theta$ :
+$$J_\varphi(\rho,\theta) = \begin{pmatrix} \cos\theta & -\rho\sin\theta \\ \sin\theta & \rho\cos\theta \end{pmatrix}$$
+$$\text{Jac}_\varphi(\rho,\theta) = \rho\cos^2\theta + \rho\sin^2\theta = \rho$$
+\end{Prop}
+
+\subsection{Coordonnées sphériques (dans $\mathbb{R}^3$)}
+
+\begin{Prop}\textbf{Coordonnées sphériques}
+
+$$\begin{cases} x = r\cos\theta\cos\varphi \\ y = r\sin\theta\cos\varphi \\ z = r\sin\varphi \end{cases}$$
+
+Le jacobien est : $\text{Jac} = r^2 \cos\varphi$
+\end{Prop}
+
+\subsection{Coordonnées cylindriques (dans $\mathbb{R}^3$)}
+
+\begin{Prop}\textbf{Coordonnées cylindriques}
+
+$$\begin{cases} x = r\cos\theta \\ y = r\sin\theta \\ z = z \end{cases}$$
+
+Le jacobien est : $\text{Jac} = r$
+\end{Prop}
+
+\begin{Ex}
+Calculer $I = \displaystyle\iint_D (x+y) \, dxdy$ où $D$ est le domaine délimité par $x = 0$, $y = x$, $y = 1-x$.
+
+\vspace{1em}
+
+\textbf{Méthode directe :}
+$$I = \int_0^{0.5} \left(\int_x^{1-x} (x+y) \, dy\right) dx = \frac{1}{6}$$
+
+\vspace{1em}
+
+\textbf{Avec changement de variables :} $u = x+y$, $v = x-y$
+
+On a $x = \frac{u+v}{2}$ et $y = \frac{u-v}{2}$.
+
+Le jacobien vaut : $\left|\frac{\partial(x,y)}{\partial(u,v)}\right| = \left|\begin{vmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{vmatrix}\right| = \frac{1}{2}$
+
+Le domaine devient : $D' = \{(u,v) \mid 0 \leq u \leq 1, -u \leq v \leq 0\}$
+
+$$I = \int_0^1 \left(\int_{-u}^0 u \, dv\right) \frac{1}{2} \, du = \frac{1}{2} \int_0^1 u^2 \, du = \frac{1}{6}$$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Exercices récapitulatifs}
+
+\exo[2]{\textbf{Domaine}}
+
+Soit $D = \{(x,y) \mid x \geq 0, y \geq 0, x+y \leq 1\}$.
+
+Calculer $\displaystyle\iint_D f(x,y) \, dxdy$ dans les cas suivants :
+\begin{enumerate}
+\item $f(x,y) = x^2 + y^2$
+\item $f(x,y) = xy(x+y)$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Calculs d'intégrales doubles}}
+
+Calculer $\displaystyle\iint_D f(x,y) \, dxdy$ dans les cas suivants :
+
+\begin{enumerate}
+\item $f(x,y) = x$ et $D = \{(x,y) \mid y \geq 0, x-y+1 \geq 0, x+2y-4 \leq 0\}$
+\item $f(x,y) = x+y$ et $D = \{(x,y) \mid 0 \leq x \leq 1, x^2 \leq y \leq x\}$
+\item $f(x,y) = \cos(xy)$ et $D = \{(x,y) \mid 1 \leq x \leq 2, 0 \leq xy \leq \frac{\pi}{2}\}$
+\item $f(x,y) = \frac{1}{(x+y)^3}$ et $D = \{(x,y) \mid 1 < x < 3, y > 2, x+y < 5\}$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Aire d'un domaine}}
+
+Soit $D = \{(x,y) \mid -1 \leq x \leq 1 \text{ et } x^2 \leq y \leq 4-x^3\}$.
+
+Calculer l'aire de $D$.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Coordonnées polaires}}
+
+Calculer $\displaystyle\iint_\Delta \frac{1}{1+x^2+y^2} \, dxdy$ où :
+$$\Delta = \{(x,y) \mid 0 \leq x \leq 1, 0 \leq y \leq 1, x^2+y^2 \leq 1\}$$
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Disque décentré}}
+
+Soit $D = \{(x,y) \mid x^2+y^2-2x \leq 0\}$.
+\begin{enumerate}
+\item Montrer que $D$ est un disque (préciser son centre et son rayon).
+\item Calculer $\displaystyle\iint_D \sqrt{x^2+y^2} \, dxdy$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Changement de variables}}
+
+Soit $D = \{(x,y) \mid x < y < 2x, x < y^2 < 2x\}$.
+
+Calculer $\displaystyle\iint_D \frac{y}{x} \, dxdy$ en utilisant le changement de variables $u = x/y$ et $v = y^2/x$.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Centre de gravité d'un quart d'ellipse}}
+
+Soit $a, b > 0$. Calculer les coordonnées du centre de gravité du domaine :
+$$D = \left\{(x,y) \mid \frac{x^2}{a^2}+\frac{y^2}{b^2} \leq 1, x \geq 0 \text{ et } y \geq 0\right\}$$
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Volume d'un ellipsoïde}}
+
+Déterminer le volume intérieur à l'ellipsoïde d'équation :
+$$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} = 1$$
+où $a$, $b$ et $c$ sont trois réels strictement positifs.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Centre de gravité d'une demi-boule}}
+
+Déterminer le centre de gravité d'une demi-boule homogène de rayon $R$.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Intégrale triple}}
+
+Calculer $\displaystyle\iiint_D f(x,y,z) \, dxdydz$ pour :
+
+\begin{enumerate}
+\item $f(x,y,z) = \cos x$ et $D = \{(x,y,z) \mid x^2+y^2+z^2 < 1\}$
+\item $f(x,y,z) = \frac{z}{\sqrt{x^2+y^2}}$ et $D = \{(x,y,z) \mid x^2+y^2 \leq a^2 \text{ et } 0 < z < a\}$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Calcul d'une intégrale simple par intégrale double}}
+
+Soit $I = \displaystyle\int_0^1 \frac{\ln(1+x)}{1+x^2} \, dx$.
+
+\begin{enumerate}
+\item Montrer que pour tout $x \in ]-1, +\infty[$, on a : $\ln(1+x) = \displaystyle\int_0^1 \frac{x \, dy}{1+xy}$.
+
+En déduire que $I = \displaystyle\iint_D \frac{x}{(1+x^2)(1+xy)} \, dxdy$, où $D = [0,1]^2$.
+
+\item En intervertissant les rôles de $x$ et $y$, montrer que :
+$$2I = \iint_D \frac{x+y}{(1+x^2)(1+y^2)} \, dxdy$$
+
+En déduire que $I = \frac{\pi}{8}\ln 2$.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,849 @@
+
+\section{Réduction d'endomorphisme}
+
+\textit{Toutes les définitions et tous les résultats sont énoncés pour un espace vectoriel sur le corps des réels, sauf mention du contraire. Tout reste vrai pour n'importe quel corps.}
+
+\subsection{Valeurs propres et vecteurs propres}
+
+\begin{Def}\textbf{Valeur propre et vecteur propre}\\
+
+Soit $E$ un $K$-espace vectoriel et $f : E \to E$ un endomorphisme.
+\begin{itemize}
+    \item Un vecteur $v \in E$ est un \textbf{vecteur propre} de $f$ si $v \neq 0_E$ et $f(v)$ est colinéaire à $v$ :
+    $$v \neq 0_E \quad \text{et} \quad \exists \lambda \in K, \, f(v) = \lambda v$$
+    \item Un scalaire $\lambda \in K$ est une \textbf{valeur propre} de $f$ s'il existe un vecteur $v \in E$ tel que $v \neq 0_E$ et $f(v) = \lambda v$.
+    \item L'ensemble des valeurs propres de $f$ est appelé le \textbf{spectre} de $f$ et est noté $\mathrm{Sp}(f)$.
+\end{itemize}
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Si $v \neq 0_E$ et $f(v) = \lambda v$, alors $v$ est un \textbf{vecteur propre} associé à la \textbf{valeur propre} $\lambda$.
+\end{Rmq}
+
+\begin{Ex}\textbf{Exemples de valeurs propres}\\
+
+\begin{itemize}
+    \item Pour l'identité $\mathrm{Id}_E$, tout vecteur non nul est vecteur propre pour la valeur propre $1$.
+    \item Pour une homothétie de rapport $k$, tout vecteur non nul est vecteur propre pour la valeur propre $k$.
+    \item Pour une symétrie par rapport à un sous-espace $F$, les vecteurs propres sont les vecteurs de $F$ (valeur propre $1$) et les vecteurs de $F^\perp$ (valeur propre $-1$).
+\end{itemize}
+\end{Ex}
+
+\begin{Prop}\textbf{Caractérisation des valeurs propres}\\
+
+$$\lambda \text{ valeur propre de } f \Longleftrightarrow \ker(f - \lambda \mathrm{Id}) \neq \{0_E\} \Longleftrightarrow f - \lambda \mathrm{Id} \text{ n'est pas injectif}$$
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Si $v$ est vecteur propre de $f$ pour la valeur propre $\lambda$, alors pour tout polynôme $P \in K[X]$, on a $P(f)(v) = P(\lambda) v$. Ainsi $P(\lambda)$ est valeur propre de $P(f)$ et $v$ est vecteur propre associé.
+\end{Rmq}
+
+\begin{Thm}\textbf{Indépendance des vecteurs propres}\\
+
+Soient $\lambda_1, \ldots, \lambda_p$ des valeurs propres distinctes de $f$. Si $v_i$ est un vecteur propre pour la valeur propre $\lambda_i$, alors les vecteurs $v_1, \ldots, v_p$ sont linéairement indépendants.
+\end{Thm}
+
+\begin{Rmq}
+\textbf{Démonstration :}
+Par récurrence sur le nombre $p$ de vecteurs propres.
+
+\textbf{Initialisation :} Pour $p = 1$, $(v_1)$ est libre car $v_1 \neq 0_E$.
+
+\textbf{Hérédité :} Supposons $(v_1, \ldots, v_{p-1})$ libre. Si $\alpha_1 v_1 + \cdots + \alpha_p v_p = 0_E$, en appliquant $f$ :
+$$\alpha_1 \lambda_1 v_1 + \cdots + \alpha_p \lambda_p v_p = 0_E$$
+En soustrayant $\lambda_p$ fois l'égalité initiale :
+$$\alpha_1 (\lambda_1 - \lambda_p) v_1 + \cdots + \alpha_{p-1} (\lambda_{p-1} - \lambda_p) v_{p-1} = 0_E$$
+Par hypothèse de récurrence, $\alpha_i (\lambda_i - \lambda_p) = 0$ pour $i < p$. Comme $\lambda_i \neq \lambda_p$, on a $\alpha_i = 0$. Puis $\alpha_p v_p = 0_E$ donne $\alpha_p = 0$.
+\end{Rmq}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Application directe}
+
+Soit $f$ l'endomorphisme de $\mathbb{R}^2$ ayant pour matrice dans la base canonique :
+$$A = \begin{pmatrix}
+1 & 1 \\
+0 & 2
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Trouver les valeurs propres de $f$.
+    \item Déterminer une base de vecteurs propres associés.
+    \item Écrire la matrice de $f$ dans cette nouvelle base.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Valeurs propres complexes}
+
+Soit $g$ l'endomorphisme de $\mathbb{R}^2$ ayant pour matrice dans la base canonique :
+$$B = \begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}$$
+\begin{enumerate}
+    \item L'endomorphisme $g$ admet-il des valeurs propres réelles ?
+    \item Quelles sont les valeurs propres de $g$ dans $\mathbb{C}$ ?
+    \item Interpréter géométriquement l'endomorphisme $g$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Un spectre égal à $\mathbb{R}$}
+
+L'ensemble $C^\infty(\mathbb{R}, \mathbb{R})$ des fonctions infiniment dérivables est un $\mathbb{R}$-espace vectoriel de dimension infinie. La dérivation $D : f \mapsto f'$ est un endomorphisme.
+\begin{enumerate}
+    \item Montrer que chaque réel $\lambda$ est une valeur propre de $D$ en exhibant un vecteur propre associé.
+    \item En déduire que $\mathrm{Sp}(D) = \mathbb{R}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Un spectre vide}
+
+Montrer que l'endomorphisme $\mathbb{R}[X] \to \mathbb{R}[X]$, $P(X) \mapsto X \cdot P(X)$ ne possède aucun vecteur propre.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Polynôme caractéristique}
+
+\begin{Def}\textbf{Polynôme caractéristique}\\
+
+Soit $A \in M_n(K)$ la matrice d'un endomorphisme $f$ de dimension $n$. Le \textbf{polynôme caractéristique} de $A$ (ou de $f$) est défini par :
+$$\chi_A(\lambda) = \det(\lambda I_n - A)$$
+C'est un polynôme en $\lambda$ de degré $n$.
+\end{Def}
+
+\begin{Prop}\textbf{Propriétés du polynôme caractéristique}\\
+
+On a la formule :
+$$\chi_A(\lambda) = \lambda^n - (\mathrm{tr}\,A)\lambda^{n-1} + \cdots + (-1)^n \det A$$
+
+En particulier :
+\begin{itemize}
+    \item Le coefficient dominant est $1$ (polynôme unitaire).
+    \item Le coefficient de $\lambda^{n-1}$ est $-\mathrm{tr}\,A$.
+    \item Le terme constant est $(-1)^n \det A$.
+\end{itemize}
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Le polynôme caractéristique est un invariant de similitude : deux matrices semblables ont le même polynôme caractéristique. En particulier, $\chi_A$ ne dépend pas de la base choisie pour représenter $f$.
+\end{Rmq}
+
+\begin{Thm}\textbf{Valeurs propres et polynôme caractéristique}\\
+
+Les valeurs propres de $f$ sont exactement les racines du polynôme caractéristique $\chi_f$ :
+$$\lambda \in \mathrm{Sp}(f) \Longleftrightarrow \chi_f(\lambda) = 0$$
+\end{Thm}
+
+\begin{Rmq}
+\textbf{Démonstration :}
+$\lambda$ est valeur propre $\iff \exists v \neq 0, f(v) = \lambda v \iff \exists v \neq 0, (\lambda \mathrm{Id} - f)(v) = 0$
+$\iff (\lambda \mathrm{Id} - f)$ non injectif $\iff \det(\lambda I_n - A) = 0$.
+\end{Rmq}
+
+
+\begin{Def}\textbf{Multiplicité algébrique}\\
+
+Soit $\lambda$ une valeur propre de $f$. La \textbf{multiplicité algébrique} de $\lambda$, notée $m_\lambda$, est la multiplicité de $\lambda$ comme racine de $\chi_f$.
+\end{Def}
+
+\begin{Ex}\textbf{Calcul de polynôme caractéristique}\\
+
+Pour $A = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$, on a :
+$$\chi_A(\lambda) = \det \begin{pmatrix} \lambda - 2 & -1 \\ 0 & \lambda - 2 \end{pmatrix} = (\lambda - 2)^2$$
+La seule valeur propre est $\lambda = 2$ avec multiplicité algébrique $m_2 = 2$.
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Matrice triangulaire}
+
+Soit $f$ l'endomorphisme de $\mathbb{R}^3$ dont la matrice dans la base canonique est :
+$$D = \begin{pmatrix}
+3 & 1 & 4 \\
+0 & 2 & 5 \\
+0 & 0 & 1
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Donner directement les valeurs propres de $f$ et leurs multiplicités algébriques.
+    \item Trouver un vecteur propre associé à chaque valeur propre.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Polynôme caractéristique paramétré}
+
+Soit $m$ un réel et $f$ l'endomorphisme de $\mathbb{R}^3$ dont la matrice dans la base canonique est :
+$$A = \begin{pmatrix}
+1 & 0 & 1 \\
+-1 & 2 & 1 \\
+2-m & m-2 & m
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique de $f$.
+    \item Déterminer les valeurs propres de $f$ en fonction de $m$.
+    \item Préciser le nombre de valeurs propres distinctes selon les valeurs de $m$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Trace et déterminant}
+
+Soit $A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$ une matrice $2 \times 2$.
+\begin{enumerate}
+    \item Montrer que $\chi_A(\lambda) = \lambda^2 - \mathrm{tr}(A)\lambda + \det(A)$.
+    \item En déduire que si $A$ a deux valeurs propres $\lambda_1$ et $\lambda_2$, alors $\lambda_1 + \lambda_2 = \mathrm{tr}(A)$ et $\lambda_1 \lambda_2 = \det(A)$.
+    \item Généraliser au cas $n \times n$ : montrer que la somme des valeurs propres (comptées avec multiplicité) est égale à la trace.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Sous-espaces propres}
+
+\begin{Def}\textbf{Sous-espace propre}\\
+
+Soit $\lambda$ une valeur propre de $f$. Le \textbf{sous-espace propre} de $f$ pour la valeur propre $\lambda$ est :
+$$E_\lambda = \ker(f - \lambda \mathrm{Id}) = \{v \in E : f(v) = \lambda v\}$$
+\end{Def}
+
+\begin{Def}\textbf{Multiplicité géométrique}\\
+
+La \textbf{multiplicité géométrique} de $\lambda$ est la dimension de son sous-espace propre : $\dim E_\lambda$.
+\end{Def}
+
+\begin{Prop}\textbf{Propriétés des sous-espaces propres}\\
+
+\begin{enumerate}
+    \item Les sous-espaces propres sont en somme directe :
+    $$\bigoplus_{\lambda \in \mathrm{Sp}(f)} E_\lambda$$
+    \item Pour toute valeur propre $\lambda$ :
+    $$1 \leq \dim E_\lambda \leq m_\lambda$$
+    où $m_\lambda$ est la multiplicité algébrique de $\lambda$.
+\end{enumerate}
+\end{Prop}
+
+\begin{Meth}\textbf{Calcul d'un sous-espace propre}\\
+
+Pour calculer $E_\lambda = \ker(A - \lambda I_n)$ :
+\begin{enumerate}
+    \item Former la matrice $A - \lambda I_n$.
+    \item Résoudre le système homogène $(A - \lambda I_n)X = 0$.
+    \item Les solutions forment le sous-espace propre $E_\lambda$.
+\end{enumerate}
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Calcul de sous-espaces propres}
+
+Soit la matrice :
+$$A = \begin{pmatrix}
+5 & -6 \\
+3 & -4
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique et les valeurs propres.
+    \item Déterminer les sous-espaces propres associés.
+    \item Vérifier que la somme des sous-espaces propres est directe et égale à $\mathbb{R}^2$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Multiplicités algébrique et géométrique}
+
+Soit la matrice :
+$$A = \begin{pmatrix}
+2 & 1 & 0 \\
+0 & 2 & 0 \\
+0 & 0 & 3
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique et les valeurs propres avec leurs multiplicités algébriques.
+    \item Calculer les sous-espaces propres et leurs dimensions (multiplicités géométriques).
+    \item Comparer multiplicités algébriques et géométriques.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Diagonalisation}
+
+\begin{Def}\textbf{Endomorphisme et matrice diagonalisable}\\
+
+\begin{itemize}
+    \item Un endomorphisme $f$ est \textbf{diagonalisable} s'il existe une base de $E$ formée de vecteurs propres de $f$. Dans cette base, la matrice de $f$ est diagonale.
+    \item Une matrice $A$ est \textbf{diagonalisable} s'il existe $P$ inversible telle que $P^{-1}AP$ est diagonale.
+\end{itemize}
+\end{Def}
+
+\begin{Thm}\textbf{Critères de diagonalisation}\\
+
+Soit $f$ un endomorphisme de $E$ de dimension $n$. Les assertions suivantes sont équivalentes :
+\begin{enumerate}
+    \item $f$ est diagonalisable.
+    \item $E = \bigoplus_{\lambda \in \mathrm{Sp}(f)} E_{\lambda}$
+    \item $\dim E = \sum_{\lambda \in \mathrm{Sp}(f)} \dim E_{\lambda}$
+    \item $\chi_f$ est scindé et $\forall \lambda \in \mathrm{Sp}(f), \dim E_{\lambda} = m_{\lambda}$ (multiplicité géométrique = multiplicité algébrique).
+\end{enumerate}
+\end{Thm}
+
+\begin{Prop}\textbf{Condition suffisante de diagonalisabilité}\\
+
+Si $f$ admet $n = \dim E$ valeurs propres distinctes, alors $f$ est diagonalisable.
+\end{Prop}
+
+\begin{Rmq}
+\textbf{Démonstration :}
+Si $\lambda_1, \ldots, \lambda_n$ sont $n$ valeurs propres distinctes, il existe $n$ vecteurs propres $v_1, \ldots, v_n$ linéairement indépendants d'après le théorème d'indépendance. Ces $n$ vecteurs forment une base de $E$ composée de vecteurs propres.
+\end{Rmq}
+
+
+\begin{Rmq}$\,$
+
+La réciproque est fausse : $I_n$ est diagonalisable mais $\mathrm{Sp}(I_n) = \{1\}$ (une seule valeur propre).
+\end{Rmq}
+
+\begin{Meth}\textbf{Méthode de diagonalisation}\\
+
+Pour diagonaliser une matrice $A$ :
+\begin{enumerate}
+    \item Calculer $\chi_A$ et ses racines (valeurs propres $\lambda_1, \ldots, \lambda_r$).
+    \item Pour chaque $\lambda_i$, calculer $E_{\lambda_i} = \ker(A - \lambda_i I)$.
+    \item Vérifier : $\sum \dim E_{\lambda_i} = n$.
+    \item Former $P$ avec les vecteurs propres en colonnes.
+    \item $D = P^{-1}AP$ est diagonale avec les valeurs propres sur la diagonale.
+\end{enumerate}
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Diagonalisation de matrices $2 \times 2$}
+
+Diagonaliser (si possible) les matrices suivantes :
+$$A = \begin{pmatrix}
+1 & 5 \\
+2 & 4
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+2 & 5 \\
+4 & 3
+\end{pmatrix}, \quad
+C = \begin{pmatrix}
+5 & 3 \\
+-8 & -6
+\end{pmatrix}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Diagonalisation de matrices $3 \times 3$}
+
+Diagonaliser (si possible) les matrices suivantes :
+$$D = \begin{pmatrix}
+0 & 2 & -1 \\
+3 & -2 & 0 \\
+-2 & 2 & 1
+\end{pmatrix}, \quad
+E = \begin{pmatrix}
+0 & 3 & 2 \\
+-2 & 5 & 2 \\
+2 & -3 & 0
+\end{pmatrix}, \quad
+F = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & -1 & 2
+\end{pmatrix}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Diagonalisabilité avec paramètre}
+
+Pour quelles valeurs de $m$, la matrice 
+$$A(m) = \begin{pmatrix}
+1 & 1-m \\
+1 & 1+m
+\end{pmatrix}$$ 
+est-elle diagonalisable ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Matrice symétrique $2 \times 2$}
+
+Soit la matrice symétrique :
+$$A = \begin{pmatrix}
+a & c \\
+c & d
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique.
+    \item Montrer que le discriminant est toujours positif ou nul.
+    \item En déduire que $A$ est diagonalisable sur $\mathbb{R}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Diagonalisation sur $\mathbb{C}$}
+
+Montrer que la matrice suivante est diagonalisable sur $\mathbb{C}$ :
+$$A = \begin{pmatrix}
+2 & 0 & 0 & -2 \\
+5 & 0 & 0 & -4 \\
+-2 & 1 & -1 & 1 \\
+2 & 0 & 0 & -1
+\end{pmatrix}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Trigonalisation}
+
+\begin{Def}\textbf{Endomorphisme trigonalisable}\\
+
+Un endomorphisme $f$ est \textbf{trigonalisable} s'il existe une base dans laquelle la matrice de $f$ est triangulaire supérieure.
+\end{Def}
+
+\begin{Thm}\textbf{Critère de trigonalisation}\\
+
+$$f \text{ trigonalisable} \Longleftrightarrow \chi_f \text{ est scindé}$$
+\end{Thm}
+
+\begin{Thm}\textbf{Trigonalisation sur $\mathbb{C}$}\\
+
+Tout endomorphisme d'un $\mathbb{C}$-espace vectoriel de dimension finie est trigonalisable (car tout polynôme à coefficients complexes est scindé, d'après le théorème de d'Alembert-Gauss).
+\end{Thm}
+
+\begin{Rmq}$\,$
+
+\begin{itemize}
+    \item Les coefficients diagonaux d'une matrice trigonalisée sont les valeurs propres (avec multiplicité).
+    \item On peut choisir une matrice triangulaire inférieure en inversant l'ordre des vecteurs de la base.
+\end{itemize}
+\end{Rmq}
+
+\begin{Meth}\textbf{Méthode de trigonalisation}\\
+
+Pour trigonaliser une matrice $A$ :
+\begin{enumerate}
+    \item Chercher une base de $E_\lambda = \ker(A - \lambda I)$ pour chaque valeur propre $\lambda$.
+    \item Si $\dim E_\lambda < m_\lambda$, compléter avec des vecteurs de $\ker(A - \lambda I)^2$, puis $\ker(A - \lambda I)^3$, etc.
+    \item Répéter pour toutes les valeurs propres.
+    \item La famille obtenue forme une base dans laquelle la matrice est triangulaire.
+\end{enumerate}
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Trigonalisation}
+
+Trigonaliser les matrices suivantes :
+$$A = \begin{pmatrix}
+1 & 0 & 1 \\
+-1 & 2 & 1 \\
+1 & -1 & 1
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+0 & 1 & 0 \\
+-4 & 4 & 0 \\
+-2 & 1 & 2
+\end{pmatrix}, \quad
+C = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & -1 \\
+0 & 1 & 2
+\end{pmatrix}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Trigonalisation explicite}
+
+Soit $f$ l'endomorphisme ayant pour matrice :
+$$A = \begin{pmatrix}
+2 & 1 & -1 \\
+3 & 3 & -4 \\
+3 & 1 & -2
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique et montrer que $f$ est trigonalisable.
+    \item Déterminer les sous-espaces propres.
+    \item Trouver une base de trigonalisation et écrire la matrice triangulaire.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Puissance d'une matrice}
+
+\begin{Def}\textbf{Matrice nilpotente}\\
+
+Une matrice $N$ est dite \textbf{nilpotente} s'il existe un entier $k$ tel que $N^k = 0$. Le plus petit tel entier est l'indice de nilpotence.
+\end{Def}
+
+\begin{Prop}\textbf{Puissance d'une matrice diagonalisable}\\
+
+Si $A = PDP^{-1}$ avec $D = \mathrm{diag}(\lambda_1, \ldots, \lambda_n)$, alors :
+$$A^k = PD^kP^{-1} \quad \text{avec} \quad D^k = \mathrm{diag}(\lambda_1^k, \ldots, \lambda_n^k)$$
+\end{Prop}
+
+\begin{Prop}\textbf{Puissance d'une matrice trigonalisable}\\
+
+Si $A = PTP^{-1}$ avec $T$ triangulaire, alors $A^k = PT^kP^{-1}$.
+
+Pour calculer $T^k$ : décomposer $T = D + N$ avec $D$ diagonale et $N$ nilpotente strictement triangulaire, puis utiliser le binôme de Newton.
+\end{Prop}
+
+\begin{Ex}\textbf{Puissance d'une matrice diagonale}\\
+
+Si $D = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$, alors $D^k = \begin{pmatrix} 2^k & 0 \\ 0 & 3^k \end{pmatrix}$.
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Puissance $n$-ième par récurrence}
+
+Soit la matrice dont tous les coefficients valent $1$ :
+$$J = \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer $J^2$ et $J^3$.
+    \item Conjecturer la forme de $J^k$ pour tout $k \in \mathbb{N}^*$.
+    \item Démontrer cette conjecture par récurrence.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Calcul de puissance par diagonalisation}
+
+Soit $A = \begin{pmatrix}
+0 & 1 & 2 \\
+1 & 0 & 2 \\
+0 & 0 & 3
+\end{pmatrix}$.
+\begin{enumerate}
+    \item Montrer que $A$ est diagonalisable et la diagonaliser.
+    \item Calculer $A^n$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Inverse par le polynôme caractéristique}
+
+Soit la matrice :
+$$A = \begin{pmatrix}
+1 & 1 & 0 \\
+-1 & 0 & 0 \\
+2 & 0 & -1
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique de $A$.
+    \item En utilisant le théorème de Cayley-Hamilton, exprimer $A^{-1}$ comme polynôme en $A$.
+    \item Calculer explicitement $A^{-1}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section{Exercices récapitulatifs}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Étude complète}
+
+Soit $f$ l'endomorphisme de $\mathbb{R}^4$ dont la matrice dans la base canonique est :
+$$A = \begin{pmatrix}
+-8 & -3 & -3 & 1 \\
+6 & 3 & 2 & -1 \\
+26 & 7 & 10 & -2 \\
+0 & 0 & 0 & 2
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Montrer que $1$ et $2$ sont valeurs propres de $f$.
+    \item Calculer les sous-espaces propres.
+    \item $f$ est-elle diagonalisable ? Si oui, diagonaliser.
+    \item Calculer $A^n$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Diagonalisabilité selon un paramètre}
+
+Soit $a$ un réel. Soit $f$ l'endomorphisme de $\mathbb{R}^4$ dont la matrice dans la base canonique est :
+$$A = \begin{pmatrix}
+1 & 0 & 1 & 1 \\
+0 & 1 & 1 & 1 \\
+0 & 0 & a & 0 \\
+0 & 0 & 0 & -a
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Combien $f$ a-t-elle de valeurs propres en fonction de $a$ ?
+    \item Trouver une base de chaque espace propre.
+    \item Pour quelles valeurs de $a$, $f$ est-elle diagonalisable ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Diagonalisation et applications aux suites}
+
+Soit $A = \begin{pmatrix}
+0 & 1 & 2 \\
+1 & 0 & 2 \\
+0 & 0 & 3
+\end{pmatrix}$ et $B = \begin{pmatrix}
+7 & 1 \\
+0 & 7
+\end{pmatrix}$.
+
+\begin{enumerate}
+    \item Montrer que $A$ est diagonalisable et la diagonaliser. Montrer que $B$ n'est pas diagonalisable.
+    \item Montrer que pour tout $n \in \mathbb{N}$ :
+    $$A^n = \begin{pmatrix}
+    \frac{1+(-1)^n}{2} & \frac{1-(-1)^n}{2} & -1+3^n \\
+    \frac{1-(-1)^n}{2} & \frac{1+(-1)^n}{2} & -1+3^n \\
+    0 & 0 & 3^n
+    \end{pmatrix}$$
+    \item Déterminer toutes les suites $(u_n)$, $(v_n)$ et $(w_n)$ telles que, pour tout $n \in \mathbb{N}$ :
+    $$\begin{cases}
+    u_{n+1} = v_n + 2w_n \\
+    v_{n+1} = u_n + 2w_n \\
+    w_{n+1} = 3w_n
+    \end{cases}$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Fibonacci et matrices}
+
+Soit la matrice :
+$$F = \begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer $F^2$, $F^3$, $F^4$.
+    \item Montrer que $F^n = \begin{pmatrix}
+    f_{n+1} & f_n \\
+    f_n & f_{n-1}
+    \end{pmatrix}$ où $(f_n)$ est la suite de Fibonacci définie par $f_0 = 0$, $f_1 = 1$ et $f_{n+2} = f_{n+1} + f_n$.
+    \item En diagonalisant $F$, retrouver la formule de Binet :
+    $$f_n = \frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n\right]$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Suite récurrente linéaire}
+
+Soit $(u_n)$ la suite définie par $u_0 = 1$, $u_1 = 2$ et $u_{n+2} = 3u_{n+1} - 2u_n$.
+\begin{enumerate}
+    \item Écrire ce système sous forme matricielle $X_{n+1} = AX_n$ avec $X_n = \begin{pmatrix} u_{n+1} \\ u_n \end{pmatrix}$.
+    \item Diagonaliser $A$ et en déduire $A^n$.
+    \item Exprimer $u_n$ en fonction de $n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Matrice de rotation}
+
+Soit la matrice de rotation :
+$$R_\theta = \begin{pmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Montrer que $R_\theta$ n'est pas diagonalisable sur $\mathbb{R}$ (sauf cas particuliers).
+    \item Diagonaliser $R_\theta$ sur $\mathbb{C}$.
+    \item En déduire que $R_\theta^n = R_{n\theta}$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Matrice trigonalisable et puissance}
+
+Soit :
+$$A = \begin{pmatrix}
+2 & 1 & 0 \\
+0 & 2 & 1 \\
+0 & 0 & 2
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Montrer que $A$ n'est pas diagonalisable.
+    \item Écrire $A = 2I + N$ et calculer $N^2$, $N^3$.
+    \item En utilisant le binôme de Newton, calculer $A^n$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Valeurs propres avec paramètre}
+
+Soit $m$ un réel et $f$ l'endomorphisme dont la matrice dans la base canonique est :
+$$A = \begin{pmatrix}
+2 & 0 & 1-m \\
+-1 & 1 & m-1 \\
+m-1 & 0 & 2m
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le polynôme caractéristique.
+    \item Préciser le nombre de valeurs propres de $f$ en fonction de $m$.
+    \item Pour quelles valeurs de $m$ la matrice est-elle diagonalisable ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Application aux suites}
+
+Soit $(x_n, y_n, z_n)$ la suite définie par :
+$$\begin{cases}
+x_{n+1} = 2x_n + y_n \\
+y_{n+1} = x_n + 2y_n \\
+z_{n+1} = z_n
+\end{cases}$$
+avec $(x_0, y_0, z_0) = (1, 0, 1)$.
+\begin{enumerate}
+    \item Écrire ce système sous forme matricielle.
+    \item Calculer les valeurs propres de la matrice.
+    \item Exprimer $x_n$, $y_n$, $z_n$ en fonction de $n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{QCM - Valeurs propres}
+
+Pour chaque question, une seule réponse est correcte.
+
+\begin{enumerate}
+\item Si $\lambda$ est valeur propre de $A$, alors $\lambda^2$ est valeur propre de :
+\begin{multicols}{4}
+\begin{enumerate}[label=\alph*.]
+    \item $2A$
+    \item $A^2$
+    \item $A + I$
+    \item $A^{-1}$
+\end{enumerate}
+\end{multicols}
+
+\item Une matrice $3 \times 3$ ayant pour polynôme caractéristique $(\lambda - 1)^2(\lambda - 2)$ :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+    \item est toujours diagonalisable
+    \item n'est jamais diagonalisable
+    \item peut être diagonalisable ou non
+    \item a exactement 3 valeurs propres distinctes
+\end{enumerate}
+\end{multicols}
+
+\item Si $A$ et $B$ sont semblables, alors :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+    \item $A = B$
+    \item $\det(A) = \det(B)$ et $\mathrm{tr}(A) = \mathrm{tr}(B)$
+    \item $A$ et $B$ ont les mêmes coefficients
+    \item $AB = BA$
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Commutant d'une matrice diagonalisable}
+
+Soit $A$ une matrice diagonalisable à valeurs propres distinctes.
+\begin{enumerate}
+    \item Montrer que si $B$ commute avec $A$ (i.e. $AB = BA$), alors tout vecteur propre de $A$ est aussi vecteur propre de $B$.
+    \item En déduire que $B$ est diagonalisable dans la même base que $A$.
+    \item Montrer que l'ensemble des matrices qui commutent avec $A$ est l'ensemble des polynômes en $A$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Matrices semblables sur $\mathbb{R}$ et sur $\mathbb{C}$}
+
+Soit $A = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$ et $B = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$.
+\begin{enumerate}
+    \item Calculer les polynômes caractéristiques de $A$ et $B$.
+    \item Montrer que $A$ et $B$ ne sont pas semblables sur $\mathbb{R}$.
+    \item Montrer que $A$ et $B$ sont semblables sur $\mathbb{C}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+

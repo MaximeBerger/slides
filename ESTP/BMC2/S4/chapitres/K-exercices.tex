@@ -1,0 +1,1098 @@
+%\newpage
+
+\section{Lois discrètes usuelles}
+
+
+\exo[1]{\textbf{Rebuts}}
+
+Une fabrication automatique de pièces embouties donne un pourcentage de rebuts s'élevant à $5\%$. On considère un échantillon de 10 pièces issues de cette fabrication. Calculer la probabilité
+de trouver dans cet échantillon au plus 2 rebuts.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Dé de 6 }}
+
+Combien de fois faut-il lancer un dé pour faire au moins un six avec une probabilité
+supérieure ou égale à $0,95$ ?\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Pétrole}}
+
+Dans une région pétrolifère, la probabilité qu'un forage conduise à une nappe de pétrole est $0,1$.
+\begin{enumerate}
+\item Justifier que la réalisation d'un forage peut être assimilée à une épreuve de Bernoulli.
+\item  On effectue 9 forages.
+\begin{enumerate}
+\item Quelle hypothèse doit-on formuler pour que la variable aléatoire $X$ correspondant au nombre de forages qui ont conduit à une nappe de pétrole suive une loi binomiale ?
+\item Sous cette hypothèse, calculer la probabilité qu'au moins un forage conduise à une nappe de
+pétrole.\\
+\end{enumerate}
+\end{enumerate}
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 2013
+
+\exo[2]{\textbf{Une suite de jeux}}
+
+Des joueurs $A_1,A_2,\dots,A_n,\dots$ s'affrontent de la manière suivante : chaque manche oppose deux concurrents qui ont chacun la probabilité $\frac 12$ de gagner. La première manche oppose $A_1$ et $A_2$ et, à l'étape $n$, si elle a lieu, le gagnant de l'épreuve précédente affronte le joueur $A_{n+1}$. Le jeu s'arrête lorsque, pour la première fois, un joueur gagne deux manches consécutives. 
+\begin{enumerate}
+\item Quelle est la probabilité que l'étape $n$ ait lieu?
+\item En déduire que le jeu s'arrête presque sûrement.
+\item Quelle est la probabilité que le joueur $A_n$ gagne?\\
+
+\end{enumerate}
+
+% \begin{Sol}
+
+% \begin{enumerate}
+% \item  Notons $E_n$ l'événement "la n-ième étape a lieu". On a $P(E_1)=1$ et $P(E_2)=1$.\\
+%  Ensuite, pour $n \geq 3$, si la n-1-ième étape a eu lieu, il y a une probabilité $\frac{1}{2}$ que l'on s'arrête là (le joueur qui avait remporté la manche précédente remporte une deuxième manche consécutive) et une probabilité $\frac{1}{2}$ que l'on continue. Ainsi, $P(E_n)=12P(E_{n-1})$ d'où l'on déduit que, pour tout $n \geq 2$, on a $P(En)=\frac{1}{2^{n-2}}$.
+% \item Notons $F_n$ l'événement : "Le jeu s'arrête à l'étape $n$". On a $P(F_n)=P(E_n)-P(E_{n+1})=\frac{1}{2^{n-1}}$ si $n \geq 2$, et $P(F_1)=0$.\\
+%  Les événements $F_n$ étant incompatibles, on en déduit que $P(\bigcup_{n=2}^{+\infty}F_n)=\sum_{n=2}^{+\infty}P(F_n)=\sum_{n=2}^{+\infty}\dfrac{1}{2^{n-1}}=1$. Ainsi, le jeu s'arrête presque sûrement (avec une probabilité $1$).
+% \item Remarquons d'abord que la probabilité que $A_1$ ou que $A_2$ gagne vaut $\frac{1}{2}\times \frac{1}{2}=\frac{1}{4} $(il faut que $A_1$ et $A_2$ gagnent les deux premières parties).\\
+%  Pour $n \geq 3,$ An joue si et seulement si l'étape $n-1$ a lieu, et donc $A_n$ joue avec une probabilité valant 12n-3. Et lorsque $A_n$ joue, il a une probabilité $\frac{1}{4}$ de gagner. En conclusion, $P(A_n \text{ gagne})=\frac{1}{4}P(A_n \text{ joue })=\frac{1}{2^{n-1}}$.
+% \end{enumerate}
+
+
+
+% \end{Sol}
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Vélo}}
+
+
+Un élève se rend à vélo au lycée distant de $3$ km de son domicile à une vitesse supposée constante de $15Km.h^{-1}$.
+Sur le parcours, il rencontre $6$ feux tricolores non synchronisés. Pour chaque feu, la probabilité qu'il soit au vert est $\dfrac{2}{3}$.
+Un feu rouge ou orange lui fait perdre une minute et demie. On appelle $X$ la variable aléatoire correspondant au
+nombre de feux verts rencontrés par l'élève sur son parcours et $T$ la variable aléatoire égale au temps en minute mis par l'élève pour aller au lycée.
+\begin{enumerate}
+\item Déterminer la loi de probabilités de $X$.
+\item Exprimer $T$ en fonction de $X$.
+\item Déterminer $E(T)$ et interpréter ce résultat.
+\item L'élève part 17 minutes avant le début des cours.\begin{enumerate}
+\item Peut-il espérer être à l'heure ?
+\item Calculer la probabilité qu'il soit en retard.\\
+\end{enumerate}
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Tennis}}
+
+Alain et Benjamin pratiquent assidûment le tennis. On estime que la probabilité qu'Alain gagne une rencontre est $0,6$. Ils décident de jouer trois matchs dans l'année (les résultats des matchs sont indépendants les uns des autres) et de faire une cagnotte pour s'offrir un repas en fin d'année. A la fin de chaque match, le perdant versera 20EUR.
+Benjamin s'interroge sur sa dépense éventuelle en fin d'année.
+On note $X$ la variable aléatoire correspondant au nombre de matchs gagnés par Benjamin et $D$ la variable aléatoire correspondant à la dépense de Benjamin.
+\begin{enumerate}
+\item Quelles sont les valeurs possibles de $X$ ? Exprimer $D$ en fonction de $X$ et en déduire les valeurs possibles de $D$.
+\item Démontrer que la probabilité que Benjamin dépense 40EUR est $0,432$.
+\item Calculer l'espérance de dépense en fin d'année de Benjamin.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Canal}}
+
+Si on expédie des bits sur un canal binaire symétrique à raison de $512$ bits toutes les millisecondes, avec une probabilité d'erreur de 1\%, quel est le nombre de bits faux expédiés au bout de $3$h ? (On assimilera probabilité et fréquence).\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+\exo[1]{\textbf{Quartet}}
+
+
+Dans la mémoire d'un ordinateur, on appelle quartet un ensemble de $4$ bits (prenant chacun
+la valeur $0$ ou $1$). On suppose que la mémoire de l'ordinateur n'a pas été initialisée. Ainsi, tous les bits de la mémoire se trouvent, indépendamment, dans l'état $1$ avec probabilité $p \in [0, 1]$. On considère un quartet pris au hasard et on note $X$ le nombre entier dont ce quartet est l'écriture en base 2.
+\begin{enumerate}
+\item Quelles valeurs peut prendre $X$ ?
+\item Calculer la probabilité que $X $ soit impair puis $P(X > 3)$\\
+
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Système d'exploitation}}
+
+On pense que la probabilité qu'un bon système d'exploitation tombe en panne durant une
+journée d'utilisation est $p = 0, 01$.
+\begin{enumerate}
+\item Combien de jours doit-on attendre pour que la probabilité d'observer au moins une panne du système soit supérieure ou égale à $\frac{1}{2}$ ?
+\item Quelle est l'espérance du temps avant une panne du système ?\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Répertoire}}
+
+Un magasin d'optique dispose d'un répertoire informatique contenant un grand nombre de fichiers de clients ayant acheté des verres. On s'intéresse à un type de traitement des verres : le traitement anti-rayure.\\
+ Dans le répertoire, 45 \% des fichiers correspondent à des clients ayant demandé le traitement anti-rayure. On prélève au hasard et avec remise 100 fichiers dans le répertoire. On désigne par $X$ la variable aléatoire qui, à tout
+prélèvement de $100$ fichiers, associe le nombre de fichiers de clients ayant demandé le traitement anti-rayure
+de leurs verres.\\
+
+\begin{enumerate}
+\item
+Donner la loi de la variable aléatoire $X$ ainsi que ses paramètres.
+\item On donne ci-dessous un extrait du tableau obtenu à l'aide d'un tableur fournissant des probabilités
+$P(X = k)$ et $P(X \leq k)$, où k désigne un entier naturel compris entre $0$ et $100$.
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+A &B &C& D\\
+\hline
+1 &k &P(X = k)& P(X \leq k)\\
+\hline
+2 &45 &0,079988& 0,541316\\
+\hline
+3 &46 &0,078249 &0,619565\\
+\hline
+4 &47 &0,073557& 0,693122\\
+\hline
+5 &48 &0,066452 &0,759573\\
+\hline
+6 &49 &0,057698 &0,817272\\
+\hline
+7 &50 &0,048152 &0,866424\\
+\hline
+8 &51 &0,038625 &0,904048\\
+\hline
+9 &52 &0,029779 &0,933827\\
+\hline
+10& 53 &0,022066 &0,955893\\
+\hline
+11& 54 &0,015714 &0,971607\\
+\hline
+12 &55 &0,010153 &0,982359\\
+\hline
+13 &56& 0,007070 &0,989429\\
+\hline
+\end{array}$$
+
+\begin{enumerate}
+\item Déterminer à l'aide de ce tableau la probabilité qu'il y ait, dans un prélèvement de $100$ fichiers, exactement $50$ fichiers de clients ayant demandé le traitement anti-rayure de leurs verres.
+\item Déterminer à l'aide de ce tableau le plus petit entier $a$ tel que $P(X \leq a) > 0, 975$.\\
+
+\end{enumerate}
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Transmission}}
+
+Une ligne de transmission entre un émetteur et un récepteur transporte des pages de texte, chaque
+page est représentée par $100 000$ bits. La probabilité pour qu'un bit transmis soit erroné est estimée
+à $10^{-4}$ et on admet que les erreurs de transmission sont indépendantes les unes des autres. Soit $X$ la variable aléatoire donnant le nombre d'erreurs lors de la transmission d'une page.
+\begin{enumerate}
+\item Quelle est la loi de probabilité de $ X$ ? Justifier.
+\item
+ Déterminer sa moyenne et son écart-type.
+\item	Préciser les conditions d'approximation de cette loi par une loi normale dont on donnera les paramètres.
+\item	Déterminer la probabilité pour qu'une page transmise comporte au plus $15$ erreurs.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Virus informatique}}
+
+Un virus informatique à son initialisation occupe $0,1 Mo$. A chaque itération, il occupe $k$ fois plus de mémoire et s'arrête avec probabilité $p$ (puis libère la mémoire occupée).\\
+
+ Dans quelle mesure ce virus risque-t-il de saturer la mémoire ? (La réponse est fonction de la taille totale $ T$ de la mémoire disponible.)\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Tableau}}
+
+On doit pré-dimensionner un tableau, qui est une ressource pour un ensemble de processus : un processus qui s'exécute a besoin d'une entrée dans le tableau. Si aucune entrée n'est disponible alors il est mis en attente dans une file. On sait qu'en moyenne $p$ processus s'exécutent en même temps.\\
+
+ Comment dimensionner le tableau pour qu'il n'y ait pas plus de 10\% de processus en attente en moyenne.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Algorithme et complexité}}
+
+
+Un algorithme reçoit en entrée une liste d'entiers positifs. Sa complexité est une fonction du nombre d'entiers pairs $p$, $f(p) = p^2 + 1$.\\
+
+ Donner la complexité moyenne de cet algorithme.\\
+ 
+ \hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Impression}}
+
+Un utilisateur peut à tout moment exécuter $q$ processus différents avec la même probabilité $p$. L'un de ces processus concerne l'impression.\\
+
+ \' Etudiez ce processus d'impression pour $ N$ utilisateurs.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{File d'impression}}
+
+Le logiciel client qui permet de gérer la file d'impression (visualisation de la liste des impressions en attente) n'est pas totalement fiable : il affiche effectivement les tâches en attente dans 99,9\% des cas. Dans 0,01\% des cas, l'impression qui vient d'être lancée n'apparaît pas. Un utilisateur novice s'entête : s'il ne voit pas l'impression qu'il vient de lancer, il la relance aussitôt. \\
+
+Combien de fois en moyenne cet utilisateur risque-t-il de lancer la même impression ?\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Parc informatique}}
+
+Une entreprise possède $50$ ordinateurs. La probabilité qu'un ordinateur tombe en panne est de $0,01$. On suppose que le fonctionnement d'un ordinateur est indépendant des autres. On note $X$ la variable aléatoire correspondant au nombre d'ordinateurs en panne.\\
+
+\begin{enumerate}
+\item Déterminer $S(X)$ le support de la variable aléatoire $X$.
+\item Quelle loi suit la variable aléatoire $ X $? Déterminer ses paramètres.
+\item Calculer la probabilité que aucun ordinateur n'est en panne.
+\item Calculer la probabilité que $5$ ordinateurs soient en panne. 
+\item Calculer la probabilité de l'évènement $E$ : « au moins un ordinateur est en panne ».
+\item Que signifie $\mathbb P (X = 3)$ ? 
+\item Calculer ensuite $\mathbb P (X = 3)$.
+\item Calculer $\mathbb P (X \leq 3)$. Interpréter ce résultat.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1253
+
+
+\exo[2]{\textbf{Loi d'un dé truqué?}}
+
+On considère un dé cubique truqué dont les faces sont numérotés de 1 à 6 et on note $X$ la variable aléatoire donnée par le numéro de la face du dessus. On suppose que le dé est truqué de sorte que la probabilité d'obtenir une face est proportionnelle au numéro inscrit sur cette face. 
+\begin{enumerate}
+\item Déterminer la loi de $X$, calculer son espérance.
+\item On pose $Y=1/X$. Déterminer la loi de $Y$, et son espérance.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+% Exercice 1261
+
+
+\exo[3]{\textbf{Maximum d'une loi binomiale}}
+
+Soit $X$ une variable aléatoire suivant une loi binomiale de paramètres $n\in\mathbb N^*$ et $p\in ]0,1[$. Pour quelle(s) valeur(s) de $k$ la probabilité $p_k=P(X=k)$ est maximale?\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 2257
+
+\exo[2]{\textbf{En plein dans le mille}}
+
+Un joueur tire sur une cible de $10$cm de rayon, constituée de couronnes concentriques,
+délimitées par des cercles de rayons $1,2, \dots, 10$ cm, et numérotées respectivement de $10$ à $1$. La probabilité d'atteindre la couronne $k$ est proportionnelle à l'aire de cette couronne, et on suppose que le joueur atteint sa cible à chaque lancer. Soit $X$ la variable aléatoire qui à chaque lancer associe le numéro de la cible.
+\begin{enumerate}
+\item Quelle est la loi de probabilité de $X$ ?
+\item Le joueur gagne $k$ euros s'il atteint la couronne numérotée $k$ pour $k$ compris entre 6 et 10, tandis qu'il perd 2 euros s'il atteint l'une des couronnes périphériques numérotées de 1 à 5. Le jeu est-il
+favorable au joueur ?\\
+\end{enumerate}
+
+
+\section{Lois continues usuelles}
+
+\exo[1]{\textbf{Loi uniforme}}
+
+$X$ est une variable aléatoire qui suit la loi uniforme sur l'intervalle $I$. Pour chaque $I$ précisé ci-dessous:
+\begin{enumerate}\item Déterminer la fonction de densité de probabilité,
+ \item Tracer la représentation graphique de la fonction de densité de probabilité.
+   \item Calculer $\mathbb{P}(1 \leq X \leq 3)$.
+   \item Donner l'espérance lorsque :
+   \end{enumerate}
+\begin{itemize}
+\item [\ding{170}]$I=[-1;5]$ 
+\item [\ding{170}]$I=[2;3]$
+\item [\ding{170}]$I=[0;4]$
+\item [\ding{170}]$I=[-2;0]$
+\item [\ding{170}]$I=[-1;2]$\\
+\end{itemize}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Loi exponentielle}}
+
+$X$ est une variable aléatoire qui suit la loi exponentielle de paramètre $\lambda>0$.
+Déterminer la fonction de densité de probabilité,  calculer $\mathbb{P}(1 \leq X \leq 3)$  et donner l'espérance lorsque :
+\begin{itemize}
+\item [\ding{40}]$\lambda=1$
+\item [\ding{40}] $\lambda=2$
+\item  [\ding{40}] $\lambda=17$
+\item  [\ding{40}]$\lambda=2022$\\
+\end{itemize}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Loi d'une probabilité uniforme}}
+
+$X$ est une variable aléatoire qui suit la loi uniforme sur l'intervalle $[-2;2]$. Calculer les probabilités suivantes:
+\begin{itemize}
+\item  [\ding{46}] $\mathbb{P}( X \leq 1)$
+\item [\ding{46}]$\mathbb{P}( X \geq 0.5)$
+\item [\ding{46}]$\mathbb{P}_{X>0}( X \geq 0.5)$\\
+\end{itemize}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Résumé}}
+
+On se place dans l'univers probabilisé $(\Omega,\mathcal{A},\mathbb{P})$.\\
+\begin{enumerate}
+\item Rappeler la définition de la fonction de répartition d'une variable aléatoire réelle $X$ de support image $X(\Omega)$.
+\begin{enumerate}
+\item
+Exprimer la fonction de répartition si $X$ suit une loi uniforme sur l'intervalle $[17; 19]$.
+\item Soit $a$ et $b$ des réels avec $a<b$.
+Exprimer la fonction de répartition si $X$ suit une loi uniforme sur l'intervalle $[a; b]$. 
+\item
+Exprimer la fonction de répartition si $X$ suit une loi exponentielle de paramètre $\lambda=4$.
+\item Soit $\lambda>0$
+Exprimer la fonction de répartition si $X$ suit une loi exponentielle de paramètre $\lambda$.
+ 
+\end{enumerate}
+\item Rappeler la définition de l'espérance d'une $X$ de support image $X(\Omega)$.
+\begin{enumerate}
+\item
+Exprimer l'espérance et calculer l'espérance si $X$ suit une loi uniforme sur l'intervalle $[17; 19]$.
+\item Soit $a$ et $b$ des réels avec $a<b$.
+Exprimer l'espérance et calculer l'espérance si $X$ suit une loi uniforme sur l'intervalle $[a; b]$. 
+\item 
+Exprimer l'espérance et calculer l'espérance si $X$ suit une loi de Bernoulli de paramètre $0<p<1$.
+\item 
+Exprimer l'espérance et calculer l'espérance si $X$ suit une loi de Binomiale de paramètre $n\in\N$ et $0<p<1$.
+\item 
+Exprimer l'espérance et calculer l'espérance si $X$ suit une loi géométrique de paramètre $n\in\N$ et $0<p<1$.\\
+%\item
+%Exprimer l'espérance et calculer l'espérance si $X$ suit une loi exponentielle de paramètre $\lambda=4$.
+%\item Soit $\lambda>0$
+%Exprimer l'espérance et calculer l'espérance si $X$ suit une loi exponentielle de paramètre $\lambda$. 
+\end{enumerate}
+
+\end{enumerate}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+% Exercice 3146
+
+\exo[1]{\textbf{Pour bien comprendre ce qu'est une loi... uniforme}}
+
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $\{1,\dots,20\}$. Déterminer la loi de $\lfloor \sqrt X\rfloor$.\\
+
+
+\section{Probabilités conditionnelles}
+
+
+% Exercice 1248
+
+\exo[2]{\textbf{Compagnie d'assurance}}
+
+Une compagnie d'assurance répartit ses clients en trois classes $R_1$, $R_2$ et $R_3$ : les bons risques, les risques moyens, et les mauvais risques.
+Les effectifs de ces trois classes représentent $20\%$ de la population totale pour la classe $R_1$, $50\%$ pour la classe $R_2$, et 
+$30\%$ pour la classe $R_3$. Les statistiques indiquent que les probabilités d'avoir un accident au cours de l'année pour une personne de l'une de ces trois classes sont respectivement de $0.05$, $0.15$ et $0.30$.
+\begin{enumerate}
+\item Quelle est la probabilité qu'une personne choisie au hasard dans la population ait un accident dans l'année?
+\item Si M.Martin n'a pas eu d'accident cette année, quelle est la probabilité qu'il soit un bon risque?\\
+\end{enumerate}
+
+
+% \begin{Sol}
+
+% \begin{enumerate}
+% \item
+% On note $A$ l'événement "avoir un accident dans l'année".\\
+%  Comme les trois classes $R_1$, $R_2$ et $R_3$ réalisent une partition de la population.\\
+%   On peut appliquer la formule des probabilités totales : $$P(A)=P(A|R1)P(R1)+P(A|R2)P(R2)+P(A|R3)P(R3)$$
+%   $$P(A)=0,05\times0,2+0,15\times0,5+0,3\times0,3=0,175.$$
+% \item On cherche la probabilité d'être dans $R_1$
+% sachant qu'on n'a pas eu d'accident, c'est-à-dire la probabilité $P(R_1| \bar A)$. La formule de Bayes donne : $P(R_1| \bar A)=P( \bar A|R_1)P(R_1)P( \bar A)$. La probabilité $P( \bar A)$ se calcule par la formule $P( \bar A)=1-P(A)$, tandis que l'énoncé donne $P(\bar A|R_1)=0,95$. On obtient finalement : $$P(R_1| \bar A)=0,95×0,21- P(A)=0,23.$$
+% \end{enumerate}
+% \end{Sol}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Mémoire d'ordinateur}}
+
+
+Dans la mémoire d'un ordinateur il se peut que certains "bit" enregistrés soient inexacts.
+Ce phénomène étant rare on suppose que le nombre de "bit" erronés suit une loi de Poisson.\\ Cependant, il est plus fréquent de voir apparaître un $0$ à la place d'un $1$ que le contraire. Soit $X_1$ le nombre de faux $0$ et $X_2$ le nombre de faux $1$.\\
+ On suppose ces variables indépendantes et de loi de Poisson de paramètres respectifs $\lambda_1$ et $\lambda_2$, avec $\lambda_1 > \lambda_2$.
+\begin{enumerate}
+\item Quelle est la loi du nombre total d'erreurs ?
+\item Sachant que n erreurs ont été commises, combien y a-t-il de faux $0$ ?\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 2253
+
+\exo[1]{\textbf{Plus grand nombre tiré}}
+
+On lance deux dés parfaitement équilibrés. On note $X$ le plus grand des numéros obtenus. Déterminer la loi de la variable aléatoire $X$.\\
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1260
+
+\exo[3]{\textbf{Génotype}}
+
+On s'intéresse à une maladie génétique. Elle est portée par un gène particulier qui existe en deux formes : l'allèle A (sain), et l'allèle B (malade). Il existe donc par chaque individu trois génotypes possibles : 1 (A A), 2 (A B) et 3 (B B). Un individu est malade lorsqu'il porte le génotype (B B). Le but de l'exercice est de démontrer que la proportion de malades est constante au cours du temps.\newline
+Pour cela, on s'intéresse à une population dont la proportion du génotype $i$, à la génération $n$, est noté $u_i(n)$. On rappelle que chaque enfant reçoit un des deux allèles de chacun de ses parents (et ce de façon complètement aléatoire). On suppose aussi que les procréations dans la population se font complètement aléatoirement.\newline
+On fixe $n\geq 0$ et on note $E$ le génotype d'un enfant de la $n+1$-ième génération, $P$ et $M$ les génotypes respectifs du père et de la mère.
+\begin{enumerate}
+\item Calculer les probabilités conditionnelles $P(E=1| (P,M)=(i,j) )$.
+\item En déduire la loi de $E$ en fonction de $u_i(n)$. 
+\item On pose $\theta(n)=u_1(n)+\frac 12 u_2(n)$. Exprimer $u_{i}(n+1)$ en fonction de $\theta(n)$.
+\item Démontrer que la proportion de malades ne varie plus à partir de la génération $2$.\\
+\end{enumerate}
+
+
+% \begin{Sol}
+
+% \begin{enumerate}
+% \item
+% En utilisant les informations de l'énoncé sur l'héritage des gènes, on trouve $P(E=1|(P,M)=(1,1))=1$, $P(E=1|(P,M)=(1,2))=P(E=1|(P,M)=(2,1))=\frac{1}{2}$, $P(E=1|(P,M)=(1,3))=P(E=1|(P,M)=(3,1))=0$, $P(E=1|(P,M)=(2,2))=\frac{1}{4}$, $P(E=1|(P,M)=(2,3))=P(E=1|(P,M)=(3,2))=0$, $P(E=1|(P,M)=(3,3))=0$. On vérifie que l'on a bien écrit les $9$ cas possibles pour $(P,M)$.
+% \item
+% On calcule $P(E=1)$ par la formule des probabilités totales : 
+% \[ P(E=1)=\sum_{i=1}^{3}\sum_{j=1}^{3} P(E=1|(P,M)=(i,j))\times P((P,M)=(i,j)). \]
+% Les procréations étant supposées aléatoires, on a aussi $P((P,M)=(i,j))=u_i(n)u_j(n)$. On en déduit 
+% \[ P(E=1)=\frac{u_1(n)^2}{2}+\frac{1}{2}u_1(n)u_2(n)+\frac{1}{2}u_2(n)u_1(n)+\frac{1}{4}u_2(n)^2=\left(u_1(n)+\frac{1}{2}u_2(n)\right)^2. \]
+% Il est facile de calculer $P(E=3)$. Par symétrie des rôles de $A$ et $B$, on a en effet 
+% \[ P(E=3)=\left(u_3(n)+\frac{1}{2}u_2(n)\right)^2. \]
+% Enfin, $P(E=2)=1-P(E=1)-P(E=3)=1-\left(u_1(n)+\frac{1}{2}u_2(n)\right)^2-\left(u_3(n)+\frac{1}{2}u_2(n)\right)^2$.
+
+% \item
+% On a $u_1(n+1)=P(E=1)=\theta(n)^2$. De plus, $u_1(n)+u_2(n)+u_3(n)=1$, ce qui fait que $u_3(n)+u_2(n)^2=1-\theta(n)$. Ainsi, $u_3(n+1)=(1-\theta(n))^2$ et $u_2(n+1)=1-\theta(n)^2-(1-\theta(n))^2$.
+% \item 
+% Calculons $\theta_{n+1}$ en fonction de $\theta(n)$, pour $n \geq 1$. On a $\theta(n+1)=u_1(n+1)+\frac{1}{2}u_2(n+1)=\theta(n)^2+\frac{1}{2}-\frac{\theta(n)^2}{2}-(1-\theta(n))^2$. Ainsi, pour $n \geq 1$, on a $\theta(n+1)=\theta(n)$ et donc d'après la question précédente, $u_i(n+2)=u_i(n+1)$. La proportion de malades dans la population ne varie plus à partir de la génération 2.\\
+% \end{enumerate}
+
+% \end{Sol}
+
+
+% Exercice 2018
+\section{Indépendance}
+
+\exo[2]{\textbf{Tirer un nombre au hasard}}
+
+On tire au hasard un nombre entier strictement positif. On suppose que la probabilité d'obtenir $n$ vaut $1/2^n$. Pour $k\in\mathbb N^*$, on note $A_k$ l'événement "$n$ est un multiple de $k$".
+\begin{enumerate}
+\item Vérifier que ceci définit une probabilité sur $\mathbb N^*$.
+\item Calculer la probabilité de $A_k$ pour $k\in\mathbb N^*$.
+\item Calculer la probabilité de $A_2\cup A_3$.
+\item Montrer que pour $p,q\geq 2$, alors $A_p$ et $A_q$ ne sont pas indépendants.\\
+\end{enumerate}
+
+% \begin{Sol}
+% \begin{enumerate}
+% \item 
+%  Il suffit de vérifier que la série $\sum_{ n \geq 1}P(\{n\})$ est convergente et que sa somme vaut $1$.\\
+%   Mais puisque $P({n})=\dfrac{1}{2^n}$, on a une somme géométrique de raison $\dfrac{1}{2}$ dont la somme vaut effectivement $1$.\\
+% Les éléments de $A_k$ sont les $mk$, avec $m \geq 1$.\\
+%  On a donc $P(A_k)=\sum_{m \geq 1}\dfrac{1}{2^{mk}}=\dfrac{1}{2^k}\times \dfrac{1}{1-\frac{1}{2^k}}=\dfrac{1}{2^k-1}$.
+% On va utiliser le fait que $P(A_2 \cup A_3)=P(A_2)+P(A_3)-P(A_2\cap A_3)$.\\
+%  Un entier est dans $A_2 \cap A_3$ si et seulement s'il est divisible par $2$ et par $3$ si et seulement s'il est divisible par $6$, si et seulement s'il appartient à $A_6$. On a donc $P(A_2 \cup A_3)=\dfrac{1}{3}+\dfrac{1}{7}-\dfrac{1}{63}=\dfrac{29}{63}$.\\
+% \item
+% Notons $m$ le ppcm de $p$ et $q$.\\
+%  Alors $A_p \cap A_q=A_m$. Si $A_p$ et $A_q$ étaient indépendants, on aurait $P(A_m)=P(A_p)\times P(A_q)$ et donc $2^m=(2^p-1)(2^q-1)+1=2^{p+q}-2^p-2^q+2$. Or, le membre de gauche est divisible par $4$, et pas le membre de droite (tous les termes à droite sont divisibles par $4$, sauf $ 2$...). On a donc une contradiction.\\ 
+% \end{enumerate}
+
+% \end{Sol}
+\hfill\break
+\hrule
+\hfill\break
+
+
+\exo[2]{\textbf{La grenouille}}
+
+Une grenouille monte les marches d'un escalier (supposé infini) en partant du sol et en sautant 
+\begin{itemize}
+\item ou bien une seule marche, avec probabilité $p$;
+\item ou bien deux marches, avec la probabilité $1-p$.
+\end{itemize}
+On suppose que les sauts sont indépendants les uns des autres. 
+\begin{enumerate}
+\item Dans cette question, on observe $n$ sauts de la grenouille, et on note $X_n$ le nombre de fois où la grenouille a sauté une marche, et $Y_n$ le nombre de marches franchies. Quelle est la loi de $X_n$? Exprimer $Y_n$ en fonction de $X_n$. En déduire l'espérance et la variance de $Y_n$.
+\item Pour $k\geq 1$, on note $p_k$ la probabilité que la grenouille passe par la marche $k$. Que vaut $p_1$? Que vaut $p_2$? \'Etablir une formule de récurrence liant $p_k$ et $p_{k-1}$. En déduire la valeur de $p_k$ pour $k\geq 1$.
+\item On note désormais $Z_n$ le nombre de sauts nécessaires pour atteindre ou dépasser la $n$-ième marche. \'Ecrire un algorithme qui simule la variable aléatoire $Z_n$.\\
+
+\end{enumerate}
+% Exercice 2016
+
+% \begin{Sol}
+% \begin{enumerate}
+% \item On a affaire ici à un schéma de Bernoulli : $X_n$ compte le nombre de fois où n expériences indépendantes (les n premiers sauts) donnent un résultat ayant probabilité $p$. La variable aléatoire $X_n$ suit donc une loi binomiale de paramètres $n$ et $p$. Le nombre de marches franchies est alors $Y_n=X_n+2(n-X_n)=2n-X_n$.\\
+%  Par linéarité de l'espérance, on trouve $E(Y_n)=2n-E(X_n)=2n-np=(2-p)n$.\\
+%   De plus, on a $V(Y_n)=V(X_n)=np(1-p)$.
+% \item On a $p_1=p$: il faut que le premier saut de la grenouille soit un saut d'une marche.\\
+%  Pour déterminer $p_2$, on remarque que la grenouille passe par la marche $2$ si le premier saut est un saut de deux marches ou si les deux premiers sauts sont des sauts de une marche.\\
+%   On a donc $p_2=1-p+p^2$.
+
+
+
+
+% On observe que la grenouille ne passe pas par la marche $k$ si elle   passe par la marche $k-1$ et si elle fait un saut de deux marches.\\
+%  On a donc : $1-p_k=(1-p)p_{k-1}$ soit $p_k=1-(1-p)p_{k-1}$.\\
+%   On reconnait une suite arithmético-géométrique : la suite $u_k=p_k-\dfrac{1}{2-p}$ est une suite géométrique de raison $p-1$, et donc on a $u_k=(p-1)^{k-1}u_1$, ce qui signifie que $p_k=\dfrac{1}{2-p}+(1-p)^{k-1}u_1$. Puisque $u_1=p-\dfrac{1}{2-p}=\dfrac{2p-p^2-1}{2-p}$,\\
+%   on a finalement : $$p_k=\frac{1}{2-p}+(p-1)^{k-1}\dfrac{2p-p^2-1}{2-p}.$$
+
+
+% \item
+% Voici un algorithme possible :
+
+% \begin{verbatim}
+% Variables :
+%   n entier
+%   hauteur entier
+%   saut entier
+% Traitement :
+%   Lire n
+%   hauteur=0
+%   saut=0
+%   Tant que (hauteur<n) faire
+%       Si (alea()<p) faire hauteur=hauteur+1
+%       Sinon faire hauteur=hauteur+2
+%       Fin si.
+%       saut=saut+1;
+%   Fin Tant que.
+%   Afficher saut 
+% \end{verbatim}
+% \end{enumerate}
+
+
+
+
+% \end{Sol}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Vrai ou faux}}
+
+Les assertions suivantes sont-elles vraies ou fausses?\\
+\begin{enumerate}
+\item Deux événements incompatibles sont indépendants.
+\item Deux événements indépendants sont incompatibles.
+\item Si $P(A)+P(B)=1$, alors $A=\bar B$.
+\item Si $A$ et $B$ sont deux événements indépendants, alors $P(A\cup B)=P(A)+P(B)$.
+\item Soit $(A_n)_{n\in\mathbb N}$ et $(B_p)_{p\in\mathbb N}$ deux systèmes complets d'événements. Alors $(A_n\cap B_p)_{(n,p)\in\mathbb N^2}$ est un système complet d'événements.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1254
+
+\exo[2]{\textbf{Garagiste}}
+
+Un garagiste dispose de deux voitures de location. Chacune est utilisable en moyenne $4$ jours sur $5$. Il loue les voitures avec une marge brute de $300$ euros par jour et par voiture.
+On considère $X$ la variable aléatoire égale au nombre de clients se présentant chaque jour pour louer une voiture. On suppose que $X(\Omega)=\{0,1,2,3\}$ avec 
+$$P(X=0)=0,1\ \ P(X=1)=0,3\ \ P(X=2)=0,4\ \ P(X=3)=0,2.$$
+\begin{enumerate}
+\item On note $Z$ le nombre de voitures disponibles par jour. Déterminer la loi de $Z$. On pourra considérer dans la suite que $X$ et $Z$ sont indépendantes.
+\item On note $Y$ la variable aléatoire : " nombre de clients satisfaits par jour". Déterminer la loi de $Y$.
+\item Calculer la marge brute moyenne par jour.\\
+\end{enumerate}
+
+
+% \begin{Sol}
+% \begin{enumerate}
+% \item 
+% $Z$ est élément de $\{0,1,2\}$. On a : $P(Z=2)=45\times45=1625$ (les deux voitures sont disponibles).\\
+%  D'autre part, $P(Z=0)=15\times 15=125$ (les deux voitures sont simultanément indisponibles).\\  Enfin, on obtient : $P(Z=1)=1-P(Z=0)-P(Z=2)=825$.\\
+%   On aurait aussi pu directement remarquer que $Z$ suit une loi binomiale $\mathcal{B}(2,4/5)$.
+%  \item
+% Remarquons que $Y$ est à valeurs dans $\{0,1,2\}$.\\
+%  On calcule sa loi en utilisant la formule des probabilités totales. L'événement $Y=0$ se produit si $X=0$ ou bien si $X \geq 1$ et $Z=0$.\\
+%   Ces deux événements étant disjoints, on a : $P(Y=0)=P(X=0)+P(X \geq 1 \cap Z=0)=P(X=0)+P(X \geq 1)P(Z=0)$ (la disponibilité des voitures étant supposée indépendante de l'arrivée des clients).\\
+%   D'où : $P(Y=0)=0,1+0,9 	\times (15)^2=0,136$.\\
+ 
+%   De même, l'événement $Y=1$ se produit si $X=1$ et $Z \geq 1$ ou bien si $X \geq 2$ et $Z=1$. On en déduit : $P(Y=1)=P(X=1)P(Z \geq 1)+P(X \geq 2)P(Z=1)=0,48$. Enfin, l'événement $Y=2$ est réalisé si $X \geq 2$ et $Z=2$. Ceci donne : $P(Y=2)=P(X \geq 2)P(Z=2)=0,6 \times (45)^2=0,384$.\\
+%   \item 
+% La marge brute vaut $300Y$.\\
+%  La marge brute moyenne par jour est en euros : $E(300Y)=300(0 	\times 0,136+1 	\times 0,48+2 \times 0,384)=374,4$.\\
+% \end{enumerate}
+% \end{Sol}
+
+
+
+\section{Moment}
+% Exercice 2035
+
+\exo[2]{\textbf{Sur la variance}}
+
+Soit $X$ une variable aléatoire admettant un moment d'ordre 2.\\ Démontrer que $E\big((X-a)^2\big)$ est minimal pour $a=E(X)$.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 2029
+
+
+\exo[2]{\textbf{Quand a-t-on une loi discrète infinie?}}
+
+\begin{enumerate}
+\item Déterminer une condition nécessaire et suffisante pour que les réels $a$ et $k$ sont tels que la suite $(p_n)$ définie, pour $n\geq 0$, par $p_n=\left(\frac a{a+1}\right)^n k$ soit la loi de probabilité d'une variable aléatoire à valeurs dans $\mathbb N$. 
+\item Donner alors la fonction génératrice d'une telle variable aléatoire.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[3]{\textbf{Vaches laitières}}
+
+Les vaches laitières sont atteintes par une maladie $M$ avec la probabilité $p=0,15$. Pour dépister la maladie $M$ dans une étable de $n$ vaches, on fait procéder à une analyse de lait. Deux méthodes sont possibles :
+\begin{itemize}
+\item Première méthode : On fait une analyse sur un échantillon de lait de chaque vache.
+\item Deuxième méthode : On effectue d'abord une analyse sur un échantillon de lait provenant du mélange des $n$ vaches. Si le résultat est positif, on effectue une nouvelle analyse, cette fois pour chaque vache.
+\end{itemize}
+On voudrait connaître la méthode la plus économique (=celle qui nécessite en moyenne le moins d'analyse). Pour cela, on note $X_n$ la variable aléatoire du nombre 
+d'analyses réalisées dans la deuxième méthode. On pose $Y_n=\frac{X_n}{n}.$
+\begin{enumerate}
+\item Déterminer la loi de $Y_n$, et montrer que son espérance vaut : $1+\frac{1}{n}-(0.85)^n$.
+\item \' Etudier la fonction $f(x)=ax+\ln x$, pour $a=\ln(0,85)$. Donner la liste des entiers $n$ tels que $f(n)>0$.
+\item Montrer que $f(n)>0$ équivaut à $E(Y_n)<1$. En déduire la réponse (en fonction de $n$) à la question posée.\\
+\end{enumerate}
+
+
+% \begin{Sol}
+% \begin{enumerate}
+% \item
+% $Y_n$ ne prend que deux valeurs, $1/n$ et $1+1/n$. On a en outre : $(Y_n=1/n) \iff$ aucune vache n'est malade, d'où $P(Y_n=1/n)=0,85^n$. On en déduit que $P(Y_n=1+1/n)=1-(0,85)^n$. Le calcul de l'espérance donne : $E(Y_n)=0,85^n/n+n+1/n(1-0,85^n)=1+1/n-0,85^n$.
+% \item
+% $f$ est dérivable sur $]0,+\infty[$, et $f'(x)=1+ax/x$. $f'(x)$ est donc du signe de $1+ax$, 
+% ce qui permet de dire que $f$ est croissante sur $]0,-1/a[$, et décroissante ensuite.\\
+
+%  La limite de $f$ en $+\infty$ est $-\infty$, il en est de même en $0$.\\
+%   En calculant les valeurs successives de $f(n)$, on a $f(17)>0,07$ et $f(18)<-0,03$. $17$ est donc la plus grande valeur entière pour laquelle $f(n)$ est positive. En outre, $f(1)<0$ alors que $f(2)>0$. L'ensemble d'entiers recherché est donc $\{2,\ldots,17\}$.
+
+% \item
+% On a : $E(Y_n)<1 \iff 1+1/n-0,85^n<1 \iff 0,85^n>1/n \iff n\ln(0,85)>-\ln n$.
+% Par suite, $E(Y_n)<1 \iff f(n)>0$. L'étude précédente montre que les entiers $n$ pour lesquels $f(n)>0$ sont $\{2,\ldots,17\}$. On a intérêt à choisir la deuxième méthode si, et seulement si, il y a de $2$ à $17$ vaches dans l'étable!\\
+
+
+% \end{enumerate}
+
+% \end{Sol}
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 2295
+\exo[2]{\textbf{Analyse de sang}}
+
+On cherche à dépister une maladie détectable à l'aide d'un examen sanguin. On suppose que dans notre population, il y a une proportion $p$ de personnes qui n'ont pas cette maladie.\\
+\begin{enumerate}
+\item On analyse le sang de $r$ personnes de la population, avec $r$ entier au moins égal à 2. On suppose que l'effectif de la population est suffisamment grand pour que le choix de ces $r$ personnes s'apparente à un tirage avec remise. Quelle est la probabilité qu'aucune de ces personnes ne soit atteinte de la maladie?
+\item On regroupe le sang de ces $r$ personnes, puis on procède à l'analyse de sang. Si l'analyse est négative, aucune de ces personnes n'est malade et on arrête. Si l'analyse est positive, on fait toutes les analyses individuelles (on avait pris soin de conserver une partie du sang recueilli avant l'analyse groupée). On note $Y$ la variable aléatoire qui donne le nombre d'analyses de sang effectuées. Donner la loi de probabilité de $Y$ et calculer son espérance en fonction de $r$ et de $p$.
+\item On s'intéresse à une population de $n$ personnes, et on effectue des analyses collectives après avoir mélangé les prélèvements par groupe de $r$ personnes, où $r$ est un diviseur de $n$. Montrer que le nombre d'analyses que l'on peut espérer économiser, par rapport à la démarche consistant à tester immédiatement toutes les personnes, est égal à $np^r-\frac nr$.
+\item Dans cette question, on suppose que $p=0,9$ et on admet qu'il existe un réel $a>1$ de sorte que la fonction $x\mapsto p^x-\frac{1}x$ est croissante sur $[1,a]$ et décroissante sur $[a,+\infty[$. \'Ecrire un algorithme permettant de déterminer 
+pour quelle valeur de l'entier $r$ le nombre $p^r-\frac 1r$ est maximal.\\
+\end{enumerate} 
+
+% \begin{Sol}
+
+% \begin{enumerate}
+% \item
+% On note $A_i$ l'événement "la $i$-ème personne choisie n'est pas malade". On cherche la probabilité de l'événement $A_1 \cap A_2 \cap \ldots \cap A_r$. L'énoncé nous dit que $P(A_i) = p$ (proportion $p$ de personnes qui n'ont pas la maladie), et que les événements $A_1, \ldots, A_r$ sont mutuellement indépendants (le choix de ces $r$ personnes s'apparente à un tirage avec remise). On en déduit donc que la probabilité qu'aucune des $r$ personnes ne soit atteinte de la maladie est $p^r$.\\
+
+% \item
+% La variable aléatoire $Y$ peut prendre deux valeurs : la valeur 1 (l'analyse collective est négative), et la valeur $r+1$ (l'analyse collective est positive, et il faut donc faire également toutes les analyses individuelles). On a de plus $P(Y=1) = p^r$ (l'événement $\{Y=1\}$ est aussi l'événement aucune des $r$ personnes n'est malade) et donc $P(Y=r+1) = 1 - p^r$. On en déduit que $E(Y) = p^r + (r+1)(1-p^r) = (r+1) - rp^r$.\\
+
+% \item
+% Si on analyse immédiatement toutes les personnes, on réalise $n$ analyses. En les regroupant par groupe de $r$ personnes, notons $Z$ le nombre d'analyses effectuées, et $Y_1, \ldots, Y_{n/r}$ le nombre d'analyses effectués sur chacun des $n/r$ groupes constitués. Alors d'après la question précédente, on sait que l'espérance de $Y_i$ est $(r+1) - rp^r$. Le nombre moyen d'analyses que l'on peut espérer réaliser est donc égal à $E(Y_1) + \ldots + E(Y_{n/r}) = \frac{n}{r} ((r+1) - rp^r)$. Le nombre d'analyses que l'on peut espérer économiser vaut donc $n - \frac{n}{r} ((r+1) - rp^r) = n(p^r - \frac{1}{r})$.\\
+% \item
+% On nous demande donc de donner un algorithme qui détermine le maximum d'une suite croissante, puis décroissante. \\
+
+% \begin{verbatim}
+% from math import *
+
+% def maximum():
+%     r = 1
+%     val = -1
+%     p = 0.9
+%     while ((pow(p, r) - 1 / r) > val):
+%         val = (pow(p, r) - 1 / r)
+%         r = r + 1
+%     return r - 1
+% \end{verbatim}
+
+% La variable \texttt{val} contient la plus grande valeur atteinte jusqu'au rang présent. Elle est initialisée à un nombre négatif afin que l'on rentre dans la boucle. Il faut bien afficher $r-1$ et non $r$, car quand on sort de la boucle, on a dépassé le maximum.\\
+% \end{enumerate}
+
+% \end{Sol}
+% Exercice 1255
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1256
+
+
+\exo[2]{\textbf{Recrutement}}
+
+Une entreprise souhaite recruter un cadre. $n$ personnes se présentent pour le poste. Chacun d'entre eux passe à tour de rôle un test, et le premier qui réussit le test est engagé. La probabilité de réussir le test est $p\in ]0,1[$. On pose également $q=1-p$. On définit la variable aléatoire $X$ par $X=k$ si le $k$-ième candidat qui passe le test est engagé, et $X=n+1$ si personne n'est engagé.
+\begin{enumerate}
+\item Déterminer la loi de $X$.
+\item En dérivant la formule donnant $\sum_{k=0}^n x^k$, calculer $\sum_{k=1}^n kx^{k-1}$ pour $x\neq 1$.
+\item En déduire l'espérance de $X$.
+\item Quelle est la valeur minimale de $p$ pour avoir plus d'une chance sur deux de recruter l'un des candidats?\\
+\end{enumerate}
+
+
+% \begin{Sol}
+% \begin{enumerate}
+% \item 
+% Notons  $\Omega$ l'univers associé à l'expérience.\\
+%  On a bien sûr $X(\Omega)=\{1,\dots,n+1\}$. Pour i=1,…,n, on note $A_i$ l'événement : le i-ème candidat réussit le test.\\
+%   Pour $k  \leq  n$, on a $(X=k)= \bar  A_1  \cap  \bar  A2  \cap \dots  \cap    \bar A_{k-1}  \cap A_k$.\\
+%   Par la formule des probabilités composées, on trouve $$P(X=k)=P( \bar  A1)P_{ \bar  A1}( \bar  A_2)\dots P_{ \bar  A_1  \cap \dots  \cap    \bar { A}_{k-1}}(A_k).$$
+%    Mais pour tout $j$, $P _{\bar  A_1  \cap \dots \cap  \bar  \bar  A_{j-1}}( \bar  A_j)$ est juste la probabilité que le candidat échoue au test (qu'il ne passe que si les candidats précédents ont tous échoué). Cette probabilité vaut donc $q=1-p$.\\
+%    Finalement, on trouve donc $P(X=k)=q^{k-1}p$. D'autre part, $P(X=n+1)$ est la probabilité que tous les candidats échouent au test.\\
+%   On a donc $P(X=n+1)=q^n$.\\
+%   \item 
+% Posons $f(x)=\sum _{k=0}^n x^k=\dfrac{1-x^{n+1}}{1-x}$.\\
+% La fonction est dérivable sur $\mathbb{R}\ \{1\}$. En dérivant des deux côtés de l'égalité, on obtient $$\sum_{ k=1}^n x^{k-1}=\dfrac{nx^{n+1}-(n+1)x^{n}+1}{(1-x)^2}.$$
+% \item L'espérance de $X$ vaut donc $E(X)=n\sum  k=1kqk-1p+(n+1)qn$. En tenant compte du résultat de la question précédente, et après simplifications, on trouve $E(X)=\dfrac{1-q^{n+1}}{1-q}$.\\
+% \item 
+% Un des candidats est recruté si et seulement si l'événement $X  \leq  n$
+% est réalisé. Il vient $P(X  \leq  n)=1-P(X=n+1)=1-q^n$. On a $$P(X  \leq  n) \geq 1/2 \Longleftrightarrow q^n  \leq  \dfrac{1}{2} .$$
+% \end{enumerate}
+% \end{Sol}
+
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 2262
+
+\exo[1]{\textbf{Trouver le paramètre d'une loi uniforme connaissant son espérance}}
+
+
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $\{0,1,\dots,a\}$, où $a\in\mathbb N$. On suppose que $E(X)=6$. Déterminer $a$.\\
+
+
+
+
+% Exercice 1263
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Uniformément uniforme}}
+
+On dispose de $n$ urnes numérotées de $1$ à $n$, l'urne numérotée $k$
+comprenant $k$ boules numérotées de $1$ à $k$ indiscernables au toucher. On réalise l'expérience aléatoire suivante. On choisit d'abord au hasard et sans préférence une urne, puis on prélève une boule dans cette urne. On note $X$ le numéro de l'urne choisie et on note $Y$ le numéro de la boule tirée.
+\begin{enumerate}
+\item Quelle est la loi de la variable aléatoire $X$?
+\item Pour $(i,k)\in\{1,\dots,n\}^2$, déterminer $P(Y=k|X=i)$.
+\item Déterminer la loi de $Y$.
+\item Quelle est l'espérance de $Y$? Comment l'interprétez-vous?\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1258
+
+\exo[2]{\textbf{Minimum et maximum de dés}}
+
+On lance deux dés équilibrés, on note $U_1$ et $U_2$ les variables aléatoires correspondant aux résultats obtenus.
+On appelle $X=\min(U_1,U_2)$ et $Y=\max(U_1,U_2)$. 
+\begin{enumerate}
+ \item Donner la loi de $X$. En déduire $E(X)$.
+\item Exprimer $X+Y$ en fonction de $U_1$ et $U_2$. En déduire $E(Y)$.
+\item Exprimer $XY$ en fonction de $U_1$ et $U_2$. En déduire $\textrm{Cov}(X,Y)$. $X$ et $Y$ sont-elles indépendantes?\\
+\end{enumerate}
+
+
+% Exercice 1815
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{\textbf{Loi uniforme discrète}}
+
+Soit $X,Y$ deux variables aléatoires indépendantes suivant la loi uniforme sur $\{1,\dots,n\}$. 
+\begin{enumerate}
+\item Déterminer $P(X=Y)$.
+\item Déterminer $P(X\geq Y)$.
+\item Déterminer la loi de $X+Y$.\\
+\end{enumerate}
+
+
+% Exercice 3147
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Minimum de variables aléatoires uniformes}}
+
+Soit $X_1,\dots,X_n$ des variables aléatoires définies sur un même espace probabilisé fini, indépendantes, et suivant une loi uniforme sur $\{1,\dots,n\}$.
+On note $M=\min(X_1,\dots,X_n)$.
+\begin{enumerate}
+\item Pour $k\in\{1,\dots,n\}$, déterminer $P(M\geq k)$.
+\item En déduire la loi de $M$.
+\item Soit $A$ l'événement : "il existe $i\in\{1,\dots,n\}$ tel que $X_i=1$". Démontrer que $P(A)\geq 1-\frac 1e$.\\ 
+\end{enumerate}
+
+
+% Exercice 1274
+\hfill\break
+\hrule
+\hfill\break
+
+
+\exo[2]{\textbf{Tirages avec remise}}
+
+Une urne contient $N$ boules numérotées de $1$ à $N$. On en tire $n$ en effectuant des tirages avec remise. On note $X$ et $Y$ le plus petit et le plus grand des nombres obtenus. Déterminer la loi de $X$ et la loi de $Y$.\\
+
+
+% Exercice 1257
+
+\hfill\break
+\hrule
+\hfill\break
+\exo[2]{\textbf{Avion}}
+
+$A$ et $B$ sont deux avions ayant respectivement 4 et 2 moteurs. Les moteurs sont supposés indépendants les uns des autres, et ils ont une probabilité $p$ de tomber en panne.
+Chaque avion arrive à destination si moins de la moitié de ses moteurs tombe en panne. Quel avion choisissez-vous? (on discutera en fonction de $p$).\\
+
+
+% \begin{Sol}
+
+% On note $X$ la variable aléatoire du nombre de moteurs de A qui tombent en panne, et $Y$ la variable aléatoire du nombre de moteurs de B qui tombent en panne. $X$ suit une loi binomiale $B(4,p)$. En particulier, on a : 
+% \[ P(X=0)+P(X=1) = \binom{4}{0} p^0 (1-p)^4 + \binom{4}{1} p^1 (1-p)^3 = (1-p)^4 + 4p(1-p)^3. \]
+% D'autre part, $Y$ suit une loi binomiale $B(2,p)$. En particulier, $P(Y=0) = (1-p)^2$. On a intérêt à prendre l'avion A si $P(X=0)+P(X=1) \geq P(Y=0)$. Ceci donne : 
+% \[ p(1-p)^2(2-3p) \geq 0. \]
+% Donc, si $0 \leq p < \frac{2}{3}$ (cas que l'on espère être celui du monde réel), il est préférable de choisir A. Si $p=\frac{2}{3}$, le choix est indifférent, et si $p > \frac{2}{3}$, il vaut mieux choisir B.\\
+
+
+
+% \end{Sol}
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1262
+
+\exo[2]{\textbf{Lancer de pièce}}
+
+On lance $n$ fois une pièce parfaitement équilibrée. Quelle est la probabilité d'obtenir strictement plus de piles que de faces.\\
+
+
+% \begin{Sol}
+% Notons $A$ l'événement "obtenir strictement plus de piles que de faces" et $B$ l'événement "obtenir strictement plus de faces que de piles". La pièce étant parfaitement équilibrée, par symétrie, $P(A)=P(B)$. On distingue alors deux cas :
+
+% \begin{itemize}
+%     \item $n$ est impair. Dans ce cas, le couple $(A,B)$ est un système complet d'événements et $P(A)=\frac{1}{2}$.
+%     \item $n=2r$ est pair. Notons $X$ la variable aléatoire du nombre de piles obtenues. $X$ suit une loi binomiale $B(n,1/2)$. On a $A=(X>r)$ et $B=(X<r)$. On a donc $P(A)+P(B)+P(X=r)=1 \implies P(A)=\frac{1}{2}-\frac{1}{2}P(X=r)=\frac{1}{2}-(2r\choose r)\frac{(1/2)^{2r}}{2r+1}$.\\
+% \end{itemize}
+
+% \end{Sol}
+% Exercice 2569
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{\textbf{Restaurateur}}
+
+Un restaurateur accueille chaque soir 70 clients. Il sait qu'en moyenne, deux clients sur cinq prennent une crème brûlée. Il pense que s'il prépare 30 crèmes brûlées, dans plus de 70\% des cas, la demande sera satisfaite.
+\begin{enumerate}
+\item A-t-il raison?
+\item Combien de crèmes brûlées doit-il fabriquer au minimum pour que la demande soit satisfaite dans au moins 90\% des cas.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 2160
+
+
+\exo[2]{\textbf{Code de la route}}
+
+L'examen du code de la route se compose de $40$ questions. Pour chaque question, on a le choix entre $4$ réponses possibles. Une seule de ces réponses est correcte. Un candidat se présente à l'examen. Il arrive qu'il connaisse la réponse
+à certaines questions. Il répond alors à coup sûr. S'il ignore la réponse, il choisit au hasard entre les $4$ réponses proposées. On suppose toutes les questions indépendantes et que pour chacune de ces questions, la probabilité que le candidat connaisse la vraie réponse est $p$. On note, pour $1\leq i\leq 40$, $A_i$ l'événement : "le candidat donne la bonne réponse à la $i$-ème 
+question". On note $S$ la variable aléatoire égale au nombre total de bonnes réponses.
+\begin{enumerate}
+\item Calculer $P(A_i)$.
+\item Quelle est la loi de $S$ (justifier!)?
+\item A quelle condition sur $p$ le candidat donnera en moyenne au moins $36$ bonnes réponses?\\
+\end{enumerate}
+
+
+
+
+
+
+\section{Approximation}
+
+
+\exo[2]{\textbf{Fichier informatique}}
+
+
+Un fichier informatique vidéo est composé de $10 ^ 9 $bits (valeurs $0$ ou $1$). Lors de la transmission de ce fichier sur un réseau, il peut se produire des erreurs : on considère que la valeur de chaque bit peut être modifiée avec probabilité $p$ très faible, et que tous ces événements sont indépendants. On suppose de plus que plus la transmission est rapide, plus il y a d'erreurs ;
+de sorte qu'il est possible d'ajuster la valeur de $p$ en réglant la vitesse de transmission. Pour
+cela on cherche à satisfaire les deux critères suivants :\\
+\begin{itemize}
+\item (1) La proportion de bits erronés doit être en moyenne inférieure à $10^{-6}$.
+
+\item (2) La probabilité de ne faire aucune erreur dans l'en-tête du fichier (formé des $1000$ premiers
+bits) doit être supérieure à $1-\alpha$, avec $\alpha = 10^{-4}$
+\end{itemize}
+
+\begin{enumerate}
+\item On note $X$ le nombre d'erreurs. 
+
+\begin{enumerate}
+\item Quelle est la loi exacte de $X$ ? 
+\item Par quelle loi peut-on l'approcher au vu des données du problème ? Exprimer la condition (1) comme une condition sur $X$, puis l'écrire en fonction de $p$.
+\end{enumerate}
+\item  Exprimer la condition (2) en fonction de $p$ (on ( votre professeur.e)  fera un développement à l'ordre 1 en $\alpha$ du
+résultat afin d'obtenir une valeur approchée simple).
+\item  Déterminer la valeur maximale acceptable pour $p$.\\
+\end{enumerate}
+
+
+
+
+
+%\underline {\ding{110}\, \bf{Exercice \thecompteur \stepcounter{compteur}:  Bruit}}\\
+%
+%On fait passer un test de réactivité visuelle à un groupe de $118$ sujets. Chaque sujet passe le test dans deux conditions différentes : avec ou sans bruit dans la salle. Le test se présente comme suit. Deux lampes sont placées à droite et à gauche du sujet. Chaque lampe s'allume de fa¸con aléatoire, avec un temps d'attente variable (entre $0.2s$ et $0.5s$). Le sujet est assis les mains sur les genoux.\\
+%Dès qu'une lampe s'allume, il doit frapper une plaque située en dessous de la lampe correspondante. On considère qu'un sujet a réussi le test lorsqu'il a réalisé la bonne association ” lumière, frappe ” au moins $7$ fois sur $10$.\\
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%&&Avec Bruit&\\
+%\hline
+%&&Succès& Echecs\\
+%\hline
+%Sans Bruit& Succès &62& 26\\
+%\hline
+%&Echecs &7 &23\\
+%
+%\hline
+%\end{tabular}
+%\vspace{0.2cm}
+%
+%Quelle conclusion tirez vous de cette expérience ?\\
+%
+%
+%\hfill\break
+%\hrule
+%\hfill\break
+
+
+
+
+
+%EXERCICE : loi normale.\\
+%
+%Pour chacune des propositions suivantes, dire si la proposition est vraie ou fausse en justifiant
+%la réponse.
+%L'entreprise MICRO vend en ligne du matériel informatique notamment des ordinateurs portables et des clés USB.\\
+%
+%Partie A\\
+%
+%Durant la période de garantie, les deux problèmes les plus fréquemment relevés par le service
+%après-vente portent sur la batterie et sur le disque dur, ainsi :
+%
+%Parmi les ordinateurs vendus, 5 \% ont été retournés pour un défaut de batterie et parmi
+%ceux-ci, 2 \% ont aussi un disque dur défectueux.\\
+%Parmi les ordinateurs dont la batterie fonctionne correctement, 5 \% ont un disque dur défectueux.\\
+%
+% On suppose que la société MICRO garde constant le niveau de qualité de ses produits. 
+%
+%Suite à l'achat en ligne d'un ordinateur :
+%
+%Proposition 1 :
+%
+%La probabilité que l'ordinateur acheté n'ait ni problème de batterie ni problème de disque
+%dur est égale à 0,08 à 0,01 près.
+%
+%Proposition 2 :\\
+%
+%La probabilité que l'ordinateur acheté ait un disque dur défectueux est égale à 0, 0485.
+%
+%Proposition 3\\
+%
+%Sachant que l'ordinateur a été retourné pendant sa période de garantie car son disque dur
+%était défectueux, la probabilité que sa batterie le soit également est inférieure à 0, 02.
+%
+%Partie B\\
+%
+%L'autonomie de la batterie qui équipe les ordinateurs portables distribués par la société MICRO,
+%exprimée en heure, suit une loi normale d'espérance $\mu = 8$ et d'écart-type $\sigma = 2$.
+%
+%Proposition 4\\
+%La probabilité que l'ordinateur ait une autonomie supérieure ou égale à 10 h est inférieure à
+%$0, 2$.
+%
+%Partie C\\
+%
+%L'entreprise MICRO vend également des clés USB et communique sur ce produit en affirmant que 98 \% des clés commercialisées fonctionnent correctement.
+%Sur 1 000 clés prélevées dans le stock, 50 clés se révèlent défectueuses.
+%
+%Proposition 5 :
+%Ce test, réalisé sur ces 1000 clés, ne remet pas en cause la communication de l'entreprise.
+%
+

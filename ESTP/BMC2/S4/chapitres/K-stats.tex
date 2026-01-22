@@ -1,0 +1,880 @@
+\section{Rappels en statistiques univariées}
+
+\begin{Def}\textbf{Population et caractère}\\
+
+Soit $\Omega$ un ensemble.
+\begin{itemize}
+    \item $\Omega$ désigne la population qui fera l'objet de l'étude.
+    \item Les éléments $\omega_i \in \Omega$ sont les individus.
+    \item Une variable statistique (ou caractère) $X$ sur la population $\Omega$ est une application $X : \Omega \to F$. Dans le cas où $F$ est une partie de $\mathbb{R}$, on dit que le caractère est quantitatif. Sinon, on dit que le caractère est qualitatif.
+\end{itemize}
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Dans la suite, on ne considère que les caractères quantitatifs.
+\end{Rmq}
+
+\begin{Def}\textbf{Échantillon}\\
+
+\begin{itemize}
+    \item Si $\Omega$ est un ensemble fini, le nombre d'éléments de $\Omega$, noté $\text{Card}(\Omega)$, est l'effectif de la population.
+    \item Quand il n'est pas possible d'étudier chaque individu de la population, on étudie seulement les individus d'une partie finie $E$ de la population $\Omega$. Dans ce cas, la partie $E$ est appelée échantillon. Le nombre d'individus de l'échantillon, $\text{Card}(E)$, est la taille de l'échantillon.
+    \item Ainsi, si $N$ désigne la taille, on peut écrire $E = \{e_1, e_2, \ldots, e_N\}$ où les $e_i$ sont distincts deux à deux.
+\end{itemize}
+\end{Def}
+
+\begin{Def}\textbf{Variables statistiques}\\
+
+On distinguera deux types de variables statistiques :
+\begin{itemize}
+    \item Si l'ensemble des valeurs prises par la variable, noté $X(\Omega)$, est un ensemble fini, on dit que la variable quantitative est discrète.
+    \item Dans le cas contraire, on dit que la variable quantitative est continue.
+\end{itemize}
+\end{Def}
+
+\subsection{Cas discret}
+
+\begin{Def}\textbf{Série statistique}\\
+
+Soit $X$ une variable statistique discrète et $E = \{e_1, e_2, \ldots, e_N\}$ un échantillon. La donnée du $N$-uplet des observations
+\[
+x = (X(e_1), X(e_2), \ldots, X(e_N))
+\]
+définit une série statistique.
+\end{Def}
+
+\begin{Def}\textbf{Modalités, effectif, fréquences}\\
+
+\begin{itemize}
+    \item L'échantillon étant un ensemble fini, l'ensemble des valeurs prises par la variable $X$ sur $E$ est aussi fini. On peut l'écrire $X(E) = \{m_1, m_2, \ldots, m_p\}$ où $m_1 < m_2 < \ldots < m_p$ où chaque $m_i$ est une valeur ou modalité.
+    \item L'effectif d'une modalité $m_i$ est le nombre d'individus de $E$ pour lequel le caractère prend la modalité $m_i$. C'est-à-dire
+    \[
+    n_i = \text{Card} \{e \in E \mid X(e) = m_i\}.
+    \]
+    Si $N$ est la taille de l'échantillon, $N = \sum_{i=1}^{p} n_i$.
+    \item La fréquence d'une modalité $m_i$ est la quantité
+    \[
+    f_i = \frac{\text{Effectif de la modalité}}{\text{Taille de l'échantillon}} = \frac{n_i}{N}.
+    \]
+    On a alors $\sum_{i=1}^{p} f_i = 1$.
+    \item La fréquence cumulée d'une modalité $m_i$ est la somme de toutes les fréquences des modalités qui lui sont inférieures. Autrement dit,
+    \[
+    F_i = \sum_{j \leq m_i} f_j.
+    \]
+\end{itemize}
+\end{Def}
+
+\begin{Def}\textbf{Tableau de série statistique}\\
+
+Donner une série statistique est équivalent à la donnée du couple $(m, n)$ où
+\begin{itemize}
+    \item $m = (m_1, m_2, \ldots, m_p)$ est le $p$-uplet constitué des modalités,
+    \item $n = (n_1, n_2, \ldots, n_p)$ est le $p$-uplet constitué des effectifs.
+\end{itemize}
+
+Il est alors commode de représenter une série statistique à l'aide d'un tableau :
+\[
+\begin{array}{|c|c|c|c|c|c|}
+\hline
+\text{Modalités} & m_1 & m_2 & \ldots & m_p & \text{Total} \\
+\hline
+\text{Effectifs} & n_1 & n_2 & \ldots & n_p & N \\
+\hline
+\end{array}
+\]
+\end{Def}
+
+\begin{Ex}\textbf{Notes d'Inès}\\
+
+Voici les notes d'Inès cette année en mathématiques :
+\[
+x = (15, 12, 8, 14, 12, 15, 10, 12, 10, 12, 15, 15).
+\]
+Série que l'on résume sous la forme :
+\[
+\begin{array}{|c|c|c|c|c|c|c|}
+\hline
+\text{Modalités} & 8 & 10 & 12 & 14 & 15 & \text{Total} \\
+\hline
+\text{Effectifs} & 1 & 2 & 4 & 1 & 4 & 12 \\
+\hline
+\end{array}
+\]
+\end{Ex}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une série statistique discrète est définie par :
+\begin{enumerate}
+\item une fonction de densité
+\item une liste ordonnée de classes
+\item un $N$-uplet d'observations
+\item une fonction de répartition
+\end{enumerate}
+
+\item L'effectif total $N$ d'une série statistique discrète est :
+\begin{enumerate}
+\item le nombre de modalités
+\item la somme des fréquences
+\item la somme des effectifs
+\item le nombre de classes
+\end{enumerate}
+
+\item La fréquence cumulée $F_i$ associée à la modalité $m_i$ est :
+\begin{enumerate}
+\item égale à $n_i$
+\item égale à $\sum_{j=i}^p f_j$
+\item égale à $\sum_{j \le i} f_j$
+\item toujours égale à $1$
+\end{enumerate}
+\end{enumerate}
+
+\subsection{Cas continu}
+
+\begin{Meth}\textbf{Regroupement en classes}\\
+
+On découpe l'ensemble des valeurs possibles $X(\Omega)$ en un certain nombre d'intervalles. Notons $p \in \mathbb{N}^*$ le nombre d'intervalles choisis. Ces intervalles doivent être deux à deux disjoints, et leur réunion est égale à (ou contient) l'ensemble des valeurs possibles.
+
+Plus précisément, en notant $a_1, a_2, \ldots, a_{p+1} \in \mathbb{R}$, les bornes de tous ces intervalles avec $a_1 < a_2 < \cdots < a_{p+1}$, on a $X(\Omega) \subset \bigcup_{i=1}^{p} [a_i; a_{i+1}[$.
+\end{Meth}
+
+\begin{Def}\textbf{Classe}\\
+
+L'intervalle $[a_i; a_{i+1}[$ est une classe.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+\begin{itemize}
+\item On peut ainsi définir l'effectif d'une classe et sa fréquence.
+\item On peut utiliser ces définitions pour une variable discrète lorsque l'ensemble des valeurs prises est trop important. Par exemple, pour étudier le nombre d'habitants par département, on pourra faire des tranches de 200 000 habitants.
+\end{itemize}
+\end{Rmq}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Dans le cas continu, les valeurs de la variable sont :
+\begin{enumerate}
+\item nécessairement finies
+\item regroupées en classes
+\item toutes observables exactement
+\item toujours discrètes
+\end{enumerate}
+
+\item Une classe statistique est :
+\begin{enumerate}
+\item une modalité
+\item un intervalle de valeurs
+\item un effectif
+\item une fréquence cumulée
+\end{enumerate}
+
+\item Le regroupement en classes permet :
+\begin{enumerate}
+\item de transformer une variable continue en discrète
+\item de calculer exactement la moyenne
+\item d'éviter toute perte d'information
+\item d'ordonner les individus
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Paramètres}
+
+La collecte massive de données permise par la révolution numérique de ces dernières années a rendu l'emploi des statistiques de plus en plus nécessaire. Comme le souligne R.A Fisher, un des objectifs des statistiques est d'introduire des quantités pertinentes pour l'analyse des données afin d'en extraire les informations pertinentes. Les plus élémentaires étant la moyenne, la variance, l'écart-type...
+
+\subsubsection{Paramètres de position}
+
+\begin{Def}\textbf{Mode}\\
+
+Un mode d'une série statistique est une modalité pour laquelle l'effectif est maximal.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Un mode n'est pas nécessairement unique.
+\end{Rmq}
+
+\begin{Ex}
+Il y a deux modes dans la série des notes d'Inès : $12$ et $15$ d'effectif $4$.
+\end{Ex}
+
+\begin{Def}\textbf{Moyenne empirique}\\
+
+Soit $x = (x_i)_{1 \ldots N}$, une série statistique. On définit la moyenne de la série par
+\[
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i.
+\]
+Si $(m_i)_{1 \ldots p}$, $(n_i)_{1 \ldots p}$ et $(f_i)_{1 \ldots p}$ désignent respectivement les modalités, les effectifs et les fréquences, on a aussi
+\[
+\bar{x} = \frac{1}{N} \sum_{i=1}^{p} n_i m_i = \sum_{i=1}^{p} f_i m_i.
+\]
+\end{Def}
+
+\begin{Ex}\textbf{Calcul de moyenne}\\
+
+\begin{itemize}
+\item On a directement $\bar{x} = \frac{1}{12} (1 \times 8 + 2 \times 10 + 4 \times 12 + 1 \times 14 + 4 \times 15) = 12,5$.
+\item Avec Python, la moyenne est obtenue par la commande \texttt{mean()} qui prend en argument une liste.
+\begin{verbatim}
+import numpy as np
+np.mean(L)
+\end{verbatim}
+\end{itemize}
+\end{Ex}
+
+\begin{Rmq}\textbf{Phénomène de Will Rogers}\\
+
+« Quand, pendant la Grande Dépression, les ouvriers pauvres ont quitté l'Oklahoma pour la Californie, le niveau intellectuel moyen des deux États a augmenté. » Cette citation est attribuée au comédien américain originaire d'Oklahoma : Will Rogers.
+
+C'est une façon déguisée de dire que les habitants de Californie sont en moyenne plus bêtes que ceux de l'Oklahoma. Le quotient intellectuel de la Californie augmente car il accueille des Oklahomans plus intelligents alors que celui de l'Oklahoma augmente car les émigrés faisaient baisser la moyenne.
+\end{Rmq}
+
+\begin{Def}\textbf{La médiane d'une série statistique}\\
+
+Soit $x = (x_i)_{1 \ldots N}$ une série statistique ordonnée suivant l'ordre croissant. On définit la médiane de la série statistique par
+\[
+m_e =
+\begin{cases}
+x_p & \text{si } N \text{ est impair avec } p = \frac{N + 1}{2}, \\
+\frac{x_p + x_{p+1}}{2} & \text{si } N \text{ est pair avec } p = \frac{N}{2}.
+\end{cases}
+\]
+Autrement dit, la médiane est un nombre réel $m_e$ tel que le nombre d'individus pour lesquels $X$ prend une valeur inférieure ou égale à $m_e$ soit égal au nombre d'individus pour lesquels $X$ prend une valeur supérieure ou égale à $m_e$.
+\end{Def}
+
+\begin{Ex}\textbf{Calcul de médiane}\\
+
+\begin{itemize}
+    \item Ordonnons les douze notes d'Inès : 
+    \[
+    x = (15, 12, 8, 14, 12, 15, 10, 12, 10, 12, 15, 15), \quad \tilde{x} = (8, 10, 10, 12, 12, 12, 12, 14, 15, 15, 15, 15).
+    \]
+    La médiane est donnée par 
+    \[
+    m_e = \frac{\tilde{x}_6 + \tilde{x}_7}{2} = 12.
+    \]
+    
+    \item Avec Python, la médiane est obtenue par la commande \texttt{median()} :
+    \begin{verbatim}
+>>> import numpy as np
+>>> np.median(L)
+    \end{verbatim}
+    
+    \item Selon l'INSEE, le salaire mensuel moyen (équivalent temps plein en 2019) d'un Français est de 2 424 euros net. Le salaire médian, lui, s'élève à 1 940 euros par mois. La moyenne est relevée par les très hauts revenus qui ne concernent qu'une minorité de salariés. Ce dernier exemple illustre un fait important : \textbf{la moyenne est sensible aux valeurs extrêmes alors que la médiane ne l'est pas}.
+\end{itemize}
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Transformation affine d'une série statistique}
+
+Soient $a, b$ deux réels et $x$ une série statistique. Exprimer en fonction de la moyenne de $x$, la moyenne de la série $x' = ax + b$. Faire de même avec la médiane.
+
+\begin{Rmq}$\,$
+
+La série $x' = ax + b$ est la série obtenue à partir de $x$ en remplaçant chaque donnée $x_i$ par le réel $ax_i + b$.
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Def}\textbf{Quartiles}\\
+
+Soit $x$ une série statistique.
+\begin{itemize}
+    \item Le premier quartile de $x$ est la plus petite modalité de la série pour laquelle la fréquence cumulée est supérieure ou égale à $\frac{1}{4}$.
+    \item Le troisième quartile de $x$ est la plus petite modalité de la série pour laquelle la fréquence cumulée est supérieure ou égale à $\frac{3}{4}$.
+\end{itemize}
+\end{Def}
+
+\begin{Rmq}$\,$
+
+De même, on définit le k-ième décile comme la plus petite modalité de la série pour laquelle la fréquence cumulée est supérieure ou égale à $\frac{k}{10}$.
+\end{Rmq}
+
+\begin{Ex}\textbf{Répartition du patrimoine}\\
+
+Ci-dessous, la répartition du patrimoine net des Français en 2018 suivant les déciles (source I.N.S.E.E). Par exemple, 10\% des Français ont un patrimoine net supérieur à 549 600 euros.
+
+\begin{itemize}
+    \item 1er décile : 2600
+    \item 2e décile : 9000
+    \item 3e décile : 23400
+    \item 4e décile : 60800
+    \item 5e décile : 117000
+    \item 6e décile : 176700
+    \item 7e décile : 246200
+    \item 8e décile : 348700
+    \item 9e décile : 549600
+    \item 95e centile : 794800
+    \item 99e centile : 1745800
+\end{itemize}
+\end{Ex}
+
+\section{Paramètres de dispersion}
+
+\begin{Def}\textbf{La variance empirique et l'écart-type}\\
+
+Soit $x$ une série statistique.
+\begin{itemize}
+    \item La variance de la série est le réel, noté $\sigma(x)^2$, défini par
+    \[
+    \sigma(x)^2 = \frac{1}{N} \left( (x_1 - \bar x)^2 + (x_2 - \bar x)^2 + \ldots + (x_N - \bar x)^2 \right) = \frac{1}{N} \sum_{i=1}^{N} (x_i -  \bar x)^2.
+    \]
+    \item L'écart-type, $\sigma(x)$ d'une série statistique est défini comme la racine carrée de la variance.
+\end{itemize}
+\end{Def}
+
+\begin{Rmq}$\,$
+
+\begin{itemize}
+    \item Si les modes $m_1, m_2, \ldots, m_p$ de la série sont donnés avec leurs effectifs $n_1, n_2, \ldots, n_p$ ou leurs fréquences $f_1, f_2, \ldots, f_p$, alors
+    \[
+    \sigma(x)^2 = \frac{1}{N} \sum_{i=1}^{p} n_i (m_i - \bar{x})^2 = \sum_{i=1}^{p} f_i (m_i - \bar{x})^2.
+    \]
+    \item Une variance est toujours un nombre positif. L'écart-type est donc bien défini.
+    \item Une série a une variance nulle si et seulement si toutes les valeurs de la série sont identiques.
+\end{itemize}
+\end{Rmq}
+
+\begin{Ex}\textbf{Calcul de variance}\\
+
+\begin{itemize}
+    \item Pour les notes d'Inès :
+    \[
+    \sigma(x)^2 = \frac{1}{12} \left( 1 \times (8 - 12.5)^2 + 2 \times (10 - 12.5)^2 + 4 \times (12 - 12.5)^2 + 1 \times (14 - 12.5)^2 + 4 \times (15 - 12.5)^2 \right) \approx 5.08
+    \]
+    puis un écart-type de 2.25.
+    
+    \item Avec Python, la variance et l'écart-type sont obtenus par les commandes \texttt{var()} et \texttt{std()}.
+\end{itemize}
+\end{Ex}
+
+\begin{Prop}\textbf{Transformation affine}\\
+
+Soit $x$ une série statistique et $a, b \in \mathbb{R}$. Si $x'$ est la série statistique obtenue en modifiant chaque donnée $x_i$ en $ax_i + b$, alors
+\[
+V' = a^2 V \quad \text{et} \quad \sigma' = |a| \sigma
+\]
+où $V, \sigma$ (resp. $V', \sigma'$) désignent la variance et l'écart-type de $x$ (resp. de $x'$).
+\end{Prop}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Démonstration de la proposition}
+
+Prouver la proposition précédente.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Thm}\textbf{Formule de Koenig-Huygens}\\
+
+Soit $x$ une série statistique de modalités $(m_i)_{1 \ldots p}$, d'effectifs $(n_i)_{1 \ldots p}$ et de variance $\sigma(x)^2$, alors
+\[
+\sigma(x)^2 = \left( \frac{1}{N} \sum_{i=1}^{N} x_i^2 \right) - \bar x^2 = \left( \frac{1}{N} \sum_{i=1}^{p} n_i m_i^2 \right) - \bar x^2.
+\]
+\end{Thm}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Formule de Koenig-Huygens}
+
+Prouver ce théorème.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Rmq}$\,$
+
+Si $x^2$ désigne la série dont chaque donnée est $x_i^2$. On démontre que $\frac{1}{N} \sum_{i=1}^{p} n_i m_i^2$ est la moyenne $\overline{(x^2)}$. La formule de Koenig-Huygens devient alors
+\[
+\sigma(x)^2 = \overline{(x^2)} - (\bar x)^2.
+\]
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{L'écart-type, un indicateur de dispersion}
+
+Soit $x = (x_i)_{1 \ldots N}$ une série statistique avec $\bar{x}$ et $\sigma(x)$, respectivement la moyenne et l'écart-type de la série. Soit $r$ le nombre d'éléments de la série statistique compris entre $\bar x - 2\sigma(x)$ et $\bar x + 2\sigma(x)$.
+
+\begin{enumerate}
+    \item Montrer que 
+    \[
+    \sum_{k=1}^{N} (x_k - \bar x)^2 \geq 4\sigma(x)^2 (N - r).
+    \]
+    \item En déduire qu'au moins les trois quarts des éléments de la série statistique sont compris entre $\bar x - 2\sigma(x)$ et $\bar x + 2\sigma(x)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Le mode d'une série statistique est :
+\begin{enumerate}
+\item la valeur moyenne
+\item la valeur centrale
+\item la valeur la plus fréquente
+\item toujours unique
+\end{enumerate}
+
+\item La moyenne empirique d'une série est :
+\begin{enumerate}
+\item toujours une modalité
+\item sensible aux valeurs extrêmes
+\item égale à la médiane
+\item insensible aux transformations affines
+\end{enumerate}
+
+\item La médiane d'une série statistique :
+\begin{enumerate}
+\item dépend fortement des valeurs extrêmes
+\item est toujours égale à la moyenne
+\item partage la série en deux groupes de même effectif
+\item est définie uniquement si $N$ est impair
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Histogrammes}
+
+Un histogramme donne une idée graphique de la répartition des valeurs du caractère sur l'échantillon. Ce graphique est obtenu en traçant, pour chaque $i \in [[1, p]]$, le rectangle de base $[a_i, a_{i+1}]$ sur l'axe des abscisses et en ordonnées, l'effectif de la classe $[a_i, a_{i+1}]$.
+
+\begin{Meth}\textbf{Création d'un histogramme avec Python}\\
+
+\begin{verbatim}
+inter = np.linspace(0, 2.810*6, 15)
+plt.hist(L, bins=inter)
+plt.xlabel('Nbre habitants (en millions)')
+plt.ylabel('Nbre de départements')
+plt.show()
+\end{verbatim}
+\end{Meth}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Dans un histogramme, l'aire d'un rectangle est proportionnelle :
+\begin{enumerate}
+\item à la modalité
+\item à l'effectif de la classe
+\item à la moyenne
+\item à la variance
+\end{enumerate}
+
+\item Les rectangles d'un histogramme :
+\begin{enumerate}
+\item sont toujours disjoints
+\item ont tous la même hauteur
+\item peuvent avoir des largeurs différentes
+\item représentent des fréquences cumulées
+\end{enumerate}
+
+\item Un histogramme est particulièrement adapté :
+\begin{enumerate}
+\item aux séries qualitatives
+\item aux séries discrètes à peu de modalités
+\item aux séries continues
+\item aux séries à deux variables
+\end{enumerate}
+\end{enumerate}
+
+
+\section{Statistiques bivariées}
+
+Dans la suite, $x, y$ désigne deux séries statistiques. La question est de savoir dans quelle mesure l'une des deux, dite expliquée, dépend de l'autre, dite explicative.
+
+\subsection{Premières définitions}
+
+\begin{Def}\textbf{Covariance empirique}\\
+
+Soient $x = (x_i)_{1 \ldots N}$ et $y = (y_i)_{1 \ldots N}$, deux séries statistiques. On définit la covariance des deux séries par :
+\[
+\text{Cov}(x, y) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})(y_i - \bar{y}).
+\]
+\end{Def}
+
+\begin{Def}\textbf{Coefficient de corrélation linéaire empirique}\\
+
+Si les séries $x$ et $y$ ne sont pas constantes, on définit aussi le coefficient de corrélation linéaire empirique par :
+\[
+\rho(x, y) = \frac{\text{Cov}(x, y)}{\sigma(x) \sigma(y)}.
+\]
+\end{Def}
+
+\begin{Rmq}$\,$
+
+\begin{itemize}
+    \item $\rho(x, y)$ est un réel de $[-1, 1]$.
+    \item On a l'égalité $\rho(x, y) = \pm 1$ si et seulement s'il existe $a$ et $b$ tels que pour tout indice $i$, $y_i = ax_i + b$. Dans ce cas, le signe de $a$ est le même que celui de $\rho(x, y)$.
+\end{itemize}
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Propriétés du coefficient de corrélation}
+
+Prouver les deux remarques précédentes.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Prop}\textbf{Calcul de la covariance}\\
+
+Soient $x = (x_i)_{1 \leq i \leq N}$ et $y = (y_i)_{1 \leq i \leq N}$, deux séries statistiques. On a :
+\[
+\text{Cov}(x, y) = \overline{(x \cdot y)} - \bar{x} \cdot \bar{y}
+\]
+où $\overline{(x \cdot y)}$ désigne la moyenne de la série $x \cdot y = (x_i \cdot y_i)_{1 \leq i \leq N}$.
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+La corrélation n'est pas causalité.
+\end{Rmq}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item La covariance empirique mesure :
+\begin{enumerate}
+\item la dispersion d'une seule variable
+\item le lien linéaire entre deux séries
+\item une relation causale
+\item une distance entre deux points
+\end{enumerate}
+
+\item Si $\text{Cov}(x,y)=0$, alors :
+\begin{enumerate}
+\item $x$ et $y$ sont indépendantes
+\item il n'existe aucun lien entre $x$ et $y$
+\item il n'y a pas de lien linéaire
+\item les moyennes sont nulles
+\end{enumerate}
+
+\item Le coefficient de corrélation linéaire $\rho(x,y)$ :
+\begin{enumerate}
+\item peut dépasser $1$
+\item est toujours positif
+\item est compris entre $-1$ et $1$
+\item mesure une relation causale
+\end{enumerate}
+\end{enumerate}
+
+\section{Nuage de points}
+
+\begin{Def}\textbf{Nuage de points}\\
+
+Soient $x = (x_i)_{1 \ldots N}$ et $y = (y_i)_{1 \ldots N}$, deux séries statistiques. Le nuage de points associé à ces deux séries est l'ensemble des points $M_i$ du plan de coordonnées $(x_i, y_i)$ où $i \in [[1, N]]$.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Le point $(\bar{x}, \bar{y})$ est le point moyen du nuage.
+\end{Rmq}
+
+\begin{Meth}\textbf{Tracé d'un nuage de points avec Python}\\
+
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Exemples avec deux séries
+x = np.array([1, 3, 4, 5, 8, 11, 13])
+y = np.array([28.1, 27.5, 30.3, 31.8, 37.6, 39, 40.6])
+
+# Tracé du nuage de points et du point moyen
+plt.plot(x, y, 'r*')
+plt.plot(np.mean(x), np.mean(y), 'ko')
+\end{verbatim}
+\end{Meth}
+
+\begin{Prop}\textbf{Problème des moindres carrés et droite de régression}\\
+
+Soit $n$ un entier supérieur à 2. Considérons $n$ points de $\mathbb{R}^2$, $(x_1, y_1), \ldots, (x_n, y_n)$ non alignés verticalement. On cherche la droite qui « approxime » au mieux ces $n$ points. Si on note $y = ax + b$, l'équation d'une droite, on cherche à minimiser l'erreur
+\[
+E_r = \sum_{i=1}^{n} d_i^2 = \sum_{i=1}^{n} (ax_i + b - y_i)^2.
+\]
+Si on introduit les variances et covariances empiriques, on obtient
+\[
+a = \rho(x, y) \frac{\sigma(y)}{\sigma(x)}=\frac{\text{Cov}(x,y)}{V(x)} \quad \text{et} \quad b = \bar{y} - a \bar{x}.
+\]
+L'équation de la droite est alors :
+\[
+y - \bar{y} = \rho(x, y) \frac{\sigma(y)}{\sigma(x)} (x - \bar{x}).
+\]
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Avec cette dernière expression, on constate que le point moyen appartient à la droite de régression.
+\end{Rmq}
+
+\begin{Rmq}$\,$
+
+Un des inconvénients de la droite de régression est qu'elle est très sensible aux valeurs extrêmes : une seule valeur très éloignée de la droite modifie beaucoup le coefficient de corrélation linéaire et donc la pente de la droite. En particulier, la droite est très sensible aux erreurs de mesure.
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Droite de régression par les fonctions de plusieurs variables}
+
+Soient $x, y$ deux séries statistiques avec $\sigma(x) \neq 0$. Soit $f$ la fonction définie sur $\mathbb{R}^2$ par :
+\[
+\forall (a, b) \in \mathbb{R}^2, \quad f(a, b) = \sum_{k=1}^{n} (ax_k + b - y_k)^2
+\]
+
+\begin{enumerate}
+    \item Justifier que $f$ est de classe $C^2$ sur $\mathbb{R}^2$.
+    \item 
+    \begin{enumerate}
+        \item Écrire le système d'équations $S$ permettant de déterminer les points critiques de $f$.
+        \item Résoudre le système $S$. En déduire que $f$ admet un unique point critique $(\hat{a}, \hat{b})$ que l'on exprimera en fonction de $\bar{x}, \bar{y}, \sigma(x)$ et $\text{Cov}(x, y)$.
+        \item Montrer que ce point critique correspond à un minimum local de $f$.
+        \item Établir la formule suivante :
+        \[
+        f(\hat{a}, \hat{b}) = n\sigma(y)^2 (1 - \rho(x, y)^2)
+        \]
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+        \item Montrer que l'on a : $|\rho(x, y)| \leq 1$.
+        \item Que peut-on dire du nuage de points lorsque $|\rho(x, y)| = 1$ ?
+    \end{enumerate}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Rmq}$\,$
+
+Retenons que lorsque le coefficient de corrélation linéaire est proche de $\pm 1$, la droite de régression approche bien le nuage de points. Dans ce cas, on peut modéliser la dépendance et faire des prédictions. De plus, si le coefficient de corrélation est positif, les données $x_i$ « auront tendance » à augmenter lorsque $y_i$ augmente et inversement si le coefficient est négatif.
+\end{Rmq}
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Quelques biais statistiques}
+
+Chercher l'erreur ou le biais dans les raisonnements suivants :
+
+\begin{enumerate}
+    \item Dans la classe d'ECG, on compte qu'en moyenne les élèves ont 1.7 frères et sœurs. Ce qui donne 2.7 enfants par femme alors que le nombre d'enfants par femme n'est que de 1.8 dans la population française. Donc les enfants de familles nombreuses font plus facilement des études.
+    
+    \item L'espérance de vie des professeurs de mathématiques est de 82 ans, soit 3 ans de plus que l'espérance de la population française. Donc les mathématiques sont bonnes pour la santé !
+    
+    \item Lors de la Seconde Guerre Mondiale, la Royal Air Force souhaite améliorer le taux de retour de ses bombardiers partis frapper les positions allemandes. Les ingénieurs de la R.A.F. décident d'étudier la localisation des impacts de balles sur les avions à leur retour de mission, puis de renforcer le blindage sur les zones les plus atteintes.
+    
+    \item En 1936, le démocrate Franklin D. Roosevelt et le républicain Alfred M. Landon concoururent pour la présidence des États-Unis. Juste avant l'élection, le journal \textit{Literary Digest} réalisa un sondage de grande ampleur : 10 millions de bulletins de sondage sont distribués aux abonnés du magazine et à des gens figurant au bottin téléphonique. Après plus de 2 millions de réponses, Alfred Landon est annoncé président des États-Unis !
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Écart-moyen et écart-type}
+
+On appelle écart-moyen de la série statistique $(x_i)_{i=1,\dots,n}$ le réel 
+$$e=\frac {\sum_{i=1}^n |x_i-\bar x|}n.$$
+Démontrer que l'écart-moyen est toujours inférieur ou égal à l'écart-type $\sigma_x$ (conseil : utiliser l'inégalité de Cauchy-Schwarz).
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Minimisation d'écarts - d'après CAPES 2013}
+
+Soit $n$ un entier naturel et $(x_1,\dots,x_n)$ un $n$-uplet de réels. On souhaite trouver un réel $x$ minimisant la somme des écarts ou la somme des écarts au carré. On définit donc sur $\mathbb R$ les deux fonctions $G$ et $L$ par :
+\begin{eqnarray*}
+G(x)&=&\sum_{i=1}^n (x-x_i)^2\\
+L(x)&=&\sum_{i=1}^n |x-x_i|.
+\end{eqnarray*}
+
+\begin{enumerate}
+\item Minimisation de $G$.
+\begin{enumerate}
+\item En écrivant $G(x)$ sous la forme d'un trinôme du second degré, démontrer que la fonction $G$ admet un minimum sur $\mathbb R$ et indiquer en quelle valeur de $x$ il est atteint.
+\item Que représente d'un point de vue statistique la valeur de $x$ trouvée à la question précédente?
+\end{enumerate}
+\item Minimisation de $L$. On suppose désormais que la série est ordonnée, c'est-à-dire que $x_1\leq  x_2\leq  \dots\leq  x_n$.
+ \begin{enumerate}
+\item Représenter graphiquement la fonction $L$ dans le cas où $n=3$, $x_1=-2$, $x_2=3$, $x_3=4$.
+\item Représenter graphiquement la fonction $L$ dans le cas où $n=4$, $x_1=-2$, $x_2=3$, $x_3=4$, $x_4=7$.
+\item Démontrer que la fonction $L$ admet un minimum sur $\mathbb R$ et indiquer pour quelle(s) valeur(s) de $x$ il est atteint
+(on distinguera les cas $n$ pair et $n$ impair).
+\item Que représentent, d'un point de vue statistique, les valeurs de $x$ trouvées à la question précédente?
+\end{enumerate}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Sur les indicateurs de dispersion}
+
+Soit $x_1,\ldots,x_N$ une série statistique de $N$ nombres réels (non nécessairement rangés par ordre croissant). On note $m$ la moyenne de la série et $\sigma$ son écart-type.
+
+\begin{enumerate}
+ \item 
+\begin{enumerate}
+\item Soit $n$ le nombre d'éléments de la série statistique compris entre $m-2\sigma$ et $m+2\sigma$. Montrer que $\sum_{k=1}^N(x_k-m)^2\ge 4(N-n)\sigma^2$.
+\item En déduire qu'au moins les trois quarts des éléments de la série statistique sont compris entre $m-2\sigma$ et $m+2\sigma$.
+\end{enumerate}
+\item Plus généralement, montrer que pour tout réel $t>1$, l'intervalle $[m-t\sigma,m+t\sigma]$ contient au moins une proportion $1-\frac1{t^2}$ des éléments de la série statistique.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Algorithme et moyenne}
+
+\begin{enumerate}
+\item Écrire un algorithme qui calcule la moyenne d'une série statistique. Il demandera à l'utilisateur (par l'instruction LIRE) l'effectif de cette série et ensuite chacun des éléments de cette série. 
+\item Modifier l'algorithme pour qu'il calcule de plus la variance.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Sur le coefficient de corrélation linéaire}
+
+Soit $x=(x_i)_{1\leq i\leq n}$ et $y=(y_i)_{1\leq i\leq n}$ deux séries statistiques de variance non nulle.
+On rappelle que le coefficient de corrélation linéaire des deux séries $x$ et $y$ est défini par 
+$$\rho_{x,y}=\frac{\sigma_{x,y}}{\sigma_x\sigma_y}\textrm{ où }\sigma_{x,y}=\frac1n\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y).$$
+
+\begin{enumerate}
+\item Interpréter $\rho_{x,y}$ à l'aide du produit scalaire et de la norme de vecteurs de $\mathbb R^n$.
+\item En déduire que $\rho_{x,y}\in [-1,1]$.
+\item Démontrer que $|\rho_{x,y}|=1$ si et seulement s'il existe $a,b\in\mathbb R$ tels que, pour tout $i=1,\dots,n$, $y_i=ax_i+b$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{La méthode des moindres carrés}
+
+On considère une série statistique double $\{(x_i,y_i)_{1\leq i\leq n}\}$ vue comme $n$ points de $\mathbb R^2$ et on note $M_i$ le point de coordonnées $(x_i,y_i)$. 
+On cherche une droite de la forme $y=ax+b$ qui réalise le "meilleur ajustement" possible du nuage. La méthode des moindres carrés consiste à dire que le meilleur ajustement est réalisé lorsque la somme des carrés des distances de $M_i$ à $H_i$ (le projeté de $M_i$ sur la droite $y=ax+b$ parallèlement à l'axe des ordonnées) est minimale. Autrement dit, on cherche à minimiser la quantité suivante :
+$$T(a,b)=\sum_{i=1}^n (y_i-ax_i-b)^2.$$
+
+On va prouver dans cet exercice le résultat suivant :
+\begin{quote}
+Si $\sigma_x\neq 0$, il existe une unique droite d'équation $y=ax+b$ minimisant la quantité $T(a,b)$. De plus, 
+$$a=\frac{\sigma_{x,y}}{\sigma_x^2}\textrm{ et }b=\bar y-\bar x\frac{\sigma_{x,y}}{\sigma_x^2}.$$
+\end{quote}
+
+\begin{enumerate}
+\item Pourquoi impose-t-on la condition $\sigma_x\neq 0$?
+\item Méthode 1 : par un calcul direct
+\begin{enumerate}
+\item On suppose pour commencer que $\bar x=0$ et que $\bar y=0$. Démontrer que 
+$$T(a,b)=\sum_{i=1}^n y_i^2+a^2\sum_{i=1}^n x_i^2-2a\sum_{i=1}^n x_iy_i+nb^2.$$
+\item En déduire que $T(a,b)$ est minimum si et seulement si $a=\frac{\sigma_{x,y}}{\sigma_x^2}$ et $b=0$.
+\item Cas général : on pose $x'_i=x_i-\bar x$, $y'_i=y-\bar y$ et $U(a,b)=\sum_{i=1}^n (y'_i-ax'_i-b)^2$. Démontrer que $T(a,b)=U(a,b-\bar y+a\bar x)$. 
+\item Conclure.
+\end{enumerate}
+\item Méthode 2 : par projection orthogonale. On munit $\mathbb R^n$ de son produit scalaire canonique.
+\begin{enumerate}
+\item Soit $\vec y$ un vecteur de $\mathbb R^n$ et $F$ un plan vectoriel (de dimension $2$). Démontrer que 
+$$\inf \{\|\vec y-\vec z\|;\ \vec z\in F\}=\|\vec y-p_F(\vec y)\|$$
+où $p_F(\vec y)$ est le projeté orthogonal de $\vec y$ sur $F$.
+\item On note $\vec x=(x_1,\dots,x_n)$, $\vec y=(y_1,\dots,y_n)$ et $\vec u=(1,\dots,1)$. Déterminer $a$ et $b$ de sorte
+que $a\vec x+b\vec u$ soit le projeté orthogonal de $\vec y$ sur $\textrm{vect}(\vec x,\vec u)$.
+\item Vérifier que $T(a,b)=\|\vec y-(a\vec x+b\vec u)\|^2$.
+\item Conclure.
+\end{enumerate}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Prédiction}
+
+L'étude d'une réaction chimique en fonction du temps a donné les résultats suivants : 
+$$\begin{array}{|c|c|c|c|c|c|}
+\hline
+\textrm{Temps t (en h)}&1&2&3&4&5\\ \hline
+\textrm{Concentration C (en g/L)}&6,25&6,71&7,04&7,75&8,33\\
+\hline
+\end{array}
+$$
+Des considérations théoriques laissent supposer que la concentration $C$ et le temps $t$ sont liés par une relation de la forme $C=\frac 1{at+b}$. Donner une estimation de la concentration après 6H.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Droite des moindres carrés, dans les deux sens!}
+
+On considère une série statistique à deux variables $\{(x_i,y_i);\ 1\leq i\leq n\}$. On note $D_1$ la droite de régression de $Y$ par rapport à $X$ et $D_2$ la droite de régression de $X$ par rapport à $Y$. Démontrer que $D_1=D_2$ si et seulement si tous les points $(x_i,y_i)$ sont alignés.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Avec l'ordinateur}
+
+Le tableau ci-dessous donne la production annuelle d'une usine de pâte à papier (en tonnes) en fonction de l'année. 
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|}
+2004&2005&2006&2007&2008&2009&2010&2011\\
+\hline
+325&351&382&432&478&538&708&930
+\end{array}
+$$
+
+\begin{enumerate}
+\item Tracer le nuage de points correspondant (sous logiciel!).
+\item Un ajustement affine vous semble-t-il adéquat?
+\item Pour chaque année, on note $p_i$ la production de la pâte à papier et $m_i=\ln(p_i)$. Tracer le nouveau nuage de points $(i,m_i)$ et calculer le coefficient de corrélation linéaire de la série double ($i$, $m_i$). Qu'en pensez-vous?
+\item Donner une équation de la droite d'ajustement par les moindres carrés de $m_i$ en $i$.
+\item Quelle production peut-on prévoir en 2014?
+\item À cette dernière question, voici la réponse de quelques élèves :
+\begin{quote}
+Élève A : Je remplace 2014 dans l'équation 0,14x – 280,5 : je trouve 1,46. Puis je prends
+l'exponentielle : on trouve 4,3. Il doit y avoir une erreur car ce n'est pas assez.\newline
+Élève B : Puisque $p = e^{0,143i -280,508}$, alors $p(2014)\simeq 1797$. La production est de 1797 tonnes.\newline
+Élève C : J'utilise la touche Stats de ma calculatrice et je trouve 1233 tonnes.\newline
+Élève D : Je sais que $x= 2014$ et $p = 77,79x -155 636,82$.
+Donc : $p = 77,79\times 2014 – 155 636,82 =1032,24$. La production est 1032,24 tonnes
+\end{quote}
+Analysez la production de chaque élève en mettant en évidence ses réussites et en indiquant l'origine éventuelle de ses erreurs.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}

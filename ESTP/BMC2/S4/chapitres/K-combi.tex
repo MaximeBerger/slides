@@ -1,0 +1,1179 @@
+
+\section{Cardinal d'un ensemble fini}
+\subsection{Définition et opérations}
+
+\begin{Def}\textbf{Définition du cardinal d'un ensemble fini}\\
+Soit $E$ un ensemble fini, on appelle cardinal le nombre de ses éléments, et on le note $|E|$ ou $\mathrm{Card}(E)$.\\
+\end{Def}
+
+
+%\begin{Rmq} 
+Cette définition n'est pas très précise, elle ne définit pas ce qu'est un ensemble fini ni ce qu'est le nombre d'éléments. 
+Précisons cette définition : un ensemble $E$ est dit fini s'il existe $n \in \mathbb{N}$ et une bijection $\varphi : \{1, \ldots, n\} \to E$. On montre alors que le $n$ en question est unique, et on note $\mathrm{Card}(E) = n$.\\
+%\end{Rmq}
+
+
+\begin{Ex}
+\begin{itemize}
+    \item $| \{1, 1, 3, 1, -8\} | = 3$.
+    \item Soit deux entiers $a \leq b$, alors $\mathrm{Card}(\{a, b\}) = b - a + 1$, en particulier, $\mathrm{Card}(\{1, n\}) = n$, $\mathrm{Card}(\{0, n\}) = n + 1$ si $n \in \mathbb{N}$.
+    \item $\mathrm{Card}(\emptyset) = 0$.
+    \item Les ensembles $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{R}$, $\mathbb{C}$, $\mathbb{R}^X$ etc. ne sont pas finis.\\
+\end{itemize}
+\end{Ex}
+\begin{Def}
+Soit $E$ un ensemble fini et $A \subseteq E$, alors : $A$ est fini et $|A| \leq |E|$ et $A = E$ ssi $|A| = |E|$.
+\end{Def}
+\begin{Prop}\textbf{ Partie d'un ensemble fini}\\
+Soient $E$ un ensemble fini et $A$ et $B$ deux parties de $E$. On note $C_{E}A$ ou $A^c$ le complémentaire de $A$ dans $E$.
+\begin{enumerate}
+    \item Si $A$ et $B$ sont disjointes, alors $|A \cup B| = |A| + |B|$.
+    \item $|A \setminus B| = |A| - |A \cap B|$, $|A^c| = |E| - |A|$, $|A \cup B| = |A| + |B| - |A \cap B|$.
+    \item Si $A_1, A_2, \ldots, A_n$ sont des parties de $E$ deux à deux disjointes, alors,
+    \[
+    \bigg| \bigcup_{i=1}^n A_i \bigg| = \sum_{i=1}^n |A_i|.
+    \]
+\end{enumerate}
+\end{Prop}
+
+
+\begin{Ex}
+\begin{itemize}
+    \item Dans $\{0, 99\}$, combien y a-t-il de nombres entiers qui contiennent au moins un 1 ?
+    \item Sur un jeu de 52 cartes, combien y a-t-il de cartes qui sont des trèfles ou des rois ?
+\end{itemize}
+\end{Ex}
+\begin{Prop}\textbf{ Cardinal du produit}\\
+
+\begin{enumerate}
+    \item Si $E$ et $F$ sont deux ensembles finis, alors $E \times F$ est un ensemble fini et $|E \times F| = |E| \cdot |F|$.
+    \item Si $E_1, E_2, \ldots, E_n$ sont des ensembles finis, alors $\bigcup_{i=1}^n E_i$ est fini et
+    \[
+    \bigg| \bigcup_{i=1}^n E_i \bigg| = \sum_{i=1}^n |E_i|.
+    \]
+\end{enumerate}
+\end{Prop}
+
+\begin{Ex}
+\begin{itemize}
+    \item Si on lance un dé puis une pièce, combien y a-t-il de possibilités ?
+    \item À la cantine, il y a 3 entrées, 2 plats et 4 desserts (on peut toujours rêver), combien cela fait de menus possibles ?\\
+\end{itemize}
+\end{Ex}
+
+\begin{Prop}\textbf{Cardinal de l'ensemble des parties de $E$}\\
+
+Soit $E$ un ensemble fini, alors $\mathcal{P}(E)$ est un ensemble fini et $|\mathcal{P}(E)| = 2^{|E|}$.\\
+\end{Prop}
+
+\begin{Ex} Si $E = \{1, 2, 3\}$, alors $|\mathcal{P}(E)| = 8$.
+\end{Ex}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Soit $E$ un ensemble fini tel que $|E| = 5$. Combien d'éléments possède $\mathcal{P}(E)$ ?
+\begin{enumerate}
+\item $10$
+\item $25$
+\item $32$
+\item $5$
+\end{enumerate}
+
+\item Soient $A$ et $B$ deux parties disjointes d'un ensemble fini $E$. Quelle est la valeur de $|A \cup B|$ ?
+\begin{enumerate}
+\item $|A| \cdot |B|$
+\item $|A| + |B|$
+\item $|A| - |B|$
+\item $|A| + |B| - |A \cap B|$
+\end{enumerate}
+
+\item Soit $A \subset E$ avec $|E| = 12$ et $|A| = 5$. Quel est le cardinal de $A^c$ ?
+\begin{enumerate}
+\item $5$
+\item $7$
+\item $12$
+\item $17$
+\end{enumerate}
+\end{enumerate}
+
+\section{Applications entre ensembles finis}
+
+
+\begin{Prop}\textbf{ Fonctions injectives, surjectives et bijectives et cardinaux}\\
+
+Soit $E$ et $F$ deux ensembles.\\
+\begin{enumerate}
+    \item Si $f : E \to F$ est bijective, alors $E$ est un ensemble fini ssi $F$ est un ensemble fini et dans ce cas $|E| = |F|$.
+    \item Si $f : E \to F$ est injective et que $F$ est un ensemble fini, alors $E$ est un ensemble fini et $|F| \geq |E|$.
+    \item Si $f : E \to F$ est surjective et que $E$ est un ensemble fini, alors $F$ est un ensemble fini et $|F| \leq |E|$.
+    \item Si $E$ et $F$ sont deux ensembles finis et que $|E| = |F|$ et que $f : E \to F$, alors sont équivalents :
+    \[
+    f \text{ surjective } \iff f \text{ injective } \iff f \text{ bijective.}
+    \]
+\end{enumerate}
+\end{Prop}
+
+\begin{Ex} Dans la classe, il existe au moins deux personnes qui sont nées le même mois. 
+Si on a $n + 1$ pantalons rangés dans $n$ tiroirs, il existe au moins un tiroir avec plus d'un pantalon.\\
+\end{Ex}
+
+\begin{Prop}\textbf{Dénombrement de \( F \times E, F \times F = F E \)}
+
+Si \( E \) et \( F \) sont deux ensembles finis, alors \( F \times E, F \times F \) est un ensemble fini et \( |F \times E, F \times F| = |F E| = |F| \times |E| \).
+
+\end{Prop}
+
+\section{Listes et combinaisons}
+
+\subsection{p-listes}
+\begin{Def}\textbf{Définition d'une p-liste (ou d'un p-uplet)}\\
+Soit \( E \) un ensemble et \( p \in \mathbb{N}^* \), on appelle \( p \)-liste (ou \( p \)-uplet) d'éléments de \( E \) tout élément de \( E^p \).\\
+ \end{Def}
+ 
+\begin{Prop}\textbf{Nombre de p-listes} \\
+ Soit \( E \) un ensemble fini, alors le nombre de \( p \)-listes d'éléments de \( E \) est \( |E^p| = |E|^p \).
+ \end{Prop}
+
+
+
+\begin{Ex} Un élève a 10 notes de colles (des entiers naturels) comprises entre 4 et 12, combien cela fait-il de possibilités ?\\
+\end{Ex}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Soit $E$ un ensemble fini de cardinal $7$. Combien existe-t-il de $4$-listes d'éléments de $E$ ?
+\begin{enumerate}
+\item $28$
+\item $7^4$
+\item $\binom{7}{4}$
+\item $4^7$
+\end{enumerate}
+
+\item Une $p$-liste d'éléments de $E$ correspond à :
+\begin{enumerate}
+\item Une partie de $E$ à $p$ éléments
+\item Une suite ordonnée de $p$ éléments de $E$, avec répétitions possibles
+\item Une permutation de $E$
+\item Une liste sans ordre
+\end{enumerate}
+
+\item Si $|E| = n$, quelle est la bonne formule pour $|E^p|$ ?
+\begin{enumerate}
+\item $n!$
+\item $\binom{n}{p}$
+\item $n^p$
+\item $\frac{n!}{(n-p)!}$
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{p-listes d'éléments distincts}
+\begin{Def}\textbf{Définition de p-listes d'éléments distincts} \\
+Soit \( E \) un ensemble fini et \( p \in \mathbb{N}^* \), on appelle p-liste (ou \( p \)-uplet ou \( p \)-arrangement) d'éléments distincts de \( E \) tout élément \( (x_1, x_2, \ldots, x_p) \in E^p \) tel que pour tout \( (i, j) \in \{1, \ldots, p\}^2 \), si \( i \neq j \), alors \( x_i \neq x_j \).
+\end{Def}
+\begin{Prop}\textbf{Nombre de p-listes d'éléments distincts/arrangement} 
+Si \( |E| = n \) et \( p \in \{1, \ldots, n\} \), alors le nombre de \( p \)-listes d'éléments distincts de \( E \) est \( \frac{n!}{(n - p)!} \).\\
+\end{Prop}
+
+
+
+\begin{Ex} Sur une course de 100 cyclistes, combien y a-t-il de podiums différents possibles ?
+\end{Ex}
+
+%
+\begin{Prop}\textbf{Nombre d'applications injectives}\\
+Si \( |E| = n \) et \( |F| = p \) avec \( p \leq n \), le nombre de fonctions injectives de \( F \) vers \( E \) est \( \frac{n!}{(n - p)!} \).\\
+
+\end{Prop}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Soit $E$ un ensemble de cardinal $n$. Combien existe-t-il de $p$-listes d'éléments distincts de $E$ ?
+\begin{enumerate}
+\item $n^p$
+\item $\binom{n}{p}$
+\item $\dfrac{n!}{(n-p)!}$
+\item $p!$
+\end{enumerate}
+
+\item Une $p$-liste d'éléments distincts se distingue d'une combinaison par :
+\begin{enumerate}
+\item L'absence d'ordre
+\item La présence de répétitions
+\item L'ordre des éléments
+\item Le fait que $p$ soit fixé
+\end{enumerate}
+
+\item Le nombre d'applications injectives de $F$ vers $E$ avec $|F|=p$ et $|E|=n$ est :
+\begin{enumerate}
+\item $n^p$
+\item $\binom{n}{p}$
+\item $\dfrac{n!}{(n-p)!}$
+\item $p!$
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Permutations}
+
+
+\begin{Def}\textbf{Définition d'une permutation d'un ensemble}\\
+
+Soit \( E \) un ensemble fini de cardinal \( n \), on appelle permutation de toute \( n \)-liste d'éléments distincts de \( E \).\\
+  \end{Def}
+
+\begin{Prop}\textbf{Nombre de permutations}\\
+  Si \( E \) est un ensemble fini de cardinal \( n \), alors le nombre de permutations de \( E \) est \( n! \).\\
+\end{Prop}
+
+\begin{Ex}Si on mélange un jeu de 32 cartes, combien cela fait-il de possibilités ?
+\end{Ex}
+
+\begin{Prop}\textbf{Nombre de bijections}\\
+Si \( E \) et \( F \) sont deux ensembles finis tels que \( |E| = |F| = n \), le nombre de bijections de \( E \) vers \( F \) est \( n! \).\\
+\end{Prop}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une permutation d'un ensemble fini $E$ de cardinal $n$ est :
+\begin{enumerate}
+\item Une partie de $E$
+\item Une bijection de $E$ dans $E$
+\item Une $n$-liste quelconque d'éléments de $E$
+\item Une combinaison de $n$ éléments
+\end{enumerate}
+
+\item Combien existe-t-il de permutations d'un ensemble à $n$ éléments ?
+\begin{enumerate}
+\item $n^n$
+\item $\binom{n}{2}$
+\item $n!$
+\item $(n-1)!$
+\end{enumerate}
+
+\item Le nombre de bijections entre deux ensembles finis de même cardinal $n$ est :
+\begin{enumerate}
+\item $n^2$
+\item $n!$
+\item $\binom{n}{n}$
+\item $2^n$
+\end{enumerate}
+\end{enumerate}
+
+\subsection{Combinaisons/Parties à p-éléments}
+
+\begin{Def}\textbf{Définition d'une partie à p éléments}\\
+Soit \( E \) un ensemble fini et \( p \in \mathbb{N} \), on appelle partie à \( p \) éléments de \( E \) (ou \( p \)-combinaison de \( E \)) tout sous-ensemble de \( E \) à \( p \) éléments.\\
+\end{Def}
+
+\begin{Prop}\textbf{Nombre de parties à p éléments}\\
+\\  Si \( |E| = n \) et \( p \in \{0, \ldots, n\} \), le nombre de parties à \( p \) éléments de \( E \) est \( \binom{n}{p} = \frac{n!}{p!(n - p)!} \).\\
+\end{Prop}
+
+
+
+\begin{Ex} 
+Sur un jeu de 52 cartes, on tire 5 cartes. Combien cela fait-il de possibilités ?\\
+\end{Ex}
+
+\begin{Prop}\textbf{Formules}\\
+Soit \( n \) un entier naturel non nul.\\
+\begin{enumerate}
+    \item Pour tout \( p \in \{0, \ldots, n\} \), \( \binom{n}{p} = \binom{n}{n - p} \) (symétrie des coefficients binomiaux).
+    \item \( \binom{n}{0} = 1, \quad \binom{n}{1} = n, \quad \binom{n}{2} = \frac{n(n - 1)}{2}, \quad \binom{n}{n - 2} = \frac{n(n - 1)}{2}, \quad \binom{n}{n - 1} = n, \quad \binom{n}{n} = 1 \).
+    \item Pour tout \( p \in \{1, \ldots, n\} \), \( p \cdot \binom{n}{p} = n \cdot \binom{n - 1}{p - 1} \) (formule du maire).
+    \item Pour tout \( p \in \{2, \ldots, n\} \), \( p \cdot (p - 1) \cdot \binom{n}{p} = n \cdot (n - 1) \cdot \binom{n - 2}{p - 2} \) (formule du maire et de l'adjoint).
+    \item Pour tout \( p \in \{1, \ldots, n - 1\} \), \( \binom{n}{p} = \binom{n - 1}{p - 1} + \binom{n - 1}{p} \) (formule du triangle de Pascal).
+    \item Pour tout \( (a, b) \in \mathbb{C}^2 \), \( (a + b)^n = \sum_{k = 0}^{n} \binom{n}{k} a^k b^{n - k} \) (formule du binôme de Newton).\\
+\end{enumerate}
+\end{Prop}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une combinaison de $p$ éléments de $E$ correspond à :
+\begin{enumerate}
+\item Une $p$-liste ordonnée
+\item Une partie de $E$ à $p$ éléments
+\item Une permutation
+\item Une application injective
+\end{enumerate}
+
+\item Si $|E|=n$, combien existe-t-il de parties à $p$ éléments de $E$ ?
+\begin{enumerate}
+\item $n^p$
+\item $\dfrac{n!}{(n-p)!}$
+\item $\binom{n}{p}$
+\item $p!$
+\end{enumerate}
+
+\item Quelle égalité est toujours vraie ?
+\begin{enumerate}
+\item $\binom{n}{p} = \binom{p}{n}$
+\item $\binom{n}{p} = n^p$
+\item $\binom{n}{p} = \binom{n}{n-p}$
+\item $\binom{n}{p} = p!$
+\end{enumerate}
+\end{enumerate}
+
+
+\section{Exercices}
+%
+%
+%\exo{  \textbf{Du tableau de variations à la courbe}\\
+%\vskip0.2cm
+%Soit $f:[0,+\infty[\to\mathbb R^2$ un arc paramétré de classe $C^1$, dont le tableau de variations des fonctions coordonnées
+%est :
+%$$\begin{tabvar}{|C|CCCCCCCCC|} \hline 
+%t	&0 &  &&1	& & &\sqrt 3	& & +\infty
+%\\ \hline 
+%x'(t)  & 0	    &+ &&\dbarre& & + & & + &\\ \hline
+% \niveau{1}{3} x(t) &1	&\croit
+%&\niveau{3}{3}+\infty&\dbarre	&\niveau{1}{3}-\infty&\croit &-\frac 12 &\croit& \niveau{3}{3}0 \\ \hline
+%  \niveau{1}{3} y(t) &0 &\croit & +\infty & \dbarre & \niveau{1}{3} -\infty & \croit &-\frac{3\sqrt 3}2 &\decroit&-\infty  \\ \hline 
+%  y'(t) &  0	    &+ &&\dbarre& & + &0 & -&\\ \hline 
+%\end{tabvar}$$
+%Que peut-on dire, à la lecture de ce tableau, des points stationnaires? des tangentes parallèles aux axes? des branches infinies?\\
+%Tracer une courbe paramétrée qui peut correspondre à ce tableau de variations.\\
+%
+%
+%}
+%
+%% Exercice 1183
+%
+%
+%\exo{  \textbf{Branches infinies}\\
+%\vskip0.2cm
+%\'Etudier les branches infinies de la courbe paramétrée $t\mapsto \left(\frac{t^3}{t^2-9},\frac{t(t-2)}{t-3}\right).$\\
+%}
+%
+
+% Exercice 1197
+
+
+\exo{  \textbf{Groupe d'étudiants}}
+\vskip0.2cm
+A leur entrée en L1, les étudiants choisissent une langue (anglais ou allemand) et une option (informatique, chimie ou astronomie).
+Dans un groupe d'étudiants, 12 étudiants sont inscrits en astronomie, 15 en chimie, 16 étudient l'allemand. Par ailleurs, 8 inscrits en astronomie et 3 inscrits en informatique étudient l'anglais,  6 inscrits en chimie étudient l'allemand.\newline
+Indiquer la répartition des étudiants par discipline, ainsi que le nombre total d'étudiants dans le groupe.\\
+
+
+% Exercice 1198
+
+
+
+
+\exo{  \textbf{Dans une entreprise...}}
+\vskip0.2cm
+Dans une entreprise, il y a 800 employés. 300 sont des hommes, 352 sont membres d'un syndicat, 424 sont mariés, 188 sont des hommes syndiqués, 166 sont des hommes mariés, 208 sont syndiqués et mariés, 144 sont des hommes mariés syndiqués. Combien y-a-t-il de femmes célibataires non syndiquées?\\
+
+
+% Exercice 1199
+
+
+
+\exo{  \textbf{Triangles}}
+\vskip0.2cm
+On trace dans un plan $n\geq 3$ droites en position générale (c'est-à-dire que deux droites ne sont jamais parallèles, et 3 droites ne sont jamais concourantes). Combien de triangles a-t-on ainsi tracé?\\
+
+
+% Exercice 1201
+
+
+
+\exo{  \textbf{Podium!}}
+\vskip0.2cm
+Une course oppose 20 concurrents, dont \'Emile.
+\begin{enumerate}
+ \item Combien y-a-t-il de podiums possibles?
+\item Combien y-a-t-il de podiums possibles où \'Emile est premier?
+\item Combien y-a-t-il de podiums possibles dont \'Emile fait partie?
+ \item On souhaite récompenser les 3 premiers en leur offrant un prix identique à chacun. Combien y-a-t-il de distributions de récompenses possibles?\\
+\end{enumerate}
+
+% Exercice 2362
+
+
+
+\exo{  \textbf{Les boulangeries}}
+\vskip0.2cm
+Dans une ville, il y a quatre boulangeries qui ferment un jour par semaine.\\
+\begin{enumerate}
+\item Déterminer le nombre de façons d'attribuer un jour de fermeture hebdomadaire à chaque boulangerie.
+\item Déterminer le nombre de façons d'attribuer un jour de fermeture hebdomadaire à chaque boulangerie si plusieurs boulangeries ne peuvent fermer le même jour.
+\item Déterminer le nombre de façons d'attribuer un jour de fermeture hebdomadaire à chaque boulangerie si chaque jour, il doit y avoir au moins une boulangerie ouverte.\\
+\end{enumerate}
+
+
+% Exercice 2376
+
+
+
+\exo{  \textbf{Autour d'une table}}
+\vskip0.2cm
+Dans une pièce, il y a deux tables. La première dispose de 3 chaises, numérotées de 1 à 3, la seconde dispose de 4 chaises, numérotées de 1 à 4.\\
+Sept personnes entrent. Combien y-a-t-il de possibilités de les distribuer autour de ces deux tables?\\
+
+
+% Exercice 3196
+
+
+
+\exo{  \textbf{Addition, multiplication et combinaison}}
+\vskip0.2cm
+Une entreprise comporte $18$ employés dont $8$ femmes et $10$ hommes. Pour un sondage, on choisit $3$ personnes au hasard. Quel est le nombre d'échantillons comportant au moins $2$ hommes?\\
+
+
+% Exercice 2327
+
+\exo{  \textbf{Le cadenas}}
+\vskip0.2cm
+Un cadenas possède un code à $3$ chiffres, chacun des chiffres pouvant être un chiffre de $1$ à $9$.
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item Combien y-a-t-il de codes possibles?
+\item Combien y-a-t-il de codes se terminant par un chiffre pair?
+\item Combien y-a-t-il de codes contenant au moins un chiffre $4$?
+\item Combien y-a-t-il de codes contenant exactement un chiffre $4$?
+\end{enumerate}
+\item Dans cette question on souhaite que le code comporte obligatoirement trois chiffres distincts.
+\begin{enumerate}
+\item Combien y-a-t-il de codes possibles?
+\item Combien y-a-t-il de codes se terminant par un chiffre impair?
+\item Combien y-a-t-il de codes comprenant le chiffre $6$?\\
+\end{enumerate}
+\end{enumerate}
+
+
+% Exercice 2900
+
+
+\exo{  \textbf{Les hélicoptères}}
+\vskip0.2cm
+On dispose de 4 hélicoptères de tourisme, de 4 pilotes et de 8 agents. Combien de façons différentes y a-t-il d'attribuer les pilotes et agents aux hélicoptères de manière que chaque hélicoptère ait un pilote et deux agents ?\\
+
+
+% Exercice 2328
+
+
+\exo{  \textbf{Comité de joueurs}}
+\vskip0.2cm
+Fred et \'Emile font partie d'une équipe de $8$ joueurs ($6$ garçons et $2$ filles). On décide de fabriquer un comité de $3$ joueurs.
+\begin{enumerate}
+\item Combien y-a-t-il de comités possibles?
+\item Combien y-a-t-il de comités contenant exactement $2$ garçons et $1$ fille?
+\item Combien y-a-t-il de comités contenant au moins deux garçons?
+\item On veut que Fred et \'Emile soient ensemble dans le comité. Combien y-a-t-il de comités possibles?
+\item On ne veut pas que Fred et \'Emile soient ensemble dans le comité. Combien y-a-t-il de comités possibles?\\
+\end{enumerate}
+
+
+% Exercice 2329
+
+
+\exo{  \textbf{Les trois mousquetaires}}
+\vskip0.2cm
+Les trois mousquetaires (donc quatre personnes avec d'Artagnan), ont mélangé leurs bottes dans le couloir de l'auberge. D'Artagnan se lève en premier et prend deux bottes au hasard.
+\begin{enumerate}
+\item Combien de possibilités s'offrent à lui?
+\item Combien de choix a-t-il tels que les deux bottes forment une paire (une droite et une gauche quelconques)?
+\item Combien de choix a-t-il tels que les deux bottes appartiennent à deux personnes différentes?\\ 
+\end{enumerate}
+
+
+
+% \begin{Sol}
+
+
+
+% Il y a 
+% \[
+% \binom{8}{2} = 28
+% \]
+% choix possibles (il s'agit de choisir deux éléments parmi 8).
+
+% Il y a 
+% \[
+% \binom{4}{1}
+% \]
+% choix possibles pour une botte gauche et 
+% \[
+% \binom{4}{1}
+% \]
+% choix possibles pour une botte droite. Le nombre total de choix formant une paire est donc 
+% \[
+% \binom{4}{1} \times \binom{4}{1} = 16.
+% \]
+
+% Il y a de nombreuses façons de répondre à cette question, mais la plus simple est de raisonner par différence. 
+
+% Il y a en effet 4 choix pour que les deux bottes choisies appartiennent à la même personne. Comme il y a, d'après la première question, 28 choix possibles de deux bottes, il y a :
+% \[
+% 28 - 4 = 24
+% \]
+% choix possibles de sorte que les deux bottes appartiennent à deux personnes différentes.\\
+% \end{Sol}
+% Exercice 3195
+
+
+\exo{  \textbf{Chaussures dans mon armoire}}
+\vskip0.2cm
+Dans mon armoire, il y a 5 paires de chaussures noires, 3 paires de chaussures marrons et 2 paires de chaussures blanches. Je peux distinguer toutes ces chaussures les unes des autres. Un matin, mal réveillé, je choisis deux chaussures au hasard.
+\begin{enumerate}
+\item Combien y-a-t-il de choix possibles ?
+\item Combien y-a-t-il de choix où j'obtiens deux chaussures de même couleur ?
+\item Combien de choix amènent un pied gauche et un pied droit ?
+\item Combien de choix amènent une chaussure droite et une chaussure gauche de même couleur ?
+\item Combien de choix amènent à deux chaussures qui ne sont pas de la même paire?\\
+\end{enumerate}
+
+
+
+
+% \begin{Sol}
+
+% \begin{enumerate}
+% \item
+% Les chaussures étant discernables, j'ai choisi 2 chaussures parmi les 20 de mon armoire. Il y a donc 
+% \[
+% \binom{20}{2} = 190
+% \]
+% choix possibles.
+% \item
+% Notons \( E \) les tirages qui m'amènent à des chaussures de même couleur, et \( E_N, E_M, E_B \) les tirages qui m'amènent à deux chaussures noires (resp. marron, resp. blanches). 
+
+% Alors \( E = E_N \cup E_M \cup E_B \) et cette réunion est disjointe. On a donc :
+% \[
+% \text{card}(E) = \text{card}(E_N) + \text{card}(E_M) + \text{card}(E_B).
+% \]
+
+% Or, 
+% \[
+% \text{card}(E_N) = \binom{10}{2},
+% \]
+% puisque je peux choisir 2 chaussures parmi 10.
+
+% Finalement :
+% \[
+% \text{card}(E) = \binom{10}{2} + \binom{6}{2} + \binom{4}{2} = 66.
+% \]
+% \item
+% Il y a 10 choix possibles pour la chaussure droite. Une fois ce choix réalisé, il y a 10 choix possibles pour la chaussure gauche. Au total, il y a :
+% \[
+% 10 \times 10 = 100
+% \]
+% choix possibles.
+% \item
+% Notons \( A \) les tirages qui amènent une chaussure droite et une chaussure gauche de la même couleur. Comme précédemment, on va décomposer \( A \) en \( A_N \cup A_M \cup A_B \), où \( A_N \) est l'ensemble des tirages amenant une chaussure droite noire et une chaussure gauche noire.
+
+% On a :
+% \[
+% \text{card}(A_N) = 5 \times 5
+% \]
+% (5 choix pour la chaussure droite, 5 choix pour la chaussure gauche), et finalement :
+% \[
+% \text{card}(A) = 5 \times 5 + 3 \times 3 + 2 \times 2 = 38.
+% \]
+% \item
+% On compte d'abord le nombre de choix de deux chaussures qui amènent la même paire : il y en a 10 (autant que de paires de chaussures). Par différence, le nombre de choix qui amènent à deux chaussures qui ne sont pas de la même paire est :
+% \[
+% \binom{20}{2} - 10 = 180.
+% \]
+% \end{enumerate}
+% \end{Sol}
+
+
+% Exercice 1200
+
+\exo{  \textbf{Nombres et chiffres}}
+
+Soit $A$ l'ensemble des nombres à 7 chiffres ne comportant aucun "1". Déterminer le nombre d'éléments des ensembles suivants :
+\begin{enumerate}
+\item $A$.
+\item $A_1$, ensemble des nombres de $A$ ayant 7 chiffres différents.
+\item $A_2$, ensemble des nombres pairs de $A$.
+\item $A_3$, ensemble des nombres de $A$ dont les chiffres forment une suite strictement croissante (dans l'ordre où ils sont écrits).\\
+\end{enumerate}
+
+
+% Exercice 1204
+
+
+\exo{  \textbf{Anagrammes}}
+
+Dénombrer les anagrammes des mots suivants : MATHS, RIRE, ANANAS.\\
+
+
+% Exercice 1205
+
+
+\exo{  \textbf{Des tours sur un échiquier}}
+
+De combien de façons différentes peut-on placer $p$ tours sur un échiquier de taille $n\times n$ de façon à
+ce qu'elles ne puissent pas se prendre?\\
+
+
+% Exercice 3197
+
+
+\exo{  \textbf{Le tournoi de tennis}}
+\vskip0.2cm
+Un tournoi de tennis comporte $2n$ joueurs. De combien de façons peut-on organiser le premier tour dans le cas où :
+\begin{enumerate}
+\item on s'intéresse à la fois aux joueurs qui sont opposés et à l'ordre des matches ;
+\item on ne s'intéresse qu'à la connaissance des joueurs opposés.\\
+\end{enumerate}
+
+
+% Exercice 3198
+
+
+\exo{  \textbf{Dénombrement de tirages successifs et simultanés, avec ou sans remise}}
+
+Un sac contient 5 jetons blancs et 8 jetons noirs. On suppose que les jetons sont discernables (numérotés par exemple) et on effectue un tirage de 6 jetons de ce sac.
+\begin{enumerate}
+\item On suppose que les jetons sont tirés successivement en remettant à chaque fois le jeton tiré.
+\begin{enumerate}
+\item Donner le nombre de résultats possibles.
+\item Combien de ces résultats amènent
+\begin{enumerate}
+\item exactement 1 jeton noir ?
+\item au moins 1 jeton noir ?
+\item au plus un jeton noir ?
+\item 2 fois plus de jetons noirs que de jetons blancs ?
+\end{enumerate}
+\end{enumerate}
+\item Mêmes questions en supposant que les jetons sont tirés successivement sans remise.
+\item Mêmes questions en supposant que les jetons sont tirés simultanément.\\
+\end{enumerate}
+
+
+% \begin{Sol}
+% \begin{small}
+% \begin{enumerate}
+% \item
+% \begin{enumerate}
+% \item
+% On est dans un cas où l'ordre et la répétition interviennent puisque les jetons sont tirés successivement et avec remise. À chaque tirage, on a 13 choix possibles, et donc on obtient $13^6$
+% résultats possibles (on a dénombré des listes).
+% \item
+% \begin{enumerate}
+% \item
+% Pour obtenir exactement un jeton noir, on doit choisir à quel tirage on va tirer le jeton noir (6 choix possibles). Ensuite, pour chaque choix de numéro de tirage, on a 8 choix possibles de jetons noirs et pour les 5 autres tirages, on a 5 possibilités à chaque fois puisqu'il y a 5 jetons blancs. Ainsi, on obtient :  
+% $6 \times 8 \times 5^5$ résultats possibles.
+
+% \item On va dénombrer l'ensemble complémentaire. En effet, il y a exactement 
+% $5^6$ 
+% tirages sans jeton noir (à chaque fois, on a tiré un jeton blanc). Il y a donc :
+% $ 13^6 - 5^6$
+% tirages avec au moins un jeton noir.
+% \item
+% On a déjà dénombré les tirages avec exactement un jeton noir et les tirages sans jeton noir. L'ensemble recherché étant l'union disjointe des ensembles précédents, il y a :
+% $6 \times 8 \times 5^5 + 5^6$
+% tirages amenant au plus un jeton noir.
+% \item
+% Si on a deux fois plus de jetons noirs que de jetons blancs, c'est qu'on a tiré 4 jetons noirs et 2 jetons blancs. On commence par fixer les 2 tirages parmi 6 pour lesquels on a trouvé un jeton blanc : il y en a 
+% $
+% \binom{6}{2}.
+% $
+% Ce choix fixé, il y a 
+% $
+% 5^2
+% $
+% choix pour les jetons blancs et 
+% $
+% 8^4
+% $
+% choix possibles pour les jetons noirs. On obtient au final :
+% $
+% \binom{6}{2} \times 5^2 \times 8^4
+% $
+% tirages amenant 2 fois plus de jetons noirs que de jetons blancs.\end{enumerate}
+% \end{enumerate}
+
+% \item
+
+% Si on tire les jetons successivement et sans remise, l'ordre intervient mais il n'y a plus de répétition. On dénombre des arrangements et il y a :
+% $
+% 13 \times 12 \times 11 \times 10 \times 9 \times 8 = \frac{13!}{7!}
+% $
+% tirages possibles.
+
+% Pour obtenir exactement un jeton noir, on doit choisir à quel tirage on va tirer le jeton noir (6 choix possibles). Ensuite, pour chaque choix de numéro de tirage, on a 8 choix possibles de jetons noirs et pour les 5 autres tirages, on doit choisir 5 jetons parmi 5 sans remise mais avec ordre :
+% $
+% 5 \times 4 \times 3 \times 2 \times 1 = 5!.
+% $
+% Ainsi, on obtient :
+% $
+% 6 \times 8 \times 5!
+% $
+% résultats possibles.
+
+% On remarque qu'il n'y a aucun tirage sans jeton noir, puisque l'on fait 6 tirages, sans remise, et qu'il n'y a que 5 jetons blancs. Le nombre de tirages avec au moins un jeton noir est égal au nombre total de tirages, soit :
+% $
+% \frac{13!}{7!}.
+% $
+% Comme il n'y a aucun tirage sans jeton noir, le nombre de tirages avec au plus un jeton noir est égal au nombre de tirages avec exactement un jeton noir, soit :
+% $6 \times 8 \times 5!
+% $
+% résultats possibles.
+
+% Comme précédemment, on tire 2 jetons blancs et 4 jetons noirs. On commence par fixer la place des 2 jetons blancs parmi les 6 tirages, il y a 
+% $
+% \binom{6}{2}
+% $
+% choix. Puis il y a 
+% $
+% 5 \times 4
+% $
+% choix pour les jetons blancs et 
+% $
+% 8 \times 7 \times 6 \times 5
+% $
+% choix possibles pour les jetons noirs. Finalement, on obtient :
+% $
+% \binom{6}{2} \times 5 \times 4 \times 8 \times 7 \times 6 \times 5
+% $
+% choix possibles.
+
+% \item
+
+% On est dans le cas où ni l'ordre ni la répétition n'interviennent, on dénombre donc des combinaisons. Il y a donc :
+% $
+% \binom{13}{6}
+% $
+% résultats possibles.
+
+% On tire forcément tous les jetons blancs et un jeton noir parmi les 8 : il y a donc 8 tirages possibles.
+
+% On remarque qu'il n'y a aucun tirage sans jeton noir, puisque l'on fait 6 tirages, sans remise, et qu'il n'y a que 5 jetons blancs. Le nombre de tirages avec au moins un jeton noir est égal au nombre total de tirages, soit :
+% $
+% \binom{13}{6}.
+% $
+% Comme il n'y a aucun tirage sans jeton noir, le nombre de tirages avec au plus un jeton noir est égal au nombre de tirages avec exactement un jeton noir, soit :
+% $
+% 8
+% $
+% résultats possibles.
+
+% On doit tirer 2 jetons blancs parmi 5 et 4 jetons noirs parmi 8. Le nombre de tirages recherché est donc :
+% $
+% \binom{5}{2} \times \binom{8}{4}.
+% $
+
+% \end{enumerate}
+% \end{small}
+% \end{Sol}
+
+
+% Exercice 2587
+
+
+\exo{\textbf{Bridge}}
+
+Dans cet exercice, on attend des réponses qui ne sont pas des valeurs numériques, mais des expressions en termes de factorielles, sous la forme
+la plus simple possible.
+\begin{enumerate}
+ \item Combien y-a-t-il de façons de répartir les 52 cartes d'un jeu entre 4 joueurs N, S, E, O, chacun possédant 13 cartes.
+ \item Parmi ces façons, combien y-en-a-t-il qui sont telles que chaque joueur n'a qu'une seule couleur (par exemple, N a les 13 piques, S a les 13 coeurs,...)?
+ \item Combien y-a-t-il de façons que deux joueurs quelconques aient chacun une seule couleur?
+ \item Combien y-a-t-il de façons que deux partenaires, c'est-à-dire (N,S) ou (E,O), aient chacun une seule couleur, les deux autres partenaires ayant des cartes quelconques.\\
+\end{enumerate}
+
+
+% Exercice 2361
+
+
+\exo{  \textbf{Le poker}}
+
+Une main au poker est formée de 5 cartes extraites d'un jeu de 52 cartes. Traditionnellement,trèfle, carreau, coeur, pique sont appelées couleurs et les valeurs des cartes sont rangées dans l'ordre : as, roi, dame, valet, 10, 9, 8, 7, 6, 5, 4, 3, 2, de la plus forte à la plus faible. Dénombrer les mains suivantes :
+\begin{enumerate}
+\item quinte flush : main formée de 5 cartes consécutives de la même couleur (Attention! la suite as, 2, 3, 4 et 5 est une quinte flush).
+\item carré : main contenant 4 cartes de la même valeur (4 as par exemple).
+\item full : main formée de 3 cartes de la même valeur et de deux autres cartes de même valeur (par exemple, 3 as et 2 rois).
+\item quinte : main formée de 5 cartes consécutives et qui ne sont pas toutes de la même couleur.
+\item brelan : main comprenant 3 cartes de même valeur et qui n'est ni un carré, ni un full (par exemple, 3 as, 1 valet, 1 dix).\\
+\end{enumerate}
+
+
+% Exercice 1202
+
+
+\exo{\textbf{Tirages dans un jeu de cartes}}
+
+On tire simultanément 5 cartes d'un jeu de 32 cartes. Combien de tirages différents peut-on obtenir :
+\begin{enumerate}
+\item sans imposer de contraintes sur les cartes.
+\item contenant 5 carreaux ou 5 piques.
+\item contenant 2 carreaux et 3 piques.
+\item contenant au moins un roi.
+\item contenant au plus un roi.
+\item contenant exactement 2 rois et exactement 3 piques.\\
+\end{enumerate}
+
+
+% Exercice 1203
+
+
+\exo{  \textbf{Ranger des livres}}
+
+On souhaite ranger sur une étagère $4$ livres de mathématiques (distincts), $6$ livres de physique, et $3$ de chimie. De combien de façons peut-on effectuer ce rangement :
+\begin{enumerate}
+\item si les livres doivent être groupés par matières.
+\item si on exige seulement que les livres mathématiques soient groupés (les livres des autres disciplines pouvant l'être ou non).\\
+\end{enumerate}
+
+
+% Exercice 2571
+
+
+\exo{  \textbf{Polygones et diagonales}}
+
+Soit $p$ points du plan distincts.
+\begin{enumerate}
+\item Combien de polygones à $n\leq p$ côtés peut-on réaliser à partir de ces points? 
+\item On fixe un tel polygone à $n$ côtés. Combien de diagonales ce polygone comporte-t-il?\\
+\end{enumerate}
+
+
+% Exercice 2360
+
+
+\exo{  \textbf{Autour d'une table!}}
+
+Une table ronde comporte cinq places, numérotées de 1 à 5. On veut répartir Adélie, Brigitte, Chafik, Denis et Emilie autour de la table. Mais attention! Denis et \'Emilie ne s'entendent pas du tout, et il ne faut pas les placer côte à côte!!! Combien y-a-t-il de dispositions possibles?\\
+
+
+
+% \begin{Sol}
+
+% On va raisonner par différence. Si l'on ne met pas de contraintes, il y a \( 5! = 120 \) façons de placer les gens autour de la table. Comptons maintenant le nombre de façons où Denis et Émilie sont côte à côte.  
+
+% On commence par choisir la position de ce couple. Il y a cinq positions possibles : \( (1,2) \), \( (2,3) \), \( (3,4) \), \( (4,5) \) et \( (5,1) \). Cette position fixée, il y a \( 2! = 2 \) choix pour placer Denis et Émilie, puis \( 3! = 6 \) choix pour placer les autres. Il y a donc :  
+% \[
+% 5 \times 2 \times 6 = 60
+% \]
+% dispositions où Denis et Émilie sont côte à côte. Finalement, il y a :  
+% \[
+% 120 - 60 = 60
+% \]
+% dispositions où Émilie et Denis ne sont pas côte à côte !
+
+% Remarquons que ce raisonnement dépend du fait que l'on a numéroté les places et donc que, implicitement, la position  
+% \( \text{Adélie 1, Brigitte 2, Chafik 3, Denis 4 et Émilie 5} \)  
+% est différente de la position  
+% \( \text{Adélie 2, Brigitte 3, Chafik 4, Denis 5 et Émilie 1} \),  
+% alors que dans ces deux configurations, tout le monde a le même voisin. Si on ne numérote pas les places, alors on doit diviser le nombre de possibilités par 5 et il y a :  
+% \[
+% \frac{60}{5} = 12
+% \]
+% configurations différentes.
+
+% Une autre possibilité, pour faire le dénombrement, est de choisir d'abord la place de Denis (\( 5 \) choix), puis la place d'Émilie (il ne reste que \( 2 \) choix), puis la place des 3 autres (respectivement, \( 3,2 \) et \( 1 \) choix). Le nombre de dispositions possibles vaut bien :  
+% \[
+% 5 \times 2 \times 3 \times 2 = 60.
+% \]
+% \end{Sol}
+% Exercice 2366
+
+
+\exo{\textbf{Le concours}}
+
+Soit $n$ un entier non nul. On désigne par $u_n$ le nombre de listes de $n$ termes, chaque terme étant $0$ ou $1$, et n'ayant pas deux termes $1$ consécutifs.
+\begin{enumerate}
+\item Que vaut $u_1$? $u_2$?
+\item Démontrer que, pour tout $n\geq 3$, on a $u_n=u_{n-1}+u_{n-2}$.
+\item \'Ecrire un algorithme permettant de calculer $u_{20}$.
+\item Application : un concours comporte vingt questions, numérotées de 1 à 20. On a constaté que, parmi les 17712 personnes ayant participé au concours, aucune n'a répondu juste à deux questions consécutives. Peut-on affirmer que deux candidats au moins ont répondu de la même manière au questionnaire, c'est-à-dire juste aux mêmes questions et faux aux mêmes questions?\\
+\end{enumerate}
+
+
+% Exercice 2566
+
+
+\exo{\textbf{Mon escalier}}
+
+Dans ma maison, il y a un escalier de $17$ marches. Pour descendre cet escalier, je peux à chaque pas descendre une marche, descendre deux marches, ou descendre trois marches à la fois. Combien y-a-t-il de façons de descendre cet escalier?\\
+
+
+
+% \begin{Sol}
+
+% Notons \( S(n) \) le nombre de façons de descendre un escalier à \( n \) marches. On a \( S(1) = 1 \), \( S(2) = 2 \) (ou bien on descend deux fois une marche, ou bien on descend deux marches d'un coup), et \( S(3) = 4 \) : ou bien notre premier pas descend de trois marches, et on a fini, ou bien il descend de deux marches, et il reste un escalier à une marche à descendre, ou bien il descend d'une seule marche, et il reste encore un escalier de deux marches à descendre. Autrement dit,  
+% \[
+% S(3) = 1 + 1 + S(2) = 4.
+% \]
+
+% Cherchons maintenant une formule de récurrence pour \( S(n) \) lorsque \( n \geq 4 \). On raisonne en fonction du premier pas :
+
+% \begin{itemize}
+% \item ou bien on descend une seule marche : dans ce cas, il reste un escalier à \( n-1 \) marches à descendre, et donc \( S(n-1) \) possibilités;
+% \item ou bien on descend deux marches : dans ce cas, il reste un escalier à \( n-2 \) marches à descendre, et donc \( S(n-2) \) possibilités;
+% \item ou bien on descend trois marches : dans ce cas, il reste un escalier à \( n-3 \) marches à descendre, et donc \( S(n-3) \) possibilités.
+% \end{itemize}
+
+% On a donc la formule de récurrence :  
+% \[
+% S(n) = S(n-1) + S(n-2) + S(n-3).
+% \]
+
+% Il nous faut calculer \( S(17) \). 
+% \end{Sol}
+
+
+\exo{  \textbf{Ensembles}}
+
+Soit $E$ un ensemble et $A$ et $B$ deux parties de $E$ et $f : \mathcal{P}(E) \to \mathcal{P}(A) \times \mathcal{P}(B)$ défini par 
+$$
+f(X) = (X \cap A, X \cap B).
+$$
+
+\begin{enumerate}
+    \item Donner une condition nécessaire et suffisante (CNS) sur $A$ et $B$ pour que $f$ soit injective.
+
+\item Donner une condition nécessaire et suffisante (CNS) sur $A$ et $B$ pour que $f$ soit surjective.
+
+\item En déduire une condition nécessaire et suffisante (CNS) sur $A$ et $B$ pour que $f$ soit bijective.
+
+\item Désormais, supposons que $f$ est bijective.
+   \begin{enumerate}
+    \item Expliciter $f^{-1}$.
+   \item On suppose que $E$ est un ensemble fini. Qu'en déduit-on sur les cardinaux de $\mathcal{P}(A) \times \mathcal{P}(B)$ et $\mathcal{P}(E)$ ? Vérifier cette égalité compte tenu des conditions vérifiées par $A$ et $B$.\\
+   \end{enumerate}
+   \end{enumerate}
+
+
+
+\exo{  \textbf{Nombre de partitions}}
+
+Pour tout entier naturel $n$ non nul, on pose $D_n$ le nombre de partitions de l'ensemble $E_n = \{1, \ldots, n\}$. Par convention, $D_0 = 1$.\\
+
+\begin{enumerate}
+    \item Montrer que : pour tout entier $n$ non nul, 
+    \[
+    D_{n+1} = \sum_{k=0}^{n} \binom{n}{k} D_k
+    \]
+    puis que $D_n \leq n!$.
+    
+    \item Soit $f(x) = e^{e^x - 1}$.
+    \begin{enumerate}
+        \item Justifier que $f$ admet un développement limité à tout ordre $N$ au voisinage de 0 de la forme : 
+        \[
+        f(x) = \sum_{k=0}^{N} \frac{a_k}{k!} x^k + o_0(x^N).
+        \]
+        \item En utilisant la relation, $f'(x) = e^x f(x)$ vérifiée par $f$ en tout réel $x$, montrer que $(a_n)$ vérifie la même relation de récurrence que $(D_n)$.
+        \item En déduire une relation entre $a_n$ et $D_n$.
+        \item Calculer alors $D_2$, $D_3$, $D_4$, $D_5$, grâce au $DL$, puis $D_6$ grâce à 1).\\
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+\exo{\textbf{Père Noël}}
+
+Pour tout $n$ un entier naturel non nul, on note $a_n$ le nombre de façons qu'a le père Noël de distribuer $n$ cadeaux à $n$ enfants sans qu'aucun enfant ne reçoive le cadeau qu'il a demandé (sachant que dans sa hotte, ce père Noël a exactement les $n$ cadeaux commandés par les $n$ enfants !!).\\
+
+\begin{enumerate}
+    \item Calculer $a_1$, $a_2$, $a_3$.
+    \item Montrer que : pour tout entier naturel $n \geq 1$,
+    \[
+    a_{n+2} = (n + 1)(a_n + a_{n+1}).
+    \]
+    \item Montrer que : pour tout entier naturel $n \geq 1$,
+    \[
+    a_{n+1} - (n + 1)a_n = (-1)^{n+1}.
+    \]
+    \item Montrer que : pour tout entier naturel $n \geq 1$,
+    \[
+    \frac{a_n}{n!} = \sum_{k=0}^{n} \frac{(-1)^k}{k!}.
+    \]
+    \item Grâce à l'inégalité de Taylor-Lagrange, déterminer un équivalent simple de $a_n$.\\
+\end{enumerate}
+
+
+
+
+\exo{\textbf{Pairs et impairs}}
+
+Soit \( E \) un sous-ensemble fini de \(\mathbb{N}\) contenant \( a \) entiers pairs et \( b \) entiers impairs. Montrer en utilisant \( E \) que : \\
+
+\[
+\sum_{k=0}^{p} \binom{a}{k} \binom{b}{p-k} = \binom{a+b}{p}.
+\]
+En déduire la valeur de 
+\[
+\sum_{k=0}^{n} \binom{n}{k}^2
+\] 
+où \( n \in \mathbb{N} \).\\
+
+
+
+% \begin{Sol}
+
+% Notons \( A \) l'ensemble de parties de \( E \) à \( p \) éléments. 
+% Comme \( \text{card}(E) = a + b \), on a donc \( \text{card}(A) = \binom{a+b}{p} \).
+
+% Comptons d'une autre manière ce nombre de parties de \( E \) à \( p \) éléments. Notons \(\forall k \in \llbracket 0, p \rrbracket\), \( A_k \) l'ensemble des parties de \( E \) à \( p \) éléments contenant \( k \) éléments pairs. Alors \( (A_0, A_1, \ldots, A_p) \) est une partition de \( A \). Donc 
+% \[
+% \text{card}(A) = \sum_{k=0}^{p} \text{card}(A_k).
+% \]
+% Construire un élément de \( A_k \) revient à :
+% \begin{enumerate}[(1)]
+%     \item Choisir les \( k \) éléments pairs parmi les \( a \) appartenant à \( E \) si possible (c'est-à-dire si \( k \leq a \)).
+%     \item Choisir les \( p - k \) autres éléments qui sont nécessairement impairs et choisis parmi les \( b \) appartenant à \( E \) si possible (c'est-à-dire si \( p - k \leq b \)).\\
+% \end{enumerate}
+
+% Donc, 
+% \[
+% \text{card}(A_k) = \binom{a}{k} \binom{b}{p-k}
+% \] 
+% valable si \( k \leq a \) et \( p - k \leq b \) car dans ce cas \( A_k = \emptyset \) donc \( \text{card}(A_k) = 0 = \binom{a}{k} \binom{b}{p-k} \).
+
+% Ainsi, \( \binom{a+b}{p} = \text{card}(A) = \sum_{k=0}^{p} \binom{a}{k} \binom{b}{p-k} \).\\
+% \end{Sol}
+
+
+\exo{\textbf{Couples}}
+
+Soit \( (p, n) \in \mathbb{N}^* \times \mathbb{N}^* \) et \( E = \{1, \ldots, n\} \).\\
+ Déterminer :
+\begin{enumerate}
+    \item Le nombre de couples \( (x, y) \) d'éléments de \( E \) tels que \( x + y = n \).
+    \item Le nombre de couples \( (x, y) \) d'éléments distincts de \( E \).
+    \item Le nombre de couples \( (x, y) \) d'éléments de \( E \) tels que \( x > y \).
+    \item Le nombre \( u_n \) de couples \( (x, y) \) d'éléments de \( E \) tels que \( x \) ou \( y \) impair. Calculer 
+    \[
+    \lim_{n \to +\infty} \frac{u_n}{n^2}.
+    \]
+    \item Le nombre de \( p \)-uplets \( (x_1, x_2, \ldots, x_p) \) d'éléments de \( E \) tels que \( x_1 < x_2 < \ldots < x_p \).
+    \item Le nombre de \( p \)-uplets \( (x_1, x_2, \ldots, x_p) \) d'éléments de \( E \) tels que \( x_1 \leq x_2 \leq \ldots \leq x_p \).\\
+\end{enumerate}
+
+
+
+% \begin{Sol}
+% \begin{scriptsize}
+
+% \begin{enumerate}
+% \item \( \text{card}\{(1, n-1), (2, n-2), \ldots, (n-1, 1)\} = n - 1 \)
+
+% \item \( \text{card}\{(x, y) \in \{1, \ldots, n\}^2 / x \neq y\} = A_n^2 = n(n - 1) \)
+
+% \item Notons \( A_k = \{(k, y) \in \{1, \ldots, n\}^2 / k > y\} \) et \( A = \{(x, y) \in \{1, \ldots, n\}^2 / x > y\} \). Alors \( (A_2, A_3, \ldots, A_n) \) est une partition de \( A \). Donc 
+% \[
+% \text{card}(A) = \sum_{k=1}^{n} \text{card}(A_k) = \sum_{k=1}^{n} (k-1) = \sum_{k=0}^{n-1} k = \frac{n(n-1)}{2}.
+% \]
+
+% \item \( u_n = \text{card}(B) \) où \( B = \{(x, y) \in \{1, \ldots, n\}^2 / x \text{ ou } y \text{ impair}\}. \) 
+% On a \( B = E^2 \setminus \{(x, y) \in \{1, \ldots, n\}^2 / x \text{ et } y \text{ pairs}\}.
+% \)
+
+
+
+% $
+% B = E^2 \{(x,y) \in \{1, \ldots, n\}^2 / x \text{ et } y \text{ pairs} \}
+% $
+
+% Or, 
+
+% $
+% C = \{(x,y) \in \{1, \ldots, n\}^2 / x \text{ et } y \text{ pairs} \} = \begin{cases}
+% \{2, 4, 6, \ldots, n\} \times \{2, 4, 6, \ldots, n\} & \text{si } n \text{ pair} \\
+% \{2, 4, 6, \ldots, n-1\} \times \{2, 4, 6, \ldots, n-1\} & \text{si } n \text{ impair}
+% \end{cases}
+% $
+
+% Donc,
+
+% \[
+% \text{card}(C) = \begin{cases}
+% \left(\frac{n}{2}\right)^2 & \text{si } n \text{ pair} \\
+% \left(\frac{n-1}{2}\right)^2 & \text{si } n \text{ impair}
+% \end{cases}
+% \]
+
+% Alors,
+
+% $
+% u_n = \text{card}(B) = \text{card}(E \times E) - \text{card}(C) = \begin{cases}
+% n^2 - \left(\frac{n}{2}\right)^2 & \text{si } n \text{ pair} \\
+% n^2 - \left(\frac{n-1}{2}\right)^2 & \text{si } n \text{ impair}
+% \end{cases}
+% $
+
+% $
+% = \begin{cases}
+% \frac{3}{4} n^2 & \text{si } n \text{ pair} \\
+% \frac{3}{4} n^2 + n - \frac{1}{4} & \text{si } n \text{ impair}
+% \end{cases}
+% $
+
+% Donc,
+
+% \[
+% v_n = \frac{u_n}{n^2} = \begin{cases}
+% \frac{3}{4} & \text{si } n \text{ pair} \\
+% \frac{3}{4} + \frac{1}{n} - \frac{1}{4 n^2} & \text{si } n \text{ impair}
+% \end{cases}
+% \]
+
+% Donc \(\lim_{n \to +\infty} v_{2n} = \frac{3}{4} = \lim_{n \to +\infty} v_{2n+1}\). Ainsi, \(\lim_{n \to +\infty} v_n = \frac{3}{4}\).\\
+
+% \item Construire un \(p\)-uplet \((x_1, x_2, \ldots, x_p)\) d'éléments de \(E\) tels que \(x_1 < x_2 < \cdots < x_p\) revient à
+% \begin{enumerate}
+%     \item Choisir \(p\) éléments distincts parmi les \(n\) éléments de \(E\) (impossible si \(p > n\)).
+%     \item Ordonner ces \(p\) éléments de manière strictement croissante pour les ranger dans le \(p\)-uplet.
+% \end{enumerate}
+% Donc, le nombre de \(p\)-uplets \((x_1, x_2, \ldots, x_p)\) d'éléments de \(E\) tels que \(x_1 < x_2 < \cdots < x_p\) est \(\binom{n}{p} \underbrace{ \text{(nombre de façons de prendre } p \text{ éléments parmi } n)}_{\text{NB de façons de les ordonner}} \times 1 \underbrace{ \text{(nombre de façons de les ordonner)}}_{\text{à une seule façon}}\)\\
+
+% \item Soit \(A\) l'ensemble des \(p\)-uplets \((x_1, x_2, \ldots, x_p)\) d'éléments de \(E\) tels que \(x_1 \leq x_2 \leq \cdots \leq x_p\).
+% Soit \(B\) l'ensemble des \(p\)-uplets \((y_1, y_2, \ldots, y_p)\) d'éléments de \([1, n + p - 1]\) tels que \(y_1 < y_2 < \cdots < y_p\). D'après le point 5), \(\text{card}(B) = \binom{n + p - 1}{p}\).
+
+% Construisons une bijection de \(A\) sur \(B\) :
+% Si \(x_1, x_2, \ldots, x_p\) sont des entiers tels que \(1 \leq x_1 \leq x_2 \leq \cdots \leq x_p \leq n\) alors \(1 \leq x_1 < x_2 + 1 < x_3 + 2 < \cdots < x_p + (p - 1) \leq n + p - 1\).
+
+% Soit \(f\) définie sur \(A\) par : 
+% $
+% f(x_1, x_2, \ldots, x_p) = (x_1, x_2 + 1, x_3 + 2, \ldots, x_p + (p - 1)).
+% $
+% Alors, d'après ce qui précède, \(\forall (x_1, x_2, \ldots, x_p) \in A\), \(f(x_1, x_2, \ldots, x_p) \in B\). De plus, \(f\) est bijective de \(A\) sur \(B\). En effet,
+% Soit \((y_1, y_2, \ldots, y_p) \in B\).
+% $
+% f(x_1, x_2, \ldots, x_p) = (y_1, y_2, \ldots, y_p) \iff 
+% \begin{cases}
+% y_1 = x_1 \\
+% y_2 = x_2 + 1 \\
+% y_3 = x_3 + 2 \\
+% \vdots \\
+% y_p = x_p + (p - 1)
+% \end{cases}
+% x_1 \leq x_2 \leq \cdots \leq x_p \iff 
+% \begin{cases}
+% x_1 = y_1 \\
+% x_2 = y_2 - 1 \\
+% x_3 = y_3 - 2 \\
+% \vdots \\
+% x_p = y_p - (p - 1)
+% \end{cases}
+% x_1 \leq x_2 \leq \cdots \leq x_p.
+% %\end{array}
+% $
+
+% Comme \(y_1, y_2, \ldots, y_p\) sont des entiers tels que \(1 \leq y_1 < y_2 < \cdots < y_p \leq n + (p - 1)\), nous pouvons affirmer que :
+% \(1 \leq y_1 \leq y_2 - 1 \leq y_3 - 2 \leq \cdots \leq y_p - (p - 1) \leq n\). Ainsi, 
+% \((y_1, y_2 - 1, y_3 - 2, \ldots, y_p - (p - 1))\) est l'unique antécédent de \((y_1, y_2, \ldots, y_p)\) par \(f\).
+
+% J'en déduis que \(\text{card}(A) = \text{card}(B) = \binom{n + p - 1}{p}\).
+% \end{enumerate}
+% \end{scriptsize}
+
+% \end{Sol}
+
+

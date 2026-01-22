@@ -1,0 +1,750 @@
+\documentclass[a4paper,11pt]{article}
+
+%	Tous les packages pour francisation compl\' ete
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+\usepackage{mdframed}
+
+% Définition des couleurs personnalisées
+\definecolor{ThemeLight}{HTML}{E0F2F1}
+
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+
+%\usepackage{auto-pst-pdf}
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{D\'efinition}
+\newtheorem{theoreme}{Th\'eor\`eme}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}} %vecteur
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
+\newboolean{showSolutions}
+\input \jobname.adr
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{09/10/2025}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- BMC 2 Semestre 3}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime Berger, Rémi Blanquet \& Karine Serier  \\
+        \hline 
+        \textbf{Matière} & Mathématiques  \\
+        \hline 
+        \textbf{Durée de l'examen} & 2h00 \\
+        \hline 
+        \textbf{Consignes} & \vspace{1em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize} 
+       \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{2em}
+
+
+\underline {\ding{110}\, \bf{Exercice 1  : Limites (6 points)}}
+\medskip
+
+Calculer les limites suivantes :
+
+
+$$ \lim_{x \to 0} \left(\frac{e^x - (1+x)}{x^2}\right)\qquad \quad
+ \lim_{x \to 0} \left(\frac{x^2}{\cos(x) - 1}\right)\qquad \quad
+ \lim_{x \to 0} \left(\frac{(e^x - 1)\sin(x)}{x^2}\right)$$
+
+
+\medskip
+\ifthenelse{\boolean{showSolutions}}
+{
+    
+
+\begin{solution}
+
+Rappelons les DL dont nous aurons besoin, au voisinage de $0$:
+\[
+e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{3!}+o(x^3) \qquad \cos(x)=1-\dfrac{x^2}{2}+o(x^3) \qquad \sin(x)=x-\dfrac{x^3}{3!}+o(x^3)
+\]
+\vspace{1em}
+Ainsi, pour la première limite :
+
+$
+\dfrac{e^x - (1+x)}{x^2}=\dfrac{\dfrac{x^2}{2}+\dfrac{x^3}{3!}+o(x^3)}{x^2} =\dfrac{1}{2}+\dfrac{x}{6}+o(x)$
+Donc
+$\underset{x \to 0}{\lim} \left(\dfrac{e^x - (1+x)}{x^2}\right)=\dfrac{1}{2}
+$
+
+\vspace{1em}
+\noindent Pour la deuxième limite : 
+
+
+$
+\dfrac{x^2}{\cos(x)-1}=\frac{x^2}{-\frac{x^2}{2}+o(x^3)} =\dfrac{-2}{1+o(x)}$
+donc
+$
+ \underset{x \to 0}{\lim} \left(\dfrac{x^2}{\cos(x) - 1}\right)=-2
+$
+
+\vspace{1em}
+\noindent Enfin, pour la troisième, 
+
+\[
+\frac{(e^x - 1)\sin(x)}{x^2}=\frac{\Big(x + \frac{x^2}{2}+\frac{x^3}{3!}+o(x^3)\Big)\Big(x-\frac{x^3}{3!}+o(x^3) \Big)}{x^2} =\frac{x^2 + \frac{x^3}{2}+o(x^3) }{x^2}=1+\frac{x}{2}+o(x)
+\] 
+donc 
+\[
+\lim_{x \to 0} \left(\frac{(e^x - 1)\sin(x)}{x^2}\right)=0
+\]
+\end{solution}
+
+}{}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 2 : Inversibilité et expression de l'inverse via un polynôme annulateur (5 points)}}\\
+\medskip
+
+    Soit la matrice $P = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$.
+    \begin{enumerate}
+        \item Calculer $P^2$.
+        \item Vérifier que $P^2 - 3P + 2I_2 = 0_2$, où $I_2$ est la matrice identité d'ordre 2 et $0_2$ la matrice nulle d'ordre $2$.
+        \item À partir de cette relation, déduisez que la matrice $P$ est inversible et exprimez son inverse $P^{-1}$ en fonction de $P$ et $I_2$.
+        \item Utiliser cette expression pour calculer $P^{-1}$.
+    \end{enumerate}
+
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+
+    \begin{enumerate}
+        \item Calcul de $P^2$ :
+        \[
+        P^2 = P \times P = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix} = \begin{pmatrix} 1\times1+1\times0 & 1\times1+1\times2 \\ 0\times1+2\times0 & 0\times1+2\times2 \end{pmatrix} = \begin{pmatrix} 1 & 3 \\ 0 & 4 \end{pmatrix}
+        \]
+
+        \item Vérification :
+        \[
+        P^2 - 3P + 2I_2 = 
+        \begin{pmatrix} 1 & 3 \\ 0 & 4 \end{pmatrix}
+        - 3\begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}
+        + 2\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+        \]
+
+        Calculons les termes intermédiaires : 
+        $$-3P = \begin{pmatrix} -3 & -3 \\ 0 & -6 \end{pmatrix}, \qquad
+        2I_2 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$$
+
+        Donc :
+        \[
+        \begin{pmatrix} 1 & 3 \\ 0 & 4 \end{pmatrix}
+        + \begin{pmatrix} -3 & -3 \\ 0 & -6 \end{pmatrix}
+        + \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}
+        = \begin{pmatrix} 1 - 3 + 2 & 3 - 3 + 0 \\ 0 + 0 + 0 & 4 - 6 + 2 \end{pmatrix}
+        = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+        \]
+
+        L'égalité est donc bien vérifiée.
+
+        \item Déduire que $P$ est inversible et exprimer $P^{-1}$ :
+
+        On a $P^2 - 3P + 2I_2 = 0_2$ donc $P^2 - 3P = -2I_2$\\
+        Donc $P(P - 3I_2) = -2I_2$,\\
+        donc en multipliant chaque membre par $-1/2$ :
+        \[
+        -\frac{1}{2}P(P - 3I_2) = I_2
+        \]
+        Donc $P$ est inversible, avec :
+        \[
+        P^{-1} = -\frac{1}{2}(P - 3I_2)
+        \]
+        c'est-à-dire
+        \[
+        P^{-1} = -\frac{1}{2}P + \frac{3}{2}I_2
+        \]
+
+        \item Calcul de $P^{-1}$ numériquement : 
+        $$-\frac{1}{2}P = \begin{pmatrix} -\frac{1}{2} & -\frac{1}{2} \\ 0 & -1 \end{pmatrix},
+        \qquad \frac{3}{2}I_2 = \begin{pmatrix} \frac{3}{2} & 0 \\ 0 & \frac{3}{2} \end{pmatrix}$$
+
+        Donc
+        \[
+        P^{-1} = \begin{pmatrix} -\frac{1}{2}+\frac{3}{2} & -\frac{1}{2}+0 \\ 0+0 & -1+\frac{3}{2} \end{pmatrix}
+        = \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix}
+        \]
+    \end{enumerate}
+    \end{solution}
+}
+{}
+\hfill\break
+\hrule
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 3 : Déterminant et condition d'inversibilité (3 points)}}\\
+
+    Sans effectuer de calculs explicites, expliquer pourquoi les déterminants suivants sont nuls.\\ 
+    Préciser la propriété utilisée.\\
+    
+$$A = \begin{vmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 1 & 2 & 3 \end{vmatrix}\qquad
+        B = \begin{vmatrix} 1 & 2 & 4 \\ 2 & 4 & 8 \\ 3 & 5 & 7 \end{vmatrix}\qquad 
+        C = \begin{vmatrix} 1 & 2 & 3 \\ 0 & 0 & 0 \\ 4 & 5 & 6 \end{vmatrix}$$
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    
+\begin{solution}
+
+    $A$ est nul car la matrice possède deux lignes identiques.
+    $B$ est nul car la matrice possède deux lignes proportionnelles.
+    $C$ est nul car la matrice possède une ligne nulle.
+\end{solution}
+
+}
+{}
+
+\ifthenelse{\boolean{showSolutions}}{}
+{
+\newpage 
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+}
+
+
+
+\underline {\ding{110}\, \bf{Exercice 4 : Combinaisons linéaires (6 points)}}
+\medskip 
+
+On se place dans $\mathbb{R}^3$, on note $e_1=(1,3,2)$ et $e_2=(1,-1,4)$.
+\begin{enumerate}
+    \item  Dans $\mathbb{R}^3$, $u=(2,5,3)$ est-il combinaison linéaire de $e_1$ et $e_2$ ?
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+
+        $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+    Trouver $a$ et $b$ nous conduit à un système linéaire : 
+
+    \begin{align*}
+      a + b &= 2 \\
+      3a - b &= 5 \\
+      2a + 4 b &= 3
+    \end{align*}
+
+    Les premières étapes du pivot de Gauss nous donnent : 
+    \begin{align*}
+      a + b &= 2 \\
+      0 - 4b &= 1 \\
+      0 + 2b &= -1
+    \end{align*}
+    Le système est donc incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+    \end{solution}
+}
+{}
+
+
+\item Comment choisir le paramètre $m$ pour que le vecteur $v=(3, 1, m)$ soit combinaison linéaire de $e_1$ et $e_2$ ?
+
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+
+        $u$ est combinaison linéaire de $e_1$ et $e_2$ si et seulement si il existe $a, b \in \mathbb{R}$ tels que $u=a e_1 + b e_2$.
+
+        Trouver $a$ et $b$ nous conduit à un système linéaire : 
+    
+        \begin{align*}
+          a + b &= 3 \\
+          3a - b &= 1 \\
+          2a + 4 b &= m
+        \end{align*}
+    
+        Les premières étapes du pivot de Gauss nous donnent : 
+        \begin{align*}
+          a + b &= 3 \\
+          0 - 4b &= -8 \\
+          0 + 2b &= m-6
+        \end{align*}
+        Le système est compatible si et seulement si $m = 10$, dans ce cas, $u$ est combinaison linéaire de $e_1$ et $e_2$.
+    
+        Si $m \neq 10$, le système est incompatible et $u$ n'est pas combinaison linéaire de $e_1$ et $e_2$.
+    \end{solution}
+}
+{}
+
+
+
+\item Ecrire sous forme échelonnée les systèmes suivants, en déduire le nombre de solutions.
+
+$$
+\begin{cases}
+    -x - y = 1 \\
+    -3x - 3y = 2
+  \end{cases}, \qquad \qquad 
+  \begin{cases}
+    4y + z = 20 \\
+    2x - 2y + z = 0 \\
+    x + z = 5 \\
+    x + y - z = 10
+  \end{cases}
+  $$
+\end{enumerate}
+  \ifthenelse{\boolean{showSolutions}}{
+
+  \begin{solution}
+
+        Pour le premier, On peut effectuer l'opération $L_2 \leftarrow L_2 + 3L_1$, cela conduit à l'équation $0=5$, qui est incompatible. Le système n'admet pas de solution.
+
+
+
+      Pour échelonner le deuxième système, il faut commencer par échanger les équations pour avoir un $x$ dans la première équation. On échange par exemple $L_1$ et $L_3$. 
+      On obtient  
+      $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+          2x - 2y + z = 0 \\
+          x + y - z = 10
+        \end{cases}$$
+
+        Ensuite, on élimine les $x$ des autres équations à l'aide de la première équation : $L_3 \leftarrow L_3 - 2L_1$ et $L_4 \leftarrow L_4 - L_1$. On obtient :
+        $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+          -2y - z = -10 \\
+           y - 2z = 5
+        \end{cases}$$
+
+        Ensuite, on utilise $L_2$ pour éliminer les $y$ : $L_3 \leftarrow 2L_3 + L_2$ et $L_4 \leftarrow 4L_4 - L_2$. On obtient :
+        $$\begin{cases}
+          x + z = 5 \\
+          4y + z = 20 \\
+           - z = 0 \\
+           - 9z = 0
+        \end{cases}$$
+        Les 2 dernières équations apportent la même information, on peut en garder seulement une des deux. On obtient un système échelonné avec une unique solution. 
+
+
+        \end{solution}
+}
+{}
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+
+\underline {\ding{110}\, \bf{Exercice 5 : Étude de la Conchoïde de Nicomède (20 points)}}
+
+
+
+\subsection*{Partie 1 : Forme Paramétrique}
+
+La conchoïde de Nicomède est définie par les équations paramétriques :
+$$
+\begin{cases}
+x(t) = \frac{2}{\cos(t)} + \cos(t) \\
+y(t) = 2 \tan(t) + \sin(t)
+\end{cases}
+$$
+
+\begin{enumerate}
+    \item      \begin{enumerate}
+    \item Déterminer le domaine de définition de $t$.
+    \item \'Etudier les symétries de la courbe.
+    \end{enumerate}
+    \item 
+        \begin{enumerate}
+    \item Calculer les dérivées $x'(t)$ et $y'(t)$.
+    \item En déduire les coordonnées d'un vecteur tangent $\vec{V}(t)$ à la courbe à un point régulier $M_t$ de coordonnées~$\big(x(t),y(t)\big)$.
+    \end{enumerate}
+    \item         \begin{enumerate}
+    \item
+    Déterminer les points où la tangente est horizontale ou verticale.
+    \item Donner les coordonnées cartésiennes de ces points.
+     \end{enumerate}
+    
+     %\begin{enumerate}
+     \item Effectuer un développement limité de $x(t)$ et $y(t)$ au voisinage de $t=0$ à l'ordre $3$.
+     %\item En déduire la nature du point correspondant à $t=0$.
+    % \end{enumerate}
+    \item
+    \begin{enumerate}
+    \item Étudier les limites de $x(t)$ et $y(t)$ lorsque $t$ approche $\frac{\pi}{2}$ et $-\frac{\pi}{2}$.
+  
+    \item Que pouvez-vous en déduire?
+   %  Donner l'équation des asymptotes à la courbe.\\
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{Partie 2 : Forme Polaire}
+
+La conchoïde de Nicomède est définie en coordonnées polaires par l'équation :
+$$r(\theta) = \frac{2}{\cos \theta} + 1$$
+
+\begin{enumerate}
+    \item Déterminer le domaine de définition de $\theta$ et étudier les symétries de la courbe.
+    \item Convertir l'équation polaire en coordonnées cartésiennes $x(\theta)$ et $y(\theta)$.
+    \item 
+        \begin{enumerate}
+    \item Étudier les limites de $x(\theta)$ et $y(\theta)$ lorsque $\theta$ approche $\frac{\pi}{2}$ et $-\frac{\pi}{2}$.
+    \item  Donner l'équation des asymptotes.
+    \end{enumerate}
+    \item Calculer la dérivée $\frac{dr}{d\theta}$.
+    \item Déterminer l'angle $\alpha$ de la tangente à la courbe en un point de coordonnées $(r, \theta)$.
+    \item
+            \begin{enumerate}
+    \item Effectuer un développement limité de $r(\theta)$ au voisinage de $\theta=0$ à l'ordre $2$.
+    \item  En déduire la nature du point correspondant à $\theta=0$.
+\end{enumerate}
+\end{enumerate}
+
+
+\ifthenelse{\boolean{showSolutions}}
+{
+\begin{solution}
+
+\subsection*{Partie 1 : Forme Paramétrique}
+
+\begin{enumerate}
+    \item
+    \begin{enumerate}
+        \item Domaine de définition de $x$ et $y$:\\
+         $\cos(t) \neq 0$ si et seulement si $t \neq \frac{\pi}{2} + k\pi$, $k \in \mathbb{Z}$.\\
+        Donc, le domaine de définition est $D_f=\mathbb{R} \setminus \left\{ \frac{\pi}{2} + k\pi \mid k \in \mathbb{Z} \right\}$.
+
+        \item 
+        L'ensemble de définition est symétrique par rapport à $0$.\\
+        On a :
+        \[
+        \forall  t \in D_f,\quad
+        x(-t) = \frac{2}{\cos(-t)} + \cos(-t) = \frac{2}{\cos t} + \cos t = x(t)
+        \]
+        donc $x$ est paire.\\
+        De même :
+        \[ \forall  t \in D_f,\quad
+        y(-t) = 2 \tan(-t) + \sin(-t) = -2 \tan t - \sin t = -y(t)
+        \]
+        donc $y$ est impaire.\\
+        Par conséquent, la courbe est symétrique par rapport à l'axe des abscisses.
+
+    \end{enumerate}
+
+    \item
+    \begin{enumerate}
+        \item Les fonctions $x$ et $y$ sont dérivables sur l'ensemble de définition comme somme de fonctions dérivables.:
+        \[
+        x'(t) = \frac{2 \sin t}{\cos^2 t} - \sin t = \sin t \left( \frac{2}{\cos^2 t} - 1 \right)
+        \qquad
+        y'(t) =  \frac{2}{\cos^2 t} + \cos t
+        \]
+%\begin{tikzpicture}
+%  \tkzTabInit[lgt=2,espcl=3]
+%  {$t$ /1, $x'(t)$ /1, $x(t)$ /2}
+%  {$-\frac{\pi}{2}$, $-\frac{\pi}{4}$, $0$, $\frac{\pi}{4}$, $\frac{\pi}{2}$}
+%  \tkzTabLine{, -, z, +, z, -}
+%  \tkzTabVar{-/$-\infty$, +/, -/$3$, +/, -/$+\infty$}
+%\end{tikzpicture}
+%
+%\begin{tikzpicture}
+%  \tkzTabInit[lgt=2,espcl=3]
+%  {$t$ /1, $y'(t)$ /1, $y(t)$ /2}
+%  {$-\frac{\pi}{2}$, $-\frac{\pi}{4}$, $0$, $\frac{\pi}{4}$, $\frac{\pi}{2}$}
+%  \tkzTabLine{, +, z, +, z, +}
+%  \tkzTabVar{-/$-\infty$, +/, +/$0$, +/, +/$+\infty$}
+%\end{tikzpicture}
+
+        \item Un vecteur tangent à la courbe au point régulier $M_t = (x(t), y(t))$ est donné par :
+        \[
+        \vec{V}(t) = \left( x'(t), y'(t) \right) =\left(\sin t \left( \frac{2}{\cos^2 t} - 1 \right),   \frac{2}{\cos^2 t} + \cos t \right)
+        \]
+
+    \end{enumerate}
+
+    \item
+    \begin{enumerate}
+        \item La tangente est horizontale lorsque $y'(t) = 0$ :
+        \[
+        y'(t) = \frac{2}{\cos^2 t} + \cos t = 0 \iff \cos t=-2^{\frac{1}{3}}
+        \]
+     Or $-2^{\frac{1}{3}}<-1$. Il n'y a pas de tangente horizontale.
+
+        La tangente est verticale lorsque $x'(t) = 0$, soit :
+        \[
+        \sin t \left( \frac{2}{\cos^2 t} - 1 \right) = 0
+        \]
+        Deux cas sont possibles :
+        \begin{itemize}
+            \item $\sin t = 0$ si et seulement si $t = k\pi$ avec $k \in \mathbb{Z}$.
+            \item $\frac{2}{\cos^2 t} - 1 = 0$ si et seulement si $\cos^2 t = 2$, ce qui est impossible.
+        \end{itemize}
+        Les tangentes sont donc verticales pour $t = k\pi$ avec $k \in \mathbb{Z}$.
+
+        \item Pour $t = 0$ :
+        \[
+        x(0) = \frac{2}{1} + 1 = 3,\quad y(0) = 0 + 0 = 0
+        \]
+        Pour $t = \pi$ :
+        \[
+        x(\pi) = \frac{2}{-1} -1 = -3,\quad y(\pi) = 2 \cdot 0 + \sin(\pi) = 0
+        \]
+        Les coordonnées des points où la tangente est verticale sont $(3, 0)$ et $(-3, 0)$
+
+    \end{enumerate}
+
+    \item
+   % \begin{enumerate}
+      %  \item Développement limité à l'ordre $3$ en $t = 0$ :
+
+        \[
+        \cos t = 1 - \frac{t^2}{2} + \frac{t^4}{24} + o(t^4), \quad \frac{1}{\cos t} = 1 + \frac{t^2}{2} + \frac{5t^4}{24} + o(t^4)
+        \]
+        \[
+        x(t) = 2 \left(1 + \frac{t^2}{2}\right) + \left(1 - \frac{t^2}{2}\right) + o(t^2) = 3 + t^2 + o(t^2)
+        \]
+        \[
+        \tan t = t + \frac{t^3}{3} + o(t^3), \quad \sin t = t - \frac{t^3}{6} + o(t^3)
+        \]
+        \[
+        y(t) = 2t + \frac{2t^3}{3} + t - \frac{t^3}{6} + o(t^3) = 3t + \frac{t^3}{2} + o(t^3)
+        \]
+
+        On obtient :
+        \[
+        x(t) = 3 + t^2 + o(t^2),\quad y(t) = 3t + \frac{t^3}{2} + o(t^3)
+        \]
+        %C'est une parabole horizontale issue du point $(3,0)$ avec tangente verticale. Le point est un point régulier, non stationnaire, avec tangente verticale.
+
+   % \end{enumerate}
+
+    \item
+    \begin{enumerate}
+        \item Étude des limites quand $t \to \pm \frac{\pi}{2}$ :
+
+    \[
+\lim_{t \to \frac{\pi}{2}^{-}} \cos t = 0^{+}, \quad \lim_{t \to \frac{\pi}{2}^{-}} \frac{1}{\cos t} = +\infty, \quad \lim_{t \to \frac{\pi}{2}^{-}} \tan t = +\infty
+\]
+\[
+\lim_{t \to \frac{\pi}{2}^{-}} x(t) = \lim_{t \to \frac{\pi}{2}^{-}} \left( \frac{2}{\cos t} + \cos t \right) = +\infty
+\]
+\[
+\lim_{t \to \frac{\pi}{2}^{-}} y(t) = \lim_{t \to \frac{\pi}{2}^{-}} \left( 2 \tan t + \sin t \right) = +\infty
+\]
+
+\[
+\lim_{t \to -\frac{\pi}{2}^{+}} \cos t = 0^{+}, \quad \lim_{t \to -\frac{\pi}{2}^{+}} \frac{1}{\cos t} = +\infty, \quad \lim_{t \to -\frac{\pi}{2}^{+}} \tan t = -\infty
+\]
+\[
+\lim_{t \to -\frac{\pi}{2}^{+}} x(t) = \lim_{t \to -\frac{\pi}{2}^{+}} \left( \frac{2}{\cos t} + \cos t \right) = +\infty
+\]
+\[
+\lim_{t \to -\frac{\pi}{2}^{+}} y(t) = \lim_{t \to -\frac{\pi}{2}^{+}} \left( 2 \tan t + \sin t \right) = -\infty
+\]
+
+
+        \item Les deux coordonnées tendent vers l'infini donc la courbe admet des branches infinies.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection*{Partie 2 : Forme Polaire}
+
+
+\begin{enumerate}
+    \item Domaine : $\cos \theta \ne 0$ D'où $\theta \in \mathbb{R} \setminus \left\{ \frac{\pi}{2} + k\pi \mid k \in \mathbb{Z} \right\}$.\\
+    Symétrie : $\cos(-\theta) = \cos \theta$ donc $r(-\theta) = r(\theta)$ : la courbe est symétrique par rapport à l'axe des abscisses.
+
+    \item On utilise :
+    \[
+    x(\theta) = r(\theta) \cos \theta = \left( \frac{2}{\cos \theta} + 1 \right) \cos \theta = 2 + \cos \theta
+    \]
+    \[
+    y(\theta) = r(\theta) \sin \theta = \left( \frac{2}{\cos \theta} + 1 \right) \sin \theta
+    \]
+
+    \item
+    \begin{enumerate}
+        \item \[
+\lim_{\theta \to \frac{\pi}{2}^{-}} \cos \theta = 0^{+}, \quad \lim_{\theta \to \frac{\pi}{2}^{-}} r(\theta) = \lim_{\theta \to \frac{\pi}{2}^{-}} \left( \frac{2}{\cos \theta} + 1 \right) = +\infty
+\]
+\[
+\lim_{\theta \to \frac{\pi}{2}^{-}} x(\theta) = \lim_{\theta \to \frac{\pi}{2}^{-}} \left( r(\theta) \cos \theta \right) = \lim_{\theta \to \frac{\pi}{2}^{-}} \left( \left( \frac{2}{\cos \theta} + 1 \right) \cos \theta \right) = 2 
+\]
+\[
+\lim_{\theta \to \frac{\pi}{2}^{-}} y(\theta) = \lim_{\theta \to \frac{\pi}{2}^{-}} \left( r(\theta) \sin \theta \right) = \lim_{\theta \to \frac{\pi}{2}^{-}} \left( \left( \frac{2}{\cos \theta} + 1 \right) \sin \theta \right) = +\infty
+\]
+
+
+        \item Asymptote verticale d'équation $x = 2$.
+    \end{enumerate}
+
+    \item
+    \[
+    r'(\theta)  = \frac{2 \sin \theta}{\cos^2 \theta}
+    \]
+
+    \item
+    En coordonnées polaires, l'angle $\alpha$ entre la tangente et le rayon vecteur est donné par :
+    \[
+    \tan \alpha = \frac{r'(\theta)}{r(\theta)}
+    \]
+
+    \item
+    \begin{enumerate}
+        \item Développement limité en $\theta = 0$ :
+    \[
+\cos \theta = 1 - \frac{\theta^2}{2} + o(\theta^2) \quad \text{(développement limité en 0 à l'ordre 2)}
+\]
+\[
+ \frac{1}{1 - u}=1+u+u^2+o(u^2) \text{ si } u \to 0 \text{ avec }u=\dfrac{\theta ^2}{2}
+ \]
+\[
+\frac{1}{\cos \theta} = \frac{1}{1 - \frac{\theta^2}{2} + o(\theta^2)} = 1 + \frac{\theta^2}{2} + o(\theta^2)
+\]
+\[
+r(\theta) = \frac{2}{\cos \theta} + 1 = 2\left(1 + \frac{\theta^2}{2} + o(\theta^2)\right) + 1 
+= 2 + \theta^2 + o(\theta^2) + 1 = 3 + \theta^2 + o(\theta^2)
+\]
+
+%\Rightarrow \text{Au voisinage de } \theta = 0,\quad r(\theta) = 3 + \theta^2 + o(\theta^2)
+
+
+        \item Le point correspondant à $\theta = 0$ est à distance $r = 3$ sur l'axe des abscisses. La courbe présente ici un point régulier non singulier avec une tangente d'angle nul.
+    \end{enumerate}
+\end{enumerate}
+%
+%\begin{tikzpicture}[scale=0.25]
+%    % Définition des axes
+%    \draw[->] (-3,0) -- (7,0) node[right] {$x$};
+%    \draw[->] (0,-7) -- (0,7) node[above] {$y$};
+%
+%    % Dessin de la conchoïde
+%    % La conchoïde de Nicomède a des branches qui s'étendent à l'infini,
+%    % il faut donc choisir un domaine pour 't' qui évite les asymptotes
+%    % (quand cos(t) est proche de 0 ou tan(t) est indéfini).
+%    % Nous allons tracer deux branches pour couvrir le comportement de la courbe.
+%
+%    % Première branche (pour t de -pi/2 + epsilon à pi/2 - epsilon)
+%    \draw[blue, thick, variable=\t, domain=-1.5:1.5, samples=200]
+%        plot ({2/cos(\t r) + cos(\t r)}, {2*tan(\t r) + sin(\t r)});
+%
+%    % Deuxième branche (pour t de pi/2 + epsilon à 3*pi/2 - epsilon)
+%    % On décale le domaine pour éviter les singularités
+%    \draw[blue, thick, variable=\t, domain=1.65:4.6, samples=200]
+%        plot ({2/cos(\t r) + cos(\t r)}, {2*tan(\t r) + sin(\t r)});
+%
+%    % Asymptote (ligne verticale x=2)
+%    \draw[red, dashed] (2,-7) -- (2,7) node[below right] {$x=2$};
+%
+%    % Légende (facultatif)
+%    \node[below left, align=left] at (-2,-6) {
+%        \textbf{Conchoïde de Nicomède} \\
+%        $x(t) = \frac{2}{\cos(t)} + \cos(t)$ \\
+%        $y(t) = 2 \tan(t) + \sin(t)$
+%    };
+%
+%\end{tikzpicture}
+\end{solution}
+
+
+}
+{}
+
+\end{document}

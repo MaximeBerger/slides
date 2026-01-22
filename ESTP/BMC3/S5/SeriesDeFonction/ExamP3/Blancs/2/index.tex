@@ -1,0 +1,520 @@
+\input{configTD}
+
+\title{Examen S5 - Mathématiques }
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[backgroundcolor=ThemeLight,linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-002} \\
+        \hline
+        \textbf{26/01/2026}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 5}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime Berger \& Antoine Perney \\
+        \hline 
+        \textbf{Promotion} & BMC3 - S5 \\
+        \hline 
+        \textbf{Matière} & Mathématiques \\
+        \hline 
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{2em}
+
+%==============================================================================
+\section*{Exercice 1 : Développements limités (5 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Calculs de développements limités.}
+    \begin{enumerate}
+        \item Donner le développement limité de $\cos x$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)
+        \]
+        \end{solution}
+        }{}
+        
+        \item Donner le développement limité de $\dfrac{1}{1-x}$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        \[
+        \frac{1}{1-x} = 1 + x + x^2 + x^3 + x^4 + o(x^4)
+        \]
+        \end{solution}
+        }{}
+        
+        \item En déduire le développement limité de $f(x) = \dfrac{\cos x}{1-x}$ à l'ordre 3 au voisinage de 0. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On multiplie les DL en ne gardant que les termes d'ordre $\leq 3$ :
+        \begin{align*}
+        \frac{\cos x}{1-x} &= \left(1 - \frac{x^2}{2}\right)\left(1 + x + x^2 + x^3\right) + o(x^3) \\
+        &= 1 + x + x^2 + x^3 - \frac{x^2}{2} - \frac{x^3}{2} + o(x^3) \\
+        &= 1 + x + \frac{x^2}{2} + \frac{x^3}{2} + o(x^3)
+        \end{align*}
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{Calcul de limite.} Calculer la limite suivante à l'aide d'un développement limité : \textit{(1.5 pts)}
+    \[
+    \lim_{x \to 0} \frac{e^x - 1 - x - \frac{x^2}{2}}{x^3}
+    \]
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On utilise le DL de $e^x$ à l'ordre 3 :
+    \[
+    e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)
+    \]
+    Donc :
+    \[
+    e^x - 1 - x - \frac{x^2}{2} = \frac{x^3}{6} + o(x^3)
+    \]
+    Et :
+    \[
+    \frac{e^x - 1 - x - \frac{x^2}{2}}{x^3} = \frac{1}{6} + o(1) \xrightarrow[x \to 0]{} \boxed{\frac{1}{6}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item \textbf{Étude d'une fonction.} Soit $g(x) = \dfrac{\tan x - x}{x^3}$ pour $x \neq 0$.
+    \begin{enumerate}
+        \item À l'aide d'un développement limité, montrer que $g$ admet un prolongement par continuité en 0 et déterminer sa valeur. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On a $\tan x = x + \frac{x^3}{3} + \frac{2x^5}{15} + o(x^5)$, donc :
+        \[
+        \tan x - x = \frac{x^3}{3} + \frac{2x^5}{15} + o(x^5)
+        \]
+        Ainsi :
+        \[
+        g(x) = \frac{\tan x - x}{x^3} = \frac{1}{3} + \frac{2x^2}{15} + o(x^2) \xrightarrow[x \to 0]{} \frac{1}{3}
+        \]
+        On peut prolonger $g$ par continuité en posant $g(0) = \frac{1}{3}$.
+        \end{solution}
+        }{}
+        
+        \item En déduire la position de la courbe de $g$ par rapport à sa tangente horizontale en 0. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Le DL de $g$ en 0 est :
+        \[
+        g(x) = \frac{1}{3} + \frac{2x^2}{15} + o(x^2)
+        \]
+        La tangente en 0 est $y = \frac{1}{3}$ (horizontale car le terme en $x$ est nul).
+        
+        On a $g(x) - \frac{1}{3} = \frac{2x^2}{15} + o(x^2) \sim \frac{2x^2}{15} > 0$ pour $x \neq 0$ petit.
+        
+        Donc la courbe est \textbf{au-dessus} de sa tangente au voisinage de 0.
+        \end{solution}
+        }{}
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+%==============================================================================
+\section*{Exercice 2 : Équations aux dérivées partielles (5 points)}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Équation exacte.} On considère l'équation différentielle :
+    \[
+    (3x^2 + 2y) \, dx + (2x + 4y^3) \, dy = 0
+    \]
+    \begin{enumerate}
+        \item Vérifier que cette équation est exacte, c'est-à-dire que l'expression $f(x,y)\,dx + g(x,y)\,dy$ est une différentielle totale. \textit{(0.75 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On pose $f(x,y) = 3x^2 + 2y$ et $g(x,y) = 2x + 4y^3$.
+        \[
+        \frac{\partial f}{\partial y} = 2 \qquad \text{et} \qquad \frac{\partial g}{\partial x} = 2
+        \]
+        Comme $\frac{\partial f}{\partial y} = \frac{\partial g}{\partial x}$, l'équation est exacte.
+        \end{solution}
+        }{}
+        
+        \item Trouver une fonction $F(x,y)$ telle que $dF = f\,dx + g\,dy$. \textit{(1 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        On cherche $F$ telle que $\frac{\partial F}{\partial x} = 3x^2 + 2y$.
+        
+        En intégrant par rapport à $x$ : $F(x,y) = x^3 + 2xy + H(y)$
+        
+        On vérifie avec $\frac{\partial F}{\partial y} = 2x + H'(y) = 2x + 4y^3$.
+        
+        Donc $H'(y) = 4y^3$, soit $H(y) = y^4 + C$.
+        
+        \textbf{Conclusion :} $F(x,y) = x^3 + 2xy + y^4$
+        \end{solution}
+        }{}
+        
+        \item En déduire la solution générale de l'équation différentielle. \textit{(0.5 pt)}
+        
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Les solutions sont données par $F(x,y) = K$ où $K$ est une constante :
+        \[
+        \boxed{x^3 + 2xy + y^4 = K}
+        \]
+        \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \item \textbf{EDP linéaire d'ordre 1.} Résoudre l'équation aux dérivées partielles :
+    \[
+    3\frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = 6x
+    \]
+    en utilisant un changement de variables linéaire. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $\begin{cases} X = ax + by \\ Y = cx + dy \end{cases}$ et $F(X,Y) = f(x,y)$.
+    
+    L'équation devient $(3a - b)\frac{\partial F}{\partial X} + (3c - d)\frac{\partial F}{\partial Y} = 6x$.
+    
+    On choisit $a = 1$, $b = 3$ (donc $3a - b = 0$) et $c = 1$, $d = 0$ (donc $3c - d = 3$).
+    
+    Avec ce choix, $X = x + 3y$ et $Y = x$, donc $x = Y$.
+    
+    L'équation devient $3\frac{\partial F}{\partial Y} = 6Y$, soit $\frac{\partial F}{\partial Y} = 2Y$.
+    
+    En intégrant par rapport à $Y$ : $F(X,Y) = Y^2 + K(X)$, où $K$ est une fonction $\mathcal{C}^1$ quelconque.
+    
+    En revenant aux variables initiales :
+    \[
+    \boxed{f(x,y) = x^2 + K(x + 3y)}
+    \]
+    où $K$ est une fonction de classe $\mathcal{C}^1$ quelconque.
+    \end{solution}
+    }{}
+    
+    \item \textbf{Méthode de séparation de variables.} On considère l'équation :
+    \[
+    \frac{\partial f}{\partial x} + 2\frac{\partial f}{\partial y} = -f
+    \]
+    En cherchant des solutions sous la forme $f(x,y) = X(x)Y(y)$, déterminer les solutions de cette équation. \textit{(1.25 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    En posant $f(x,y) = X(x)Y(y)$, on obtient :
+    \[
+    X'Y + 2XY' = -XY
+    \]
+    En divisant par $XY$ :
+    \[
+    \frac{X'}{X} + 2\frac{Y'}{Y} = -1 \quad \Rightarrow \quad \frac{X' + X}{X} = -2\frac{Y'}{Y}
+    \]
+    Le membre de gauche ne dépend que de $x$, le membre de droite que de $y$. Ils sont donc tous deux égaux à une constante $k$.
+    
+    \textbf{Pour $X$ :} $\frac{X' + X}{X} = k \Rightarrow X' = (k-1)X \Rightarrow X(x) = C_1 e^{(k-1)x}$
+    
+    \textbf{Pour $Y$ :} $-2\frac{Y'}{Y} = k \Rightarrow Y' = -\frac{k}{2}Y \Rightarrow Y(y) = C_2 e^{-ky/2}$
+    
+    \textbf{Solutions :} $\boxed{f(x,y) = C \, e^{(k-1)x} e^{-ky/2}}$ pour $k \in \mathbb{R}$, $C \in \mathbb{R}$.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Exercice 3 : Modélisation -- Circuit RC (5 points)}
+%==============================================================================
+
+Un condensateur de capacité $C = 10$ $\mu$F est initialement chargé à la tension $U_0 = 12$ V. À l'instant $t = 0$, on le décharge à travers une résistance $R = 100$ k$\Omega$.
+
+La tension $U(t)$ aux bornes du condensateur vérifie l'équation différentielle :
+\[
+RC\frac{dU}{dt} + U = 0
+\]
+
+\begin{enumerate}
+    \item Calculer la valeur numérique de la constante de temps $\tau = RC$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \tau = RC = 100 \times 10^3 \times 10 \times 10^{-6} = 1 \text{ s}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Réécrire l'équation différentielle sous la forme $\dfrac{dU}{dt} = -\dfrac{U}{\tau}$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On part de $RC\frac{dU}{dt} + U = 0$, donc $RC\frac{dU}{dt} = -U$.
+    
+    En divisant par $RC = \tau$ :
+    \[
+    \frac{dU}{dt} = -\frac{U}{\tau}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre cette équation différentielle avec la condition initiale $U(0) = U_0$. \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    C'est une équation à variables séparables :
+    \[
+    \frac{dU}{U} = -\frac{dt}{\tau}
+    \]
+    
+    En intégrant : $\ln|U| = -\frac{t}{\tau} + K$
+    
+    Donc : $U(t) = A e^{-t/\tau}$ où $A = e^K$
+    
+    Avec la condition initiale $U(0) = U_0$ : $A = U_0 = 12$ V
+    
+    \[
+    \boxed{U(t) = U_0 e^{-t/\tau} = 12 \, e^{-t}}
+    \]
+    (avec $t$ en secondes et $U$ en volts)
+    \end{solution}
+    }{}
+    
+    \item L'énergie stockée dans le condensateur est $E = \frac{1}{2}CU^2$. Exprimer $E(t)$ en fonction du temps. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $U(t) = U_0 e^{-t/\tau}$, donc :
+    \[
+    E(t) = \frac{1}{2}C U(t)^2 = \frac{1}{2}C U_0^2 e^{-2t/\tau}
+    \]
+    
+    Avec $E_0 = \frac{1}{2}C U_0^2 = \frac{1}{2} \times 10^{-5} \times 144 = 7{,}2 \times 10^{-4}$ J :
+    \[
+    \boxed{E(t) = E_0 \, e^{-2t/\tau} = 7{,}2 \times 10^{-4} \, e^{-2t} \text{ J}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Au bout de combien de temps l'énergie a-t-elle diminué de moitié ? \textit{(1 pt)}
+    
+    \textit{On donne $\ln(2) \approx 0{,}7$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $E(t) = \frac{E_0}{2}$ :
+    \[
+    E_0 e^{-2t/\tau} = \frac{E_0}{2}
+    \]
+    \[
+    e^{-2t/\tau} = \frac{1}{2} \quad \Rightarrow \quad -\frac{2t}{\tau} = \ln\left(\frac{1}{2}\right) = -\ln(2)
+    \]
+    \[
+    t = \frac{\tau \ln(2)}{2} = \frac{1 \times 0{,}7}{2} = \boxed{0{,}35 \text{ s}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Vers quelle valeur tend $U(t)$ quand $t \to +\infty$ ? Interpréter physiquement. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    \[
+    \lim_{t \to +\infty} U(t) = \lim_{t \to +\infty} 12 \, e^{-t} = 0 \text{ V}
+    \]
+    
+    \textbf{Interprétation :} Le condensateur se décharge complètement à travers la résistance. Toute l'énergie électrique initialement stockée est dissipée par effet Joule dans la résistance.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+%==============================================================================
+\section*{Exercice 4 : Modélisation -- Pharmacocinétique (5 points)}
+%==============================================================================
+
+On étudie l'évolution de la concentration $C(t)$ d'un médicament dans le sang après une injection intraveineuse.
+
+\textbf{Partie A -- Modèle à élimination simple}
+
+On suppose que le médicament est éliminé à un taux proportionnel à sa concentration :
+\[
+\frac{dC}{dt} = -kC
+\]
+où $k = 0{,}2$ h$^{-1}$ est la constante d'élimination et $C_0 = 100$ mg/L la concentration initiale.
+
+\begin{enumerate}
+    \item Résoudre cette équation différentielle avec la condition initiale $C(0) = C_0$. \textit{(1 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    C'est une équation différentielle linéaire du premier ordre à variables séparables.
+    
+    On sépare les variables : $\frac{dC}{C} = -k\,dt$
+    
+    En intégrant : $\ln|C| = -kt + K$
+    
+    Donc : $C(t) = Ae^{-kt}$ où $A = e^K$
+    
+    Avec la condition initiale $C(0) = C_0$ : $A = C_0$
+    
+    \[
+    \boxed{C(t) = C_0 e^{-kt} = 100 \, e^{-0{,}2t} \text{ mg/L}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Calculer la demi-vie $T_{1/2}$ du médicament (temps pour que $C(T_{1/2}) = \frac{C_0}{2}$). \textit{(0.5 pt)}
+    
+    \textit{On donne $\ln(2) \approx 0{,}7$.}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $C(T_{1/2}) = \frac{C_0}{2}$ :
+    \[
+    C_0 e^{-kT_{1/2}} = \frac{C_0}{2} \quad \Rightarrow \quad e^{-kT_{1/2}} = \frac{1}{2} \quad \Rightarrow \quad -kT_{1/2} = -\ln(2)
+    \]
+    \[
+    \boxed{T_{1/2} = \frac{\ln(2)}{k} = \frac{0{,}7}{0{,}2} = 3{,}5 \text{ h}}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\textbf{Partie B -- Modèle avec perfusion continue}
+
+On administre maintenant le médicament par perfusion continue à un débit constant $D$ (en mg/(L$\cdot$h)). L'équation devient :
+\[
+\frac{dC}{dt} = D - kC
+\]
+
+\begin{enumerate}[resume]
+    \item Déterminer la concentration d'équilibre $C_{\text{eq}}$ (solution constante de l'équation). \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    À l'équilibre, $\frac{dC}{dt} = 0$, donc :
+    \[
+    D - kC_{\text{eq}} = 0 \quad \Rightarrow \quad \boxed{C_{\text{eq}} = \frac{D}{k}}
+    \]
+    \end{solution}
+    }{}
+    
+    \item On pose $\theta(t) = C(t) - C_{\text{eq}}$. Montrer que $\theta$ vérifie l'équation $\dfrac{d\theta}{dt} = -k\theta$. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $C = \theta + C_{\text{eq}}$, donc $\frac{dC}{dt} = \frac{d\theta}{dt}$ (car $C_{\text{eq}}$ est constante).
+    
+    En substituant dans l'équation $\frac{dC}{dt} = D - kC$ :
+    \[
+    \frac{d\theta}{dt} = D - k(\theta + C_{\text{eq}}) = D - k\theta - kC_{\text{eq}}
+    \]
+    
+    Or $C_{\text{eq}} = \frac{D}{k}$, donc $kC_{\text{eq}} = D$, et :
+    \[
+    \frac{d\theta}{dt} = D - k\theta - D = -k\theta
+    \]
+    \end{solution}
+    }{}
+    
+    \item Résoudre et en déduire $C(t)$ avec $C(0) = 0$ (perfusion démarrant sans médicament dans le sang). \textit{(1.5 pts)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    L'équation $\frac{d\theta}{dt} = -k\theta$ a pour solution :
+    \[
+    \theta(t) = \theta_0 e^{-kt}
+    \]
+    
+    Condition initiale : $C(0) = 0$ donc $\theta_0 = C(0) - C_{\text{eq}} = -C_{\text{eq}} = -\frac{D}{k}$
+    
+    Donc : $\theta(t) = -\frac{D}{k} e^{-kt}$
+    
+    En revenant à $C$ :
+    \[
+    C(t) = \theta(t) + C_{\text{eq}} = -\frac{D}{k} e^{-kt} + \frac{D}{k} = \frac{D}{k}\left(1 - e^{-kt}\right)
+    \]
+    
+    \[
+    \boxed{C(t) = C_{\text{eq}}\left(1 - e^{-kt}\right) = \frac{D}{k}\left(1 - e^{-kt}\right)}
+    \]
+    \end{solution}
+    }{}
+    
+    \item Déterminer $\lim_{t \to +\infty} C(t)$. Interpréter médicalement ce résultat. \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Quand $t \to +\infty$, on a $e^{-kt} \to 0$ (car $k > 0$).
+    
+    Donc :
+    \[
+    \lim_{t \to +\infty} C(t) = \frac{D}{k}(1 - 0) = \boxed{C_{\text{eq}} = \frac{D}{k}}
+    \]
+    
+    \textbf{Interprétation :} La concentration tend vers un état stationnaire où l'apport par perfusion compense exactement l'élimination. Le médecin peut ajuster le débit $D$ pour atteindre la concentration thérapeutique souhaitée.
+    \end{solution}
+    }{}
+    
+    \item Si la concentration thérapeutique souhaitée est $C_{\text{th}} = 50$ mg/L, quel débit de perfusion $D$ doit-on utiliser ? \textit{(0.5 pt)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On veut $C_{\text{eq}} = C_{\text{th}} = 50$ mg/L.
+    
+    Or $C_{\text{eq}} = \frac{D}{k}$, donc :
+    \[
+    D = k \times C_{\text{th}} = 0{,}2 \times 50 = \boxed{10 \text{ mg/(L$\cdot$h)}}
+    \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

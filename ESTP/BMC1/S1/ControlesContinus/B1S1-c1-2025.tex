@@ -1,0 +1,236 @@
+\documentclass[a4paper,11pt]{article}
+
+%	Tous les packages pour francisation compl�te
+%\usepackage[applemac]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+
+%\usepackage{auto-pst-pdf}
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{D\'efinition}
+\newtheorem{theoreme}{Th\'eor\`eme}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}} %vecteur
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+\newcommand{\encad}[1]{\begin{center}%
+\fcolorbox{black}{gray!20}{\begin{minipage}[t]{0.8\linewidth}%
+#1\end{minipage}}\end{center}}
+
+
+\pagestyle{fancy}
+\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{ESTP / Bachelor 1 / \the\year}
+\fancyhead[R]{Composition de math\'ematiques}
+\renewcommand\footrulewidth{1pt}
+%\fancyfoot[L]{Math�matiques : les polyn�mes}
+%\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\begin{center}\bf {\Large\underline{Composition de MATH\'EMATIQUES (3h) : 35 points}}\end{center}
+%\begin{center}\bf {{\small Rendre le sujet avec votre copie si le graphe de l'exercice 4 pr�sente la courbe de la fonction $f$.}}\end{center}
+\hfill\break
+
+%%%%%%%%%%
+%\includegraphics[trim = gauche bas droit haut, clip, width=3cm]
+%%%%%%%%%%
+\underline {\ding{110}\, \bf{Exercice 1 : \'Equations} (8 points)}
+
+\medskip
+
+Résoudre dans $\mathbb{R}$ les équations ou systèmes suivants :
+\begin{multicols}{2}
+\begin{enumerate}
+\item $e^{2x} - 2e^{x} + 1 = 0$\\
+\item $\ln(4x^2) = 2$\\
+\item $\cos\left ( 3x -\dfrac{\pi}{2}\right)=\dfrac{1}{2}$\\
+\item $\cos (7x)+\sin(7x)=1$\\
+\end{enumerate}
+\end{multicols}
+
+
+%{\color{blue}\underline{\bf SOLUTION :}
+%\medskip
+%
+%\begin{enumerate}[1)]
+%\item En posant $X=e^x$, on r�sout l'�quation $3X^2+X-4$. On trouve comme solutions $X_1=1$ et $X_2=-4/3$. On en d�duit la seule solution possible en $x$ � partir de $e^x=1$, soit 0.
+%\item Il est n�cessaire que $x\neq 1$ et $x>0$.
+%
+%Il suffit alors que $\abs{\ln x}=1\Longleftrightarrow \ln x=1\text{ ou } \ln x=-1\Longleftrightarrow x=e \text{ ou } x=e^{-1}=1/e$.
+%\item Il est n�cessaire que $x^2+x>0$, soit $x\in]-\infty, -1[\cup]0,+\infty[$.
+%
+%Il suffit alors que $x^2+x=e\Longleftrightarrow x^2+x-e=0\Longleftrightarrow x=\dfrac{-1-\sqrt{1+4e}}{2}\text{ ou }x=\dfrac{-1+\sqrt{1+4e}}{2}$. C'est deux solutions sont acceptables puisque $\dfrac{-1-\sqrt{1+4e}}{2}<-1$ et $\dfrac{-1+\sqrt{1+4e}}{2}>0$.
+%\end{enumerate}
+%
+%}
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+%Pour chaque fonction, préciser la nature des asymptotes (verticale, horizontale ou oblique) et tracer une ébauche du graphe de la fonction.
+
+%
+%Les courbes ne sont fournies qu'\`a titre indicatif afin d'orienter votre recherche et de valider vos r\'esultats.\\
+%%
+%\begin{minipage}{0.3\linewidth}
+%$$f:x\mapsto \dfrac{x\sqrt x}{x^2+1}$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f2.png}
+%\end{center}
+%\end{minipage}
+%%
+%\hfill\break
+%\hfill\break
+%
+%\begin{minipage}{0.3\linewidth}
+%$$g:x\mapsto \dfrac{1}{2}x+2+\ln\left(\dfrac{x-1}{x+1}\right)$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f1.png}
+%\end{center}
+%\end{minipage}
+%%
+%
+%\hfill\break
+%\hfill\break
+%
+%\begin{minipage}{0.3\linewidth}
+%$$h:x\mapsto (x+ 1)^2e^{-x}$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f3.png}
+%\end{center}
+%\end{minipage}
+%%
+
+
+\underline {\ding{110}\, \bf{Exercice 2 : Réponse d’un capteur à un changement de température (6 points)}}\\
+
+Un capteur de température est initialement à l'équilibre thermique dans un environnement à $20^\circ$C. À l'instant $t = 0$, il est brusquement plongé dans un liquide maintenu à $80^\circ$C. 
+
+On modélise la température $T(t)$ indiquée par le capteur à l'instant $t$ (en secondes) par la fonction :
+\[
+T(t) = 80 - 60 e^{-t/5}
+\]
+où $T(t)$ est exprimée en degrés Celsius.\\
+
+\begin{enumerate}
+  \item Quelle est la température initiale lue par le capteur ? Et la température à long terme ?\\
+  \item À quelle date le capteur affiche-t-il une température de $50^\circ$C ?\\
+  \item Déterminer la dérivée $T'(t)$, puis montrer que :
+  \[
+  T'(t) = \frac{12}{e^{t/5}}
+  \]
+  \item Interpréter le signe de $T'(t)$. Que peut-on dire de l’évolution de la température ?\\
+  \item Déterminer le temps mis par le capteur pour atteindre $95\%$ de la température finale.\\
+  %\item Quel est le temps caractéristique de ce système ? Justifier à partir de l'expression donnée.
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+\underline {\ding{110}\, \bf{Exercice 3 : } Logique, sommes et produits (10 points)}\\
+
+\begin{enumerate}
+  \item Donner la table de vérité de la proposition logique :
+  \[
+  (P \Rightarrow Q)
+  \]
+  \item Donner la table de vérité de la proposition logique :
+  \[
+  (P \Rightarrow Q) \land (\lnot Q \Rightarrow \lnot P)
+  \]
+  \item En déduire une équivalence logique.\\
+    \item Démontrer par récurrence que :
+  \[
+ (*) \qquad \sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+  \]
+  \item Calculer les expressions suivantes :
+  \begin{itemize}
+    \item $\displaystyle \sum_{k=1}^{n} \ln\left(1+\dfrac{1}{k}\right)$
+    \item $\displaystyle \prod_{k=1}^{n} e^{k-1}$, on pourra utiliser la relation $(*)$.\\
+  \end{itemize}
+
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 4 : }Vecteurs et géométrie plane (11 points)}\\
+
+On considère dans le plan muni d’un repère orthonormé les points : $A(1,2,0)$, $B(0,4,6)$, $C(7,-1,2)$.\\
+
+\begin{enumerate}
+  \item Calculer les coordonnées des vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$.\\
+  \item Calculer les longueurs $AB$ et $AC$.\\
+  \item Calculer le produit scalaire entre les vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$ et le produit vectoriel vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$.\\
+  \item En déduire le cosinus et le sinus de l'angle $\big(\overrightarrow{AB},\overrightarrow{AC}\big)$.\\
+  \item Donner une équation paramétrique de la droite $(AB)$.\\
+  \item Déterminer la distance du point $C$ à la droite $(AB)$.\\
+\end{enumerate}
+
+
+\end{document}

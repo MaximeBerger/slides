@@ -1,0 +1,585 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Suites de référence}
+
+\subsection{Suites arithmétiques}
+
+\begin{Def}\textbf{Suite arithmétique}
+    \vspace{1em}
+
+Une suite arithmétique est une suite dont le passage d'un terme au suivant s'obtient en \textbf{ajoutant} toujours la même quantité $r$ appelée la raison.
+\end{Def}
+
+De cette définition, découle la forme récurrente de la suite :
+$$\begin{cases}
+    u_0 \\
+    u_{n+1}=u_n+r
+\end{cases}$$
+
+\begin{Thm}\textbf{Expression générale d'une suite arithmétique}
+    \vspace{1em}
+
+Avec un peu de réflexion, on en déduit l'expression en fonction de $n$ :
+$$u_n=u_p+(n-p)r$$
+Où $u_p$ représente le premier terme de la suite.
+\end{Thm}
+
+
+On rappelle la formule de sommation :
+$$\sum_{k=0}^n u_k=\frac{(n+1)(u_0+u_n)}{2}$$
+
+
+\exo[1]{Exemple 1 :}
+$(u_n)$ est une suite arithmétique de raison $r$.
+\begin{enumerate}
+    \item $u_2=3$ et $r=0,2$. Calculer $u_{50}$.
+    \item $u_6=4$ et $u_8=12$. Calculer $r$ et $u_5$.
+    \item $u_2=7$ et $u_10=1$. Calculer $r$ et $u_0$.
+\end{enumerate}
+
+\subsection{Suites géométriques}
+
+\begin{Def}\textbf{Suite géométrique}
+    \vspace{1em}
+
+Une suite géométrique est une suite dont le passage d'un terme au suivant s'obtient en \textbf{multipliant} toujours la même quantité $q$ appelée la raison.
+\end{Def}
+
+
+De cette définition, découle la forme récurrente de la suite: 
+$$\begin{cases}
+    u_0 \\
+    u_{n+1}=q \times u_n
+\end{cases}$$
+
+
+\begin{Thm}\textbf{Expression générale d'une suite géométrique}
+    \vspace{1em}
+
+Avec un peu de réflexion, on en déduit l'expression en fonction de $n$ :
+$$u_n=u_p\times q^{n-p}$$
+Où $u_p$ représente le premier terme de la suite.
+\end{Thm}
+
+
+On rappelle la formule de sommation :
+$$\sum_{k=0}^n u_k=\frac{1-q^{n+1}}{1-q}$$
+
+
+\exo[1]{Exemple 2 :}
+$(u_n)$ est une suite géométrique de raison $q$.
+\begin{enumerate}
+    \item $u_0=16$ et $q=0,5$. Calculer $u_8$.
+    \item $u_6=9$ et $q=-3$. Calculer $u_0$.
+    \item $u_10=18$ et $u_9=-6$. Calculer $q$.
+\end{enumerate}
+
+\subsection{Les suites arithmético-géométriques}
+
+\begin{Def}\textbf{Suites arithmético-géométriques}
+    \vspace{1em}
+
+Ces suites sont de la forme :
+$$\begin{cases}
+    u_0 \\
+    u_{n+1}=au_n+b
+\end{cases}$$
+\end{Def}
+
+
+Si $a=1$, on retombe sur une suite arithmétique et si $b=0$ sur une suite géométrique. 
+
+L'objectif, comme souvent avec les suites, est de trouver une expression en fonction de $n$. 
+On se place donc dans le cas où $a\neq 1$ et $b \neq 0$.
+
+\vspace{2em}
+
+\textbf{Méthode de résolution des suites arithmético-géométriques}
+
+\vspace{1em}
+
+La réalisation de cet objectif se déroule en trois étapes :
+\begin{enumerate}
+    \item On cherche un point fixe, c'est à dire un réel $c$ tel que :
+    $$c=ac+b$$
+    \item On définit une suite auxiliaire $v$ définie par :
+    $$v_n=u_n-c$$
+    Et on montre que $v_n$ est géométrique (de raison $a$).
+    \item On exprime $v$ en fonction de $n$ et on en déduit une expression de $u$ en fonction de $n$.    
+\end{enumerate}
+
+
+\exo[1]{Exemple 3 :}
+Pour chacune des suites suivantes; déterminer son expression en fonction de $n$.
+$$\begin{cases}
+        u_0=-2 \\
+        u_{n+1}=-2u_n+3
+    \end{cases}, \qquad \begin{cases}
+        u_0=150 \\
+        u_{n+1}=0,8\, u_n+45
+    \end{cases}, \qquad \begin{cases}
+        u_0=5 \\
+        u_{n+1}=\frac{1}{2}u_n-\frac{3}{2}
+    \end{cases}$$
+
+\subsection{Suites récurrentes linéaires d'ordre 2}
+
+
+Ces suites sont de la forme :
+$$\begin{cases}
+    u_0 \\
+    u_1 \\
+    u_{n+2}=au_{n+1}+bu_n
+\end{cases}$$
+
+
+\vspace{2em}
+
+\textbf{Méthode de résolution des suites récurrentes linéaires d'ordre 2}
+
+\vspace{1em}
+
+Pour trouver une expression en fonction de $n$, on considère ce que l'on appelle l'équation caractéristique :
+$$r^2-ar-b=0$$
+On calcule le discriminant $\Delta$ et on distingue les trois cas habituels : 
+\begin{enumerate}
+    \item $\Delta>0$
+
+    L'équation admet deux solutions distinctes $r_1$ et $r_2$ et dans ce cas, il existe $\lambda$ et $\mu$ uniques tels que :
+    $$u_n=\lambda r_1^n +\mu r_2^n$$
+    
+    \item $\Delta=0$
+
+    L'équation admet une unique solution $r$ et dans ce cas, il existe $\lambda$ et $\mu$ uniques tels que :
+    $$u_n=(\lambda+\mu n)r^n $$
+
+    \item $\Delta<0$
+    L'équation admet deux solutions complexes $r_1=re^{i \theta}$ et $r_2=re^{-i \theta}$ et dans ce cas, il existe $\lambda$ et $\mu$ uniques tels que :
+    $$u_n=r^n\big(\lambda\cos({n \theta})+\mu \sin{(n\theta)}\big)$$
+\end{enumerate}
+
+
+\begin{Rmq}$\,$
+
+Dans chacun des cas, le couple $(\lambda, \mu )$ est déterminé en appliquant les formules de $u_n$ pour $n=0$ et $n=1$.
+\end{Rmq}
+
+\exo[2]{Exemple 4 :}
+Pour chacune des suites suivantes, déterminer son expression en fonction de $n$.
+$$\begin{cases}
+    u_0=2 \\
+    u_1=3 \\
+    u_{n+2}=5u_{n+1}-6u_n
+\end{cases}, \qquad \begin{cases}
+    u_0=1 \\
+    u_1=0 \\
+    u_{n+2}=-4u_{n+1}-4u_n
+\end{cases}$$
+$$\begin{cases}
+    u_0=1 \\
+    u_1=2 \\
+    u_{n+2}=2u_{n+1}-2u_n
+\end{cases}, \qquad \begin{cases}
+    u_0=2 \\
+    u_1=3 \\
+    u_{n+2}=6u_{n+1}-9u_n
+\end{cases}$$
+
+\section{Variations et limites}
+
+\subsection{Variations}
+
+\begin{Def}\textbf{Variations}
+    \vspace{1em}
+
+Une suite $(u_n)$ est \textbf{croissante} si pour tout entier $n$, on a :
+$$u_{n+1}\geq u_n$$
+
+Une suite $(u_n)$ est \textbf{décroissante} si pour tout entier $n$, on a :
+$$u_{n+1}\leq u_n$$
+\end{Def}
+
+
+Dans la pratique, on dispose de quatre méthodes pour étudier les variations d'une suite :
+\begin{enumerate}
+    \item \'Etudier le signe de $u_{n+1}-u_n$.
+    \item Comparer le rapport $\frac{u_{n+1}}{u_n}$ à 1.
+    \item Si $u_n=f(n)$, on peut étudier les variations de $f$ sur $[0;+\infty[$.
+    \item Utiliser une démonstration par récurrence.
+\end{enumerate}
+
+
+\begin{Rmq}$\,$
+
+Attention, une suite n'est pas nécessairement croissante ou décroissante... Les suites géométriques à raisons négatives ne sont ni l'une ni l'autre.
+\end{Rmq}
+
+\subsection{Majoration et minoration}
+
+\begin{Def}\textbf{Majoration et minoration}
+    \vspace{1em}
+
+Une suite $(u_n)$ est \textbf{majorée} s'il existe $M$ réel tel que $u_n\leq M$.
+Une suite $(u_n)$ est \textbf{minorée} s'il existe $m$ réel tel que $u_n\geq m$.
+\end{Def}
+
+
+Une suite croissante est minorée par son premier terme.
+
+Une suite décroissante est majorée par son premier terme.
+
+Une suite majorée et minorée est dite bornée.
+
+
+\exo[1]{Exemple 5 :}
+Trouver un majorant et un minorant pour chacune des suites suivantes :
+\begin{enumerate}
+    \item $\forall n \in \mathbb{N}, u_n=\sin{(\frac{\pi}{3}+\frac{n \pi}{4})}$  
+     \item $\forall n \in \mathbb{N^*}, u_n=1-\frac{1}{n}$
+      \item $\forall n \in \mathbb{N^*}, u_n=1+\frac{1}{n}$
+       \item $\forall n \in \mathbb{N}, u_n=e^{-n}$
+\end{enumerate}
+
+\subsection{Limites}
+
+
+Contrairement aux fonctions, la limite d'une suite n'a de sens que pour $n$ qui tend vers $+\infty$.
+
+\begin{Def}\textbf{Limites}
+    \vspace{1em}
+
+On dit que $(u_n)$ converge vers une limite finie $\ell\in \mathbb{R}$ si :
+$$\forall \epsilon >0\quad \exists N \in \mathbb{N}\quad \text{tel que}\quad n>N \Rightarrow |u_n-\ell|<\epsilon$$
+On note : 
+$$\lim\limits_{n \rightarrow +\infty} u_n=\ell$$
+
+On dit que $(u_n)$ diverge vers $\pm \infty$ si :
+$$\forall M >0\quad \exists N \in \mathbb{N}\quad \text{tel que}\quad n>N \Rightarrow |u_n|>M$$
+On note : 
+$$\lim\limits_{n \rightarrow +\infty} u_n=\pm \infty$$
+\end{Def}
+
+Une suite peut aussi ne pas avoir de limite, comme les fonctions. On parle parfois de divergence de seconde espèce.
+
+
+\vspace{2em}
+
+\textbf{Techniques de calcul de limites}
+
+\vspace{1em}
+
+On dispose de techniques très pratiques pour justifier de la convergence ou non d'une suite et parfois même de trouver sa limite.
+
+\begin{enumerate}
+    \item Toute suite croissante (resp. décroissante) majorée (resp. minorée) est convergente.
+    \item si $u_{n+1}=f(u_n)$ et $\lim\limits_{n \rightarrow +\infty} u_n=\ell$, alors nécessairement $\ell$ est un point fixe de $f$ : $f(\ell)=\ell$.
+    \item \textbf{Inégalité des accroissements finis}
+
+    Si $f$ est dérivable sur un intervalle $I$ et si $\exists M>0$ tel que $|f'(x)|\leq M$, alors pour tout couple $a,b$ dans $I$, on a :
+    $$|f(b)-f(a)|\leq M|b-a|$$ 
+    \item \textbf{Équivalents}
+
+    Deux suites $(u_n)$ et $(v_n)$ sont dites \textbf{équivalentes} si :
+  $$\lim\limits_{n \rightarrow +\infty} \frac{u_n}{v_n}= 1$$  
+  On note $u_n \sim v_n$.
+
+  Deux suites équivalentes ont même limite.Il faut connaître les équivalents usuels pour $u$ convergente vers 0.
+  $$e^{u_n}-1\sim u_n \quad \ln{(1+u_n)}\sim u_n \quad \sin u_n \sim u_n \quad \tan u_n \sim u_n$$
+  $$(1-u_n)^\alpha \sim \alpha u_n \quad 1-\cos u_n \sim \frac{u_n^2}{2}$$
+  
+  \newpage
+
+  \item \textbf{Sur les suites géométriques}
+  \begin{itemize}
+    \item Si $|q|<1$, alors $q^n$ tend vers $0$.
+    \item Si $q>1$, alors $q^n$ tend vers $+\infty$.
+    \item Si $q=1$, alors $q^n=1$, la suite est constante.
+    \item Si $q\leq -1$, alors $q^n$ n'a pas de limite.
+  \end{itemize}
+\end{enumerate}
+
+
+\exo[2]{Exemple 6 :}
+\begin{enumerate}
+    \item 
+On considère la suite $u$ définie par : 
+    $\begin{cases}
+        u_0=1 \\
+        u_{n+1}=\frac{5u_n+3}{3+u_n}
+    \end{cases}$
+ \begin{enumerate} 
+     \item Montrer par récurrence que $u_n \geq 0$ puis que $u_n-3\leq 0$.
+     \item  Montrer que $u_n$ est croissante.
+      \item En déduire qu'elle converge et déterminer sa limite.
+      \end{enumerate}
+\item On considère la suite $u$ définie par : 
+    $\begin{cases}
+        u_0=1 \\
+        u_{n+1}=\frac{1}{1+u_n}
+    \end{cases}$
+    On pose $f(x)=\frac{1}{1+x}$
+    \begin{enumerate}
+      \item  Montrer que l'équation $f(x)=x$ admet une seule solution $l$ sur $]0,1[$.
+    \item Montrer que pour tout $n\geq 0, u_n \in [\frac{1}{2}, 1]$.
+        \item  Montrer que pour tout $x\in [\frac{1}{2}, 1], |f'(x)|\leq \frac{4}{9}$.
+     \item Montrer que $|u_{n+1}-l|\leq \frac{4}{9}|u_n-l|$ et en déduire que $\lim\limits_{n \rightarrow +\infty} u_n= l$.
+     \end{enumerate}
+\item Calculer les limites des suites suivantes :  
+\begin{enumerate}
+    \item $$\forall n \in \mathbb{N^*}, u_n=\frac{3^n-5^n}{3^n+5^n}$$
+    \item $$\forall n \in \mathbb{N^*}, u_n=\frac{n-\sqrt n}{n^2-n}  $$
+    \item $$\forall n \in \mathbb{N^*}, u_n=\sqrt{n^2+n+1}- \sqrt{n^2+1}  $$
+    \item $$\forall n \in \mathbb{N^*}, u_n=\frac{n^2+\cos n}{2^n+\sin n}  $$
+    \item $$\forall n \in \mathbb{N^*}, u_n=\frac{\ln (1+2\tan (1/n))}{\sin (1/n)}  $$
+\end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section{Suites extraites et suites adjacentes}
+
+\subsection{Suites extraites}
+
+\begin{Def}\textbf{Suite extraite}
+    \vspace{1em}
+
+Une \textbf{suite extraite} de la suite $(u_n)$ est une suite $(u_{\phi(n)})$ où $\phi(n)$ est une suite strictement croissante d'indices.
+\end{Def}
+
+En particulier, les suites $(u_{2n})$ et $(u_{2n+1})$ sont extraites de $(u_n)$.
+
+Le résultat le plus utile sur les suites extraites est le suivant :
+
+\begin{Thm}\textbf{Propriété fondamentale des suites extraites}
+    \vspace{1em}
+
+Si une suite $(u_n)$ converge vers $\ell$, alors toute suite extraite de $(u_n)$ converge vers $\ell$.
+\end{Thm}
+
+\begin{Rmq}$\,$
+
+On se sert surtout de ce résultat pour montrer qu'une suite n'a pas de limite. \vspace{1em}
+
+Par exemple, considérons la suite $u_n=(-1)^n$:
+\begin{itemize}
+\item La suite extraite $(u_{2n})$ tend vers 1 
+\item alors que la suite extraite $(u_{2n+1})$ tend vers -1.
+\end{itemize}
+donc la suite $(u_n)$ n'a pas de limite. -1 et 1 sont appelés \textbf{valeurs d'adhérence} dans ce cas, ces deux valeurs "attirent" une infinité de terme de la suite $(u_n)$.
+
+\vspace{1em}
+
+La réciproque de ce résultat est moins restrictive, il suffit que $(u_{2n})$ et $(u_{2n+1})$ convergent vers la même limite et $(u_n)$ converge. 
+Cela fonctionne avec n'importe quelle partition des entiers naturels, c'est une méthode de raisonnement très utilisée en arithmétique, notamment avec des tableaux de congruences. \vspace{1em}
+\end{Rmq}
+
+\exo[2]{Exemple 7 :}
+Soit $(u_n)$ une suite réelle définie sur les entiers strictement positifs vérifiant :
+$$0\leq u_{m+n} \leq \frac{m+n}{mn}$$
+Pour tout $m,n\in \mathbb{N^*}$.
+Montrer que $(u_n)$ tend vers 0 en utilisant les suites extraites de termes pairs et impairs.
+
+\newpage
+
+\subsection{Suites adjacentes}
+
+\begin{Def}\textbf{Suites adjacentes}
+    \vspace{1em}
+
+Deux suites $(u_n)$ et $(v_n)$ sont dites \textbf{adjacentes} si :
+\begin{enumerate}
+    \item $(u_n)$ est croissante
+    \item $(v_n)$ est décroissante
+    \item $\lim\limits_{n \rightarrow +\infty} |v_n-u_n|=0$
+\end{enumerate}
+\end{Def}
+
+\begin{Thm}\textbf{Propriété des suites adjacentes}
+    \vspace{1em}
+
+Si $(u_n)$ et $(v_n)$ sont deux suites adjacentes, alors :
+
+Pour tout entier $n$, $u_n \leq v_n$ et $(u_n)$ et $(v_n)$ sont convergentes et ont la même limite.
+\end{Thm}
+
+\exo[2]{Exemple 8 :}
+Montrer que les suites suivantes sont adjacentes :
+\begin{enumerate}
+    \item $\forall n \in \mathbb{N^*}, \quad u_n=3-\frac{1}{n}$ et $v_n=3+\frac{1}{n}$
+    \item $\forall n \in \mathbb{N^*}, \quad u_n= \sum_{k=0}^n \frac{1}{k!}$ et $v_n=u_n+\frac{1}{n\times n!}$
+\end{enumerate}
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Sommes}
+
+Soit la suite $u$ définie par : 
+$$u_n=(n+1)^2-n^2$$
+\begin{enumerate}
+    \item Calculer les trois premiers termes.
+    \item Montrer que cette suite est arithmétique et préciser sa raison.
+    \item Calculer la somme des 100 premiers nombres impairs.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Sommes}
+
+On considère les suites $u$ et $v$ telles que :
+$$\forall n \in \mathbb{N}, \quad u_n=\frac{3\times 2^n-4n+3}{2}; \quad u_n=\frac{3\times 2^n+4n-3}{2}$$
+\begin{enumerate}
+    \item Soit $w$ la suite telle que $w_n=u_n+v_n$. Montrer que $w$ est géométrique et calculer la somme des $(n+1)$ premiers termes de la suite $w$.
+    \item Soit $t$ la suite telle que $t_n=u_n+v_n$. Montrer que $t$ est arithmétique et calculer la somme des $(n+1)$ premiers termes de la suite $t$.
+    \item Calculer $S_n=\sum_{k=0}^n u_k$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Suites extraites}
+
+On considère les suites $u$ et $v$ telles que :
+$$\begin{cases}
+    u_0=0 \\
+    u_{n+1}=\frac{u_n+v_n}{2}
+\end{cases}$$
+$$\begin{cases}
+    v_0=4 \\
+    v_{n+1}=\frac{u_{n+1}+v_n}{2}
+\end{cases}$$
+\begin{enumerate}
+    \item Soit w la suite définie par :
+    $$w_n=v_n-u_n$$
+    Montrer que $w$ est géométrique et déterminer sa limite.
+    \item Montrer que $u$ est croissante et $v$ décroissante.
+    \item On considère la suite $t$ définie par :
+    $$t_n=\frac{u_n+2v_n}{3}$$
+    Montrer que $t$ est constante et en déduire la limite de $u$ et $v$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Suites adjacentes}
+
+on considère la suite $u$ définie par :
+$$\begin{cases}
+    u_0=3\\
+    u_{n+1}=\frac{3u_n+1}{4+u_n}
+\end{cases}$$
+On considère la suite $v$ définie par :
+$$v_n=\frac{u_n-1}{u_n+2}$$
+\begin{enumerate}
+    \item Montrer que $v$ est géométrique et montrer qu'elle converge.
+    \item En déduire l'expression de $u_n$ en fonction de $n$.
+    \item trouver la limite de $u$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Équivalents}
+
+Quels sont les équivalents corrects en l'infini parmi les proposition suivantes ?
+\begin{enumerate}
+    \item $n \sim n+1$
+    \item $n^2 \sim n^2+n$
+    \item $\ln n \sim \ln (10^6n)$
+    \item $e^n\sim e^{n+10^6}$
+    \item $e^n \sim e^{2n}$
+    \item $\ln n \sim \ln{(n+1)}$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équation}
+
+Déterminer un équivalent le plus simple possible de chacune des suites suivantes en l'infini.
+\begin{enumerate}
+    \item $u_n =\frac{1}{n-1}-\frac{1}{n+1}$
+    \item $u_n=\sqrt{n+1}-\sqrt{n-1}$
+    \item $u_n=\frac{n^3-\sqrt{1-n^2}}{\ln n-2n^2}$
+    \item $u_n= \sin{(\frac{1}{\sqrt{n+1}})}$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Suite}
+
+On définit la suite $u$ par :
+$$\begin{cases}
+    u_0=\frac{7}{2}\\
+    u_{n+1}=f(u_n)
+\end{cases}$$
+où $f$ est la fonction définie sur l'intervalle $[-1;+infty[$ par : 
+$$f(x)=4-\frac{1}{4} \ln x$$
+\begin{enumerate}
+    \item Dresser le tableau de variations de $f$ sur son ensemble de définition.
+    \item Montrer que : 
+    $$3 \leq u_n \leq 4$$
+    \item Montrer que pout tout réel $x$ de l'intervalle $[3,4]$, on : 
+    $$|f'(x)|\leq \frac{1}{12}$$
+    \item Montrer l'existence d'un unique $\alpha \in [3,4]$ tel que $f(\alpha)=\alpha$.
+    \item Montrer que : 
+    $$\forall n \in \mathbb{N}, \quad |u_{n+1}-\alpha| \leq \frac{1}{12}|u_n-\alpha$$
+    Puis que :
+   $$\forall n \in \mathbb{N}, \quad |u_{n}-\alpha| \leq (\frac{1}{12})^{n+1}$$  
+   \item En déduire la limite de $u$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Suite}
+
+Un jardinier décide de verser un seau d'eau au pied de chacun des peupliers qui bordent son champ. Il y a 95 peupliers, en ligne droite, espacés de 3 mètres et la prise d'eau est au pied du premier. Le jardinier ne porte qu'un seul seau à la fois. 
+On suppose qu'il arrose les peupliers dans l'ordre d'alignement du plus proche au plus éloigné des arbres. On pose $u_n$ la distance aller-retour pour arroser le $n$-ième arbre et revenir au point d'eau. 
+\begin{enumerate}
+    \item Calculer les distances qui correspondent aux 4 premiers aller-retours.
+\item  Quelle est la nature de $u$? préciser sa raison et son premier terme.
+\item Exprimer $u_n$ en fonction de $n$.
+\item Calculer la distance que doit parcourir le jardinier pour arroser tous ses peupliers.
+\item Il commence sa lourde tâche ; mais épuisé, il décide de s'arrêter après avoir parcouru exactement 10 266 m. combien a-t-il arrosé d'arbres ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Suite}
+
+Pour tout entier $n \geq 1$, on définit la fonction $f_n$ par :
+$$\forall x \in \mathbb{R^+}, \quad f_n(x)=x^n+9x^2-4$$
+\begin{enumerate}
+    \item Montrer que l'équation $f_n(x)=0$ n'a qu'une seule solution strictement positive, notée $u_n$.
+    \item Vérifier que $\forall x \in \mathbb{N^*}, \quad u_n \in ]0, \frac{2}{3}[$
+    \item Montrer que, pour tout $x$ élément de $]0,1[$, on a $f_{n+1}(x)<f_n(x)$.
+    \item En déduire le signe de $f_n(u_{n+1}$, puis les variations de la suite $(u_n)$.
+    \item Montrer que $u$ converge.
+    \item Déterminer la limite de $(u_n)^n$ en $+ \infty$.
+    \item Donner enfin la valeur de $l$.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,2012 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Introduction}
+
+Les complexes sont partout en science, vous les rencontrerez en mécanique, en électricité, dès qu'il s'agira de résoudre des équations polynomiales ou différentielles .. 
+%En guise d'introduction, nous présentons un extrait du cours  de MPSI, PCSI, PTSI, TSI de messieurs Capaces, Soyeur et Vieillard-Baron proposé sur le site Les-Mathématiques.net.
+%
+%\includegraphics[scale=1]{COURS-PTSI-complexes}
+%
+%Cette définition du corps des complexes ne sera pas utilisée par la suite, mais on gardera en mémoire qu'un nombre complexe est un couple de nombre réels...
+%
+%\section{Rappels}
+
+%%%%%%% FORME ALGEBRIQUE
+\section{Différentes formes}
+\subsection{Forme algébrique}
+
+\begin{Def}{\textbf{Nombre complexe}}
+    \vspace{1em}
+
+On note $i$ un nombre imaginaire tel que $i^2 = -1$.
+
+Un nombre complexe $z$ est un nombre qui s'écrit sous la forme (algébrique) $$z=a + ib$$ avec $a$ et $b$ réels.
+
+L'ensemble des nombres complexes est noté $\C$.
+\end{Def}
+
+\begin{Def}{\textbf{Partie réelle, partie imaginaire}}
+    \vspace{1em}
+
+Lorsqu'on écrit $z = a + ib$, 
+on dit que 
+\begin{itemize}
+    \item $a$ est la partie réelle de $z$
+    \item $b$ est la partie imaginaire de $z$.
+\end{itemize}
+On note $a = \Re(z)$ ou $Re(z)$ et $b = \Im(z)$ ou $Im(z)$.
+\end{Def}
+
+\begin{Def}{\textbf{Nombre réel, imaginaire pur}}
+    \vspace{1em}
+
+Tout complexe $z$ tel que $b = 0$ s'écrit $z = a$ : c'est un nombre réel.
+
+Tout complexe $z$ tel que $a = 0$ s'écrit $z = ib$ : c'est un nombre imaginaire pur.
+\end{Def}
+
+
+\begin{bclogo}[couleur = yellow!30, arrondi = 0.1, ombre = true, couleurOmbre=black!10, logo=\bccrayon]{~Addition}
+
+L'addition et la multiplication dans $\C$ respectent les m\^emes règles de calcul que dans $\R$ en tenant compte du fait que $i^2 = -1$.
+\end{bclogo}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Premier calcul algébrique}
+On pose $z_1=1+2i$ et $z_2=2-i$.
+Calculer sous forme algébrique
+$$z_1+z_2, \qquad z_1z_2, \qquad \frac{z_1}{z_2} \qquad \text{et} \qquad 2z_1+3z_2.$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Algébrique}
+On pose $z_1=2+3i$ et $z_2=3-4i$.
+Calculer sous forme algébrique
+$$z_1+z_2, \qquad z_1z_2, \qquad \frac{z_1}{z_2} \qquad \text{et} \qquad 2z_1+3z_2.$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équations}
+Résoudre dans $\C$ les équations suivantes:
+
+\begin{enumerate}
+ \item [$\bullet$] $z+2=i(z-1)$
+ \item [$\bullet$] $iz-3=2i$
+ \item [$\bullet$] $\frac{z+1}{z-1}=1+i$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Système}
+Résoudre dans $\C$ le système 
+$$\left\lbrace 
+\begin{array}{rcrcl}
+2z_1&+&z_2&=&4\\ 
+-2iz_1&+&z_2&=&0
+  \end{array}\right.$$ 
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Représentation géométrique}
+\noindent
+Le plan complexe est le plan muni d'un repère orthonormé direct. %$\RE$.\\
+Soit $z=a+ib$.
+\begin{itemize}
+ \item [$\bullet$]{$M\left(a;b \right)$ est {\bf l'image} du complexe $z=a+ib$
+ 
+De même $\overrightarrow{OM}$ est le vecteur image de $z=a+ib$}
+ \item [$\bullet$]$z=a+ib$ est {\bf l'affixe} du point $M$ ou du vecteur $\overrightarrow{OM}$
+\end{itemize}
+\begin{center}
+ 
+\includegraphics[scale=0.5]{images/fig1.png}
+\end{center}
+
+%\newpage%gestion bclogo
+\begin{Prop} \textbf{Nombre complexe et vecteur}
+    \vspace{1em}
+
+Soit $z_1$ et $z_2$ les complexes d'image les vecteurs $\overrightarrow{V_1}$ et $\overrightarrow{V_2}$ et soit $\alpha$ et $\beta$ deux réels :
+ \begin{itemize}
+  \item [$\bullet$] l'image de $z_1 +z_2$ est le vecteur $\overrightarrow{V_1} + \overrightarrow{V_2}$
+ \item [$\bullet$]l'image de $\alpha z_1 $ est le vecteur $\alpha \overrightarrow{V_1}$
+ \item [$\bullet$]l'image de $\alpha z_1 + \beta z_2$ est le vecteur $\alpha \overrightarrow{V_1}+ \beta \overrightarrow{V_2}$.
+ \end{itemize}
+
+\end{Prop}
+
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[1]{Représentation}
+
+Représenter les images $A$, $B$ et $C$ des complexes suivants :
+$$z_{A}=2+3i\quad\quad z_{B}=3i-2\quad\quad z_{C}=-1-2i$$
+\noindent Donner les affixes des milieux des segments $[AB]$ et $[BC]$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Conjugué d'un complexe}
+
+\begin{Def}\textbf{Nombre conjugué}
+    \vspace{1em}
+
+Le conjugué du complexe $z=a+ib$ est le complexe $\bar{z}=a-ib$
+\end{Def}
+
+ %\begin{Exs}
+\newpage
+
+ \exo[1]{Applications}
+ \begin{multicols}{3}
+ \begin{itemize}
+ \item []$\overline{1+3i}=$%1-3i$
+ \item []$\overline{-2i}=$%2i$
+ \item []$\overline{i}=$%-i$
+ \item []$\overline{3}=$%3$
+  \item [] $\overline{-1}=$%-1$\\
+ \end{itemize}
+ \end{multicols}
+% \end{Exs}
+
+
+\begin{Prop}\textbf{Image}
+    \vspace{1em}
+
+ L'image de $\bar{z}$ est le symétrique de l'image de $z$ par rapport à l'axe des abscisses.
+ 
+L'image de $-z$ est le symétrique de l'image de $z$ par rapport à l'origine $O$ du repère.
+\end{Prop}
+
+ \begin{center}
+\includegraphics[scale=0.5]{images/fig2.png}
+\end{center}
+%\begin{thm}
+\begin{Prop}\textbf{Opérations et nombre conjugué}
+    \vspace{1em}
+
+\begin{multicols}{2}
+\begin{enumerate}%[(a)]
+\item $z \bar{z}=(Re(z))^2+(Im(z))^2=\vert z \vert^2$
+\item $z+\bar{z}=2Re(z)$
+\item $z-\bar{z}=2i\,Im(z)$
+\item $\bar{\bar{z}}=z$
+\end{enumerate}
+\begin{enumerate}%[(a')]
+\item $\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}$
+\item $\overline{z_1 \times z_2}=\overline{z_1} \times \overline{z_2}$
+\item si $z_2 \ne 0$ : $\overline{\left( \dfrac{z_1}{z_2}\right) }=\dfrac{\overline{z_1}}{\overline{z_2}}$\\ 
+\end{enumerate}
+\end{multicols}
+
+\end{Prop}
+%\end{thm}
+%\vspace{0.5cm}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Démonstration}
+
+ Faire la démonstration des propriétés précédentes.\\
+%}
+%
+%\sol{
+%\vspace{2cm}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+%
+%{\textcolor{blue}{\hrulefill{} \ding{110}}}}
+%
+\newpage
+
+\exo[1]{Conjugué}
+
+ Donner les conjugués des complexes suivants :\\
+ 
+$$z_1 = \left( 3-2i \right) \left( i-4 \right)\quad\quad z_2 = \frac{3-2i}{2i-4} \quad\quad z_3 = \frac{\left( 2-i\right) \left( 1+i\right) }{2i\left( 5+3i\right)}$$
+%}
+%
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%%%%%%%%% FORME TRIGONOMETRIQUE
+\subsection{Forme trigonométrique  : module et argument }
+\begin{Def}{Module et argument}
+    \vspace{1em}
+    
+Soit $z=a+ib$ un complexe d'image $M$.\\
+
+\noindent Le module de $z$, noté $|z|$, est la norme du vecteur $\overrightarrow{OM}$.\\
+Si $z \ne 0$, un argument de $z$, noté $\arg(z)$, est une mesure en radian, de l'angle orienté $\left(\vec{i},\overrightarrow{OM} \right) $.\\
+\begin{center}
+\begin{tabular}{lll}
+\multirow{9}*{
+%\begin{pspicture*}(-1,-1.5)(7,6)
+%	\def\xmin{0} \def\xmax{6} \def\ymin{0} \def\ymax{5}
+%	\psaxes[linewidth=1pt,Dx=10,Dy=10]{->}(0,0)(\xmin,\ymin)(\xmax,\ymax)
+%	\psset{algebraic=true,xunit=1cm,yunit=1cm}
+%	%\psgrid[gridlabels=0pt,gridwidth=.3pt, gridcolor=gray, subgridwidth=.3pt, subgridcolor=gray, subgriddiv=1](0,0)(0,0)(8,8)
+%	\uput[dl](0,0){O}\uput[ur](5,4){M($z$)}\uput[d](5,0){$a$}\uput[l](0,4){$b$}\uput[d](0.5,0){$\overrightarrow{i}$}\uput[l](0,0.5){$\overrightarrow{j}$}
+%	\uput[ur](1,0.2){$\theta$}\uput[u](2,2){$\rho$}
+%	\psline[linestyle=dashed](0,4)(5,4)\psline[linestyle=dashed](5,0)(5,4)\psline[linewidth=1.5pt]{->}(0,0)(5,4)\psline[linewidth=1.5pt]{->}(0,0)(1,0)\psline[linewidth=1.5pt]{->}(0,0)(0,1)
+%	\psarc{->}(0,0){1}{0}{40}
+%   \end{pspicture*}
+\includegraphics[scale=0.4]{images/fig3.png}
+}
+			      &&$z=a+ib$ \\ 
+			      &&\\
+			      &&$\rho=|z|=OM=\| \overrightarrow{OM}\|=\sqrt{a^2+b^2}$\\&\\
+			      &&$\theta = \arg(z)=\left(\vec{i},\overrightarrow{OM} \right)$\\
+			      &&\\
+			      &&$a= \rho \cos \theta$ \\
+			      &&\\
+			      &&$ b=\rho \sin \theta$  
+\end{tabular}
+\end{center}$\;$\\
+\end{Def}
+%
+% \begin{Rem}
+% - On impose  $z\neq0$ car sinon, l'angle orienté $\left(\vec{i},\overrightarrow{OM} \right) $ n'a aucun sens.\\
+
+% - Si $\theta$ est un argument de $z$ alors tout nombre qui s'écrit $\theta+2k \pi$ o\`u $k$ appartient \`a $\Z$ est aussi un argument de $z$. On note $\theta =\arg(z) ~[2\pi ].$\\
+% \end{Rem}
+
+%\medskip
+\exo[1]{Questions}
+\begin{itemize}
+\item Où se situe l'image d'un affixe dont le module est égal à $2$ ?\\
+\item Où se situe l'image d'un affixe dont le module est égal à $0$ ?\\
+\item Où se situe l'image d'un affixe dont le module est égal à $1$ ?\\
+\item Où se situe l'image d'un affixe dont l'argument est égal à $0$ ?\\
+\item Où se situe l'image d'un affixe dont l'argument est égal à $\dfrac{\pi}{2}$ ?\\
+\end{itemize} 
+\medskip
+%
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Argument et module}
+
+Soit $z=2-2i\sqrt 3$.
+ Calculer $|z|$ et $\arg(z)$.
+%
+%\sol{
+%\vspace{2cm}%$|z|=\sqrt{2^2+(2\sqrt 3)^2}=\sqrt{4+12}=4$ et $\cos\theta=\frac{2}{4}=\frac{1}{2}$ et $\sin\theta=\frac{-2\sqrt 3}{4}=\frac{-\sqrt 3}{2}$, donc $\theta=-\frac{\pi}{3}\, [2\pi]$.
+%
+%{\textcolor{blue}{\hrulefill{} \ding{110}}}}
+%%\newpage%gestion bclogo
+%
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Prop}\textbf{Propriétés du module et de l'argument}
+    \vspace{1em}
+
+ \begin{enumerate}%[(i)]
+  \item $|-z|=|z|$ et si $z\neq0$ alors $\arg(-z)=\pi+\arg(z) [2\pi]$
+ \item $|\bar{z}|=|z|$ et si $z\neq0$ alors $\arg(\bar{z})=-\arg(z) [2\pi]$
+  \item 
+%  		{\obelix{$$si\, z\, est\, un\, réel\, : $$}}
+		\begin{itemize}
+                   \item [$\bullet$]$\arg(z)=0 ~[2\pi]$ si $\mathcal{R}e(z)>0$
+		\item [$\bullet$]$\arg(z)=\pi~ [2\pi]$ si $\mathcal{R}e(z)<0$
+%  		{\obelix{$$si\, z\, est\, un\, imaginaire\, pur\,: $$}}
+                   \item [$\bullet$]$\arg(z)={\pi}/{2} ~[2\pi]$ si $\mathcal{I}m(z)>0$
+		\item [$\bullet$]$\arg(z)=-{\pi}/{2} ~[2\pi]$ si $\mathcal{I}m(z)<0$
+                  \end{itemize}
+% \medskip
+ \end{enumerate}
+\end{Prop}
+%\end{thm}
+%
+Dans ce qui suit on pose $z=a+ib$, avec $\rho=|z|=||\overrightarrow{OM}||$ et $\theta=\arg(z)= \hat{\left( \vec{i},\overrightarrow{OM}\right)}$.
+%%
+\begin{Def}\textbf{Forme trigonométrique}
+    \vspace{1em}
+
+On appelle forme trigonométrique de $z$ l'expression :
+$$z=\rho(\cos\theta+i\sin\theta)$$
+\end{Def}
+
+\exo[1]{Placement}
+
+Soit $z=i+\sqrt 3$.
+Calculer $|z|$ et $\arg(z)$.
+
+ Donner la forme trigonométrique. Placer le point image d'affixe $z$ dans le plan% $\RE$.\\
+%
+%\sol{
+%\vspace{3cm}
+%
+%{\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+% \begin{Rem}Tout nombre complexe posséde une forme trigonométrique, encore faut-il \^etre sûr de l'avoir sous les yeux. On propose ci-dessous des formes que ne sont pas des formes trigonométriques mais que l'on transforme gr\^ace aux propriétés trigonométriques ou gr\^ace au positionnement du point image correspondant dans le plan $\RE$ afin d'obtenir la forme trigonométrique. \`A titre d'exercice, identifier le probléme par rapport \`a la définition d'une forme trigonométrique, puis repérer les propriétés utilisées pour la modification :$$\begin{array}{rrl}(a)&-2\bigg(\cos\left(\frac{\pi}{3}\right)+i\sin\left(\frac{\pi}{3}\right)\bigg)&=2\bigg(-\cos\left(\frac{\pi}{3}\right)-i\sin\left(\frac{\pi}{3}\right)\bigg)\\
+% &&=2\bigg(\cos\left(\frac{\pi}{3}+\pi\right)+i\sin\left(\frac{\pi}{3}+\pi\right)\bigg)\\
+% &&=2\bigg(\cos\left(\frac{4\pi}{3}\right)+i\sin\left(\frac{4\pi}{3}\right)\bigg)\\
+% &&\\
+% (b)&5\bigg(\cos\left(\frac{\pi}{3}\right)-i\sin\left(\frac{\pi}{3}\right)\bigg)&=5\bigg(\cos\left(-\frac{\pi}{3}\right)+i\sin\left(-\frac{\pi}{3}\right)\bigg)\end{array}$$
+% \end{Rem}
+%\newpage%%
+%\begin{thm}
+
+\begin{Def}\textbf{Distance et module}
+    \vspace{1em}
+
+Soient $A$ et $B$ deux points du plan complexe d'affixe respective $z_{A}$ et $z_{B}$, on a alors 
+\vspace{1em}
+
+\begin{minipage}[htbp]{0.3\linewidth}
+$$AB=|z_{B}-z_{A}|$$
+\end{minipage}
+\begin{minipage}[htbp]{0.5\linewidth}
+\begin{center}
+ 
+\includegraphics[scale=0.3]{images/fig4.png}
+\end{center}
+% \begin{pspicture*}(-1,-1)(7,7)
+%	\def\xmin{0} \def\xmax{8} \def\ymin{0} \def\ymax{8}
+%	\psaxes[linewidth=1pt,Dx=10,Dy=10]{->}(0,0)(-1,-1)(6,6)
+%	\psset{algebraic=true,xunit=1cm,yunit=1cm}
+%	\psline[linewidth=1.5pt]{->}(0,0)(0,1)\psline[linewidth=1.5pt]{->}(0,0)(1,0)
+%	\uput[d](0.5,0){$\overrightarrow{i}$}\uput[l](0,0.5){$\overrightarrow{j}$}
+%	%\psgrid[gridlabels=0pt,gridwidth=.3pt, gridcolor=gray, subgridwidth=.3pt, subgridcolor=gray, subgriddiv=1](0,0)(0,0)(8,8)
+%	\uput[dl](0,0){O}\uput[ur](5,5){A($z_{\tiny A}$)}\uput[ul](3,2){B($z_{\tiny B}$)}
+%	\psline[linestyle=dashed](0,5)(5,5)\psline[linestyle=dashed](5,0)(5,5)\psline[linestyle=dashed](3,0)(3,2)\psline[linestyle=dashed](0,2)(3,2)
+%	\uput[d](5,0){$x_A$}\uput[l](0,5){$y_A$}\uput[d](3,0){$x_B$}\uput[l](0,2){$y_B$}
+%	\psline[linewidth=1.5pt]{-}(3,2)(5,5)
+%   \end{pspicture*}
+\end{minipage}
+\end{Def}
+%\end{thm}
+%
+%\exo{Démontrer la proposition 2.6}
+%
+%\sol{
+%\vspace{2cm}
+%
+%{\textcolor{blue}{\hrulefill{} \ding{110}}}}
+%
+\exo[2]{Calculs}
+
+Calculer d'une part $AB=\sqrt{\vert|\overrightarrow{AB}\vert|^2}$ et $|z_B-z_A|$ d'autre part.\\
+
+
+\subsection{Forme exponentielle}
+
+\begin{Def}\textbf{Forme exponentielle}
+    \vspace{1em}
+
+Pour tout réel $\theta$, on note $e^{i\theta}=\cos\theta+i\sin\theta$. 
+
+Ainsi $e^{i\theta}$ est le complexe de module 1 et d'argument $\theta$.
+\vspace{1em}
+
+Tout complexe $z$ \textbf{non nul} de module $\rho$ et d'argument $\theta$ peut donc s'écrire $$z=\rho e^{i\theta}.$$
+\end{Def}
+
+% \begin{Rem}On en déduit que $$\overline{z}=\rho e^{-i\theta},\quad z^n=\rho^ne^{in\theta},\quad(\overline{z})^n=\rho^ne^{-in\theta}=\overline{z^n},\quad \vert z\vert ^n=\vert z^n\vert.$$
+% \end{Rem}
+
+\begin{Ex}Soit $z=3e^{i\frac{\pi}{6}}$, alors
+$$ \overline{z}=3e^{-i\frac{\pi}{6}}\qquad z^2=9e^{i\frac{\pi}{3}}\qquad\overline{z}^2=9e^{-i\frac{\pi}{3}}$$
+\end{Ex}
+
+%\begin{thm}
+\begin{Prop}\textbf{Formules d'Euler}
+    \vspace{1em}
+
+$$\cos \theta=\dfrac{e^{i\theta}+e^{-i\theta}}{2}\qquad \text{et} \qquad \sin \theta=\dfrac{e^{i\theta}-e^{-i\theta}}{2i}$$
+\end{Prop}
+%\end{thm}
+
+% \begin{Dem}  \`A partir de $e^{i\theta}=\cos\theta+i\sin\theta$ et $e^{i(-\theta)}=\dots$.
+% \vspace{2cm}
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+
+%\begin{Prec}
+Les formules d'Euler sont équivalentes à $$e^{i\theta}+e^{-i\theta}=2\cos \theta\qquad \text{ et }\qquad e^{i\theta}-e^{-i\theta}=2i\sin\theta$$
+%\end{Prec}	      
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Forme exponentielle}
+
+\'Ecrire sous forme exponentielle les nombres complexes suivants :
+$$1+i=\qquad 1-i=\qquad i=\qquad -i=$$
+$$\dfrac{-1+i\sqrt 3}{1-i}=\qquad (1+i)^n=\qquad 7i=\qquad -7=$$
+%}
+
+%\sol{
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Forme exponentielle version 2}
+
+\begin{enumerate}
+      \item Mettre sous forme exponentielle les complexes $z_1=\sqrt{3}+i$ et $z_2=2i$.\\
+      \item En déduire la forme exponentielle puis la forme algébrique de $z_1\times z_2$.\\
+      \item Calculer directement la forme algébrique de $z_1\times z_2$.\\
+     \end{enumerate}
+%}
+%
+%\sol{
+%\vspace{4cm}
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Formules d'Euler}
+
+En utilisant les formules d'Euler retrouver que $\sin (2\theta)=2\sin( \theta)\cos(\theta)$.
+
+%\sol{
+%\vspace{2cm}
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Forme trigonométrique}
+
+\'Ecrire les expressions suivantes en utilisant les fonctions sinus et cosinus :
+
+\begin{itemize}
+    \vspace{0.5em}
+ \item[$\bullet$] $\dfrac{3e^{-i6x}+3e^{i6x}}{2} = $
+ \vspace{0.5em}
+ \item[$\bullet$] $\dfrac{e^{i3x}+7e^{i4x}+7e^{-i4x}+e^{-i3x}}{8} = $
+ \vspace{0.5em}
+ \item[$\bullet$] $\dfrac{e^{i4x}-5e^{i6x}+5e^{-i6x}-e^{-i4x}}{-4i} = $
+\end{itemize}
+%\vspace{0.5cm}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%
+%\sol{
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%\newpage
+\exo[3]{Linéarisation}
+
+En utilisant les formules d'Euler, linéariser :
+
+$$\sin (x)\cos (3x)\qquad \cos^4(x)\qquad \sin^4(x)\cos^2(x)$$
+
+ Calculer 
+$$\displaystyle\int \sin (x)\cos(3x)dx\qquad \int \cos^4(x)dx\qquad \int\sin^4(x)\cos^2(x)dx$$
+
+
+
+
+%\sol{
+%\vfill
+%\includegraphics[scale=0.1]{exo_line_euler_corr}
+%
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newpage 
+
+\section{Opérations}
+\subsection{Somme et différence}
+%
+%\begin{thm}
+\begin{Prop}\textbf{Somme}
+    \vspace{1em}
+
+Si $z_1$ a pour image $M_1$ et $z_2$ a pour image $M_2$, alors
+%
+\begin{center}$z_1+z_2$ a pour image $S$ o\`u  $\overrightarrow{OS}=\overrightarrow{OM_1}+\overrightarrow{OM_2}$.\end{center}
+\end{Prop}
+%\end{thm}
+%
+%\begin{Prec} 
+Posons $z_1=x_1+iy_1$ et $z_2=x_2+iy_2$.
+%\vspace{1em}
+%
+%\begin{center} \begin{pspicture*}(-1,-1)(8,7)
+%	\def\xmin{0} \def\xmax{8} \def\ymin{0} \def\ymax{8}
+%	\psset{algebraic=true,xunit=0.5cm,yunit=0.5cm}
+%	\psaxes[linewidth=1pt,Dx=10,Dy=10]{->}(0,0)(-1,-1)(6,6)
+%	\psline[linewidth=1.5pt]{->}(0,0)(0,1)\psline[linewidth=1.5pt]{->}(0,0)(1,0)
+%	\uput[d](0.5,0){$\overrightarrow{i}$}\uput[l](0,0.5){$\overrightarrow{j}$}
+%	%\psgrid[gridlabels=0pt,gridwidth=.3pt, gridcolor=gray, subgridwidth=.3pt, subgridcolor=gray, subgriddiv=1](0,0)(0,0)(8,8)
+%	\uput[dl](0,0){O}\uput[ul](2,4){$M_1(z_1)$}\uput[r](3,2){$M_2(z_2)$}\uput[r](5,6){$S(z_1+z_2)$}
+%	\psline[linewidth=1.5pt]{->}(0,0)(2,4)\psline[linewidth=1.5pt]{->}(0,0)(3,2)\psline[linewidth=1.5pt]{->}(0,0)(5,6)\psline[linewidth=1.5pt,linestyle=dashed]{->}(3,2)(5,6)\psline[linewidth=1.5pt,linestyle=dashed]{->}(2,4)(5,6)
+%   \end{pspicture*}
+%\end{center}
+\begin{center}
+ 
+\includegraphics[scale=0.6]{images/fig5.png}
+\end{center}
+%
+Dans le triangle $OM_1S$, on a $OS\leq OM_1+M_1S$ et $M_1S=OM_2$, on en déduit $$OS\leq OM_1+OM_2$$
+d'o\'u $$|z_1+z_2|\leq|z_1|+|z_2|$$
+Cette inégalité est appelée \textbf{inégalité triangulaire.}\\
+%\end{Prec}
+%
+%\begin{thm}
+\begin{Prop}{\textbf{Différence et argument}}
+    \vspace{1em}
+
+Si $z_2-z_1$ a pour image $D$ avec $\overrightarrow{OD}=\overrightarrow{OM_2}-\overrightarrow{OM_1}=\overrightarrow{M_1M_2}$, alors
+$$M_1M_2=||\overrightarrow{M_1M_2}||=|z_2-z_1|\quad et\quad \text{l'angle }\left( \vec{i},\overrightarrow{M_1M_2}\right)=\arg(z_2-z_1)\, [2\pi].$$
+\end{Prop}
+%\end{thm}
+%
+%\begin{Prec}\begin{center}
+% \begin{pspicture*}(-1,-3)(8,7)
+%	\def\xmin{0} \def\xmax{8} \def\ymin{-2} \def\ymax{8}
+%	\psset{algebraic=true,xunit=0.5cm,yunit=0.5cm}
+%	\psaxes[linewidth=1pt,Dx=10,Dy=10]{->}(0,0)(-1,-2)(6,6)
+%	\psline[linewidth=1.5pt]{->}(0,0)(0,1)\psline[linewidth=1.5pt]{->}(0,0)(1,0)
+%	\uput[d](0.5,0){$\overrightarrow{i}$}\uput[l](0,0.5){$\overrightarrow{j}$}
+%	%\psgrid[gridlabels=0pt,gridwidth=.3pt, gridcolor=gray, subgridwidth=.3pt, subgridcolor=gray, subgriddiv=1](0,0)(0,0)(8,8)
+%	\uput[dl](0,0){O}\uput[ul](2,4){$M_1(z_1)$}\uput[r](3,2){$M_2(z_2)$}\uput[r](1,-2){$D(z_2-z_1)$}
+%	\psline[linewidth=1.5pt]{->}(0,0)(2,4)\psline[linewidth=1.5pt]{->}(0,0)(3,2)\psline[linewidth=1.5pt]{->}(0,0)(1,-2)\psline[linewidth=1.5pt,linestyle=dashed]{->}(3,2)(1,-2)\psline[linewidth=1.5pt,linestyle=dashed]{->}(2,4)(3,2)
+%   \end{pspicture*}
+%\end{center}
+%\end{Prec}
+%\vspace{1em}
+
+
+\exo[2]{Distance et angle}
+
+Dans le plan complexe, on donne 
+\begin{itemize}
+    \item le point $A$ d'affixe $z_a=-3+i$
+    \item le point $B$ d'affixe $z_b=-2+2i$
+\end{itemize}
+
+ Calculer la distance $AB$ et une mesure de l'angle $\left( \vec{i},\overrightarrow{AB}\right)$.
+
+%\sol{
+%\vspace{2cm}
+
+%{\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\newpage
+
+\subsection{Produit et quotient}
+
+%\begin{thm}
+\begin{Prop}\textbf{Produit, module et argument}
+    \vspace{1em}
+
+$$|z_1\times z_2|=|z_1|\times|z_2| \quad\text{ et }\quad\arg(z_1\times z_2)=\arg(z_1)+ \arg(z_2)\, [2\pi]$$
+\end{Prop}
+
+% \vspace{1em}
+% \hrule
+% \vspace{1em}
+%\end{thm}
+%
+% \begin{Dem} 
+% \` A partir des formes trigonométriques.
+
+% Notons les formes trigonométriques de $z_1=\rho_1(\cos\theta_1+i\sin \theta_1)$ et $z_2=\rho_2(\cos\theta_2+i\sin \theta_2)$. Alors,
+% $$\begin{array}{rl}
+% z_1z_2&=\rho_1(\cos\theta_1+i\sin \theta_1)\rho_2(\cos\theta_2+i\sin \theta_2)\\
+% &=\rho_1\rho_2(\cos\theta_1+i\sin \theta_1)(\cos\theta_2+i\sin \theta_2)\\
+% &=\rho_1\rho_2(\cos\theta_1\cos\theta_2+i\cos\theta_1\sin \theta_2+i\sin\theta_1\cos\theta_2-\sin\theta_1\sin \theta_2)\\
+% &=\rho_1\rho_2\bigg(\cos\theta_1\cos\theta_2-\sin\theta_1\sin \theta_2+i(\cos\theta_1\sin \theta_2+\sin\theta_1\cos\theta_2)\bigg)\\
+% &=\rho_1\rho_2\bigg(\cos(\theta_1+\theta_2)+i(\sin(\theta_1+\theta_2)\bigg)
+% \end{array}$$
+
+% Finalement, $|z_1z_2|=\rho_1\rho_2$ et $\arg(z_1z_2)=\theta_1+\theta_2$.
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+%
+%\begin{thm}
+\begin{Prop}\textbf{{~Inverse, module et argument}}
+    \vspace{1em}
+
+ Si $z\neq 0$, alors $$\left|\dfrac{1}{z}\right|=\dfrac{1}{|z|}\text{ et }\arg\left( \dfrac{1}{z}\right) =-\arg(z) [2\pi]$$
+\end{Prop}
+%\end{thm}
+%
+% \begin{Dem} En effet, si $z\neq0$ :
+
+% \medskip
+% $\left|1\right|=1=\left|z\right|\times\left|\dfrac{1}{z}\right|\Longrightarrow \left|\dfrac{1}{z}\right|=\dfrac{1}{|z|}$ et
+
+% $\arg(1)=0=\arg\left(z\times\dfrac{1}{z}\right)=\arg(z)+\arg\left(\dfrac{1}{z}\right)\Longrightarrow \arg\left(\dfrac{1}{z}\right)=-\arg(z)$.
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+
+%\begin{thm}
+\begin{bclogo}[couleur = yellow!30, arrondi = 0.1, ombre = true, couleurOmbre=black!10, logo=\bccrayon]{Quotient,  module et argument}
+
+ Si $z_2\neq 0$ alors $$\left|\dfrac{z_1}{z_2}\right|=\dfrac{|z_1|}{|z_2|}\text{ et }\quad \arg\left( \dfrac{z_1}{z_2}\right) =\arg(z_1)-\arg(z_2) \quad[2\pi]$$
+\end{bclogo}
+%\end{thm}
+%
+% \begin{Dem} %Utiliser les propriétés précédentes.
+% \vspace{2cm}
+
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+%\newpage
+%
+
+
+\exo[2]{Affixes}
+
+Démontrer que si $z_a$, $z_b$, $z_c$ et $z_d$ sont respectivement les affixes des points $A$, $B$, $C$ et $D$
+$$\left( \overrightarrow{AB},\overrightarrow{CD}\right)=\arg \left(\dfrac{z_d-z_c}{z_b-z_a}\right) \quad [2\pi]$$
+
+Partir de $\left( \overrightarrow{AB},\overrightarrow{CD}\right)=\left( \overrightarrow{AB},\vec{i}\right)+\left( \vec{i},\overrightarrow{CD}\right)=-\left( \vec{i},\overrightarrow{AB}\right)+\left( \vec{i},\overrightarrow{CD}\right)$, puis utiliser la propriété précédente.\\
+%
+%\sol{
+%\vspace{2cm}
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Quatre points}
+
+Dans le plan complexe, on donne les points $A,\, B,\, C$ et $D$, d'affixe respective 
+$$z_a=-1+i,\qquad z_b=1+2i,\qquad z_c=2\qquad \text{ et }\qquad  z_d=-i$$
+Calculer une mesure de chacun des angles
+     $\left( \vec{i},\overrightarrow{AB}\right)$, $\left( \overrightarrow{BA},\overrightarrow{BC}\right)$ et 
+$\left( \overrightarrow{AB},\overrightarrow{DC}\right)$.
+
+Utiliser le résultat de l'exercice précédent, et les formes trigonométriques des rapports qui interviennent.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%\sol{
+%\vspace{2cm}
+%
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%
+%\begin{thm}
+\begin{Prop}\textbf{Puissance d'un nombre complexe, module et argument}
+    \vspace{1em}
+
+Pour tout complexe $z\neq 0$ et pour tout entier relatif $n$,
+$$|z^n|=|z|^n \quad \text{ et }\quad \arg(z^n)=n\arg(z)\quad[2\pi]$$                             
+\end{Prop}
+%\end{thm}
+% %
+% \begin{Dem} Utiliser les propriétés précédentes.
+% \vspace{3cm}
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+%
+%\begin{thm}
+\begin{bclogo}[couleur = yellow!30, arrondi = 0.1, ombre = true, couleurOmbre=black!10, logo=\bccrayon]{~Formule de Moivre}
+Pour tout nombre réel $\theta$ et pour tout entier relatif $n$,
+
+$$\Big(\cos(\theta)+i\sin(\theta)\Big)^n=\cos (n\theta) + i \sin (n\theta)$$
+\end{bclogo}
+%\end{thm}
+
+% \begin{Dem} On propose une démonstration par récurrence de la formule de Moivre.
+
+% \begin{itemize}\item Pour $n=0$ : d'une part $(\cos\theta+i\sin\theta)^0=1$, d'autre part $\cos0\theta+i\sin0\theta=\cos 0+i\sin0=1$
+% \item Supposons qu'il existe un rang $n$ tel que $$(\cos\theta+i\sin\theta)^n=\cos n\theta + i \sin n\theta$$ Alors $$\begin{array}{rl}(\cos\theta+i\sin\theta)^{n+1}&=(\cos\theta+i\sin\theta)^{n}(\cos\theta+i\sin\theta)\\&=(\cos n\theta + i \sin n\theta)(\cos\theta+i\sin\theta)\\&=\cos n\theta\cos\theta+i\cos n\theta\sin\theta + i \sin n\theta\cos\theta-\sin n\theta\sin\theta\\&=\cos n\theta\cos\theta-\sin n\theta\sin\theta+i(\cos n\theta\sin\theta + \sin n\theta\cos\theta)\\&=\cos(n\theta+\theta)+i\sin(n\theta+\theta)\\&=\cos(n+1)\theta+i\sin(n+1)\theta\end{array}$$
+% La propriété est vraie au rang $n+1$
+% \item Conclusion : $\forall n\in\N,  (\cos(\theta)+i\sin(\theta))^n=\cos n\theta + i \sin n\theta$\end{itemize}
+
+% \textcolor{red}{\hrulefill{} \ding{110}}
+% \end{Dem}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Formule de Moivre}
+\begin{enumerate}
+      \item \'Ecrire la formule de Moivre pour $n=2$.
+      \item Développer $(\cos(\theta)+i\sin(\theta))^ 2$, et retrouver les formules de trigonométrie de $\cos(2\theta)$ et $\sin(2\theta)$.
+     \end{enumerate}
+     
+\vspace{1em}
+\hrule
+\vspace{1em}
+%
+%\sol{
+%\vspace{3cm}
+%
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%
+
+
+\subsection{QCM}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+
+\item La forme algébrique d'un nombre complexe \( z \) est :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( z = a + bi \), avec \( a, b \in \mathbb{R} \)
+    \item[2.] \( z = r \cos(\theta) + i r \sin(\theta) \)
+    \item[3.] \( z = r\,e^{i\theta} \)
+    \item[4.] \( z = |z| (\cos(\theta) + i \sin(\theta)) \)
+\end{itemize}
+\end{multicols}
+
+\item Le module d'un nombre complexe \( z = a + ib \) est :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( |z| = a^2 + b^2 \)
+    \item[2.] \( |z| = \sqrt{a^2 + b^2} \)
+    \item[3.] \( |z| = \sqrt{z \bar{z}} \)
+    \item[4.] \( |z| = a + b \)
+\end{itemize}
+\end{multicols}
+
+\item La forme trigonométrique d'un nombre complexe \( z \) est donnée par :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( z = r(\cos\theta + i\sin\theta) \)
+    \item[2.] \( z = a + ib \)
+    \item[3.] \( r = |z| \), \( \theta = \arg(z) \)
+    \item[4.] Elle est uniquement définie si \( r = 1 \)
+\end{itemize}
+\end{multicols}
+
+\item La forme exponentielle de \( z \) s'écrit :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( z = re^{i\theta} \)
+    \item[2.] \( z = \ln(r) + i \theta \)
+    \item[3.] \( z = |z|\,e^{i\arg(z)} \)
+    \item[4.] \( z = e^{i(a + ib)} \)
+\end{itemize}
+\end{multicols}
+
+\item Soit \( z = 2(\cos(\frac{\pi}{3}) + i\sin(\frac{\pi}{3})) \), alors :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( z = 2e^{i\pi/3} \)
+    \item[2.] \( |z| = 2 \)
+    \item[3.] \( \arg(z) = \frac{\pi}{3} \)
+    \item[4.] \( \text{Re}(z) = 1 \)
+\end{itemize}
+\end{multicols}
+
+\item Soit \( z_1 = re^{i\theta_1} \), \( z_2 = se^{i\theta_2} \), alors :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( z_1 z_2 = r s \,e^{i(\theta_1 + \theta_2)} \)
+    \item[2.] \( \frac{z_1}{z_2} = \frac{r}{s} \,e^{i(\theta_1 - \theta_2)} \)
+    \item[3.] \( \bar{z_1} = r \,e^{-i\theta_1} \)
+    \item[4.] \( z_1 + z_2 = (r + s)\, e^{i(\theta_1 + \theta_2)} \)
+\end{itemize}
+\end{multicols}
+
+\newpage
+
+\item Le passage de la forme algébrique à la forme trigonométrique nécessite :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] Le module de \( z \)
+    \item[2.] L'argument de \( z \)
+    \item[3.] Que \( z \neq 0 \)
+    \item[4.] Que \( \text{Re}(z) = \text{Im}(z) \)
+\end{itemize}
+\end{multicols}
+
+\item On a la formule d'Euler :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( e^{i\theta} = \cos(\theta) + i\sin(\theta) \)
+    \item[2.] \( e^{i\theta} = \tan(\theta) + i \)
+    \item[3.] \( e^{i\pi} = -1 \)
+    \item[4.] \( e^{2i\theta} = \cos(2\theta) + i \sin(2\theta) \)
+\end{itemize}
+\end{multicols}
+
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% EQ 2 DEGRE
+\section{Équation du second degré}
+\subsection{Racines carrées complexes d'un nombre complexe}
+%%
+\begin{Def}\textbf{Racines carrées}
+    \vspace{1em}
+
+Soit $u\in\C$. On appelle racines carrées de $u$ les solutions de l'équation $$z^2=u,\quad z\in\C.$$
+\end{Def}
+%
+\exo[2]{Racines}
+
+Résoudre dans $\mathbb{C}$ :
+ $$z^2=36\qquad z^2=-25\qquad z^2=2i$$
+
+%\sol{
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%
+\begin{bclogo}[couleur = green!20, arrondi = 0.1, ombre = true, couleurOmbre=black!10, logo=\bcinfo]{Méthode dans le cas général}
+    Soit $u=a+ib$ avec $a,b\in\R$, on cherche $z=x+iy$ tel que $z^2=u$.
+
+\begin{enumerate}[itemsep=1em]%[$\bullet$]
+\item $z=x+iy \Rightarrow z^2=x^2-y^2+2ixy\Rightarrow \left\{\begin{array}{l}x^2-y^2=a\\2xy=b\end{array}\right.$
+\item $x^2+y^2=\vert z\vert^2=\vert z^2\vert=\vert u\vert=\sqrt{a^2+b^2}\Rightarrow\left\{\begin{array}{ll}x^2-y^2=a&(1)\\x^2+y^2=\sqrt{a^2+b^2}&(2)\\2xy=b&(3)\end{array}\right.$
+
+\item En additionnant $(1)+(2)$, on déduit $2x^2=\sqrt{a^2+b^2}+a$ donc 
+
+$$x=\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}} \quad \text{ ou }\quad x=-\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}}$$
+
+\item si $x=\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}}$ alors d'après $(3)$ : $$y=\dfrac{b}{\sqrt{2(\sqrt{a^2+b^2}+a)}}$$
+
+et si $x=-\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}}$ alors d'après $(3)$ : $$y=-\dfrac{b}{\sqrt{2(\sqrt{a^2+b^2}+a)}}$$
+\item Finalement les deux solutions de l'équation $z^2=a+ib$ sont $$\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}}+\dfrac{ib}{\sqrt{2(\sqrt{a^2+b^2}+a)}}$$
+ et
+$$-\sqrt{\dfrac{\sqrt{a^2+b^2}+a}{2}}-\dfrac{ib}{\sqrt{2(\sqrt{a^2+b^2}+a)}}$$
+\end{enumerate}
+\end{bclogo}
+%
+% \begin{Rem}On se gardera bien de retenir la forme générale des solutions, pour se concentrer sur le protocole \`a suivre.\end{Rem}\\
+% %
+\begin{Ex}On cherche $z$ tel que $z^2=-2+i2\sqrt3$.
+
+\begin{enumerate}%[$\bullet$]
+\item En posant $z=x+iy$ on obtient  $z^2=x^2-y^2+2ixy$, \newline 
+donc $x$ et $y$ doivent vérifier le système  
+$$
+\left\{
+\begin{array}{l}
+x^2-y^2=-2\\
+2xy=2\sqrt3
+\end{array}
+\right.
+$$
+
+\item On peut aussi calculer le module de $z$: $x^2+y^2=\vert z\vert^2=\vert z^2\vert=4$. \newline 
+Nous obtenons donc les 3 équations :
+$$
+\left\{\begin{array}{ll}x^2-y^2=-2&(1)\\x^2+y^2=4&(2)\\xy=\sqrt3&(3)\end{array}\right.$$
+\item En additionnant $(1)+(2)$, on déduit $2x^2=2$, c'est-à-dire $x^2=1$\newline 
+donc  $x=1$ ou $x=-1$
+
+\item D'après $(3)$, si $x=1$ alors $y=\sqrt3$\, et si $x=-1$ alors $y=-\sqrt3$
+\end{enumerate}
+
+Finalement les deux solutions de l'équation $z^2=-2+i2\sqrt3$ sont: $$1+i\sqrt3\quad \text{ et }\quad -1-i\sqrt3$$
+\end{Ex}
+%
+%\begin{Rem}Si une racine carrée est évidente, on évite les calculs.\\ Par exemple, la racine carrée de $8+6i$ est $3+i$ ...  ha ! ha ! ha !\end{Rem}
+%
+
+\newpage
+
+\subsection{Équation du second degré \`a coefficients complexe}
+\begin{Prop}\textbf{Forme générale}
+    \vspace{1em}
+
+On appelle équation du second degré \`a coefficients complexe, une équation du type 
+$$az^2+bz+c=0$$
+avec $a\in\C^*,\ b\in\C,\ c\in\C.$
+\end{Prop}
+%
+%\begin{thm}
+\begin{Prop}\textbf{Forme des solutions}
+    \vspace{1em}
+
+Ce type d'équations admet toujours deux solutions complexes, qui sont :
+$$z_1=\dfrac{-b-\delta}{2a}\quad\text{ et }\quad z_2=\dfrac{-b+\delta}{2a}$$
+ avec $\delta^2=b^2-4ac.$
+\end{Prop}
+%\end{thm}
+%
+%\begin{Prec}
+Pour déterminer $\delta$, on pose $\delta =x+iy$, puis on cherche $x,y$ tels que $\delta ^2=b^2-4ac$, en écrivant $b^2-4ac$ sous forme algébrique. On peut donc utiliser la méthode de résolution du type $z^2=u$.
+%  \end{Prec}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équation à coefficients réels}
+
+Résoudre dans $\C : z^2-4z+5=0.$\\
+
+%
+%\sol{${\cal S}=\{2-i,2+i\}$
+%
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Équation à coefficients complexes}
+
+Résoudre dans $\C : z^2-(4-i)z+5+i=0.$
+%
+%\sol{${\cal S}=\{1+i,3-2i\}$
+%
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Racines de  $P$}
+
+Soit $P(z)=2z^3-(1+4i)z^2+(4-6i)z-2+4i$.
+
+\begin{enumerate}
+    \item Montrer que $1/2$ est racine de $P(z)$.
+    \item Factoriser $P(z)$ \textcolor{blue}{({\it \underline{rappel} : si $\alpha$ est une racine d'un polyn\^ome $P$ de degré $n$, alors $P(z)$ se factorise par $z-\alpha$, c'est-\`a-dire que $P(z)=(z-\alpha)Q(z)$ o\`u $Q$ est un polyn\^ome de degré $n-1$})}.
+\item Résoudre dans $\C $ l'équation $P(z)=0$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%\sol{${\cal S}=\{1/2,1-i,-1+3i\}$
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+%
+
+\section{Racines $n^{\text{ièmes}}$ d'un nombre complexe}
+\subsection{Cas général}
+
+\begin{Def}\textbf{Racine $n^{\text{ièmes}}$}
+    \vspace{1em}
+
+Soit $u\in\C,\, n\in\N$ avec $n\geq2$. Une racine $n^{\text{ième}}$ du complexe $u$ est une solution de l'équation$$z^n=u.$$
+\end{Def}
+
+%\begin{Rem}
+D\`es que $n\geq3$, la méthode algébrique est déconseillée et on pose $z=\rho e^{i\theta}$.
+%\end{Rem}
+
+\begin{Ex} Pour trouver les racines cubiques de $-8i$, il s'agit de résoudre $z^3=-8i$.
+
+\begin{enumerate}%[$\bullet$]
+\item On pose $z=\rho e^{i\theta}$, l'équation devient $$\rho^3e^{i3\theta}=8e^{-i\frac{\pi}{2}}$$
+
+\item En identifiant module et argument, on obtient  
+$$\left\{\begin{array}{l}\rho^3=8\\
+3\theta=-\frac{\pi}{2}+2k\pi
+\end{array}\right.\quad \text{ donc }
+\left\{\begin{array}{l}\rho=2\\ \theta=-\frac{\pi}{6}+k\frac{2\pi}{3}\end{array}\right.$$
+
+\item\underline{Solutions :}
+\begin{enumerate}
+    \item[] {$k=0 :$} $z_0=2e^{-i\frac{\pi}{6}}$, affixe de $M_0$
+    \item[] {$k=1 :$} $z_1=2e^{i\frac{\pi}{2}}$, affixe de $M_1$
+    \item[] {$k=2 :$} $z_2=2e^{i\frac{7\pi}{6}}$, affixe de $M_2$
+\end{enumerate}
+
+Le triangle $M_0M_1M_2$ est équilatéral.
+
+%\hspace{1cm}\begin{minipage}[t]{0.5\linewidth}\begin{center}\underline{Interprétation géométrique :}\end{center}
+%
+%%\pstTriangle(0,2){A}(-1.73,-1){B}(1.73,-1){C}
+%%\pstCircleABC{A}{B}{C}{O}
+%%\psaxes[Dx=10,Dy=10,linewidth=1pt]{->}(0,0)(-3,-3)(3,3)
+%
+%\psset{xunit=1cm , yunit=3.5cm}
+%\begin{pspicture}(3,3)(3,3)
+%\CercleTriangle{1}
+%\end{pspicture}\end{minipage}
+\end{enumerate}
+\end{Ex}
+
+%\begin{Rem}
+On peut aussi choisir comme valeurs de $k$, $-1,0,1$ : si bien que la racine $z_2$ ci-dessus sera donnée sous la forme $z_{-1}=2e^{-i\frac{5\pi}{6}}$.
+%\end{Rem}
+%\vspace{1em}
+\begin{Prop}\textbf{Racines $n^{\text{ièmes}}$}
+    \vspace{1em}
+
+Pour tout $u\in\C^*,\, n\in\N$ avec $n\geq2$. Il existe toujours exactement $n$ solutions à équation$$z^n=u.$$
+\end{Prop}
+
+\exo[2]{Racines quatrièmes de -4 :}
+
+Résoudre $z^4=-4$
+
+%\sol{
+% \vspace{4.5cm}
+
+%\textcolor{blue}{\hrulefill{} \ding{110}}}
+
+\subsection{Cas particulier : racines $n^{\text{ièmes}}$ de l'unité}
+
+\begin{Def}\textbf{ Racine $n^{\text{ième}}$ de l'unité} 
+    \vspace{1em}
+
+Une racine $n^{\text{ième}}$ de $1$ est une solution de l'équation $$z^n=1.$$
+\end{Def}
+
+\noindent En posant $z=\rho e^{i\theta}$ : $$\left\{\begin{array}{l}\rho=1\\ \theta=\frac{2k\pi}{n}\end{array}\right..$$
+
+\begin{Ex}
+Pour trouver les racines cubiques de l'unité, il s'agit de résoudre $z^3=1$.
+
+\begin{minipage}[t]{0.45\linewidth}\underline{Solutions :}
+\vspace{1em}
+
+{$k=0 :$} $z_0=1$
+\vspace{1em}
+
+{$k=1 :$} $z_1=e^{i\frac{2\pi}{3}}=j$
+\vspace{1em}
+
+{$k=2 :$} $z_2=e^{i\frac{4\pi}{3}}=j^2=\bar j$
+\vspace{1em}
+
+On notera que {$1+j+ j^2=0$.}\end{minipage}\hspace{1cm}
+%\begin{minipage}[t]{0.5\linewidth}\begin{center}\underline{Interprétation géométrique :}\end{center}
+%\psset{xunit=1cm , yunit=3.5cm}
+%\begin{pspicture}(3,3)(3,3)
+%\CercleTriangleDeux{1}
+%\end{pspicture}\end{minipage}
+\end{Ex}
+
+\begin{Ex}\textbf{\emph{Résolution de $z^3=-8i$, par une technique se ramenant aux racines cubiques de l'unité.}}
+
+\begin{enumerate}%[$\bullet$]
+\item Une racine évidente : $2i$
+\item donc on cherche $z$ tel que $z^3=(2i)^3\Longleftrightarrow\left(\dfrac{z}{2i}\right)^3=1$
+\item On déduit que $\dfrac{z}{2i}=1$ ou $\dfrac{z}{2i}=j$ ou $\dfrac{z}{2i}=j^2$
+\item c'est-\`a-dire $z=2i=2e^{i\frac{\pi}{2}}$ ou $z=2i j=2e^{i\frac{7\pi}{6}}$ ou $z=2ij^2=2e^{-i\frac{\pi}{6}}$
+\end{enumerate}
+\end{Ex}
+
+\subsection{QCM}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+
+\item Une équation \( az^2 + bz + c = 0 \), avec \( a, b, c \in \mathbb{C} \), a toujours :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] Deux solutions dans \( \mathbb{R} \)
+    \item[2.] Deux solutions dans \( \mathbb{C} \)
+    \item[3.] Une seule solution si \( \Delta = 0 \)
+    \item[4.] Deux solutions distinctes si \( \Delta \neq 0 \)
+\end{itemize}
+\end{multicols}
+
+\item L'équation \( z^2 + 1 = 0 \) admet pour solutions :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( i \)
+    \item[2.] \( -i \)
+    \item[3.] \( 1 \)
+    \item[4.] \( \sqrt{2} \)
+\end{itemize}
+\end{multicols}
+
+\item Le discriminant complexe \( \Delta \) de l'équation \( az^2 + bz + c = 0 \) est :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( b^2 - 4ac \)
+    \item[2.] Toujours réel
+    \item[3.] Parfois complexe
+    \item[4.] Nécessaire pour appliquer la formule des racines
+\end{itemize}
+\end{multicols}
+
+\item Soit \( z \in \mathbb{C} \), alors les solutions de \( z^n = 1 \) sont :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] Les racines \( n \)-ièmes de l'unité
+    \item[2.] Réparties régulièrement sur le cercle de rayon 1
+    \item[3.] Données par \( e^{2ik\pi/n} \), \( k = 0, 1, \ldots, n-1 \)
+    \item[4.] Toutes réelles si \( n \) est pair
+\end{itemize}
+\end{multicols}
+
+\item L'équation \( z^3 = 8 \) admet comme solutions :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( 2 \)
+    \item[2.] \( 2e^{2i\pi/3} \)
+    \item[3.] \( 2e^{-2i\pi/3} \)
+    \item[4.] Une infinité de solutions
+\end{itemize}
+\end{multicols}
+
+\item Pour \( z_0 \in \mathbb{C} \), \( z_0 \neq 0 \), les solutions de \( z^n = z_0 \) sont données par :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] \( \sqrt[n]{|z_0|} e^{i(\arg(z_0) + 2k\pi)/n} \)
+    \item[2.] Une infinité de racines dans \( \mathbb{C} \)
+    \item[3.] \( n \) racines distinctes si \( z_0 \neq 0 \)
+    \item[4.] Une seule racine si \( z_0 \in \mathbb{R}_+^* \)
+\end{itemize}
+\end{multicols}
+
+\item L'ensemble des racines \( n \)-ièmes de l'unité forme :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] Un groupe multiplicatif
+    \item[2.] Un sous-ensemble de \( \mathbb{R} \)
+    \item[3.] Un polygone régulier à \( n \) sommets
+    \item[4.] Une droite dans le plan complexe
+\end{itemize}
+\end{multicols}
+
+\item Une équation complexe du second degré peut avoir :
+\begin{multicols}{2}
+\begin{itemize}
+    \item[1.] Deux racines égales
+    \item[2.] Une racine réelle et une imaginaire
+    \item[3.] Deux racines imaginaires pures
+    \item[4.] Des racines conjuguées
+\end{itemize}
+\end{multicols}
+
+\end{enumerate}
+
+
+
+\section{Retour sur les ensembles $\C[X]$ et $\R[X]$}
+\subsection{Factorisation dans $\C[X]$ (polyn\^omes \`a coefficients complexes)}
+
+
+\begin{Thm}\textbf{Théorème de d'Alembert}\
+    \vspace{1em}
+
+Tout polyn\^ome de $\C[X]$ peut s'écrire comme produit de polyn\^omes de degré 1 :$$\forall P\in\C[X]\quad \exists a\in\C\textrm{ et }(\alpha_i,m_i)_{i\in I}\in\C\times\N\quad\text{tels que}\quad P(X)=\ds a\prod_i (X-\alpha_i)^{m_i}$$
+\end{Thm}
+
+%
+%\begin{Dem}
+%Pas facile, facile...
+
+%\textcolor{red}{\hrulefill{} \ding{110}}
+%\end{Dem}
+
+\'Etant donné un polyn\^ome $P$, on cherche ses racines.
+
+%\begin{Exs}
+\begin{enumerate}%[$\bullet$]
+\item $P(X)=X^3-1$ : après la recherche des racines cubique de 1: 
+$$P(X)=(X-1)(X-j)(X-\bar j)$$
+\item $P(X)=X^6+1$ : cherchons les racines sous la forme $X=\rho e^{i\theta}$, l'équation donne alors 
+$$\rho^6e^{i6\theta}=e^{i\pi}\quad \text{ donc } \quad 
+\left\{\begin{array}{l}\rho^6=1\\ 6\theta=\pi+2k\pi\end{array}\right.$$
+On touve finalement
+$$\left\{\begin{array}{l}\rho=1\\ \theta=\frac{\pi}{6}+\frac{k\pi}{3}\end{array}\right.$$
+
+Les 6 racines sont $\{e^{i\pi/6},\,e^{i\pi/2},\,e^{i5\pi/6},\,e^{i7\pi/6},\,e^{i3\pi/2},\,e^{i11\pi/6}\}$.
+
+%\begin{center}
+%\psset{xunit=1cm , yunit=4cm}
+%\begin{pspicture}(-2,0.5)(2,2.5)
+%\CercleHexagone{1}
+%\end{pspicture}
+%\end{center}
+Et finalement 
+$$P(X)=(X-e^{-i\pi/6})(X-e^{i\pi/6})(X-e^{i\pi/2})(X-e^{i5\pi/6})(X-e^{-i5\pi/6})(X-e^{-i\pi/2}).$$
+
+\item $P(X)=X^6-2X^3+1$ : on remarque que 
+$$P(X)=(X^3-1)^2=(X-1)^2(X-j)^2(X-\bar j)^2.$$
+\end{enumerate}
+%\end{Exs}
+
+\subsection{Factorisation dans $\R[X]$ (polyn\^omes \`a coefficients réels)}
+
+%\begin{thm}
+\begin{Prop}\textbf{Racines sur $\R[X]$}
+    \vspace{1em}
+
+    \'Etant donné un polyn\^ome $P$ de $\R[X]$. Les racines de $P$ sont soit réelles, soit complexes conjuguées.
+\end{Prop}
+%\end{thm}
+
+%\begin{Dem} 
+On consid\` ere le polyn\^ome $P$ de $\R[X]$, $P(X)=a_nX^n+a_{n-1}X^{n-1}+\dots+a_0$.
+
+$$\begin{array}{rll}\alpha\text{ racine de }P&\Longleftrightarrow&a_n\alpha^n+a_{n-1}\alpha^{n-1}+...+a_0=0\\
+&&\\
+&\Longleftrightarrow&\overline{a_n\alpha^n+a_{n-1}\alpha^{n-1}+...+a_0}=\bar0\\
+&&\\
+&\Longleftrightarrow&\overline{a_n\alpha^n}+\overline{a_{n-1}\alpha^{n-1}}+...+\overline{a_0}=0\\
+&&\\
+&\Longleftrightarrow&\overline{a_n}\overline{\alpha^n}+\overline{a_{n-1}}\overline{\alpha^{n-1}}+...+\overline{a_0}=0\\
+&&\\
+&\Longleftrightarrow&a_n\overline{\alpha^n}+a_{n-1}\overline{\alpha^{n-1}}+...+a_0=0\\
+&&\\
+&\Longleftrightarrow&a_n\overline{\alpha}^n+a_{n-1}\overline{\alpha}^{n-1}+...+a_0=0\\
+&&\\
+&\Longleftrightarrow&P(\overline\alpha)=0\\
+&&\\
+&\Longleftrightarrow&\overline\alpha\textrm{ racine de }P
+\end{array}$$
+%\textcolor{red}{\hrulefill{} \ding{110}}
+%\end{Dem}
+%
+%\begin{Ex}$P(X)=X^2+\sqrt{3}X+2$\end{Ex}
+%
+%\begin{thm}
+\begin{Prop}\textbf{Racines complexes sur $\C[X]$}
+    \vspace{1em}
+
+    \'Etant donné $\alpha\in\C$. Le produit $(X-\alpha)(X-\overline\alpha)$ est \`a coefficients réels.\\
+\end{Prop}
+%\end{thm}
+%
+%\begin{Dem} 
+$$(X-\alpha)(X-\overline\alpha)=X^2-(\alpha+\overline\alpha)X+\alpha\overline\alpha=X^2-2Re(\alpha)X+\abs{\alpha}^2.$$
+
+%\textcolor{red}{\hrulefill{} \ding{110}}
+%\end{Dem}
+%
+%\begin{thm}
+\begin{Prop}\textbf{Factorisation dans $\R[X]$}
+    \vspace{1em}
+
+Tout polyn\^ome de $\R[X]$ peut s'écrire comme produit de polyn\^omes de degré 1 et de polyn\^omes de degré 2 \`a discriminant strictement négatif (ou encore, aux racines complexes non réelles conjuguées).
+\end{Prop}
+%\end{thm}
+
+% \begin{Dem} D'aprés le théoréme de d'Alembert, un polyn\^ome $P$ de $\C[X]$ peut s'écrire :$$P(X)=\ds\prod_i (X-a_i)^{m_i}$$
+% o\`u $m_i$ est la multiplicité de $a_i$.
+
+% Soit $a_i$ est une racine complexe de $P$ de multiplicité $m_i$, $\overline{a_i}$ est une racine complexe de $P$. Si $m_i\geq2$, $a_i$ est une racine de $P'$ ; et ainsi de suite jusqu'\`a $P^{(m_i-1)}$.
+
+% Réciproquement, comme $P^{(m_i)}(a_i)\neq 0$, on a $P^{(m_i)}(\overline{a_i})$ ; on en déduit que $\overline{a_i}$ est une racine complexe de $P$ de multiplicité $m_i$.
+
+% Si $a_i\in\R$ alors $\overline{a_i}=a_i\in\R$ ; par contre si $a_i\notin\R$ alors il existe $j\neq i$ tel que $a_j=\overline{a_i}$ et $m_j=m_i$. On a alors $$(X-a_i)^{m_i}(X-\overline{a_i})^{m_i}=(X^2-2Re(a_i)X+\abs{a_i}^2)^{m_i}$$
+% et $X^2-2Re(a_i)X+\abs{a_i}^2$ est un polyn\^ome réel de degré 2 \`a discriminant négatif.\\
+
+%\textcolor{red}{\hrulefill{} \ding{110}}
+%\end{Dem}
+
+%\begin{Exs}
+\begin{enumerate}%[$\bullet$]
+\item $P(X)=X^3-1=(X-1)(X-j)(X-\bar j)=(X-1)(X^2+X+1)$\\
+\vspace{1em}
+
+\item $P(X)=X^6+1\\\begin{array}{l}=(X-e^{-i\pi/6})(X-e^{i\pi/6})(X-e^{i\pi/2})(X-e^{-i\pi/2})(X-e^{i5\pi/6})(X-e^{-i5\pi/6})\\=(X^2-\sqrt3X+1)(X^2+1)(X^2+\sqrt3X+1)\end{array}$\end{enumerate}
+%\end{Exs}
+
+\begin{bclogo}[couleur = green!20, arrondi = 0.1, ombre = true, couleurOmbre=black!10, logo=\bcinfo]{~Méthode pour factoriser dans $\R[X]$}
+
+ On peut, si nécessaire, rechercher les racines complexes du polyn\^ome $P$ de $\R[X]$,\\
+  puis développer les produits du type $(X-a_i)(X-\overline{a_i})$ lorsque $a_i\in\C-\R$ pour retrouver les polyn\^omes de degré 2 irréductibles dans $\R[X]$ 
+  et établir la factorisation de $P$ dans $\R[X]$.
+\end{bclogo}
+
+\exo[3]{Polynôme}
+
+On consid\`ere le polyn\^ome $P(X)=X^5-1$.
+\begin{enumerate}
+\item Déterminer les racines complexes de $P$.
+\item En déduire une factorisation de $P$ dans $\C[X]$, puis dans $\R[X]$.
+\end{enumerate}
+
+\subsection{Division de polyn\^omes}
+Dans le paragraphe suivant, on propose de prendre connaissance d'une technique exposée dans le cours sur les polyn\^omes : la division euclidienne des polyn\^omes.
+%\sect{La division euclidienne de polyn\^omes}
+%
+%\{
+Si $A$ et $B$ sont deux polyn\^omes de $\C[X]$, avec $B$ non nul, il existe un unique couple $(Q, R)$ de polyn\^ omes de $\C[X]$ tel que : $$A = BQ + R \quad\text{avec}\quad deg(R) < deg(B)$$
+%{\bf
+\textbf{Divisibilité :} si $R=0$, c'est-\`a-dire que $A=BQ$ on dit que \og A est divisible par B\fg\, ou que \og B divise A\fg.
+%}}
+%%
+%\exe{
+%%
+\vspace{1em}
+
+\noindent\begin{minipage}[htb]{8cm}
+\underline{(a) Division de $x^4-3x^3+x+1$ par $x^2+2$} :
+
+\begin{equation*}
+\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraycolsep}{2pt}
+  \begin{array}{rrrrr|rrr}
+ x^4&-3x^3 &   &+x&+1  &x^2 &+2&  \\
+\cline{6-7}
+-x^4&&-2x^2 &   &  &x^2&-3x&-2\\
+\cline{1-3}
+    &-3x^3 &  &  & &  &   &  \\
+    &3x^3&&+6x&  &   &   &  \\
+    \cline{2-4}
+    &     &-2x^2 &  & &  &   &  \\
+    &     &+2x^2&&+4&   &   &  \\
+              \cline{3-5}
+    &     &   &7x&+5&   &   &  \\ 
+  \end{array}
+\end{equation*}
+Finalement,
+
+ $x^4-3x^3+x+1$
+ 
+ $=(x^2+2)(x^2-3x-2)+7x+5$
+\end{minipage}\hspace{1cm}\vline\hspace{0.5cm}
+\begin{minipage}[htb]{5cm}
+\underline{(b) Division de $x^3+x^2-1$ par $x-1$} :
+
+\begin{equation*}
+\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraycolsep}{2pt}
+  \begin{array}{rrrr|rrr}
+ x^3&+x^2 &   &-1&x  &-1 &  \\
+\cline{5-7}
+-x^3&+x^2 &   &  &x^2&+2x&+2\\
+\cline{1-2}
+    &2x^2 &   &  &   &   &  \\
+    &-2x^2&+2x&  &   &   &  \\
+    \cline{2-3}
+    &     &2x &  &   &   &  \\
+    &     &-2x&+2&   &   &  \\
+              \cline{3-4}
+    &     &   &+1&   &   &  \\ 
+  \end{array}
+\end{equation*}
+Finalement,
+
+$x^3+x^2-1$
+
+$=(x-1)(x^2+2x+2)+1$
+\end{minipage}
+
+\vspace{1em}
+\hrule\hrule
+\vspace{1em}
+
+\noindent\begin{minipage}[htb]{7cm}
+\underline{(c) Division de $x^3-x^2+x-1$ par $x-1$} :
+
+\begin{equation*}
+\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraycolsep}{2pt}
+  \begin{array}{rrrr|rr}
+ x^3&-x^2 &+x&-1  &x &-1  \\
+\cline{5-6}
+-x^3&+x^2 &   &  &x^2&+1\\
+\cline{1-3}
+    & & x &  & &       \\
+    &&-x&+1&  &      \\
+    \cline{2-4}
+    &     && 0 & &       \\
+  \end{array}
+\end{equation*}
+donc,
+
+$x^3-x^2+x-1=(x-1)(x^2+1)$
+\end{minipage}\hspace{2.5cm}\vline\hspace{0.5cm}
+\begin{minipage}[htb]{7cm}
+il suit qu'en posant la division de
+
+$x^2+1$ par $x-i$ on obtient :
+
+\begin{equation*}
+%\renewcommand{\arraystretch}{1.2}
+%\renewcommand{\arraycolsep}{2pt}
+  \begin{array}{rrr|rr}
+x^2 &   &+1&x  &-i   \\
+\cline{4-5}
+-x^2 & +ix  &  &x&+i\\
+\cline{1-2}
+    &ix &   &   &    \\
+    &-ix&-1&   &    \\
+    \cline{2-3}
+    &   &  0&   &  \\
+  \end{array}
+\end{equation*}
+donc,
+
+$x^2+1=(x-i)(x+i)$
+
+Finalement, on obtient la forme factorisée :
+
+$x^3-x^2+x-1$
+
+$=(x-1)(x-i)(x+i)$
+\end{minipage}
+%}
+%%
+%%
+%\newpage
+\section{Exercices}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Forme algébrique - Somme et produits}
+
+
+Mettre sous forme algébrique les nombres complexes suivants :
+$$\begin{array}{lll}
+\mathbf{1.}\ z_1=(2+5i)+(i+3)&\quad \mathbf{2.}\ z_2=4(-2+3i)+3(-5-8i)&\quad\mathbf{3.}\ z_3=(2-i)(3+8i)\\
+\displaystyle\mathbf{4.}\ z_4=(1-i)\overline{(1+i)}&\quad\mathbf{5.}\ z_5=i(1-3i)^2& \quad\mathbf{6.}\ z_6=(1+i)^3
+\end{array}
+$$
+Attention! Il y a un symbole de conjugaison dans $z_4$.
+
+
+% Exercice 2902
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+\exo[1]{Forme algébrique - Quotients}
+
+Mettre sous forme algébrique les nombres complexes suivants :
+$$\begin{array}{lll}
+\mathbf{1.}\ z_1=\frac1{1+i}&\quad{\mathbf 2.}\ z_2=\frac{-4}{1+i\sqrt 3}&
+\quad\mathbf{3.}\ z_3=\frac{1-2i}{3+i}\\
+\displaystyle{\mathbf 4.}\ z_4=\frac{(3+5i)^2}{1-2i}&\displaystyle\quad{\mathbf 5.}\ z_5=\left(\frac{1+i}{2-i}\right)^2+\frac{3+6i}{3-4i}\\
+\end{array}
+$$
+
+
+% Exercice 2411
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Systèmes}
+
+Résoudre les syst\` emes suivants, d'inconnues les nombres complexes $z_1$ et $z_2$ :
+$$\left\{
+ \begin{array}{rcl}
+  2z_1-z_2&=&i\\
+  -2z_1+3iz_2&=&-17
+ \end{array}\right.\qquad\qquad \left\{
+ \begin{array}{rcl}
+  3iz_1+iz_2&=&i+7\\
+  iz_1+2z_2&=&11i
+ \end{array}\right.$$
+
+On donnera les résultats sous forme algébrique.\\
+
+
+% Exercice 2
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[1]{Forme exponentielle}
+
+Mettre sous forme exponentielle les nombres complexes suivants :
+$$\begin{array}{lll}
+{\mathbf 1.}\ z_1=1+i\sqrt 3&\quad\mathbf 2.\ z_2=9i&\quad{\mathbf 3.}\ z_3=-3\\
+\displaystyle{\mathbf 4.}\ z_4=\frac{-i\sqrt 2}{1+i}&\displaystyle \quad\mathbf{5.}\ z_5=\frac{(1+i\sqrt 3)^3}{(1-i)^5}&\quad{\mathbf 6.}\ z_6=\sin x+i\cos x.\\
+\end{array}
+$$
+
+
+% Exercice 2930
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Forme exponentielle, encore}
+
+ On pose
+  $z_1=4e^{i\frac{\pi}{4}},\;z_2=3ie^{i\frac{\pi}{6}},\;z_3=-2e^{i\frac{2\pi}{3}}$.
+  
+  \'Ecrire sous forme exponentielle les nombres complexes : $z_1$, $z_2$, $z_3$, $z_1z_2$,
+  $\frac{z_1z_2}{z_3}$.
+% Exercice 3
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Les deux \`a la fois - avec application}
+
+On consid\` ere les nombres complexes suivants :
+$$z_1=1+i\sqrt 3,\qquad z_2=1+i\quad \textrm{ et }\quad z_3=\frac{z_1}{z_2}.$$
+\begin{enumerate}
+\item \'Ecrire $z_3$ sous forme algébrique.
+\item \'Ecrire $z_3$ sous forme trigonométrique.
+\item En déduire les valeurs exactes de $\cos\frac\pi{12}$ et $\sin\frac\pi{12}$.
+\end{enumerate}
+
+
+% Exercice 4
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Forme algébrique, le retour}
+
+Déterminer la forme algébrique des nombres complexes suivants :
+$$z_1=(2+2i)^6\qquad z_2=\left(\frac{1+i\sqrt 3}{1-i}\right)^{20}\qquad  z_3=\frac{(1+i)^{2000}}{(i-\sqrt 3)^{1000}}.$$
+
+
+% Exercice 5
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[2]{Réel positif}
+
+Trouver les entiers $n\in\mathbb N$ tels que $(1+i\sqrt 3)^n$ soit un réel positif.\\
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Forme exponentielle et formule d'Euler}
+
+Soient $a,b\in]0,\pi[$. écrire sous forme exponentielle les nombres complexes suivants :
+$$z_1=1+e^{ia}\qquad z_2=1-e^{ia}\qquad  z_3=e^{ia}+e^{ib}\qquad z_4=\frac{1+e^{ia}}{1+e^{ib}}.$$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[2]{Le m\^eme module}
+
+Déterminer les nombres complexes non nuls $z$ tels que $z$, $\frac 1z$ et $1-z$ aient le m\^eme module.
+
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[3]{Homographie}
+
+Soit $z$ un nombre complexe, $z\neq 1$. Démontrer que :
+$$|z|=1\iff \frac{1+z}{1-z}\in i\mathbb R.$$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[2]{Exponentielle}
+
+Résoudre l'équation $e^z=3\sqrt 3-3i$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Équations du premier degré}
+
+Résoudre les équations suivantes, d'inconnue $z\in\mathbb C$ :
+$$z+2i=iz-1\qquad\qquad(3+2i)(z-1)=i$$
+$$(2-i)z+1=(3+2i)z-i\qquad\qquad(4-2i)z^2=(1+5i)z.$$
+
+On écrira les solutions sous forme algébrique.
+
+
+% Exercice 2517
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équations avec des conjugués}
+
+Résoudre les équations suivantes :
+$$2z+i=\overline z+1\qquad 2z+\overline z=2+3i\qquad  2z+2\overline z=2+3i.
+$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% Exercice 15
+
+\exo[1]{Racine carrée d'un nombre complexe}
+
+Calculer les racines carrées des nombres complexes suivants :
+$z_1=3+4i,\ z_2=8-6i.$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 16
+
+
+\exo[2]{Racine carré de deux fa\c cons}
+
+Déterminer les racines carrées de $Z=\sqrt 3+i$ sous forme algébrique, puis sous forme trigonométrique.\\
+En déduire la valeur de $\cos\pi/12$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% Exercice 2971
+
+\exo[2]{Racine carrée puis équation du second degré}
+
+\begin{enumerate}
+\item Calculer les racines carrées du nombre complexe $1+2\sqrt 2 i$ sous forme algébrique.
+\item Résoudre dans $\mathbb C$ l'équation $z^2+iz-\frac 12-i\frac{\sqrt 2}2=0$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% Exercice 18
+
+
+\exo[2]{Racines $n$-i\` emes}
+
+Résoudre les équations suivantes :
+$$z^3=1+i\sqrt 3\qquad z^6=\frac{-4}{1+i\sqrt 3}
+\qquad z^5=\frac{(1+i\sqrt 3)^4}{(1+i)^2}.$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 19
+
+
+\exo[3]{Presque des racines de l'unité}
+
+Résoudre les équations suivantes : 
+$$(z-1)^5=(z+1)^5\qquad  \left(\frac{z+1}{z-1}\right)^3+\left(\frac{z-1}{z+1}\right)^3=0
+\qquad (z+i)^n=(z-i)^n.$$
+
+
+% Exercice 21
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[3]{Degré plus grand}
+
+On cherche \`a résoudre l'équation
+$$z^3+(1+i)z^2+(i-1)z-i=0.$$
+\begin{enumerate}
+\item Rechercher une solution imaginaire pure $ai$ \` a l'équation.\\
+\item Déterminer $b,c\in\mathbb R$ tels que 
+$$z^3+(1+i)z^2+(i-1)z-i=(z-ai)(z^2+bz+c).$$
+\item En déduire toutes les solutions de l'équation.\\
+\item Sur le m\^eme mod\` ele, résoudre l'équation $z^3-(2+i)z^2+2(1+i)z-2i=0$.\\
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 26
+
+\exo[3]{Lieu géométrique et arguments}
+
+Le plan est rapporté \` a un rep\` ere orthonormé direct $(O,\vec u,\vec v)$. Déterminer l'ensemble des points $M$ dont l'affixe $z$ vérifie la relation demandée :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $\arg(z-2)=\frac{\pi}2\ [2\pi]$
+\item $\arg(z-2)=\frac{\pi}2\ [\pi]$
+\item $\arg(iz)=\frac{\pi}{4}\ [\pi]$
+\item $\arg\left(\frac{z}{1+i}\right)=\frac{\pi}2\ [2\pi]$
+\item $\arg\left(\frac{z-2i}{z-1+i}\right)=\frac{\pi}2\ [\pi]$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 24
+
+\exo[3]{Lieux géométriques et module}
+
+Déterminer le lieu géométrique des points $M$ dont l'affixe $z$ vérifie
+$$
+\begin{array}{ll}
+\mathbf{1.}\ |z-i|=|z+i|&
+\mathbf{2.}\ \displaystyle \frac{|z-3+i|}{|z+5-2i|}=1\\
+\mathbf{3.}\ |(1+i)z-2i|=2&
+\mathbf{4.}\ \displaystyle \ |3+iz|=|3-iz|
+\end{array}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 27
+
+
+\exo[3]{écriture complexe de transformations}
+Déterminer la nature et les éléments caractéristiques des transformations géométriques données par l'écriture complexe suivante :
+$$\begin{array}{ll}
+\mathbf 1.\ z\mapsto \frac 1iz&\mathbf 2.\ z\mapsto z+(2+i)\\
+\mathbf 3.\ z\mapsto (1+i\sqrt 3)z+\sqrt 3(1-i)&\mathbf 4.\ z\mapsto (1+i\tan\alpha )z-i\tan\alpha,\ \alpha\in [0,\pi/2[.\\
+\end{array}$$
+
+
+% Exercice 28
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[3]{Une coquille d'escargot}
+
+Dans le plan muni d'un rep\` ere orthonormal $(O,\vec i,\vec j)$, on note $A_0$ le point d'affixe 6 et $S$ la similitude de centre $O$, de rapport $\frac{\sqrt 3}2$ et d'angle $\frac\pi 6$. On pose $A_{n+1}=S(A_n)$ pour $n\geq 1$.\\
+\begin{enumerate}
+\item Déterminer, en fonction de $n$, l'affixe du point $A_n$. En déduire que $A_{12}$ est sur la demi-droite $(O,\vec i)$.\\
+\item Établir que le triangle $OA_nA_{n+1}$ est rectangle en $A_{n+1}$.\\
+\item Calculer la longueur du segment $[A_0A_1]$. En déduire la longueur $\ell$ de la ligne polygonale
+$A_0A_1A_2\dots A_{12}.$\\
+\end{enumerate}
+
+
+% Exercice 29
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Lieux géométriques}
+
+Pour chacune des conditions suivantes, déterminer et représenter le lieu géométrique des points $M$ d'affixe $z$ qui vérifient la condition.\\
+\begin{enumerate}
+\item $|z - 2 + i| = 3$;\\
+\item $|z - 1| = |z + 3|$;\\
+\item $\Re e(z + 2i) = 1$;\\
+\item $|z - i| \leq 2$ et $\Im m(z) \geq 0$.\\
+\end{enumerate}
+
+
+% Exercice 3086
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Linéariser!}
+
+\begin{enumerate}
+\item Établir la formule de trigonométrie 
+$\cos^4(\theta)=\cos(4\theta)/8+\cos(2\theta)/2+3/8$.\\
+\item Fournir une relation analogue pour $\sin^4(\theta)$. \\
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% Exercice 57
+
+\exo[2]{Linéariser à nouveau}
+
+Linéariser $\cos^5 x$, $\sin^5 x$ et $\cos^2 x\sin^3 x$.\\
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 3087
+
+\newpage
+
+\exo[2]{Addition}\
+
+\begin{enumerate}
+\item Démontrer la formule de trigonométrie 
+$\cos(4\theta)=\cos^4(\theta)-6\cos^2(\theta)\sin^2(\theta)+\sin^4(\theta)$. \\
+\item Fournir une relation analogue pour $\sin(4\theta)$.\\
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+% Exercice 58
+
+
+\exo[2]{Addition à nouveau}
+
+Exprimer $\cos(5x)$ et $\sin(5x)$ en fonction de $\cos x$ et $\sin x$.\\
+
+
+% Exercice 59
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Un calcul d'intégrale}
+
+Calculer $\int_0^{\pi/2}\cos^4t\sin^2tdt$.\\
+
+
+% Exercice 60
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Sommes trigonométriques}
+
+Soit $n\in\mathbb N^*$ et $x,y\in\mathbb R$. Calculer les sommes suivantes :
+\begin{enumerate}
+\item $\displaystyle \sum_{k=0}^n \binom{n}{k}\cos(x+ky)$;\\
+\item $\displaystyle S=\sum_{k=0}^n \frac{\cos(kx)}{(\cos x)^k}\textrm{ et }T=\sum_{k=0}^n \frac{\sin(kx)}{(\cos x)^k},$\\
+avec $x\neq\frac{\pi}2+k\pi$, $k\in\mathbb Z$;\\
+\item $\displaystyle D_n=\sum_{k=-n}^n e^{ikx}$ et $\displaystyle K_n=\sum_{k=0}^n D_k$, avec $x\neq 0+2k\pi$, $k\in\mathbb Z$.\\
+\end{enumerate}
+
+
+%
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Module}
+
+Déterminer $z$ pour que $z, 1-z$ et $z^2$ aient le m\^eme module.
+
+%\encad{SOLUTION :
+%
+%En posant $z=x+iy$, on déduite $1-z=1-x-iy$ et $z^2=x^2-y^2+i2xy$. Ces trois nombres complexes ont le méme module si $x, y$ vérifient les égalités $(1)$ et $(2)$ suivantes (écriture similaire à un systéme) :
+%$$x^2+y^2\stackrel{(1)}{=}(1-x)^2+y^2\stackrel{(2)}{=}(x^2-y^2)^2+4x^2y^2$$
+%
+%- De l'égalité $(1)$, on déduit $x^2=1-2x+x^2$, soit $x=\frac{1}{2}$.
+%
+%- En remplaéant $x$ par $\frac{1}{2}$ dans l'égalité $(2)$, on déduit de $1-2x+x^2+y^2=x^4+y^4+2x^2y^2$ l'égalité
+%$$\begin{array}{l}\frac{1}{4}+y^2=\frac{1}{16}+y^4+\dfrac{y^2}{2}\\y^4-\dfrac{y^2}{2}-\dfrac{3}{16}=0\\16y^4-8y^2-3=0\\16Y^2-8Y-3=0\quad\text{en posant } Y=y^2\end{array}$$
+%
+%Les solutions réelles é cette équation en $Y$ sont $-\dfrac{1}{4}$ et $\dfrac{3}{4}$ : on ne retient que $\dfrac{3}{4}$ pour $y^2$, soit $y=-\dfrac{\sqrt 3}{2}$ ou $y=\dfrac{\sqrt 3}{2}$.
+%
+%- Finalement, l'ensemble des solutions au probléme est $\left\{\dfrac{1}{2}+i\dfrac{\sqrt 3}{2},\dfrac{1}{2}-i\dfrac{\sqrt 3}{2}\right\}$
+%}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Primitives}
+
+\begin{enumerate}
+\item \`A l'aide des formules d'Euler, linéariser $f(x)=\cos2x\sin3x$ et $g(x)=\cos x\sin^5x$.
+\item En déduire les primitives $\ds\int f(x)\, dx$ et $\ds\int g(x)\, dx$.
+\item Par le calcul direct de $\ds\int \cos x\sin^5x\, dx$ puis par linéarisation de la primitive, retrouver le résultat de la question 2.\\
+\end{enumerate}
+
+%\encad{SOLUTION :
+%
+%\begin{enumerate}
+%\item D'une part $$\begin{array}{rl}
+%f(x)=\cos2x\sin3x&=\left(\dfrac{e^{i2x}+e^{-i2x}}{2}\right)\left(\dfrac{e^{i3x}-e^{-i3x}}{2i}\right)\\
+%&=\dfrac{1}{4i}(e^{i5x}-e^{-ix}+^{ix}+e^{-i5x})\\
+%&\\
+%&=\dfrac{1}{4i}(2i\sin 5x+2i\sin x)\\
+%&\\
+%&=\dfrac{1}{2}\sin 5x+\dfrac{1}{2}\sin x
+%\end{array}$$
+%
+%D'autre part, en utilisant le développement $(a-b)^5=a^5-5a^4b+10a^3b^2-10a^2b^3+5ab^4-b^5$, $$\begin{array}{rl}
+%g(x)=\cos x\sin^5 x&=\left(\dfrac{e^{ix}+e^{-ix}}{2}\right)\left(\dfrac{e^{ix}-e^{-ix}}{2i}\right)^5\\
+%&=\dfrac{1}{64i}(e^{ix}+e^{-ix})(e^{5ix}-5e^{i3x}+10e^{ix}-10e^{-ix}+5e^{-i3x}-e^{-i5x})\\
+%&\\
+%&=\dfrac{1}{64i}(e^{i6x}-e^{-i6x}-4(e^{i4x}-e^{-i4x})+5(e^{i2x}-e^{-i2x})))\\
+%&\\
+%&=\dfrac{1}{64i}(2i\sin 6x-8i\sin 4x+10i\sin 2x)\\
+%&\\
+%&=\dfrac{1}{32}\sin 6x-\dfrac{1}{8}\sin 4x+\dfrac{5}{32}\sin 2x\\
+%\end{array}$$
+%\item On en déduit $\ds\int f(x)\, dx=-\dfrac{1}{10}\cos 5x-\dfrac{1}{2}\cos x+k,\quad k\in\R$ et $\ds\int g(x)\, dx=-\dfrac{1}{192}\cos 6x-\dfrac{1}{32}\cos 4x-\dfrac{5}{64}\cos 2x+k,\quad k\in\R$
+%\item $\ds\int \cos x\sin^5x\, dx=\dfrac{1}{6}\sin^6 x+k$. Il ne reste plus qu'é (!) calculer $\sin^6 x=\left(\dfrac{e^{ix}-e^{-ix}}{2i}\right)^6$...
+%\end{enumerate}
+%}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Imaginaire pur ou réel?}
+
+
+Soit le nombre complexe $T=\dfrac{e^{i\theta}-1}{i(e^{i\theta}+1)}$.
+
+\'Etablir si $T$ est un imaginaire pur, ou un réel.
+
+%\encad{SOLUTION :
+%\begin{eqnarray*}
+%T&=&\dfrac{e^{i\theta}-1}{i(e^{i\theta}+1)}=\dfrac{e^{i\frac{\theta}{2}}(e^{i\frac{\theta}{2}}-e^{-i\frac{\theta}{2}})}{ie^{i\frac{\theta}{2}}(e^{i\frac{\theta}{2}}+e^{-i\frac{\theta}{2}})}=\dfrac{2i\sin(\theta/2)}{i2\cos(\theta/2)}=\tan(\theta/2)\in\R\\
+%\end{eqnarray*}
+%
+%}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Nouvelle équation}
+
+
+Résoudre dans $\C$ l'équation : \quad $z^2+(2+2i)z-3+6i=0$
+
+%\encad{SOLUTION :
+%
+% à partir de la méthode proposée en cours, on trouve deux solutions $$z_1=-3\quad\text{et}\quad z_2=1-2i$$
+%}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Racines cinquièmes}
+
+
+Déterminer les racines cinqui\` eme du complexe $16(1+i\sqrt 3)$.\\
+
+%\encad{SOLUTION :
+%
+%\includegraphics[scale=0.85,trim=1cm 2cm 9.5cm 10.5cm, clip]{EG2_CA1_TD5corr-p1}
+%}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Racines}
+
+\begin{enumerate}
+\item Résoudre dans $\C$ l'équation $Z^9=1$
+\item En déduire les solutions de l'équation $\left(\dfrac{z-1}{z+1}\right)^9=1$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+%\encad{SOLUTION :
+%
+%\includegraphics[scale=0.85,trim=1cm 0 0cm 2.5cm, clip]{EG2_CA1_TD5corr-p2}
+%
+%}
+
+\end{document}

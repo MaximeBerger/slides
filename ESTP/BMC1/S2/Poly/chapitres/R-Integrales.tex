@@ -1,0 +1,320 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+L'intégration correspond au processus inverse de la dérivation. C'est un outil fondamental en mathématiques et en sciences, permettant de calculer des aires, des volumes, ou de résoudre des équations différentielles.
+
+\textit{Dans tout ce chapitre, $f$ et $g$ désignent des fonctions continues sur un intervalle $[a;b]$.}
+
+\section{Primitives et intégrales}
+
+\subsection{Définitions fondamentales}
+
+\begin{Def}\textbf{Primitive d'une fonction}
+
+On dit qu'une fonction $F$ est une \textbf{primitive} de la fonction $f$ sur l'intervalle $[a ; b]$ si la dérivée de $F$ est égale à $f$.
+
+Autrement dit, pour tout $x \in[a ; b]$ :
+$$F^{\prime}(x)=f(x)$$
+\end{Def}
+
+\begin{Rmq}
+    Il faut garder en tête qu'une primitive est définie à constante près : 
+    
+    Si la fonction $F$ est une primitive de $f$, alors pour n'importe quel nombre réel $k$, la fonction $F+k$ est aussi une primitive de $f$. Une primitive est donc définie \textbf{à une constante près}.
+\end{Rmq}
+
+\begin{Def}\textbf{Intégrale}
+
+On appelle \textbf{intégrale de $f$ entre $a$ et $b$} et on note
+$$\int_a^b f(x) \, dx$$
+l'aire algébrique délimitée par la courbe de $f$ et l'axe des abscisses entre les bornes $a$ et~$b$.
+\end{Def}
+
+\subsection{Théorème fondamental de l'analyse}
+
+\begin{Thm}\textbf{Théorème fondamental}
+
+Soit $F$ une primitive de $f$ sur $[a,b]$. Alors :
+$$\int_a^b f(x) \, dx = \big[F(x)\big]_a^b = F(b) - F(a)$$
+
+La valeur de l'intégrale ne dépend pas du choix de la primitive.
+\end{Thm}
+
+\subsection{Tableau des primitives usuelles}
+
+\renewcommand{\arraystretch}{2.0}
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+\textbf{Fonction $f$} & \textbf{Primitive $F$} & \textbf{Fonction $f$} & \textbf{Primitive $F$} \\
+\hline
+$k$ (constante) & $kx + C$ & $u'(x) \cdot u^n(x)$ & $\dfrac{u^{n+1}(x)}{n+1} + C$ \\
+\hline
+$x^n$ & $\dfrac{x^{n+1}}{n+1} + C$ & $\dfrac{u'(x)}{u(x)}$ & $\ln |u(x)| + C$ \\
+\hline
+$\dfrac{1}{x}$ & $\ln |x| + C$ & $u'(x) e^{u(x)}$ & $e^{u(x)} + C$ \\
+\hline
+$e^x$ & $e^x + C$ & $\dfrac{u'(x)}{\sqrt{u(x)}}$ & $2\sqrt{u(x)} + C$ \\
+\hline
+$\cos x$ & $\sin x + C$ & $u'(x) \cos(u(x))$ & $\sin(u(x)) + C$ \\
+\hline
+$\sin x$ & $-\cos x + C$ & $u'(x) \sin(u(x))$ & $-\cos(u(x)) + C$ \\
+\hline
+$\dfrac{1}{\sqrt{x}}$ & $2\sqrt{x} + C$ & $\dfrac{1}{1+x^2}$ & $\arctan x + C$ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\section{QCM d'entraînement}
+
+\exo[1]{\textbf{QCM - Primitives}}
+
+\begin{enumerate}
+\item Une primitive de $f(x) = 3x^2 + 2x$ est :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $6x + 2$
+\item $x^3 + x^2$
+\item $x^3 + x^2 + 5$
+\end{enumerate}
+\end{multicols}
+
+\item $\displaystyle\int_0^1 e^{2x} \, dx$ vaut :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $\dfrac{e^2 - 1}{2}$
+\item $e^2 - 1$
+\item $2(e^2 - 1)$
+\end{enumerate}
+\end{multicols}
+
+\item $\displaystyle\int_1^e \frac{1}{x} \, dx$ vaut :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $0$
+\item $1$
+\item $e - 1$
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\subsection{Propriétés de l'intégrale}
+
+\begin{Prop}\textbf{Propriétés fondamentales}
+
+\begin{enumerate}
+\item \textbf{Intégrale sur un point :} $\displaystyle\int_a^a f(x) \, dx = 0$
+\item \textbf{Changement de bornes :} $\displaystyle\int_a^b f(x) \, dx = -\int_b^a f(x) \, dx$
+\item \textbf{Positivité :} Si $f \geq 0$ alors $\displaystyle\int_a^b f(x) \, dx \geq 0$
+\item \textbf{Croissance :} Si $f \geq g$ alors $\displaystyle\int_a^b f(x) \, dx \geq \int_a^b g(x) \, dx$
+\item \textbf{Inégalité triangulaire :} $\displaystyle\left|\int_a^b f(x) \, dx\right| \leq \int_a^b |f(x)| \, dx$
+\item \textbf{Linéarité :} $\displaystyle\int_a^b \lambda f(x) + g(x) \, dx = \lambda \int_a^b f(x) \, dx + \int_a^b g(x) \, dx$
+\item \textbf{Relation de Chasles :} $\displaystyle\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$
+\end{enumerate}
+\end{Prop}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Techniques d'intégration}
+
+\subsection{Intégration par parties (IPP)}
+
+Le principe est d'exploiter la règle de Leibniz pour dériver un produit :
+$$(uv)' = u'v + uv'$$
+
+\begin{Thm}\textbf{Formule d'intégration par parties}
+
+Soient $f$ et $g$ deux fonctions dérivables de dérivées continues sur $[a,b]$. Alors :
+$$\int_a^b f(x) g'(x) \, dx = \big[f(x) g(x)\big]_a^b - \int_a^b f'(x) g(x) \, dx$$
+\end{Thm}
+
+\begin{Rmq}
+La difficulté réside dans le choix judicieux de $f$ et $g'$. En général :
+\begin{itemize}
+\item On choisit pour $f$ une fonction qui se simplifie en dérivant (polynôme, $\ln$, $\arctan$...)
+\item On choisit pour $g'$ une fonction dont on connaît une primitive ($e^x$, $\sin$, $\cos$...)
+\end{itemize}
+\end{Rmq}
+
+\begin{Ex}
+Calculer $\displaystyle\int_0^1 x e^x \, dx$.
+
+On pose $f(x) = x$ et $g'(x) = e^x$, donc $f'(x) = 1$ et $g(x) = e^x$.
+
+$\displaystyle\int_0^1 x e^x \, dx = \big[x e^x\big]_0^1 - \int_0^1 e^x \, dx = e - \big[e^x\big]_0^1 = e - (e - 1) = 1$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\subsection{Décomposition en éléments simples}
+
+Cette technique permet de calculer les primitives de fractions rationnelles (quotients de polynômes).
+
+\begin{Meth}\textbf{Principe de la méthode}
+Pour intégrer $\dfrac{h(x)}{f(x) \cdot g(x)}$, on cherche des polynômes $A(x)$ et $B(x)$ tels que :
+$$\frac{h(x)}{f(x) \cdot g(x)} = \frac{A(x)}{f(x)} + \frac{B(x)}{g(x)}$$
+
+On procède par identification en multipliant par $f(x) \cdot g(x)$ :
+$$h(x) = A(x) \cdot g(x) + B(x) \cdot f(x)$$
+\end{Meth}
+
+\begin{Ex}
+Décomposer $\dfrac{1}{x^2-1}$ puis calculer $\displaystyle\int_2^4 \dfrac{1}{x^2-1} \, dx$.
+
+On cherche $a$ et $b$ tels que $\dfrac{1}{x^2-1} = \dfrac{a}{x-1} + \dfrac{b}{x+1}$.
+
+En multipliant par $(x-1)(x+1)$ : $1 = a(x+1) + b(x-1)$.
+\begin{itemize}
+\item Pour $x = 1$ : $1 = 2a$, donc $a = \dfrac{1}{2}$
+\item Pour $x = -1$ : $1 = -2b$, donc $b = -\dfrac{1}{2}$
+\end{itemize}
+
+Ainsi : $\displaystyle\int_2^4 \dfrac{1}{x^2-1} \, dx = \dfrac{1}{2}\int_2^4 \dfrac{1}{x-1} \, dx - \dfrac{1}{2}\int_2^4 \dfrac{1}{x+1} \, dx = \dfrac{1}{2}\ln\dfrac{3}{5}$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\subsection{Changement de variable}
+
+\begin{Thm}\textbf{Formule de changement de variable}
+
+Soit $\varphi : [a,b] \to I$ une fonction dérivable de dérivée continue. Alors :
+$$\int_a^b f(\varphi(x)) \cdot \varphi'(x) \, dx = \int_{\varphi(a)}^{\varphi(b)} f(u) \, du$$
+
+En posant $u = \varphi(x)$, on a $du = \varphi'(x) \, dx$.
+\end{Thm}
+
+\begin{Rmq}
+Attention à bien transformer les bornes lors du changement de variable !
+\end{Rmq}
+
+\begin{Ex}
+Calculer $\displaystyle\int_{-1}^{1} \sqrt{1-x^2} \, dx$ en posant $x = \sin u$.
+
+On a $dx = \cos u \, du$ et $\sqrt{1-x^2} = \sqrt{1-\sin^2 u} = |\cos u| = \cos u$ (car $u \in [-\frac{\pi}{2}, \frac{\pi}{2}]$).
+
+Les bornes : $x = -1 \Rightarrow u = -\frac{\pi}{2}$ et $x = 1 \Rightarrow u = \frac{\pi}{2}$.
+
+$\displaystyle\int_{-1}^{1} \sqrt{1-x^2} \, dx = \int_{-\pi/2}^{\pi/2} \cos^2 u \, du = \int_{-\pi/2}^{\pi/2} \frac{1+\cos(2u)}{2} \, du = \frac{\pi}{2}$
+
+On retrouve bien l'aire d'un demi-disque de rayon 1.
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+
+\section{Exercices}
+
+\exo[1]{\textbf{Calculs directs de primitives}}
+
+Déterminer une primitive des fonctions suivantes :
+
+\begin{multicols}{3}
+\begin{enumerate}
+\item $f(x) = 3x + 1$
+\item $f(x) = 3x^2 - x + 1$
+\item $f(x) = \dfrac{1}{x} + 2$
+\item $f(x) = e^x + 1$
+\item $f(x) = \dfrac{3}{x+1} - e^{2x+1}$
+\item $f(t) = t \cdot e^{t^2+1}$
+\item $f(t) = \dfrac{e^t}{e^t+1}$
+\item $f(t) = \dfrac{e^{2t}-1}{e^t}$
+\item $f(t) = \dfrac{t^2-t}{t^3}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Intégration par parties}}
+
+Calculer les intégrales suivantes :
+
+\begin{multicols}{2}
+\begin{enumerate}
+\item $\displaystyle\int_0^1 \ln(x+1) \, dx$
+\item $\displaystyle\int_1^{e^\pi} \sin(\ln x) \, dx$
+\item $\displaystyle\int_0^{\pi/2} x^2 \cos x \, dx$
+\item $\displaystyle\int_1^e x \ln x \, dx$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Changement de variable}}
+
+\begin{enumerate}
+\item En posant $u = \ln x$, calculer $\displaystyle\int_1^e \frac{1}{x\sqrt{\ln x + 1}} \, dx$
+\item En posant $t = x + \sin x$, calculer $\displaystyle\int_{\pi/6}^{\pi/3} \frac{\cos^2(x/2)}{x + \sin x} \, dx$
+\item En posant $t = \sin x - \cos x$, calculer $\displaystyle\int_{\pi/6}^{\pi/3} \frac{\sin x + \cos x}{2 - 2\sin(2x)} \, dx$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Décomposition en éléments simples}}
+
+\begin{enumerate}
+\item Déterminer $a$ et $b$ tels que $\dfrac{x}{2x^2+9x+9} = \dfrac{a}{x+3} + \dfrac{b}{2x+3}$.
+
+En déduire $\displaystyle\int_0^1 \frac{x}{2x^2+9x+9} \, dx$.
+
+\item Déterminer $a$, $b$ et $c$ tels que $\dfrac{x-2}{(x^2+1)(2x+1)} = \dfrac{ax+b}{x^2+1} + \dfrac{c}{2x+1}$.
+
+En déduire $\displaystyle\int_0^1 \frac{x-2}{(x^2+1)(2x+1)} \, dx$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Problème - Aire d'un logo}}
+
+On s'intéresse au logo ci-dessous, symétrique par rapport à l'axe des ordonnées :
+
+La feuille gauche du logo correspond à la partie du plan délimitée par les fonctions :
+$$f(x) = \frac{0{,}2}{x} \quad \text{et} \quad g(x) = -x^2 + 0{,}2x + 1$$
+
+L'unité choisie sur chacun des axes est de 2,5 cm.
+
+\begin{enumerate}
+\item Déterminer les points d'intersection des courbes $\mathcal{C}_f$ et $\mathcal{C}_g$.
+\item Calculer l'aire de la feuille gauche du logo.
+\item En déduire l'aire totale du logo en $cm^2$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Application - Réserve d'eau}}
+
+On prélève via un tuyau cylindrique de l'eau dans une réserve d'eau de pluie de 10 000 litres. Le débit d'eau, mesuré en litres par minute, varie en fonction du temps $t$ (en minutes) selon la formule :
+$$D(t) = \frac{K}{(t+1)(t+2)}$$
+
+où $K$ est une constante à déterminer.
+
+Pour un prélèvement qui dure $x$ minutes, le volume prélevé est :
+$$V(x) = \int_0^x D(t) \, dt$$
+
+\begin{enumerate}
+\item Décomposer $\dfrac{1}{(t+1)(t+2)}$ en éléments simples.
+\item En déduire l'expression de $V(x)$ en fonction de $K$ et $x$.
+\item Sachant que le prélèvement a duré 10 minutes et qu'il reste 8 000 litres dans la réserve, déterminer la constante $K$.
+\item Combien de temps faudrait-il pour vider entièrement la réserve (limite théorique) ?
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Application - Hangar à peindre}}
+
+Un architecte conçoit un hangar dont la façade avant a la forme d'une courbe définie par :
+$$f(x) = 80 - 20e^{0{,}025x} \quad \text{pour } x \in [0, 60]$$
+où $x$ est exprimé en mètres.
+
+\begin{enumerate}
+\item Vérifier que $f(0) = 60$ m et calculer $f(60)$.
+\item Montrer que $f$ est strictement décroissante sur $[0, 60]$.
+\item Calculer l'aire de la façade avant (entre la courbe et l'axe des abscisses).
+\item La peinture utilisée a un pouvoir couvrant de  $0,2 m^2$ par litre et est vendue en bidons de 68 litres. Combien de bidons faut-il pour peindre la façade ?
+\end{enumerate}
+
+\end{document}

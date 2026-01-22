@@ -1,0 +1,1279 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+ Les fonctions \textbf{exponentielles} peuvent être utilisées dans de nombreuses applications, par exemple pour le calcul des intérêts en économie, la croissance d'une population, la dilatation thermique des matériaux de construction, etc. 
+
+
+Avant l'invention des calculatrices scientifiques, les \textbf{logarithmes} étaient utilisés sous forme de tables logarithmiques pour effectuer de nombreux calculs.
+Le mérite de l'invention des logarithmes revient à John Napier (d'où le qualificatif de \textbf{népérien}), bien que de nombreux scientifiques et mathématiciens aient contribué à la forme finale que nous utilisons aujourd'hui.
+
+
+\section {La fonction Exponentielle}
+
+
+
+\subsection{Définition de la fonction exponentielle}
+
+Malgré son importance, cette fonction n'est pas facile à définir, nous admettons son existence pour le moment. 
+
+
+\begin{Thm}\textbf{Existence de la fonction exponentielle}
+  \vspace{1em}
+
+\indent Il existe une unique fonction f dérivable sur $\R$ telle que :
+$$
+f (0) = 1\quad \text{ et,    pour tout nombre réel }x\quad  f^{\prime}(x) = f (x)\, .
+$$
+
+Cette fonction est appelée la fonction exponentielle et notée $\exp$.
+$$
+\exp:
+\begin{array}{ccl}
+\mathbb{R}&\longrightarrow&\mathbb{R}_+\\
+x&\longmapsto &e^x\\
+\end{array}
+$$
+On peut noter indifféremment $\exp(x)$ ou $e^x$
+\end{Thm}
+
+\newpage 
+
+Le graphe de la fonction exponentielle :
+\begin{center}
+\includegraphics[]{images/pic.pdf}
+\end{center}
+% \begin{center}
+% \includegraphics[scale=0.4]{expo.png}
+% \end{center}
+
+%
+\begin{Rmq}$\,$
+  
+  La fonction exponentielle:
+\begin{itemize}
+\item est définie sur $\R$, continue, dérivable et strictement croissante.
+\item est strictement positive sur $\R$ : $\forall x\in \R\quad e^x>0$
+\item vaut $1$ au point $0$ : $\exp(0) =e^0= 1$
+\item tend vers $0$ en moins l'infini : $\displaystyle\lim_{x\to -\infty } e^x = 0 $
+\item tend vers l'infini en plus l'infini : $\displaystyle\lim_{x\to +\infty } e^x = +\infty$ 
+\end{itemize}
+\end{Rmq}
+ 
+\subsection{Propriétés de la fonction exponentielle}
+
+La fonction exponentielle se comporte comme une fonction puissance : 
+\begin{Prop}$\,$
+  \vspace{1em}
+
+Pour tous $(a, b)$ deux nombres réels, pour tout $n\in \mathbb{N}$ :
+\begin{multicols}{2}
+\begin{itemize}
+  \item[] $e^{a+b}=e^a\times e^b$
+  \item[] $e^{-a}=1/e^a$
+  \item[] $e^{a-b}=e^a/e^b$
+  \item[] $(e^{a})^n=e^{na}$
+\end{itemize}
+\end{multicols}
+\end{Prop}
+
+
+
+ \begin{Prop}\textbf{Croissances comparées }
+  \vspace{1em}
+
+ La fonction exponentielle dicte son comportement lorsqu'elle est comparée à \newline 
+ des fonctions polynomiales: pour tout entier $n\in \mathbb{N}$
+$$\lim_{x \to -\infty}  x^n e^x  = 0, \qquad \qquad
+\lim_{x \to +\infty} \frac{e^x}{x^n} = +\infty\qquad \qquad$$
+\end{Prop}
+
+%  \begin{Prop}\textbf{Taux d'accroissement}\\
+% $$\lim_{x\to 0 }\left( \dfrac{e^x-1}{x-0}\right) = 1 $$
+% \end{Prop}
+\newpage
+
+\subsection{QCM}
+\begin{enumerate}
+\item Que vaut le produit $e^3\times e^4$ ?
+\begin{multicols}{4}
+\begin{enumerate}[label=\alph*.]
+\item   $e^{12}$
+\item   $e^7$
+\item   $e^{34}$
+\item   $e^{3^4}$
+\end{enumerate}
+\end{multicols}
+
+\item
+La dérivée de la fonction $f$ définie par $f(x)=e^x$ est :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+\item
+    $f'(x)=e^x$
+\item
+    
+    $f'(x)=x$
+\item
+    
+    $f'(x)=xe^x$
+    \item
+    
+    $f'(x)=\ln(x)$
+\end{enumerate}    
+\end{multicols}
+
+\item L'équation $e^x=3$
+\begin{multicols}{2}
+
+\begin{enumerate}[label=\alph*.]
+\item  n'admet pas de solutions dans $\R$
+\item  a une unique solution: $x=3$
+\item  a une unique solution: $x=\ln(3)$
+\item  a une unique solution:  $x=e^3$
+\end{enumerate}   
+\end{multicols}
+
+\item Que vaut $\displaystyle \lim_{x\to -\infty}x^4e^{x}$ ?
+\begin{multicols}{2}
+
+\begin{enumerate}[label=\alph*.]
+\item  $0$
+\item  $+\infty$
+\item  $-\infty$
+\item  $4$
+\end{enumerate}   
+\end{multicols}
+
+\item Que vaut $\displaystyle \lim_{x\to -\infty}\dfrac{1-e^x}{x}$ ?
+\begin{multicols}{2}
+
+\begin{enumerate}[label=\alph*.]
+\item  $0$
+\item  $+\infty$
+\item  $-\infty$
+\item  $1$
+\end{enumerate}   
+\end{multicols}
+
+\end{enumerate}   
+ 
+\section{La fonction Logarithme népérien}
+\subsection{Définition de la fonction logarithme népérien}
+ \begin{Thm}\textbf{La fonction logarithme népérien}
+  \vspace{1em}
+
+La fonction exponentielle réalise une bijection strictement croissante de $\R$ sur \newline 
+l'intervalle $] 0 ;+\infty [$, c'est-à-dire que tout nombre réel strictement positif $y$ peut s'écrire
+comme une exponentielle. 
+
+$$\forall y >0 \quad \exists x\in\R\quad y=e^x $$
+
+La fonction Logarithme népérien est la réciproque de la fonction exponentielle,\newline 
+on la note $\ln$
+$$
+\ln :
+\begin{array}{ccl}
+\mathbb{R}_+^*&\longrightarrow&\mathbb{R}\\
+x&\longmapsto &\ln(x)\\
+\end{array}
+$$
+à tout nombre réel strictement positif $x$, elle associe le nombre dont l'exponentielle \newline vaut $x$, ce nombre est noté $\ln x$
+\end{Thm}
+
+\newpage 
+
+Le graphe de la fonction logarithme népérien :
+\begin{center}
+\includegraphics[]{images/log.pdf}
+\end{center}
+Comme les deux fonctions exponentielle et logarithme népérien sont réciproques l'une de l'autre, leurs graphes sont symétriques par rapport à la droite d'équation $y=x$.
+
+% \begin{center}
+% \includegraphics[scale=0.6]{expoLn.png}
+% \end{center}
+
+
+\begin{Rmq}$\,$
+
+La fonction Logarithme népérien : 
+\begin{itemize}
+\item est définie sur $\R_+^\star$, continue, dérivable et strictement croissante.
+\item n'est pas définie au point $0$ ni pour les nombres réels négatifs.
+\item vaut $0$ au point $1$ : $\ln(1) = 0 $
+\item tend vers moins l'infini en $0$ : $\displaystyle \lim_{x\to 0 } \ln x = -\infty $
+\item tend vers l'infini en plus l'infini : $\displaystyle \lim_{x\to +\infty } \ln x = +\infty$ 
+\end{itemize}
+\vspace{1em}
+
+Pour tout nombre réel $x$ et tout nombre réel strictement positif $y$, \newline 
+on a les propriétés suivantes :
+\begin{multicols}{2}
+\begin{itemize}
+  \item[] $e^x=y \Longleftrightarrow x=\ln(y)$
+  \item[] $e^x>y \Longleftrightarrow x>\ln(y)$
+  \item[] $e^{\ln(y)}=y$
+  \item[] $\ln(e^x)=x$
+\end{itemize}
+\end{multicols}
+
+\end{Rmq}
+
+Ces fonctions permettent également d'étendre la définition des puissances :
+$$\forall a >0 \quad \forall b \in \R \quad a^b = \exp(b\ln a)$$
+
+\newpage 
+
+\subsection{Propriétés de la fonction logarithme népérien}
+
+\begin{Rmq}$\,$
+
+La fonction logarithme népérien est dérivable sur $\left] 0;+\infty \right[$ et sa dérivée est la fonction inverse :
+\[\left(\ln{x}\right)'=\dfrac{1}{x}
+\]
+
+\end{Rmq}
+
+Le logarithme transforme les produits en somme, il était utilisé par les astronomes du 16e siècle pour accélérer les multiplications de nombres à 10 chiffres.
+ \begin{Prop}\textbf{Propriétés algébriques}
+  \vspace{1em}
+
+Pour tous $(a, b)$ deux nombres réels strictement positifs, pour tout $n\in \mathbb{N}$ :
+\begin{multicols}{2}
+    \begin{itemize}
+  \item[] $\ln(ab)=\ln(a)+\ln(b)$
+  \item[] $\ln\left(1/a\right)=-\ln(a)$.    
+    \item[] $\ln\left(a/b\right)=\ln(a)-\ln(b)$. 
+    \item[] $\ln(\sqrt{a}\, )=\dfrac{1}{2}\ln(a)$ 
+    \item[] $\,$ 
+        \item[] $\ln(a^n)=n\ln(a)$ 
+  \end{itemize}
+\end{multicols}
+
+
+
+\end{Prop}
+Il existe d'autres fonctions logarithmes, par exemple la fonction logarithme en base $10$, $\log_{10}$ qui vérifie les mêmes propriétés de calcul mais qui est définie par : 
+$$
+\log_{10} (10) = 1\,. 
+$$
+
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Application directe}
+
+\begin{enumerate}
+\item Résoudre les équations: 
+\begin{multicols}{2}
+    \begin{enumerate}
+    \item[] $(E_1)\quad e^x=5$
+    \item[] $(E_2)\quad \ln(x)=-5$
+    \item[] $(E_3)\quad \ln(2x-1)=-2$
+    \item[] $(E_4)\quad \ln(1+x)=100$
+\end{enumerate}
+\end{multicols}
+
+
+
+\item Résoudre les syst\`emes:  
+
+\[
+\mathcal{S}_1
+\left\{
+\begin{array}{rcl}
+ -\ln x + 2\ln y & = & 1 \\
+  3\ln x - 5\ln y & = & -1
+\end{array}
+\right.
+\qquad\qquad
+\mathcal{S}_2
+\left\{
+\begin{array}{rcl}
+ -2\ln x + 3\ln y & = & -1 \\
+ -7\ln x - 8\ln y & = & 1
+\end{array}
+\right.
+\]
+\end{enumerate}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+ \begin{Prop}\textbf{Croissances comparées }
+  \vspace{1em}
+
+ Les fonctions puissances dictent leur comportement lorsqu'elles sont\newline  comparées à 
+ la fonction logarithme: 
+ pour tout entier $n\in \mathbb{N}$
+$$\lim_{x\to 0 } x^n\ln(x) = 0 \qquad \qquad 
+\lim_{x\to +\infty } \dfrac{\ln(x)}{x^n} = 0\qquad \qquad$$
+
+\end{Prop}
+
+%   \begin{Prop}\textbf{Taux d'accroissement}
+% $$\lim_{x\to 1 }\left( \dfrac{\ln(x)}{x-1}\right) = 1 $$
+% $$\lim\limits_{h \rightarrow 0} \left(\dfrac{\ln(1+h)}{h}\right)=1$$
+% \end{Prop}
+
+
+\subsection{QCM}
+\begin{enumerate}[itemsep=2ex]
+\item Quelle est la valeur de la somme $\ln(4)+\ln(10)$ ?
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+\item   $\ln(14)$
+\item   $\ln(40)$
+\item   $\ln(4/10)$
+\item   $\ln(10^4)$
+\end{enumerate}
+\end{multicols}
+
+\item
+La dérivée de la fonction $f$ définie par $f(x)=\ln(x)$ est :
+\begin{multicols}{2}
+    \begin{enumerate}[label=\alph*.]
+\item $f'(x)=x$
+\item $f'(x)=\dfrac{1}{x}$
+\item $f'(x)=e^x$
+    \item $f'(x)=\ln(x)$
+\end{enumerate}  
+\end{multicols}
+  
+
+\item L'équation $\ln(x)=-8$ 
+\begin{multicols}{2}
+
+\begin{enumerate}[label=\alph*.]
+\item  n'admet pas de solutions dans $\R_+^\star$
+\item  a une unique solution $x=-8$
+\item  a une unique solution $x=-\ln(8)$
+\item  a une unique solution $x=e^{-8}$
+\end{enumerate}   
+\end{multicols}
+
+\item Que vaut $\displaystyle \lim_{x\to 0}x^2\ln(x^3)$ ? 
+\begin{multicols}{2}
+
+\begin{enumerate}[label=\alph*.]
+\item  $0$
+\item  $+\infty$
+\item  $-\infty$
+\item  $x^6$
+\end{enumerate}   
+\end{multicols}
+
+\item Que vaut $\displaystyle \lim_{h\to 0}\dfrac{\ln(1+h)}{h}$ ?
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+\item  $0$
+\item  $+\infty$
+\item  $-\infty$
+\item  $1$
+\end{enumerate}  
+\end{multicols}
+
+\end{enumerate}   
+
+%
+
+\newpage 
+
+\section {Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Positionnement}
+\begin{enumerate}
+\item Déterminer, en fonction de $x$, le signe des fonctions suivantes :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $f$ définie sur $\R$ par $$f(x)=(x^2+4)e^x$$ 
+\item $g$ définie sur $\R$ par $$g(x)=\dfrac{e^{-4x}}{-x^4-7}$$ 
+\item $h$ définie sur $\R$ par $$h(x)=(1+e^{2x})(e^{-3x}+4)$$ 
+\item $i$ définie sur $\R$ par $$i(x)=(x^2-x-6)e^{x}$$
+\end{enumerate}
+\end{multicols}
+\item Dans chacun des cas les fonctions sont  dérivables sur $\R$, déterminer leur dérivée :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*)]
+\item $f$ définie par $f(x)=e^{2x}$ 
+\item $g$ définie par $g(x)=e^{4x}$ 
+\item $h$ définie par $h(x)=e^{3x+4}$ 
+\item $i$ définie par $i(x)=e^{5x-2}$ 
+\item $j$ définie par $j(x)=e^{-7x+1}$ 
+\item $k$ définie par $k(x)=e^{-6x-3}$ 
+\end{enumerate}
+\end{multicols}
+\item Dans chacun des cas les fonctions sont  dérivables sur $\R$, déterminer leur dérivée :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*), itemsep=1.2ex]
+\item $f$ définie par $f(x)=e^x+x^2$ 
+\item $g$ définie par $g(x)=3e^{x}+4x+5$ 
+\item $h$ définie par $h(x)=3x^2-4e^x$ 
+\item $i$ définie par $i(x)=xe^{x}$ 
+\item $j$ définie par $j(x)=(1+x)e^{x}$ 
+\item $k$ définie par $k(x)=3x^2-4e^x$ 
+\item $l$ définie par $l(x)=\dfrac{x^2+5}{e^{x}}$ 
+\end{enumerate}
+\end{multicols}
+\item Résoudre dans $\R$ les équations suivantes :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item $e^3=e^x$ 
+\item $e^x-e^{-4}=0$ 
+\item $e^x=1$ 
+\item $e^x-e=0$ 
+\item $e^{2x+4}=e^2$ 
+\item $e^x=3$
+\item $e^x+5=0$ 
+\item $e^{-3x+5}=1$ 
+\item $e^x=0$ 
+\end{enumerate}
+\end{multicols}
+\item Résoudre dans $\R$ les inéquations suivantes :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*), itemsep=1.2ex]
+\item $e^x>e^4$ 
+\item $e^{-2x}>1$ 
+\item $e^{2x}<6$ 
+\item $e^{3x+4}\geq e^{13}$ 
+\item $e^{-2x+5}\leq e^9$ 
+\item $e^{3x+5}\leq e^{6x-1}$ 
+\item $e^{x}\leq 4$ 
+\item $e^{2x+3}>4$
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[1]{QCM}
+
+\begin{enumerate}[itemsep=2ex]
+\item
+Pour tout nombre réel $x$, $
+A(x)=1-\dfrac{e^{-x}-1}{e^{-x}+1}$ s'écrit également :
+
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item
+    $\dfrac{2}{e^{-x}+1}$
+\item
+    $\dfrac{
+    2e^{-x}}{e^{-x}+1}$
+\item
+    $2$
+\end{enumerate}    
+\end{multicols}
+
+\item La limite $\displaystyle \lim_{x\to +\infty }\left(\dfrac{e^{-x}+3}{1+2e^{-x}}\right)$ est égale \`a :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item  $3$
+\item      $+\infty$
+\item $ \dfrac{3}{2}$
+
+%
+\end{enumerate}  
+\end{multicols}
+
+\item $f$ est la fonction définie et dérivable sur $]-1;+\infty[$ par :
+$f(x)=\dfrac{-2e^x}{x+1}$ alors sa dérivée
+$f'$  s'écrit :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item   $f'(x)=\dfrac{-2e^x}{(1+x)^2}$
+\item   $f'(x)=\dfrac{-2xe^x}{(1+x)^2}$
+\item   $f'(x)=\dfrac{2e^x}{(1+x)^2}$
+\end{enumerate}
+\end{multicols}
+
+\item Le nombre $e^3(e^{-2})^5$ est égal \`a :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item   $ e^6$
+\item $e^{-30}$
+\item $ e^{-7}$
+\end{enumerate}
+\end{multicols}
+
+\item Pour tout réel $x$  différent de $-\ln(2)$, la fraction $\dfrac{3-e^{-x-2}}{2e^{-x}-1}$ peut s'écrire aussi :
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*), itemsep=1.3ex]
+\item    $\dfrac{1-5e^x}{1+2e^x}$
+\item    $\dfrac{1+5e^x}{1-2e^x}$
+\item    $\dfrac{1-5e^x}{1-2e^x}$
+\item    $\dfrac{1-5e^x}{-1+2e^x}$
+\end{enumerate}   
+\end{multicols} 
+    \end{enumerate}
+    
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Puissances}
+
+Soit $n$ un nombre entier relatif. Simplifier les écritures suivantes: 
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*), itemsep=1.5ex]
+\item $2^{2n}\times 2$ 
+\item $ \dfrac{2^{3n+1}}{2^{2n+1}}$
+\item\ $\left(2^{n+1}\right)^3\times 2^{-1}$
+\item $ \dfrac{4^{n+2}}{2^{2n}}\times\dfrac{1}{8}$
+\item $\dfrac{2^{n+3}}{4^{-n}}\times 2^{-n}$
+\end{enumerate}
+\end{multicols}
+
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Parité et fonction exponentielle}
+
+Étudier la parité des fonctions suivantes :
+$$f_1(x)=e^x-e^{-x},\qquad f_2(x)=\frac{e^{2x}-1}{e^{2x}+1},\qquad f_3(x)=\frac{e^x}{(e^x+1)^2}.$$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Dérivées et étude de fonctions avec $\ln$}
+
+\begin{enumerate}
+\item Calculer la dérivée des fonctions suivantes sur leur ensemble de définition :
+\begin{multicols}{3}
+\begin{enumerate}[label=]
+\item $f(x)=\ln(2x+1)$
+\item $g(x)=\ln(x^2+1)$
+\item $h(x)=x\ln(x)$
+\item $k(x)=\dfrac{\ln(x)}{x}$
+\item $\ell(x)=\ln(\ln(x))$
+\item $m(x)=\ln\left(\dfrac{x+1}{x-1}\right)$
+\end{enumerate}
+\end{multicols}
+\item Étudier les variations de la fonction $f$ définie sur $]0,+\infty[$ par $f(x)=x-\ln(x)$.
+\item Étudier les variations de la fonction $g$ définie sur $]0,+\infty[$ par $g(x)=\dfrac{\ln(x)}{x^2}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Limites et inéquations avec $\ln$}
+
+\begin{enumerate}
+\item Déterminer les limites suivantes :
+\begin{multicols}{3}
+\begin{enumerate}[label=]
+\item $\displaystyle\lim_{x\to +\infty}\frac{\ln(x)}{x}$
+\item $\displaystyle\lim_{x\to +\infty}\frac{\ln(x)}{\sqrt{x}}$
+\item $\displaystyle\lim_{x\to 0^+}x\ln(x)$
+\item $\displaystyle\lim_{x\to +\infty}\left(x^2-\ln(x)\right)$
+\item $\displaystyle\lim_{x\to +\infty}\frac{\ln(x+1)}{\ln(x)}$
+\item $\displaystyle\lim_{x\to 1}\frac{\ln(x)}{x-1}$
+\end{enumerate}
+\end{multicols}
+\item Résoudre les inéquations suivantes sur leur ensemble de définition :
+\begin{multicols}{2}
+\begin{enumerate}[label=]
+\item $(I_1) \quad \ln(x) \geq 1$
+\item $(I_2) \quad \ln(2x-1) < 0$
+\item $(I_3) \quad \ln(x^2-4) \leq \ln(3)$
+\item $(I_4) \quad \ln(x) + \ln(x-2) > \ln(3)$
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équations}
+
+Résoudre sur $\mathbb R$ les équations suivantes : 
+$$
+\ e^{2x}-e^x-6=0\qquad\qquad\ 3e^x-7e^{-x}-20=0.
+$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Syst\`emes}
+
+Résoudre les syst\`emes d'équations suivantes : 
+$$\begin{array}{lll}
+\mathbf{1.}\ \left\{
+\begin{array}{rcl}
+e^xe^y&=&10\\
+e^{x-y}&=&\frac 25
+\end{array}
+\right.&\quad\quad&\mathbf{2.}\ 
+\left\{
+\begin{array}{rcl}
+e^x-2e^y&=&-5\\
+3e^x+e^y&=&13
+\end{array}\right.\quad\quad
+\mathbf{3.}\ \left\{
+\begin{array}{rcl}
+5e^x-e^y&=&19\\
+e^{x+y}&=&30
+\end{array}
+\right.
+\end{array}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Exponentielle et valeur absolue}
+
+\vspace{1em}
+Démontrer que pour tout réel $x$, on a 
+$$\frac{e^x+e^{-x}}{2}\leq e^{|x|}.$$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[3]{Un encadrement de $e$}
+
+\vspace{1em}
+Démontrer que, pour tout $n\geq 2$, on a 
+$$\left(1+\frac 1n\right)^n \leq e\leq \left(1-\frac 1n\right)^{-n}.$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Limites et exponentielle}
+
+\vspace{1em}
+
+Déterminer les limites suivantes : 
+$$\lim_{x\to+\infty}\frac{e^x}{2e^x+e^{-2x}}\qquad \textrm{ et }\qquad\lim_{x\to-\infty}\frac{e^x}{2e^x+e^{-2x}}.$$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Positivité}
+
+Soit $g:\mathbb R_+\to\mathbb R$ définie par 
+$$g(x)=(x-2)e^{x}+(x+2).$$
+
+Démontrer que $g\geq 0$ sur $\mathbb R_+$.
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Médecin légiste}
+
+Un inspecteur qui arrive sur le lieu d'un crime demande au médecin
+légiste de prendre la température de la victime. Elle est de $32^{\circ} C$. Il prend la température de la pi\`ece, qui est de $20^{\circ} C$.
+
+La loi de Newton sur le refroidissement d'un objet en milieu ambiant permet de modéliser la température de la victime en posant $T(t)=Ae^{-ct}+20$ o\`u $t>0$ représente le temps, exprimé en heures, depuis la mort de la victime et $T(t)$ la température de la victime \`a  l'instant $t$, en degrés Celsius.
+
+Sachant qu'une demi-heure plus tard, la température de la victime est de $31^{\circ} C$, déterminer l'heure du crime (on prendra comme hypoth\`ese qu'au moment de sa mort, la température de la victime était de $37^{\circ} C$).
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[3]{Pharmacocinétique}
+
+\vspace{1em}
+On injecte un médicament \`a  un patient en intraveineuse.
+Dans de nombreux cas, la concentration dans le sang de la substance active, en $\textrm{mg.L}^{-1}$, vérifie la relation 
+$$C(t)=C_0e^{-\lambda t}$$
+o\`u $C_0$ est la concentration initiale, $t$ est le temps, exprimé en heures, apr\`es l'injection, et $\lambda$ est un coefficient spécifique au médicament, 
+\begin{enumerate}
+\item On appelle demi-vie du médicament le temps nécessaire pour que, apr\`es administration du médicament, sa concentration diminue de moitié. Calculer (en fonction de $\lambda$) le temps de demi-vie $T_{1/2}$ d'un médicament dont la concentration dans le sang satisfait la relation précédente. Quelle est la concentration apr\`es $2T_{1/2}$? Apr\`es $nT_{1/2}$?
+\item L'aztréonam est un antibiotique qui est notamment utilisé chez les patients atteints de mucoviscidose pour soigner des infections bronchiques. Il n'est efficace que si sa concentration dans 
+le sang dépasse $40\textrm{mg.L}^{-1}$. On dispose de doses de $2\textrm{g}$ et on souhaite connaitre le temps maximal entre deux injections pour maintenir cette concentration supérieure \`a  $40\textrm{mg.L}^{-1}$ chez un patient pesant $60\textrm{kg}$. 
+Sachant que le volume sanguin d'un adulte est d'environ $70\textrm{mL.kg}^{-1}$ et que le temps de demi-vie de l'aztréonam, tel qu'indiqué par le fabricant, est de $1,\!7\textrm{h}$,  calculer 
+\begin{enumerate}[label=\alph*)]
+\item le temps maximal séparant la premi\`ere injection et la deuxi\`eme;
+\item le temps maximal séparant les injections suivantes.
+\end{enumerate}
+\end{enumerate}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[3]{Point le plus proche de l'origine}
+
+\vspace{1em}
+On consid\`ere la courbe de la fonction exponentielle dans un rep\`ere orthonormé $(O,\vec i,\vec j)$. 
+\begin{enumerate}[label=\alph*)]
+\item Pour $x\in\mathbb R$, on pose $g(x)=x+e^{2x}$. \newline 
+Démontrer qu'il existe un réel $c$ tel que $g(x)< 0$ si $x< c$ et $g(x)> 0$ si $x> c$.
+\item En déduire qu'il y a un unique point sur la courbe de la fonction exponentielle qui minimise la distance \`a l'origine. On le note $M_0$.
+\item Démontrer que la tangente \`a   la courbe en $M_0$ est perpendiculaire \`a  la droite $(OM_0)$.
+\end{enumerate}
+
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Unique solution}
+
+\vspace{1em}
+Soit $h$ la fonction définie sur $\mathbb R$ par $h(x)=x\exp(1-x)$.
+\begin{enumerate}[label=\alph*)]
+\item Dresser le tableau de variations de $h$.
+\item Démontrer qu'il existe un unique $\rho\in\mathbb R$ tel que $h(\rho)=-1$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{\'Equation différentielle}
+
+\vspace{1em}
+Soit $f$ une fonction définie sur $\R$ telle que  pour tout $x$ réel, $f'(x)=0$. 
+
+\begin{enumerate}
+\item
+Que peut-on dire de $f$ ? 
+\item On suppose de plus que $f(0)=2$. Que peut-on alors dire de $f$ ?
+\end{enumerate}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Tangente}
+
+Déterminer les équations des tangentes \`a la courbe représentative de
+la fonction exponentielle aux points d'abscisse $0$, $1$ et $2$. 
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Simplification}
+
+\vspace{1em}
+Simplifier les expressions: 
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*), itemsep=1.5ex]
+\item $ (e^x)^5e^{-2x}$
+\item $ \dfrac{e^{2x+3}}{e^{2x-1}}$
+\item $\dfrac{e^x+e^{-x}}{e^{-x}}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Factorisation}
+
+\vspace{1em}
+Démontrer que pour tout réel $x$, 
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*), itemsep=1.5ex]
+\item $\dfrac{e^{2x}-1}{e^x+1}=e^x\dfrac{1-e^{-2x}}{1+e^{-x}}$.
+\quad
+\item $(e^x+e^{-x})^2-(e^x-e^{-x})^2=4$.
+\item $ \dfrac{e^x-1}{e^x+1}=\dfrac{1-e^{-x}}{1+e^{-x}}$
+\item $ e^{-x}-e^{-2x}=\dfrac{e^x-1}{e^{2x}}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Équations et inéquations}
+
+Résoudre les équations suivantes
+\begin{multicols}{3}
+\begin{enumerate}
+\item[] $(E_1) \quad e^x=1$
+\item[] $(E_2) \quad e^{2x}=e$
+\item[] $(E_3) \quad e^{x}=e^{-x}$
+\item[] $(E_4) \quad e^{x^2}=(e^{-x})^2e^3$ 
+\item[] $(E_5) \quad e^{2x+1}=e^{\frac{6}{x}}$
+\end{enumerate}
+\end{multicols}
+Résoudre les inéquations suivantes
+\begin{multicols}{3}
+\begin{enumerate}
+\item[] $(I_1) \quad e^x>e$
+\item[] $(I_2) \quad e^{2x}\leq 1$
+\item[] $(I_3) \quad (e^x)^3\leq \frac{1}{e}$
+\item[] $(I_4) \quad e^x-\frac{1}{e^x}>0$
+\item[] $(I_5) \quad e^{x^2}\geq e^{-x-1}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Étude}
+
+\vspace{1em}
+On note $\mathcal{C}$ la courbe représentative de la fonction
+exponentielle dans un rep\`ere orthonormal $(O;\vec{i},\vec{j})$. 
+\begin{enumerate}[label=\alph*)]
+\item Soit $a$ un réel.\newline
+Déterminer l'équation de la tangente $T_a$ \`a  la courbe $\mathcal{C}$ au point d'abscisse $a$. 
+\item Etudier la position relative de la courbe $\mathcal{C}$ par
+  rapport \`a la droite $T$ .\vspace{1em}
+%  
+  \emph{Indication: on pourra étudier les variations de la fonction
+    $\varphi$ définie par $\varphi(x)=e^x-y$, o\`u $y$ désigne l'équation de la
+    tangente $T_a$}. 
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Sens de variation}
+
+Etudier le sens de variation des fonctions suivantes: 
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*)]
+\item $f(x)=\dfrac{e^x}x$ \quad 
+\item $f(x)=e^{2x}-2x$ \quad 
+\item $f(x)=e^{x^2}-x^2$ \quad 
+\item $f(x)=\dfrac{e^x+e^{-x}}2$ \quad 
+\item $f(x)=(2x+3)e^{-2x}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Limites}
+
+Déterminer les limites en $-\infty$ et $+\infty$ des fonctions suivantes: 
+\begin{multicols}{3}
+\begin{enumerate}[label=]
+\item $f(x)=e^{-3x}$ 
+\item $g(x)=e^{x}+e^{-x}$
+\item $h(x)=x+e^x$
+\item $k(x)=e^{2x}+e^x+1$
+
+\item $ \ell(x)=e^{3x}-e^{x}$ 
+\item $ m(x)=\frac{e^x+1}{e^x+2}$
+\item $ n(x)=\dfrac{-2e^x}{1+e^x}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+\newpage
+
+\exo[2]{Limites}
+
+ Déterminer la limite en $+\infty$ des fonctions suivantes: 
+
+$$f(x)=x^2+2-e^x \qquad
+g(x)=\frac{2e^x-x}{x^2} \qquad 
+h(x)=\frac{e^x}{x^2+1}$$
+
+\vspace{0.2cm}
+$$\ell(x)=e^{2x}-(x+1)e^x \qquad
+k(x)=\frac{\sqrt{e^x+2}}{x} \qquad 
+t(x)=\frac{e^{2x}+x^2}{x^2+x-3}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Limites}
+
+ A l'aide d'un changement de variable, étudier la limite en
+$+\infty$ des fonctions: 
+
+$$f(x)=\frac{e^{2x+1}}{x}, \qquad 
+g(x)=\frac{2e^{x^2-1}}{x^2}, \qquad 
+h(x)=x^3e^{-\sqrt{x}}$$ 
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Études}
+
+Etudier sur $\R$ les fonctions suivantes (sens de variations et limites): 
+
+\begin{multicols}{3}
+\begin{enumerate}[label=]
+\item $f(x)=e^{-x}$ 
+\item $g(x)=e^x+e^{-x}$
+\item $h(x)=x+e^x$
+\item $k(x)=e^{3x}-3e^x$
+\item $\ell(x)=e^{-x^2}$
+\item $m(x)=(x-2)e^{-0.1x}$
+\item $n(x)=(x+1)^2e^{-x}$
+\end{enumerate}
+\end{multicols}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Position relative}
+
+Les fonctions $f$ et $g$ sont définies sur $\R$ par: 
+$f(x)=-x^2e^x$ et $g(x)=\left( x^2-x-1\right) e^x$. 
+
+\begin{enumerate}[label=\alph*)]
+\item Déterminer les coordonnées des points d'intersection des courbes
+  $\mathcal{C}_f$ et $\mathcal{C}_g$ représentatives des fonctions $f$
+  et $g$. 
+\item Déterminer la position relative de $\mathcal{C}_f$ et
+  $\mathcal{C}_g$. 
+\item Déterminer les limites de $f$ et $g$ en $-\infty$ et $+\infty$. 
+\item Dresser les tableaux de variations de $f$ et $g$.
+\end{enumerate}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Capteur solaire}
+
+Un capteur solaire récupère de la chaleur par le biais d'un fluide. On s'intéresse \`a l'évolution de la température du fluide dans un capteur de $1$m de longueur. 
+
+Cette température est modélisée par: 
+$T(x)=170-150e^{-0,6x}$, 
+où $x\in[0;1]$ est la distance parcourue par le fluide en mètres
+depuis son entrée dans le capteur, et $T(x)$ est la température en
+$^\circ$C. 
+\begin{enumerate}
+\item Déterminer la température \`a l'entrée du capteur. 
+\item 
+\begin{enumerate}[label=\alph*)]
+  \item Etudier les variations de la température $T$ sur $[0;1]$. 
+  \item En déduire la température maximale, au degré prés, atteinte
+    par le fluide. 
+  \item Tracer dans un repére la courbe représentant la température
+    $T$. 
+\end{enumerate}
+\end{enumerate}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+\exo[3]{D'apr\`es sujet bac Amérique du Sud 2018}
+
+ \medskip 
+
+
+$f$ est la fonction définie sur $[0 ; 12]$ par $f(x) = 2x e^{-x}$.
+
+\medskip
+
+ \textsf{\textbf{\textsc{Partie A}}}
+
+\medskip
+
+Un logiciel de calcul formel donne les résultats suivants : 
+
+
+\begin{center}
+\begin{tabularx}{0.75\linewidth}{|c|X|}\hline
+\multirow{2}*{1} & \rule[-1ex]{0pt}{3ex} Dériver $\left(2*x*\mathrm{exp}(-x)\right)$\\
+	& \multicolumn{1}{r@{\hspace{2em}}|}{$-2*x*\mathrm{exp}(-x)+2*\exp(-x)$}\\ \hline
+\multirow{2}*{2} & \rule[-1ex]{0pt}{3ex} Factoriser $\left(-2*x*\mathrm{exp}(-x)+ 2*\mathrm{exp}(-x)\right)$\\
+	&\multicolumn{1}{r@{\hspace{2em}}|}{$2*(1-x)*\mathrm{exp}(-x)$}\\ \hline
+	\multirow{2}*{3} & \rule[-1ex]{0pt}{3ex} Dériver $\left(2*(1-x)*\mathrm{exp}(-x)\right)$\\
+	&\multicolumn{1}{r@{\hspace{2em}}|}{$2*x*\mathrm{exp}(- x) - 4*\mathrm{exp}(- x)$}\\ \hline
+	\multirow{2}*{4} & \rule[-1ex]{0pt}{3ex} Factoriser $\left(2 *x*\mathrm{exp}(-x) - 4*\mathrm{exp}(-x)\right)$\\
+	&\multicolumn{1}{r@{\hspace{2em}}|}{$2 *(x - 2)*\mathrm{exp}(- x)$}\\ \hline
+\end{tabularx}
+\end{center}
+
+
+\begin{enumerate}
+\item Vérifier le résultat de la ligne 1 donné par le logiciel de calcul formel. 
+\end{enumerate}
+
+\medskip
+
+\emph{Dans la suite, on pourra utiliser les résultats donnés par le logiciel de calcul formel sans les justifier.}
+
+\medskip 
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item 
+	\begin{enumerate}
+		\item Dresser le tableau des variations de la fonction $f$ sur l'intervalle $[0 ; 12]$ en le justifiant. 
+		\item Démontrer que l'équation $f(x) = 0,5$ admet deux solutions dans $[0 ; 12]$. 
+
+Donner \`a l'aide de la calculatrice une valeur approchée au centi\`eme de chacune de ces solutions. 
+	\end{enumerate}
+\item étudier la convexité de la fonction $f$ sur l'intervalle $[0 ; 12]$. 
+\end{enumerate}
+
+\medskip
+
+
+\newpage
+
+ \textsf{\textbf{\textsc{Partie B}}}
+
+\medskip
+
+Le taux d'alcoolémie d'une personne pendant les $12$ heures suivant la consommation d'une certaine quantité d'alcool est modélisé par la fonction $f$ : 
+
+
+\begin{itemize}
+\item $x$ représente le temps (exprimé en heure) écoulé depuis la consommation d'alcool; 
+\item $f(x)$ représente le taux d'alcoolémie (exprimé en g/L) de cette personne. 
+\end{itemize}
+
+
+\medskip
+
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Décrire les variations du taux d'alcoolémie de cette personne pendant les 12 heures suivant la consommation d'alcool. 
+		\item \`A quel instant le taux d'alcoolémie de cette personne est-il maximal ? 
+
+Quelle est alors sa valeur ? Arrondir au centi\`eme. 
+	\end{enumerate}
+\item  Le Code de la route interdit toute conduite d'un véhicule lorsque le taux d'alcoolémie est supérieur ou égal \`a 0,5 g/L. 
+
+Une fois l'alcool consommé, au bout de combien de temps le taux d'alcoolémie de l'automobiliste reprend-il une valeur conforme \`a la législation ?
+\end{enumerate}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+\exo[2]{D'apr\`es sujet bac Amérique du Nord 2005}
+
+ \medskip 
+
+
+\emph{Les deux questions sont indépendantes. Les résultats seront arrondis \`a} $10^{-2}$.
+
+\medskip
+
+Le gouvernement d'un pays envisage de baisser un imp\^ot de 30\,\% en cinq ans.
+
+\begin{enumerate}
+\item On suppose que le pourcentage de baisse est le m\^eme chaque année.
+
+Vérifier que ce pourcentage de baisse annuel est alors égal \`a environ 6,89\,\%.
+\item  La premi\`ere année cet imp\^ot  baisse de 5\,\%, la deuxi\`eme année la baisse est de 1\,\% et la troisi\`eme année de 3\,\%.
+	\begin{enumerate}
+		\item Quelle est la baisse, en pourcentage, de cet imp\^ot  au terme de ces trois premi\`eres années ?
+		\item  Pour atteindre son objectif quel pourcentage annuel de baisse doit décider ce gouvernement, en supposant que ce pourcentage est le m\^eme sur les deux derni\`eres années ?
+	\end{enumerate}
+\end{enumerate}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{D'apr\`es sujet bac France Métropolitaine Septembre 2010}
+
+
+
+\medskip
+
+\textsf {\small{\textbf{\textsc{Partie A}}}:  étude d'une fonction}
+
+\medskip
+ 
+On consid\`ere les fonctions $f$, $g$ et $h$ définies et dérivables pour tout nombre réel $x$ de l'intervalle $[4~;~ 6]$ par $f(x) = 100\left(e^x - 45\right)$, $g(x) = 10^6 e^{-x}$ et $h(x) = g(x) - f(x)$.
+ 
+On note $h'$ la fonction dérivée de la fonction $h$ sur l'intervalle $[4~;~6]$.
+
+\medskip
+ 
+Résolution de l'équation $h(x) = 0$. 
+
+\medskip
+ 
+\begin{enumerate}
+\item 
+	\begin{enumerate}
+		\item Démontrer que la fonction $h$ est strictement décroissante sur l'intervalle $[4~;~6]$. 
+		\item Dresser le tableau de variations de la fonction $h$. 
+		\item Justifier que l'équation $h(x) = 0$ admet une solution unique $\alpha$ sur l'intervalle $[4~;~6]$.
+	\end{enumerate} 
+
+
+\end{enumerate}
+
+\medskip
+
+\emph{Dans la suite de l'exercice, on admet que la valeur exacte du nombre réel $\alpha$ est égale \`a $3\ln 5$ o\`u $\ln$ désigne la fonction logarithme népérien.}
+ 
+\medskip
+
+\textsf {\small{\textbf{\textsc{Partie B}}}:  Application économique}
+
+\medskip
+ 
+Les fonctions $f$ et $g$ définies dans la partie A modélisent respectivement l'offre et la demande d'un produit de prix unitaire $x$, compris entre 4 et 6 euros :
+
+
+\begin{itemize}
+\item $f(x)$ est la quantité, exprimée en kilogrammes, que les producteurs sont pr\^ets \`a vendre au prix unitaire $x$ ; 
+\item $g(x)$ la quantité, exprimée en kilogrammes, que les consommateurs sont pr\^ets \`a acheter au prix unitaire $x$.
+\end{itemize}
+
+\medskip
+ 
+On appelle prix unitaire d'équilibre du marché la valeur de $x$ pour laquelle l'offre est égale \`a la demande.
+ 
+\begin{enumerate}
+\item Quel est, exprimé au centime d'euro pr\`es, le prix unitaire d'équilibre du marché ? Justifier. 
+\item  Quelle quantité de produit, exprimée en kilogrammes, correspond \`a ce prix unitaire d'équilibre ? 
+\end{enumerate}
+
+%\psset{unit=1cm}
+%\begin{pspicture}(0,-9)(12,7)
+%\rput(6,6.5){\textsf {Graphique \`a compléter}}
+%\newrgbcolor{bleu}{0.1 0.05 .5}
+%\def\pshlabel#1{\footnotesize #1}
+%\def\psvlabel#1{\footnotesize #1}
+%\psgrid[gridwidth=0.1pt,gridcolor=gray,subgriddiv=0,gridlabels=0](0,0)(0,-9)(12,6)
+%\psset{xunit=5cm,yunit=.25cm}
+%\psaxes[labelsep=.75mm,ticksize=-2pt 2pt,linewidth=0.75pt,Ox=4,Dx=.2,Dy=4, ylabelFactor={\,000}, comma]{->}(0,0)(-.02,-36)(2.4,24)
+%\uput[l](0,0){\footnotesize{$0$}}
+%\uput[dr](0,0){\footnotesize{$4$}}
+%\uput[d](2.4,0){\footnotesize{$x$}}
+%\uput[l](0,24){\footnotesize{$y$}}
+%\end{pspicture}
+%\end{center}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[3]{Étude de fonctions}
+
+La fonction $f$ est définie par : \quad $f(x)=\dfrac{2x}{1-x^2}+\ln\left(\dfrac{1+x}{1-x}\right)$.
+\begin{enumerate}
+\item Justifier que $D_f=]-1;1[$.
+\item étudier la parité de $f$.
+\item Préciser les asymptotes \`a la courbe ${\cal C}_f$.
+\item étudier les variations de $f$.
+\item Donner l'équation de la tangente \`a ${\cal C}_f$ au point d'abscisse 0.
+\item Faire une représentation graphique.
+\end{enumerate}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Fonction auxiliaire}
+
+En vous aidant des variations de la fonction $f:x\mapsto \dfrac{1}{x\ln x}$, démontrer que $$\forall x\in]0;1[, \quad \dfrac{1}{x\ln x}\leq -e$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Inéquation et équation}
+
+\begin{enumerate}
+\item Résoudre dans $\R$:\quad $e^x-4=5e^{-x}$.
+
+\item Résoudre dans $\R$:\quad $1\leq e^{2x-3}\leq e$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Radon}
+
+Le radon est un gaz radioactif qui se désintègre avec le temps. Si $m$ est la masse de radon un certain jour (origine), $x$ jours plus tard la masse $f(x)$ est donnée par :
+$$f(x)=me^{-0,18x}$$
+\begin{enumerate}
+\item Exprimer $f(x+1)$ en fonction de $f(x)$. En déduire quelle est l'évolution de la masse en pourcentage en un jour.
+\item Représenter qualitativement ${\cal C}_f$ sur une durée de 8 jours.
+\item On appelle période le temps au bout duquel la masse a diminué de moitié. Calculer la période du radon en jours puis en heures. Contr\^oler graphiquement la réponse obtenue.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{\'Etude}
+
+Soit la fonction $f$ définie sur $\R$ par $f(x)=3x+\dfrac{20e^x}{e^x+1}.$
+\begin{enumerate}
+\item Déterminer les limites de $f$ en $-\infty$ et $+\infty$.
+\item Soit $g$ la fonction définie sur $\R$ par $g(x)=f(x)-3x$.\vspace{1em}
+Déterminer les limites de $g$ en $-\infty$ et $+\infty$.
+\item Dans un repère orthogonal, on note $\cal C$ la courbe représentative de $f$, $\Delta$ la droite d'équation $y=3x$ et $\Delta^{\prime}$ la droite d'équation $y=3x+20$.
+	\begin{enumerate}%[(a)]
+	\item Soit $a$ un réel ; $M$ le point d'abscisse $a$ de $\cal C$ et $N$ le point d'abscisse $a$ de $\Delta$. Quelles sont les ordonnées de $M$ et $N$ ?
+	\item Exprimer la distance $MN$ en fonction de $e^a$. Justifier que $\displaystyle\lim_{a\to-\infty}MN=0$.
+	\item Soit $P$ le point d'abscisse $a$ de $\Delta^{\prime}$. Quelle est l'ordonnée de $P$ ?
+	\item Exprimer la distance $MP$ en fonction de $e^a$. Justifier que $\displaystyle\lim_{a\to+\infty}MP=0$.
+	\item Que représentent $\Delta$ et $\Delta^{\prime}$ pour la courbe $\cal C$ ?
+	\item Représenter graphiquement $\cal C$,  $\Delta$ et $\Delta^{\prime}$ dans un repère orthogonal (unités graphiques : 1 cm sur l'axe des abscisses, 0.5cm sur l'axe des ordonnées).
+	\end{enumerate}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Difficile}
+Trouver la plus grande valeur de $n^{1/n}$ pour $n\in\N^*$.
+\medskip
+
+\textit{On étudiera (sous son écriture exponentielle) la fonction $f$ définie sur $]0,+\infty[$ par $f(x)=x^{1/x}$ pour conduire la recherche.}
+
+\end{document}
+

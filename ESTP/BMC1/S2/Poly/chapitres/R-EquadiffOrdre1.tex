@@ -1,0 +1,408 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+Les équations différentielles modélisent de nombreux phénomènes naturels : croissance de populations, désintégration radioactive, refroidissement, circuits électriques... 
+
+Ce chapitre présente les équations différentielles d'ordre 1, c'est-à-dire celles où seules $y$ et $y'$ interviennent.
+
+\section{Introduction aux équations différentielles}
+
+\subsection{Définitions}
+
+\begin{Def}\textbf{Équation différentielle}
+
+Une \textbf{équation différentielle} est une équation dont l'inconnue est une fonction $y$ et qui fait intervenir $y$ et ses dérivées successives ($y'$, $y''$, ...).
+
+L'\textbf{ordre} d'une équation différentielle est le plus grand ordre de dérivation qui apparaît dans l'équation.
+\end{Def}
+
+\begin{Ex}
+\begin{itemize}
+\item $y' = 2y$ est d'ordre 1
+\item $y'' + 3y' - 2y = 0$ est d'ordre 2
+\item $y' = x^2 + y$ est d'ordre 1
+\end{itemize}
+\end{Ex}
+
+\begin{Def}\textbf{Solution d'une équation différentielle}
+
+Une \textbf{solution} d'une équation différentielle est une fonction qui, substituée à l'inconnue $y$, vérifie l'équation.
+\end{Def}
+
+\begin{Rmq}
+Une équation différentielle admet en général une \textbf{infinité de solutions}. Le nombre de paramètres dans la solution générale est égal à l'ordre de l'équation. Pour une équation d'ordre 1, il y a donc un seul paramètre (une constante $C$).
+\end{Rmq}
+
+\begin{Def}\textbf{Problème de Cauchy}
+
+Un \textbf{problème de Cauchy} (ou problème aux conditions initiales) consiste à trouver une solution particulière vérifiant une condition initiale de la forme $y(x_0) = y_0$.
+\end{Def}
+
+\begin{Ex}
+Montrer que $y = Cx^2$ est solution de $xy' = 2y$ pour tout $C \in \mathbb{R}$.
+
+\textbf{Vérification :} Si $y = Cx^2$, alors $y' = 2Cx$.
+
+$xy' = x \cdot 2Cx = 2Cx^2 = 2y$ \checkmark
+
+Avec la condition $y(2) = 8$, on obtient $C \cdot 4 = 8$, donc $C = 2$.
+
+La solution particulière est $y = 2x^2$.
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Équations linéaires à coefficients constants}
+
+\subsection{Forme générale}
+
+\begin{Def}\textbf{Équation linéaire d'ordre 1 à coefficients constants}
+
+C'est une équation de la forme :
+$$y' + ay = b(x)$$
+où $a \in \mathbb{R}$ est une constante et $b(x)$ est une fonction continue.
+
+\begin{itemize}
+\item L'\textbf{équation homogène associée} est : $y' + ay = 0$
+\item Le terme $b(x)$ s'appelle le \textbf{second membre}
+\end{itemize}
+\end{Def}
+
+\subsection{Résolution de l'équation homogène}
+
+\begin{Thm}\textbf{Solution de l'équation homogène}
+
+Les solutions de l'équation $y' + ay = 0$ sont les fonctions de la forme :
+$$y_h(x) = Ce^{-ax}$$
+où $C \in \mathbb{R}$ est une constante arbitraire.
+\end{Thm}
+
+\begin{Rmq}
+La démonstration utilise le fait que $y'/y = -a$, donc $\ln|y| = -ax + K$, ce qui donne $y = Ce^{-ax}$.
+\end{Rmq}
+
+\subsection{Résolution de l'équation complète}
+
+\begin{Thm}\textbf{Structure des solutions}
+
+La solution générale de $y' + ay = b(x)$ est :
+$$y_g(x) = y_h(x) + y_p(x)$$
+où :
+\begin{itemize}
+\item $y_h(x) = Ce^{-ax}$ est la solution générale de l'équation homogène
+\item $y_p(x)$ est une solution particulière de l'équation complète
+\end{itemize}
+\end{Thm}
+
+\begin{Rmq}
+Pour trouver $y_p$, on cherche une solution de même forme que $b(x)$ :
+\begin{itemize}
+\item Si $b(x)$ est un polynôme de degré $n$, on cherche $y_p$ polynôme de degré $n$
+\item Si $b(x) = ke^{\lambda x}$ avec $\lambda \neq -a$, on cherche $y_p = Ae^{\lambda x}$
+\item Si $b(x) = k\cos(\omega x)$ ou $k\sin(\omega x)$, on cherche $y_p = A\cos(\omega x) + B\sin(\omega x)$
+\end{itemize}
+\end{Rmq}
+
+\begin{Ex}
+Résoudre $y' + 2y = x^2$.
+
+\vspace{1em}
+
+\textbf{1) Équation homogène :} $y' + 2y = 0$ donne $y_h = Ce^{-2x}$
+
+\vspace{1em}
+
+\textbf{2) Solution particulière :} On cherche $y_p = ax^2 + bx + c$.
+
+$y_p' = 2ax + b$
+
+$y_p' + 2y_p = 2ax + b + 2ax^2 + 2bx + 2c = 2ax^2 + (2a+2b)x + (b+2c)$
+
+Identification avec $x^2$ :
+\begin{itemize}
+\item $x^2$ : $2a = 1 \Rightarrow a = \frac{1}{2}$
+\item $x^1$ : $2a + 2b = 0 \Rightarrow b = -\frac{1}{2}$
+\item $x^0$ : $b + 2c = 0 \Rightarrow c = \frac{1}{4}$
+\end{itemize}
+
+Donc $y_p = \frac{1}{2}x^2 - \frac{1}{2}x + \frac{1}{4}$
+
+\vspace{1em}
+
+\textbf{3) Solution générale :} $y = Ce^{-2x} + \frac{1}{2}x^2 - \frac{1}{2}x + \frac{1}{4}$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Équations à coefficients constants}}
+
+Résoudre les équations différentielles suivantes :
+\begin{multicols}{2}
+\begin{enumerate}
+\item $y' + y = 2\sin x$
+\item $y' - y = (x+1)e^x$
+\item $y' + y = x - e^x + \cos x$
+\item $y' - 3y = e^{2x}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Équations à variables séparables}
+
+\begin{Def}\textbf{Équation à variables séparables}
+
+Une équation à variables séparables est une équation qui peut s'écrire sous la forme :
+$$a(y) \, dy = b(x) \, dx$$
+ou de manière équivalente : $a(y) \cdot y' = b(x)$
+\end{Def}
+
+\begin{Meth}\textbf{Méthode de résolution}
+
+\begin{enumerate}
+\item Écrire $y' = \dfrac{dy}{dx}$
+\item Séparer les variables : mettre tous les $y$ d'un côté, tous les $x$ de l'autre
+\item Intégrer chaque membre
+\item Expliciter $y$ si possible
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+Résoudre $9yy' = 4x$.
+
+\vspace{1em}
+
+\textbf{Séparation :} $9y \, dy = 4x \, dx$
+
+\vspace{1em}
+
+\textbf{Intégration :} $\displaystyle\int 9y \, dy = \int 4x \, dx$
+
+$\dfrac{9y^2}{2} = 2x^2 + C$
+
+$y^2 = \dfrac{4x^2}{9} + C'$
+
+$y = \pm\sqrt{\dfrac{4x^2}{9} + C'}$
+\end{Ex}
+
+\begin{Ex}
+Résoudre $y' = 1 + y^2$.
+
+\vspace{1em}
+
+\textbf{Séparation :} $\dfrac{dy}{1+y^2} = dx$
+
+\vspace{1em}
+
+\textbf{Intégration :} $\arctan(y) = x + C$
+
+\vspace{1em}
+
+\textbf{Solution :} $y = \tan(x + C)$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Variables séparables}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $(1+x^2)y' + y^2 + 1 = 0$ avec $y(0) = 1$
+\item $y' = 6y^2x$ avec $y(1) = \dfrac{1}{5}$
+\item $y' = e^{-y}(2x-4)$ avec $y(5) = 0$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Équations linéaires à coefficients variables}
+
+\subsection{Forme générale}
+
+\begin{Def}
+Une équation linéaire d'ordre 1 à coefficients variables est de la forme :
+$$y' + a(x)y = b(x)$$
+où $a(x)$ et $b(x)$ sont des fonctions continues sur un intervalle $I$.
+\end{Def}
+
+\subsection{Solution de l'équation homogène}
+
+\begin{Thm}
+Les solutions de $y' + a(x)y = 0$ sont :
+$$y_h(x) = Ce^{-A(x)}$$
+où $A(x)$ est une primitive de $a(x)$.
+\end{Thm}
+
+\subsection{Méthode de variation de la constante}
+
+\begin{Meth}\textbf{Variation de la constante}
+
+Pour trouver une solution particulière de $y' + a(x)y = b(x)$ :
+
+\vspace{1em}
+
+\textbf{1)} On part de la solution homogène $y_h = Ce^{-A(x)}$
+
+\vspace{1em}
+
+\textbf{2)} On cherche $y_p$ sous la forme $y_p(x) = C(x)e^{-A(x)}$ où $C(x)$ est une fonction à déterminer
+
+\vspace{1em}
+
+\textbf{3)} On substitue dans l'équation :
+
+$y_p' = C'(x)e^{-A(x)} - a(x)C(x)e^{-A(x)}$
+
+$y_p' + a(x)y_p = C'(x)e^{-A(x)} = b(x)$
+
+\vspace{1em}
+
+\vspace{1em}
+
+\textbf{4)} Donc $C'(x) = b(x)e^{A(x)}$ et $C(x) = \displaystyle\int b(x)e^{A(x)} \, dx$
+\end{Meth}
+
+\begin{Ex}
+Résoudre $(1-x^2)y' + 2xy = (1+x)^2$.
+
+On réécrit : $y' + \dfrac{2x}{1-x^2}y = \dfrac{(1+x)^2}{1-x^2} = \dfrac{1+x}{1-x}$
+
+\vspace{1em}
+
+\vspace{1em}
+
+\textbf{1) Équation homogène :} $a(x) = \dfrac{2x}{1-x^2}$
+
+$A(x) = \displaystyle\int \dfrac{2x}{1-x^2} \, dx = -\ln|1-x^2|$
+
+$y_h = Ce^{\ln|1-x^2|} = C(1-x^2)$ (pour $|x| < 1$)
+
+\vspace{1em}
+
+\vspace{1em}
+
+\textbf{2) Variation de la constante :}
+
+$C'(x) = \dfrac{1+x}{1-x} \cdot \dfrac{1}{1-x^2} = \dfrac{1+x}{(1-x)(1-x^2)} = \dfrac{1}{(1-x)^2}$
+
+$C(x) = \displaystyle\int \dfrac{1}{(1-x)^2} \, dx = \dfrac{1}{1-x}$
+
+\vspace{1em}
+
+\textbf{3) Solution générale :}
+
+$y = (1-x^2)\left(C + \dfrac{1}{1-x}\right) = C(1-x^2) + (1+x)$
+\end{Ex}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{QCM d'entraînement}
+
+\exo[1]{\textbf{QCM - Équations différentielles}}
+
+\begin{enumerate}
+\item La solution générale de $y' + 3y = 0$ est :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $y = Ce^{3x}$
+\item $y = Ce^{-3x}$
+\item $y = 3Ce^x$
+\end{enumerate}
+\end{multicols}
+
+\item Une solution particulière de $y' - y = 2$ est :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item $y_p = 2$
+\item $y_p = -2$
+\item $y_p = 2x$
+\end{enumerate}
+\end{multicols}
+
+\item L'équation $yy' = x$ est de type :
+\begin{multicols}{3}
+\begin{enumerate}[label=\alph*.]
+\item Linéaire
+\item Variables séparables
+\item Ni l'un ni l'autre
+\end{enumerate}
+\end{multicols}
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section{Exercices}
+
+\exo[2]{\textbf{Résolution d'équations}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y' + 2xy = x$
+\item $(x^2+1)y' = y$ avec $y(1) = 1$
+\item $(1+2x)y' = y - 2$
+\item $\dfrac{y'-1}{x^2} = 1$
+\item $xy' - 2y = -\ln x$
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Problème - Piscine et chlore}}
+
+Le bassin d'une piscine municipale a une capacité de 600 000 litres d'eau. Pour respecter les normes d'hygiène, 30 000 litres d'eau sont renouvelés chaque heure et le taux de chlore maximum autorisé est de 0,25 mg/L.
+
+Un soir, 1 kg de chlore est déversé par erreur dans le bassin à 20h (alors que le taux de chlore était initialement indétectable).
+
+On modélise la concentration massique du chlore par une fonction $f(t)$ (en mg/L), où $t$ est le temps écoulé depuis l'accident (en heures). On admet que $f$ est solution de :
+$$y' + 0{,}05y = 0$$
+
+\begin{enumerate}
+\item Résoudre cette équation différentielle.
+\item Déterminer $f(0)$ et en déduire l'expression de $f(t)$.
+\item Au bout de combien de temps pourra-t-on ouvrir la piscine au public ?
+\item Tracer l'allure de la courbe représentative de $f$.
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[3]{\textbf{Problème - Refroidissement d'une roche}}
+
+On modélise le refroidissement d'une roche volcanique en supposant que le taux de refroidissement est proportionnel à la différence de température entre la roche et l'air ambiant.
+
+On note $T_a$ la température de l'air (constante) et $T(t)$ la température de la roche au temps $t$ (en heures).
+
+\begin{enumerate}
+\item Montrer que $T(t)$ est solution de l'équation : $T' = -k(T - T_a)$ où $k > 0$.
+\item Résoudre cette équation et montrer que $T(t) = Ce^{-kt} + T_a$.
+\item Interpréter physiquement la constante $C$.
+\item Application : Si $k = \ln 3$, $T_a = 20°C$ et $T(0) = 500°C$, calculer :
+\begin{enumerate}[label=\alph*.]
+\item La température après 30 minutes
+\item Le temps nécessaire pour atteindre 100°C
+\end{enumerate}
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Problème - Croissance de population}}
+
+L'accroissement d'une population d'un pays est proportionnel à cette population. On sait que la population double tous les 50 ans.
+
+\begin{enumerate}
+\item Écrire l'équation différentielle modélisant cette situation.
+\item Résoudre cette équation.
+\item Déterminer la constante de proportionnalité $k$.
+\item En combien de temps la population triple-t-elle ?
+\end{enumerate}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\exo[2]{\textbf{Problème - Dissolution chimique}}
+
+La vitesse de dissolution d'un composé chimique dans l'eau est proportionnelle à la quantité restante. On place 20 g de ce composé et on observe que 5 minutes plus tard, il reste 10 g.
+
+\begin{enumerate}
+\item Écrire et résoudre l'équation différentielle.
+\item Déterminer la constante de proportionnalité.
+\item Combien de temps faut-il attendre pour qu'il reste seulement 1 g ?
+\end{enumerate}
+
+\end{document}

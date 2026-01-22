@@ -1,0 +1,171 @@
+\section{Développements limités}
+
+
+
+\begin{enumerate}
+    \item 
+    Donner les développements limités des fonctions $\sin(x)$ et $\cos(x)$ à l'ordre $3$ au voisinage de $0$.
+
+    \item
+    Utiliser les développements limités obtenus pour calculer le développement limité de $h(x) = \sin(x) \cdot \cos(x)$ à l'ordre $3$.
+
+    \item 
+    En partant du développement limité de $\dfrac{1}{1-x}$, calculer $\ln\left(1-x\right)$ à l'ordre $3$ au voisinage de $0$ en détaillant la démarche.
+\end{enumerate}
+
+
+\section{Courbes paramétrées}
+
+L'astroïde est la courbe de coordonnées cartésiennes (où $t \in \mathbb{R}$) :
+$$
+\left \{
+\begin{array}{lc}
+x(t) =& \cos^3(t)\\
+y(t) = &\sin^3(t)\\
+\end{array}
+\right.
+$$
+
+\begin{enumerate}
+    \item 
+   Réduire l'intervalle d'étude. \textbf{ 0 1 point}
+\item Calculer les tangentes de la courbe pour $t \in \left[0;\frac{\pi}{2} \right]$.\textbf{0 1 2 3 points}
+\item En déduire les points stationnaires.\textbf{0 1 2 points}
+    \item Calculer la longueur de la courbe.\textbf{0 1 2 3 4 points}
+
+
+\end{enumerate}
+
+
+
+% \section*{Solutions}
+% Pour rappel, la correction est extrêmement détaillée pour vous aider, un tel niveau n'était pas attendu.\\
+
+
+
+% \begin{enumerate}
+
+%     \item
+%     Les fonctions $x$ et $y$ sont définies sur $\mathbb{R}$.\\
+    
+%     L'équation paramétrique est $2\pi$-périodique. L'ensemble d'étude est un intervalle de longueur $2\pi$.\\
+    
+%     $\forall t \in \mathbb{R}, \qquad -t \in\mathbb{R}, \qquad x(-t)= x(t) \text{ et } y(-t)=y(t)$.\\
+%     Les point $M_t$ et $M_{-t}$ sont symétriques par rapport à l'axe des abscisses.\\
+%     On réduit l'ensemble d'étude à $[0\pi]$.\\
+    
+%     On peut également remarquer que :\\
+%     \begin{itemize} \item 
+%     $\forall t \in \mathbb{R}, \qquad t+\pi \in\mathbb{R}, \qquad x(t+\pi)=- x(t) \text{ et } y(t+\pi)=-y(t)$.\\
+%     Les point $M_t$ et $M_{t+\pi}$ sont symétriques par rapport à l'origine.\\
+%     \item
+%        $\forall t \in \mathbb{R}, \qquad \frac{\pi}{2}-t \in\mathbb{R}, \qquad x( \frac{\pi}{2}-t )=y(t) \text{ et } y( \frac{\pi}{2}-t )=x(t)$.\\ 
+%         Les point $M_t$ et $M_{\frac{\pi}{2}-t}$ sont symétriques par rapport à la droite d'équation $y=x$.\\
+%     \end{itemize}
+    
+%     On peut donc réduire l'ensemble d'étude à $t \in \left[0, \frac{\pi}{4}\right]$.\\
+    
+%     \item 
+    
+% Les fonctions $x$ et $y$ sont dérivables sur $\left[0;\frac{\pi}{2} \right]$
+%     \[
+%  x'(t) = -3\cos^2(t)\sin(t) \quad \text{et} \quad y'(t) = 3\sin^2(t)\cos(t).
+%     \]
+
+%     Pour $t \in \left[0, \frac{\pi}{2}\right]$, la tangente en chaque point $(x(t), y(t))$ a pour équation :
+%     \[
+%     y - \sin^3(t) = -\tan(t)(x - \cos^3(t)).
+%     \]
+    
+%     \item
+    
+%     Les points stationnaires correspondent à $x'(t) = 0$ et $y'(t) = 0$ avec
+%       \[
+%  x'(t) = -3\cos^2(t)\sin(t) \quad \text{et} \quad y'(t) = 3\sin^2(t)\cos(t).
+%     \]  
+%     On obtient 
+%     $$t=0 +k\pi \text{ et } t=\frac{\pi}{2}+k\pi \text{ avec } k \in \mathbb{R}$$
+%    Restreignons nous uniquement à l'intervalle  d'étude $t \in \left[0, \frac{\pi}{2}\right]$, les autres points peuvent être obtenus par symétrie.\\
+%    $t=0$ et $t=\frac{\pi}{2}$
+%     Pour $t = 0$, le point est $(x, y) = (1, 0)$. Pour $t = \frac{\pi}{2}$, le point est $(x, y) = (0, 1)$.
+%     Les points stationnaires ont pour coordonnées $(1, 0)$ et $(0, 1)$, puis par symétrie $(1, -1)$ et $(1, 1)$.\\
+
+%     \item
+%     La longueur de la courbe pour $t \in \left[0, \frac{\pi}{2}\right]$ est donnée par :
+%     \[
+%     L = \int_0^{\frac{\pi}{2}} \sqrt{\left(x'(t)\right)^2 + \left(y'(t)\right)^2} \, dt.
+%     \]
+%     Or
+%     \[
+%     \forall t \in \mathbb{R} \qquad
+%     \sqrt{\left(x'(t)\right)^2 + \left(y'(t)\right)^2} = 3|\cos(t)\sin(t)|\sqrt{\cos^2(t) + \sin^2(t)} = 3|\cos(t)\sin(t)|.
+%     \]
+%     Donc :
+%     \[
+%     L = \int_0^{\frac{\pi}{2}} 3\cos(t)\sin(t) \, dt = 3\int_0^{\frac{\pi}{2}} \frac{\sin(2t)}{2} \, dt = \frac{3}{2} \int_0^{\frac{\pi}{2}} \sin(2t) \, dt
+%  \frac{3}{2} \left[-\frac{1}{2}\cos(2t)\right]_0^{\frac{\pi}{2}} = \frac{3}{2} \cdot \frac{1}{2} \cdot (1 + 1) = \frac{3}{2}.
+%     \]
+%     La longueur de la courbe est $L = \frac{3}{2}$.
+    
+% \end{enumerate}
+
+\section{Courbes paramétrées, 2eme version}
+
+On considère la courbe de coordonnées cartésiennes (où $t \in \mathbb{R}$) :
+$$
+\left \{
+\begin{array}{lc}
+x(t) =& \cos^2(t)\\
+y(t) = &\sin^2(t)\\
+\end{array}
+\right.
+$$
+
+\begin{enumerate}
+    \item 
+   Réduire l'intervalle d'étude. \textbf{ 0 1 point}\\
+\item Calculer les tangentes de la courbe pour $t \in \left[0;\pi \right]$.\textbf{0 1 2 3 points}\\
+\item En déduire les points stationnaires.\textbf{0 1 2 points}\\
+    \item
+   Calculer la longueur de la courbe.\textbf{0 1 2 3 4 points}\\
+
+
+\section{Séries numériques}
+
+
+Trois questions pouvaient être tirées parmi le lot suivant
+
+\begin{enumerate}
+    \item 
+    Soit la série $\displaystyle\sum_{n=1}^{+\infty} \frac{1}{n^2 + 3n + 2}$. Montrer qu'il s'agit d'une série à termes positifs et conclure sur sa convergence par comparaison.\\
+
+    \item 
+    Étudier la convergence de la série $\displaystyle\sum_{n=2}^{+\infty} \frac{1}{n (\ln n)^p}$ selon les valeurs du paramètre $p > 0$.\\
+
+    \item 
+    Étudier la convergence de la série $\displaystyle\sum_{n=1}^{+\infty} \frac{n^2}{n^3 + x}$ selon la valeur du réel $x$.\\
+
+    \item 
+    Pour quelles valeurs de $x \in \mathbb{R}$ la série $\displaystyle\sum_{n=1}^{+\infty} \frac{x^n}{n}$ converge-t-elle ?\\
+
+    \item 
+    Étudier la nature de la série $\displaystyle\sum_{n=1}^{+\infty} \frac{(-1)^n}{n^p}$ selon les valeurs du paramètre réel $p > 0$.\\
+
+    \item 
+    Soit $f(x) = \displaystyle\sum_{n=1}^{+\infty} \frac{x^n}{n^2}$. Déterminer l'ensemble de convergence de cette série, puis étudier la continuité de $f$ sur cet ensemble.\\
+
+    \item 
+    On considère la série $\displaystyle\sum_{n=1}^{+\infty} \frac{(-1)^n}{n^2 + x}$. Pour quelles valeurs de $x$ la série est-elle convergente ? Converge-t-elle absolument ?\\
+
+    \item 
+    Étudier la convergence de la série $\displaystyle\sum_{n=1}^{+\infty} \frac{1}{n^\alpha \ln^\beta n}$ selon les valeurs des paramètres $\alpha > 0$ et $\beta \in \mathbb{R}$.\\
+
+    \item 
+    Pour $x > 0$, étudier la convergence de la série $\displaystyle\sum_{n=1}^{+\infty} \frac{1}{n^x + n}$.\\
+
+    \item 
+    Soit $S(x) = \displaystyle\sum_{n=1}^{+\infty} \left(\frac{x}{1+x}\right)^n$. Donner l'ensemble de convergence de cette série en fonction de $x$. Calculer ensuite $S(x)$ lorsque la série converge.\\
+\end{enumerate}
+
+\end{enumerate}
+

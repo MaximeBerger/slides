@@ -1,0 +1,598 @@
+
+
+
+
+\section{Matrices}
+
+\subsection{Matrice diagonalisable}
+\begin{Def}\textbf{Matrice diagonalisable}\\
+On dit qu’une matrice carrée $A$ est \textbf{diagonalisable} si elle est semblable à une matrice diagonale, c’est-à-dire s’il existe une matrice inversible $P$ telle que $P^{-1} \cdot A \cdot P$ est diagonale.
+\end{Def}
+
+
+
+
+\begin{Def}\textbf{Spectre}\\
+Soient $E$ un $K$-espace vectoriel et $u : E \to E$ un endomorphisme.  
+\begin{enumerate}[(i)]
+    \item On dit qu’un vecteur $x \in E$ est un \textbf{vecteur propre} de $u$ si $x$ n’est pas nul et $u(x)$ est colinéaire à $x$, c’est-à-dire : 
+    \[
+    x \neq 0_E \quad \text{et} \quad \exists \lambda \in K, \, u(x) = \lambda x.
+    \]
+    \item On dit qu’un scalaire $\lambda \in K$ est une \textbf{valeur propre} de $u$ s’il existe un vecteur $x \in E$ tel que $x \neq 0_E$ et $u(x) = \lambda x$.
+    \item L’ensemble des valeurs propres de $u$ est appelé le \textbf{spectre} de $u$ et est noté $\mathrm{Sp}(u)$.\\
+\end{enumerate}
+\end{Def}
+
+Soient un vecteur $x \in E$ et un scalaire $\lambda \in K$ : si $x \neq 0_E$ et $u(x) = \lambda x$, alors $x$ est un \textbf{vecteur propre} et $\lambda$ est une \textbf{valeur propre}.  
+On dit alors que $x$ est un vecteur propre associé à la valeur propre $\lambda$. \\ 
+
+\begin{Ex} \textbf{Un spectre égal à $\mathbb{R}$} \\
+L’ensemble $C^\infty(\mathbb{R}, \mathbb{R})$ des fonctions de $\mathbb{R}$ vers $\mathbb{R}$ infiniment dérivables est un $\mathbb{R}$-espace vectoriel de dimension infinie.  
+La dérivation $D : C^\infty(\mathbb{R}, \mathbb{R}) \to C^\infty(\mathbb{R}, \mathbb{R})$, $f \mapsto f'$ est un endomorphisme.  
+
+Chaque réel $\lambda$ est une valeur propre de $D$. En effet, la fonction :  
+\[
+f : \mathbb{R} \to \mathbb{R}, \quad x \mapsto e^{\lambda x}
+\]
+est de classe $C^\infty$, non nulle, et sa dérivée est $f' = \lambda f$.  
+Cette fonction $f$ est donc un vecteur propre de $D$, associé à la valeur propre $\lambda$.  
+Ainsi, $\operatorname{Sp}(D) = \mathbb{R}$.\\  
+\end{Ex}
+
+\begin{Ex} \textbf{Un spectre vide}\\
+L’endomorphisme $R[X] \to R[X]$, $P(X) \mapsto X \cdot P(X)$ ne possède aucun vecteur propre (et donc aucune valeur propre).\\
+\end{Ex}
+
+\begin{Rem} 
+Si l’espace vectoriel $E$ est de dimension finie $n$, alors on peut représenter, dans une base de $E$, l’endomorphisme $u$ par une matrice carrée $A \in M_n(K)$ et le vecteur $x$ par un vecteur colonne $X \in M_{n,1}(K)$.  \\
+
+De :  
+\[
+u(x) = \lambda x \iff A \cdot X = \lambda X,
+\]
+on déduit que $x$ est un vecteur propre de $u$ si, et seulement si, $X$ est un vecteur propre de $A$ (avec la même valeur propre).\\
+\end{Rem}
+
+\begin{Def}\textbf{Endomorphisme diagonalisable}\\
+Soient $E$ un espace vectoriel de dimension finie $n$ et $u : E \to E$ un endomorphisme.  
+On dit que l’endomorphisme $u$ est \textbf{diagonalisable} s’il existe une base $(\varepsilon_1, \dots, \varepsilon_n)$ de $E$ dont chaque vecteur est un vecteur propre de $u$ :  
+\[
+\forall i \in \{1, \dots, n\}, \quad u(\varepsilon_i) = \lambda_i \varepsilon_i.
+\]
+
+\[
+A = 
+\begin{pmatrix}
+u(e_1) & u(e_2) & \cdots & u(e_n) \\
+e_1 & a_{11} & a_{12} & \cdots & a_{1n} \\
+e_2 & a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+e_n & a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}
+\]
+
+\[
+P = 
+\begin{pmatrix}
+\varepsilon_1 & \cdots & \varepsilon_n \\
+e_1 & \cdots & e_n \\
+: & \cdots & : \\
+: & \cdots & : 
+\end{pmatrix}
+\longrightarrow
+P^{-1} A P = 
+\begin{pmatrix}
+u(\varepsilon_1) & u(\varepsilon_2) & \cdots & u(\varepsilon_n) \\
+\varepsilon_1 & \lambda_1 & 0 & \cdots & 0 \\
+\varepsilon_2 & 0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\varepsilon_n & 0 & \cdots & 0 & \lambda_n
+\end{pmatrix}.
+\]
+
+Si la matrice $A$ représente l’endomorphisme $u$ dans une base $B = (e_1, \dots, e_n)$, alors $A$ est diagonalisable si, et seulement si, $u$ est diagonalisable.\\
+\end{Def}
+
+\subsection{Le polynôme caractéristique}
+
+\begin{Def}\textbf{Proposition-definition}\\
+Soit une matrice carrée $A \in M_n(K)$. La fonction  
+\[
+K \to K, \quad x \mapsto \det(xI_n - A)
+\]
+est un polynôme noté $\chi_A$ et appelé le \textbf{polynôme caractéristique} de $A$ :  
+\[
+\forall x \in K, \quad \chi_A(x) = \det(xI_n - A) = x^n - (\operatorname{tr}A) x^{n-1} + \cdots + (-1)^n \det A.
+\]
+\end{Def}
+
+\begin{Dem}
+Les termes de degré $n$ et $n-1$ de $\chi_A(x)$ sont ceux du produit $(x - a_{1,1}) \cdots (x - a_{n,n})$, c'est-à-dire $x^n$ et $-(a_{1,1} + \cdots + a_{n,n})x^{n-1}$.  
+Enfin, le terme constant du polynôme $\chi_A$ est :  
+\[
+\chi_A(0) = \det(0I_n - A) = \det(-A) = (-1)^n \det A.
+\]
+\end{Dem}
+\findem
+
+\begin{Prop}
+Deux matrices semblables ont le même polynôme caractéristique.\\
+\end{Prop}
+
+\begin{Dem}
+Soit $A' = P^{-1}AP$, où $P \in \operatorname{GL}_n(K)$. Pour tout $x \in K$, on a :  
+\[
+xI_n - A' = xI_n - P^{-1}AP = P^{-1}(xI_n - A)P.
+\]
+Ainsi :  
+\[
+\chi_{A'}(x) = \det(xI_n - A') = \det(xI_n - A) = \chi_A(x).
+\]
+\end{Dem}
+\findem
+
+Autrement dit, le polynôme caractéristique d'une matrice est un invariant de similitude comme son rang, son déterminant et sa trace.\\
+
+Si $E$ est un $K$-espace vectoriel de dimension finie, on peut définir le \textbf{polynôme caractéristique} d'un endomorphisme $u$ par :  
+\[
+\chi_u(x) = \det(x \operatorname{id}_E - u).
+\]
+Si la matrice $A$ représente l'endomorphisme $u$ dans une base $B$, alors la matrice $xI_n - A$ représente l'endomorphisme $x\operatorname{id}_E - u$ dans la même base, donc $\chi_u = \chi_A$.
+
+\begin{Thm}\textbf{Le polynôme caractéristique détecte les valeurs propres}\\
+Soit une matrice carrée $A \in M_n(K)$. Un scalaire $\lambda \in K$ est une valeur propre de $A$ si, et seulement si, $\lambda$ est une racine du polynôme caractéristique $\chi_A \in K[X]$ :  
+\[
+\lambda \in \operatorname{Sp}(A) \iff \det(\lambda I_n - A) = 0.
+\]
+Autrement dit : si $E$ est un $K$-espace vectoriel de dimension finie et $u : E \to E$ un endomorphisme, alors :  
+\[
+\forall \lambda \in K, \quad \lambda \in \operatorname{Sp}(u) \iff \det(\lambda \operatorname{id}_E - u) = 0.
+\]
+\end{Thm}
+
+\begin{Dem}
+Un scalaire $\lambda \in K$ est une valeur propre de $A$ si, et seulement si, il existe un vecteur colonne $X \neq 0$ tel que $A \cdot X = \lambda X$.  
+
+Or :  
+\[
+\exists X \neq 0, \, A \cdot X = \lambda X \iff \exists X \neq 0, \, (A \cdot X - \lambda X) = 0
+\]
+\[
+\iff \exists X \neq 0, \, (A - \lambda I_n) \cdot X = 0
+\]
+\[
+\iff \text{l'endomorphisme } (\lambda \operatorname{id}_E - u) \text{ n'est pas injectif}
+\]
+\[
+\iff \text{l'endomorphisme } (\lambda \operatorname{id}_E - u) \text{ n'est pas bijectif}
+\]
+\[
+\iff \text{la matrice } (\lambda I_n - A) \text{ n'est pas inversible}
+\]
+\[
+\iff \det(\lambda I_n - A) = 0.
+\]
+\end{Dem}
+
+\findem
+
+\begin{Prop}\textbf{Sous-espaces propres}\\
+Soient $E$ un espace vectoriel et $u : E \to E$ un endomorphisme.  
+Si des valeurs propres sont distinctes deux à deux, alors les vecteurs propres associés sont linéairement indépendants. \\ 
+
+Autrement dit : les sous-espaces propres sont en somme directe.\\
+\end{Prop}
+
+\begin{Dem}
+Soient $\varepsilon_1, \cdots, \varepsilon_r$ des vecteurs propres de $u$ associés à des valeurs propres $\lambda_1, \cdots, \lambda_r$ distinctes deux à deux.  
+On procède par récurrence sur $r$ :  
+
+\begin{itemize}
+    \item \textbf{Cas de base :} Si $r = 1$, la famille $(\varepsilon_1)$ est libre, car $\varepsilon_1 \neq 0_E$ (un vecteur propre n’est jamais nul, par définition).
+    \item \textbf{Hérédité :} Supposons que la famille $(\varepsilon_1, \cdots, \varepsilon_{r-1})$ est libre. Montrons que :  
+    \[
+    \alpha_1 \varepsilon_1 + \cdots + \alpha_{r-1} \varepsilon_{r-1} + \alpha_r \varepsilon_r = 0_E \implies \alpha_1 = \cdots = \alpha_{r-1} = \alpha_r = 0.
+    \]
+    Si :  
+    \[
+    \alpha_1 \varepsilon_1 + \cdots + \alpha_{r-1} \varepsilon_{r-1} + \alpha_r \varepsilon_r = 0_E \tag{L1},
+    \]
+    alors en appliquant $u$, on obtient :  
+    \[
+    u(\alpha_1 \varepsilon_1 + \cdots + \alpha_{r-1} \varepsilon_{r-1} + \alpha_r \varepsilon_r) = u(0_E),
+    \]
+    ce qui donne :  
+    \[
+    \alpha_1 \lambda_1 \varepsilon_1 + \cdots + \alpha_{r-1} \lambda_{r-1} \varepsilon_{r-1} + \alpha_r \lambda_r \varepsilon_r = 0_E \tag{L2}.
+    \]
+    En soustrayant $\lambda_r \times \text{(L1)}$ de (L2), on obtient :  
+    \[
+    \alpha_1 (\lambda_1 - \lambda_r) \varepsilon_1 + \cdots + \alpha_{r-1} (\lambda_{r-1} - \lambda_r) \varepsilon_{r-1} = 0_E. \tag{L3}
+    \]
+    Par hypothèse de récurrence, la famille $(\varepsilon_1, \cdots, \varepsilon_{r-1})$ est libre. Ainsi :  
+    \[
+    \alpha_1 (\lambda_1 - \lambda_r) = \cdots = \alpha_{r-1} (\lambda_{r-1} - \lambda_r) = 0.
+    \]
+    Comme les valeurs propres $\lambda_1, \cdots, \lambda_r$ sont distinctes deux à deux, on a $\lambda_i - \lambda_r \neq 0$ pour tout $i < r$. Il s’ensuit que :  
+    \[
+    \alpha_1 = \cdots = \alpha_{r-1} = 0.
+    \]
+    En revenant à (L1), on en déduit que $\alpha_r = 0$.  
+\end{itemize}
+
+Par récurrence, la famille $(\varepsilon_1, \cdots, \varepsilon_r)$ est libre pour tout $r \geq 1$. \\ 
+\end{Dem}
+\findem
+\noindent
+*** Par récurrence, la propriété est vraie pour tout $r \in \mathbb{N}^*$.  
+
+Voici une autre preuve qui utilise le lemme des noyaux : si $\lambda_1, \cdots, \lambda_r$ sont des valeurs propres de $u$ deux à deux distinctes, alors les polynômes $P_1 = \lambda_1 - X, \cdots, P_r = \lambda_r - X$ sont deux à deux premiers entre eux. D’où :  
+\[
+\ker(P_1(u) \circ \cdots \circ P_r(u)) = \ker(P_1(u)) \oplus \cdots \oplus \ker(P_r(u)).
+\]
+Cette somme est directe et c’est la somme des sous-espaces propres.
+
+ 
+
+
+\subsection{Critères de diagonalisabilité}
+
+\begin{Prop}\textbf{Une condition suffisante pour qu’une matrice soit diagonalisable}\\
+
+Soient $n \geq 2$ et une matrice $A \in \mathcal{M}_n(K)$ :  
+\[
+A \text{ possède $n$ valeurs propres distinctes deux à deux } \implies A \text{ est diagonalisable.}
+\]
+\end{Prop}
+
+\begin{Dem}
+Si $A$ possède $n$ valeurs propres distinctes deux à deux, alors il existe $n$ vecteurs propres associés, et ils sont linéairement indépendants.  
+Or une famille libre de $n$ vecteurs est une base de $K^n$. Donc $A$ est diagonalisable.  
+
+La réciproque est fausse : par exemple, la matrice identité $I_n$ est diagonalisable (car elle est diagonale), mais $\mathrm{Sp}(I_n) = \{1\}$.\\
+\end{Dem}
+\findem
+
+\begin{Thm}[Conditions nécessaires et suffisantes pour qu’une matrice soit diagonalisable]
+
+Soient $E$ un espace vectoriel de dimension finie et $u : E \to E$ un endomorphisme.  
+Les propositions suivantes sont équivalentes :\\
+\begin{itemize}
+    \item $u$ est diagonalisable ;
+    \item $E = \bigoplus_{\lambda \in \mathrm{Sp}(u)} \ker(\lambda \mathrm{id}_E - u)$ ;
+    \item $\dim E = \sum_{\lambda \in \mathrm{Sp}(u)} \dim \ker(\lambda \mathrm{id}_E - u)$ ;
+    \item $\chi_u$ est scindé et $\forall \lambda \in \mathrm{Sp}(u), \; \dim \ker(\lambda \mathrm{id}_E - u) = m_\lambda$,
+\end{itemize}
+où $m_\lambda$ désigne la multiplicité de $\lambda$ dans $\chi_u$.
+\end{Thm}
+
+\subsection{Trigonalisation}
+
+\begin{Def}\textbf{Matrice trigonalisable}\\
+On dit qu’une matrice $A \in \mathcal{M}_n(K)$ est \textbf{trigonalisable} s’il existe une matrice inversible $P$ telle que $P^{-1}AP$ est triangulaire :  
+\[
+P^{-1}AP =
+\begin{pmatrix}
+\lambda_1 & \ast & \cdots & \ast \\
+0 & \lambda_2 & \cdots & \ast \\
+\vdots & \vdots & \ddots & \ast \\
+0 & 0 & \cdots & \lambda_n
+\end{pmatrix}.
+\]
+Soit $E$ un espace vectoriel de dimension finie et $u \in \mathcal{L}(E)$. On dit que $u$ est \textbf{trigonalisable} s’il existe une base $B = (\varepsilon_1, \dots, \varepsilon_n)$ de $E$ telle que $\mathrm{Mat}_B(u)$ est triangulaire.\\
+\end{Def}
+
+\begin{Rem}
+\begin{enumerate}
+    \item Dans la définition, on peut choisir une matrice triangulaire inférieure au lieu de supérieure. Il suffit de remplacer la base $(\varepsilon_1, \dots, \varepsilon_n)$ par la base $(\varepsilon_n, \dots, \varepsilon_1)$, c’est-à-dire d’inverser l’ordre des vecteurs, autrement dit d’inverser l’ordre des colonnes de $P$.
+    \item Si $A$ est trigonalisable, alors les scalaires $\lambda_i \in K$ sur la diagonale sont des valeurs propres de $A$, car le polynôme caractéristique de $A$ est $(X - \lambda_1) \cdots (X - \lambda_n)$ (un déterminant triangulaire).\\
+\end{enumerate}
+\end{Rem}
+
+\begin{Thm}
+Une matrice $A \in \mathcal{M}_n(K)$ est trigonalisable si, et seulement si, son polynôme caractéristique $\chi_A$ est scindé sur $K$.\\
+\end{Thm}
+
+\begin{Dem}
+On démontre la propriété par récurrence sur la taille $n$ de la matrice :
+\begin{itemize}
+    \item \textbf{Cas de base ($n = 1$) :} La matrice $A = (a_{11})$ est déjà triangulaire.
+    \item \textbf{Hérédité :} Supposons que la propriété est vraie pour toutes les matrices de taille $(n-1) \times (n-1)$.  
+    La matrice $A$ représente un endomorphisme $u$ d’un $K$-espace vectoriel $E$, dans une base $B = (e_1, e_2, \dots, e_n)$. Le polynôme caractéristique $P_A$ possède au moins une racine $\lambda_1 \in K$ car il est scindé.  
+    Soit $\varepsilon_1 \in E$ un vecteur propre de $u$, associé à cette valeur propre $\lambda_1$. On complète pour obtenir une base $C = (\varepsilon_1, e'_2, \dots, e'_n)$ de $E$. Dans cette base, la matrice de $u$ est de la forme :
+    \[
+    A' = Q^{-1}AQ =
+    \begin{pmatrix}
+    \lambda_1 & \ast & \cdots & \ast \\
+    0 & \ddots & & \vdots \\
+    \vdots & & \ddots & \ast \\
+    0 & \cdots & 0 & B
+    \end{pmatrix},
+    \]
+    où $Q$ est la matrice de passage de $B$ vers $C$.  
+    Le bloc $B$ est une matrice de taille $(n-1) \times (n-1)$ et son polynôme caractéristique est aussi scindé, car $P_A(X) = P_{A'}(X) = (X - \lambda_1)P_B(X)$ est scindé. D’où $B$ est trigonalisable : il existe $R \in \mathrm{GL}_{n-1}(K)$ telle que la matrice $R^{-1}BR$ est triangulaire.  
+    La matrice 
+    \[
+    S =
+    \begin{pmatrix}
+    1 & 0 & \cdots & 0 \\
+    0 & \ddots & & 0 \\
+    \vdots & & R & \vdots \\
+    0 & \cdots & 0 & R
+    \end{pmatrix}
+    \]
+    est inversible et $S^{-1}$ est de la même forme.  
+    Alors :
+    \[
+    S^{-1}A'S =
+    \begin{pmatrix}
+    \lambda_1 & \ast & \cdots & \ast \\
+    0 & \ddots & & \vdots \\
+    \vdots & & R^{-1}BR & \vdots \\
+    0 & \cdots & 0 & \lambda_n
+    \end{pmatrix}
+    \]
+    est triangulaire. Soit $P = QS$, la matrice $P^{-1}AP$ est triangulaire. \\ 
+\end{itemize}
+\end{Dem}
+\findem
+
+\begin{Thm}\textbf{Matrice trigonalisable}\\
+Toute matrice de $\mathcal{M}_n(\mathbb{C})$ est trigonalisable.\\
+\end{Thm}
+
+
+\section{Systèmes Différentiels Linéaires}
+
+\subsection{Définition}
+\begin{Def}
+Un système différentiel linéaire homogène à coefficients constants est une équation de la forme :  
+\[
+(E) \quad X' = A \cdot X
+\]  
+où $A : I \to M_n(K)$ est continue sur $I$, intervalle de $\mathbb{R}$.  
+
+Une solution de $(E)$ sur $I$ est une fonction dérivable $X : I \to K^n$ vérifiant $(E)$. \\ 
+\end{Def}
+
+
+\begin{Def}\textbf{Système différentiel linéaire homogène à coefficients constants}\\
+En notant $x_i(t)$ et $a_{ij}(t)$ les composantes de $X(t)$ et $A$, on a :  
+\[
+X' = A \cdot X \iff 
+\begin{cases}
+x'_1 = a_{11}x_1 + \cdots + a_{1n}x_n, \\
+\vdots \\
+x'_n = a_{n1}x_1 + \cdots + a_{nn}x_n.
+\end{cases}
+\]
+\end{Def}
+
+\subsection{ Résolution}
+
+La résolution d’un tel système se fait en réduisant la matrice $A$.  
+
+En effectuant le changement de base $X = PY$, $A = PBP^{-1}$, $X' = PY'$ et $X = AX' \iff Y' = BY$.  
+
+\subsection{ Cas où $A$ est diagonalisable}
+
+On diagonalise $A : A = PDP^{-1}$ où $D = \text{diag}(\lambda_1, \ldots, \lambda_n)$. Alors :  
+\[
+X' = AX \iff Y' = DY.
+\]  
+
+Le système $Y' = DY$ est alors un système diagonal, c’est-à-dire un système d’équations différentielles (une seule fonction inconnue par ligne) qui se résolvent indépendamment les unes des autres :  
+\[
+Y' = DY \iff Y(t) = 
+\begin{pmatrix}
+C_1 e^{\lambda_1 t} \\
+\vdots \\
+C_n e^{\lambda_n t}
+\end{pmatrix}
+= \sum_{i=1}^n C_i e^{\lambda_i t} E_i,
+\]
+où les $E_i$ sont les vecteurs de la base canonique et les $C_i$ des constantes arbitraires.  
+
+Ainsi :  
+\[
+X' = AX \iff X(t) = \sum_{i=1}^n C_i e^{\lambda_i t} V_i,
+\]
+où les $V_i = PE_i$ sont les colonnes de $P$, c’est-à-dire des vecteurs propres associés à $\lambda_i$.  
+
+On obtient donc un système fondamental de solutions :  
+\[
+(t \mapsto e^{\lambda_i t} V_i)_{1 \leq i \leq n}.
+\]
+
+Dans le cas où $A$ (réelle) est diagonalisable sur $\mathbb{C}$ mais pas sur $\mathbb{R}$, les valeurs propres sont conjuguées deux à deux avec le même ordre de multiplicité.  
+
+On résout le système sur $\mathbb{C}$ et on prend les parties réelles et imaginaires d’un système fondamental de solutions pour obtenir un système fondamental de solutions sur $\mathbb{R}$.  
+
+Lors de la résolution d’un tel système, il faut refaire toute cette démarche, simple et codifiée : poser $X = PY$, etc.  
+Par ailleurs, la matrice $P^{-1}$ n’intervient pas : inutile de la calculer.  
+
+
+\subsection{Cas où $A$ est trigonalisable}
+
+On trigonalise la matrice en se plaçant si besoin dans le cas où $K = \mathbb{C}$ et on pratique comme ci-dessus : $A = PTP^{-1}$, $X = PY$, $X' = AX \iff Y' = TY$ (système triangulaire).  
+
+On résout ensuite le système linéaire obtenu en commençant par la dernière équation, qui est une équation différentielle, on reporte dans l’avant-dernière qui devient une équation différentielle avec second membre, et ainsi de suite.  
+
+\exo{
+\begin{enumerate}
+    \item 
+    \[
+    \begin{cases}
+    x' = -3x + 5y - 5z, \\
+    y' = -4x + 6y - 5z, \\
+    z' = -4x + 4y - 3z.
+    \end{cases}
+    \]
+    
+    \item 
+    \[
+    \begin{cases}
+    x' = -2x, \\
+    y' = -z, \\
+    z' = y.
+    \end{cases}
+    \]
+    
+    \item 
+    \[
+    \begin{cases}
+    x' = 5x - 3y - 4z, \\
+    y' = -x + y - 2z, \\
+    z' = x - 3y.
+    \end{cases}
+    \]
+\end{enumerate}
+}
+
+
+
+\section{Exercices}
+
+
+\exo{\textbf{Le plus facile des systèmes différentiels}\\
+\vskip0.2cm
+Le mouvement d'une particule chargée dans un champ magnétique suivant l'axe $(Oz)$
+est régi par un système différentiel de la forme
+$$\left\{
+\begin{array}{rcl}
+x''&=&\omega y'\\
+y''&=&-\omega x'\\
+z''&=&0
+\end{array}\right.$$
+où $\omega$ dépend de la masse et de la charge de la particule, ainsi que du champ magnétique. 
+En posant $u=x'+iy'$, résoudre ce système différentiel.\\
+}
+
+% Exercice 293
+
+
+\exo{\textbf{Diagonalisable!}
+\vskip0.2cm
+Résoudre les systèmes différentiels suivants :
+$$\mathbf 1. \left\{
+\begin{array}{rcl}
+x'&=&x+2y-z\\
+y'&=&2x+4y-2z\\
+z'&=&-x-2y+z
+\end{array}\right.\quad\quad
+\mathbf 2. \left\{\begin{array}{rcl}
+x'&=&y+z\\
+y'&=&-x+2y+z\\
+z'&=&x+z
+\end{array}\right.
+$$
+}
+
+% Exercice 294
+
+
+\exo{\textbf{ Diagonalisable...mais sur les complexes}\\
+\vskip0.2cm
+Donner les solutions réelles du système différentiel  $X'=AX$ lorsque
+$$\mathbf 1. A=\left(\begin{array}{ccc}
+1&1&0\\
+-1&2&1\\
+1&0&1
+\end{array}\right)\quad\quad\mathbf 2. A=\left(\begin{array}{ccc}
+0&1&-1\\
+1&4&-2\\
+2&6&-3
+\end{array}\right).
+$$
+}
+
+% Exercice 309
+
+\exo{\textbf{Systèmes non diagonalisables}\\
+\vskip0.2cm
+Résoudre le système différentiel $X'=AX$ lorsque
+$$
+\begin{array}{lll}
+\mathbf 1.\ A=\left(\begin{array}{ccc}
+0&2&2\\
+-1&2&2\\
+-1&1&3
+\end{array}\right)&\quad&
+\mathbf 2.\ A=\left(\begin{array}{ccc}
+-6&5&3\\
+-8&7&4\\
+-2&1&1
+\end{array}\right)
+\end{array}$$
+
+}
+
+% Exercice 312
+
+\exo{\textbf{Avec second membre}\\
+\vskip0.2cm
+Résoudre les systèmes différentiels suivants :
+$$\begin{array}{lll}
+\mathbf 1.\ 
+\left\{
+\begin{array}{rcl}
+x_1'(t)&=&6x_1(t)+3x_2(t)-3t+4e^{3t}\\
+x_2'(t)&=&-4x_1(t)-x_2(t)+4t-4e^{3t}
+\end{array}\right.
+&\quad&
+\mathbf 2.\ 
+\left\{
+\begin{array}{rcl}
+x_1'(t)&=&x_2(t)+1\\
+x_2'(t)&=&-x_1(t)+2x_2(t)+t.
+\end{array}\right.
+\end{array}$$
+
+}
+
+\exo{
+\begin{enumerate}
+    \item Soient les matrices 
+    \[
+    A =
+    \begin{pmatrix}
+    0 & 1 & 2 \\
+    1 & 0 & 2 \\
+    0 & 0 & 3
+    \end{pmatrix}
+    \quad \text{et} \quad
+    B =
+    \begin{pmatrix}
+    7 & 1 \\
+    0 & 7
+    \end{pmatrix}.
+    \]
+    Montrer que la matrice $A$ est diagonalisable et la diagonaliser. Montrer que la matrice $B$ n’est pas diagonalisable.
+    \item Montrer que, pour tout $n \in \mathbb{N}$,
+    \[
+    A^n =
+    \begin{pmatrix}
+    \frac{1 + (-1)^n}{2} & \frac{1 - (-1)^n}{2} & -1 + 3^n \\
+    \frac{1 - (-1)^n}{2} & \frac{1 + (-1)^n}{2} & -1 + 3^n \\
+    0 & 0 & 3^n
+    \end{pmatrix}.
+    \]
+    \item Déterminer toutes les suites $(u_n)$, $(v_n)$ et $(w_n)$ telles que, pour tout $n \in \mathbb{N}$ :
+    \[
+    \begin{cases}
+    u_{n+1} = v_n + 2w_n, \\
+    v_{n+1} = u_n + 2w_n, \\
+    w_{n+1} = 3w_n.
+    \end{cases}
+    \]
+    \item Résoudre le système d’équations différentielles :
+    \[
+    \begin{cases}
+    x'(t) = y(t) + 2z(t), \\
+    y'(t) = x(t) + 2z(t), \\
+    z'(t) = 3z(t).
+    \end{cases}
+    \]
+\end{enumerate}
+}

@@ -1,0 +1,507 @@
+\documentclass[a4paper,11pt]{article}
+
+%	Tous les packages pour francisation compl�te
+%\usepackage[applemac]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+
+%\usepackage{auto-pst-pdf}
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{D\'efinition}
+\newtheorem{theoreme}{Th\'eor\`eme}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}} %vecteur
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+\newcommand{\encad}[1]{\begin{center}%
+\fcolorbox{black}{gray!20}{\begin{minipage}[t]{0.8\linewidth}%
+#1\end{minipage}}\end{center}}
+
+
+\pagestyle{fancy}
+\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{ESTP / Bachelor 1 / \the\year}
+\fancyhead[R]{Composition de math\'ematiques}
+\renewcommand\footrulewidth{1pt}
+%\fancyfoot[L]{Math�matiques : les polyn�mes}
+%\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\begin{center}\bf {\Large\underline{Composition de MATH\'EMATIQUES (3h) : 35 points}}\end{center}
+%\begin{center}\bf {{\small Rendre le sujet avec votre copie si le graphe de l'exercice 4 pr�sente la courbe de la fonction $f$.}}\end{center}
+\hfill\break
+
+%%%%%%%%%%
+%\includegraphics[trim = gauche bas droit haut, clip, width=3cm]
+%%%%%%%%%%
+\underline {\ding{110}\, \bf{Exercice 1 : \'Equations} (8 points)}
+
+\medskip
+
+Résoudre dans $\mathbb{R}$ les équations ou systèmes suivants :
+\begin{multicols}{2}
+\begin{enumerate}
+\item $e^{2x} - 2e^{x} + 1 = 0$\\
+\item $\ln(4x^2) = 2$\\
+\item $\cos\left ( 3x -\dfrac{\pi}{2}\right)=\dfrac{1}{2}$\\
+\item $\cos (7x)+\sin(7x)=1$\\
+\end{enumerate}
+\end{multicols}
+
+
+
+\medskip
+{\color{blue}\underline{\bf Solution}\\
+
+
+\begin{enumerate}
+\item $e^{2x} - 2e^{x} + 1 = 0$
+L'ensemble de définition est $\mathbb R$.\\
+On pose \( X = e^x \), avec \( X > 0 \).  
+L'équation devient : \( X^2 - 2X + 1 = 0 \iff (X - 1)^2 = 0 \iff X = 1 \)
+
+Donc \( e^x = 1 \iff x = \ln(1) = 0 \)
+
+\textbf{Ensemble solution :} \( \boxed{\{ 0\}} \)
+
+\item \( \ln(4x^2) = 2 \)
+L'ensemble de définition est $\mathbb R$.\\
+On utilise la propriété \( \ln(ab) = \ln a + \ln b \) et \( \ln(e^2) = 2 \) :
+\[
+\ln(4x^2) = \ln 4 + \ln(x^2) 
+\]
+
+
+\[
+ \ln(x^2) = \ln\left( \dfrac{e^2}{4} \right) \iff |x| = \dfrac{e}{2}
+\]
+
+\textbf{Ensemble solution :} \( \boxed{\left \{  -\dfrac{e}{2};\dfrac{e}{2}\right\}}  \)
+
+\item \( \cos\left(3x - \dfrac{\pi}{2}\right) = \dfrac{1}{2} \)
+
+On utilise la formule \( \cos\left(a - \dfrac{\pi}{2}\right) = \sin(a) \) :
+
+\[
+ \sin(3x) = \dfrac{1}{2}
+\iff 3x = \dfrac{\pi}{6} + 2k\pi \quad \text{ou} \quad 3x = \dfrac{5\pi}{6} + 2k\pi
+\]
+
+\[
+\iff x = \dfrac{\pi}{18} + \dfrac{2k\pi}{3} \quad \text{ou} \quad x = \dfrac{5\pi}{18} + \dfrac{2k\pi}{3}
+\quad \text{avec } k \in \mathbb{Z}
+\]
+
+\textbf{Ensemble solution :}
+\[
+\boxed{x = \dfrac{\pi}{18} + \dfrac{2k\pi}{3} \quad \text{ou} \quad x = \dfrac{5\pi}{18} + \dfrac{2k\pi}{3},\; k \in \mathbb{Z}}
+\]
+
+\item \( \cos(7x) + \sin(7x) = 1 \)
+L'ensemble de définition est $\mathbb R$.\\
+
+On cherche à écrire cette somme sous la forme :
+\[
+\cos(7x) + \sin(7x) = R\cos(7x - \alpha)
+\]
+
+où \( R = \sqrt{a^2 + b^2} \) avec \( a = 1 \), \( b = 1 \), donc :
+\[
+R = \sqrt{1^2 + 1^2} = \sqrt{2}, \quad \cos \alpha = \dfrac{1}{\sqrt{2}}, \text{ et } \sin \alpha = \dfrac{1}{\sqrt{2}} \iff \alpha = \dfrac{\pi}{4}
+\]
+
+On a donc :
+\[
+\cos(7x) + \sin(7x) = \sqrt{2} \cos\left(7x - \dfrac{\pi}{4} \right)
+\]
+
+L'équation devient alors :
+\[
+\sqrt{2} \cos\left(7x - \dfrac{\pi}{4} \right) = 1 \iff
+\cos\left(7x - \dfrac{\pi}{4} \right) = \dfrac{1}{\sqrt{2}}
+\]
+
+On résout :
+\[
+7x - \dfrac{\pi}{4} =  \dfrac{\pi}{4} + 2k\pi \text{ ou } 7x - \dfrac{\pi}{4} = - \dfrac{\pi}{4} + 2k\pi
+\]
+
+Deux cas :
+\begin{itemize}
+  \item \( 7x - \dfrac{\pi}{4} = \dfrac{\pi}{4} + 2k\pi \iff 7x = \dfrac{\pi}{2} + 2k\pi \iff x = \dfrac{\pi}{14} + \dfrac{2k\pi}{7} \)
+  \item \( 7x - \dfrac{\pi}{4} = -\dfrac{\pi}{4} + 2k\pi \iff 7x = 2k\pi \iff x = \dfrac{2k\pi}{7} \)
+\end{itemize}
+
+\textbf{Solution :}  
+\[
+\boxed{x = \dfrac{2k\pi}{7} \quad \text{ou} \quad x = \dfrac{\pi}{14} + \dfrac{2k\pi}{7}, \quad k \in \mathbb{Z}}
+\]
+
+
+\end{enumerate}
+
+}
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+%Pour chaque fonction, préciser la nature des asymptotes (verticale, horizontale ou oblique) et tracer une ébauche du graphe de la fonction.
+
+%
+%Les courbes ne sont fournies qu'\`a titre indicatif afin d'orienter votre recherche et de valider vos r\'esultats.\\
+%%
+%\begin{minipage}{0.3\linewidth}
+%$$f:x\mapsto \dfrac{x\sqrt x}{x^2+1}$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f2.png}
+%\end{center}
+%\end{minipage}
+%%
+%\hfill\break
+%\hfill\break
+%
+%\begin{minipage}{0.3\linewidth}
+%$$g:x\mapsto \dfrac{1}{2}x+2+\ln\left(\dfrac{x-1}{x+1}\right)$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f1.png}
+%\end{center}
+%\end{minipage}
+%%
+%
+%\hfill\break
+%\hfill\break
+%
+%\begin{minipage}{0.3\linewidth}
+%$$h:x\mapsto (x+ 1)^2e^{-x}$$
+%\end{minipage}
+%\begin{minipage}{0.7\linewidth}
+%\begin{center}
+%\includegraphics[width=0.75\linewidth]{f3.png}
+%\end{center}
+%\end{minipage}
+%%
+
+
+\underline {\ding{110}\, \bf{Exercice 2 : Réponse d’un capteur à un changement de température (6 points)}}\\
+
+Un capteur de température est initialement à l'équilibre thermique dans un environnement à $20^\circ$C. À l'instant $t = 0$, il est brusquement plongé dans un liquide maintenu à $80^\circ$C. 
+
+On modélise la température $T(t)$ indiquée par le capteur à l'instant $t$ (en secondes) par la fonction :
+\[
+T(t) = 80 - 60 e^{-t/5}
+\]
+où $T(t)$ est exprimée en degrés Celsius.\\
+
+\begin{enumerate}
+  \item Quelle est la température initiale lue par le capteur ? Et la température à long terme ?\\
+  \item À quelle date le capteur affiche-t-il une température de $50^\circ$C ?\\
+  \item Déterminer la dérivée $T'(t)$, puis montrer que :
+  \[
+  T'(t) = \frac{12}{e^{t/5}}
+  \]
+  \item Interpréter le signe de $T'(t)$. Que peut-on dire de l’évolution de la température ?\\
+  \item Déterminer le temps mis par le capteur pour atteindre $95\%$ de la température finale.\\
+  %\item Quel est le temps caractéristique de ce système ? Justifier à partir de l'expression donnée.
+\end{enumerate}
+
+
+
+\medskip
+{\color{blue}\underline{\bf Solution}\\
+
+\begin{enumerate}
+  \item Température initiale : 
+  \[
+  T(0) = 80 - 60e^{0} = 80 - 60 = 20^\circ\text{C}
+  \]
+  Température à long terme :
+  \[
+  \lim_{t \to +\infty} (T(t)) =\lim_{t \to +\infty} ( 80 - 60e^{-t/5})= 80
+  \]
+
+  \item On résout : \( T(t) = 50 \)\\
+  \[
+  50 = 80 - 60e^{-t/5} \iff 60e^{-t/5} = 30 \iff e^{-t/5} = \frac{1}{2}
+  \iff t = 5\ln(2) 
+  \]
+
+  \item Dérivée de $T$, fonction dérivable sur $\mathbb R$ comme somme de fonctions dérivables:\\
+  \[\forall t \in \mathbb R, \quad   T'(t) = -60 \cdot \left( \frac{d}{dt} e^{-t/5} \right) = -60 \cdot \left( -\frac{1}{5} e^{-t/5} \right)
+  = \frac{60}{5} e^{-t/5} = 12e^{-t/5}
+  \]
+  Montrons :
+  \[
+  \boxed{T'(t) = \frac{12}{e^{t/5}}}
+  \quad \text{car} \quad e^{-t/5} = \frac{1}{e^{t/5}}
+  \]
+
+  \item \( T'(t) > 0 \) pour tout \( t \geq 0 \) car une exponentielle réelle est toujours positive.\\
+  Donc \( T \) est strictement croissante : la température indiquée par le capteur augmente.
+
+  \item Température finale : \( T_f = 80^\circ\text{C} \). On cherche \( t \) tel que :
+  \[
+  T(t) = 0{,}95 \times 80 = 76
+  \iff 76 = 80 - 60e^{-t/5} \iff 60e^{-t/5} = 4 \iff e^{-t/5} = \frac{1}{15}
+  \iff t = -5 \ln\left( \frac{1}{15} \right)
+  = 5 \ln(15) 
+  \]
+\end{enumerate}
+
+}
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+
+\underline {\ding{110}\, \bf{Exercice 3 : } Logique, sommes et produits (10 points)}\\
+
+\begin{enumerate}
+  \item Donner la table de vérité de la proposition logique :
+  \[
+  (P \Rightarrow Q)
+  \]
+  \item Donner la table de vérité de la proposition logique :
+  \[
+  (P \Rightarrow Q) \land (\lnot Q \Rightarrow \lnot P)
+  \]
+  \item En déduire une équivalence logique.\\
+    \item Démontrer par récurrence que :
+  \[
+ (*) \qquad \sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+  \]
+  \item Calculer les expressions suivantes :
+  \begin{itemize}
+    \item $\displaystyle \sum_{k=1}^{n} \ln\left(1+\dfrac{1}{k}\right)$
+    \item $\displaystyle \prod_{k=1}^{n} e^{k-1}$, on pourra utiliser la relation $(*)$.\\
+  \end{itemize}
+
+\end{enumerate}
+
+
+\medskip
+{\color{blue}\underline{\bf Solution}\\
+
+\begin{enumerate}
+  
+  \item Table de vérité de \( (P \Rightarrow Q) \) :
+
+  \[
+  \begin{array}{|c|c||c|}
+  \hline
+  P & Q & P \Rightarrow Q \\
+  \hline
+  V & V & V \\
+  V & F & F \\
+  F & V & V \\
+  F & F & V \\
+  \hline
+  \end{array}
+  \]
+
+  \item Table de vérité de \( (P \Rightarrow Q) \land (\lnot Q \Rightarrow \lnot P) \) :
+
+  \[
+  \begin{array}{|c|c||c|c|c|}
+  \hline
+  P & Q & P \Rightarrow Q & \lnot Q \Rightarrow \lnot P & \text{Conjonction} \\
+  \hline
+  V & V & V & V & V \\
+  V & F & F & F & F \\
+  F & V & V & V & V \\
+  F & F & V & V & V \\
+  \hline
+  \end{array}
+  \]
+
+  \item On en déduit :
+  \[
+  (P \Rightarrow Q) \Leftrightarrow (\lnot Q \Rightarrow \lnot P)
+  \quad \text{(contraposée)}
+  \]
+
+  \item Montrons par récurrence que  pour tout entier naturel $n$ non nul
+  \[
+  P_n :  \sum_{k=1}^n k = \frac{n(n+1)}{2}
+  \]
+est vraie.\\
+
+  \textbf{Initialisation :} pour \( n = 1 \), on a 
+  \[
+   \sum_{k=1}^1 k = 1 \text{ et }  \frac{1(1+1)}{2} = 1 
+   \] : $P_1$ est vraie.\\.
+
+  \textbf{Hérédité :} supposons la formule vraie au rang \( n \), montrons-la au rang \( n+1 \) :
+  \[
+  \sum_{k=1}^{n+1} k = \left( \sum_{k=1}^{n} k \right) + (n+1)
+  = \frac{n(n+1)}{2} + (n+1) = \frac{n(n+1) + 2(n+1)}{2}
+  = \frac{(n+1)(n+2)}{2}
+  \]
+
+  Conclusion : la propriété est vraie pour tout \( n \in \mathbb{N}^* \) par récurrence.
+
+  \item \textbf{Calculs :}
+
+  \begin{itemize}
+    \item
+    \[
+    \sum_{k=1}^{n} \ln\left(1 + \frac{1}{k} \right)
+    = \sum_{k=1}^{n} \ln\left( \frac{k+1}{k} \right)
+    = \sum_{k=1}^{n} \left[ \ln(k+1) - \ln(k) \right]
+    \]
+    \[
+    = \ln(n+1) - \ln(1) = \ln(n+1)
+    \]
+
+    \item
+    \[
+    \prod_{k=1}^{n} e^{k-1}
+    = e^{\sum_{k=1}^{n} (k-1)} = e^{\sum_{k=0}^{n-1} k}
+    = e^{\frac{(n-1)n}{2}} \quad \text{(formule (*) utilisée)}
+    \]
+  \end{itemize}
+\end{enumerate}
+
+  
+
+}
+\hfill\break
+\hrule
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 4 : }Vecteurs et géométrie plane (11 points)}\\
+
+On considère dans le plan muni d’un repère orthonormé les points : $A(1,2,0)$, $B(0,4,6)$, $C(7,-1,2)$.\\
+
+\begin{enumerate}
+  \item Calculer les coordonnées des vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$.\\
+  \item Calculer les longueurs $AB$ et $AC$.\\
+  \item Calculer le produit scalaire entre les vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$ et le produit vectoriel vecteurs $\overrightarrow{AB}$ et $\overrightarrow{AC}$.\\
+  \item En déduire le cosinus et le sinus de l'angle $\big(\overrightarrow{AB},\overrightarrow{AC}\big)$.\\
+  \item Donner une équation paramétrique de la droite $(AB)$.\\
+  \item Déterminer la distance du point $C$ à la droite $(AB)$.\\
+\end{enumerate}
+
+
+\medskip
+{\color{blue}\underline{\bf Solution}\\
+\begin{enumerate}
+  \item Calcul des vecteurs :
+  \[
+  \overrightarrow{AB} : (0 - 1,\ 4 - 2,\ 6 - 0) = (-1,\ 2,\ 6)
+  \]
+  \[
+  \overrightarrow{AC}  : (7 - 1,\ -1 - 2,\ 2 - 0) = (6,\ -3,\ 2)
+  \]
+
+  \item Longueurs :
+  \[
+  AB = \| \overrightarrow{AB} \| = \sqrt{(-1)^2 + (2)^2 + (6)^2} = \sqrt{1 + 4 + 36} = \sqrt{41}
+  \]
+  \[
+  AC = \| \overrightarrow{AC} \| = \sqrt{(6)^2 + (-3)^2 + (2)^2} = \sqrt{36 + 9 + 4} = \sqrt{49} = 7
+  \]
+
+  \item Produit scalaire :
+  \[
+  \overrightarrow{AB} \cdot \overrightarrow{AC} = (-1)(6) + 2(-3) + 6(2)  = 0
+  \]
+
+  Produit vectoriel :
+  \[
+  \overrightarrow{AB} \wedge \overrightarrow{AC} 
+  = (2 \cdot 2 - 6 \cdot (-3)) \vec{i} - (-1 \cdot 2 - 6 \cdot 6) \vec{j} + (-1 \cdot (-3) - 2 \cdot 6) \vec{k}  = 22 \vec{i} + 38 \vec{j} - 9 \vec{k}
+  \]
+
+  \item Angle entre les vecteurs :
+
+  Comme le produit scalaire est nul, on a :
+  \[
+  \cos(\theta) = 0 \iff \theta = \frac{\pi}{2}, \quad \text{donc } \sin(\theta) = 1
+  \]
+
+  \item Équation paramétrique de la droite $(AB)$ :
+
+  Un point : \( A(1,2,0) \), un vecteur directeur \( \overrightarrow{AB} = (-1,2,6) \)
+
+  \[
+  \begin{cases}
+  x = 1 - t \\
+  y = 2 + 2t \\
+  z = 6t
+  \end{cases},\quad t \in \mathbb{R}
+  \]
+
+  \item Distance du point \( C \) à la droite \( (AB) \) :
+
+  \[
+  d(C,AB) = \frac{ \| \overrightarrow{AB} \wedge \overrightarrow{AC} \| }{ \| \overrightarrow{AB} \| }
+  = \frac{ \sqrt{22^2 + 38^2 + (-9)^2} }{ \sqrt{41} }
+  = \frac{ \sqrt{484 + 1444 + 81} }{ \sqrt{41} }
+  = \frac{ \sqrt{2009} }{ \sqrt{41} } = \sqrt{ \frac{2009}{41} }
+  \]
+\end{enumerate}
+
+
+}
+\end{document}

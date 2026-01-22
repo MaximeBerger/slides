@@ -1,0 +1,601 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Calcul vectoriel dans le plan}
+
+\subsection{Rappels sur les vecteurs}
+
+\begin{Def}\textbf{Vecteur}
+    \vspace{1em}
+
+Dans le plan, un vecteur est la donnée d'une longueur d'un sens et d'une direction.
+\end{Def}
+
+
+La puissance de cette notion réside dans le fait qu'elle se "détache" du plan euclidien habituel. 
+Deux vecteurs peuvent être égaux même s'ils ne sont pas au même endroit, on sort du carcan de la géométrie euclidienne et de sa rigidité pour la première fois… Nous creuserons cette idée plus tard avec l'algèbre linéaire.
+
+
+
+On considère deux points du plan, $A(x_A;y_A)$ et $B(x_B;y_B)$.
+\begin{center}
+Les coordonnées du vecteur $\overrightarrow {AB}$ sont :
+$\overrightarrow {AB}=\begin{pmatrix} x_B-x_A \\ y_B-y_A \end{pmatrix}$
+\end{center}
+
+
+Pour les différencier des points de l'espace euclidien, on écrit les coordonnées des vecteurs en colonne.
+
+
+\begin{Thm}\textbf{Opérations sur les vecteurs}
+    \vspace{1em}
+
+On considère deux vecteurs $\displaystyle \overrightarrow {u}=\begin{pmatrix} x \\ y \end{pmatrix}$ et $\displaystyle \overrightarrow {v}=\begin{pmatrix} x' \\ y' \end{pmatrix}$.
+\begin{itemize}
+    \item La somme des deux vecteurs est définie par :
+    $\displaystyle \overrightarrow {u}+\overrightarrow {v}=\begin{pmatrix} x+x' \\ y+y' \end{pmatrix}$
+
+    \item La multiplication par un nombre réel $\lambda$ est définie par :
+    $\displaystyle \lambda \overrightarrow {u}=\begin{pmatrix} \lambda x \\ \lambda y \end{pmatrix}$
+
+    \item La norme d'un vecteur, $\lVert \vec{u} \rVert$ est définie par :
+    $\displaystyle \lVert \vec{u} \rVert= \sqrt{x^2+y^2}$
+C'est la longueur du vecteur $\vec{u}.$
+\end{itemize}
+\end{Thm}
+
+\subsection{Colinéarité}
+
+\begin{Def}\textbf{Colinéarité}
+    \vspace{1em}
+
+Deux vecteurs sont dits colinéaires s'ils ont la même direction. 
+
+\end{Def}
+Cela se traduit par le fait que leurs coordonnées sont proportionnelles. 
+
+
+Les vecteurs $\vec{u} = \begin{pmatrix} x \\ y \end{pmatrix}$ et $\vec{v} = \begin{pmatrix} x' \\ y' \end{pmatrix}$ sont colinéaires si et seulement si$\exists k \in \mathbb{R}$ tel que :
+$\vec{u}=k\vec{v}$, ce qui se traduit par $xy'-yx'=0$
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Exemple 1 :}
+On considère les points $A(-3;6), B(2;9), C(3;4), D(9;2), E(5;8)$
+\begin{enumerate}
+    \item Calculer les coordonnées des vecteurs $\overrightarrow{AC}, \overrightarrow{AB}, \overrightarrow{BE}, \overrightarrow{CE}, \overrightarrow{CD}$
+    \item Parmi ces vecteurs, lesquels sont égaux ? Colinéaires ?
+\end{enumerate}
+
+\newpage
+
+\subsection{Produit scalaire}
+
+\begin{Def}\textbf{Produit scalaire}
+    \vspace{1em}
+
+Le produit scalaire est un produit entre deux vecteurs dont le résultat est un nombre. 
+
+On peut le définir de trois façons différentes :
+\begin{enumerate}
+    \item Définition avec le projeté orthogonal.
+    \begin{center}
+      \includegraphics[]{images/pdt scalaire.jpg}  
+    \end{center}
+    $H$ est le projeté orthogonal de $A$ sur $(OB)$.
+
+    $\overrightarrow{u}\cdot\overrightarrow{v}=OH \times OB$ si $\overrightarrow{OH}$ et $\overrightarrow{OB}$ ont le même sens.
+
+     $\overrightarrow{u}\cdot\overrightarrow{v}=OH \times OB$ si $\overrightarrow{OH}$ et $\overrightarrow{OB}$ sont de sens contraire.
+     \item Définition avec les normes et cosinus.
+     $$\vec{u}\cdot\vec{v}=\lVert \vec{u} \rVert \times \lVert \vec{v} \rVert \times \cos{(\vec{u};\vec{v})}$$
+     \item Définition avec les coordonnées.
+     $$\vec{u}\cdot\vec{v}=xx'+yy'$$
+\end{enumerate}
+\end{Def}
+
+Ces trois définitions sont équivalentes.
+La seule difficulté avec cette notion est de jouer en combinant ces trois définitions pour résoudre un problème géométrique.
+
+\begin{Prop}\textbf{Propriétés du produit scalaire}
+    \vspace{1em}
+
+Le produit scalaire est commutatif :
+$\vec{u}\cdot\vec{v}=\vec{v}\cdot\vec{u}$
+
+\vspace{0.5em}
+Le produit scalaire est distributif par rapport à la somme :
+$$\vec{u}\cdot(\vec{v}+\vec{w})=\vec{u}\cdot\vec{v}+\vec{u}\cdot\vec{w}$$
+
+\vspace{0.5em}
+
+Loi des cosinus pour trois points $A, B, C$ quelconques :
+$$\overrightarrow{AB}\cdot\overrightarrow{AC}=\frac{1}{2}(AB^2+AC^2-BC^2)$$
+
+\vspace{0.5em}
+
+La propriété la plus utilisée : 
+$$\vec{u}\cdot\vec{v}=0 \Leftrightarrow \vec{u} \text{ et }\vec{v} \text{ orthogonaux}$$
+\end{Prop}
+
+\exo[1]{Exemple 2 :}
+\begin{enumerate}
+    \item 
+$\vec{u},\vec{v}$ deux vecteurs tels que $\lVert \vec{u} \rVert=3, \lVert \vec{v} \rVert=2 $ et $\vec{u}\cdot\vec{v}=-2$
+
+Calculer $(\vec{u}+\vec{v})^2, (\vec{u}-\vec{v})^2$ et $(\vec{u}+\vec{v})\cdot(\vec{u}-\vec{v})$.
+\item On considère les points $A(3;4), B(7;6), C(1;7)$. Déterminer $\lVert \overrightarrow{AB} \rVert ,\lVert \overrightarrow{AB} \rVert, \overrightarrow{AB}.\overrightarrow{AC}$. 
+
+En déduire une valeur approchée de l'angle $(\overrightarrow{AB}; \overrightarrow{AC})$
+\end{enumerate}
+
+\subsection{Droites du plan}
+
+On connait déjà les droites avec la fameuse équation :
+$$y=ax+b$$
+Le problème d'envisager les droites comme des fonctions, c'est que l'on oublie toutes les droites verticales qui n'en sont pas...
+
+
+En géométrie, on utilise plutôt l'équation cartésienne :
+$$ax+by+c=0$$
+
+
+\begin{Prop}\textbf{Vecteurs directeur et normal}
+    \vspace{1em}
+
+Si $(d)$ est une droite d'équation 
+$$ax+by+c=0$$
+alors, 
+le vecteur $\vec{u}=\begin{pmatrix} -b \\ a \end{pmatrix}$ est un vecteur directeur de la droite et \newline
+le vecteur $\vec{v}=\begin{pmatrix} a \\ b \end{pmatrix}$ est un vecteur normal de la droite.
+\end{Prop}
+
+\begin{Thm}\textbf{Distance d'un point à une droite}
+    \vspace{1em}
+
+Pour une droite $D$ du plan, la distance d'un point $M$ à cette droite est la distance entre $M$ et son projeté orthogonal sur $D$. 
+
+On peut calculer cette distance avec la formule de la distance d'un point par rapport à une droite :
+$$d=\frac{|\overrightarrow{AM}\cdot\vec{n}|}{\lVert \vec{n} \rVert}$$
+où $A$ est n'importe quel point de $D$ et $\vec{n}$ n'importe quel vecteur normal à $D$.
+\end{Thm}
+Cette formule est obtenue en partant d'un point $A$ quelconque de $D$, puis en décomposant le vecteur $\overrightarrow{AM}$ et en faisant un produit scalaire avec un vecteur $\vec{n}$ normal à $D$.
+
+\exo[1]{Exemple 3 : }
+\begin{enumerate}
+    \item On considère la droite d'équation  $22x-y+3=0$. Donner un vecteur normal et un vecteur directeur de cette droite.
+    \item Soit $\vec{u}=\binom{1}{3}$ et $A=(2;-1)$. 
+    
+    Donner l'équation de la droite $(d)$ passant par $A$ de direction $\vec{u}$ 
+    et l'équation de la droite $(d')$ passant par $A$ de normale $\vec{u}$
+    \item $M(3;-2)$, calculer la distance de $M$ à $(d)$ et $(d')$
+\end{enumerate}
+
+\section{Calcul vectoriel dans l'espace}
+
+\subsection{Produit scalaire}
+
+On a les mêmes définitions et propriétés que dans le plan, on rajoute juste une coordonnée.
+Si 
+$\vec{u} \begin{pmatrix}
+    x\\
+    y\\
+    z
+\end{pmatrix}, \vec{v} \begin{pmatrix}
+    x'\\
+    y'\\
+    z'\\
+    
+\end{pmatrix}$ alors :
+$$\vec{u}\cdot\vec{v}=xx'+yy'+zz'$$
+
+
+\begin{Prop}\textbf{Vecteur normal à un plan}
+    \vspace{1em}
+
+A l'image du vecteur normal à une droite dans le plan, on peut déterminer une équation de plan avec un vecteur normal. 
+
+Si $P$ est un plan d'équation $ax+by+cz+d=0$, \newline
+alors le vecteur $\vec{n} \begin{pmatrix}
+    a\\
+    b\\
+    c
+\end{pmatrix}$
+ est normal au plan $P$.
+\end{Prop}
+
+\exo[2]{Exemple 4 :}
+\begin{enumerate}
+    \item Déterminer l'équation du plan $P$ passant par $A(1, 2, 0)$ de vecteur normal $\vec{u}\begin{pmatrix}
+    4\\
+    -1\\
+    1\\
+    
+\end{pmatrix}$
+\item Donner un vecteur normal aux plans suivants :
+$$P_1 : x-y+z=1, \qquad P_2 : 2x-y=0, \qquad P_3 : x=0, \qquad P_4 : y=-1, \qquad P_5 : z=0$$
+\end{enumerate}
+
+\newpage
+
+
+\subsection{Produit vectoriel}
+
+\begin{Thm}\textbf{Définitions équivalentes du produit vectoriel}
+    \vspace{1em}
+
+Comme pour le produit scalaire, il y a trois définitions équivalentes pour le produit vectoriel.
+\begin{enumerate}
+    \item \textbf{Définition géométrique}
+
+    Le sens direct dans l'espace est déterminé par le triplet $(\vec{i}, \vec{j}, \vec{k})$. On  peut le modéliser avec notre main :
+    \begin{center}
+    \includegraphics[scale=0.5]{images/main pdt vectoriel.jpg}  
+  \end{center}
+Ce qui nous donne des relations du genre : 
+$$\vec{i} \wedge \vec{j}=\vec{k} $$
+$$\vec{j} \wedge \vec{k}=\vec{i} $$
+$$\vec{i} \wedge \vec{k}=-\vec{j} $$
+$$\vec{j} \wedge \vec{i}=-\vec{k} $$
+
+\item \textbf{Définition avec le sinus}
+
+$$\vec{u}\wedge\vec{v}=||\vec{u}||\times ||\vec{v}||\times|\sin(\vec{u},\vec{v})|\times \vec{w}$$
+avec $\vec{w}$ unitaire et directement orthogonal à $\vec{u}$ et $\vec{v}$.
+
+\item \textbf{Définition avec les coordonnées}
+$$\vec{u}\wedge \vec{v}=\begin{vmatrix}
+    y & y'\\
+    z & z'
+\end{vmatrix}\times \vec{i}-\begin{vmatrix}
+    x & x'\\
+    z & z'
+\end{vmatrix}\times \vec{j}+\begin{vmatrix}
+    x & x'\\
+    y & y'
+\end{vmatrix}\times \vec{k}$$
+où nous avons noté $\begin{vmatrix}
+    a & b\\
+    c & d
+\end{vmatrix}=ad-bc$.
+\end{enumerate}
+\end{Thm}
+
+\begin{Prop}\textbf{Propriétés du produit vectoriel}
+    \vspace{1em}
+
+Directement avec les définitions, on peut en déduire que 
+
+\begin{enumerate}
+    \item Si $\vec{u}$ et $\vec{v}$ sont colinéaires, alors leur produit vectoriel est nul. 
+
+    \item Le produit vectoriel est antisymétrique : 
+$$\vec{u}\wedge \vec{v}=-\vec{v}\wedge \vec{u}$$
+
+    \item Le produit vectoriel est bilinéaire : pour tout $a,b$ réels, 
+$$\vec{u}\wedge (a\vec{v}+b\vec{w})=a\vec{u}\wedge \vec{v}+b\vec{u}\wedge \vec{w}$$
+
+    \item Si $\vec{u}$ et $\vec{v}$ ne sont pas colinéaires, alors $||\vec{u}\wedge \vec{v}||$ est l'aire du parallélogramme construit sur $\vec{u}$ et $\vec{v}$.
+\end{enumerate}
+\end{Prop}
+
+\exo[2]{Exemple 5 :}
+$\vec{u}\begin{pmatrix}
+    1\\
+    1\\
+    0
+\end{pmatrix}, \vec{v}\begin{pmatrix}
+    0\\
+    -1\\
+    3
+\end{pmatrix}$. Calculer $\vec{u}\wedge \vec{v}$ et en déduire l'angle $(\vec{u};\vec{v})$.
+
+\subsection{Produit mixte}
+
+
+Il tient son nom de sa définition qui combine le produit scalaire et le produit vectoriel. 
+\begin{Def}\textbf{Produit mixte}
+    \vspace{1em}
+
+Le produit mixte des vecteurs $\vec{u}, \vec{v}, \vec{w}$ dans cet ordre, noté $[\vec{u}, \vec{v}, \vec{w}]$ est :
+$$[\vec{u}, \vec{v}, \vec{w}]=(\vec{u}\wedge \vec{v})\cdot\vec{w}$$
+\end{Def}
+
+\begin{Prop}\textbf{Définition avec les coordonnées}
+    \vspace{1em}
+
+Avec les coordonnées, ça donne :
+$$[\vec{u}, \vec{v}, \vec{w}]=
+x''\times \begin{vmatrix}
+    y & y'\\
+    z & z'
+\end{vmatrix}-y''\times\begin{vmatrix}
+    x & x'\\
+    z & z'
+\end{vmatrix}+ z''\times\begin{vmatrix}
+    x & x'\\
+    y & y'
+\end{vmatrix}$$
+Avec toujours $\begin{vmatrix}
+    a & b\\
+    c & d
+\end{vmatrix}=ad-bc$.
+\end{Prop}
+
+
+On peut utiliser aussi la règle de Sarrus :
+\begin{center}
+    \includegraphics[scale=0.7]{images/sarrus.jpg}  
+  \end{center}
+
+
+\begin{Prop}\textbf{Propriétés du produit mixte}
+    \vspace{1em}
+
+Le produit mixte est invariant par permutation circulaire :
+$$[\vec{u}, \vec{v}, \vec{w}]=[\vec{w}, \vec{u}, \vec{v}]=[\vec{v}, \vec{w}, \vec{u}]$$
+il est trilinéaire :
+$$[a\vec{u}+b\vec{u'}, \vec{v}, \vec{w}]=[a\vec{u}, \vec{v}, \vec{w}]+[b\vec{u'}, \vec{v}, \vec{w}]$$
+Et la propriété la plus utile :
+$$\vec{u}, \vec{v}, \vec{w} \text{ coplanaires} \Leftrightarrow [\vec{u}, \vec{v}, \vec{w}]=0$$
+\end{Prop}
+
+\exo[2]{Exemple 6 :}
+On donne 
+$\vec{u}\begin{pmatrix}
+    1\\
+    1\\
+    1
+\end{pmatrix}, \vec{v}\begin{pmatrix}
+    -1\\
+    -1\\
+    0
+\end{pmatrix},\vec{w}\begin{pmatrix}
+    1\\
+    0\\
+    1
+\end{pmatrix}$
+Calculer de deux façons différentes $[\vec{u}, \vec{v}, \vec{w}]$.
+
+\subsection{Droites et plans de l'espace}
+
+\begin{enumerate}
+    \item \textbf{\'Equation paramétrique d'une droite}
+
+    On définit une droite $d$ à partir d'un point $A(x_A, y_A, z_A)$ et un vecteur directeur $\vec{u}\begin{pmatrix}
+   \alpha\\
+   \beta\\
+   \gamma
+\end{pmatrix}$
+ par :
+ \begin{align*}
+    M=(x, y, z)\in d &\Leftrightarrow \exists t\in \mathbb{R}\quad \overrightarrow{AM}=t\vec{u} \\
+ &\Leftrightarrow \exists t\in \mathbb{R}\quad
+ \begin{cases}
+      x=x_A+t\alpha\\
+      y=y_A+t\beta\\
+      z=z_A+t \gamma
+   \end{cases}
+\end{align*}
+
+\newpage
+
+    \item \textbf{\'Equation paramétrique d'un plan} 
+
+    On définit un plan $P$ à partir d'un point $A(x_A, y_A, z_A)$ et de deux vecteurs directeurs $\vec{u}$ et $\vec{v}$ par :
+    $$M =(x, y, z)\in P \Leftrightarrow \exists t, s\in \mathbb{R}\quad \overrightarrow{AM}=t\vec{u}+s\vec{v}$$
+    à condition que $\vec{u}$ et $\vec{v}$ ne soient pas colinéaires.
+    \item \textbf{\'Equation cartésienne d'un plan}
+
+    Pour trouver facilement une équation cartésienne d'un plan, on utilise le fait que le produit mixte d'un triplet de vecteurs coplanaires est nul.
+
+    L'équation cartésienne du plan $P$ passant par $A(x_A, y_A, z_A)$ et tels que $\vec{u}, \vec{v}$ sont deux vecteurs directeurs non colinéaires est :
+    \begin{align*}
+    M\in P 
+    &\Leftrightarrow \overrightarrow{AM}, \vec{u},\vec{v} \text{ coplanaires } \\
+    &\Leftrightarrow [\overrightarrow{AM}, \vec{u},\vec{v}]=0
+    \end{align*}
+    Si on reprend la définition du produit mixte avec le produit scalaire, on en déduit que le plan d'équation $ax+by+cz+d=0$ a pour vecteur normal $\vec{n}\begin{pmatrix}
+        a\\
+        b\\c
+    \end{pmatrix}$
+\end{enumerate}
+
+
+Une droite étant vue comme une intersection de deux plans, une équation cartésienne de droite revient à trouver deux équations cartésiennes de plans non confondus qui contiennent la droite qui nous intéresse.
+
+
+\exo[2]{Exemple 7 :}
+\begin{enumerate}
+    \item Donner l'équation paramétrique de la droite passant par le point $A(1, -1, 0)$ et de vecteur directeur $\vec{u} \begin{pmatrix}
+        -2\\
+        3\\
+        5
+    \end{pmatrix}$
+    \item Soit $d$ la droite d'équation paramétrique : 
+    $$\begin{cases}
+       x=2\\
+       y=t\\
+       z=2-t
+    \end{cases}$$
+    Trouver un vecteur directeur et un point sur cette droite.
+    \item Donner l'équation paramétrique du pla passant par le point $A(1, -1, 2)$ dirigé par les vecteurs $\vec{u}\begin{pmatrix}
+        1\\
+        2\\
+        3
+    \end{pmatrix}$ et $\vec{u}\begin{pmatrix}
+        -1\\
+        1\\
+        -4
+    \end{pmatrix}$
+    \item Donner une équation cartésienne et paramétrique passant par $A(0, -1, 2)$ dirigé par $\vec{u}\begin{pmatrix}
+        2\\
+        0\\
+        1
+    \end{pmatrix}$ et $\vec{u}\begin{pmatrix}
+        -1\\
+        1\\
+        0
+    \end{pmatrix}$
+\item Soient $P_1: x+y-z-3=0$ et $P_2 : 2x-y+z+1=0$. Montrer que l'intersection de ces plans est une droite et donner une équation paramétrique de cette droite.
+\end{enumerate}
+
+\section{Distances}
+
+On utilise la même logique que dans le plan. 
+
+
+\begin{Thm}\textbf{Formules de distance dans l'espace}
+    \vspace{1em}
+
+Pour calculer la distance d'un point $M$ à une droite $d$ de l'espace, on utilise la formule : 
+$$\frac{||\overrightarrow{AM}\wedge \vec{u}||}{||\vec{u}||}$$
+Avec $\vec{u}$ vecteur directeur de la droite $d$ et $A$ un point de $d$.
+
+\vspace{1em}
+Pour calculer la distance d'un point $M$ à un plan $P$ de l'espace, on utilise la formule : 
+$$\frac{||\overrightarrow{AM}\cdot\vec{n}||}{||\vec{n}||}$$
+Avec $\vec{n}$ vecteur normal au plan $P$ et $A$ point sur $P$.
+\end{Thm}
+
+
+Si le plan $P$ a pour équation $ax+by+cz+d=0$ et $\vec{n}\begin{pmatrix}
+    a\\
+    b\\
+    c
+\end{pmatrix}$ est un vecteur normal à ce plan, $M(x_M, y_M, z_M)$ un point de l'espace et $A(x_A, y_A, z_A)$ un point du plan, on peut utiliser directement la formule moins antipathique : 
+$$\frac{|ax_M+by_M+cz_M+d|}{\sqrt{a^2+b^2+c^2}}$$
+
+\exo[2]{Exemple 8 :}
+\begin{enumerate}
+    \item Soit $A(2, -1, 0)$ et $M(3, 0, \frac{1}{2})$ deux points de l'espace et $\vec{u}\begin{pmatrix}
+        1\\
+        1\\
+        1
+    \end{pmatrix}$ un vecteur. Donner une équation de la droite passant par $A$ et de direction $\vec{u}$, puis calculer la distance de $M$ à cette droite.
+    \item Calculer la distance du poitn $M(1,2,3)$ au plan $P: 2x-y+2z-1=0$
+\end{enumerate}
+
+\newpage
+
+\section{Sphères}
+
+
+On transpose la définition d'un cercle dans un plan avec une dimension de plus. 
+
+\begin{Def}\textbf{Sphère}
+    \vspace{1em}
+
+La sphère $S$ de centre $\Omega(a,b,c)$ et de rayon $R$ est l'ensemble des points situés à une distance $R$ de $\Omega$. 
+\end{Def}
+
+
+On le traduit par : 
+$$M(x,y,z)\in S \Leftrightarrow \Omega M^2=R^2$$
+Ce qui donne comme équation pour la shpère $S$: 
+$$(x-a)^2+(y-b)^2+(z-c)^2=R^2$$
+
+\subsection{Intersection d'une sphère et d'une droite}
+
+
+Il y a trois cas à envisager :
+\begin{center}
+    \includegraphics[scale=0.7]{images/sphere droite.jpg}  
+  \end{center}
+
+\exo[2]{Exemple 9 :}
+On considère la sphère $S$ d'équation $x^2+y^2+z^2-2x+4z-4=0$ et la droite $d$ d'équation paramétrique : 
+$\begin{cases}
+    x=1-t\\
+    y=-5+3t\\
+    z=-8+4t
+\end{cases}$
+\begin{enumerate}
+    \item Déterminer le rayon et le centre de $S$.
+    \item Montrer que $d$ et $S$ ont deux points d'intersection et calculer leurs coordonnées. 
+\end{enumerate}
+
+\subsection{Intersection d'une sphère et d'un plan}
+
+
+On calcule la distance du centre $\Omega$ de la sphère de rayon $R$ avec le plan $P$ et on distingue trois cas :
+\begin{enumerate}
+    \item $d(\Omega, P)>R$ et l'intersection est vide.
+    \item $d(\Omega, P)=R$ et l'intersection est un point, le plan est tangent à la sphère.
+    \item $d(\Omega, P)<R$ et l'intersection est un disque de centre $H$, le projeté orthogonal de $\Omega$ sur $P$ de rayon $r$ qui vérifie $r^2=R^2-\Omega H^2$.
+     \begin{center}
+      \includegraphics[scale=0.4]{images/sphere plan.jpg}  
+    \end{center}
+    
+\end{enumerate}
+
+\subsection{Intersection de deux sphères}
+
+On a encore 3 cas à envisager :
+\begin{center}
+    \includegraphics[scale=0.8]{images/spheres.jpg}  
+  \end{center}
+
+\exo[2]{Exemple 10 :}
+Déterminer les intersections de sphères suivantes :
+$$S_1:x^2+y^2+z^2=4, \quad \text{ et } \quad S_2:x^2+y^2+z^2-4x-4y-2z+8=0$$
+$$S_1:(x-1)^2+(y-2)^2+(z-1)^2=9, \quad \text{ et } \quad S_2:x^2+y^2+z^2=4$$
+$$S_1:(x+1)^2+(y-2)^2+(z+1)^2=4, \quad \text{ et } \quad S_2:(x-3)^2+(y+2)^2+z^2=1$$
+
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Droites et plans}
+
+Soit $d$ la droite passant par $A(-1,0,0)$ et de vecteur directeur $\vec{u} \begin{pmatrix}
+    -1\\
+    2\\
+    1
+\end{pmatrix}$. 
+
+Soit $P$ le plan d'équation $2x+y-z-3=0$.
+\begin{enumerate}
+    \item Montrer que $d$ n'est pas orthogonale à $P$.
+    \item Déterminer une équation du plan contenant $d$ et perpendiculaire à $P$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Produit vectoriel}
+
+On considère les points $A(-1,0,0), B(1,1,3),C(-1,2,-2),D(3,0,8),E(2,-2,-4)$.
+\begin{enumerate}
+    \item Calculer $\overrightarrow{BE} \wedge \overrightarrow{AD}$.
+    \item Montrer que $\overrightarrow{BD}$ et $\overrightarrow{CE}$ sont orthogonaux.
+    \item Montrer que $A, B, C, D$ sont coplanaires.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Produit vectoriel}
+
+On considère les points $A(1,2,3), B(-1,3,4),C(-1,0,1),D(-1,6,7)$.
+\begin{enumerate}
+    \item Déterminer $\overrightarrow{AB} \wedge \overrightarrow{AC}$.
+    \item Les vecteurs $\overrightarrow{AB}, \overrightarrow{AC}, \overrightarrow{AD}$ sont-ils coplanaires ?
+    \item Donner une mesure de l'angle $(\overrightarrow{BA}; \overrightarrow{BC})$.
+    \item Déterminer une équation du plan $(ABC)$.
+    \item Donner une équation paramétrique de la droite $d$, orthogonale au plan $(ABC)$ et passant par le point $S(3,3,3)$.
+    \item Etudier l'intersection de $d$ avec le plan $(ABC)$.
+    
+\end{enumerate}
+
+\end{document}

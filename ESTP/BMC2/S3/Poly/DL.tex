@@ -1,0 +1,1367 @@
+
+
+\section{Développements limités en a}
+\begin{Thm}\textbf{Complément utile sur les relations de négligeabilité}\\
+
+Soient $f$ et $g$ deux fonctions définies sur $I$ ne s'annulant pas sur un voisinage de $a$ où $a \in I$ ou $a$ est une borne de $I$.
+
+On note 
+\[ f(x) = \underset{x \to a}{o}(g(x))\]
+si et seulement s'il existe une fonction $\varepsilon$, définie sur un voisinage du point $a$, telle que 
+\[f(x) = g(x)\varepsilon(x) \text{ avec } \lim_{x \to a} \varepsilon(x) = 0 \]
+\end{Thm}
+
+
+\subsection{Introduction et définition}
+
+\textbf{Motivation :}
+
+Prenons l'exemple de la fonction exponentielle. Une idée du comportement de la fonction $f : x \mapsto e^x$ autour du point $x = 0$ est donnée par sa tangente, dont l'équation est
+\[ y = x + 1. \]
+Nous avons approché le graphe par une droite. Si l'on souhaite faire mieux, quelle parabole d'équation $y = c_0 + c_1 x + c_2 x^2$ approche le mieux le graphe de $f$ autour de $x = 0$ ? \newline 
+Il s'agit de la parabole d'équation
+\[ y = 1 + x + \frac{x^2}{2}. \]
+Cette équation a la propriété remarquable que si on note $g : x \mapsto e^x - \left(1 + x + \frac{x^2}{2}\right)$ alors
+\[ g(0) = 0, \quad g'(0) = 0 \quad \text{et} \quad g''(0) = 0. \]
+Trouver l'équation de cette parabole c'est faire un développement limité à l'ordre 2 de la fonction exponentielle. Bien sûr, si l'on veut être plus précis on peut chercher une courbe du troisième degré. Pour la fonction exponentielle, on trouve
+\[ y = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}. \]
+
+
+\textbf{Illustration :}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{images/expoDL}
+\caption{Illustration des approximations successives de $e^x$}
+\end{figure}
+
+\begin{Def}\textbf{Développement limité}\\
+
+Soit $a \in \mathbb{R}$. On dit qu'une fonction $f$ admet un développement limité à l'ordre $n$ en $a$ (un DL$_n(a)$ en abrégé) si $f$ est définie au voisinage de $a \in \mathbb{R}$ et s'il existe un polynôme $P_n$ de degré au plus $n$ tel que :
+\[ f(x) = P_n(x - a) + \underset{x \to a}{o}((x - a)^n)\]
+qu'on peut écrire aussi 
+\[f(x) = a_0 + a_1 (x - a) + a_2 (x - a)^2 + \cdots + a_n (x - a)^n +\underset{x \to a}{o}((x - a)^n) \]
+où $(a_0, \ldots, a_n) \in \mathbb{R}^{n+1}$.
+\end{Def}
+\subsection{Développement limité en $0$ et en $a \neq 0$}
+
+%Reprenons la définition précédente dans le cas particulier où $a = 0$. C'est le cas le plus simple et la définition est plus facile à retenir.
+\begin{Def}\textbf{Développement limité en $0$}\\
+On dit qu'une fonction $f$ admet un développement limité à l'ordre $n$ en $0$ si $f$ est définie au voisinage de $0$ et s'il existe des réels $a_0, \ldots, a_n$ tels que :
+\[ f(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n + \underset{x \to 0}{o}(x^n). \]
+\end{Def}
+
+\newpage
+\begin{Meth}
+Pour déterminer le DL$_n(a)$ d'une fonction $f$ (s'il existe) on procède comme suit :
+\begin{enumerate}
+    \item Faire le changement de variable $x = h + a$.
+    \item On est alors ramené à étudier le DL$_n(0)$ de la fonction $\tilde{f} : h \mapsto f(a + h)$ plutôt que le DL$_n(a)$ de la fonction $f$.
+    \[ \tilde{f}(h) = f(a + h) = a_0 + a_1h + a_2h^2 + \cdots + a_nh^n +\underset{h \to 0}{o}(h^n). \]
+    \item Comme
+    \[ x = a + h \iff h = x - a \]
+    et d'après la proposition ci-dessus, on en déduit que
+    \[ f(x) = a_0 + a_1(x - a) + a_2(x - a)^2 + \cdots + a_n(x - a)^n +\underset{x \to a}{o}((x - a)^n). \]
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+Déterminons le DL$_3(1)$ de la fonction $f : x \mapsto 2x^5 - x^3 + x^2 + 1$.\\
+ On fait pour cela le changement de variable $x = 1 + h$. \\
+ 
+ On est donc ramené à déterminer le DL$_3(0)$ de la fonction
+ $$\tilde{f} : h \mapsto 2(1+h)^5 - (1+h)^3 + (1+h)^2 + 1.$$
+  Or,
+  \begin{align*}
+  \tilde{f}(h) &= 2(1 + 5h + 10h^2 + 10h^3 + 5h^4 + h^5) - (1 + 3h + 3h^2 + h^3) + (1 + 2h + h^2) + 1 \\
+  &= (2 - 1 + 1 + 1) + (10 - 3 + 2)h + (20 - 3 + 1)h^2 + (20 - 1)h^3 + \underset{h \to 0}{o}(h^3) \\
+  &= 3 + 9h + 18h^2 + 19h^3 + \underset{h \to 0}{o}(h^3). 
+  \end{align*}
+Finalement,
+\[ f(x) = 3 + 9(x - 1) + 18(x - 1)^2 + 19(x - 1)^3 + \underset{x \to 1}{o}\big((x - 1)^3\big). \]
+\end{Ex}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[1]{Fonction exponentielle}
+
+On admet pour le moment qu'au voisinage de $0$, 
+$$e^x = 1 + x + \frac{x^2}{2} + \underset{x \to 0}{o}(x^2).$$
+
+Déterminer un développement limité de la fonction $\exp$ à l'ordre 2 au voisinage de 1.
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[2]{Au voisinage de $a$}
+
+Soit $f : x \mapsto 2x^4 - x^3 + 2x^2 + x + 1$. 
+
+Déterminer les développements limités de $f$ à tous les ordres en $a = 2$.
+
+\subsection{Premières propriétés}
+
+\begin{Prop} \textbf{Unicité du développement}
+
+Si $f(x) = P_1(x) + o((x - a)^n)$ et $f(x) = P_2(x) + o((x - a)^n)$ sont deux développements limités à l'ordre $n$ de $f$ au voisinage de $a$, alors $P_1 = P_2$.
+\end{Prop}
+
+\begin{Prop}   \textbf{Développement limité et parité}
+
+Soit $f$ une fonction admettant un développement limité en $0$. Si $f$ est paire (resp. impaire), la partie régulière du développement limité en $0$ ne comporte que des puissances paires (resp. impaires).\\
+\end{Prop} 
+
+
+\begin{Ex}
+La fonction sinus admet un développement limité en $0$:
+\[
+\sin(x) \quad = \quad x \, - \, \frac{x^3}{3!} \, + \, \cdots\,  + \, (-1)^n \frac{x^{2n+1}}{(2n+1)!} \quad + \underset{x \to 0}{o}(x^{2n+1}).
+\]
+\end{Ex}
+
+\begin{Rmq}
+
+Cependant, la parité ou l'imparité de la partie régulière d'un DL$_n(0)$ ne donne aucune indication quant à une éventuelle parité/imparité de la fonction. Par exemple, on peut montrer que :
+\[ f(x) = (x^3 - 1) \cos(x) = -1 + \frac{x^2}{2} +\underset{x \to 0}{o}(x^2). \]
+La partie régulière de ce DL$_2(0)$ est $x \mapsto -1 + \frac{x^2}{2}$. C'est une fonction paire, mais pourtant $f$ ne l'est absolument pas.\\
+\end{Rmq}
+
+\newpage
+
+\subsection{Petits ordres}
+\begin{Thm}\textbf{ Les cas $n = 0$ ET $n = 1$}\\
+Soit $a \in \mathbb{R}$.
+
+\begin{enumerate}
+    \item Soit $f$ définie au voisinage de $a$. La fonction $f$ possède un DL à l'ordre 0 en $a$ si et seulement si $f$ a une limite finie $\ell$ en $a$. Dans ce cas le DL est :
+    \[ f(x) = \ell + \underset{x \to a}{o}(1) \]
+    Si la fonction $f$ est définie en $a$, elle est donc continue en $a$. Dans le cas contraire, si $a$ est une borne de $I$, $f$ est prolongeable par continuité en $a$.
+
+    \item Soit $f$ définie au voisinage de $a$ et en $a$. $f$ possède un DL à l'ordre 1 en $a$ si et seulement si $f$ est dérivable en $a$. Dans ce cas le DL est :
+    \[ f(x) = f(a) + f'(a)(x - a) + \underset{x \to a}{o}(x - a) \]
+    Si $f$ n'est pas définie en $a$, c'est-à-dire si $a$ est une borne de $I$, on aura le même résultat avec le prolongement par continuité de $f$ en $a$.\\
+\end{enumerate}
+
+\end{Thm}
+
+
+\begin{Ex}
+$$\arctan(x) = x + \underset{x \to 0}{o}(x)$$
+
+
+\end{Ex}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo [2]{Fonction arccos}
+
+Donner un développement limité de la fonction $\arccos$ à l'ordre $1$ en $0$.
+
+
+
+
+\textbf{Attention !}\\
+ On pourrait croire que ce résultat se généralise et que $\forall k \geq 2$, une fonction admettant un développement limité d'ordre $k$ au voisinage de $a$ est $k$ fois dérivable en $a$. Ce n'est pas vrai. Voici un contre-exemple.
+
+
+ \vspace{1em}
+ \hrule
+ \vspace{1em}
+
+% \begin{CEx}
+\exo [3]{Contre-exemple}
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par 
+\[ 
+f(x) =
+\begin{cases} 
+x^3 \cos\left(\frac{1}{x}\right) & \text{si } x \neq 0 \\
+0 & \text{si } x = 0 
+\end{cases}
+\]
+
+Montrer que $f$ admet un développement limité à l'ordre $2$ en $0$ mais qu'elle n'est pas 2 fois dérivable.\\
+
+
+% \end{CEx}
+
+
+\subsection{Premiers développements limités}
+\begin{Ex} \textbf{Premiers exemples non triviaux de développements limités}\\
+\[
+\forall n \in \mathbb{N}, \quad \frac{1}{1 - x} = 1 + x + x^2 + \cdots + x^n + \underset{x \to 0}{o}(x^n)\qquad
+\]
+et
+\[
+\frac{1}{1 + x} = 1 - x + x^2 - \cdots + (-1)^n x^n + \underset{x \to 0}{o}(x^n)\qquad
+\]
+\end{Ex}
+
+
+\begin{Rmq}$\,$
+
+Pour obtenir le deuxième développement limité, 
+il suffit de remplacer $x$ par~$-x$ dans le premier développement limité.
+\end{Rmq}
+
+\section{Recherche de développements limités}
+\subsection{Formule de Taylor-Young}
+
+\begin{Thm}\textbf{Formule de Taylor-Young}\\
+
+Soient \(n \in \mathbb{N}\) et \(f\) de classe \(C^n\) sur un intervalle \(I\) et \(a \in I\). Alors
+\[
+f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!} (x - a)^k + \underset{x \to a}{o} \left( (x - a)^n \right)
+\]
+
+
+\end{Thm}
+
+
+% \begin{Rmq}
+\begin{enumerate}
+    \item Dans le cas particulier où \(a = 0\), on obtient la formule :
+    \[
+    f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} x^k + \underset{x \to 0}{o} \left( x^n \right)
+    \]
+    \item Cette formule permet d'obtenir le développement limité de quelques fonctions classiques dont le calcul des dérivées successives ne pose pas de problème comme \(x \mapsto e^x\), \(x \mapsto \cos x\) et \(x \mapsto \sin x\).
+\end{enumerate}
+% \end{Rmq}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+        \newpage
+
+
+
+\exo [2]{Exponentielle et sinus}
+
+\begin{enumerate}
+\item
+Déterminer les développements limités à l'ordre $5$, puis à tout ordre, des fonctions $\exp$ et $\sin$ en $0$.
+\item Calculer le développement limité en $1$ à l'ordre $3$ de la fonction exponentielle.
+\item Déterminer le développement limité à l'ordre $3$ de la fonction $\tan$ en $0$.\\
+\end{enumerate}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\subsection{Intégration terme à terme d'un développement limité}
+
+
+\begin{Thm}\textbf{Développement limité d'une primitive}
+
+Soit \(f\) une fonction définie sur un intervalle \(I\) admettant une primitive \(F\) sur \(I\). Soit \(a \in I\). On suppose que \(f\) admet un développement limité (DL) d'ordre \(n \in \mathbb{N}\) en \(a\) :
+\[
+f(x) = a_0 + a_1 (x - a) + \ldots + a_n (x - a)^n +\underset{x \to a}{o}\left( (x - a)^n \right).
+\]
+Alors \(F\) admet un DL d'ordre \(n + 1\) en \(a\) :
+\[
+\begin{aligned}
+F(x) &= F(a) + a_0 (x - a) + a_1 \frac{(x - a)^2}{2} + \ldots + a_n \frac{(x - a)^{n+1}}{n+1} + \underset{x \to a}{o} \left( (x - a)^{n+1} \right)\\
+&= F(a) + \sum_{k=0}^{n} a_k \frac{(x - a)^{k+1}}{k+1} + \underset{x \to a}{o} \left( (x - a)^{n+1} \right).
+\end{aligned}
+\]
+
+
+\end{Thm}
+
+
+\begin{Ex}
+Soit $n \in \N$ et $f$ la fonction définie sur $\R \backslash \{-1\}$ par $f (x) = \dfrac{1
+}{1+x}$.
+\begin{enumerate}
+\item Rappeler le développement limité de f sur $\R \backslash \{-1\}$ à l'ordre $n$ en $0$.\\
+ En déduire un développement limité de $\ln(1 + x)$ au voisinage de $0$.
+\item Déduire de la première question un développement limité de $\dfrac{1}{1+x^2}$ en $0$.
+\item En déduire un développement limité de $\text{Arctan}(x)$ en $0$.\\
+
+\end{enumerate}
+\end{Ex}
+
+
+
+\newpage
+
+
+
+\subsection{Opérations sur les développements limités}
+
+
+\begin{Thm}
+Soient \(f\) et \(g\) deux fonctions admettant un DL\(_n(0)\) :
+\[
+f(x) = \sum_{k=0}^{n} a_k x^k + o(x^n) \quad \text{et} \quad g(x) = \sum_{k=0}^{n} b_k x^k + o(x^n).
+\]
+Alors
+\begin{enumerate}
+    \item \textbf{Troncature :} Pour tout entier \(p \leq n\), \(f\) admet un DL\(_p(0)\) et
+    \[
+    f(x) = \sum_{k=0}^{p} a_k x^k + o(x^p)
+    \]
+    \item \textbf{Combinaisons linéaires :} Pour tout \(\alpha, \beta \in \mathbb{R}\), la fonction \(\alpha f + \beta g\) admet un DL\(_n(0)\) et
+    \[
+    \alpha f(x) + \beta g(x) = \sum_{k=0}^{n} (\alpha a_k + \beta b_k) x^k + o(x^n)
+    \]
+    \item \textbf{Produit :} \(f \cdot g\) admet un DL\(_n(0)\) et
+    \[
+    f(x) \cdot g(x) = \underbrace{\left( \sum_{k=0}^{n} a_k x^k \right) \left( \sum_{k=0}^{n} b_k x^k \right)}_{\text{à développer et tronquer à l'ordre } n} + o(x^n) = \sum_{k=0}^{n} c_k x^k + o(x^n)
+    \]
+    \item \textbf{Produit par un monôme :} pour tout \(p \in \mathbb{N}\), la fonction \(x \mapsto x^p f(x)\) admet un DL\(_{n+p}(0)\) et
+    \[
+    x^p f(x) = \sum_{k=0}^{n} a_k x^{k+p} + o(x^{n+p})
+    \]
+    \item \textbf{Composition :} si \(b_0 = 0\) alors \(f \circ g\) admet un DL\(_n(0)\) et
+    \[
+    (f \circ g)(x) = \underbrace{\sum_{k=0}^{n} a_k \left( \sum_{i=0}^{n} b_i x^i \right)^k }_{\text{à développer et tronquer à l'ordre } n} + o(x^n) = \sum_{k=0}^{n} c_k x^k + o(x^n)
+    \]
+\end{enumerate}
+
+
+\end{Thm}
+
+\begin{Rmq}
+Les propriétés ci-dessus fonctionnent si l'on considère des développements limités au voisinage
+de $a \in \R$.\\
+\end{Rmq}
+
+\begin{Ex}
+Pour chaque fonction \( f \) donnée ci-après dont on donne un \( DL_4(0) \), former son \( DL_3(0) \) :
+\begin{enumerate}
+    \item \( f(x) = 1 + \frac{x^2}{2} + x^3 + \frac{x^4}{3} + o(x^4) \)
+    \[
+    \text{Troncature à l'ordre 3 :} \quad f(x) = 1 + \frac{x^2}{2} + x^3 + o(x^3)
+    \]
+    \item \( f(x) = -2 + 3x - x^2 + x^4 + o(x^4) \)
+    \[
+    \text{Troncature à l'ordre 3 :} \quad f(x) = -2 + 3x - x^2 + o(x^3)
+    \]
+\end{enumerate}
+\end{Ex}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo [2]{Entraînement}
+
+
+\begin{enumerate}
+
+    \item Donner le \( DL_5(0) \) de la fonction \( g : x \mapsto x \sin(x) \).
+    \item Donner le \( DL_3(0) \) de la fonction \( h : x \mapsto \frac{1 + x^2}{1 + x} \).
+    \item Donner le \( DL_4(0) \) de la fonction \( j : x \mapsto \frac{\sin(x)}{1 - x} \).\\
+\end{enumerate}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[2]{Entraînement bis}
+
+\begin{enumerate}
+    \item Donner le \( DL_3(0) \) de la fonction \( f : x \mapsto e^x + x^2 \).
+    \item Donner le \( DL_6(0) \) de la fonction \( f : x \mapsto \ln(1 + x^2 + x^3) \).
+    \item Donner le \( DL_3(0) \) de la fonction \( f : x \mapsto \ln(1 + \sin(x)) \).\\
+    \end{enumerate}
+
+
+    \vspace{1em}
+    \hrule
+    \vspace{1em}
+
+% \begin{Meth}
+\textbf{Calcul du DL d'un inverse}\\
+
+On suppose que \( f \) admet un \( DL_n(a) \) et on souhaite calculer 
+le \( DL_n(a) \) de \( g = 1/f \).\\
+
+\begin{enumerate}
+    \item Quitte à faire le changement de variable \( x = a + h \), on peut supposer que \( a = 0 \).
+    \item On écrit le \( DL_n(0) \) de \( f \) :
+    \[
+    f(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n + o_{x \to 0} \left( x^n \right).
+    \]
+    On en déduit le \( DL_n(0) \) de \( g = 1/f \).
+    
+\newpage
+
+
+    \item La fonction \( g = 1/f \) admet un \( DL_n(0) \) seulement lorsque \( a_0 \neq 0 \). 
+    On se place donc dans ce cas-là. 
+    
+    On écrit
+    \begin{align*}
+    \frac{1}{f(x)} 
+    &= \frac{1}{a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n + o_{x \to 0} \left( x^n \right)} \\
+    &= \frac{1}{a_0} \left[ \frac{1}{1 + \left( \frac{a_1}{a_0} x + \frac{a_2}{a_0} x^2 + \ldots + \frac{a_n}{a_0} x^n + o_{x \to 0} \left( x^n \right) \right)} \right]
+    \end{align*}
+    Comme
+    \[
+    \lim_{x \to 0} \left( \frac{a_1}{a_0} x + \frac{a_2}{a_0} x^2 + \ldots + \frac{a_n}{a_0} x^n + o_{x \to 0} \left( x^n \right) \right) = 0
+    \]
+    on peut utiliser le \( DL_n \)
+    \[
+    \frac{1}{1 + u} = 1 - u + u^2 - u^3 + \ldots + (-1)^n u^n + o_{u \to 0} \left( u^n \right)
+    \]
+    pour trouver le \( DL_n(0) \) de \( g \).\\
+\end{enumerate}
+% \end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[2]{Premières gammes}
+Calculer le \( DL_3(0) \) de \( f : x \mapsto \frac{1}{1 + e^x} \) puis le \( DL_3(2) \) de \( x \mapsto \frac{1}{x} \).
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Montée en gammes}
+
+\begin{enumerate}
+    \item Calculer le \( DL_3(0) \) de la fonction \( x \mapsto \sqrt{1 + x} \).
+\item Calculer le \( DL_3(0) \) de la fonction \( x \mapsto \frac{1}{\sqrt{1 + x}} \).
+\item Calculer le \( DL_2(0) \) de la fonction \( x \mapsto \sqrt{1 + \sqrt{1 + x}} \).
+\item Calculer le \( DL_4(0) \) de la fonction \( x \mapsto \cos(x) \ln(1 + x) \).
+\end{enumerate}
+
+
+% \begin{Sol}
+% \begin{enumerate}
+%     \item
+%     {$$
+%      \begin{aligned}
+%      \sqrt{1 + x} &= (1 + x)^{1/2}\\
+%      &= 1 + \frac{1}{2}x + \frac{1}{2} \left( \frac{-1}{2} \right) \frac{x^2}{2} + \frac{1}{2} \left( \frac{-1}{2} \right) \left( \frac{-3}{2} \right) \frac{x^3}{6} + o(x^3)\\
+%      &= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{3}{48}x^3 + o(x^3) \\
+%      &= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16}x^3 + o(x^3) 
+%      \end{aligned}$$
+%      }
+% \item     {$$
+%      \begin{aligned}
+%      \frac{1}{\sqrt{1 + x}} &= (1 + x)^{-1/2}\\
+%      & = 1 - \frac{1}{2}x + \frac{1}{2} \left( \frac{3}{2} \right) \frac{x^2}{2} + \frac{1}{2} \left( \frac{3}{2} \right) \left( \frac{5}{2} \right) \frac{x^3}{6} + o(x^3) \\
+%      &= 1 - \frac{1}{2}x + \frac{3}{8}x^2 - \frac{15}{48}x^3 + o(x^3) \\
+%      &= 1 - \frac{1}{2}x + \frac{3}{8}x^2 - \frac{5}{16}x^3 + o(x^3) 
+%       \end{aligned}$$
+%      }
+% \item  $1 + \sqrt{1 + x} = 2 + \frac{1}{2}x - \frac{1}{8}x^2 + o(x^2) $ d'après 1.\\
+% {$$
+%      \begin{aligned}  \sqrt{1 + \sqrt{1 + x}}& = \left( 1 + \sqrt{1 + x} \right)^{1/2}\\
+%      & = \sqrt{2} \left[ 1 + \frac{1}{4}x - \frac{1}{16}x^2 + o(x^2) \right]^{1/2}\\
+%      & = \sqrt{2} \left[ 1 + \frac{1}{8}x - \frac{1}{32}x^2 - \frac{1}{8} \left( \frac{1}{16}x^2 \right) \right] + o(x^2)\\
+%      & = \sqrt{2} \left[ 1 + \frac{1}{8}x - \frac{1}{32}x^2 - \frac{1}{128}x^2 \right] + o(x^2)\\
+%      & = \sqrt{2} \left[ 1 + \frac{1}{8}x - \frac{5}{128}x^2 \right] + o(x^2)\\
+%      & = \sqrt{2} + \frac{x}{4\sqrt{2}} - \frac{5x^2}{64\sqrt{2}} + o(x^2) 
+%        \end{aligned}$$
+%      }
+% \item  {$$
+%      \begin{aligned} \cos(x) \ln(1 + x) &= \left( 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4) \right) \left( x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + o(x^4) \right)\\
+%      & = x - \frac{x^2}{2} + \left( \frac{1}{3} - \frac{1}{2} \right)x^3 + \left( -\frac{1}{4} + \frac{1}{24} \right)x^4 + o(x^4)\\
+%      & = x - \frac{x^2}{2} - \frac{x^3}{6} + o(x^4)
+%     \end{aligned}$$
+%      }
+% \end{enumerate}
+% \end{Sol}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[1]{Limites}
+
+Calculer $\displaystyle \lim_{x \to 0} \frac{\ln(1 + x) - \ln(1 - x)}{e^x - 1}$.\\
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+% \begin{Sol} 
+% On commence par remarquer que $e^x - 1 \sim_{x \to 0} x$.\\
+
+% On cherche un équivalent de $\ln(1 + x) - \ln(1 - x)$ au voisinage de 0.\\
+% \[
+% \ln(1 + x) - \ln(1 - x) = (x - \frac{x^2}{2} + o(x^2)) - (-x - \frac{x^2}{2} + o(x^2)) = 2x - \frac{x^2}{2} + o(x^2) \sim_{x \to 0} 2x.
+% \]
+
+% Finalement,
+% \[
+% \frac{\ln(1 + x) - \ln(1 - x)}{e^x - 1} \sim_{x \to 0} \frac{2x}{x} = 2 \implies \lim_{x \to 0} \frac{\ln(1 + x) - \ln(1 - x)}{e^x - 1} = 2.
+% \]
+% \end{Sol}
+
+\newpage
+
+
+
+\section{Utilisation des développements limités}
+
+\subsection{Calculs d'équivalents et de limites}
+
+
+
+\begin{Meth}
+\textbf{Trouver un équivalent d'une fonction en \(a\)}\\
+
+On détermine le premier terme non nul d'un développement limité au voisinage de $a$ de la fonction.
+
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[2]{\'Equivalent}
+
+Déterminer un équivalent en 0 de la fonction \( f : x \mapsto \ln(1 + x^2) \cdot \sin^2(x) \).
+
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\begin{Meth}
+\textbf{Trouver la limite d'une fonction en \(a\)}\\
+
+On détermine un équivalent de la fonction en \(a\) et on applique la propriété affirmant que deux fonctions équivalentes au voisinage de \(a\) ont la même limite en \(a\) .\\
+\end{Meth}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[3]{Limites}
+
+En utilisant vos connaissances sur les équivalents et les développements limités, déterminer les limites suivantes :
+\[ 1.\lim_{x \to 0} \frac{\sin(x) - x + \frac{x^3}{6}}{(\tan(x))^5}, \qquad  2.\lim_{x \to 0} \frac{\sqrt{1+x} - \sqrt{1-x} - x}{x^3}\]
+\[ 3.\lim_{x \to \frac{\pi}{2}} \frac{\ln(\sin(x))}{\left( x - \frac{\pi}{2} \right)^2}, \qquad  4.\lim_{x \to -1} x \left( \left( 1 + \frac{1}{2x} \right)^{3x} - \left( 1 + \frac{3}{x} \right)^{\frac{x}{2}} \right)\]
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\subsection{Détermination d'asymptotes}
+
+
+\begin{Meth}
+\textbf{Étudier le comportement asymptotique d'une fonction $f$}\\
+\begin{itemize}
+    \item On cherche une relation du type : \( \frac{f(x)}{x} \underset{+\infty}{=}  \left( a_0 + \frac{a_1}{x} + \frac{a_2}{x^2} + \ldots + \frac{a_n}{x^n} + o\left( \frac{1}{x^n} \right) \right) \) grâce au changement de variable \( u = \frac{1}{x} \). On obtient ce que l'on appelle un développement asymptotique au voisinage de \(+ \infty\).
+    \item On multiplie par \(x\) et on tronque à l'ordre 1, pour obtenir \( f(x) \underset{+\infty}{\sim} a_0 x + a_1 \). Cela prouve alors que la droite d'équation \( y = a_0 x + a_1 \) est asymptote à la courbe de \(f\) au voisinage de \(+ \infty\).
+    \item On peut enfin déterminer la position locale de la courbe par rapport à son asymptote au voisinage de \(+ \infty\), en cherchant le signe du premier terme non nul dans le développement de \( f(x) - (a_0 x + a_1) \).\\
+\end{itemize}
+
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo [3]{Comportement asymptotique}
+
+Étudier le comportement asymptotique au voisinage de \( +\infty \) et \( -\infty \) de la fonction \( f \) définie sur \( ]-\infty, -1[ \cup [0, +\infty[ \) par \( f(x) = \sqrt{x^2 + x} \).
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\subsection{Étude locale d'une fonction}
+
+\begin{Meth}
+\textbf{Comment étudier une fonction $f$ au voisinage de $a$}
+
+\begin{enumerate}
+\item On détermine le développement limité de $f$ au voisinage de $a$ d'ordre $p$, où $p$ est le plus petit entier supérieur ou égal à 2 tel que $a_p \neq 0$. Autrement dit, on se ramène à
+$$f(x) \underset{a}{=} a_0 + a_1(x - a) + a_p (x - a)^p + o((x - a)^p)$$
+où $a_p \neq 0$.
+
+\item On peut alors affirmer que $f$ est prolongeable par continuité ($f(a) = a_0$) et dérivable en $a$ ($f'(a) = a_1$).
+
+\item On peut aussi donner l'équation de la tangente $T$ à $\mathcal{C}_f$ au point d'abscisse $a$ :
+$$T \text{ a pour équation } y = a_0 + a_1(x - a).$$
+
+\item On peut enfin déterminer la position locale de $T$ par rapport à $\mathcal{C}_f$ en cherchant le signe de $a_p (x - a)^p$. En effet,
+\[f(x) - (a_0 + a_1(x - a)) \underset{a}{\sim} a_p (x - a)^p.\]
+\end{enumerate}
+\end{Meth}
+%
+
+
+
+\begin{Rmq}
+
+\begin{enumerate}
+\item Si $p$ est pair et si $a_p \geq 0$ :
+  - Alors $a_p(x - a)^p \geq 0$ au voisinage de $a$.
+  - Donc, $f(x) - (a_0 + a_1(x - a)) \geq 0$ au voisinage de $a$.
+  - Donc, $\mathcal{C}_f$ est au-dessus de $T$ au voisinage de $a$.
+
+\item Si $p$ est impair et si $a_p \geq 0$ :
+  - Alors
+    \[
+    \begin{cases}
+      a_p(x - a)^p \geq 0 \text{ au voisinage de } a^+ \\
+      a_p(x - a)^p \leq 0 \text{ au voisinage de } a^- \\
+    \end{cases}
+    \]
+  - Donc,
+    \[
+    \begin{cases}
+      f(x) - (a_0 + a_1(x - a)) \geq 0 \text{ au voisinage de } a^+ \\
+      f(x) - (a_0 + a_1(x - a)) \leq 0 \text{ au voisinage de } a^- \\
+    \end{cases}
+    \]
+  - Donc,
+    \[
+    \begin{cases}
+      \mathcal{C}_f \text{ est au-dessus de } a^+ \\
+      \mathcal{C}_f \text{ est en-dessous de } a^- \\
+    \end{cases}
+    \]
+
+\item Si $p$ est pair et si $a_p \leq 0$ :
+  - Alors $a_p(x - a)^p \leq 0$ au voisinage de $a$.
+  - Donc, $f(x) - (a_0 + a_1(x - a)) \leq 0$ au voisinage de $a$.
+  - Donc, $\mathcal{C}_f$ est en-dessous de $T$ au voisinage de $a$.
+
+\item Si $p$ est impair et si $a_p \leq 0$ :
+  - Alors
+    \[
+    \begin{cases}
+      a_p(x - a)^p \leq 0 \text{ au voisinage de } a^+ \\
+      a_p(x - a)^p \geq 0 \text{ au voisinage de } a^- \\
+    \end{cases}
+    \]
+  - Donc,
+    \[
+    \begin{cases}
+      f(x) - (a_0 + a_1(x - a)) \leq 0 \text{ au voisinage de } a^+ \\
+      f(x) - (a_0 + a_1(x - a)) \geq 0 \text{ au voisinage de } a^- \\
+    \end{cases}
+    \]
+  - Donc,
+    \[
+    \begin{cases}
+      \mathcal{C}_f \text{ est en-dessous de } a^+ \\
+      \mathcal{C}_f \text{ est au-dessus de } a^- \\
+    \end{cases}
+    \]
+    
+    \end{enumerate}
+\end{Rmq}
+
+
+\begin{Ex}
+Étudier localement en $0$ la fonction définie pour tout $x \in ]-1,0[ \cup ]0,1[$
+par $f(x) = \frac{\ln(1+x) - x}{x^2}$.
+\end{Ex}
+
+\subsection{Étude des points critiques}
+\begin{Meth}
+\textbf{Déterminer la nature d'un point critique $a$}
+
+Soient $I$ un intervalle et $a \in I$, $a$ n'étant pas une extrémité de $I$ et $f$ une fonction dérivable sur $I$. On appelle " \textbf{point critique} " toute valeur $a$ telle que $f'(a) = 0$. On rappelle qu'avoir $f'(a) = 0$ est une condition nécessaire mais non suffisante pour avoir un extremum local en $a$.
+
+On suppose que $a$ est un point critique de $f$.
+\begin{enumerate}
+\item On forme le développement limité de $f$ au voisinage de $a$ à un ordre suffisant de manière à obtenir :
+$$f(x) - f(a) \approx a_p (x - a)^p \text{ où } a_p \neq 0.$$
+Comme $a$ est un point critique, nécessairement on a $p \geq 2$ (car $f'(a) = a_1 = 0$).
+
+\item On discute selon la parité de $p$ et le signe de $a_p$ :
+\begin{enumerate}
+\item Si $p$ est impair, alors $a_p (x - a)^p$ change de signe au voisinage de $a$, donc il n'y a pas d'extremum local en $a$, mais un\textbf{ point d'inflexion}.
+
+    \[
+    \begin{cases}
+    a_p \geq 0 \\
+    a_p \leq 0 \\
+    \end{cases}
+    \]
+
+  \item 
+  \begin{enumerate}
+\item Si $p$ est pair  et si $a_p \geq 0$, alors $a_p (x - a)^p \geq 0$ au voisinage de $a$, autrement dit $f(x) \geq f(a)$ au voisinage de $a$, donc il y a un minimum local en $a$.
+  
+    \[
+    a_p \geq 0
+    \]
+
+  \item  Si $p$ est pair et si $a_p \leq 0$, alors $a_p (x - a)^p \leq 0$ au voisinage de $a$, autrement dit $f(x) \leq f(a)$ au voisinage de $a$, donc il y a un maximum local en $a$.
+  
+    \[
+    a_p \leq 0
+    \]
+        \end{enumerate}
+       \end{enumerate} 
+    \end{enumerate}
+\end{Meth}
+
+
+
+\begin{Ex}
+
+Soit $f : x \mapsto \frac{e^x - 1}{x^2 + 1}$. $f$ admet-elle des extrema locaux ?
+\end{Ex}
+
+
+
+\begin{Ex}
+
+Montrer que la fonction $x \mapsto \ln(e^x - \sin(x))$ admet un minimum local en $0$.
+\end{Ex}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Tangentes et asymptotes}
+
+Étudier et représenter la fonction $f$ définie sur $\mathbb{R}^*$ par $f(x) = \frac{x}{1 + e^{\frac{1}{x}}}$. On cherchera en particulier les tangentes et asymptotes remarquables ainsi que la position relative de la courbe par rapport à ces tangentes et asymptotes.
+
+
+% \begin{Sol}
+
+% $f $ est définie et dérivable sur $ \mathbb{R}^* $ comme composée et quotient de fonctions dérivables sur $ \mathbb{R}^*$.
+% $$
+% \forall x > 0, f'(x) = \frac{(1 + e^{\frac{1}{x}}) - x \left( -\frac{1}{x^2} e^{\frac{1}{x}} \right)}{(1 + e^{\frac{1}{x}})^2} = \frac{x + (x + 1) e^{\frac{1}{x}}}{x (1 + e^{\frac{1}{x}})^2} > 0 $$
+% donc $ f $ est strictement croissante sur $ \mathbb{R}^*_+$.
+
+% Par composée somme et quotient, on a $ \lim_{x \to 0^+} f(x) = 0 $ donc $ f $ est prolongeable par continuité en $0 $ avec $f(0) = 0$. On considère dorénavant le prolongement par continuité de $ f$ que l'on note toujours  $f$. $f $est donc strictement croissante sur $ \mathbb{R}^+$.
+
+% $\lim_{x \to -1} f(x) = -1 $ par composition, somme et quotient.
+
+% Étudions la dérivabilité à droite de  $f$ en  $0$:
+% $
+% \forall x > 0, \frac{f(x) - f(0)}{x - 0} = \frac{1}{1 + e^{\frac{1}{x}}} \to 0$.  Ainsi, $ f $ est dérivable à droite en $ 0$  avec  $f'(0) = 0$.
+
+% Il y aura donc une demi-tangente horizontale d'équation $ y = 0$  et comme $ f(0) = 0$ et que la fonction  $f $ est strictement croissante sur $ \mathbb{R}^+$, $f$ sera située au-dessus de cette demi-tangente au voisinage de $0$.
+
+% Étude d'une éventuelle asymptote oblique en  $-1$:
+
+% En posant $ u = \frac{1}{x}$, on a au voisinage de  $u = 0$:
+% $
+% \frac{f(x)}{x} = \frac{1}{1 + e^u} = \frac{1}{1 + (1 + u + \frac{u^2}{2} + \frac{u^3}{6} + o(u^3))} = \frac{1}{2} \cdot \frac{1}{1 + (u + \frac{u^2}{2} + \frac{u^3}{6} + o(u^3))}
+% $
+
+% $
+% \frac{1}{1 + u} \approx 1 - u + u^2 - u^3 + o(u^3)
+% $
+
+% $
+% \frac{1}{2} \left( 1 - \left( \frac{u}{2} + \frac{u^2}{4} + \frac{u^3}{12} \right) + \left( \frac{u}{2} + \frac{u^2}{4} + \frac{u^3}{12} \right)^2 \right) = \frac{1}{2} \left( 1 - \frac{u}{2} + \left( -\frac{u^2}{4} + \frac{u^2}{4} \right) + \left( -\frac{u^3}{12} + \frac{u^3}{4} - \frac{u^3}{8} \right) \right)
+% $
+
+% $
+% = \frac{1}{2} \left( 1 - \frac{u}{2} + \frac{u^3}{48} + o(u) \right)$
+
+% On en déduit le développement asymptotique suivant au voisinage de  $-1$:
+% $
+% \frac{f(x)}{x} = \frac{1}{2} - \frac{1}{4x} + \frac{1}{48x^3} + o\left( \frac{1}{x^3} \right)
+% $
+
+% $f(x) = \frac{x}{2} - \frac{1}{4} + \frac{1}{48x^2} + o\left( \frac{1}{x^2} \right)$
+
+% La droite d'équation $ y = \frac{x}{2} - \frac{1}{4} $ est donc asymptote à la courbe au voisinage de  $-1$.
+
+% Comme $ f(x) - \left( \frac{x}{2} - \frac{1}{4} \right) = \frac{1}{48x^2} + o\left( \frac{1}{x^2} \right) $ est positif au voisinage de $ -1$, la courbe sera au-dessus de son asymptote.
+
+% On peut alors tracer la courbe, après avoir tracé la tangente $ y = 0$ et l'asymptote $ y = \frac{x}{2} - \frac{1}{4}$.
+% \end{Sol}
+
+
+\section{Formulaire et points méthodes}
+\subsection{Principaux développements limités en $0$}
+% \begin{small}
+% \begin{Prop}
+Soient $n \in \mathbb{N}$ et $\alpha \in \mathbb{R}$. \vspace{1em}
+
+\noindent \textbf{Suites géométriques :}
+\begin{enumerate}
+
+\item
+\[
+\frac{1}{1 - x} = 1 + x + x^2 + \ldots + x^n + \underset{x \to 0}{o}(x^n) = \sum_{k=0}^{n} x^k +  \underset{x \to 0}{o}(x^n)
+\]
+\item
+\[
+\frac{1}{1 + x} = 1 - x + x^2 + \ldots + (-1)^n x^n + \underset{x \to 0}{o}(x^n) = \sum_{k=0}^{n} (-1)^k x^k +  \underset{x \to 0}{o}(x^n)
+\]
+
+\newpage
+
+
+
+\noindent \textbf{Taylor-Young :}
+\item
+\[
+e^x = 1 + x + \frac{x^2}{2!} + \ldots + \frac{x^n}{n!} +  \underset{x \to 0}{o}(x^n) = \sum_{k=0}^{n} \frac{x^k}{k!} + \underset{x \to 0}{o}(x^n)
+\]
+
+
+
+\item
+\[
+\begin{aligned}
+\cos x &= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \ldots + (-1)^n \frac{x^{2n}}{(2n)!} + \underset{x \to 0}{o}(x^{2n+1})\\
+& = \sum_{k=0}^{n} (-1)^k \frac{x^{2k}}{(2k)!} +  \underset{x \to 0}{o}(x^{2n+1})
+\end{aligned}
+\]
+
+
+\item
+\[
+\begin{aligned}
+\sin x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} + \ldots + (-1)^n \frac{x^{2n+1}}{(2n+1)!} + \underset{x \to 0}{o}(x^{2n+2})\\
+& = \sum_{k=0}^{n} (-1)^k \frac{x^{2k+1}}{(2k+1)!} +  \underset{x \to 0}{o}(x^{2n+2})
+\end{aligned}
+\]
+
+
+\item
+\[
+\begin{aligned}
+(1 + x)^{\alpha} &= 1 + \alpha x + \frac{\alpha (\alpha - 1)}{2!} x^2 + \ldots + \frac{\alpha (\alpha - 1) \cdots (\alpha - n + 1)}{n!} x^n +  \underset{x \to 0}{o}(x^n) \\
+&= \sum_{k=0}^{n} \frac{\alpha (\alpha - 1) \cdots (\alpha - k + 1)}{k!} x^k +  \underset{x \to 0}{o}(x^n)\\
+\end{aligned}
+\]
+\item 
+\[
+\tan x = x + \frac{x^3}{3} + \underset{x \to 0}{o}(x^3)
+\]
+
+
+\noindent \textbf{Intégration terme à terme :}
+\item
+\[
+\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} + \ldots + (-1)^{n-1} \frac{x^n}{n} + o_{x \to 0}(x^n) = \sum_{k=1}^{n} (-1)^{k-1} \frac{x^k}{k} + o_{x \to 0}(x^n) \quad (n \ge 1)
+\]
+\item
+\[
+\ln(1 - x) = -x - \frac{x^2}{2} - \frac{x^3}{3} - \ldots - \frac{x^n}{n} + o_{x \to 0}(x^n) = \sum_{k=1}^{n} -\frac{x^k}{k} + o_{x \to 0}(x^n) \quad (n \ge 1)
+\]
+
+
+\item
+\[
+\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} + \ldots + (-1)^n \frac{x^{2n+1}}{2n+1} + o_{x \to 0}(x^{2n+2}) = \sum_{k=0}^{n} (-1)^k \frac{x^{2k+1}}{2k+1} +  \underset{x \to 0}{o}(x^{2n+2})
+\]
+
+\end{enumerate}
+% \end{Prop}
+
+% \end{small}
+%%\noindent \textbf{Combinaisons linéaires :}
+%%\item
+%%\[
+%%\cosh(x) = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \ldots + \frac{x^{2n}}{(2n)!} +  \underset{x \to 0}{o}}(x^{2n+1}) = \sum_{k=0}^{n} \frac{x^{2k}}{(2k)!} +  \underset{x \to 0}{o}(x^{2n+1})
+%%\]
+%%\item
+%%\[
+%%\sinh(x) = x + \frac{x^3}{3!} + \frac{x^5}{5!} + \ldots + \frac{x^{2n+1}}{(2n+1)!} + \underset{x \to 0}{o}(x^{2n+2}) = \sum_{k=0}^{n} \frac{x^{2k+1}}{(2k+1)!} +  \underset{x \to 0}{o}(x^{2n+2})
+%%\]
+%\end{enumerate}
+
+
+%
+%
+%
+% \begin{Rmq}
+Attention! Pour pouvoir utiliser le développement limité de $(1+x)^\alpha$, il faut que le nombre $\alpha$ soit
+une constante indépendante de $x$.
+% \end{Rmq}
+
+
+
+
+\newpage
+
+
+
+\subsection{Application des développements limités}
+
+\begin{Def}\textbf{Développement asymptotique}
+
+Un développement asymptotique est similaire à un développement limité, mais \(x\) peut tendre vers \(+\infty\) ou \(-\infty\), et il peut y avoir des termes non polynomiaux comme \(\frac{1}{x^p}\). En pratique, on procède comme pour les DL.
+\end{Def}
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[2]{Précision}
+
+\begin{enumerate}
+    \item Développement asymptotique à la précision de \(o\left(\frac{1}{n^2}\right)\) de \(\left(1 + \frac{1}{n}\right)^n\).
+    \item Développement asymptotique de \(x \mapsto \frac{1}{1 + x}\) en \(+\infty\) à la précision de \(o(x^{-3})\).
+\end{enumerate}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[2]{Limite de suite}
+
+Soit \(x \in \mathbb{R}\), trouvons la limite de \((u_n)\) où pour tout \(n \in \mathbb{N}^*\), \(u_n = \left(1 + \frac{x}{n}\right)^n\).
+
+
+
+
+
+
+\begin{Meth}\textbf{Comment trouver un équivalent ?}
+
+La fonction \(f\) est équivalente à son premier terme non nul dans son DL. 
+Si \(f(x) = a \sum_{k=p}^{n} a_k (x - a)^k + o\left((x - a)^n\right)\) avec \(a_p \neq 0\), alors \(f(x) \sim a_p (x - a)^p\).
+\end{Meth}
+
+
+
+\begin{Meth}\textbf{Comment trouver une limite ?}
+
+La fonction \(f\) est équivalente à son premier terme non nul dans son DL. La fonction \(f\) a la même limite en \(a\) qu'un équivalent trouvé grâce à la méthode précédente.
+
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[1]{Nouvelle limite}
+
+Quelle est la limite de \(\frac{\sin(x) - x}{x^3}\) en 0 ?
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\begin{Meth}\textbf{Comment étudier la courbe d'une fonction grâce à un DL}
+
+Si \(f\) a un DL(p) en \(a\) : \(f(x) = f(a) + f'(a)(x - a) + a_p (x - a)^p + o\left((x - a)^p\right)\) avec \(a_p \neq 0\) et \(p \geq 2\).
+
+Au voisinage de \(a\), \(f(x) - \left(f(a) + f'(a)(x - a)\right)\) est du même signe que \(a_p(x - a)^p\). On connaît donc la position de la fonction par rapport à sa tangente en \(a\).
+
+Si jamais \(f'(a) = 0\), on a un point critique, et suivant la parité de \(p\) et du signe de \(a_p\), on peut avoir un maximum local, un minimum local, ou un point d'inflexion.
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[2]{Allure}
+
+Posons \( f : x \mapsto 1 + 2x - 5\sqrt{1 + x^3 + x^4} \). Tracer l'allure de \( f \) au voisinage de $0$.
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\begin{Def}\textbf{Asymptote}
+
+On dit que \( x \mapsto ax + b \) est une asymptote de \( f \) en \( +\infty \) si \( f(x) - (ax + b) \to 0 \) lorsque \( x \to +\infty \) (idem en \( -\infty \)).
+\end{Def}
+
+% \begin{Meth}
+\textbf{Comment trouver l'asymptote de \( f \) en \( +\infty \) ?}
+
+\begin{enumerate}
+    \item Trouver un développement asymptotique de \( f \) de la forme \( f(x) = \alpha x + \beta + \gamma x^{-p} + o(x^{-p}) \) avec \( p > 0 \).
+    \item Alors \( x \mapsto \alpha x + \beta \) est une asymptote de \( f \) en \( +\infty \).
+    \item Si \( \gamma \neq 0 \), le signe de \( \gamma \) permet de connaître la position de \( f \) par rapport à son asymptote.
+\end{enumerate}
+% \end{Meth}
+
+% \begin{Rmq} 
+Si \( f(x) \to \pm\infty \) lorsque \( x \to a \) avec \( a \in \mathbb{R} \), alors \( x = a \) est une asymptote verticale de \( f \).
+% \end{Rmq}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[3]{Asymptote et position relative}
+
+Montrer que \( f : x \mapsto \frac{x^c}{x + 1} \) admet une asymptote en \( +\infty \) et déterminer la position de \( f \) par rapport à cette asymptote.
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\begin{Meth}
+\textbf{Comment déterminer le développement limité d'une fonction réciproque ?}
+
+Soit \( f : I \to J \) bijective.
+\begin{enumerate}
+    \item Justifier avec la formule de Taylor-Young que \( f^{-1} \) admet un DL\( n \) en \( a \) : \( f^{-1}(x) = \sum_{k=0}^{n} a_k (x-a)^k + o((x-a)^n) \).
+    \item Si \( a = 0 \) et \( f \) est impaire, alors \( f^{-1} \) est aussi impaire et donc \( a_{2k} = 0 \) pour tout \( k \).
+    \item Écrire le développement limité de \( f \).
+    \item Par composition, écrire le développement limité de \( f \circ f^{-1} = \text{Id} \). Conclure par unicité des coefficients.
+\end{enumerate}
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+\exo[3]{Bijection}
+
+Montrer que \( \sinh \) est une bijection de \( \mathbb{R} \) vers \( \mathbb{R} \) et trouver le DL\( 3(0) \) de \( \sinh^{-1} \).
+
+ Calculer \( (\sinh^{-1})^{(k)}(0) \) pour \( k \in \{0, 1, 2, 3\} \).
+
+
+ \vspace{1em}
+ \hrule
+ \vspace{1em}
+
+
+\begin{Meth}
+\textbf{Comment déterminer un développement assymptotique d'une suite définie par récurrence ou implicitement ?}
+
+On effectue un développement asymptotique (DA) à un très petit ordre (avec une limite, un équivalent, un encadrement), puis on réinjecte ce DA de façon à en obtenir un plus précis, puis on recommence.
+
+\end{Meth}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+        
+        \newpage
+
+\exo [3]{Suites}
+
+Soit \( u_0 = 0 \) et \( u_{n+1} = \sqrt{u_n + n^2} \), montrer que \( u_n \in [n-1 ; n] \), puis trouver un DA à la précision \( o\left(\frac{1}{n}\right) \).
+
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo [3]{Suite et valeur approchée}
+
+\begin{enumerate}
+    \item Montrer que pour \( n \in \mathbb{N} \), l'équation \( x^3 + nx = 1 \) admet une unique solution sur \( \mathbb{R} \), notée \( x_n \).
+    \item Montrer que pour tout \( n \in \mathbb{N}^* \), \( 0 \leq x_n \leq \frac{1}{n} \). En déduire la limite de \( (x_n)_{n \in \mathbb{N}} \) puis que \( x_n \sim \frac{1}{n} \) lorsque \( n \to +\infty \).
+    \item Montrer que \( x_n = \frac{1}{n} - \frac{1}{n^4} + o\left(\frac{1}{n^4}\right) \).
+\end{enumerate}
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\section{Exercices}
+\exo[2]{Somme et produit de DLs}
+
+
+Calculer les développements limités suivants :
+$$\begin{array}{lcl}
+\displaystyle \mathbf 1.\ \frac{1}{1-x}-e^x\textrm{ à l'ordre 3 en 0}&&\displaystyle \mathbf 2.\ \sqrt{1-x}+\sqrt{1+x}\textrm{ à l'ordre 4 en 0}\\
+\displaystyle \mathbf 3.\ \sin x\cos(2x)\textrm{ à l'ordre 6 en 0}&&\displaystyle \mathbf 4.\ \cos(x)\ln(1+x)\textrm{ à l'ordre 4 en 0}\\
+\displaystyle \mathbf 5.\ (x^3+1)\sqrt{1-x}\textrm{ à l'ordre 3 en 0}&&\displaystyle \mathbf 6.\ \big(\ln(1+x)\big)^2\textrm{ à l'ordre 4 en 0}
+\end{array}$$
+
+
+% Exercice 564
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Quotient de DLs}
+
+
+Déterminer les développements limités des fonctions suivantes :
+$$\begin{array}{lcl}
+\displaystyle \mathbf 1.\ \frac{1}{1+x+x^2}\textrm{ à l'ordre $4$ en $0$}&&\displaystyle \mathbf 2.\ \tan(x)\textrm{ à l'ordre $5$ en $0$}\\
+\displaystyle \mathbf 3.\ \frac{\sin x-1}{\cos x+1}\textrm{ à l'ordre $2$ en $0$}&&\displaystyle \mathbf 4.\ \frac{\ln(1+x)}{\sin x}\textrm{ à l'ordre $3$ en $0$}.
+\end{array}$$
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+% Exercice 563
+
+\exo[3]{Composition de DLs}
+
+Calculer les développements limités suivants :
+$$\begin{array}{lcl}
+\displaystyle \mathbf 1.\ \ln\left(\frac{\sin x}{x}\right)\textrm{ à l'ordre $4$ en $0$}&&
+\displaystyle \mathbf 2.\ \exp(\sin x)\textrm{ à l'ordre $4$ en $0$}\\
+\displaystyle \mathbf 3.\ (\cos x)^{\sin x}\textrm{ à l'ordre $5$ en $0$}&&
+\displaystyle \mathbf 4.\ x\big(\cosh x\big)^{\frac 1x}\textrm{ à l'ordre $4$ en $0$}.
+\end{array}$$
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+% Exercice 807
+
+
+\exo[3]{Intégration de DLs}
+
+Calculer les développements limités suivants :
+$$\begin{array}{lcl}
+\displaystyle \mathbf 1.\ \arccos x\textrm{ à l'ordre $5$ en $0$}&&
+\displaystyle \mathbf 2.\ \int_0^x e^{t^2}dt\textrm{ à l'ordre $5$ en $0$}.
+\end{array}
+$$
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+% Exercice 565
+\exo[2]{DLs pas en 0!}
+
+Calculer les développements limités suivants :
+$$\begin{array}{lcl}
+\mathbf 1. \frac 1x\textrm{ à l'ordre 3 en }2&&\displaystyle \mathbf 2. \ln(x)\textrm{ à l'ordre 3 en }2\\
+\displaystyle \mathbf 3. e^x\textrm{ à l'ordre 3 en }1&&\displaystyle \mathbf 4. \cos(x)\textrm{ à l'ordre 3 en }\frac{\pi}3\\
+\displaystyle \mathbf 5. \sqrt x\textrm{ à l'ordre 3 en 2}
+\end{array}$$
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+% Exercice 566
+
+\exo[3]{Ordre le plus grand possible}
+
+Déterminer $a$ et $b$ pour que la partie principale du développement limité en $0$ de la fonction
+$\cos x-\frac{1+ax^2}{1+bx^2}$ soit de valuation la plus grande possible.\\
+
+
+% Exercice 806
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{DL en l'infini}
+
+Calculer les développements limités suivants :
+$$\begin{array}{lcl}
+\mathbf 1. \frac{\sqrt{x+2}}{\sqrt x}\textrm{ à l'ordre 3 en }+\infty&&
+\displaystyle \mathbf 2. \ln\left(x+\sqrt {1+x^2}\right)-\ln x\textrm{ à l'ordre $4$ en }+\infty
+\end{array}$$
+
+
+% Exercice 567
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Astucieux!}
+
+Calculer, à l'ordre 100, le développement limité en 0 de $\ln\left(\sum_{k=0}^{99}\frac{x^k}{k!}\right)$.\\
+
+
+% Exercice 2371
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo [3]{Un DL par équation différentielle et unicité}
+
+Soit $f$ la fonction définie sur $]-1,1[$ par $f(x)=\frac{\arcsin(x)}{\sqrt{1-x^2}}$.
+\begin{enumerate}
+ \item Déterminer la fonction $a:]-1,1[\to\mathbb R$ telle que, pour tout $x\in]-1,1[$, $f'(x)+a(x)f(x)=\frac{1}{1-x^2}$.
+ \item Déterminer un développement limité à l'ordre 4 en $0$ de $a$.
+ \item En déduire un développement limité à l'ordre 5 en $0$ de $f$.
+\end{enumerate}
+
+
+% Exercice 570
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[2]{Limites de fonctions}
+
+Déterminer les limites des fonctions suivantes :
+$$\begin{array}{lrl}
+\displaystyle \mathbf 1.\ \frac{\sin x-x}{x^3}\textrm{ en }0;&&
+\displaystyle \mathbf 2.\ \frac{1+\ln(1+x)-e^x}{1-\cos x}\textrm{ en }0;\\
+\displaystyle \mathbf 3.\ \frac{\ln(1+x)-\sin(x)}{x^2}\textrm{ en }0;&&
+\displaystyle \mathbf 4.\ \frac{\exp(x^2)\cos(2x)-1}{\sin(x^2)-x^2}\textrm{ en }0;\\
+\displaystyle \mathbf 5.\ \frac{2x}{\ln\left(\frac{1+x}{1-x}\right)}\textrm{ en }0.\\
+\end{array}$$
+
+
+% Exercice 3477
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Limites de fonctions}
+
+$$\begin{array}{lrl}
+\displaystyle \mathbf 1.\ \left(\frac{a^x+b^x}{2}\right)^{1/x}\textrm{ en }0;&&
+\displaystyle \mathbf 2.\ \frac{\exp(\sin x)-\exp(\tan x)}{\sin x-\tan x}\textrm{ en }0;\\
+\displaystyle \mathbf 3.\ \frac{x^{x^x}\ln x}{x^x-1}\textrm{ en }0^+.\\
+\end{array}$$
+
+
+% Exercice 2294
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Limites à paramètres}
+
+Déterminer $a\in\mathbb R$ tel que la fonction $x\mapsto \frac{e^x+e^{ax}-2}{x^2}$ admette une limite finie en $0$. Déterminer alors la limite.
+
+
+% Exercice 571
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[2]{\'Etude locale d'une courbe}
+
+
+Soit $f$ la fonction définie sur $\R$ par $\displaystyle{ f(x)=\frac{1}{1+e^x}.}$ 
+\begin{enumerate}
+\item Donner un développement limité de $f$ à l'ordre $3$ en zéro.
+\item En déduire que la courbe représentative de $f$ admet une tangente au point d'abscisse $0$, dont on précisera l'équation.
+\item Prouver que la courbe traverse la tangente en $0$. Un tel point est appelé point d'inflexion.\\
+\end{enumerate}
+
+
+% Exercice 572
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[2]{Position relative d'une courbe et de sa tangente}
+
+Soit $f$ la fonction définie sur $\mathbb R$ par $f(x)=\ln(x^2+2x+2)$.
+Donner l'équation de la tangente à la courbe représentative de $f$ au point d'abscisse 0 et étudier 
+la position relative de la courbe et de la tangente au voisinage de ce point.
+
+
+% Exercice 573
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+        
+\newpage
+
+
+\exo[3]{Branches infinies}
+
+A l'aide des développements limités, déterminer les asymptotes éventuelles et la position relative par rapport aux asymptotes de la courbe représentative de la fonction :
+$$f(x)=\sqrt{x^2+1}+\sqrt{x^2-1}.$$
+
+
+
+% Exercice 574
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Asymptotes}
+
+Prouver qu'au voisinage de $+\infty$, les courbes représentatives des fonctions suivantes 
+admettent une asymptote dont on donnera l'équation. On précisera aussi la position de la courbe par rapport à son asymptote.
+$$\begin{array}{lcl}
+\displaystyle \mathbf  1.\ f(x)=\frac{x\cosh(x)-\sinh(x)}{\cosh x-1}&&\displaystyle \mathbf 2.\ g(x)=x^2\ln\left(\frac{x+1}x\right)\\
+\displaystyle \mathbf 3.\ h(x)=\frac{x+1}{1+\exp(1/x)}&&\displaystyle\mathbf 4.\ u(x)=x\exp\left(\frac{2x}{x^2-1}\right)\\
+\end{array}$$
+
+
+% Exercice 575
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Comparaison de fonctions}
+
+On pose $f(x)=1/(1+x)$, $g(x)=e^{-x}$, $h(x)=\sqrt{1-2\sin x}$, $k(x)=\cos(\sqrt{2x})$.
+Préciser les positions relatives au voisinage de $0$ des courbes représentatives $C_f$, $C_g$, $C_h$, $C_k$.
+
+
+
+% Exercice 576
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+
+\exo[3]{Dérivée $n$-ième en 0}
+Soit $f:x\mapsto \frac{x^4}{1+x^6}$. Déterminer $f^{(n)}(0)$.
+
+
+
+\vspace{1em}
+        \hrule
+        \vspace{1em}
+
+

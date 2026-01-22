@@ -1,0 +1,204 @@
+
+\section{Continuité}
+
+
+On définit une fonction de cette manière :
+\[f(x)=
+\left\{
+\begin{array}{cc}
+(x-2)^2 &\text{ si } x<5\\
+a&\text{ si } x=5\\
+(2x-b)^2&\text{ si } x>5 \\
+\end{array}
+\right.
+\]
+
+
+\begin{enumerate}
+     \item 
+        Déterminer $a$ et $b$ pour que $f$ soit continue sur $\mathbb{R}$.\\
+        
+\vspace{1em}
+
+        \textbf{Correction:}\\
+
+        $ \underset{{x\overset{x<5}{\to} 5}}{\lim}((x-2)^2)=9$\\
+        Pour que $f$ soit continue en $5$ à  gauche, il faut et il suffit que $a=9$.\\
+        $ \underset{{x\overset{x>5}{\to} 5}}{\lim}((2x-b)^2)=(10-b)^2$\\
+        Pour que $f$ soit continue en $5$ à  droite, il faut et il suffit que $(10-b)^2=9$.\\
+        On obtient $b=7$ ou $b=13$.
+        
+        La fonction $f$ est prolongeable par continuité en $0$ en une focntion $\tilde{f}$ avec $\tilde{f}(5)=9$.
+        
+    \item La fonction $f$ est-elle dérivable au point $x=5$ ?\\
+    
+    Limite du taux d'accroissement à gauche:\\
+     $ \underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(x-2)^2-9}{x-5}\right)= \underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(x+1)(x-5)}{x-5}\right)=6$\\
+     
+     Limite du taux d'accroissement à droite:\\
+     $ \underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(2x-b)^2-9}{x-5}\right)= \underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(2x-b-3)(2x-b+3)}{x-5}\right)$\\
+     
+     Si $b=7$, $\underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(2x-7-3)(2x-7+3)}{x-5}\right)=2\times 6=12$\\
+          Si $b=13$, $\underset{{x\overset{x<5}{\to} 5}}{\lim}\left(\dfrac{(2x-13-3)(2x-13+3)}{x-5}\right)=-6\times 2=-12$\\
+          
+          
+          $\tilde{f}$ n'est pas dérivable en $5$, comme les limites du taux d'accroisssement à gauche et à droite ne sont pas égales.\\
+\end{enumerate}
+
+
+\noindent\textbf{Exercice  : 2 points}\\
+
+
+
+On considère les fonctions $f$ et $g$ définies par les expresssions ci-dessous:\\
+$f(x)=\dfrac{1}{x-4}$ et $g(x)=\ln(2x-1)$
+
+\begin{enumerate}
+     \item 
+        Déterminer les ensembles de définition de $f$ et $g$.\\
+        
+         La fonction $f$ est définie sur $\mathbb{R}- \{4\}$.  La fonction $f$ est définie sur $\left ] \dfrac{1}{2};+\infty\right[$
+    \item Déterminer la fonction $f\circ g$ et son ensemble de définition.\\
+    
+    La fonction $f\circ g$ est définie par $f\circ g(x) =\dfrac{1}{\ln(2x-1)-4}$ sur l'ensemble des réels tels que $\ln(2x-1)-4\neq0$ et $2x-1\geq 0$.
+\end{enumerate}
+
+\section{Continuité, 2eme version}
+
+
+
+On définit une fonction de cette manière :
+\[f(x)=
+\left\{
+\begin{array}{cc}
+\dfrac{x^2-4}{x-2} &\text{ si } x<2\\
+
+x+2&\text{ si } x>2 \\
+\end{array}
+\right.
+\]
+
+
+\begin{enumerate}
+     \item 
+        Démontrer que $f$ est continue en $2$.
+        
+       
+        
+       % La fonction $f$ est prolongeable par continuité en $0$ en une focntion $\tilde{f}$ avec $\tilde{f}(5)=9$.
+        
+    \item La fonction $f$ est-elle dérivable au point $x=2$ ?\\
+    
+ 
+\end{enumerate}
+
+
+\noindent\textbf{Exercice  : 2 points}\\
+
+
+
+On considère les fonctions $f$ et $g$ définies par les expresssions ci-dessous:\\
+$f(x)=\ln(3x-3)$ et $g(x)=\dfrac{1}{2x+5}$
+
+\begin{enumerate}
+     \item 
+        Déterminer les ensembles de définition de $f$ et $g$.\\
+        
+ 
+    \item Déterminer la fonction $f\circ g$ et son ensemble de définition.\\
+    
+\end{enumerate}
+
+\section{Equations Différentielles}
+
+
+Résoudre les équations différentielles suivantes
+
+
+\begin{enumerate}
+    \item 
+    $y''+y=0$.
+    \item
+    $z''-6z+9=0$.
+    \item
+    $3y''-4y'=0$.
+\end{enumerate}
+
+\section{Intégrale double}
+
+
+Calculer l'intégrale suivante après avoir tracé le domaine
+
+\begin{equation}
+I = \int\int_D e^{-x-y} \,dx\,dy, \quad \text{où } D = \{(x, y) \in \mathbb{R}^2 \mid 0 \leq x \leq 1, \ 1 \leq y \leq x+3\}.
+\end{equation}
+
+
+
+
+%\section*{Correction}
+%1 point tracé
+%1 point ordre d'intégration
+%1 point primitive
+% 2 points fin de calcul
+%\begin{center}
+%\begin{tikzpicture}[scale=1.5]
+%    % Axes
+%    \draw[->] (-0.5,0) -- (2,0) node[right] {$x$};
+%    \draw[->] (0,-0.5) -- (0,4.5) node[above] {$y$};
+%    
+%    % Domaine
+%    \fill[blue!20, opacity=0.5] (0,1) -- (1,4) -- (1,1) -- cycle;
+%    
+%    % Bords du domaine
+%    \draw[thick, blue] (0,1) -- (1,4);
+%    \draw[thick, blue] (1,1) -- (1,4);
+%    \draw[thick, blue] (0,1) -- (1,1);
+%    
+%    % Labels
+%    \node[left] at (0,1) {1};
+%    \node[below] at (1,0) {1};
+%    %\node[right] at (1,4) {$(1,4)$};
+%    
+%    % Equation de la droite
+%    \draw[dashed] (0,3) -- (1,4);
+%    \node[right] at (0.5,3.5) {\small $y = x+3$};
+%\end{tikzpicture}
+%\end{center}
+
+%\section*{Calcul de l'intégrale}
+%
+%L'intégrale double est donnée par :
+%\begin{align*}
+%I &= \int_0^1 \int_1^{x+3} e^{-x-y} \, dy \, dx.
+%\end{align*}
+%
+%Calculons l'intégrale intérieure :
+%\begin{align*}
+%\int_1^{x+3} e^{-x-y} \, dy &= e^{-x} \int_1^{x+3} e^{-y} \, dy \\
+%&= e^{-x} \left[ -e^{-y} \right]_1^{x+3} \\
+%&= e^{-x} \left( -e^{-(x+3)} + e^{-1} \right) \\
+%&= e^{-x} e^{-1} - e^{-x} e^{-(x+3)} \\
+%&= e^{-x-1} - e^{-2x-3}.
+%\end{align*}
+%
+%Intégrons maintenant par rapport à \( x \) :
+%\begin{align*}
+%I &= \int_0^1 \left( e^{-x-1} - e^{-2x-3} \right) dx \\
+%&= e^{-1} \int_0^1 e^{-x} \,dx - e^{-3} \int_0^1 e^{-2x} \,dx.
+%\end{align*}
+%
+%Les intégrales élémentaires donnent :
+%\begin{align*}
+%\int_0^1 e^{-x} \,dx &= \left[ -e^{-x} \right]_0^1 = 1 - e^{-1}, \\
+%\int_0^1 e^{-2x} \,dx &= \left[ -\frac{e^{-2x}}{2} \right]_0^1 = \frac{1 - e^{-2}}{2}.
+%\end{align*}
+%
+%Ainsi, on obtient :
+%\begin{align*}
+%I &= e^{-1} (1 - e^{-1}) - e^{-3} \frac{1 - e^{-2}}{2} \\
+%&= e^{-1} - e^{-2} - \frac{e^{-3} (1 - e^{-2})}{2} \\
+%&= e^{-1} - e^{-2} - \frac{e^{-3} - e^{-5}}{2}.
+%\end{align*}
+
+\section{}

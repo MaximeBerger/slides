@@ -1,0 +1,433 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Définitions, degré et opérations}
+
+\begin{Def}\textbf{Polynôme}
+    \vspace{1em}
+
+    On appelle \textbf{polynôme} (à une indéterminée et à coefficients dans $\mathbb{R}$ ou $\mathbb{C}$) toute suite à support fini $(a_k)$. On note indifféremment un polynôme $P$ par :
+    $$P=P(X)=\sum_{k=0}^n a_kX^k$$
+\end{Def}
+
+On utilise des $X$ plutôt que des $x$ pour différencier le polynôme en tant qu'animal algébrique à part entière de la fonction polynômiale que l'on regarde à travers ses images. Dans certains cas, sur les corps finis surtout, une même fonction polynômiale peut correspondre à plusieurs polynômes. On ne va pas s'appesantir sur des considérations algébriques de ce genre et à notre niveau confondre ces notations n'est pas très grave.
+
+\begin{Def}\textbf{Degré}
+    \vspace{1em}
+
+Le \textbf{degré} de $P$, noté $\deg P$ est la plus grande puissance de $X$ dans $P$.
+Si $P(X)=\sum_{k=0}^n a_kX^k$, avec $a_n \neq 0$, alors $\deg P=n$.
+\end{Def}
+
+On note $\mathbb{R[X]}$ l'ensemble des polynômes à coefficients réels et  $\mathbb{C[X]}$ celui des polynômes à coefficients complexes.
+
+Le polynôme nul est le polynôme dont tous les coefficients sont nuls, le degré du polynôme nul est $- \infty$ par convention.
+
+Deux polynômes sont égaux s'ils ont même coefficients, en particulier, ils ont même degré.
+
+\begin{Def}\textbf{Polynôme dérivé}
+    \vspace{1em}
+
+On définit le \textbf{polynôme dérivé} $P'$ de $P$ par :
+$$P'(X)=a_1+2a_2X+...+na_nX^{n-1}=\sum_{k=1}^n ka_kX^{k-1}$$
+\end{Def}
+
+\begin{Prop}\textbf{Propriétés du polynôme dérivé}
+    \vspace{1em}
+
+Pour les polynômes $P$ et $Q$, on a les propriétés suivantes :
+\begin{itemize}
+\item Si $\deg P=n$, alors $\deg P'=n-1$.
+\item La somme de deux polynômes $P$ et $Q$ est un polynôme $P+Q$ et on a :
+$$\deg (P+Q)\leq \max (\deg P, \deg Q)$$
+\item Le produit de deux polynômes $P$ et $Q$ est un polynôme $PQ$ et on a :
+$$\deg (PQ)=\deg P+ \deg Q$$
+\item Le produit d'un polynôme $P$ par un nombre $\lambda$ est un polynôme $\lambda P$ et on a :
+$$\deg (\lambda P)=\deg P$$
+\item La composée de deux polynômes $P$ et $Q$ non nuls est un polynôme $P \circ Q$ et on a :
+$$\deg (P \circ Q)=\deg (P) \times \deg(Q)$$
+\end{itemize}
+\end{Prop}
+
+\exo[1]{Exemple 1 :}
+
+On donne 
+$$P(X)=2X^2-X+1,\qquad  Q(X)=X^3-X^2+2X+1,\qquad R(X)=-2X^2+3X$$
+Donner le degré de $P+Q$, $PQ$, $PR$, $P+R$ et $3P$.
+
+\section{Le second degré}
+
+\begin{Def}\textbf{Discriminant}
+    \vspace{1em}
+
+On s'intéresse aux polynômes $P(X)=aX^2+bX+c$ avec $a, b, c$ réels et $a$ non nul.
+
+On appelle \textbf{discriminant} de $P$ la quantité $\Delta=b^2-4ac$.
+\end{Def}
+
+\begin{Prop}\textbf{Forme canonique}
+    \vspace{1em}
+
+La forme canonique de $P$ est : 
+$$aX^2+bX+c=a\Big(X+\frac{b}{2a}\Big)^2-\frac{\Delta}{4a}$$
+\end{Prop}
+
+Il n'est pas nécessaire de connaître par c\oe ur cette formule, mais il faut savoir la retrouver.
+
+\subsection{Racines et factorisation}
+
+\begin{Thm}\textbf{Racines et factorisation du trinôme du second degré}
+    \vspace{1em}
+
+\begin{itemize}
+\item Si $\Delta >0$, 
+
+le polynôme $P$ admet deux racines $x_1=\frac{-b-\sqrt{\Delta}}{2a}$ et $x_2=\frac{-b+\sqrt{\Delta}}{2a}$ et se factorise par :
+$$aX^2+bX+c=a(X-x_1)(X-x_2)$$
+
+\item Si $\Delta <0$, 
+
+le polynôme $P$ admet deux racines $z_1=\frac{-b-i\sqrt{|\Delta|}}{2a}$ et $z_2=\frac{-b+i\sqrt{|\Delta|}}{2a}$ et il n'y a pas de factorisation réelle.
+
+\item Si $\Delta =0$, 
+
+le polynôme $P$ admet une racine $x_0=\frac{-b}{2a}$ et se factorise par :
+$$aX^2+bX+c=a(X-x_0)^2$$
+\end{itemize}
+\end{Thm}
+
+\exo[1]{Exemple 2 :}
+
+Factoriser quand c'est possible les polynômes suivants :
+$$f(X)=3X^2+X-4 \qquad g(X)=X^2-X+\frac{1}{4} \qquad h(X)=X^2+X+1$$
+
+\exo[1]{Application}
+Une pelouse rectangulaire mesurant \(15~\text{m}\) sur \(10~\text{m}\) est entourée d'une allée. L'aire totale de la pelouse et de l'allée est de \(218{,}75~\text{m}^2\).
+
+Calcule la largeur de l'allée.
+
+\newpage
+
+\subsection{Somme et produit}
+
+\begin{Prop}\textbf{Somme et produit}
+    \vspace{1em}
+
+Dans le cas où le polynôme $aX^2+bX+c$ admet deux racines réelles distinctes $x_1$ et $x_2$, on note $P=x_1x_2$ le produit des deux racines et $S=x_1+x_2$ la somme des deux racines. On a :
+$$S=-\frac{b}{a}\qquad P=\frac{c}{a}$$
+
+\vspace{1em}
+Réciproquement, les réels $\alpha$ et $\beta$ vérifiant $\alpha + \beta =S$ et $\alpha \beta =P$ sont solutions de :
+$$X^2-SX+P=0$$
+\end{Prop}
+
+\exo[1]{Exemple 3 :}
+
+Déterminer les réels $\alpha$ et $\beta$ vérifiant :
+$$\begin{cases}
+    \alpha + \beta =1 \\
+    \alpha \beta =2
+\end{cases}$$
+
+\subsection{Le cas complexe}
+
+Les formules explicitant les racines via le discriminant sont toujours vraies dans le cas d'un polynôme de degré 2 à coefficients complexes. La difficulté réside dans le fait de trouver un nombre complexe $a+ib$ dont le carré est égal à $\Delta$.
+
+On est amené à résoudre ce système :
+$$\begin{cases}
+ a^2+b^2=|\Delta | \\
+ a^2-b^2= Re (\Delta) \\
+ 2ab= Im(\Delta)
+\end{cases}
+ $$
+
+
+La dernière équation ne sert qu'à déterminer si $a$ et $b$ sont de même signe ou non.
+
+\exo[2]{Exemple 4 :}
+Résoudre :
+\begin{enumerate}
+    \item $$z^2-(6+i)z+(11+13i)=0$$
+    \item $$2z^2-(7+3i)z+(2+4i)=0$$
+\end{enumerate}
+ 
+\newpage
+
+\section{Racines d'un polynôme}
+
+\subsection{Division euclidienne}
+
+\begin{Thm}\textbf{Division euclidienne des polynômes}
+    \vspace{1em}
+
+Comme pour les nombres entiers, on peut définir une division euclidienne sur l'ensemble des polynômes. Si $P$ et $T$ sont des polynômes avec $T$ non nul, il existe un \textbf{unique} couple de polynômes $(Q,R)$ tel que :
+$$P=TQ+R$$
+Avec $\deg R<\deg T$.
+\end{Thm}
+
+\begin{center}
+\includegraphics[scale=0.8]{images/division.jpg}  
+\end{center}
+
+\exo[2]{Exemple 5 :}
+
+Écrire la division euclidienne de $P$ par $T$ dans les cas suivants :
+\begin{enumerate}
+    \item $P=3X^4+2X^3+X+5, \quad T=X^2+2X+3$
+    \item $P=X^3+X^2+1, \quad T=X-1$
+    \item $P=2X^3-2X^2+X+1, \quad T=X+1$
+\end{enumerate}
+
+\subsection{Factorisation}
+
+\begin{Thm}\textbf{Théorème de factorisation}
+    \vspace{1em}
+
+Pour tout nombre $\alpha$, le reste de la division de $P$ par $X-\alpha$ est $P(\alpha)$.
+
+Si $P(\alpha)=0$, alors $P$ se factorise par $X-\alpha$ et $\alpha$ est appelé racine de $P$.
+\end{Thm}
+
+\begin{Def}\textbf{Multiplicité}
+    \vspace{1em}
+
+On dit qu'une racine $\alpha$ est de \textbf{multiplicité} $m$ pour $P$ si $(X-\alpha)^m$ divise $P$. Si $m\geq 2$, alors $\alpha$ est aussi racine de $P'$.
+\end{Def}
+
+\exo[2]{Exemple 6 :}
+Trouver toutes les racines et leur multiplicité pour les polynômes suivants : 
+$$P=X^3-5X^2+7X-3, \qquad Q=9X^3-6X^2-20X-8$$
+$$T=X^3-X^2-X-2, \qquad U=3X^4-4X^3+1$$
+
+\subsection{Formule de Taylor}
+
+\begin{Thm}\textbf{Formule de Taylor pour les polynômes}
+    \vspace{1em}
+
+Si $P$ est un polynôme de degré $n$, alors pour tout nombre réel $a$ :
+\begin{align*}
+P(X)&=P(a)+\frac{P'(a)}{1!}(X-a)+...+\frac{P^{(n)}(a)}{n!}(X-a)^n\\
+&=\sum_{k=0}^n \frac{P^{(k)}(a)}{k!}(X-a)^k
+\end{align*}
+\end{Thm}
+
+En particulier, en prenant $a=0$, on obtient :
+\begin{align*}
+P(X)&=P(0)+\frac{P'(0)}{1!}X+...+\frac{P^{(n)}(0)}{n!}X^n\\
+&=\sum_{k=0}^n \frac{P^{(k)}(0)}{k!}X^k
+\end{align*}
+
+Ce premier contact avec une formule de Taylor peut sembler bizarre, un polynôme c'est une fonction particulièrement simple à exprimer, pourquoi s'embêter avec tout ça ? Et bien, l'idée va être d'approcher au moins localement toutes les fonctions par des polynômes… On en reparlera plus tard !
+
+\subsection{Polynôme d'interpolation de Lagrange}
+
+Lorsque l'on procède à une série de mesure, il est parfois agréable de trouver une fonction qui passe par tous ces points. La première approche que l'on peut faire est avec un polynôme d'interpolation de Lagrange. Pour un ensemble de coordonnées, on récupère l'unique polynôme unitaire de degré minimal passant par tous ces points.
+
+\begin{Def}\textbf{Polynôme de Lagrange}
+    \vspace{1em}
+
+Soit $n+1$ nombres réels $a_0, ..., a_n$ deux à deux distincts. 
+
+Pour tout $i$ entier entre 0 et $n$, on définit le \textbf{polynôme de Lagrange} $L_i$ par : 
+$$L_i(X)=\frac{\prod_{j\neq i} (X-a_j)}{\prod_{j\neq i} (a_i-a_j)}$$
+\end{Def}
+
+\begin{Prop}\textbf{Polynôme de Lagrange}
+    \vspace{1em}
+
+$L_i$ est l'unique polynôme vérifiant simultanément les trois conditions suivantes : 
+\begin{enumerate}
+    \item $\deg L_i=n$
+    \item $L_i(a_i)=1$
+    \item $L_i(a_j)=0 $ si $i \neq j$
+\end{enumerate}
+\end{Prop}
+
+\vspace{2em}
+
+\textbf{Polynôme d'interpolation de Lagrange}
+
+\vspace{1em}
+
+Soit $n+1$ nombres réels $b_0, ..., b_n$, alors le polynôme $P$ défini par :
+$$P(X)=\sum_{i=0}^n b_i L_i(X)$$
+Est l'unique polynôme tel que :
+\begin{enumerate}
+    \item $\deg P =n$
+    \item $P(a_i)=b_i$ pour tout $i$
+\end{enumerate}
+
+
+\exo[2]{Exemple 7 :}
+
+Trouver le polynôme $P$ de plus petit degré tel que : 
+$\begin{cases}
+    P(1)=3 \\
+    P(-1)=2 \\
+    P(2)=-1
+\end{cases}$
+
+\section{Fractions rationnelles}
+
+\begin{Def}\textbf{Fraction rationnelle}
+    \vspace{1em}
+
+Une \textbf{fraction rationnelle} est un quotient de polynômes. 
+\end{Def}
+D'un point de vue algébrique, les fractions rationnelles sont plus agréables à manipuler car tous ses éléments sont inversibles (on parle de corps des fractions rationnelles). Ce qui nous intéresse ici, c'est surtout la décomposition en éléments simples.
+
+
+Soit $\frac{A}{B}$ une fraction rationnelle. 
+\begin{itemize}
+\item Si $\alpha$ est racine de $A$ mais pas de $B$, on dit que $\alpha$ est une racine de $\frac{A}{B}$ et l'ordre de $\alpha$ dans $\frac{A}{B}$ est la multiplicité de $\alpha$ dans $A$.
+
+\item Si $\alpha$ est racine de $B$ mais pas de $A$, on dit que $\alpha$ est un pôle de $\frac{A}{B}$ et l'ordre de $\alpha$ dans $\frac{A}{B}$ est la multiplicité de $\alpha$ dans $B$.
+\end{itemize}
+
+On pose $\deg \frac{A}{B}= \deg A- \deg B$
+
+
+\subsection{Partie entière}
+
+\begin{Thm}\textbf{Partie entière d'une fraction rationnelle}
+    \vspace{1em}
+
+Soit $F$ une fraction rationnelle, il existe un unique polynôme $E$ tel que :
+$$\deg (F-E)<0$$
+$E$ est appelé \textbf{partie entière} de $F$.
+\end{Thm}
+
+D'un point de vue pratique, on s'en sort avec la division euclidienne.
+
+\exo[2]{Exemple 8 :}
+Trouver la partie entière des fractions rationnelles suivantes : 
+$$F(X)=\frac{X^3+1}{X^2+X-2}, \qquad G(X)=\frac{X^5+3X^2+1}{X^3-5X^2+7X-3}$$
+
+\subsection{Décomposition en éléments simples}
+
+Très utile, particulièrement pour le calcul intégral...
+
+
+Soient $P$ et $Q$ deux polynômes réels tels que $\deg (P)< \deg (Q)$. C'est toujours possible quitte à soustraire la partie entière.
+$$Q(X)=\prod_{i=1}^n (X-a_i)^{m_i} \times \prod_{j=1}^k (X^2+\alpha_jX+\beta_j)^{p_j}$$
+avec $\alpha_j^2-4 \beta_j<0$ pour tout $j$.
+
+Alors il existe une famille unique de réels $*$ tels que : 
+$$\frac{P}{Q}=\sum_{i=1}^n \bigg(\frac{*}{(X-a_i)^{m_i}}+\frac{*}{(X-a_i)^{m_i-1}}+...+\frac{*}{X-a_i}+\sum_{j=1}^k \frac{*X+*}{(X^2+ \alpha_j X+ \beta_j)^{p_j}}\bigg)$$
+
+
+\exo[3]{Exemple 9 :}
+
+Décomposer en éléments simples :
+$$F(X)=\frac{X^3+1}{X^2+X-2}, \qquad G(X)=\frac{X^5+3X^2+1}{X^3-5X^2+7X-3}, \qquad H(X)=\frac{1}{(X+1)(X+2)^2}$$
+
+\newpage 
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Équation}
+
+On considère l'équation :
+$$x^4-x^3-49x^2-71x+120=0$$
+Montrer que 1 et -3 sont solutions de cette équation. En déduire toutes les solutions de l'équation.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Polynôme}
+
+Soient $a, b$ des réels et $P(X)=X^4+2aX^3+bX^2+2X+1$. Pour quelles valeurs de $a$ et $b$, le polynôme $P$ est-il le carré d'un polynôme de $\mathbb{R}[X]$ ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Divisibilité}
+
+A quelles conditions sur $a, b, c \in \mathbb{R}$, le polynôme $X^4+aX^2+bX+c$ est-il divisible par $X^2+X+1$ ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Équation}
+
+Résoudre dans $\mathbb{R}[X]$ :
+\begin{enumerate}
+    \item $P(X^2)=(X^2+1)P(X)$
+    \item $P'(X)+XP(X)=X^2+1$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Division Euclidienne}
+
+Soit $n \geq 2$. On considère les polynômes $A=X^n+2X-2$ et $B=(X-1)^2$.
+\begin{enumerate}
+    \item Quel est le degré du reste $R$ de la division de $A$ par $B$. Déterminer $R$. On pourra évaluer $A$ et $A'$ au point 1.
+    \item En effectuant le changement de variable $y=x-1$, déterminer le quotient de la division euclidienne de $A$ par $B$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Une fonction de polynômes}
+
+On définit l'application $\phi$ de l'ensemble des polynômes de degré inférieur ou égal à 3 vers l'ensemble des polynômes comme suit :
+$$\phi (P)(X)=XP(X+2)-P(X^2)$$
+On considère un polynôme $P(X)=aX^3+bX^2+cX+d$. Déterminer $\phi(P)$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Division Euclidienne}
+
+Déterminer le reste de la division euclidienne de $A=X^n$ par $B=X^2-5X+6$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Suite de polynômes}
+
+On considère la suite de polynômes définie par : 
+$$\begin{cases}
+    P_0=1 \\
+    P_1=-2X \\
+    \forall n \in \mathbb{N}, \quad P_{n+2}=-2XP_{n+1}-2(n+1)P_n
+\end{cases}$$
+\begin{enumerate}
+    \item Montrer que pour tout entier $n, P_n$ est un polynôme de degré $n$. Déterminer le coefficient dominant de $P_n$.
+    \item Calculer $P_n(0)$, en déduire le coefficient constant de $P_n$.
+    \item Déterminer une relation entre $P_n(x)$ et $P_n(-x)$ pour tout $x$ réel. \newline 
+    En déduire la parité de $P_n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Polynôme}
+
+Quels sont les polynômes $P$ de $\mathbb{C}[X]$ tel que $P'$ divise $P$ ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Décomposition en éléments simples}
+
+Décomposer en éléments simples sur $\mathbb{R}[X]$ les fractions rationnelles suivantes : 
+$$F(X)=\frac{X^3-5X-6}{X^2-1}$$
+$$G(X)=\frac{5}{(X-2)^2(X^2+1)}$$
+
+\end{document}

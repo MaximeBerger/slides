@@ -1,0 +1,259 @@
+% Classe et options générales
+\documentclass[12pt,a4paper]{report}
+
+% Langue et encodage
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern,textcomp}
+\usepackage[french]{babel}
+
+% Mise en page
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2cm,left=2cm,right=2cm, headheight=50pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{BMC Dijon}
+% \includegraphics[width=4em]{images/logotype estp couleur.png}}
+\fancyhead[R]{\leftmark} % Affiche le nom du chapitre à gauche
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\quad #1}{}}
+
+\cfoot{\thepage}
+
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{orange}\leaders\hrule height \headrulewidth\hfill}}
+
+% Mathématiques et symboles
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
+\usepackage{array,multirow,tabularx}
+\usepackage{enumitem}
+\usepackage{tablists}
+\usepackage{pifont,centernot,eurosym}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{eurosym}
+\usepackage{tabvar}
+
+% Graphiques
+\usepackage{graphicx}
+\usepackage{tikz,pgfplots,tkz-tab}
+\pgfplotsset{compat=1.18}
+
+\usepackage[tikz]{bclogo}
+\usetikzlibrary{angles, quotes, calc, decorations.markings}
+
+\usepackage{pdfpages}
+% Théorèmes
+\usepackage[standard,framed]{ntheorem}
+
+\newcommand{\bclogoboxmaster}[4]{%
+  \theoremprework{%
+    \vspace{1em}
+    \begin{lrbox}{\boitprop}
+
+\begin{minipage}{\dimexpr\textwidth - 4.5em\relax}
+        \vspace{0.5em}
+  }
+  \theorempostwork{%
+        \vspace{.3em}
+      \end{minipage}
+    \end{lrbox}
+    \begin{bclogo}[couleur=#1, arrondi=0.1, ombre=true,
+      couleurOmbre=black!30, logo=#2]{\hspace{1em}\usebox{\boitprop}}
+    \end{bclogo}
+  }
+  \newtheorem{#3}{#4}[section]%
+}
+
+\newcommand{\bclogoboxslave}[4]{%
+  \theoremprework{%
+    \vspace{1em}
+    \begin{lrbox}{\boitprop}
+\begin{minipage}{\dimexpr\textwidth - 4.5em\relax}
+        \vspace{0.5em}
+  }
+  \theorempostwork{%
+        \vspace{.3em}
+      \end{minipage}
+    \end{lrbox}
+    \begin{bclogo}[couleur=#1, arrondi=0.1, ombre=true,
+      couleurOmbre=black!30, logo=#2]{\hspace{1em}\usebox{\boitprop}}
+    \end{bclogo}
+  }
+  \newtheorem{#3}[Thm]{#4}
+}
+
+\newcommand{\bclogoboxnonum}[4]{%
+  \theoremprework{%
+    \vspace{1em}
+    \begin{lrbox}{\boitprop}
+\begin{minipage}{\dimexpr\textwidth - 4.5em\relax}
+        \vspace{0.5em}
+  }
+  \theorempostwork{%
+        \vspace{.3em}
+      \end{minipage}
+    \end{lrbox}
+    \begin{bclogo}[couleur=#1, arrondi=0.1, ombre=true,
+      couleurOmbre=black!30, logo=#2]{\hspace{1em}\usebox{\boitprop}}
+    \end{bclogo}
+  }
+  \newtheorem*{#3}{#4}%
+}
+
+\newtheorem*{Meth}{\underline{M\'ethode}}
+
+%NOTATION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+    \begin{tikzpicture}
+    \node [draw=violet!10,very thick,fill=blue!10,rectangle% , rounded corners
+    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+    \end{tikzpicture}
+ %   \end{center}
+}
+
+%NOTATION
+\theoremprework{\vspace{.5cm} 
+    \begin{lrbox}{\boitprop}
+     \begin{minipage}{.9\textwidth}
+}
+\theorempostwork{
+     \end{minipage}
+    \end{lrbox}
+%        \begin{center}
+    \begin{tikzpicture}
+    \node [draw=pink!10,very thick,fill=blue!10,rectangle% , rounded corners
+    , inner sep=10pt, inner ysep=8pt] (box){\usebox{\boitprop}};
+    \end{tikzpicture}
+ %   \end{center}
+}
+
+% Autres utilitaires
+\usepackage{verbatim,lastpage,afterpage,sectsty,color,colortbl,boites,calc,listings, caption}
+
+% Styles de caption
+% \AtBeginDocument{
+%   \captionsetup[figure]{font=footnotesize,labelsep=period}
+%   \captionsetup[table]{font=footnotesize,labelsep=newline,justification=centering}
+% }
+% Définition de blocs théorèmes avec bclogo
+\newsavebox{\boitprop}
+
+
+\bclogoboxmaster{orange!20}{\bcbook}{Thm}{Théorème}
+\bclogoboxslave{teal!15}{\bcfleur}{Def}{Définition}
+\bclogoboxslave{cyan!15}{\bcetoile}{Prop}{Proposition}
+\bclogoboxnonum{red!10}{\bcfeuvert}{Rmq}{Remarque}
+
+% Environnements personnalisés (exemples, vocabulaire, etc.)
+% Exemple :
+% \newenvironment{Ex}
+% {\vspace{.5cm}\begin{tabular}{c|r}
+%     \arrayrulecolor{black} \textbf{Exemple} &  \begin{minipage}[l]{\textwidth}}{
+% \end{minipage}\end{tabular}\vspace{.2cm}}
+
+% \newenvironment{Ex}{%
+%   \vspace{.5cm}%
+%   \begin{tabularx}{\textwidth}{c|X}
+%     \arrayrulecolor{black} \textbf{Exemple} & 
+% }{%
+%   \\ % pour finir la ligne du tableau
+%   \end{tabularx}%
+%   \vspace{.2cm}%
+% }
+\usepackage[most]{tcolorbox}
+
+\newtcolorbox{Ex}[1][]{
+  colback=white,
+  colframe=black,
+  boxrule=1pt,
+  left=5pt,
+  rounded corners,
+  before skip=10pt,
+  after skip=10pt,
+  title={\textbf{Exemple}},
+  fonttitle=\bfseries,
+  #1
+}
+% \newenvironment{Ex}{
+% \vspace{.5cm}
+% \noindent\textbf{Exemple.}\par
+% \vspace{.3cm}
+% }{\vspace{.3cm}}
+% % Préambule
+% \usepackage{xcolor}
+
+
+% Définition du compteur
+\newcounter{exocounter}
+
+% Logo de difficulté pour les exercices (niveaux numériques 1/2/3)
+\newcommand{\exologo}[1]{%
+  \ifcase#1\relax
+  \or \includegraphics[height=1em]{images/fourmi.png}% 1
+  \or \includegraphics[height=1.2em]{images/abeille.png}% 2
+  \or \includegraphics[height=1.5em]{images/castor.png}% 3
+  \fi
+}
+
+% Commande \exo avec argument optionnel pour le niveau de difficulté
+\newcommand{\exo}[2][]{%
+  \refstepcounter{exocounter}%
+  \vspace{1em}
+  \noindent
+  \textcolor{orange}{\rule{1ex}{1ex}}%
+  \hspace{0.5em}%
+  \textbf{\textcolor{orange}{Exercice \theexocounter}}%
+  \hspace{0.5em}%
+  % Affiche le logo uniquement si un niveau est donné
+  \if\relax\detokenize{#1}\relax\else
+    \exologo{#1}%
+    \hspace{0.5em}%
+  \fi
+  \textbf{#2}%
+  \par\vspace{0.5em}
+}
+\makeatletter
+\@addtoreset{exocounter}{chapter}
+\makeatother
+\renewcommand{\theexocounter}{\thechapter.\arabic{exocounter}}
+
+% Raccourcis mathématiques
+\newcommand{\C}{\mathbb{C}} \newcommand{\R}{\mathbb{R}} \newcommand{\N}{\mathbb{N}} \newcommand{\Z}{\mathbb{Z}} \newcommand{\K}{\mathbb{K}}
+\newcommand{\ds}{\displaystyle} \newcommand{\eps}{\epsilon} \renewcommand{\phi}{\varphi}
+\newcommand{\abs}[1]{\left|#1\right|} \newcommand{\p}[1]{\left(#1\right)} \newcommand{\e}[1]{\left\{#1\right\}}
+
+% Commandes logiques et limites
+\newcommand{\limni}{\ds\lim_{n\ra+\infty}} \newcommand{\limxz}{\ds\lim_{x\ra 0}} \newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\dx}{\, \mathrm{d}x}\newcommand{\dt}{\, \mathrm{d}t}\newcommand{\du}{\, \mathrm{d}u}
+
+% Listings Python (extrait simplifié)
+\lstset{language=Python,basicstyle=\ttfamily,commentstyle=\color{green!50!black},keywordstyle=\color{blue},stringstyle=\color{olive},frame=single,rulecolor=\color{blue},numbers=left,stepnumber=1,numbersep=8pt,showstringspaces=false}
+
+
+
+\usepackage[sf]{titlesec}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\sffamily\normalsize\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering\Huge}
+  {\chaptername\ \thechapter}
+  {1ex}
+  {}
+
+\usepackage[colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{bookmark}

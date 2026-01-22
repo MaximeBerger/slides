@@ -1,0 +1,395 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Logique}
+\subsection{Opérateurs logiques}
+
+\begin{Def}\textbf{Proposition}
+    \vspace{1em}
+
+Une \textbf{proposition} ou assertion est un énoncé mathématique qui a une valeur de vérité : vrai ou faux.
+
+exemple : \(2\) est pair.
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Prédicat}
+    \vspace{1em}
+
+Un \textbf{prédicat} est une expression dont la valeur de vérité dépend des variables qu'il contient.
+
+exemple : \(n\) entier naturel est pair.
+
+\noindent Ici, la valeur de vérité de l'expression dépend de la valeur de \(n\).
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Négation}
+    \vspace{1em}
+
+La \textbf{négation} de la proposition \(P\) est la proposition qui est vrai si et seulement si \(P\) est fausse.
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Conjonction et disjonction}
+    \vspace{1em}
+
+Si \(P\) et \(Q\) sont deux propositions, (\(P\) et \(Q\)) est la proposition qui est vraie si et seulement si \(P\) et \(Q\) sont toutes les deux vraies.
+
+\vspace{1em}
+
+Si \(P\) et \(Q\) sont deux propositions, (\(P\) ou \(Q\)) est la proposition qui est vraie si et seulement si au moins une des deux propositions est vraie.
+\end{Def}
+
+\vspace{1em}
+
+On peut résumer cela dans des tables de vérité.
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+        P & Q & non P & P ou Q & P et Q\\\hline
+        V & V & F & V & V\\\hline
+         V & F & F & V & F\\\hline
+         F&  V&  V&  V& F\\\hline
+         F&  F&  V&  F& F\\\hline  
+    \end{tabular}
+\end{center}
+
+Toute la logique peut être construite à partir de ces trois opérateurs.
+
+\begin{Prop}\textbf{Lois de De Morgan}
+    \vspace{1em}
+
+Le \textbf{non}, le \textbf{ou} et le \textbf{et} sont reliés par les formules suivantes :
+\begin{center}
+    \textbf{non (\(P\) et \(Q)=\) (non \(P\)) ou (non \(Q\))}
+    
+    \textbf{non (\(P\) ou \(Q)=\) (non \(P\)) et (non \(Q\))}
+\end{center}
+\end{Prop}
+
+\exo[1]{Exemple 1 :}
+Montrer ces formules avec une table de vérité.\vspace{1em}
+
+\begin{Def}\textbf{Implication}
+    \vspace{1em}
+
+Très utilisée, l'\textbf{implication} \(P\ \Rightarrow\ Q\)  est la proposition (non\(P\) ou \(Q\)).
+\end{Def}
+
+\vspace{1em}
+
+Lorsque \(P\ \Rightarrow\ Q\), on dit que \(P\) est une \textbf{condition suffisante} à \(Q\) et que \(Q\) est une \textbf{condition nécessaire} à \(P\)
+
+\exo[1]{Exemple 2 :}
+Donner la table de vérité de l'implication.\vspace{1em}
+
+La négation d'une implication est donc (\(P\) et non \(Q\)). Attention, la négation d'une implication n'est donc pas une implication ! \vspace{1em}
+
+\begin{Def}\textbf{Équivalence}
+    \vspace{1em}
+
+On dit que \(P\) et \(Q\) sont \textbf{équivalentes} si \(P \Rightarrow Q\) et \(Q \Rightarrow P\). On le note \(P \Longleftrightarrow Q\).
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Contraposée}
+    \vspace{1em}
+
+On va l'utiliser plus loin dans ce chapitre comme méthode de raisonnement, la \textbf{contraposée} de la proposition \(P\ \Rightarrow\ Q\) est la proposition non \(Q\ \Rightarrow\) non \(P\). L'une est vraie si et seulement si l'autre est vraie.
+\end{Def}
+
+\exo[1]{Exemple 3 :}
+Montrer à l'aide d'une table de vérité qu'une implication et sa contraposée ont même valeur de vérité.\vspace{1em}
+
+
+\subsection{Quantificateurs}
+
+\begin{Def}\textbf{Quantificateur universel}
+\vspace{1em}
+
+Le quantificateur \textbf{pour tout} (ou \textbf{quel que soit}) est noté \(\forall\).
+
+La proposition  \big(\(\forall x \in E\quad  P(x)\)\big) est vraie lorsque pour tout \(x \in E\), la proposition \(P(x)\) est vraie.
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Quantificateur existentiel}
+    \vspace{1em}
+
+\noindent Le quantificateur \textbf{Il existe} est noté \(\exists\).
+
+La proposition \big(\(\exists x \in E\quad   P(x)\)\big) est vraie lorsqu'il existe \(x \in E\), la proposition \(P(x)\) est vraie.
+\end{Def}
+
+\vspace{1em}
+
+\begin{Def}\textbf{Quantificateur d'unicité}
+    \vspace{1em}
+
+\noindent Le quantificateur \textbf{Il existe un unique} est noté \(\exists !\).
+
+La proposition  \big(\(\exists !x \in E\quad  P(x)\)\big) est vraie lorsqu'il existe un unique \(x \in E\) tel que la proposition \(P(x)\) est vraie.
+\end{Def}
+
+\begin{Prop}\textbf{Négation des quantificateurs}
+    \vspace{1em}
+
+La négation de $\big(\forall x \in E\quad P(x)\big)$ est $\big(\exists x \in E\quad \text{non } P(x)\big)$
+
+La négation de $\big(\exists x \in E\quad P(x)\big)$ est $\big(\forall x \in E\quad \text{non } P(x)\big)$
+\end{Prop}
+
+\vspace{1em}
+
+Attention l'ordre des quantificateurs est très importants !
+
+En effet la proposition suivante est vraie :
+$$\forall x \in \mathbb{R}\quad \exists n \in \mathbb{N}\quad n \leq x<n+1$$
+elle permet de définir la partie entière d'un réel. 
+
+Voyons ce qu'il se passe si on inverse l'ordre des quantificateurs, on obtient :
+$$ \exists n \in \mathbb{N}\quad \forall x \in \mathbb{R}\quad n \leq x<n+1$$
+
+Cette proposition est fausse il n'existe pas d'entier $n$ qui permet d'encadrer tous les réels $x$! Il suffit de prendre $x=n+2$ comme contre-exemple... 
+
+\vspace{1em}
+
+Il y a une autre erreur courante à éviter. Dans la proposition 
+$$\forall x \in \mathbb{R}\quad \exists n \in \mathbb{N}\quad n \leq x<n+1$$
+L'expression $n \leq x<n+1$ cache un opérateur \textbf{et}. 
+
+En effet $n \leq x<n+1$ veut dire $n \leq x$ \textbf{et} $x<n+1$ de sorte que
+\begin{center}
+    la négation de ($n \leq x<n+1$) est
+    \Big($n>x$ \textbf{ou} $x \geq n+1$\Big) 
+\end{center}
+et surtout pas $n>x \geq n+1$.
+
+\vspace{1em}
+
+
+
+
+\exo[1]{Exemple 4 :}
+\'Ecrire les négations des propositions suivantes :
+
+\begin{enumerate}
+    \item $\forall x, y \in \mathbb{R}\quad  \exists z \in \mathbb{R}\quad x<z<y$
+    \item $\forall n \in \mathbb{N} \quad (n+1)^2-n^2$ impaire $\Rightarrow n$ impaire.
+\end{enumerate}
+
+
+Que penser de leurs valeurs de vérité ?
+
+\section{Raisonnements}
+Le raisonnement est au coeur de l'activité mathématique. il y a très souvent plusieurs façons d'aborder un problème et bien souvent, choisir le bon type de raisonnement permet de se simplifier beaucoup la vie... 
+\subsection{Raisonnement par déduction directe}
+L'objectif est de montrer $P \Rightarrow Q$. 
+
+Ce raisonnement porte mal son nom, même si on le rédige dans le sens direct (de $P$ vers $Q$), bien souvent pour le construire on s'appuie d'abord sur $Q$ pour "remonter" jusqu'à $P$.
+Pour montrer une équivalence, soit on raisonne par équivalence, soit on montre une double implication.\vspace{1em}
+
+\exo[1]{Exemple 5 :}
+
+Montrer les propositions suivantes, $a, b$ et $x$ sont des nombres réels.
+\begin{enumerate}
+    \item $a, b\in \mathbb{Q} \Rightarrow a+b\in \mathbb{Q}$
+    \item $x=-1 \Longleftrightarrow x^5+x^4+x^3+x^2+x+1=0$
+\end{enumerate}
+
+\subsection{Raisonnement par contraposée}
+Nous avons déjà parlé de la contraposée dans la partie sur la logique. Parfois "retourner" un énoncé le rend plus simple à aborder... 
+
+Par exemple si l'on doit démontrer une différence, utiliser la contraposée permet de manipuler des égalités, et c'est souvent bien plus agréable... \vspace{1em}
+
+\exo[1]{Exemple 6 :}
+
+Montrer les propositions suivantes :
+\begin{enumerate}
+    \item Si $x \neq -1  \text{ et }  y \neq -1  \text{ alors } xy+x+y\neq -1$
+    \item $n^2$ impair, alors $n$ impair.
+\end{enumerate}
+
+\subsection{Raisonnement par l'absurde}
+Ce raisonnement, très employé, a été source de discorde entre mathématiciens du début du siècle dernier... 
+
+Le principe est de considérer la négation de la proposition que l'on souhaite démontrer et de tenter d'aboutir à une contradiction logique avec quelque chose que l'on a énoncé ou déjà démontré. \vspace{1em}
+
+\exo[2]{Exemple 7 :}
+
+Montrer les propositions suivantes :
+\begin{enumerate}
+    \item  Soit $n$ un entier naturel, $\forall p \in \mathbb{N}, p^2 \neq n^2+1.$
+    \item $\sqrt{2}$ n'est pas rationnel.
+\end{enumerate}
+
+\subsection{Raisonnement par contre-exemple}
+Pour démontrer qu'une proposition est fausse, bien souvent la recherche d'un contre-exemple est la méthode la plus efficace !\vspace{1em}
+
+\exo[1]{Exemple 8 :}
+
+Montrer que les propositions suivantes sont fausses.
+
+\begin{enumerate}
+    \item Un entier divisible par 4 et 6 est divisible par 24.
+    \item $\exists M \in \mathbb{N}, \forall n \in \mathbb{N}, n<M$
+\end{enumerate}
+
+\subsection{Raisonnement par disjonction de cas}
+Diviser pour mieux régner... Une stratégie beaucoup utilisée en informatique qui peut s'avérer utile en mathématiques aussi.\vspace{1em}
+
+\exo[1]{Exemple 9 :}
+
+Montrer que $\forall n \in \mathbb{N}, n^3+2n$ est un multiple de 3.
+
+\subsection{Raisonnement par analyse-synthèse}
+
+le principe est de construire ce que l'on cherche en présupposant de la véracité de la proposition. 
+On cherche les conditions nécessairtes à sa réalisation en analyse et en synthèse on vérifie les propriétés souhaitées.\vspace{1em}
+
+\exo[2]{Exemple 10 :}
+
+Montrer qu'il existe une unique fonction paire $f$ et une unique fonction impaire $g$ telles que :
+
+$$\forall x \in \mathbb{R}, e^x=f(x)+g(x)$$
+
+\subsection{Raisonnement par récurrence}
+C'est un raisonnement qui vise à vérifier la véracité d'une propriété $P(n)$ pour tout entier naturel $n$ supérieur à un entier de départ $n_0$.
+
+Il ne nous apprend pas grand chose de pourquoi ça marche, mais il nous montre que ça marche !
+On procède en trois étapes :
+
+\begin{enumerate}
+\item On vérifie que $P(n_{0})$ est vraie, c'est l'\textbf{initialisation.}
+\item On suppose qu'il existe un entier $n \geq n_{0}$ tel que $P(n)$ soit vraie (éventuellement vraie pour tout entier inférieur à ce $n$), c'est l'\textbf{hypothèse de récurrence.}
+\item On montre que sous l'hypothèse de récurrence, $P(n+1)$ est vraie, c'est l'\textbf{hérédité}.
+\end{enumerate}
+
+\newpage
+
+
+\exo[2]{Exemple 11 :}
+\begin{enumerate}
+\item Montrer que pour tout entier naturel non nul $n$, $n!\geq 2^{n-1}$
+\item On considère la suite définie pour tout entier naturel $n$ par $u_{0}=1$ et : 
+
+$$u_{n+1}=\frac{u_{n}}{2+u_{n}}$$
+
+Montrer que :
+$$u_{n}=\frac{1}{2^{n+1}+u_{n}}$$
+\end{enumerate}
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{En langage mathématique}
+
+Écrire les énoncés suivants en langage mathématique :
+\begin{enumerate}
+    \item $f$ est majorée
+    \item $f$ n'est pas minorée
+    \item $f$ est bornée
+    \item $f$ est croissante
+    \item $f$ ne prend pas deux fois la même valeur
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Négation}
+Donner la négation des propositions suivantes :
+\begin{enumerate}
+    \item $\forall n \in \mathbb{N}, \exists m \in \mathbb{N},\quad m>n $
+    \item $ \exists m \in \mathbb{N}, \forall n \in \mathbb{N},\quad m>n$
+   \item $\forall x, y \in \mathbb{R},  \exists z \in \mathbb{R} , \quad x<z<y$
+   \item $ \forall n \in \mathbb{N}, \quad n>3 \Rightarrow n>6 $
+   \item $\forall x \in \mathbb{R},\quad x<2 \Rightarrow x^2<4$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Conjecture de Goldbach}
+On rappelle qu'un nombre premier est un nombre qui admet exactement deux diviseurs, 1 et lui-même. 
+Voici deux célèbres problèmes ouverts :
+\begin{itemize}
+    \item Conjecture de Goldbach $(CG)$ :
+    $$\forall n>2 \text{ pair, } \exists p,q \text{ premiers tels que }n=p+q$$
+
+    \item Conjecture des nombres premiers jumeaux $(CNJ)$ :
+$$\forall n \in \mathbb{N}, \exists p \text{ premier tel que } p \leq n \text{ et } p+2 \text{ premier }$$
+\end{itemize}
+\begin{enumerate}
+    \item Écrire la négation de ces deux conjectures.
+    \item Imaginons que l'année 2718 sera faste pour les mathématiques, une équipe de l'université de Maputo démontre l'implication :
+    $$(CG) \Rightarrow (CNJ)$$
+    Donner la contraposée de cette implication.
+    \item Quelque mois plus tard, un mathématicien démontrera que $(CG)$ est fausse que pourra-t-on en déduire pour $(CNJ)$ ?
+\item L'année suivante, on découvrira une erreur dans la preuve de la fausseté de $(CG)$. 
+En revanche, une chercheuse bengalie parviendra à montrer que $(CNJ)$ est fausse. Que peut-on en déduire pour $(CG)$ ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Sommes}
+Montrer par récurrence :
+\begin{enumerate}
+    \item $\forall n \in \mathbb{N^*} \quad
+   \sum_{k=1}^n k = \frac{n(n+1)}{2}$
+   \item $\forall n \in \mathbb{N} \quad
+   \sum_{k=1}^n (2k+1) = (n+1)^2$
+  \item $\forall n \in \mathbb{N^*} \quad
+   \sum_{k=1}^n k\times k!=(n+1)!-1$  
+   \item $\forall n \in \mathbb{N^*} \quad
+   \sum_{k=1}^n \frac{1}{k(k+1)}=1- \frac{1}{n+1}$  
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Somme de carrés}
+Montrer que si $n$ est la somme de deux carrés d'entiers, alors le reste de la division euclidienne de $n$ par 4 est toujours différent de 3.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Somme de cubes}
+\begin{enumerate}
+    \item Calculer pour tout $n \in \mathbb{N}$ de deux manières différentes :
+    $$ \sum_{k=1}^{n+1} k^3-\sum_{k=0}^n (k+1)^3$$
+    \item en déduire pour tout $n \in \mathbb{N}$ la valeur de :
+    $$\sum_{k=0}^n k^2$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+
+\exo[2]{Suite}
+On considère la suite $u_{n}$ définie par $u_{0}=3$ et, pour tout entier naturel $n$,
+
+$$u_{n+1}= \frac{u_{n}-2}{2u_{n}+5}$$
+
+Montrer que :
+
+$$u_{n}= \frac{9-8n}{3+8n}$$
+
+\end{document}

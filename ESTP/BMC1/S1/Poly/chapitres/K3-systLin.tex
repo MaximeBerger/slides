@@ -1,0 +1,553 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\textbf{Dans tout ce chapitre, $\mathbb{K}$ désignera $\mathbb{R}$ ou $\mathbb{C}$.}
+
+\section{Définitions - Premiers exemples}
+
+\subsection{Définitions}
+
+\begin{Def}\textbf{Système linéaire}
+  \vspace{1em}
+
+Soient $p$ et $n$ deux entiers non nuls. On appelle \textbf{système linéaire de $n$ équations à $p$ inconnues} un système de la forme :
+\[
+(S) : 
+\left\{
+\begin{array}{rcrcl}
+a_{1,1}\,x_1 &+& \cdots + a_{1,p}\,x_p &=& b_1 \\
+a_{2,1}\,x_1 &+& \cdots + a_{2,p}\,x_p &=& b_2 \\
+\vdots && && \vdots \\
+a_{n,1}\,x_1 &+& \cdots + a_{n,p}\,x_p &=& b_n \\
+\end{array}
+\right.
+\]
+Les scalaires $(a_{i,j})_{1 \le i \le n, 1 \le j \le p}$ sont appelés \textbf{coefficients} du système, \newline 
+les $(b_i)_{1 \le i \le n}$ forment le \textbf{second membre}, \newline 
+et $x_1, \ldots, x_p$ sont les \textbf{inconnues} du système.
+\end{Def}
+
+Résoudre un tel système consiste à trouver tous les $p$-uplets $(x_1, \ldots, x_p) \in \mathbb{K}^p$ qui vérifient simultanément les $n$ équations.
+
+
+\begin{Def}\textbf{Systèmes équivalents, système incompatible}
+  \vspace{1em}
+
+\begin{itemize}
+  \item Deux systèmes $(S)$ et $(S')$ sont dits \textbf{équivalents} s'ils ont les mêmes solutions.
+  \item Un système $(S)$ est dit \textbf{incompatible} s'il n'admet aucune solution.
+\end{itemize}
+\end{Def}
+
+\begin{Def}\textbf{Systèmes homogènes, système homogène associé}
+  \vspace{1em}
+
+\begin{itemize}
+  \item Un système est dit \textbf{homogène} si son second membre est nul.
+  \item Le \textbf{système homogène associé} à un système $(S)$ est le système $(H)$ obtenu en remplaçant tous les membres $b_i$ par $0$.
+\end{itemize}
+\end{Def}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Reconnaissance directe}
+
+Déterminer si le système suivant est linéaire ou non. Si oui, expliciter les coefficients et le second membre. 
+
+\[
+\left\{
+\begin{array}{rcrcl}
+2x &+& 3y &=& 7 \\
+5x &-& y &=& 1
+\end{array}
+\right.
+\]
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Présence d'un produit}
+
+Les systèmes suivants sont-ils linéaires ? Si oui, expliciter les coefficients et le second membre. 
+
+\[
+\left\{
+\begin{array}{rcrcl}
+x^2 &+& y &=& 4 \\
+x &+& 3y &=& 2
+\end{array}
+\right.
+\qquad\quad 
+\left\{
+\begin{array}{rcrcl}
+\sin(x) &+& y &=& 1 \\
+2x &+& 3y &=& 5
+\end{array}
+\right.
+\qquad \quad 
+\left\{
+\begin{array}{rcrcl}
+xy &+& z &=& 3 \\
+x &+& y &+& z = 1
+\end{array}
+\right.
+\]
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Système homogène}
+
+Le système suivant est-il linéaire et homogène ?
+
+\[
+\left\{
+\begin{array}{rcrcl}
+x &-& y &+& 2z = 0 \\
+3x &+& 0y &+& z = 0
+\end{array}
+\right.
+\]
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Racine}
+
+Analyser la nature du système suivant :
+
+\[
+\left\{
+\begin{array}{rcrcl}
+\sqrt{x} &+& y &=& 2 \\
+x &+& y &=& 3
+\end{array}
+\right.
+\]
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Système avec paramètre}
+
+Étudier la linéarité selon le paramètre \( a \in \mathbb{R} \) :
+
+\[
+\left\{
+\begin{array}{rcrcl}
+a x &+& y &=& 2 \\
+x &+& a^2 y &=& 3
+\end{array}
+\right.
+\]
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Produit de fonction}
+
+Le système suivant est-il linéaire ?
+
+\[
+\left\{
+\begin{array}{rcrcl}
+x &\cdot& \sin(y) &=& 0 \\
+x &+& y &=& 1
+\end{array}
+\right.
+\]
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Trois équations, deux inconnues}
+
+Le système suivant est-il linéaire ? Est-il incompatible ?
+
+\[
+\left\{
+\begin{array}{rcrcl}
+x &+& y  &=& 2 \\
+2x &-& y &=& 3 \\
+3x &+& 4y &=& 1
+\end{array}
+\right.
+\]
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\subsection{Les différents cas possibles pour les systèmes linéaires}
+
+\begin{Meth}
+On distingue trois cas pour un système de $n$ équations à $p$ inconnues :
+
+\begin{itemize}
+  \item \textbf{Si $n > p$} : plus d'équations que d'inconnues. Deux cas possibles :
+    \begin{itemize}
+      \item le système est incompatible.
+      \item certaines équations sont redondantes, et on revient au cas $n \le p$.
+    \end{itemize}
+  \item \textbf{Si $n = p$} : système carré d'ordre $n$. Trois cas possibles :
+    \begin{itemize}
+      \item une unique solution (système de \textbf{Cramer}) ;
+      \item une infinité de solutions ;
+      \item aucune solution (système incompatible).
+    \end{itemize}
+  \item \textbf{Si $n < p$} : deux cas possibles :
+    \begin{itemize}
+      \item une infinité de solutions ;
+      \item aucune solution (système incompatible).
+    \end{itemize}
+\end{itemize}
+\end{Meth}
+
+\newpage
+
+\subsection{Résolution dans des cas simples}
+
+\subsubsection{Résolution par substitution}
+
+\begin{Ex}Résolvons le système suivant par substitution :
+\[
+(S) :
+\left\{
+\begin{array}{rcrcl}
+x &+& 3y &=& 2 \\
+2x &+& 7y &=& 1
+\end{array}
+\right.
+\]
+\end{Ex}
+
+\begin{Rmq}
+
+Cette méthode devient vite fastidieuse lorsque le nombre d'équations ou d'inconnues dépasse $2$.
+\end{Rmq}
+\subsubsection{Systèmes triangulaires (ou échelonnés)}
+
+\begin{Ex}
+\[
+(S) :
+\left\{
+\begin{array}{cccc}
+x &+ 3y &+ 2z &= 2 \\
+0x &+ 2y &+ 5z &= 4 \\
+0x &+ 0y &+ 4z &= 8
+\end{array}
+\right.
+\]
+\end{Ex}
+Ce système peut être résolu facilement par \textbf{remontée successive}.
+
+\begin{Ex}
+\[
+(S) :
+\left\{
+\begin{array}{cccc}
+-x &+ 2y &- z &= 0 \\
+0x &+ y &- 2z &= 5
+\end{array}
+\right.
+\]
+
+
+Le nombre d'inconnues est supérieur au nombre d'équations.\vspace{1em}
+Une inconnue (par exemple $z$) peut être choisie libre.\vspace{1em}
+\end{Ex}
+
+
+\newpage
+
+\section{Pivot de Gauss}
+
+\subsection{Opérations Élémentaires}
+
+\begin{Def}\textbf{Opérations élémentaires}
+  \vspace{1em}
+
+Soit $(S)$ un système. On appelle \textbf{opérations élémentaires} les opérations suivantes :
+\begin{enumerate}
+  \item $L_i \leftrightarrow L_j$, $i \neq j$ : échange des lignes $i$ et $j$.
+  \item $L_i \leftarrow a L_i$, $a \neq 0$ : multiplication d'une ligne par un scalaire non nul.
+  \item $L_i \leftarrow L_i + b L_j$, $i \neq j$ : addition d'un multiple de la ligne $j$ à la ligne $i$.
+  \item $L_i \leftarrow a L_i + b L_j$, $a \neq 0$ et $i \neq j$ : combinaison des deux précédentes.
+\end{enumerate}
+\end{Def}
+
+\begin{Prop}\textbf{Opérations élémentaires et équivalence (admis)} 
+  \vspace{1em}
+
+Toute opération élémentaire appliquée à un système $(S)$ donne un système équivalent à $(S)$.
+\end{Prop}
+
+\subsection{Pivot de Gauss}
+
+\begin{Meth}
+Cette méthode procède en deux temps :
+\begin{itemize}
+  \item Élimination successive des inconnues à l'aide des opérations élémentaires pour passer du système initial à un système triangulaire équivalent.
+  \item Remontée du système triangulaire obtenu.
+\end{itemize}
+
+\end{Meth}
+\vspace{1em}
+\hrule
+\vspace{1em}
+\exo[2]{Entraînement}
+Résoudre les systèmes suivants par la méthode du pivot de Gauss.
+
+\begin{equation*}
+(S_1) :
+\left\{
+\begin{array}{rcrcrcl}
+x &+& 2y &+& 3z &=& 2 \\
+3x &+& y &+& 2z &=& 1 \\
+2x &+& 3y &+& z &=& 0
+\end{array}
+\right.
+\qquad 
+(S_2) :
+\left\{
+\begin{array}{rcrcrcl}
+3x &-& y &+& 2z &=& 1 \\
+-x &+& 2y &-& 3z &=& 2 \\
+x &+& 2y &+& z &=& 0
+\end{array}
+\right.
+\end{equation*}
+
+\begin{equation*}
+(S_3) :
+\left\{
+\begin{array}{rcrcrcl}
+&&y &-& z &=& 1 \\
+2x &+& y &+& z &=& 3 \\
+x &&&+& z &=& 1
+\end{array}
+\right.
+\qquad
+(S_4) :
+\left\{
+\begin{array}{rcrcrcl}
+&&y &-& z &=& 1 \\
+2x &+& y &+& z &=& 1 \\
+x &&&+& z &=& 1
+\end{array}
+\right.
+\end{equation*}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Prop}\textbf{Caractérisation d'un système de Cramer par le pivot de Gauss}
+  \vspace{1em}
+
+Un système carré $(S)$ est un système de Cramer si on peut trouver un pivot non nul à chaque étape du pivot de Gauss.
+\end{Prop}
+
+
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Ma\c cons}
+
+Trois maçons et deux ouvriers polyvalents réalisent l'extension d'un bâtiment en $6$ jours et gagnent au total $2520$ \euro.
+Pour un travail similaire, cinq maçons et trois ouvriers polyvalents gagnent $2720$ \euro \ et terminent le chantier en $4$ jours.
+
+Calculer le salaire journalier d'un maçon et celui d'un ouvrier polyvalent.
+
+\vspace{2em}
+
+\hrule
+\exo[2]{Chantier}
+
+Le nombre de briques \(N\) sur un chantier (stock existant + livraisons) est représenté par l'équation :
+\[
+N = a \times D + e
+\]
+où :
+\begin{itemize}
+    \item \(D\) = nombre de jours,
+    \item \(a\) = constante,
+    \item \(e\) = stock existant avant le début des livraisons régulières.
+\end{itemize}
+
+Après \(2\) jours, le nombre de briques sur le chantier était de \(22\,000\), et après \(5\) jours, il était de \(40\,000\).
+
+En supposant que les livraisons de briques sont régulières, calculer les valeurs de \(a\) et \(e\), puis déterminer le nombre de briques après \(8\) jours.
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% \exo{Équilibre d'une structure isostatique}
+% Une structure triangulaire est soumise à trois forces extérieures en équilibre. Les composantes horizontales et verticales des forces $F_1$, $F_2$, et $F_3$ satisfont le système :
+% \[
+% \left\{
+% \begin{array}{l}
+% F_{1x} + F_{2x} + F_{3x} = 0 \\
+% F_{1y} + F_{2y} + F_{3y} = 0 \\
+% 3F_{1y} - 2F_{2x} + F_{3x} = 0
+% \end{array}
+% \right.
+% \]
+% Déterminer les composantes manquantes si certaines sont connues. Interpréter le système obtenu.
+% \vspace{1em}
+% \hrule
+% \vspace{1em}
+
+\exo[2]{Répartition de charges sur poutre}
+Une poutre est appuyée sur trois points $A$, $B$ et $C$, et soumise à des charges. Les réactions $R_A$, $R_B$, $R_C$ vérifient :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+R_A &+& R_B &+& R_C &=& 30 \\
+2R_A &+& R_B &+& 0R_C &=& 20 \\
+0R_A &+& R_B &+& 3R_C &=& 25
+\end{array}
+\right.
+\]
+Déterminer les réactions aux appuis. Interpréter le résultat.
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[1]{Dosage de béton}
+Un dosage impose : 1 m$^3$ de béton est composé de gravier ($G$), sable ($S$), ciment ($C$) et eau ($E$), vérifiant :
+\[
+\left\{
+\begin{array}{rcl}
+G + S + C + E &=& 1 \\
+G &=& 2S \\
+C &=& 0.15 \\
+E &=& 0.1
+\end{array}
+\right.
+\]
+Résoudre le système et donner les volumes de chaque composant. Vérifier que les proportions sont correctes pour un béton standard.
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Stabilisation d'un mur de soutènement}
+Un mur de soutènement exerce des réactions d'appui sur trois contreforts. Ces réactions vérifient :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+R_1 &+& R_2 &+& R_3 &=& 150 \\
+2R_1 &+& R_2 &+& 0R_3 &=& 110 \\
+0R_1 &+& R_2 &+& R_3 &=& 100
+\end{array}
+\right.
+\]
+Calculer $R_1$, $R_2$, $R_3$ et discuter la stabilité du mur.
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Répartition de coûts dans un chantier}
+Trois entreprises $A$, $B$ et $C$ réalisent un chantier. Leur répartition de charges obéit aux équations :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+x &+& y &+& z &=& 100 \quad \text{(total des coûts)} \\
+2x &-& y &+& 0z &=& 10 \\
+0x &+& y &+& z &=& 70
+\end{array}
+\right.
+\]
+Calculer les montants $x$, $y$, $z$ payés par chaque entreprise.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Résistance des matériaux}
+Une structure métallique repose sur 3 barres qui doivent supporter une charge totale de 900 N. La répartition des efforts est modélisée par :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+F_1 &+& F_2 &+& F_3 &=& 900 \\
+2F_1 &-& F_2 &+& 0F_3 &=& 100 \\
+0F_1 &+& F_2 &-& 2F_3 &=& 0
+\end{array}
+\right.
+\]
+Trouver la force exercée sur chaque barre.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\newpage
+
+\exo[2]{Approvisionnement d'un chantier}
+Une centrale livre trois types de matériaux : sable ($x$), gravier ($y$), ciment ($z$). Un client commande trois mélanges $M_1$, $M_2$, $M_3$ définis par :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+x &+& 2y &+& z &=& 30 \\
+2x &+& y &+& 3z &=& 50 \\
+x &+& y &+& z &=& 25
+\end{array}
+\right.
+\]
+Déterminer la quantité de chaque composant à livrer.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Ventilation dans un bâtiment}
+L'air circule dans 3 conduits $x$, $y$, $z$ d'un réseau de ventilation. On impose :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+x &+& y &=& 200 \\
+x &+& 0y &+& z &=& 180 \\
+0x &+& y &+& z &=& 220
+\end{array}
+\right.
+\]
+Trouver le débit d'air dans chaque conduit.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Budget d'un projet immobilier}
+Trois catégories de dépenses : terrain ($T$), travaux ($W$), honoraires ($H$) avec contraintes :
+\[
+\left\{
+\begin{array}{rcrcrcl}
+T &+& W &+& H &=& 1\,000\,000 \\
+0T &+& W &-& 3T &=& 0 \\
+0T &+& 0W &+& H &=& 0.1(W + H)
+\end{array}
+\right.
+\]
+Résoudre le système pour connaître la répartition du budget.
+
+\end{document}

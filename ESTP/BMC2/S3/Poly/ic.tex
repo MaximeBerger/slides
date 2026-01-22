@@ -1,0 +1,1131 @@
+
+\section{Notions de calcul différentiel}
+
+%----------------------------------------------------------------------------------------------
+\subsection{Parties ouvertes de $\R^2$}
+%----------------------------------------------------------------------------------------------
+
+
+
+%----------------------------------------------------------------------------------------------
+%\subsection{Boules ouvertes et ouverts de $\R^2$}
+%----------------------------------------------------------------------------------------------
+
+\begin{Def}\textbf{Partie ouverte de $\R^2$}\\
+Soit $U$ une partie de $\R^2$, on dit $U$ est une partie ouverte de $\R^2$, ou que $U$ est un ouvert de $\R^2$ si, tout point de $U$ est le centre d'un disque de rayon $r>0$ entièrement inclus dans $U$
+$(x_0,y_0)\in U$, id est il existe  $r>0$  tel que  $B\Big((x_0,y_0),r\Big)\subset U$.\\
+\end{Def}
+
+
+Dans la suite $U$ désigne un ouvert de $\R^2$.\\
+Intuitivement, un ouvert est un ensemble où tous les points ont ``de la place" autour d'eux.
+En pratique, on peut les `approcher" dans toutes les directions.\\
+ 
+
+\begin{Rmq} 
+\begin{itemize}
+\item[$\bullet$] Les boules ouvertes sont des ouverts de $\R^2$.
+\item[$\bullet$] Les produits de deux intervalles ouverts de $\R$  sont des ouverts de $\R^2$.\\
+$]a,b[\times ]c,d[$ est un ouvert de $\R^2$,
+$(a,b,c,d)\in{\overline{\R}}^4$.
+\end{itemize}
+\end{Rmq}
+
+\newpage
+%----------------------------------------------------------------------------------------------
+\subsection{Dérivées partielles premières}
+%----------------------------------------------------------------------------------------------
+
+
+
+\begin{Def} \textbf{Ouvert}\\
+
+Soit $a\in U$, $f\in \mathcal{F}(U,\R)$ et $h$ un vecteur de $\R^2$. Comme $U$ est un ouvert, il existe $\delta>0$ tel que,  pour tout $t\in]-\delta,\delta[$, $a+th\in U$. Dans ce cas, on peut définir 
+$$\varphi_h:\left\{\begin{array}{ccl} ]-\delta,\delta[&\longrightarrow&\R\\ t&\longmapsto& f(a+th)\end{array}\right.$$
+
+Si la fonction $\varphi_h: t\mapsto f(a+th)$ est dérivable en $0$, on dit que $f$ admet une dérivée au point $a$ selon le vecteur $h$, et on note
+$$D_hf(a)=\varphi'_h(0)$$
+\end{Def}
+
+
+
+
+\begin{Def}\textbf{Dérivée partielle première}\\
+
+ Soit $a\in U$, $f\in \mathcal{F}(U,\R)$. 
+\begin{itemize}
+\item[$\bullet$] On dit que $f$ admet une dérivée partielle par rapport à $x$ en $a$ si $f$ est dérivable en $a$ suivant $\vec{i}$. On note ce nombre dérivé
+$
+D_1f(a)$ ou $\dfrac{\partial f}{\partial x_1}(a)$. Il est appelé première dérivée partielle de $f$ ou dérivée partielle de $f$ par rapport à $x$.
+\item[$\bullet$] On dit que $f$ admet une dérivée partielle par rapport à $y$ en $a$ si $f$ est dérivable en $a$ suivant $\vec{j}$. On note ce nombre dérivé $
+D_2f(a)$ ou $\dfrac{\partial f}{\partial x_2}(a)$. Il est appelé seconde dérivée partielle de $f$ ou dérivée partielle de $f$ par rapport à $y$.\\
+\end{itemize}
+
+\end{Def}
+
+\begin{Rmq} 
+La notation $ \dfrac{\partial f}{\partial x}$ est ambiguë. Cela ne veut  pas dire que l'on dérive par rapport à $x$ mais par rapport à la première variable (elle peut être notée $y$ ou $z$). En fait, on note plus souvent $ \dfrac{\partial f}{\partial x_1}$ et $ \dfrac{\partial f}{\partial x_2}$.\\
+\end{Rmq}
+
+
+\begin{Ex}
+Montrer que $f:(x,y)\mapsto e^{xy}/(x-y)$ est continue sur son domaine et \\
+admet des dérivées partielles premières continues.\\
+\end{Ex}
+
+%----------------------------------------------------------------------------------------------
+\subsection{Fonction de classe ${\mathcal C}^1$}
+%----------------------------------------------------------------------------------------------
+
+\begin{Def}\textbf{Fonction de classe ${\mathcal C}^1$}\
+
+ Une fonction $f:U\subset\R^2\longrightarrow\R$ est dite de classe ${\mathcal C}^1$ sur $U$ si $f$ admet des dérivées partielles première continues sur $U$.\\
+ 
+ $\mathcal{C}^1(U,\R)$: ensemble des fonctions de classe $\mathcal{C}^1$ sur l'ouvert $U$.\\
+\end{Def}
+%
+\begin{Ex}
+Montrer que la fonction définie sur $U=\R_+^\ast\times\R_+^\ast$ par $\theta(x,y)=\arctan\dfrac{y}{x}$ est de classe $\mathcal{C}^1$.\\
+\end{Ex}
+
+\hfill\break
+\hrule
+\hfill\break
+\exo[1]{Classe  $\mathcal{C}^1$}
+Montrer que la fonction définie  par  $r(x,y)=\sqrt{x^2+y^2}$ sur $U=\R^2\setminus\{(0,0)$ est de classe $\mathcal{C}^1$.\\
+\hfill\break
+\hrule
+\hfill\break
+
+%----------------------------------------------------------------------------------------------
+%\subsection{Théorème fondamental }
+%----------------------------------------------------------------------------------------------
+\begin{Thm}\textbf{Théorème fondamental (admis)}\\
+Si $f:U\subset\R^2\longrightarrow\R$  est de classe ${\cal C}^1$ sur $U$ alors $f$ admet en tout point de $a$ de $U$ un développement limité à l'ordre 1, ainsi qu'une dérivée suivant tous les vecteurs $h$ de $\R^2$ et, si $h=(h_1,h_2)$
+$$
+D_hf(a)=h_1 D_1f(a)+h_2 D_2f(a)=h_1\frac{\partial f}{\partial x_1}(a) +h_2\frac{\partial f}{\partial x_2}(a). 
+$$
+
+Et, au voisinage de $a$, 
+$
+f(a+h)=f(a)+h_1\ D_1f(a)+h_2 D_2f(a)+o(\|h\|)
+$
+
+$$
+f(a+h)=f(a)+\underbrace{h_1\frac{\partial f}{\partial x_1}(a) +h_2\frac{\partial f}{\partial x_2}(a)}_{D_hf(a)}+o(\|h\|)
+$$
+
+L'application notée 
+
+\[ 
+\begin{array}{lccc}
+df:& \R^2&\longrightarrow&\R^n\\
+&h&\mapsto &D_hf(a).\\
+\end{array}
+\]
+  est appelée différentielle de $f$ en $a$.\\
+  
+\end{Thm}
+
+\begin{Rmq}Avec la notation $df$, le développement limité à l'ordre $1$ de $f$ au voisinage de $a$ s'écrit
+$$
+f(a+h)=f(a)+df(h)+o(\|h\|_2)
+$$
+\end{Rmq}
+
+
+\begin{Rmq}Par convenance,  l'usage est de confondre une fonction et sa valeur en un point.
+on confond $f(x)$ et $f$. On écrit
+$$df= \frac{\partial f}{\partial x} dx +\frac{\partial f}{\partial y} dy$$ 
+\end{Rmq}
+
+
+\begin{Rmq}
+En mathématiques, $dx$ désigne l'application qui a $h=(h_1,h_2)\longmapsto h_1$.\\
+\end{Rmq}
+
+
+\begin{Prop}\textbf{Continuité d'une fonction de classe ${\mathcal C}^1$}\\
+Si $f$ est de classe ${\mathcal C}^1$ sur l'ouvert $U$, alors $f$ est continue sur $U$.\\
+\end{Prop}
+
+
+\begin{Prop}Si $f$ et $g$ sont de classes ${\mathcal C}^1$ sur $U$ alors $f+g$, $fg$ et $f/g$ (si $g$ ne s'annule pas sur $U$) sont de classes ${\mathcal C}^1$ sur $U$.\\
+\end{Prop}
+
+
+\begin{Ex}
+On obtient par exemple $\dfrac{\partial(fg)}{\partial x}=\dfrac{\partial f}{\partial x}g+f\dfrac{\partial g}{\partial x} $ et $\dfrac{\partial}{\partial x}\left(\dfrac{1}{f}\right)=-\dfrac 1{f^2}\dfrac{\partial f}{\partial x}$.\\
+
+\end{Ex}
+
+\begin{Prop}\textbf{Dérivée d'une composée $\R\to\R^2\to\R$}\\
+
+
+\begin{itemize}
+\item Si $f:U\subset\R^2\longrightarrow\R$  est de classe ${\cal C}^1$ sur l'ouvert $U$ de $\R^2$
+\item et $\varphi : I\subset\R\longrightarrow U$ de classe ${\cal C}^1$ sur l'intervalle $I$ de $\R$. \\
+\end{itemize}
+Alors 
+l'application $F=f\circ\varphi$ est de classe  ${\cal C}^1$ sur $I$ et 
+$$
+\forall\,t\in I,\quad F'(t)=  \frac{\partial f}{\partial x} \Big( x(t),y(t) \Big)x'(t) +  \frac{\partial f}{\partial y} \Big( x(t),y(t) \Big) y'(t) 
+$$
+\end{Prop}
+
+%\rem{ Pour bien comprendre la composition, un schéma :
+%$$
+%\begin{array}{ccccc}&\varphi &&f&\\
+% I\subset\R&\longrightarrow& U\subset\R^2&\longrightarrow &\R\\
+%t&\longmapsto&\left(\begin{array}{c}x(t)\\y(t)\end{array}\right)&\longmapsto &f( x(t),y(t))
+%\end{array}
+%$$}
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[1]{Premier calcul}
+Soit $g:t\mapsto f(2t,1+t^2)$ avec $f:\R^2\to\R$ partiellement dérivable.\\ Calculer $g'$.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{Entraînement}
+Soit $f:\R^2\to\R^2$ de  classe $\mathcal{C}^1$ telle que $\forall x,y,t\in\R,\quad f(x+t,y+t)=f(x,y)$.\\
+Montrer que $$\d f x (x,y)+\d f y(x,y)=0$$
+\hfill\break
+\hrule
+\hfill\break
+
+%\rem{ On peut utiliser la notation suivante
+%$$
+%\frac{dF}{dt}=  \frac{\partial f}{\partial x} \times \frac{dx}{dt} +  \frac{\partial f}{\partial y}\times  \frac{dy}{dt} 
+%$$
+%$$
+%\frac{df}{dt}=  \frac{\partial f}{\partial x} \frac{dx}{dt} +  \frac{\partial f}{\partial y}  \frac{dy}{dt}. 
+%$$
+%%ou encore
+%%$$(f\circ\va
+
+\section{Gradient, divergence, rotationnel}
+
+
+Soit $U$ un ouvert de $\R^n$ 
+\begin{Def}\textbf{Champ de vecteurs}\\
+
+On appelle \textbf{champ de vecteurs} sur  $U$, toute application de $U$ dans $\R^n$:\\
+\[ 
+\begin{array}{lccc}
+\vec{V}:& U&\longrightarrow&\R^n\\
+&M&\mapsto &\vec{V}(M).\\
+\end{array}
+ \]
+\end{Def}
+%
+
+
+
+\subsection{Différentielle, matrice jacobienne}
+
+
+\begin{Def} \textbf{Forme différentielle}\\
+
+ Une forme différentielle (de degré 1) sur un domaine \(D\) est une expression de la forme :
+\begin{itemize}
+    \item (en dimension \(n = 2\)) : \(\omega(x, y) = P(x, y)dx + Q(x, y)dy\) où \(P\) et \(Q\) sont des fonctions de classe \(C^1\) de \(D \subset \mathbb{R}^2\) à valeurs dans \(\mathbb{R}\).
+    \item (en dimension \(n = 3\)) : \(\omega(x, y, z) = P(x, y, z)dx + Q(x, y, z)dy + R(x, y, z)dz\) où \(P\), \(Q\) et \(R\) sont des fonctions de classe \(C^1\) de \(D \subset \mathbb{R}^3\) à valeurs dans \(\mathbb{R}\).
+\end{itemize}
+On associe à la forme différentielle \(\omega\) le champ de vecteurs \(\vec{V}\) défini par :
+\begin{itemize}
+    \item (en dimension \(n = 2\)) : \(\vec{V}(x, y) = P(x, y)\vec{i} + Q(x, y)\vec{j}\)
+    \item (en dimension \(n = 3\)) : \(\vec{V}(x, y, z) = P(x, y, z)\vec{i} + Q(x, y, z)\vec{j} + R(x, y, z)\vec{k}\)
+\end{itemize}
+
+\end{Def}
+
+\begin{Def} \textbf{Forme différentielle exacte ou totale}\\
+\begin{enumerate}
+    \item La forme différentielle \(\omega\) est dite exacte (ou totale) s'il existe une fonction \(f\) de \(D\) dans \(\mathbb{R}\) telle que \(\omega = df\), c'est-à-dire \(\omega = \frac{\partial f}{\partial x} (x, y, z) dx + \frac{\partial f}{\partial y} (x, y, z) dy + \frac{\partial f}{\partial z} (x, y, z) dz\) (c'est la différentielle d'une fonction).
+    \item Un champ de vecteurs \(\vec{V}\) est un champ de gradient (ou dérive d'un potentiel) s'il existe une fonction \(f\) de \(D\) dans \(\mathbb{R}\) telle que \(\vec{V} = \nabla f\), c'est-à-dire \(\vec{V} = \frac{\partial f}{\partial x} (x, y, z) \vec{i} + \frac{\partial f}{\partial y} (x, y, z) \vec{j} + \frac{\partial f}{\partial z} (x, y, z) \vec{k}\)
+\end{enumerate}
+\end{Def}
+
+Soit $\vec{V}$ un champ de vecteurs de classe $\mathcal{C}^1$ sur $U$.\\
+Ses fonctions composantes $(V_i)_{1\leq i\leq n}$ sont alors de classe $\mathcal{C}^1$ sur $U$ et vérifient, pour $M\in U$ et $\vec{h}=(h_1,h_2,\dots,h_n)$ tel que $M+\vec{h}\in U$:\\
+
+\[
+V_i(M+h)=V_i(M)+\sum_{j=1}^n \dfrac{\partial V_i}{\partial x_j}(M)h_j+\| \vec{h}\|\varepsilon_i(\vec{h})
+\]
+
+avec $\lim_{\|\vec{h}\| \to 0}\varepsilon_i(\vec{h})=0$.\\
+
+
+\begin{Def}\textbf{Différentielle et Jacobienne}\\
+
+Pour tout point $M \in U$, il existe une application linéaire notée $d\vec{V}_M$ telle que:\\
+
+
+\[ 
+V_i(M+h)=V_i(M)+d\vec{V}_M(\vec{h})+\| \vec{h}\|\varepsilon(\vec{h})
+ \]
+avec $\lim_{\|\vec{h}\| \to 0}\varepsilon(\vec{h})=0$.\\
+
+
+Cette application linéaire, appelée \textbf{différentielle} de $\vec{V}$ en $M$, a pour matrice dans la base canonique de $\R^n$:
+ \[
+ J=\left(  \dfrac{\partial V_i}{\partial x_j}\right)_{1\leq i,j\leq n}
+ \]
+ 
+ appelée \textbf{matrice} jacobienne de $\vec{V}$ en $M$.
+\end{Def}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo [2]{ Différentielle}
+Justifier que les fonctions suivantes sont différentiables, et calculer leur différentielle
+\begin{enumerate}
+\item $f(x,y)=e^{xy}(x+y)$.
+\item $f(x,y,z)=xy+yz+zx$.
+\item $f(x,y)=(y\sin x,\cos x)$.\\
+\end{enumerate}
+
+% \begin{Sol}
+% \begin{enumerate}
+
+% \item
+% La fonction $f$ admet des dérivées partielles données par :
+% \[
+% \frac{\partial f}{\partial x}(x,y) = (y(x+y) + 1) e^{xy}
+% \]
+% \[
+% \frac{\partial f}{\partial y}(x,y) = (x(x+y) + 1) e^{xy}
+% \]
+% Ces fonctions sont continues sur $\mathbb{R}^2$, donc la fonction $f$ est différentiable. On a :
+% \[
+% df(x,y)(h,k) = (h(y(x+y) + 1) + k(x(x+y) + 1)) e^{xy}
+% \]
+% Avec la notation différentielle, on a :
+% \[
+% df = (y(x+y) + 1) e^{xy} \, dx + (x(x+y) + 1) e^{xy} \, dy
+% \]
+% \item
+
+% La fonction $f$ est clairement $C^\infty$, et est donc différentiable. La différentielle de $f$ est une application linéaire de $\mathbb{R}^2$ dans $\mathbb{R}$. On a :
+
+% \[
+% df=(y+z)dx+(x+z)dy+(x+y)dz.\\
+% \] 
+
+% \item
+% La fonction $f$ est clairement $C^\infty$, et est donc différentiable. La différentielle de $f$ est une application linéaire de $\mathbb{R}^2$ dans $\mathbb{R}$. On a :
+% \[
+% \frac{\partial f}{\partial x}(x,y) = (y \cos x, -\sin x)
+% \]
+% \[
+% \frac{\partial f}{\partial y}(x,y) = (\sin x, 0)
+% \]
+% On en déduit que :
+% \[
+% df(x,y)(h,k) = h(y \cos x - \sin x) + k(\sin x)
+% \]
+
+% \end{enumerate}
+% \end{Sol}
+% Exercice 132
+\hfill\break
+\hrule
+\hfill\break
+
+\exo [2]{ Matrices jacobiennes}
+Justifier que les fonctions suivantes sont différentiables, et calculer leur matrice jacobienne.
+\begin{enumerate}
+\item $ f(x,y,z)=\left(\frac{1}{2}(x^2-z^2),\sin x\sin y\right).$
+\item $ f(x,y)=\left(xy,\frac{1}{2}x^2+y,\ln(1+x^2)\right).$\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+\subsection{Gradient}
+
+Soit $f$ une application de classe  $\mathcal{C}^1$ sur $U$ à valeurs dans $\R$. Pour tout point $M$ et $\vec{h}=(h_1,h_2,\dots,h_n)$ tel que $M+\vec{h}\in U$:\\
+
+
+
+\[
+f(M+h)=f(M)+\sum_{j=1}^n \dfrac{\partial f}{\partial x_j}(M)h_j+\| \vec{h}\|\varepsilon(\vec{h})
+\]
+
+avec $\lim_{\|\vec{h}\| \to 0}\varepsilon(\vec{h})=0$.\\
+
+
+Le vecteur $\overrightarrow{grad}_Mf$ dont les composantes dans la base canonique de $\R^n$ sont  $\left(\dfrac{\partial f}{\partial x_j}(M)\right)_{1\leq i\leq n}$ est appelé gradient de $f$ en $M$. Il est tel que:
+
+
+\[
+f(M+h)=f(M)+\vec{h}\cdot \overrightarrow{grad}_M f + \| \vec{h}\| \varepsilon(\vec{h})
+\]
+
+avec $\lim_{\|\vec{h}\| \to 0}\varepsilon(\vec{h})=0$.\\
+
+
+On note $\overrightarrow{grad}f$ l'application $M \mapsto \overrightarrow{grad}_Mf$.
+
+
+
+\begin{Def}\textbf{Gradient d'une fonction}\\
+
+ Le gradient d'une fonction $f\in\mathcal{C}^1(U,\R)$ en un point $a$ de $U$ ouvert de $\R^2$, est le vecteur de $\R^2$, noté $\overrightarrow{grad} f(a)$ ou parfois $\overrightarrow{grad}_a f$ ou $\overrightarrow\nabla_a f$, défini par la relation 
+$$\forall h\in\R^2, \quad D_h f(a)=\overrightarrow{\text{grad}} f(a)\cdot h=(\overrightarrow{\text{grad}} f(a)\,|\,h).$$
+\end{Def}
+
+\begin{Rmq} 
+Les coordonnées de $\overrightarrow{\text{grad}} f(a)$ dans la base usuelle sont $$\Big(D_1f(a),D_2f(a)\Big)=\Big(\frac{\partial f}{\partial x}(a) ,\frac{\partial f}{\partial y}(a)\Big)$$
+ \end{Rmq}
+
+\begin{Rmq} On dit que $\overrightarrow{\text{grad}} f(a)$ est le représentant de la forme linéaire $df_a:v\mapsto D_h f(a)$.
+ \end{Rmq}
+ 
+\begin{Ex} Soit $f(M)=\|\overrightarrow{AM\|}$, alors $\overrightarrow{\text{grad}} f(M)=\dfrac{\overrightarrow{AM}}{\|\overrightarrow{AM}\|}$
+\end{Ex}
+
+\begin{Prop}\textbf{Linéarité du gradient et formule pour le produit}\\
+Si $f$ et $g$ admettent des dérivées partielles en $a$
+alors
+$$
+\overrightarrow{\text{grad}}\,(\lambda f+g)(a)=\lambda \overrightarrow{\text{grad}} f(a)+\overrightarrow{\text{grad}} g(a)
+$$
+$$
+\overrightarrow{\text{grad}}\,(fg)(a)=g(a)\overrightarrow{\text{grad}} f(a)+f(a) \overrightarrow{\text{grad}} g(a)
+$$ 
+$$
+\overrightarrow{\text{grad}}\,(1/f)(a)=-\frac{ \overrightarrow{\text{grad}} f (a) }{f^2(a)}
+$$
+
+\end{Prop}
+
+
+\subsection{Divergence}
+
+\begin{Def}\textbf{Divergence}\\
+
+On appelle \textbf{divergence} d'un champ de vecteurs $\vec{V}$ de classe $\mathcal{C}^1$ sur $U$ la fonction définie sur $U$ par:
+\[
+\text{div}_M\vec{V}=\sum_{i=1}^n \dfrac{\partial V_i}{\partial x_i}(M)
+\]
+On note $\text{div}\vec{V}$ l'appplication $M\mapsto \text{div}_M\vec{V}$.\\
+\end{Def}
+
+\begin{Prop}\textbf{Linéarité de la divergence  et formule pour le produit}\\
+Pour tout $\vec U$ et $\vec V$champs de vecteurs de classe $\mathcal{C}^1$ sur $U$.
+alors
+$$
+\text{div}\,(\lambda \vec V+\vec U)=\lambda \text{div} \vec V+\text{div}\vec U
+$$
+et pour toute fonction f de classe $\mathcal{C}^1$ de $U$ sur $\R$
+$$
+\text{div}(f\vec V)=\overrightarrow{grad} f\cdot \vec V+f\text{div}\vec{V}
+$$ 
+
+
+\end{Prop}
+
+
+\newpage
+
+
+\subsection{Laplacien}
+
+\begin{Def}\textbf{Laplacien}\\
+Si $f$ est une application de classe $\mathcal{C}^2$ sur $U$ à valeurs dans $\R$, on appelle \textbf{ Laplacien} de $f$ en $M\in U$, le réel:\\
+\[\displaystyle \Delta _M f ={\vec {\nabla }}^{2}f ={\vec {\nabla }}\cdot ({\vec {\nabla }}f )=\operatorname {div}_M \left({\overrightarrow {\operatorname {grad} }}~f \right).\]
+On a donc:\\
+\[
+\operatorname {div}_M f=
+\sum_{i=1}^n \dfrac{\partial^2 f}{\partial x_i^2}(M)
+\]
+
+On note $\Delta f$ l'appplication $M\mapsto \Delta_M f$.\\
+\end{Def}
+
+
+\begin{Prop}\textbf{Linéarité du Laplacien  et formule pour le produit}\\
+
+$$
+\Delta \,(\lambda f+g)=\lambda \Delta f \vec V+\Delta g
+$$
+et pour toute fonction f de classe $\mathcal{C}^2$ de $U$ sur $\R$ et $g$ de classe $\mathcal{C}^1$ de $U$  sur $\R$ 
+$$
+\Delta(f g)=f \Delta g+g \Delta f+2(\operatorname {grad}f )\cdot (\operatorname {grad} g)
+$$ 
+
+
+\end{Prop}
+
+\subsection{Rotationnel}
+
+On suppose ici que $n=3$. Soient $\vec{V}$ un champ de vecteurs de classe $\mathcal{C}^1$ sur $U$, et $J$ sa matrice jacobienne.\\
+La matrice $J-J^t$ est une matrice antisymétrique, donc est de la forme:\\
+$$J-J^t=
+\begin{pmatrix}
+0&-r&q\\
+r&0&-p\\
+-q&p&0\\
+\end{pmatrix}
+$$
+
+C'est la matrice, dans la base canonique de $\R^3$, de l'endormorphisme $\vec{u}\mapsto \vec{\omega}\wedge \vec{u}$ où $\vec \omega$ a pour composantes $(p,q,r)$.\\
+
+
+\begin{Def} \textbf{Rotationnel } \\
+Ce vecteur $\vec w$ est appelé \textbf{rotationnel } de $\vec V$ en $M$ et se note $\overrightarrow{\text{rot}}_M \vec{V}$.\\
+On :\\
+\[
+\overrightarrow{\text{rot}}_M\vec{V}=\left( \dfrac{\partial V_3}{\partial x_2}-\dfrac{\partial V_2}{\partial x_3},\dfrac{\partial V_1}{\partial x_3}-\dfrac{\partial V_3}{\partial x_1},\dfrac{\partial V_2}{\partial x_1}-\dfrac{\partial V_1}{\partial x_2}\right)
+\]
+\end{Def}
+
+
+
+
+\begin{Prop}\textbf{Linéarité du rotationnel  et formule pour le produit}\\
+Pour tout $\vec U$ et $\vec V$champs de vecteurs de classe $\mathcal{C}^1$ sur $U$.
+alors
+$$
+\overrightarrow{\text{rot}}\,(\lambda \vec V+\vec U)=\lambda \overrightarrow{\text{rot}} \,\vec V+\overrightarrow{\text{rot}}\, \vec U
+$$
+et pour toute fonction f de classe $\mathcal{C}^1$ de $U$ sur $\R$
+$$
+\overrightarrow{\text{rot}}(f\vec V)=f\overrightarrow{\text{rot}}\,  \vec V+\overrightarrow{\text{grad}}f\wedge \vec{V}
+$$ 
+
+
+\end{Prop}
+\subsection{Potentiel scalaire}
+
+On suppose que $U$ est un ouvert de $\R^3$.
+
+
+\begin{Def}\textbf{Potentiel scalaire}\\
+
+Un champ de vecteurs $\vec V$ sur $U$ dérive d'un potentiel s'il existe $f\in\mathcal{C}^1(U,\R)$ tel que $\vec V=\overrightarrow{\text{grad}} f$.\\
+ Une telle fonction $f$ est alors appelée \textbf{potentiel scalaire} de $\vec V$.\\
+\end{Def}
+
+\begin{Rmq}Pas unicité du potentiel vecteur... d'où l'étude des différences de potentiels en physique.\\
+\end{Rmq}
+\begin{Prop}\textbf{Caractérisation des champs de vecteurs à potentiel scalaire (Admis)}\\
+
+Un champ de vecteur $\vec V=(V_1,V_2)$ de classe $\mathcal{C}^1$ sur un ouvert étoilé dérive d'un potentiel si et seulement si $\dfrac{\partial V_1}{\partial y}=\dfrac{\partial V_2}{\partial x}$.\\
+\end{Prop}
+
+\begin{Rmq}
+En dimension $3$, particulièrement en physique, la condition est équivalent à $\overrightarrow{\text{rot}} \vec V=\vec 0$.\\
+\end{Rmq}
+\section{Intégrale curviligne}
+
+\subsection{Circulation d'un champ de vecteurs}
+\begin{itemize}
+\item Soit $U$ un ouvert du plan.
+\item Soit $\Gamma=([a,b],t\mapsto M(t))$ un arc paramétré orienté régulier, contenu dans $U$.
+\item Soit $\vec V$ un champ de vecteurs continu sur $U$.
+\end{itemize}
+
+\begin{Prop}\textbf{Intégrale curviligne}\\
+Alors, l'intégrale
+$$\int_a^b \vec V(M(t))\cdot \vec{M'}(t) dt=\int_a^b (\vec V\circ M)(t)\cdot \vec{M'}(t)dt$$
+ne dépend pas du paramétrage admissible de $\gamma$. On l'appelle \textbf{intégrale curviligne }
+
+ou circulation de $\vec V$ sur $\Gamma$.\\
+
+
+On note l'intégrale $\displaystyle\oint_\Gamma \vec V(M) \vec{dM}$.\\
+\end{Prop}
+
+
+\begin{Rmq}
+
+\begin{itemize}
+\item Si $\vec V(x,y)=(P(x,y),Q(x,y))$, on note aussi
+$$\oint_\Gamma \vec V(M) \vec{dM}=\int_\Gamma P(x,y)dx+Q(x,y)dy.$$
+
+\item On parle pour aussi pour $\Gamma$ de chemin régulier.
+
+\item En pratique, si $\gamma:t\mapsto M(t)=(x(t),y(t))$, 
+$$\oint_\Gamma \vec V(M) \vec{dM}=\int_\Gamma P(x,y)dx+Q(x,y)dy$$
+$$=\int_a^b P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t)dt.$$
+
+\end{itemize}
+\end{Rmq}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{Circulation sur le cercle unité}
+Soit $\mathcal{C}$ le cercle unité, calculer la circulation sur $\mathcal{C}$
+de $\vec V(x,y)=\left(\dfrac{-y}{x^2+y^2},\dfrac{x}{x^2+y^2}\right)$.\\
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+\begin{Prop}Si $\vec V=\vec{grad} f$ et si $\Gamma$ a pour origine $A$ et extrémité $B$, alors
+$$\oint_\Gamma \vec{V}(M)\cdot \vec{dM}=f(B)-f(A).$$
+\end{Prop}
+
+
+\begin{Rmq}
+ La circulation correspond en physique au travail d'une force. Ainsi, si la force dérive d'un potentiel, le travail ne dépend que du point de départ et du point d'arrivée.
+\end{Rmq}
+
+
+
+
+
+\begin{Def}\textbf{Intégrale curviligne d'une forme différentielle}\\
+
+L'intégrale curviligne d'une forme différentielle de classe \(C^1\), $$\omega = P(x, y, z)dx + Q(x, y, z)dy + R(x, y, z)dz$$
+
+le long de la courbe \(\gamma\) de représentation paramétrique 
+\[
+\begin{cases}
+x = x(t) \\
+y = y(t) \\
+z = z(t)
+\end{cases},
+\quad t \in [a, b],
+\]
+est le nombre réel :
+\begin{small}
+\[
+\int_{\gamma} \omega = \int_{a}^{b} \left( P(x(t), y(t), z(t))x'(t) + Q(x(t), y(t), z(t))y'(t) + R(x(t), y(t), z(t))z'(t) \right) dt
+\]
+\end{small}
+La version en dimension 2 s'obtient en ôtant la variable \(z\) et la composante \(R\), c'est-à-dire :
+\[
+\int_{\gamma} \omega = \int_{\gamma} \left( P(x, y) dx + Q(x, y) dy \right) = \int_{a}^{b} \left( P(x(t), y(t))x'(t) + Q(x(t), y(t))y'(t) \right) dt
+\]
+où \(\gamma\) est de représentation paramétrique
+\[
+\begin{cases}
+x = x(t) \\
+y = y(t)
+\end{cases}, \quad t \in [a, b]
+\]
+\end{Def}
+
+
+\begin{Ex}
+
+ L'intégrale curviligne de la forme différentielle \(\omega(x, y, z) = z \, dx - y \, dy + x \, dz\) \\
+ le long de l'arc d'hélice \(\gamma(t) = (\cos t, \sin t, t)\) avec \(t \in [0, 2\pi]\) est égale à :
+\[
+\int_{\gamma} \omega = \int_{0}^{2\pi} \left( t \frac{d(\cos t)}{dt} - \sin t \frac{d(\sin t)}{dt} + \cos t \frac{d(t)}{dt} \right) dt\]
+\[ = \int_{0}^{2\pi} \left( - t \sin t - \sin t \cos t + \cos t \right) dt
+\]
+\[
+= \left[ t \cos t \right]_{0}^{2\pi} - \int_{0}^{2\pi} \cos t \, dt - \int_{0}^{2\pi} \sin t \cos t \, dt + \int_{0}^{2\pi} \cos t \, dt
+\]
+\[= 2\pi - \left[ \frac{1}{2} \sin^2 t \right]_{0}^{2\pi} = 2\pi
+\]
+On peut aussi retrouver ce résultat, en remarquant que la forme différentielle \(\omega\) est exacte.\\
+En effet,\\ \(\omega = df\) où \(f(x, y, z) = xz - \frac{y^2}{2}\).\\
+Par suite, le théorème précédent nous donne :
+\[
+\int_{\gamma} \omega = \int_{\gamma} df = f(\gamma(2\pi)) - f(\gamma(0)) = f(1, 0, 2\pi) - f(1, 0, 0) = 2\pi.
+\]
+\end{Ex}
+
+
+\exo[2]{Intégrale curviligne}
+Calculer l'intégrale curviligne
+\[
+\int_{C^+} (x + y) \, dx + (x - y) \, dy
+\]
+où \( C^+ \) est le cercle unité orienté dans le sens direct (sens inverse des aiguilles d'une montre).\\
+
+
+
+% \begin{Sol}
+
+%  Une paramétrisation du cercle est donnée par \( \gamma(t) = (x(t), y(t)) = (\cos t, \sin t) \), où \( t \in [0, 2\pi] \). Alors \( dx = x'(t) \, dt = -\sin t \, dt \) et \( dy = y'(t) \, dt = \cos t \, dt \), ainsi
+% \[
+% \int_{C^+} (x + y) \, dx + (x - y) \, dy = \int_{0}^{2\pi} ((\cos t + \sin t)(-\sin t) + (\cos t - \sin t)(\cos t)) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} ((-\cos t \sin t - \sin^2 t) + (\cos^2 t - \sin t \cos t)) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} (-2 \cos t \sin t + \cos^2 t - \sin^2 t) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} (-\sin 2t + \cos 2t) \, dt = \left[ \frac{\cos 2t}{2} + \frac{\sin 2t}{2} \right]_{0}^{2\pi} = 0.
+% \]
+
+% \textbf{Remarque 1} On aurait aussi, remarqué que \(\omega = (x + y) \, dx + (x - y) \, dy\) est exacte, en effet \(\omega = df\) avec \( f(x, y) = \frac{x^2}{2} + xy - \frac{y^2}{2} \); ainsi
+% \[
+% \int_{C^+} (x + y) \, dx + (x - y) \, dy = \int_{C^+} df = 0,
+% \]
+% puisque \( C \) est une courbe fermée.\\
+% \end{Sol}
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{Intégrale curviligne à nouveau}
+Calculer l'intégrale curviligne
+\[
+\int_{C^+} xy \, dx + (x + y) \, dy.
+\]
+
+
+
+% \begin{Sol} 
+% On a \(\frac{\partial (xy)}{\partial y} = x \ne 1 = \frac{\partial (x + y)}{\partial x}\), la forme différentielle \(\omega = xy \, dx + (x + y) \, dy\) n'est pas fermée, donc n'est pas exacte, on doit alors faire le calcul en utilisant la définition. On prend pour cela la paramétrisation du cercle donnée dans l'exercice précédent et on obtient
+% \[
+% \int_{C^+} xy \, dx + (x + y) \, dy = \int_{0}^{2\pi} (\cos t \sin t)(-\sin t) + (\cos t + \sin t)(\cos t) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} (-\cos t \sin^2 t + \cos^2 t + \sin t \cos t) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} \left(-\cos t \sin^2 t + 1 + \frac{\cos 2t}{2} + \sin t \cos t\right) \, dt
+% \]
+% \[
+% = \left[ -\frac{\sin^3 t}{3} + \frac{t}{2} + \frac{\sin 2t}{4} + \frac{\sin^2 t}{2} \right]_{0}^{2\pi} = \pi.
+% \]
+% \end{Sol}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+\exo[3]{Intégrale curviligne suivant différents chemins}
+Calculer l'intégrale curviligne
+\[
+\int_{\gamma} \frac{y + z}{x^2 + y^2} \, dx + \frac{z + x}{x^2 + y^2} \, dy + \frac{x + y}{x^2 + y^2} \, dz
+\]
+lorsque:\\
+\begin{enumerate}\item  \(\gamma\) est le segment de droite d'origine \(A = (1, 1, 1)\) et d'extrémité \(B = (2, 2, 2)\).
+\item \(\gamma\) est l'hélice définie par \(x = \cos t\), \(y = \sin t\) et \(z = t\), \(t\) variant de \(0\) à \(2\pi\).\\
+\end{enumerate}
+
+
+
+% \begin{Sol} On a \(\frac{\partial \left( \frac{y + z}{x^2 + y^2} \right)}{\partial z} = \frac{1}{x^2 + y^2} \ne -\frac{x^2 + 2xy + y^2}{(x^2 + y^2)^2} = \frac{\partial \left( \frac{x + y}{x^2 + y^2} \right)}{\partial x}\), la forme différentielle
+% \[
+% \omega = \frac{y + z}{x^2 + y^2} \, dx + \frac{z + x}{x^2 + y^2} \, dy + \frac{x + y}{x^2 + y^2} \, dz
+% \]
+% n'est pas fermée, par conséquent n'est pas exacte, on doit alors faire le calcul en utilisant la définition.\\
+
+% 1. Le segment \([A, B]\) qui relie \(A\) à \(B\) a par exemple pour paramétrisation:
+% \[
+% \gamma(t) = A + t(B - A) = (1, 1, 1) + t((2, 2, 2) - (1, 1, 1)) = (1 + t, 1 + t, 1 + t) \quad \text{avec} \quad t \in [0, 1],
+% \]
+% alors
+% \[
+% \int_{\gamma} \frac{y + z}{x^2 + y^2} \, dx + \frac{z + x}{x^2 + y^2} \, dy + \frac{x + y}{x^2 + y^2} \, dz = \int_{0}^{1} \left(\frac{2 + 2t}{2(1 + t)^2} + \frac{2 + 2t}{2(1 + t)^2} + \frac{2 + 2t}{2(1 + t)^2}\right) \, dt
+% \]
+% \[
+% = 3 \int_{0}^{1} \frac{1}{1 + t} \, dt = 3 \left[ \ln(1 + t) \right]_{0}^{1} = 3 \ln(2).
+% \]
+
+% 2. La paramétrisation donnée est \(\gamma(t) = (\cos t, \sin t, t)\) avec \(t \in [0, 2\pi]\) et de \(\cos^2 t + \sin^2 t = 1\) on aura
+% \[
+% \int_{\gamma} \frac{y + z}{x^2 + y^2} \, dx + \frac{z + x}{x^2 + y^2} \, dy + \frac{x + y}{x^2 + y^2} \, dz = \int_{0}^{2\pi} \left( \frac{\sin t + t}{1} (-\sin t) + \frac{\cos t + t}{1} (\cos t) + \frac{\cos t + \sin t}{1} \right) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} (-\sin^2 t - t \sin t + \cos^2 t + t \cos t + \cos t + \sin t) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} (-t \sin t + t \cos t + \cos 2t + \cos t + \sin t) \, dt.
+% \]
+% Une intégration par parties donne:
+% \[
+% \int_{0}^{2\pi} -t \sin t \, dt = \left[ t \cos t \right]_{0}^{2\pi} - \int_{0}^{2\pi} \cos t \, dt = 2\pi - \left[ \sin t \right]_{0}^{2\pi} = 2\pi,
+% \]
+% et
+% \[
+% \int_{0}^{2\pi} t \cos t \, dt = \left[ t \sin t \right]_{0}^{2\pi} - \int_{0}^{2\pi} \sin t \, dt = 0 + \left[ \cos t \right]_{0}^{2\pi} = 0,
+% \]
+% d'où
+% \[
+% \int_{\gamma} \frac{y + z}{x^2 + y^2} \, dx + \frac{z + x}{x^2 + y^2} \, dy + \frac{x + y}{x^2 + y^2} \, dz = \int_{0}^{2\pi} (-t \sin t + t \cos t + \cos 2t + \cos t + \sin t) \, dt
+% \]
+% \[
+% = \int_{0}^{2\pi} -t \sin t \, dt + \int_{0}^{2\pi} t \cos t \, dt + \int_{0}^{2\pi} \cos 2t \, dt + \int_{0}^{2\pi} \cos t \, dt + \int_{0}^{2\pi} \sin t \, dt
+% \]
+% \[
+% = 2\pi + 0 + 0 + 0 + 0 = 2\pi.
+% \]
+% \end{Sol}
+\hfill\break
+\hrule
+\hfill\break
+
+\subsection{Formule de Green-Riemann}
+
+\begin{Thm} \textbf{Formule de Green-Riemann}\\
+
+Soit $D$ un domaine borné de $\R^2$, on suppose que le bord $\partial D$ de $D$ est une réunion de courbe de classe $\mathcal{C}^1$ que l'on oriente de manière que le vecteur normal se dirige vers l'intérieur de $D$.
+
+Si $\vec V=(P,Q)$ est un champ de vecteur de classe $\mathcal{C}^1$ un ouvert $U$ contenant $D$, alors
+$$\int_{\partial D} \vec V(M)\cdot \vec{dM}=\int_D \left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dxdy.$$
+
+\end{Thm}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[3]{Formule de Green-Riemann}
+Soit \( D \) le domaine limité par le cercle d'équation $ x^2 + y^2 - 2y = 0 $
+parcouru dans le sens direct.\\
+Calculer à l'aide de la formule de Green-Riemann
+\[
+\int_D (x^2 - y^2) \, dx \, dy.
+\]
+\hfill\break
+\hrule
+\hfill\break
+
+
+
+% \begin{Sol}
+% Le bord de \( D \) est la courbe (simple) \( C \) d'équation \( x^2 + y^2 - 2y = 0 \) qui s'écrit \( x^2 + (y - 1)^2 = 1 \), c'est donc le cercle centré en \( (0, 1) \) et de rayon 1. Une paramétrisation de \( C \) est donnée par :
+% \[
+% \begin{cases}
+% x = \cos t \quad \text{avec } t \in [0, 2\pi] \\
+% y - 1 = \sin t \text{ ou encore } y = \sin t + 1
+% \end{cases}
+% \]
+
+% D'après la formule de Green-Riemann,
+% \[
+% \int_D (x^2 - y^2) \, dx \, dy = \int_C P \, dx + Q \, dy,
+% \]
+% où \( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = x^2 - y^2 \).
+
+% Pour que l'égalité ait lieu, nous choisissons \( \frac{\partial Q}{\partial x} = x^2 - y^2 \) et \( \frac{\partial P}{\partial y} = 0 \), d'où \( Q = \frac{x^3}{3} - xy^2 \) et \( P = 0 \). Avec ce choix, on a
+% \[
+% \int_D (x^2 - y^2) \, dx \, dy = \int_C \left(\frac{x^3}{3} - xy^2\right) \, dy.
+% \]
+
+% En utilisant la paramétrisation \( x = \cos t \) et \( y = \sin t + 1 \), on obtient :
+% \[
+% \int_C \left(\frac{x^3}{3} - xy^2\right) \, dy = \int_0^{2\pi} \left(\frac{\cos^3 t}{3} - \cos t (\sin t + 1)^2 \right) \cos t \, dt.
+% \]
+% Développons et simplifions cette intégrale :
+% \[
+% \int_0^{2\pi} \left(\frac{\cos^3 t}{3} - \cos t (\sin^2 t + 2 \sin t + 1)\right) \cos t \, dt.
+% \]
+
+% Calculons chacune des intégrales :\\
+% ii)
+% $$
+% \begin{aligned}
+% \int_0^{2\pi} \cos^4 t \, dt &= \int_0^{2\pi} \left(\frac{1 + \cos 2t}{2}\right)^2 \, dt\\
+% & = \int_0^{2\pi} \frac{1}{4} + \frac{\cos 2t}{2} + \frac{\cos^2 2t}{4} \, dt\\
+% &= \frac{1}{4} \int_0^{2\pi} 1 \, dt + \frac{1}{2} \int_0^{2\pi} \cos 2t \, dt + \frac{1}{4} \int_0^{2\pi} \frac{1 + \cos 4t}{2} \, dt\\
+% &= \frac{1}{4} \cdot 2\pi + \frac{1}{4} \cdot \pi = \frac{3\pi}{4}.
+% \end{aligned}
+% $$
+
+
+% ii)
+% $$
+% \begin{aligned} 
+% \int_0^{2\pi} \sin t \cos^2 t \, dt &= \int_0^{2\pi} \sin t \left(\frac{1 + \cos 2t}{2}\right) \, dt\\
+% & = \frac{1}{2} \int_0^{2\pi} \sin t \, dt + \frac{1}{2} \int_0^{2\pi} \sin t \cos 2t \, dt\\
+% &= 0 + 0 = 0.
+% \end{aligned}
+% $$
+
+
+
+% \[
+% iii) \int_0^{2\pi} \cos^2 t \sin^2 t \, dt = \frac{1}{4} \int_0^{2\pi} \sin^2 2t \, dt = \frac{1}{4} \int_0^{2\pi} \frac{1 - \cos 4t}{2} \, dt
+% \]
+% \[
+% = \frac{1}{4} \left(\pi - 0 \right) = \frac{\pi}{4}.
+% \]
+
+
+% iv) 
+
+% $$
+% \begin{aligned}
+% \int_0^{2\pi} \cos^2 t \, dt& = \frac{1}{2} \int_0^{2\pi} 1 + \cos 2t \, dt\\
+% & = \frac{1}{2} \cdot 2\pi \\
+% &= \pi.\\
+% \end{aligned}
+% $$
+% Ainsi,
+% \[
+% \int_D (x^2 - y^2) \, dx \, dy = \frac{1}{3} \cdot \frac{3\pi}{4} - \pi - 2 \cdot 0 - \frac{\pi}{4}
+% = \frac{\pi}{4} - \pi - \frac{\pi}{4}
+% = -\pi.
+% \]
+
+% \end{Sol}
+
+\newpage
+
+\exo[3]{Formule de Green-Riemann à nouveau}
+Calculer l'intégrale curviligne \( I \) le long de la courbe fermée $\gamma $
+constituée par les deux arcs de parabole \( y = x^2 \) et \( x = y^2 \), \\
+orientée dans le sens direct où
+\[
+I = \int_{\gamma} (2xy - x^2) \, dx + (x + y^2) \, dy.
+\]
+Vérifier le résultat en utilisant la formule de Green-Riemann.\\
+\hfill\break
+\hrule
+\hfill\break
+
+
+% \begin{Sol} La courbe fermée \( \gamma \) est formée de deux arcs : \( \gamma_1 \) va de \( (0, 0) \) à \( (1, 1) \) en suivant la courbe \( y = x^2 \) et \( \gamma_2 \) va de \( (1, 1) \) à \( (0, 0) \) et suit la courbe \( x = y^2 \). On peut donc prendre pour paramétrisation :
+% \[
+% \gamma_1(t) = (x(t), y(t)) = (t, t^2) \text{ avec } t \in [0, 1] \text{ orienté dans le sens direct}
+% \]
+% et
+% \[
+% \gamma_2(t) = (x(t), y(t)) = (t^2, t) \text{ avec } t \in [0, 1], \text{ mais orienté dans le sens inverse}.
+% \]
+% Alors,
+% \[
+% I = \int_{\gamma} (2xy - x^2) \, dx + (x + y^2) \, dy =
+% \int_{\gamma_1} (2xy - x^2) \, dx + (x + y^2) \, dy +
+% \int_{\gamma_2} (2xy - x^2) \, dx + (x + y^2) \, dy.
+% \]
+% où
+% $$
+% \begin{aligned}
+% \int_{\gamma_1} (2xy - x^2) \, dx + (x + y^2) \, dy& =\int_0^1 \left[(2t^3 - t^2) \cdot 1 + (t + t^4) \cdot 2t\right] \, dt\\
+% & =\int_0^1 \left[t^2 + 2t^3 + 2t^5\right] \, dt = \frac{1}{3} + \frac{1}{2} + \frac{1}{3}\\
+% & = \frac{7}{6}\\
+% \end{aligned}
+% $$
+% et
+% $$
+% \begin{aligned}
+% \int_{\gamma_2} (2xy - x^2) \, dx + (x + y^2) \, dy& = - \int_0^1 \left[(2t^3 - t^4) \cdot 2t + (t^2 + t^2) \cdot 1\right] \, dt \\
+% &= - \int_0^1 \left[2t^2 + 4t^4 - 2t^5\right] \, dt \\
+% &= -\left(\frac{2}{3} + \frac{4}{5} - \frac{1}{3}\right)\\
+% & = - \frac{17}{15}\\
+% \end{aligned}
+% $$
+% Ainsi,
+% \[
+% I = \int_{\gamma} (2xy - x^2) \, dx + (x + y^2) \, dy = \frac{7}{6} - \frac{17}{15} = \frac{1}{30}.
+% \]
+
+% Vérifions maintenant le résultat à l'aide de la formule de Green-Riemann. Le domaine \( D \) bordé par la courbe \( \gamma \) est \( D = \{(x, y) \mid x^2 \leq y \leq \sqrt{x}, 0 \leq x \leq 1\} \) et \( \gamma = \partial D \). On a, d'après la formule de Green-Riemann :
+% $$
+% \begin{aligned}
+% \int_{\gamma} (2xy - x^2) \, dx + (x + y^2) \, dy &=
+% \int_{D} \left(\frac{\partial (x + y^2)}{\partial x} - \frac{\partial (2xy - x^2)}{\partial y}\right) \, dx \, dy\\
+% & = \int_{D} (1 - 2x) \, dx \, dy \\
+% &= \int_0^1 (1 - 2x) \left(\int_{x^2}^{\sqrt{x}} dy \right) dx\\
+% &= \int_0^1 (1 - 2x) (\sqrt{x} - x^2) \, dx \\
+% &=\int_0^1 \left(\sqrt{x} - x^2 - 2x \frac{3}{2} + 2x^3 \right) dx \\
+% &=\left[ \frac{2x^{3/2}}{3} - \frac{x^3}{3} - \frac{4x^5}{5} + \frac{x^4}{2} \right]_0^1\\
+% & =\frac{2}{3} - \frac{1}{3} - \frac{4}{5} + \frac{1}{2} = \frac{1}{30}.\\
+% \end{aligned}
+% $$
+% \end{Sol}
+
+
+
+
+
+
+
+
+\section{Exercices}
+
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 160
+
+
+\exo[2]{Calculs effectifs}
+\begin{enumerate}
+\item Déterminer les coordonnées de $\operatorname {grad} f$ où $f$ est le champ scalaire suivant :
+\begin{enumerate}
+\item $f(x,y,z)=xy^2-yz^2$.
+\item $f(x,y,z)=xyz\sin(xy)$.
+\end{enumerate}
+\item Déterminer $\text{div} f$ où $f$ est le champ de vecteurs suivant :
+\begin{enumerate}
+\item $f(x,y,z)=(2x^2y,2xy^2,xy)$.
+\item $f(x,y,z)=(\sin(xy),0,\cos(xz))$.
+\item $f(x,y,z)=(x(2y+z),-y(x+z),z(x-2y))$.\\
+\end{enumerate}
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 161
+
+
+
+
+\exo[2]{Passage en coordonnées polaires}
+Soit $f:\mathcal U\to\mathbb R$ une fonction de classe $C^1$ définie sur un ouvert $\mathcal U$ de $\mathbb R^2$. 
+Calculer $\left(\frac{\partial f}{\partial x}\right)^2+\left(\frac{\partial f}{\partial y}\right)^2$ en coordonnées polaires.\\
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 162
+
+\newpage
+
+\exo[3]{Laplacien en coordonnées polaires}
+On rappelle que si $F$ est une fonction de classe $C^2$ de $\R^2$ dans $\R$, son laplacien est défini par :
+$$\Delta F=\frac{\partial^2 F}{\partial x^2}+\frac{\partial^2 F}{\partial y^2}.$$
+On fait le changement de variables en coordonnées polaires $x=r\cos\theta$ et $y=r\sin\theta$.\\
+
+Donner la nouvelle expression du laplacien par rapport aux variables $r$ et $\theta$ (c'est-à-dire poser $f(r,\theta)=F(r\cos\theta,r\sin\theta)$
+et exprimer $\Delta F$ en fonction de $f$, $r$, $\theta$ et des dérivées partielles de $f$).\\
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 163
+
+
+
+
+\exo[3]{Potentiel scalaire}
+On rappelle qu'on dit qu'un champ de vecteurs $F$ dérive d'un potentiel scalaire s'il existe un champ scalaire $f$ tel que $F=\vec{grad}(f)$.
+Montrer que les champs suivants dérivent d'un potentiel scalaire, et déterminer tous les potentiels scalaires dont ils dérivent.
+\begin{enumerate}
+\item $F(x,y,z)=(2xy+z^3,x^2,3xz^2)$, défini sur $\R^3$.
+\item $F(x,y)=\left(-\frac{y}{(x-y)^2},\frac{x}{(x-y)^2}\right)$, défini sur $U=\{(x,y)\in\R^2, x>y\}$.\\
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\exo[2]{Intégration le long d'une cardioïde}
+Soit $\omega=(x+y)dx+(x-y)dy$. Calculer l'intégrale curviligne de $\omega$ le long de la demi-cardioïde d'équation en polaire $r=1+\cos\theta$, $\theta$ allant de $0$ à $\pi$.\\
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1923
+
+
+\exo[2]{Intégrales curvilignes}
+Calculer les intégrales curvilignes $\int_C\omega$ dans les exemples suivants :
+\begin{enumerate}
+\item $\omega=xydx+(x+y)dy$, et $C$ est l'arc de parabole $y=x^2$, $-1\leq x\leq 2$, parcouru dans le sens direct.
+\item $\omega=y\sin xdx+x\cos ydy$, et $C$ est le segment de droite $OA$ de $O(0,0)$ vers $A(1,1)$.\\
+\end{enumerate}
+
+
+% Exercice 1925
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+\exo[3]{Même origine, même extrémité, mais chemins différents}
+Calculer l'intégrale curviligne de $\omega=x^2dx-xydy$ le long des contours suivants :
+\begin{itemize}
+\item le segment de droite $[OB]$ de $O(0,0)$ vers $B(1,1)$.
+\item l'arc de parabole $x=y^2$, $0\leq y\leq 1$, orienté dans le sens des $x$ croissants.
+\end{itemize}
+Que peut-on en déduire pour la forme différentielle $\omega$? Retrouver cela par une autre méthode.\\
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1926
+
+
+\exo[3]{Autour d'une hélice}
+On considère l'arc $\Gamma$, arc d'hélice paramétré et orienté par :
+$$x=R\cos t,\ y=R\sin t,\ z=ht,$$
+pour $t$ variant de $0$ à $2\pi$. Calculer :
+$$I=\int_\Gamma (y-z)dx+(z-x)dy+(x-y)dz.$$
+
+\hfill\break
+\hrule
+\hfill\break
+% Exercice 1924
+
+\exo[2]{Autour d'un carré}
+Calculer l'intégrale curviligne de $$ \omega=\frac{x-y}{x^2+y^2}dx+\frac{x+y}{x^2+y^2}dy$$ le long du carré $ABCD$, avec $A(1,1)$, $B(-1,1)$, $C(-1,-1)$ et $D(1,-1)$, parcouru dans le sens direct.\\
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1930
+
+
+\exo[2]{Champ de vecteurs}
+Soit $$ V(x,y)=\left(\frac{-y}{x^2+y^2};\frac{x}{x^2+y^2}\right)$$ un champ de vecteurs. Calculer sa circulation le long du cercle de centre O et de rayon $R$. En déduire que ce champ de vecteurs ne dérive pas d'un potentiel.\\
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1931
+
+\newpage
+
+\exo[3]{Dans l'espace!}
+Soit $(O,\vec{i},\vec{j},\vec{k})$ un repère orthonormé, et $\vec{F}$ le champ de vecteurs :
+$$\vec{F}(x,y,z)=(x+z)\vec{i}-3xy\vec{j}+x^2\vec{k}.$$
+Calculer la circulation de ce champ de vecteurs entre les points $O(0,0,0)$ et $P(1,2,-1)$ le long des chemins suivants :
+\begin{enumerate}
+\item $\Gamma_1:(x=t^2,y=2t,z=-t)$.
+\item Le segment de droite $[O,P]$.
+\end{enumerate}
+Que peut-on remarquer? Pourquoi?\\
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1933
+
+
+
+\exo[3]{Formule de Green-Riemann}
+En utilisant la formule de Green-Riemann, calculer 
+$$\int_\gamma (2xy-x^2)dx+(x+y^2)dy,$$
+où $\gamma$ est le bord orienté du domaine délimité par les courbes d'équation $y=x^2$ et $x=y^2$.\\
+\hfill\break
+\hrule
+\hfill\break
+
+% Exercice 1937
+
+
+\exo[3]{Aire d'une arche de cycloïde}
+Calculer l'aire du domaine plan délimité par l'axe $(Oy)$ et l'arc paramétré $x=a(t-\sin t)$ et $y=a(1-\cos t)$, pour $t\in[0,2\pi]$.\\
+
+
+% Exercice 1939
+
+
+
+

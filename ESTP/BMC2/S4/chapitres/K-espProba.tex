@@ -1,0 +1,869 @@
+
+
+
+\section{Espace probabilisé et probabilisable}
+
+
+\begin{Def}\textbf{Ensemble dénombrable}\\
+
+On dit qu'un ensemble est dénombrable s'il est en bijection avec l'ensemble $\mathbb{N}$.\\
+\end{Def}
+\begin{Ex}
+Les ensembles $\mathbb{N}$, $\mathbb{N}^*$.
+Les ensembles $\mathbb{Z}$ et $\mathbb{Q}$ sont dénombrables, mais $\mathbb{R}$ n'est pas dénombrable.\\
+\end{Ex}
+
+\begin{Rmq} 
+Les indices de sommation d'une série forment un ensemble dénombrable.\\
+\end{Rmq} 
+
+\begin{Def}\textbf{Univers des possibles $\Omega$}\\
+On appelle univers des possibles l'ensemble $\Omega$ des résultats possibles décrivant une expérience aléatoire.\\ 
+On ne considérera dans ce chapitre que des univers discrets, i.e. finis ou dénombrables.\\
+\end{Def}
+
+\begin{Ex}
+\begin{itemize}
+    \item On lance un dé. On peut alors choisir $\Omega = [1, 6]$.
+    \item On lance une pièce. On choisit alors $\Omega = \{P, F\}$.
+    \item On lance une pièce $n$ fois. On choisit alors $\Omega = \{P, F\}^n$.
+    \item On lance une pièce indéfiniment. On choisit alors $\Omega = \{P, F\}^{\mathbb{N}^*}$.
+    \item Une urne contient une boule blanche, notée $B$, et quatre boules rouges, notées $R$.
+    \begin{itemize}
+        \item On tire successivement deux boules avec remise : $\Omega = \{(B, B), (B, R), (R, B), (R, R)\}$.
+        \item On tire successivement deux boules sans remise : $\Omega = \{(B, R), (R, B), (R, R)\}$.
+        \item On tire simultanément deux boules : $\Omega = \{\{B, R\}, \{R, R\}\}$.\\
+    \end{itemize}
+\end{itemize}
+\end{Ex}
+
+\begin{Def}\textbf{Tribu (ou $\sigma$-algèbre)}\\
+
+On appelle tribu (ou $\sigma$-algèbre) sur un univers $\Omega$ tout sous-ensemble $T$ de l'ensemble $\mathcal{P}(\Omega)$ des parties de $\Omega$ vérifiant les propriétés suivantes :
+\begin{itemize}
+    \item[(i)] la tribu $T$ contient l'univers : $\Omega \in T$ ;
+    \item[(ii)] la tribu $T$ est stable par complémentaire : $\forall A \in T, A^c \in T$ ;
+    \item[(iii)] la tribu $T$ est stable par réunion d'une suite d'événements de la tribu :
+    $\forall (B_n)_{n \in \mathbb{N}} \in T^{\mathbb{N}}, \bigcup_{n \in \mathbb{N}} B_n \in T$.
+\end{itemize}
+On définit alors les éléments de la tribu $T$ :
+\begin{itemize}
+    \item les éléments de $T$ sont appelés événements de l'expérience aléatoire,
+    \item les singletons de $T$ sont appelés événements élémentaires,
+    \item l'événement $\Omega$ est appelé l'événement certain, l'événement $\emptyset$ est appelé l'événement impossible.
+\end{itemize}
+On dit alors que le couple $(\Omega, T)$ est un espace probabilisable.\\
+\end{Def}
+
+
+\begin{Ex}
+Soit $\Omega$ un univers et soit $A \subset \Omega$. Les ensembles $T_1 = \{\Omega, \emptyset\}$, $T_2 = \{\Omega, A, A^c, \emptyset\}$ et $\mathcal{P}(\Omega)$ sont des tribus sur $\Omega$.
+
+\end{Ex}
+
+
+\begin{Prop}
+Soit $(\Omega, \mathcal{T})$ un espace probabilisable. Alors :\\
+\begin{enumerate}
+    \item $\emptyset \in \mathcal{T}$,
+    \item Pour tout $(A, B) \in \mathcal{T}^2$, $A \cap B, A \cup B$ et $A \setminus B$ sont des événements, i.e. $A \cap B \in \mathcal{T}$, $A \cup B \in \mathcal{T}$ et $A \setminus B \in \mathcal{T}$.
+    \item La tribu $\mathcal{T}$ est stable par intersection dénombrable.\\
+\end{enumerate}
+\end{Prop}
+
+\begin{Def}\textbf{Expérience aléatoire}\\
+
+On appelle expérience aléatoire une expérience dont le résultat n'est pas connu a priori, c'est-à-dire qu'il ne dépend que du hasard. L'ensemble des résultats possibles d'une expérience aléatoire est appelé univers.\\
+ On le note usuellement $\Omega$ et ses éléments, appelées issues, sont notés $\omega$. Lors de chaque expérience, une seule issue $\omega$ de $\Omega$ est réalisée. Dans ce chapitre, on ne traitera que le cas où $\Omega$ est un ensemble fini.\\
+\end{Def}
+
+\begin{Ex}
+\begin{enumerate}
+    \item On lance un dé à six faces numérotées de 1 à 6, on a $\Omega = \{1, 2, 3, 4, 5, 6\}$.
+    \item On lance une pièce, on a $\Omega = \{\text{Pile}, \text{Face}\}$.
+    \item On lance 3 fois une pièce, on a 
+    $\Omega = \{\text{PPP}, \text{PPF}, \text{PFP}, \text{PFF}, \text{FPP}, \text{FPF}, \text{FFP}, \text{FFF}\}$.
+\end{enumerate}
+\end{Ex}
+
+
+\begin{Def}\textbf{Évènement}\\
+
+Dans le cas où l'univers d'une expérience est fini, on appelle évènement toute partie de $\Omega$. Le couple $(\Omega, \mathcal{P}(\Omega))$ et alors appelé espace probabilisable.\\
+
+\end{Def}
+
+
+\begin{Ex}
+Pour le lancer d'un dé à 6 faces, l'événement “le nombre obtenu est pair” est $\{2, 4, 6\}$.
+\end{Ex}
+
+\begin{Def}\textbf{Évènement impossible, certain, élémentaire}\\
+\begin{itemize}
+    \item $\emptyset$ est appelé l'événement impossible.
+    \item $\Omega$ est appelé l'événement certain.
+    \item  Les événements $\{w\}$ (les singletons) sont appelés événements élémentaires.\\
+\end{itemize}
+
+\end{Def}
+
+
+\section{Opérations sur les évènements}
+
+\subsection{Opérations sur les évènements}
+Dans le cadre des probabilités, on a l'interprétation suivante des opérations sur les parties : 
+
+\begin{Def} \textbf{Opérations sur les évènements}\\
+
+Soit $A$ et $B$ deux événements.
+\begin{enumerate}
+    \item $A^c$ (le complémentaire de $A$ dans $\Omega$) est appelé événement contraire de $A$.
+    \item L'événement $A \cap B$ est réalisé si les événements $A$ et $B$ sont réalisés.
+    \item L'événement $A \cup B$ est réalisé si au moins un des deux événements $A$ ou $B$ est réalisé.
+    \item $A \subset B$ signifie que l'événement $A$ implique l'événement $B$.
+    \item Si $A \cap B = \emptyset$, alors on dit que $A$ et $B$ sont incompatibles.\\
+\end{enumerate}
+\end{Def}
+
+\begin{Def}\textbf{Système complet d'évènements}\\
+
+Soit $(A_i)_{i \in I}$ une famille d'événements (où $I$ est un ensemble fini de $\mathbb{N}$). On dit que cette famille forme un système complet d'événements de $\Omega$ si :
+\begin{enumerate}
+    \item $\forall(i, j) \in I^2$ tels que $i \neq j$, $A_i \cap A_j = \emptyset$.
+    \item $\bigcup_{i \in I} A_i = \Omega$.\\
+\end{enumerate}
+\end{Def}
+
+\begin{Ex}
+\begin{enumerate}
+\item Pour tout événement $A$, $\{A, A^c\}$ est un système complet d'événements.
+\item Dans le cas d'un lancé de dé, si on note :
+\begin{itemize}
+    \item $A$: "le résultat est pair"
+    \item $B$: "le résultat est égal à 3 ou 5"
+    \item $C$: "le résultat est égal à 1"
+\end{itemize}
+Alors $\{A, B, C\}$ est un s.c.e.
+\item On tire 3 fois et avec remise une boule dans une urne contenant des boules noires et blanches. On note $X$ le rang de la première boule blanche tirée en convenant que si on ne tire finalement pas de boule blanche alors $X$ vaut 0. Alors 
+\[
+\{(X = 0), (X = 1), (X = 2), (X = 3)\}
+\] 
+est un système complet d'événements.
+\end{enumerate}
+\end{Ex}
+
+
+
+\subsection{Définition et premières propriétés}
+
+\begin{Def}\textbf{Probabilité - Espace probabilisé fini }\\
+
+Soit $\Omega$ un ensemble fini. On appelle probabilité sur l'espace probabilisable $(\Omega, \mathcal{P}(\Omega))$ toute application $\mathbb{P} : \mathcal{P}(\Omega) \rightarrow [0, 1]$ vérifiant :
+\begin{itemize}
+    \item[1.] $\mathbb{P}(\Omega) = 1$
+    \item[2.] $\forall A, B \in \mathcal{P}(\Omega)$ tels que $A \cap B = \emptyset$, $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)$.
+\end{itemize}
+Le triplet $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$ est alors appelé espace probabilisé fini.\\
+\end{Def}
+
+\begin{Rmq} 
+On retiendra surtout de cette définition que si $A$ et $B$ sont incompatibles, $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)$.\\
+\end{Rmq} 
+
+\begin{Prop}\textbf{Propriété de base d'une probabilité (admis)}\\
+
+Soit $\mathbb{P}$ une probabilité sur $\Omega$ et $A$ et $B$ deux événements de $\Omega$.
+\begin{itemize}
+    \item[(I)] $\mathbb{P}(A) = 1 - \mathbb{P}(A^c)$
+    \item[(II)] Si $A \subset B$ alors $\mathbb{P}(A) \leq \mathbb{P}(B)$
+    \item[(III)] Pour toute famille $(A_i)_{1 \leq i \leq n}$ d'événements deux à deux incompatibles, on a
+    \[
+    \mathbb{P}\left( \bigcup_{i=1}^{n} A_i \right) = \sum_{i=1}^{n} \mathbb{P}(A_i)
+    \]
+    Attention ! (I) On écrira donc $\mathbb{P}(A_1 \cup A_2 \cup \cdots \cup A_n) = \mathbb{P}(A_1) + \mathbb{P}(A_2) + \cdots + \mathbb{P}(A_n)$ que si l'on sait que $A_1, A_2, \ldots, A_n$ sont deux à deux incompatibles.\\
+\end{itemize}
+\end{Prop}
+
+\subsection{Probabilité et Événements Élémentaires}
+
+\begin{Prop}\textbf{Définition d'une probabilité par les événements élémentaires (admis)}\\
+
+Une probabilité est entièrement déterminée par la connaissance des probabilités des événements élémentaires.\\
+ On peut donc définir une probabilité en attribuant à chaque événement élémentaire une probabilité de telle sorte que la somme des probabilités des événements élémentaires soit égale à $1$.\\
+\end{Prop}
+
+
+
+\begin{Prop}\textbf{Probabilité d'un événement et événements élémentaires (admis)}\\
+
+Soit $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$ un espace probabilisé fini. La probabilité d'un événement est égale à la somme des probabilités de ses événements élémentaires. Autrement dit :
+\[
+\forall A \in \mathcal{P}(\Omega), \quad \mathbb{P}(A) = \sum_{\omega \in A} \mathbb{P}(\{\omega\}).
+\]
+\end{Prop}
+
+\begin{Rmq} 
+On pourra se contenter de retenir la phrase suivante, moins rigoureuse : la probabilité d'un événement est égale à la somme des probabilités de ses issues.\\
+
+
+\end{Rmq} 
+
+\exo[1]{Dé pipé}
+
+On lance un dé à 6 faces. On note, pour tout $i \in [1 ; 6]$, $p_i = \mathbb{P}(\{i\})$. Ce dé est pipé de telle façon que :
+\begin{align*}
+    p_1 &= p_2 = p_3 = \frac{1}{12}, \\
+    p_4 &= \frac{1}{2}, \\
+    p_5 &= p_6.
+\end{align*}
+Déterminer la probabilité d'obtenir un nombre pair avec ce dé.
+
+\begin{Def}\textbf{Equiprobabilité } \\
+
+On dit que l'on est en situation d'équiprobabilité si les issues ont toutes la même probabilité.\\
+
+\end{Def}
+
+\begin{Prop}\textbf{Probabilité d'un évènement en situation d'équiprobabilité (admis)} \\
+
+En situation d'équiprobabilité, on a :
+\[
+\mathbb{P}(A) = \frac{\text{card } A}{\text{card } \Omega}.
+\]
+
+\end{Prop}
+
+\subsection{Formule du crible de Poincaré}
+\bigskip
+
+\begin{Prop}\textbf{Formule du crible de Poincaré (admis)} \\
+Soit $A$, $B$ et $C$ trois événements.
+\[
+\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+\]
+et
+\[
+\mathbb{P}(A \cup B \cup C) = \mathbb{P}(A) + \mathbb{P}(B) + \mathbb{P}(C) - \mathbb{P}(A \cap B) - \mathbb{P}(A \cap C) - \mathbb{P}(B \cap C) + \mathbb{P}(A \cap B \cap C).
+\]
+
+\end{Prop}
+
+\exo[2]{Urne et boules}
+
+Une urne contient trois boules (une rouge, une verte et une jaune) indiscernables au toucher. On fait $r$ tirages avec remise, ($r \geq 3$). Déterminer la probabilité que chacune des boules ait été tirée au moins une fois. Vérifier ensuite que cette probabilité tend vers $1$ lorsque $r$ tend vers $+\infty$.\\
+
+
+
+
+\section{Probabilités conditionnelles}
+\subsection{Définition et propriétés de base}
+
+\begin{Def}\textbf{Probabilité sachant A}\\
+
+ Soit $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$ un espace probabilisé et $A$ un événement de probabilité non nulle. Alors l'application $\mathbb{P}P_A$ définie sur $\mathcal{P}(\Omega)$ par 
+\[
+\mathbb{P}_A(B) = \frac{\mathbb{P}(B \cap A)}{\mathbb{P}(A)}
+\]
+est une probabilité appelée probabilité conditionnelle relative à $A$ ou probabilité sachant $A$.\\
+\end{Def}
+
+\begin{Rmq}  Le minimum vital consistera ici à retenir que 
+\[
+\mathbb{P}_A(B)= \mathbb{P}(B/A) = \frac{\mathbb{P}(B \cap A)}{\mathbb{P}(A)}.
+\]
+$\mathbb{P}_A$ étant une probabilité, on retrouve les formules valables pour toute probabilité, appliquées à $\mathbb{P}_A$.\\
+\end{Rmq} 
+
+\begin{Prop}\textbf{Propriétés de $\mathbb{P}_A$ (admis)}\\
+
+\begin{enumerate}
+    \item $\mathbb{P}_A(\bar{B}) = 1 - \mathbb{P}_A(B)$
+    \item Si $B \subset C$ alors $\mathbb{P}_A(B) \leq \mathbb{P}_A(C)$
+    \item Formule du crible (appliquée à $\mathbb{P}_A$) : 
+    \[
+    \mathbb{P}_A(B \cup C) = \mathbb{P}_A(B) + \mathbb{P}_A(C) - \mathbb{P}_A(B \cap C).
+    \]
+\end{enumerate}
+\end{Prop}
+
+\begin{Rmq} 
+ Il faut connaître le sens des probabilités que l'on rencontre sur les branches d'un arbre de probabilité.\\
+\end{Rmq} 
+
+\exo[1]{Tirages sans remise}
+
+Une urne contient 3 boules blanches, 2 boules rouges et 5 boules noires. On effectue deux tirages sans remise et on note $B_i$ (resp. $R_i$, $N_i$) l'évènement ``la $i$-ième boule tirée est blanche (resp. rouge, noire)''. Déterminer la probabilité d'obtenir deux boules blanches.\\
+
+
+\subsection{Formule des probabilités composées}
+
+\begin{Prop}\textbf{Formule des probabilités composées (admis)}\\
+
+\begin{enumerate}
+    \item Si $\mathbb{P}(A) \neq 0$, alors 
+    \[
+    \mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}_A(B).
+    \]
+    \item Si $\mathbb{P}(A_1 \cap A_2 \cap \ldots \cap A_{n-1}) \neq 0$, alors 
+    \[
+    \mathbb{P}\left(\bigcap_{i=1}^n A_i\right) = \mathbb{P}(A_1 \cap A_2 \cap \ldots \cap A_n) = \mathbb{P}(A_1)\mathbb{P}_{A_1}(A_2) \ldots \mathbb{P}_{A_1 \cap A_2 \cap \ldots \cap A_{n-1}}(A_n).
+    \]
+\end{enumerate}
+\end{Prop}
+
+\exo[1]{Trois tirages sans remise}
+
+On reprend l'urne de l'exemple précédent. On effectue maintenant trois tirages sans remise. Déterminer la probabilité d'obtenir trois boules blanches.\\
+
+
+
+
+
+
+\subsection{Formule des probabilités totales}
+\begin{Prop}
+\textbf{Formule des probabilités totales (admis)}\\
+
+Soit $(A_1, A_2, \ldots, A_n)$ un système complet d'événements tel que $\forall i \in \{1, \ldots, n\}, \mathbb{P}(A_i) \neq 0$.
+
+Alors pour tout événement $B$, on a :
+\[
+\mathbb{P}(B) = \sum_{i=1}^{n} \mathbb{P}(B \cap A_i) = \sum_{i=1}^{n} \mathbb{P}(A_i) \mathbb{P}_{A_i}(B)
+\]
+\end{Prop}
+
+\begin{Rmq} On utilise ce théorème quand on manque d'information ; selon l'information manquante, on sait quel système complet choisir.\\
+\end{Rmq} 
+
+\subsection{Formule de Bayes}
+
+
+\begin{Prop}
+\textbf{Formule de Bayes (admis)}\\
+
+1. Soit $A$ et $B$ deux événements de probabilité non nulle, alors :
+\[
+\mathbb{P}_B(A) = \frac{\mathbb{P}(A) \mathbb{P}_A(B)}{\mathbb{P}(B)}
+\]
+
+2. Soit $A_1, \ldots, A_n$ un système complet d'événements et $B$ un événement, alors $\forall i \in \{1, \ldots, n\}$ :
+\[
+\mathbb{P}_B(A_i) = \frac{\mathbb{P}(A_i) \mathbb{P}_{A_i}(B)}{\sum_{j=1}^{n} \mathbb{P}(A_j) \mathbb{P}_{A_j}(B)}
+\]
+
+\end{Prop}
+
+\begin{Rmq}  On utilise ce théorème pour échanger le conditionnement, mais on peut s'en passer en utilisant systématiquement la formule des probabilités totales.\\
+\end{Rmq} 
+
+% \exo{
+
+% On reprend l'exemple précédent. Sachant que la deuxième boule tirée est blanche, quelle est la probabilité que la première soit blanche ?\\
+% }
+
+
+
+
+
+
+
+\section{Indépendance d'évènements}
+
+\subsection{Indépendance de deux évènements}
+
+\begin{Def}
+\textbf{Indépendance de deux évènements}\\
+Soit $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$ un espace probabilisé fini. On dit que deux événements $A$ et $B$ sont indépendants pour la probabilité $\mathbb{P}$ si
+\[
+\mathbb{P} (A \cap B) = \mathbb{P} (A) \times \mathbb{P} (B).
+\]
+Si $\mathbb{P} (A) \neq 0$, cela revient à dire que $\mathbb{P}_A(B) = \mathbb{P} (B)$.\\
+\textbf{Attention !} L'indépendance dépend de la probabilité !\\
+\end{Def}
+
+\begin{Ex}
+On dispose d'un dé équilibré, d'une pièce équilibrée et d'une pièce truquée (2 piles). On lance le dé : si on obtient 1, on lance deux fois la pièce équilibrée, sinon on lance deux fois la pièce truquée. On note $A_i$ "obtenir pile au $i$-ième lancer" et $C$ "le lancer du dé donne 1".\\
+ Montrons que $A_1$ et $A_2$ sont indépendants pour $P_C$ mais pas pour $P$.\\
+\end{Ex}
+
+\subsection{Indépendance mutuelle d'un ensemble d'évènements}
+
+\begin{Def}\textbf{Indépendance mutuelle d'un ensemble d'évènements}\\
+On dit que $A_1, \ldots, A_n$ sont mutuellement indépendants pour la probabilité $\mathbb{P}$ si pour tout ensemble d'indice $I \subset J_{1,n}$,
+\[
+\mathbb{P} \left( \bigcap_{i \in I} A_i \right) = \prod_{i \in I} \mathbb{P} (A_i).\\
+\]
+\end{Def}
+
+\begin{Ex}  Trois évènements $A_1, A_2, A_3$ sont mutuellement indépendants si et seulement si :\\
+$$
+\begin{array}{ll}
+\mathbb{P} (A_1 \cap A_2) & = \mathbb{P} (A_1)\mathbb{P} (A_2) \\
+\mathbb{P} (A_1 \cap A_3) & = \mathbb{P} (A_1)\mathbb{P} (A_3) \\
+\mathbb{P} (A_2 \cap A_3) & = \mathbb{P} (A_2)\mathbb{P} (A_3) \\
+\mathbb{P} (A_1 \cap A_2 \cap A_3) & = \mathbb{P} (A_1)\mathbb{P} (A_2)\mathbb{P} (A_3).
+\end{array}
+$$
+
+\end{Ex}
+
+\exo[1]{\textbf{Dé}}
+
+On lance deux fois un dé équilibré.\\
+ Soit les événements : $A_1$: “le premier nombre obtenu est pair” et $A_2$: “le deuxième nombre obtenu est pair” et $A_3$: “la somme des deux nombres obtenus est paire”. Vérifier que les $A_i$ sont indépendants deux à deux mais pas mutuellement indépendants.\\
+
+
+
+
+
+
+\section{Exercices}
+
+
+
+
+
+
+% Exercice 2016
+
+\exo[2]{\textbf{Vrai/Faux}}
+
+Les assertions suivantes sont-elles vraies ou fausses?
+\begin{enumerate}
+\item Deux événements incompatibles sont indépendants.
+\item Deux événements indépendants sont incompatibles.
+\item Si $P(A)+P(B)=1$, alors $A=\bar B$.
+\item Si $A$ et $B$ sont deux événements indépendants, alors $P(A\cup B)=P(A)+P(B)$.
+\item Soit $(A_n)_{n\in\mathbb N}$ et $(B_p)_{p\in\mathbb N}$ deux systèmes complets d'événements. Alors $(A_n\cap B_p)_{(n,p)\in\mathbb N^2}$ est un système complet d'événements.\\
+\end{enumerate}
+
+
+% Exercice 1227
+
+
+
+\exo[1]{\textbf{Écriture ensembliste}}
+
+Soit $\Omega$ un univers et soient $A,B,C$ trois événements de $\Omega$. Traduire en termes ensemblistes
+(en utilisant uniquement les symboles d'union, d'intersection et de passage au complémentaire, ainsi que $A$, $B$ 
+et $C$) les événements suivants :
+\begin{multicols}{2}
+\begin{enumerate}
+ \item Seul $A$ se réalise;
+\item $A$ et $B$ se réalisent, mais pas $C$.
+\item les trois événements se réalisent;
+\item au moins l'un des trois événements se réalise;
+\item au moins deux des trois événements se réalisent;
+\item aucun ne se réalise;
+\item au plus l'un des trois se réalise;
+\item exactement deux des trois se réalisent;\\
+\end{enumerate}
+
+\end{multicols}
+
+
+
+
+
+\exo[1]{\textbf{Vocabulaire 1}}
+
+\begin{enumerate}
+\item On pose, pour tout $n \geq 1$, $A_n = \left[-\frac{1}{n}, \frac{1}{n}\right]$.\\
+Déterminer:
+\begin{multicols}{2}
+\begin{itemize}
+    \item $\bigcup_{k=1}^{n} A_k$ ;
+    \item $\bigcap_{k=1}^{n} A_k$ ;
+    \item $\bigcup_{k=1}^{+\infty} A_k$ ;
+
+    \item $\bigcap_{k=1}^{+\infty} A_k$ ;
+
+\end{itemize}
+\end{multicols}
+\item Même question avec $A_n =\left [\frac{1}{n}, +\infty\right[$.\\
+\end{enumerate}
+
+
+\exo[2]{\textbf{Vocabulaire 2}}
+
+Soit $(A_i)_{i \in \mathbb{N}}$ une suite d'évènements et $n \in \mathbb{N}^*$. Écrire, à l'aide des opérations ensemblistes $\cup$ et $\cap$ les évènements suivants :
+\begin{multicols}{2}
+\begin{enumerate}
+    \item L'un des évènements $A_1, \ldots, A_n$ se réalise.
+    \item L'un des évènements $A_i$ se réalise.
+    \item Aucun des évènements $A_i$ ne se réalise.
+    \item $A_1$ et $A_1$ seul se réalise.
+    \item $A_1$ et $A_2$ et eux seuls se réalisent.
+    \item (* ) Un et un seul des $A_i$ se réalise.
+    \item (* ) À partir d'un certain rang, tous les $A_i$ se réalisent.
+    \item (* ) Une infinité d'$A_i$ se réalise.
+    \item (* ) Un nombre fin de $A_i$ se réalise.\\
+\end{enumerate}
+\end{multicols}
+
+
+
+\exo[2]{\textbf{Vocabulaire 3}}
+
+On tire successivement et avec remise des boules dans une urne contenant 1 rouge et 9 blanches. On note $R_n$ l'évènement « la $n$-ième boule tirée est rouge ». Traduire en langage courant les évènements suivants :\\
+\begin{multicols}{3}
+\begin{itemize}
+    \item $\bigcup_{k=1}^{n} R_k$ ;
+    \item $\bigcap_{k=1}^{n} R_k$ ;
+    \item $\bigcup_{k=1}^{+\infty} R_k$ ;
+    \item $\bigcup_{k=1}^{+\infty} \overline{R_k}$ ;
+    \item $\bigcap_{k=1}^{+\infty} R_k$ ;
+    \item $\bigcap_{k=5}^{+\infty} \overline{R_k}$ ;
+    \item $\bigcup_{i=1}^{+\infty} \bigcap_{k=i}^{+\infty} R_k$ ;
+    \item $\bigcap_{i=1}^{+\infty} \bigcup_{k=i}^{+\infty} R_k$.\\
+\end{itemize}
+\end{multicols}
+
+
+\exo[2]{\textbf{Réunion disjointe}}
+
+Deux joueurs A et B s'affrontent dans un jeu de dés. On lance deux dés équilibrés jusqu'à ce qu'une somme égale à 5 ou 7 apparaisse. Le joueur A gagne si la somme 5 apparaît et le joueur B gagne si c'est la somme 7 qui apparaît. On note $A_n$ l'évènement « le joueur A gagne au $n$-ième tour » et $B_n$ l'évènement « le joueur B gagne au $n$-ième tour ». On pose $G_n = A_n \cup B_n$. On note $A$ (resp. $B$) l'évènement « le joueur $A$ (resp. $B$) gagne ».
+\begin{enumerate}
+    \item Déterminer $\mathbb{P}(A_n)$ pour tout entier naturel $n$ non nul.
+    \item En déduire $\mathbb{P}(A)$.
+    \item Déterminer $\mathbb{P}(B)$.
+    \item Le jeu s'arrête-t-il presque sûrement ?\\
+\end{enumerate}
+
+
+
+\exo[2]{\textbf{Limite monotone - 1}}
+
+Une urne contient initialement 1 boule rouge et 1 boule blanche. On tire une boule, on note sa couleur, puis on la remet dans l'urne avec une boule de la même couleur. On répète cette opération à l'infini. On note, pour $n \geq 1$ quelconque :
+\begin{itemize}
+    \item $R_n$ l'évènement « la $n$-ième boule tirée est rouge » ;
+    \item $A_n$ l'évènement « On ne tire aucune boule rouge au cours des $n$ premiers tirages. » ;
+    \item $B$ l'évènement « On tire au moins une boule rouge lors de la suite infinie de tirages ».
+\end{itemize}
+\begin{enumerate}
+    \item Déterminer, pour $n \geq 1$, $\mathbb{P}(A_n)$.
+    \item En déduire $\mathbb{P}(B)$.\\
+\end{enumerate}
+
+
+
+\exo[2]{\textbf{Limite monotone - 2}}
+
+Une urne contient initialement 1 boule rouge et 1 boule blanche. On tire une boule, on note sa couleur, puis on la remet dans l'urne avec deux boules de la même couleur. On répète cette opération à l'infini. On note, pour $n \geq 1$ quelconque :\\
+\begin{itemize}
+    \item $R_n$ l'évènement « la $n$-ième boule tirée est rouge » ;
+    \item $A_n$ l'évènement « On ne tire aucune boule rouge au cours des $n$ premiers tirages. » ;
+    \item $B$ l'évènement « On tire au moins une boule rouge lors de la suite infinie de tirages ».
+\end{itemize}
+\begin{enumerate}
+    \item Montrer que pour tout $n \in \mathbb{N}^*$, $\mathbb{P}(A_n) = \prod_{k=1}^{n} \left(1 - \frac{1}{2k}\right)$.
+    \item Justifier que la suite $(\ln(\mathbb{P}(A_n)))_{n \geq 1}$ diverge vers $-\infty$.
+    \item En déduire $\mathbb{P}(B)$.\\
+\end{enumerate}
+
+
+
+
+\exo[2]{\textbf{Limite monotone - 3}}
+
+Un joueur dispose de 2 euros et joue au jeu suivant : il lance une pièce de monnaie équilibrée et perd 1 euro s'il obtient Pile et gagne un bonbon s'il obtient Face. Il recommence ainsi indéfiniment jusqu'à avoir perdu ses 2 euros. Pour modéliser cette expérience, on considèrera qu'il répète en fait indéfiniment cette expérience mais que lorsqu'il n'a plus d'argent, à chaque lancer il ne perd plus d'argent ni ne gagne de bonbon.\\
+
+Pour tout entier $k \geq 1$, on note :
+\begin{itemize}
+    \item $X_k$ la variable aléatoire donnant le nombre de Piles obtenus lors des $k$ premiers lancers.
+    \item $A_k$ l'évènement « le joueur a encore 2 Euros à l'issue du $k$-ième lancer ».
+    \item $B_k$ l'évènement « le joueur a encore exactement 1 Euro à l'issue du $k$-ième lancer ».
+    \item $R_k$ l'évènement « le joueur a 0 euros (et est donc ruiné) à l'issue du $k$-ième lancer ».
+    \item $R$ l'évènement « le joueur finit ruiné » autrement dit « le jeu finit par s'arrêter ».
+\end{itemize}
+
+\begin{enumerate}
+    \item Soit $k \in \mathbb{N}^*$. Déterminer la loi de $X_k$.\\
+     On précisera la valeur de $\mathbb{P}(X_k = i)$ pour $i \in X_k(\Omega)$.
+    \item Soit $k \in \mathbb{N}^*$.
+    \begin{enumerate}
+        \item Déterminer $\mathbb{P}(A_k)$.
+        \item Déterminer $\mathbb{P}(B_k)$.
+        \item En déduire $\mathbb{P}(R_k)$.
+    \end{enumerate}
+    \item En déduire que le joueur finira presque sûrement ruiné.
+\end{enumerate}
+
+
+
+
+\exo[2]{\textbf{Joueur}}
+
+Un joueur joue au jeu suivant à l'aide d'une pièce équilibrée.
+\begin{itemize}
+    \item À la première étape, il lance une fois la pièce. Si elle tombe sur Pile, il a gagné, sinon il passe à la seconde étape.
+    \item À la seconde étape, il lance deux fois la pièce. S'il obtient deux Pile, il a gagné, sinon il passe à l'étape suivante.
+    \item Il recommence ainsi de suite, à l'infini : À la $k$-ième étape, il lance $k$ fois la pièce. Si elle tombe $k$ fois sur Pile, il a gagné. Sinon il passe à l'étape suivante.
+\end{itemize}
+
+On note $A_n$ l'évènement « le joueur n'a toujours pas gagné à l'issue de la $n$-ième étape ».
+\begin{enumerate}
+    \item Montrer que pour tout $n \in \mathbb{N}^*$, 
+    \[
+    \mathbb{P}(A_n) = \prod_{k=1}^{n} \left(1 - \frac{1}{2^k}\right).
+    \]
+    \item Justifier que la suite $(\ln(\mathbb{P}(A_n)))_{n \geq 1}$ tend vers une limite finie $a$.
+    \item En déduire que le joueur a une probabilité non nulle de ne jamais gagner.\\
+\end{enumerate}
+
+% \begin{small}
+% \begin{Sol}
+% \begin{enumerate}
+%     \item
+% Soit \( n \in \mathbb{N}^* \). On a les inclusions suivantes : 
+% \[
+% A_n \subset A_{n-1} \subset \dots \subset A_2 \subset A_1
+% \]
+% donc 
+% \[
+% A_n = A_1 \cap A_2 \cap \dots \cap A_n.
+% \]
+% Ainsi, d'après la formule des probabilités composées :
+% \[
+% \mathbb{P}(A_n) = \mathbb{P}(A_1 \cap A_2 \cap \dots \cap A_n) = \mathbb{P}(A_1) P(A_2 | A_1) \dots \mathbb{P}(A_n | A_1 \cap A_2 \cap \dots \cap A_{n-1}).
+% \]
+% Or, pour tout \( k \geq 2 \), si \( A_1 \cap A_2 \cap \dots \cap A_{k-1} \) est réalisé alors le joueur passe à la \( k \)-ième
+% étape, il lance \( k \) fois la pièce et la probabilité qu'il gagne est \( \left(\frac{1}{2}\right)^k \), donc la probabilité qu'il
+% ne gagne pas est \( 1 - \frac{1}{2^k} \). Dès lors,
+
+% \[
+% p_n = \mathbb{P}(A_n) = \frac{1}{2} \left( 1 - \frac{1}{2^2} \right) \dots \left( 1 - \frac{1}{2^n} \right)
+% = \frac{2 - 1}{2} \times \frac{2^2 - 1}{2^2} \times \dots \times \frac{2^n - 1}{2^n}.
+% \]
+
+% \item
+% Pour tout \( n \in \mathbb{N}^* \), on prend le logarithme :
+
+% \[
+% \ln \left( \frac{1}{p_n} \right) = \ln \left( \frac{2}{2 - 1} \times \frac{2^2}{2^2 - 1} \times \dots \times \frac{2^n}{2^n - 1} \right)
+% \]
+
+% \[
+% = \sum_{k=1}^{n} \ln \left( \frac{2^k}{2^k - 1} \right)
+% = \sum_{k=1}^{n} \ln \left( 1 + \frac{1}{2^k - 1} \right).
+% \]
+
+% Or, on sait que :
+
+% \[
+% \ln \left( 1 + \frac{1}{2^k - 1} \right) \sim_{k \to +\infty} \frac{1}{2^k}.
+% \]
+
+% La série de terme général \( \frac{1}{2^k} \) converge car \( 0 \leq \frac{1}{2} < 1 \), donc la série :
+
+% \[
+% \sum_{k=1}^{\infty} \ln \left( 1 + \frac{1}{2^k - 1} \right)
+% \]
+
+% converge vers une limite \( a \). On en déduit que :
+
+% \[
+% \lim_{n \to +\infty} \ln \left( \frac{1}{p_n} \right) = a.
+% \]
+
+% \item
+
+% Pour tout \( n \in \mathbb{N}^* \) :
+
+% \[
+% \ln \left( \frac{1}{p_n} \right) = -\ln (p_n),
+% \]
+
+% d'où :
+
+% \[
+% p_n = \exp \left( - \ln \left( \frac{1}{p_n} \right) \right).
+% \]
+
+% Sachant que \( \lim_{n \to +\infty} \ln \left( \frac{1}{p_n} \right) = a \), on a :
+
+% \[
+% \lim_{n \to +\infty} -\ln \left( \frac{1}{p_n} \right) = -a.
+% \]
+
+% Par continuité de la fonction exponentielle sur \( \mathbb{R} \), on obtient :
+
+% \[
+% \lim_{n \to +\infty} p_n = e^{-a}.
+% \]
+
+% Ainsi, la suite \( (p_n) \) converge vers une limite \( \ell = e^{-a} > 0 \).
+
+% \end{enumerate}
+% \end{Sol}
+% \end{small}
+
+% Exercice 1758
+
+
+
+
+\exo[3]{\textbf{Tribu engendrée}}
+
+Soit $\Omega=\mathbb Z$. On considère $\mathcal T$ la tribu engendrée
+par les ensembles $S_n=\{n,n+1,n+2\}$ avec $n\in\mathbb Z.$
+Quels sont les éléments de la tribu $\mathcal T$?\\
+
+
+% Exercice 2014
+
+
+
+
+\exo[3]{\textbf{Tribu image réciproque}}
+
+Soit $E$ et $F$ deux ensembles, $\mathcal T$ une tribu sur $F$ et $\phi:E\to F$ une application. Montrer que $\mathcal T'=\{\phi^{-1}(A);\ A\in\mathcal T\}$ est une tribu sur $E$.\\
+
+
+% Exercice 1760
+
+
+
+
+\exo[3]{\textbf{Tribu engendrée par une partition}}
+
+Soit $X$ un ensemble non-vide et $A_1,\dots,A_n$ une partition de $X$.
+On note 
+$$\mathcal T=\left\{\bigcup_{i\in J}A_i;\ J\subset\{1,\dots,n\}\right\}.$$
+Démontrer que $\mathcal T$ est la tribu engendrée par $A_1,\dots,A_n$.\\
+
+
+% Exercice 2015
+
+
+\exo[3]{\textbf{Tribu engendrée par une partition}}
+
+Soit $E$ un ensemble infini et $(A_n)_{n\in\mathbb N}$ une partition de $E$. Pour toute partie $J$ de $\mathbb N$, on pose $B_J=\bigcup_{j\in J}A_j$. 
+\begin{enumerate}
+\item Démontrer que $\mathcal T=\{B_J;\ J\in\mathcal P(\mathbb N)\}$ est une tribu sur $E$ et que c'est la plus petite tribu contenant tous les $A_n$.
+\item Trouver une partition $(A_n)_{n\in\mathbb N}$ de $\mathbb N$ de sorte que, pour tout $n\in\mathbb N$, $A_n$ n'est pas fini.
+\item Trouver une tribu incluse dans $\mathcal P(\mathbb N)$, de cardinal infini, dont tous les éléments, sauf l'ensemble vide, sont de cardinal infini.\\
+\end{enumerate}
+
+
+% Exercice 1229
+
+
+
+\exo[2]{\textbf{Sur la probabilité de l'intersection}}
+
+Soient $A$ et $B$ deux événements d'un espace probabilisé. Démontrer que 
+$$\max\big(0,\mathbb{P}(A)+\mathbb{P}(B)-1\big)\leq \mathbb{P}(A\cap B)\leq \min\big(\mathbb{P}(A),\mathbb{P}(B)\big).$$
+
+
+% Exercice 3479
+
+
+
+\exo[3]{\textbf{Majorer la probabilité d'une réunion}}
+
+Soit $(\Omega,\mathcal A,\mathbb{P})$ un espace probabilisé, et $A_1,\dots,A_n$ des événements. Démontrer que 
+$$\mathbb{P}\left(\bigcup_{i=1}^n A_i\right)\leq \min_{1\leq k\leq n}\left(\sum_{i=1}^n \mathbb{P}(A_i)-\sum_{\substack{1\leq i\leq n\\ i\neq k}}\mathbb{P}(A_i\cap A_k)\right).$$
+
+
+% Exercice 1230
+
+
+
+% \begin{Sol}
+
+
+
+% Pour tout \( k \in \{1, \dots, n\} \), on a :
+% \[
+% \mathbb{P}\left( \bigcup_{i=1}^{n} A_i \right) \leq \sum_{i=1}^{n} \mathbb{P}(A_i) - \sum_{\substack{1 \leq i \leq n \\ i \neq k}} \mathbb{P}(A_i \cap A_k).
+% \]
+
+% Pour\( k = n \). Pour \( i = 1, \dots, n-1 \), on a :
+
+% \[
+% \mathbb{P}(A_i) - \mathbb{P}(A_i \cap A_n) = \mathbb{P}(A_i \setminus A_n),
+% \]
+
+% et donc :
+
+% \[
+% \sum_{i=1}^{n} \mathbb{P}(A_i) - \sum_{i=1}^{n-1} P(A_i \cap A_n) = \mathbb{P}(A_n) + \sum_{i=1}^{n-1} (\mathbb{P}(A_i) - \mathbb{P}(A_i \cap A_n)).
+% \]
+
+% Ce qui s'écrit aussi :
+
+% \[
+% \mathbb{P}(A_n) + \sum_{i=1}^{n-1} \mathbb{P}(A_i \setminus A_n) \geq \mathbb{P}\left(A_n \cup \bigcup_{i=1}^{n-1} (A_i \setminus A_n)\right).
+% \]
+
+% Or,
+
+% \[
+% A_n \cup \bigcup_{i=1}^{n-1} (A_i \setminus A_n) = \bigcup_{i=1}^{n} A_i.
+% \]
+
+% Ainsi,
+
+% \[
+% \mathbb{P}\left(A_n \cup \bigcup_{i=1}^{n-1} (A_i \setminus A_n)\right) = v\left(\bigcup_{i=1}^{n} A_i\right),
+% \]
+
+
+% \end{Sol}
+
+\exo[2]{\textbf{Inégalité de Bonferroni}}
+Soient $(\Omega,\mathcal F,\mathbb \mathbb{P})$ un espace probabilisé, et $A_1,\dots,A_n$
+des événements. Démontrer que 
+$$\mathbb \mathbb{P}(A_1\cap\dots\cap A_n)\geq \left(\sum_{i=1}^n \mathbb \mathbb{P}(A_i)\right)-(n-1).$$
+
+
+% Exercice 3489
+
+
+
+\exo[3]{\textbf{Somme compliquée}}
+
+Soit $(\Omega,\mathcal T,\mathbb{P})$ un espace probabilisé.
+\begin{enumerate}
+\item Soit $A_1,\dots,A_n\in\mathcal T.$ Calculer 
+$$\mathbb{P}(A_1\cup A_2)+\mathbb{P}(\overline{A_1}\cup A_2)+\mathbb{P}(A_1\cup \overline{A_2})+\mathbb{P}(\overline{A_1}\cup\overline{A_2}).$$
+\item Soit $n\geq 2$ et $A_1,\dots,A_n\in\mathcal T.$ On pose 
+$$\Gamma_n=\{A_1,\overline{A_1}\}\times\cdots\times \{A_n,\overline{A_n}\}.$$
+Calculer 
+$$\sum_{(B_1,\dots,B_n)\in\Gamma_n}\mathbb{P}(B_1\cup\cdots\cup B_n).$$
+\end{enumerate}
+
+
+% Exercice 1231
+
+\exo[2]{\textbf{Limites supérieures et inférieures d'ensembles}}
+
+Soit $\Omega$ un ensemble et $(A_n)_{n\in\mathbb N}$ une suite de parties de $\Omega$. On appelle limite supérieure des $A_n$, et on note $\limsup_n A_n$ l'ensemble des éléments de $\Omega$ qui appartiennent à une infinité de $A_n$.\\ 
+On appelle limite inférieure des $A_n$, et on note $\liminf_n A_n$, l'ensemble des éléments de $\Omega$ qui appartiennent à tous les $A_n$, sauf un nombre fini d'entre eux.\\
+\begin{enumerate}
+ \item Déterminer les ensembles $\limsup_n A_n$ et $\liminf_n A_n$ dans les cas suivants :
+\begin{enumerate}
+\item $A_n=]-\infty,n]$;
+\item $A_n=]-\infty,-n]$;
+\item $A_{2n}=A$, $A_{2n+1}=B$;
+\item $A_n=]-\infty,(-1)^n]$. 
+\end{enumerate}
+\item \'Ecrire les définitions de $\liminf_n A_n$ et $\limsup_n A_n$ avec les quantificateurs
+$\forall$ et $\exists$. Les traduire en termes ensemblistes à l'aide de $\bigcap$ et $\bigcup$.\\
+\end{enumerate}
+
+
+% Exercice 1233
+
+
+\exo[3]{\textbf{Premier lemme de Borel-Cantelli}}
+
+Soit $(\Omega,\mathcal F,\mathbb \mathbb{P})$ un espace probabilisé. Soit $(A_n)_{n\geq 0}$ une suite d'événements.\\
+On note $A=\limsup_n A_n=\bigcap_{n\geq 0}\bigcup_{k\geq n}A_k$. On suppose que $\sum_n \mathbb \mathbb{P}(A_n)<+\infty$. Pour $n\geq 1$, on note 
+$D_n=\bigcup_{k=n}^{+\infty}A_k$.
+\begin{enumerate}
+ \item Démontrer que $\lim_{n\to+\infty}\mathbb \mathbb{P}(D_n)=0$;
+\item En déduire que $\mathbb \mathbb{P}(A)=0$. Interpréter ce résultat.\\
+\end{enumerate}
+

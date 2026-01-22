@@ -1,0 +1,186 @@
+\documentclass[../PolyS1.tex]{subfiles}
+\begin{document}
+
+\section{Sommes}
+\subsection{Définition}
+
+\begin{Def}\textbf{Somme}
+    \vspace{1em}
+
+On considère les $n$ nombres réels (ou complexes) $a_{1}, ...,a_{n}$, l'écriture : 
+
+$$\sum_{k=1}^{n} a_{k}=a_{1}+...+a_{n}$$
+
+Représente la somme des $a_{1}, ...,a_{n},$ et $k$ est l'indice muet de sommation.
+\end{Def}
+
+
+On a les propriétés suivantes :
+
+$$\sum_{k=1}^{n} \lambda a_{k}= \lambda \sum_{k=1}^{n}  a_{k}$$
+
+$$\sum_{k=1}^{n} (a_{k}+b_{k})=\sum_{k=1}^{n} a_{k}+\sum_{k=1}^{n} b_{k}$$
+
+
+\subsection{Techniques de sommation}
+Pour le calcul des sommes, nous allons nous concentrer sur trois techniques de sommations.
+
+\begin{enumerate}
+    \item \underline{\textbf{Les sommes de référence.}}
+
+    Il s'agit de formules vues au lycée dans le cadre de l'étude des suites numériques.
+
+    \begin{Thm}\textbf{Somme d'une suite arithmétique}
+        \vspace{1em}
+
+    La somme de terme d'une suite arithmétique :
+    $$\sum_{k=0}^{n} a_{k}=\frac{(a_{0}+a_{n}) (n+1)}{2}$$
+    $(n+1)$ représente le nombre de terme qu'il y a entre $0$ et $n$, \newline 
+    il peut bien sûr en être autrement en fonction de la somme que l'on regarde.
+    \end{Thm}
+
+    \begin{Thm}\textbf{Somme d'une suite géométrique}
+        \vspace{1em}
+
+    La somme de terme d'une suite géométrique :
+    $$\sum_{k=0}^{n} a_{k}=a_{0}\times \frac{1-q^{n+1}}{1-q}$$
+
+    $q$ étant la raison de la suite géométrique.\newline 
+    $(n+1)$ représente le nombre de terme qu'il y a entre $0$ et $n$, \newline 
+    il peut bien sûr en être autrement en fonction de la somme que l'on regarde.
+    \end{Thm}
+
+    \exo[1]{Exemple 1 :}
+
+    Calculer :
+    $$\sum_{k=0}^{n} (2^k+k)$$
+
+    \item \underline{\textbf{Le téléscopage}}
+
+    \begin{Thm}\textbf{Technique du téléscopage}
+        \vspace{1em}
+
+    L'objectif est de jouer sur un changement d'indice pour simplifier la somme.
+
+     \begin{align*}
+     \sum_{k=1}^{n} a_{k+1}-a_{k}
+     &= \sum_{k=1}^{n} a_{k+1}-\sum_{k=1}^{n} a_{k} \\
+     &= \sum_{k=2}^{n+1} a_{k}-\sum_{k=1}^{n} a_{k} \\
+     &= a_{n+1}+\sum_{k=2}^{n} a_{k}-\sum_{k=2}^{n} a_{k}-a_{1} \\
+     &= a_{n+1}-a_{1}
+     \end{align*}
+    \end{Thm}
+
+     \exo[1]{Exemple 2 :}
+
+     Calculer :
+     $$\sum_{k=2}^{n} \frac{1}{k^2-k}$$
+     En remarquant que : $\frac{1}{k^2-k}=\frac{1}{k-1}-\frac{1}{k}$
+     \vspace{1em}
+     \hrule
+     \vspace{1em}
+
+     \item \underline{\textbf{Le binôme de Newton}}
+     \nopagebreak[4]
+ \begin{Thm}\textbf{Formule du binôme de Newton}
+    \vspace{1em}
+
+ La célèbre formule pour développer une somme à une certaine puissance.
+ $$(a+b)^n=\sum_{k=0}^{n} \begin{pmatrix}
+     n\\
+     k
+ \end{pmatrix}
+ a^k\times b^{n-k} $$
+ Où $\begin{pmatrix}
+     n\\
+     k
+ \end{pmatrix}$ est le coefficient binomial "$k$ parmi $n$" :
+ $$\begin{pmatrix}
+     n\\
+     k
+ \end{pmatrix}= \frac{n!}{(n-k)!k!}$$
+ Et $n!=n\times (n-1)\times ... \times 2 \times1$
+ \end{Thm}
+
+ \exo[1]{Exemple 3 :}
+ Calculer :
+ $$\sum_{k=0}^{n} \begin{pmatrix}
+     n\\
+     k
+ \end{pmatrix}
+ 3^k $$    
+\end{enumerate}
+
+\section{Produits}
+
+\begin{Def}\textbf{Produit}
+    \vspace{1em}
+
+On considère les $n$ nombres réels (ou complexes) $a_{1}, ...,a_{n}$, l'écriture :
+$$\prod_{k=1}^{n} a_{k}=a_{1}\times...\times a_{n}$$
+On peut écrire par exemple :
+$$n!=\prod_{k=1}^{n}k$$
+\end{Def}
+
+
+On a les propriétés suivantes :
+$$\prod_{k=1}^{n} \lambda a_{k}= \lambda^n \prod_{k=1}^{n}  a_{k}$$
+
+$$\prod_{k=1}^{n} (a_{k} \times b_{k})=\prod_{k=1}^{n} a_{k} \times \prod_{k=1}^{n} b_{k}$$
+
+
+Le téléscopage est la technique que l'on utilise la plupart du temps pour calculer une somme.\\
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Exemple 4 :}
+Calculer :
+$$\prod_{k=1}^{n} \Big(1-\frac{1}{k^2}\Big)$$
+en remarquant que $1-\frac{1}{k^2}=(1-\frac{1}{k})(1+\frac{1}{k})$
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Propriétés}
+Parmi les formules suivantes, lesquelles sont vraies ? 
+\begin{multicols}{2}
+\begin{enumerate}
+    \item $\displaystyle \sum_{k=1}^{n} (a+b_{k})=a+\sum_{k=1}^{n} b_{k}$
+    \item $\displaystyle \sum_{k=1}^{n} (a_{k}+b_k)=\sum_{k=1}^{n} a_{k}+\sum_{k=1}^{n} b_{k}$
+    \item $\displaystyle \sum_{k=1}^{n} a_{k}b_k=\sum_{k=1}^{n} a_{k} \times \sum_{k=1}^{n} b_{k}$
+    \item $\displaystyle \sum_{k=1}^{n} a_{k}^p=(\sum_{k=1}^{n} a_{k})^p$
+    \item $\displaystyle \sum_{k=1}^{n}\sum_{i=1}^{n} a_{k,i}= \sum_{i=1}^{n}\sum_{k=1}^{n} a_{k,i}$
+    \item $\displaystyle \prod_{k=1}^{n} (a_{k}+b_k)=\prod_{k=1}^{n} a_{k}+\prod_{k=1}^{n} b_{k}$
+    \item $\displaystyle \prod_{k=1}^{n} (a_{k} \times b_k)=\prod_{k=1}^{n} a_{k}\times \prod_{k=1}^{n} b_{k}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Sommes}
+Calculer :
+\begin{multicols}{2}
+\begin{enumerate}
+    \item $\displaystyle \sum_{k=1}^{n} \frac{k}{(k+1)!}$
+    \item $\displaystyle \sum_{k=0}^{n} \frac{3^{2k}}{2^{k+2}}$
+    \item $\displaystyle \sum_{k=1}^{n} \ln(1+\frac{1}{k})$
+    \item $\displaystyle \sum_{k=0}^{n} (2k+3)$
+    \item $\displaystyle \sum_{k=0}^{n} (-1)^k \binom{n}{k}2^{2k}5^{n-k}$
+    \item $\displaystyle \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)}\binom{n}{k}$
+    \item $\displaystyle \sum_{0 \leq i, j \leq n}^{} i^2j^2$
+    \item $\displaystyle \sum_{0 \leq i, j \leq n}^{} (i+j)^2$
+    \item $\displaystyle \prod_{k=1}^{n} 2k$
+    \item $\displaystyle \prod_{k=1}^{n} \frac{2k+1}{2k-1}$
+    \item $\displaystyle \prod_{k=2}^{n} \frac{k^2-1}{k}$
+    \item $\displaystyle \sum_{i=0}^n \prod_{j=1}^{n} (i+j)$
+\end{enumerate}
+\end{multicols}
+
+\end{document}

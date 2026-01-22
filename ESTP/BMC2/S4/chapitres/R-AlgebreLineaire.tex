@@ -1,0 +1,546 @@
+
+\section{Algèbre linéaire : compléments}
+
+\textit{Dans tout le chapitre, $E$ désigne un espace vectoriel de dimension finie $n$ sur un corps $K$ (généralement $\mathbb{R}$ ou $\mathbb{C}$). Toutes les propriétés énoncées restent vraies pour n'importe quel corps.}
+
+%==============================================================================
+\subsection{Somme de sous-espaces vectoriels}
+%==============================================================================
+
+\begin{Def}\textbf{Somme de sous-espaces vectoriels}\\
+
+Soient $E_1, \ldots, E_r$ des sous-espaces vectoriels de $E$. La \textbf{somme} de ces sous-espaces est l'ensemble :
+$$E_1 + E_2 + \cdots + E_r = \left\{ x_1 + x_2 + \cdots + x_r \mid x_i \in E_i \text{ pour tout } i \right\}$$
+\end{Def}
+
+\begin{Prop}\textbf{La somme est un sous-espace vectoriel}\\
+
+La somme $E_1 + E_2 + \cdots + E_r$ est un sous-espace vectoriel de $E$. C'est le plus petit sous-espace vectoriel de $E$ contenant tous les $E_i$.
+\end{Prop}
+
+\begin{Def}\textbf{Somme directe}\\
+
+Les sous-espaces $E_1, \ldots, E_r$ sont dits \textbf{en somme directe} si pour tout vecteur $x \in E_1 + \cdots + E_r$, la décomposition $x = x_1 + \cdots + x_r$ avec $x_i \in E_i$ est \textbf{unique}.
+
+On note alors la somme directe :
+$$E_1 \oplus E_2 \oplus \cdots \oplus E_r$$
+\end{Def}
+
+\begin{Prop}\textbf{Caractérisation de la somme directe}\\
+
+Les sous-espaces $E_1, \ldots, E_r$ sont en somme directe si et seulement si :
+$$x_1 + x_2 + \cdots + x_r = 0_E \quad \text{avec } x_i \in E_i \quad \Longrightarrow \quad x_1 = x_2 = \cdots = x_r = 0_E$$
+\end{Prop}
+
+\begin{Prop}\textbf{Cas de deux sous-espaces}\\
+
+Pour deux sous-espaces $E_1$ et $E_2$, on a :
+$$E_1 \oplus E_2 \Longleftrightarrow E_1 \cap E_2 = \{0_E\}$$
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+\textbf{Attention :} Pour $r \geq 3$ sous-espaces, la condition $E_i \cap E_j = \{0_E\}$ pour tout $i \neq j$ n'est \textbf{pas suffisante} pour que la somme soit directe.
+\end{Rmq}
+
+\begin{Ex}\textbf{Contre-exemple}\\
+
+Dans $\mathbb{R}^2$, considérons :
+\begin{itemize}
+    \item $E_1 = \text{Vect}((1, 0))$ (axe des abscisses)
+    \item $E_2 = \text{Vect}((0, 1))$ (axe des ordonnées)
+    \item $E_3 = \text{Vect}((1, 1))$ (première bissectrice)
+\end{itemize}
+On a $E_i \cap E_j = \{0\}$ pour $i \neq j$, mais $(1,1) + (-1,0) + (0,-1) = (0,0)$ donc la somme n'est pas directe.
+\end{Ex}
+
+\begin{Thm}\textbf{Dimension de la somme}\\
+
+Soient $E_1, \ldots, E_r$ des sous-espaces vectoriels de $E$. Alors :
+$$\dim(E_1 + E_2 + \cdots + E_r) \leq \dim E_1 + \dim E_2 + \cdots + \dim E_r$$
+
+On a \textbf{égalité si et seulement si} les sous-espaces sont en somme directe.
+\end{Thm}
+
+\begin{Prop}\textbf{Formule pour deux sous-espaces}\\
+
+Pour deux sous-espaces $E_1$ et $E_2$ :
+$$\dim(E_1 + E_2) = \dim E_1 + \dim E_2 - \dim(E_1 \cap E_2)$$
+\end{Prop}
+
+\begin{Def}\textbf{Sous-espaces supplémentaires}\\
+
+Deux sous-espaces $E_1$ et $E_2$ sont dits \textbf{supplémentaires dans $E$} si :
+$$E = E_1 \oplus E_2$$
+c'est-à-dire si $E_1 + E_2 = E$ et $E_1 \cap E_2 = \{0_E\}$.
+
+On dit que $E_2$ est un \textbf{supplémentaire} de $E_1$ dans $E$.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Un supplémentaire n'est \textbf{pas unique}. En dimension finie, tout sous-espace admet au moins un supplémentaire.
+\end{Rmq}
+
+\begin{Prop}\textbf{Définition d'applications linéaires par morceaux}\\
+
+Si $E = E_1 \oplus E_2 \oplus \cdots \oplus E_r$ et si on se donne des applications linéaires $f_i : E_i \to F$, alors il existe une \textbf{unique} application linéaire $f : E \to F$ telle que :
+$$\forall x \in E_i, \quad f(x) = f_i(x)$$
+\end{Prop}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Somme de sous-espaces de $\mathbb{R}^3$}
+
+Dans $\mathbb{R}^3$, on considère :
+$$E_1 = \{(x, y, z) \in \mathbb{R}^3 \mid x + y = 0\} \quad \text{et} \quad E_2 = \text{Vect}((1, 1, 0))$$
+\begin{enumerate}
+    \item Déterminer $\dim E_1$ et une base de $E_1$.
+    \item Montrer que $E_1$ et $E_2$ sont en somme directe.
+    \item A-t-on $E_1 \oplus E_2 = \mathbb{R}^3$ ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Intersection et somme}
+
+Soient $F = \{(x, y, z, t) \in \mathbb{R}^4 \mid x + y = z + t = 0\}$ et $G = \text{Vect}((1, 0, 1, 0), (0, 1, 0, 1))$.
+\begin{enumerate}
+    \item Déterminer $\dim F$ et $\dim G$.
+    \item Calculer $\dim(F \cap G)$.
+    \item En déduire $\dim(F + G)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Somme directe de trois sous-espaces}
+
+Dans $\mathbb{R}^3$, on pose :
+$$E_1 = \text{Vect}((1, 0, 1)), \quad E_2 = \text{Vect}((0, 1, 1)), \quad E_3 = \text{Vect}((1, 1, 0))$$
+\begin{enumerate}
+    \item Montrer que $E_i \cap E_j = \{0\}$ pour $i \neq j$.
+    \item Les sous-espaces $E_1$, $E_2$, $E_3$ sont-ils en somme directe ?
+    \item Déterminer $E_1 + E_2 + E_3$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\subsection{Endomorphismes}
+%==============================================================================
+
+\begin{Def}\textbf{Endomorphisme}\\
+
+Un \textbf{endomorphisme} de $E$ est une application linéaire de $E$ dans lui-même :
+$$f : E \longrightarrow E$$
+L'ensemble des endomorphismes de $E$ est noté $\mathcal{L}(E)$ ou $\text{End}(E)$.
+\end{Def}
+
+\begin{Def}\textbf{Puissances d'un endomorphisme}\\
+
+Soit $f \in \mathcal{L}(E)$. On définit par récurrence les \textbf{puissances} de $f$ :
+\begin{itemize}
+    \item $f^0 = \text{Id}_E$ (l'endomorphisme identité)
+    \item $f^1 = f$
+    \item $f^{k+1} = f \circ f^k$ pour $k \geq 0$
+\end{itemize}
+Ainsi $f^k$ désigne la composition de $f$ avec elle-même $k$ fois.
+\end{Def}
+
+\begin{Prop}\textbf{Algèbre des endomorphismes}\\
+
+L'ensemble $\mathcal{L}(E)$ muni de l'addition et de la composition est une \textbf{algèbre} :
+\begin{itemize}
+    \item $(\mathcal{L}(E), +, \cdot)$ est un espace vectoriel
+    \item La composition $\circ$ est bilinéaire et associative
+    \item $\text{Id}_E$ est élément neutre pour $\circ$
+\end{itemize}
+De plus, pour $f, g \in \mathcal{L}(E)$ et $k, \ell \in \mathbb{N}$ :
+$$f^k \circ f^\ell = f^{k+\ell} \quad \text{et} \quad (f^k)^\ell = f^{k\ell}$$
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+La composition n'est \textbf{pas commutative} en général : $f \circ g \neq g \circ f$.
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Commutativité}
+
+Soit $f : \mathbb{R}^2 \to \mathbb{R}^2$ défini par $f(x, y) = (y, x)$ et $g : \mathbb{R}^2 \to \mathbb{R}^2$ défini par $g(x, y) = (2x, 0)$.
+\begin{enumerate}
+    \item Calculer $f \circ g$ et $g \circ f$.
+    \item Les endomorphismes $f$ et $g$ commutent-ils ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\subsection{Déterminant et trace d'un endomorphisme}
+%==============================================================================
+
+\begin{Def}\textbf{Déterminant d'un endomorphisme}\\
+
+Soit $f \in \mathcal{L}(E)$ et $A$ la matrice de $f$ dans une base quelconque de $E$. Le \textbf{déterminant} de $f$ est défini par :
+$$\det f = \det A$$
+\end{Def}
+
+\begin{Prop}\textbf{Invariance du déterminant}\\
+
+Le déterminant d'un endomorphisme est un \textbf{invariant algébrique} : il ne dépend pas de la base choisie pour représenter $f$.
+
+En effet, si $A$ et $B$ sont les matrices de $f$ dans deux bases différentes, alors $B = P^{-1}AP$ pour une matrice de passage $P$ inversible, et :
+$$\det B = \det(P^{-1}AP) = \det(P^{-1}) \cdot \det A \cdot \det P = \det A$$
+\end{Prop}
+
+\begin{Def}\textbf{Trace d'un endomorphisme}\\
+
+Soit $f \in \mathcal{L}(E)$ et $A = (a_{ij})$ la matrice de $f$ dans une base. La \textbf{trace} de $f$ est :
+$$\text{tr}(f) = \text{tr}(A) = \sum_{i=1}^{n} a_{ii}$$
+(somme des coefficients diagonaux)
+\end{Def}
+
+\begin{Prop}\textbf{Propriétés de la trace}\\
+
+\begin{enumerate}
+    \item La trace est un \textbf{invariant algébrique} : elle ne dépend pas de la base.
+    \item La trace est \textbf{linéaire} : $\text{tr}(\alpha f + \beta g) = \alpha \, \text{tr}(f) + \beta \, \text{tr}(g)$
+    \item $\text{tr}(f \circ g) = \text{tr}(g \circ f)$ (cyclicité)
+    \item $\text{tr}(\text{Id}_E) = n = \dim E$
+\end{enumerate}
+\end{Prop}
+
+\begin{Ex}\textbf{Calcul de trace}\\
+
+Soit $A = \begin{pmatrix} 3 & 1 & -2 \\ 0 & 5 & 4 \\ 1 & -1 & 2 \end{pmatrix}$. On a $\text{tr}(A) = 3 + 5 + 2 = 10$.
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Trace et déterminant}
+
+Soit $A = \begin{pmatrix} 2 & 1 \\ 3 & 4 \end{pmatrix}$.
+\begin{enumerate}
+    \item Calculer $\text{tr}(A)$ et $\det(A)$.
+    \item Calculer $\text{tr}(A^2)$ et $\det(A^2)$.
+    \item Vérifier que $\det(A^2) = (\det A)^2$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Trace d'un projecteur}
+
+Soit $p$ un projecteur de $E$ (c'est-à-dire $p^2 = p$).
+\begin{enumerate}
+    \item Montrer que les seules valeurs propres possibles de $p$ sont $0$ et $1$.
+    \item Montrer que $E = \ker p \oplus \text{Im}\, p$.
+    \item En déduire que $\text{tr}(p) = \text{rg}(p) = \dim(\text{Im}\, p)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\subsection{Rang d'une application linéaire}
+%==============================================================================
+
+\begin{Def}\textbf{Rang}\\
+
+Soit $f : E \to F$ une application linéaire. Le \textbf{rang} de $f$ est la dimension de l'image de $f$ :
+$$\text{rg}(f) = \dim(\text{Im}\, f)$$
+\end{Def}
+
+\begin{Thm}\textbf{Théorème du rang}\\
+
+Soit $f : E \to F$ une application linéaire. On a :
+$$\dim E = \dim(\ker f) + \text{rg}(f)$$
+\end{Thm}
+
+\begin{Prop}\textbf{Bornes du rang}\\
+
+Pour $f : E \to F$ :
+$$0 \leq \text{rg}(f) \leq \min(\dim E, \dim F)$$
+\end{Prop}
+
+\begin{Prop}\textbf{Invariance du rang}\\
+
+Le rang est un \textbf{invariant algébrique}. Si $A$ est la matrice de $f$ dans des bases et $B$ inversible, alors :
+$$\text{rg}(AB) = \text{rg}(A) = \text{rg}(f)$$
+\end{Prop}
+
+\begin{Meth}\textbf{Calcul du rang d'une matrice}\\
+
+Pour calculer le rang d'une matrice $A$, on peut :
+\begin{enumerate}
+    \item \textbf{Méthode des pivots de Gauss :} Échelonner la matrice et compter les pivots non nuls.
+    \item \textbf{Méthode des mineurs :} Chercher la taille maximale d'une sous-matrice carrée inversible.
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}\textbf{Calcul de rang par échelonnement}\\
+
+Soit $A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 4 \\ 3 & 4 & 5 \end{pmatrix}$.
+
+Par opérations élémentaires : $L_2 \leftarrow L_2 - 2L_1$, $L_3 \leftarrow L_3 - 3L_1$ :
+$$A \sim \begin{pmatrix} 1 & 2 & 3 \\ 0 & -1 & -2 \\ 0 & -2 & -4 \end{pmatrix}$$
+Puis $L_3 \leftarrow L_3 - 2L_2$ :
+$$A \sim \begin{pmatrix} 1 & 2 & 3 \\ 0 & -1 & -2 \\ 0 & 0 & 0 \end{pmatrix}$$
+Donc $\text{rg}(A) = 2$ (deux pivots non nuls).
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\subsection{Relation entre rang et déterminant}
+%==============================================================================
+
+\begin{Def}\textbf{Matrice extraite}\\
+
+Soit $A \in M_{n,p}(K)$. Une \textbf{matrice extraite} de $A$ est une matrice obtenue en supprimant un certain nombre de lignes et un certain nombre de colonnes de $A$.
+\end{Def}
+
+\begin{Thm}\textbf{Caractérisation du rang par les mineurs}\\
+
+Soit $A \in M_{n,p}(K)$ et $r$ un entier tel que $1 \leq r \leq \min(n, p)$. Alors :
+$$\text{rg}(A) \geq r \Longleftrightarrow \text{il existe une matrice extraite } r \times r \text{ de } A \text{ de déterminant non nul}$$
+\end{Thm}
+
+\begin{Prop}\textbf{Rang maximal et inversibilité}\\
+
+Pour $A \in M_n(K)$ :
+$$\text{rg}(A) = n \Longleftrightarrow \det(A) \neq 0 \Longleftrightarrow A \text{ est inversible}$$
+\end{Prop}
+
+\begin{Ex}\textbf{Rang par extraction}\\
+
+Soit $A = \begin{pmatrix} 1 & -4 & 3 & 2 \\ 0 & 6 & 0 & 3 \\ 5 & 5 & 6 & 4 \\ 0 & 0 & 0 & 5 \end{pmatrix}$.
+
+La sous-matrice $\begin{pmatrix} 1 & -4 & 2 \\ 0 & 6 & 3 \\ 0 & 0 & 5 \end{pmatrix}$ (colonnes 1, 2, 4) est triangulaire avec déterminant $1 \times 6 \times 5 = 30 \neq 0$.
+
+Donc $\text{rg}(A) \geq 3$. Comme $\det(A) = 0$ (à vérifier), on a $\text{rg}(A) = 3$.
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\subsection{Équations de l'image}
+%==============================================================================
+
+\begin{Meth}\textbf{Trouver les équations de l'image}\\
+
+Soit $f : E \to F$ une application linéaire. Pour trouver les équations cartésiennes de $\text{Im}\, f$ :
+\begin{enumerate}
+    \item Écrire la matrice $A$ de $f$ dans les bases canoniques.
+    \item Un vecteur $y = (y_1, \ldots, y_m)$ est dans $\text{Im}\, f$ si et seulement si le système $Ax = y$ a une solution.
+    \item Appliquer le pivot de Gauss au système augmenté $(A \mid y)$.
+    \item Les équations de compatibilité obtenues donnent les équations de $\text{Im}\, f$.
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}\textbf{Équations de l'image}\\
+
+Soit $f : \mathbb{R}^3 \to \mathbb{R}^4$ de matrice $A = \begin{pmatrix} 5 & -1 & -3 \\ 2 & 1 & -4 \\ 3 & -2 & 1 \\ 1 & 2 & -5 \end{pmatrix}$.
+
+On échelonne $(A \mid y)$ où $y = (y_1, y_2, y_3, y_4)^T$ :
+$$\begin{pmatrix} 5 & -1 & -3 & y_1 \\ 2 & 1 & -4 & y_2 \\ 3 & -2 & 1 & y_3 \\ 1 & 2 & -5 & y_4 \end{pmatrix} \sim \cdots$$
+
+On trouve $\text{rg}(A) = 2$, donc $\text{Im}\, f$ est un plan dans $\mathbb{R}^4$ défini par 2 équations.
+\end{Ex}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+%==============================================================================
+\section{Exercices}
+%==============================================================================
+
+\exo[1]{Rang de matrices}
+
+Calculer le rang des matrices suivantes :
+$$A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 4 \\ 3 & 4 & 5 \end{pmatrix}, \quad
+B = \begin{pmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \\ 1 & 3 & 9 \end{pmatrix}, \quad
+C = \begin{pmatrix} 1 & 2 & 3 & 3 \\ 2 & 3 & 4 & 2 \\ 3 & 4 & 5 & 2 \end{pmatrix}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Rang en fonction de paramètres}
+
+Soit $D = \begin{pmatrix} 1 & 2 & 1 & 2 \\ -2 & -3 & 0 & -5 \\ 4 & 9 & 6 & 7 \\ 1 & -1 & -5 & 5 \end{pmatrix}$.
+
+Calculer le rang de $D$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Rang maximal}
+
+Soient $\alpha, \beta$ deux réels. 
+$$A = \begin{pmatrix} 1 & 3 & \alpha & \beta \\ 2 & -1 & 2 & 1 \\ -1 & 1 & 2 & 0 \end{pmatrix}$$
+Déterminer les valeurs de $\alpha$ et $\beta$ pour que la matrice $A$ soit de rang maximal.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Rang et déterminant paramétrés}
+
+Soit $m \in \mathbb{R}$ et $A(m) = \begin{pmatrix} m-1 & 1 & -1 & 1-m \\ -1 & m+1 & -1-m & 1 \\ m+4 & m & 1 & -3 \\ 3m+1 & 2m+3 & -2m-3 & -2m \end{pmatrix}$.
+\begin{enumerate}
+    \item Calculer $\det(A(m))$ en fonction de $m$.
+    \item Déterminer le rang de $A(m)$ selon les valeurs de $m$.
+    \item Pour $m = -1$, soit $f : \mathbb{R}^4 \to \mathbb{R}^4$ l'application linéaire de matrice $A(-1)$.\\
+    Déterminer les équations de $\text{Im}\, f$ et une base de $\ker f$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Noyau et image}
+
+Soit $f : \mathbb{R}^3 \to \mathbb{R}^3$ l'endomorphisme de matrice dans la base canonique :
+$$A = \begin{pmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{pmatrix}$$
+\begin{enumerate}
+    \item Déterminer $\ker f$ et $\text{Im}\, f$.
+    \item Vérifier le théorème du rang.
+    \item L'endomorphisme $f$ est-il un projecteur ?
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Somme directe et supplémentaire}
+
+Dans $\mathbb{R}^4$, on considère :
+$$F = \{(x, y, z, t) \mid x + y = 0 \text{ et } z - t = 0\}$$
+$$G = \text{Vect}((1, 0, 1, 0), (0, 1, 0, 1))$$
+\begin{enumerate}
+    \item Déterminer une base de $F$ et de $G$.
+    \item Montrer que $F$ et $G$ sont supplémentaires dans $\mathbb{R}^4$.
+    \item Exprimer le vecteur $(1, 2, 3, 4)$ comme somme d'un vecteur de $F$ et d'un vecteur de $G$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Projecteur associé à une somme directe}
+
+On considère $E = \mathbb{R}^3$ avec $F = \text{Vect}((1, 1, 0))$ et $G = \{(x, y, z) \mid x + y = 0\}$.
+\begin{enumerate}
+    \item Montrer que $E = F \oplus G$.
+    \item Déterminer la matrice du projecteur $p$ sur $F$ parallèlement à $G$.
+    \item Vérifier que $p^2 = p$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Trace et commutateur}
+
+Soient $A, B \in M_n(\mathbb{R})$. Le \textbf{commutateur} de $A$ et $B$ est $[A, B] = AB - BA$.
+\begin{enumerate}
+    \item Montrer que $\text{tr}([A, B]) = 0$.
+    \item En déduire qu'il n'existe pas de matrices $A, B \in M_n(\mathbb{R})$ telles que $AB - BA = I_n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Rang d'un produit}
+
+Soient $A \in M_{n,p}(K)$ et $B \in M_{p,q}(K)$.
+\begin{enumerate}
+    \item Montrer que $\text{rg}(AB) \leq \min(\text{rg}(A), \text{rg}(B))$.
+    \item Donner un exemple où $\text{rg}(AB) < \text{rg}(A)$ et $\text{rg}(AB) < \text{rg}(B)$.
+    \item Montrer que si $B$ est inversible, alors $\text{rg}(AB) = \text{rg}(A)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Matrices nilpotentes et trace}
+
+Une matrice $A \in M_n(K)$ est dite \textbf{nilpotente} s'il existe $k \in \mathbb{N}^*$ tel que $A^k = 0$.
+\begin{enumerate}
+    \item Montrer que si $A$ est nilpotente, alors $\text{tr}(A) = 0$.
+    \item Montrer que si $A$ est nilpotente, alors $\det(A) = 0$.
+    \item La réciproque est-elle vraie ?
+    \item Montrer que si $A$ est nilpotente, alors $\text{tr}(A^k) = 0$ pour tout $k \geq 1$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Image et noyau d'un endomorphisme}
+
+Soit $f$ l'endomorphisme de $\mathbb{R}^4$ de matrice dans la base canonique :
+$$A = \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & 1 & -1 & -1 \\ 1 & -1 & 1 & -1 \\ 1 & -1 & -1 & 1 \end{pmatrix}$$
+\begin{enumerate}
+    \item Calculer le rang de $f$.
+    \item Déterminer une base de $\ker f$ et une base de $\text{Im}\, f$.
+    \item Montrer que $\mathbb{R}^4 = \ker f \oplus \text{Im}\, f$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Caractérisation de la somme directe}
+
+Soient $E_1, E_2, E_3$ trois sous-espaces vectoriels de $E$. On suppose que $E_i \cap E_j = \{0\}$ pour $i \neq j$.
+\begin{enumerate}
+    \item Montrer que cette condition n'implique pas que $E_1, E_2, E_3$ sont en somme directe.
+    \item Montrer que $E_1, E_2, E_3$ sont en somme directe si et seulement si :
+    $$E_1 \cap (E_2 + E_3) = \{0\}$$
+    \item Généraliser au cas de $r$ sous-espaces.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Endomorphisme induit}
+
+Soit $f \in \mathcal{L}(E)$ et $F$ un sous-espace vectoriel de $E$ stable par $f$ (c'est-à-dire $f(F) \subset F$).
+\begin{enumerate}
+    \item Montrer que la restriction $f|_F : F \to F$ est un endomorphisme de $F$.
+    \item Soit $G$ un supplémentaire de $F$ dans $E$, stable par $f$. Montrer que si $\mathcal{B}_F$ et $\mathcal{B}_G$ sont des bases de $F$ et $G$, alors la matrice de $f$ dans $\mathcal{B}_F \cup \mathcal{B}_G$ est diagonale par blocs.
+    \item En déduire que $\det(f) = \det(f|_F) \cdot \det(f|_G)$ et $\text{tr}(f) = \text{tr}(f|_F) + \text{tr}(f|_G)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+

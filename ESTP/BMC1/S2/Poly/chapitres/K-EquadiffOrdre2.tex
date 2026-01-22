@@ -1,0 +1,586 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ÉQUATIONS DIFFÉRENTIELLES DU SECOND ORDRE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Équations d'ordre 2 - Cas particuliers}
+
+\subsection{Équations où $y$ et $y'$ sont absents}
+
+\begin{Def}
+Une équation différentielle où $y$ et $y'$ sont absents est de la forme :
+$$y''=f(x)$$
+\end{Def}
+
+\begin{Meth}
+Pour résoudre : on \textbf{intègre deux fois} successivement.
+\end{Meth}
+
+\begin{Ex}
+Résoudre $y''=6x$.
+
+\vspace{1em}
+
+\textbf{Solution :}
+$$\begin{array}{rcl}
+y'' &=& 6x\\
+y' &=& 3x^2+C_1\\
+y &=& x^3+C_1x+C_2
+\end{array}$$
+\end{Ex}
+
+\begin{Rmq}
+On obtient \textbf{deux constantes d'intégration} $C_1$ et $C_2$. C'est caractéristique des équations d'ordre 2 : il y a deux intégrations à effectuer.
+\end{Rmq}
+
+\subsection{Équations où $x$ et $y'$ sont absents}
+
+\begin{Def}
+Une équation différentielle où $x$ et $y'$ sont absents est de la forme :
+$$y''=f(y)$$
+\end{Def}
+
+\begin{Meth}[Changement de variable]
+On pose $z=y'=\dfrac{dy}{dx}$, donc $z'=y''=\dfrac{dz}{dx}$.
+
+L'équation devient $\dfrac{dz}{dx}= f(y)$.
+
+On utilise la relation :
+$$z\,dz= f(y)\,dy$$
+puis on intègre de chaque côté pour obtenir $z$. Une fois $z$ connu, on résout une équation du premier ordre en $y$.
+\end{Meth}
+
+\begin{Ex}
+Résoudre $y''=\dfrac{1}{y^3}$ avec $y(0)=1$ et $y'(0)=0$.
+
+\textbf{Solution :}
+
+On pose $z=y'$. L'équation devient :
+$$z\,dz= \dfrac{1}{y^3}\,dy$$
+
+En intégrant :
+$$\dfrac{z^2}{2}=-\dfrac{1}{2y^2}+C_1$$
+
+Avec $z=y'=0$ et $y=1$ pour $x=0$ : $C_1=\dfrac{1}{2}$
+
+$$z^2=1-\dfrac{1}{y^2}=\dfrac{y^2-1}{y^2}$$
+
+$$\dfrac{dy}{dx}=\pm\dfrac{\sqrt{y^2-1}}{y}$$
+
+En séparant les variables et en intégrant :
+$$\sqrt{y^2-1}=\pm x+C_2$$
+
+Avec $y=1$ pour $x=0$ : $C_2=0$
+
+$$y^2-1=x^2 \quad\Rightarrow\quad y^2=x^2+1$$
+
+C'est l'équation d'une \textbf{hyperbole}.
+\end{Ex}
+
+\subsection{Équations où $y$ est absent}
+
+\begin{Def}
+Une équation différentielle où $y$ est absent est de la forme :
+$$y''=f(x,y')$$
+\end{Def}
+
+\begin{Meth}
+On pose $z=y'$. L'équation devient $\dfrac{dz}{dx}=f(x,z)$, une équation du \textbf{premier ordre en $z$}.
+
+On résout pour obtenir $z$, puis on intègre pour trouver $y$.
+\end{Meth}
+
+\begin{Ex}
+Résoudre $xy''+2y'=12x^2$.
+
+\vspace{1em}
+
+\textbf{Solution :}
+
+On pose $z=y'$. L'équation devient :
+$$\dfrac{dz}{dx}+\dfrac{2}{x}z=12x$$
+
+En multipliant par $x^2$ (facteur intégrant) :
+$$x^2\dfrac{dz}{dx}+2xz=12x^3$$
+$$d(x^2z)=12x^3\,dx$$
+
+En intégrant :
+$$x^2z=3x^4+C_1 \quad\Rightarrow\quad z=3x^2+\dfrac{C_1}{x^2}$$
+
+Donc $\dfrac{dy}{dx}=3x^2+\dfrac{C_1}{x^2}$
+
+En intégrant :
+$$y=x^3-\dfrac{C_1}{x}+C_2$$
+\end{Ex}
+
+\subsection{Équations où $x$ est absent}
+
+\begin{Def}
+Une équation différentielle où $x$ est absent est de la forme :
+$$y''=f(y,y')$$
+\end{Def}
+
+\begin{Meth}
+On pose $z=y'$. On utilise :
+$$z\,dz= f(y,z)\,dy$$
+
+C'est une équation du premier ordre en $z$ (variable $y$). On résout pour $z$, puis on intègre pour trouver $y$.
+\end{Meth}
+
+\begin{Ex}
+Résoudre $y''+e^y(y')^3=0$ avec $y(0)=0$ et $y'(0)=1$.
+
+\vspace{1em}
+
+\textbf{Solution :}
+
+On pose $z=y'$. L'équation devient :
+$$z\,dz=-e^y z^3\,dy \quad\Rightarrow\quad -\dfrac{dz}{z^2}=e^y\,dy$$
+
+En intégrant :
+$$\dfrac{1}{z}=e^y+C_1$$
+
+Avec $z=1$ et $y=0$ pour $x=0$ : $C_1=0$
+
+$$\dfrac{1}{z}=e^y \quad\Rightarrow\quad \dfrac{dx}{dy}=e^y$$
+
+$$dx=e^y\,dy \quad\Rightarrow\quad x=e^y+C_2$$
+
+Avec $y=0$ pour $x=0$ : $C_2=-1$
+
+$$x=e^y-1 \quad\Rightarrow\quad \boxed{y=\ln(x+1)}$$
+\end{Ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Équations linéaires à coefficients constants}
+
+\begin{Def}[Équation linéaire à coefficients constants]
+Une équation linéaire du second ordre à coefficients constants est de la forme :
+$$a\,y''+b\,y'+c\,y=Q(x)$$
+où $a,b,c$ sont des constantes réelles avec $a\neq 0$.
+
+\begin{itemize}
+\item Si $Q(x)=0$ : équation \textbf{homogène} (ou sans second membre)
+\item Si $Q(x)\neq 0$ : équation \textbf{complète} (ou avec second membre)
+\end{itemize}
+\end{Def}
+
+\begin{Thm}[Structure des solutions]
+La solution générale $y$ de l'équation complète $ay''+by'+cy=Q(x)$ est :
+$$y=y_0+y_p$$
+où :
+\begin{itemize}
+\item $y_0$ est la \textbf{solution générale de l'équation homogène} $ay''+by'+cy=0$
+\item $y_p$ est une \textbf{solution particulière} de l'équation complète
+\end{itemize}
+\end{Thm}
+
+\subsection{Équation caractéristique}
+
+\begin{Def}[Équation caractéristique]
+L'\textbf{équation caractéristique} de l'équation différentielle $ay''+by'+cy=Q(x)$ est l'équation du second degré :
+$$ar^2+br+c=0$$
+\end{Def}
+
+\begin{Rmq}
+L'idée est de chercher des solutions de la forme $y=e^{rx}$. En substituant :
+$$ar^2e^{rx}+bre^{rx}+ce^{rx}=0 \quad\Rightarrow\quad (ar^2+br+c)e^{rx}=0$$
+Comme $e^{rx}\neq 0$, on obtient l'équation caractéristique.
+\end{Rmq}
+
+\subsection{Résolution de l'équation homogène}
+
+\begin{Thm}[Solution de l'équation homogène]
+Les solutions de l'équation homogène $ay''+by'+cy=0$ dépendent du discriminant $\Delta=b^2-4ac$ :
+
+\begin{enumerate}
+\item \textbf{Si $\Delta>0$} : deux racines réelles distinctes $r_1$ et $r_2$
+$$y_0=C_1 e^{r_1x}+C_2 e^{r_2x} \quad (C_1, C_2\in\R)$$
+
+\item \textbf{Si $\Delta<0$} : deux racines complexes conjuguées $r_{1,2}=\alpha\pm i\beta$
+$$y_0=e^{\alpha x}(C_1 \cos \beta x+C_2 \sin \beta x) \quad (C_1,C_2\in\R)$$
+
+\item \textbf{Si $\Delta=0$} : une racine double réelle $r_0=-\dfrac{b}{2a}$
+$$y_0=(C_1 x+C_2)e^{r_0x} \quad (C_1,C_2\in\R)$$
+\end{enumerate}
+\end{Thm}
+
+\begin{Ex}
+Résoudre les équations homogènes suivantes :
+
+\begin{enumerate}
+\item $y''+y'-2y=0$
+
+\vspace{1em}
+
+\textbf{Équation caractéristique :} $r^2+r-2=0 \Rightarrow (r-1)(r+2)=0$
+
+Racines : $r_1=1$ et $r_2=-2$ (réelles distinctes)
+
+$$\boxed{y_0=C_1e^x+C_2e^{-2x}}$$
+
+\item $y''+4y'+13y=0$
+
+\vspace{1em}
+
+\textbf{Équation caractéristique :} $r^2+4r+13=0$
+
+$\Delta=16-52=-36<0$, donc $r=-2\pm 3i$
+
+$$\boxed{y_0=e^{-2x}(C_1\cos 3x+C_2\sin 3x)}$$
+
+\item $y''-2y'+y=0$
+
+\vspace{1em}
+
+\textbf{Équation caractéristique :} $r^2-2r+1=0 \Rightarrow (r-1)^2=0$
+
+Racine double : $r_0=1$
+
+$$\boxed{y_0=(C_1x+C_2)e^{x}}$$
+\end{enumerate}
+\end{Ex}
+
+\subsection{Solution particulière - Second membre polynomial}
+
+\begin{Prop}
+\textbf{Second membre $Q(x)=P(x)$ polynomial de degré $n$.} On cherche $y_p$ sous la forme d'un polynôme $K(x)$ dont le degré dépend de la situation :
+
+\begin{itemize}
+\item Si $c\neq 0$ (0 n'est pas racine de l'éq. car.) : $\deg(K)=n$
+\item Si $c=0$ et $b\neq 0$ (0 est racine simple) : $\deg(K)=n+1$
+\item Si $c=0$ et $b=0$ (0 est racine double) : $\deg(K)=n+2$
+\end{itemize}
+\end{Prop}
+
+\begin{Ex}
+Résoudre $y''+4y'-5y=x^2-1$.
+
+\vspace{1em}
+
+\textbf{Équation homogène :} $r^2+4r-5=0 \Rightarrow r_1=1$, $r_2=-5$
+$$y_0=C_1e^x+C_2e^{-5x}$$
+
+\vspace{1em}
+
+\textbf{Solution particulière :} Comme $c=-5\neq 0$, on cherche $y_p=\alpha x^2+\beta x+\gamma$
+
+$$y'_p=2\alpha x+\beta, \quad y''_p=2\alpha$$
+
+En substituant dans l'équation :
+$$2\alpha+4(2\alpha x+\beta)-5(\alpha x^2+\beta x+\gamma)=x^2-1$$
+$$-5\alpha x^2+(8\alpha-5\beta)x+(2\alpha+4\beta-5\gamma)=x^2-1$$
+
+Par identification :
+$$\begin{cases}-5\alpha=1\\ 8\alpha-5\beta=0\\ 2\alpha+4\beta-5\gamma=-1\end{cases} \Rightarrow \begin{cases}\alpha=-\frac{1}{5}\\ \beta=-\frac{8}{25}\\ \gamma=-\frac{17}{125}\end{cases}$$
+
+$$\boxed{y=C_1e^x+C_2e^{-5x}-\frac{1}{5}x^2-\frac{8}{25}x-\frac{17}{125}}$$
+\end{Ex}
+
+\subsection{Solution particulière - Second membre exponentiel}
+
+\begin{Prop}
+\textbf{Second membre $Q(x)=P(x)e^{mx}$.} Où $P(x)$ est un polynôme de degré $n$ et $m\in\C$.
+
+On cherche $y_p=e^{mx}K(x)$ avec $K$ polynôme :
+
+\begin{itemize}
+\item Si $m$ n'est \textbf{pas racine} de l'éq. car. : $\deg(K)=n$
+\item Si $m$ est \textbf{racine simple} de l'éq. car. : $\deg(K)=n+1$
+\item Si $m$ est \textbf{racine double} de l'éq. car. : $\deg(K)=n+2$
+\end{itemize}
+\end{Prop}
+
+\begin{Ex}
+Résoudre $y''-2y'+2y=\sin x-\cos x$.
+
+\vspace{1em}
+
+\textbf{Équation homogène :} $r^2-2r+2=0$, $\Delta=-4$, $r=1\pm i$
+$$y_0=e^x(C_1\cos x+C_2\sin x)$$
+
+\vspace{1em}
+
+\textbf{Solution particulière :} On cherche $y_p=\alpha\sin x +\beta\cos x$
+
+$$y'_p=\alpha\cos x-\beta\sin x, \quad y''_p=-\alpha\sin x -\beta\cos x$$
+
+En substituant :
+$$(\alpha+2\beta)\sin x+(-2\alpha+\beta)\cos x=\sin x-\cos x$$
+
+Par identification :
+$$\begin{cases}\alpha+2\beta=1\\ -2\alpha+\beta=-1\end{cases} \Rightarrow \begin{cases}\alpha=\frac{3}{5}\\ \beta=\frac{1}{5}\end{cases}$$
+
+$$\boxed{y=e^x(C_1\cos x+C_2\sin x)+\frac{3}{5}\sin x+\frac{1}{5}\cos x}$$
+\end{Ex}
+
+\subsection{Principe de superposition}
+
+\begin{Prop}
+\textbf{Superposition.} Pour l'équation $ay''+by'+cy=f_1(x)+f_2(x)$ :
+
+Si $y_1$ est solution de $ay''+by'+cy=f_1(x)$ et $y_2$ est solution de $ay''+by'+cy=f_2(x)$, alors :
+$$y_p=y_1+y_2$$
+est solution de l'équation complète.
+\end{Prop}
+
+\begin{Ex}
+Chercher une solution particulière de $y''+2y'-3y=x+e^{2x}$.
+
+\vspace{1em}
+
+\textbf{Équation caractéristique :} $r^2+2r-3=0 \Rightarrow r_1=1$, $r_2=-3$
+
+\begin{enumerate}
+\item Pour $y''+2y'-3y=x$ : on cherche $y_1=\alpha x+\beta$
+$$2\alpha-3(\alpha x+\beta)=x \Rightarrow -3\alpha=1, \quad 2\alpha-3\beta=0$$
+$$\alpha=-\frac{1}{3}, \quad \beta=-\frac{2}{9} \quad\Rightarrow\quad y_1=-\frac{x}{3}-\frac{2}{9}$$
+
+\item Pour $y''+2y'-3y=e^{2x}$ : comme 2 n'est pas racine, on cherche $y_2=\gamma e^{2x}$
+$$4\gamma+4\gamma-3\gamma=1 \Rightarrow 5\gamma=1 \quad\Rightarrow\quad y_2=\frac{1}{5}e^{2x}$$
+\end{enumerate}
+
+$$\boxed{y_p=-\frac{x}{3}-\frac{2}{9}+\frac{1}{5}e^{2x}}$$
+\end{Ex}
+
+\subsection{Méthode de résolution complète}
+
+\begin{Meth}[Résolution de $ay''+by'+cy=Q(x)$]
+\begin{enumerate}
+\item \textbf{Résoudre l'équation homogène} $ay''+by'+cy=0$ :
+\begin{itemize}
+\item Calculer le discriminant $\Delta$ de l'équation caractéristique
+\item Déterminer $y_0$ selon le signe de $\Delta$
+\end{itemize}
+
+\item \textbf{Chercher une solution particulière} $y_p$ :
+\begin{itemize}
+\item Identifier la forme du second membre $Q(x)$
+\item Choisir la forme de $y_p$ en fonction des racines de l'éq. car.
+\item Identifier les coefficients
+\end{itemize}
+
+\item \textbf{Conclure} : $y=y_0+y_p$
+\end{enumerate}
+\end{Meth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercices}
+
+\exo{\textbf{Premiers pas}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''=12$ \quad ($y,y'$ absents)
+\item $y''=24x^2+12x+6$ \quad ($y,y'$ absents)
+\item $y''=e^{2y}$ avec $y'(0)=1$ et $y(0)=0$ \quad ($x,y'$ absents)
+\item $xy''-y'=1$ \quad ($y$ absent)
+\item $y''-\left(1+\dfrac{1}{x}\right)y'=x$ \quad ($y$ absent)
+\item $y''-yy'=0$ avec $y'(1)=-1$ et $y(1)=1$ \quad ($x$ absent)
+\item $yy''-(y')^2=-1$ avec $y'(2)=0$ et $y(2)=2$ \quad ($x$ absent)
+\item $yy''=2(y')^2$ avec $y'(1)=8$ et $y(1)=2$ \quad ($x$ absent)
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Équations homogènes}}
+
+Résoudre les équations homogènes suivantes :
+\begin{multicols}{2}
+\begin{enumerate}
+\item $y''-y=0$
+\item $y''-6y'+9y=0$
+\item $y''+4y'+5y=0$ avec $y(0)=1$, $y'(0)=2$
+\item $y''-y'=0$ avec $y(0)=1$, $y'(0)=-1$
+\item $y''+4y'-5y=0$
+\item $y''+2y'+y=0$
+\item $y''+9y=0$
+\end{enumerate}
+\end{multicols}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Recherche de solutions particulières}}
+
+Déterminer la solution particulière $y_p$ à partir de la forme proposée :
+\begin{enumerate}
+\item $y''+4y=8x^2+1$ avec $y_p=A x^2+Bx+C$
+\item $y''-3y'+2y=e^x$ avec $y_p=(Ax+B)e^x$
+\item $y''+y'-2y=e^{-x}+\cos (2x)$ avec $y_p=Ae^{-x}+B\cos( 2x)+C\sin( 2x)$
+\item $y''+2y'+y=x^2e^{x}$ avec $y_p=(ax^2+bx+c)e^{x}$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Entraînement}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''+y=-x-x^2$ avec $y_p=Ax^2+Bx+C$
+\item $y''-y=e^x$ avec $y_p=Axe^x$
+\item $y''-4y'+3y=e^{2x}$ avec $y_p=Ae^{2x}$
+\item $y''-y'-2y=10\cos (2x)$ avec $y_p=A\cos( 2x)+B\sin( 2x)$
+\item $y''-2y'+2y=3e^x(x+3)$ avec $y_p=(Ax+B)e^x$
+\item $y''-2y'+y=2x^2-8x+4$ avec $y(0)=2$, $y'(0)=-1$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Équations sans second membre}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''-2y'-3y=0$
+\item $y''-2y'+y=0$
+\item $y''-2y'+5y=0$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Second membre polynomial}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''-3y'+2y=1$
+\item $y''-2y'+y=x$, avec $y(0)=y'(0)=0$
+\item $y''+9y=x+1$, avec $y(0)=0$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Second membre exponentiel ou trigonométrique}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''-4y'+3y=(2x+1)e^{-x}$
+\item $y''-4y'+3y=(2x+1)e^x$
+\item $y''-2y'+y=(x^2+1)e^x+e^{3x}$
+\item $y''-y=e^{2x}-e^x$
+\item $y''+y'+y=\cos(x)$
+\item $y''-2y'+y=\sin^2 x$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Problème inverse}}
+
+Déterminer une équation différentielle vérifiée par la famille de fonctions :
+$$y(x)=C_1e^{2x}+C_2e^{-x},\quad C_1,C_2\in\mathbb R$$
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Système différentiel}}
+
+Déterminer les fonctions $y,z:\mathbb R\to\mathbb R$ dérivables vérifiant le système :
+$$\begin{cases}
+y'-y=z\\
+z'+z=3y
+\end{cases}$$
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Avec condition initiale}}
+
+Déterminer l'unique fonction solution :
+\begin{enumerate}
+\item $y''+2y'+4y=xe^x$, avec $y(0)=1$ et $y(1)=0$
+\item $y''-2y'+(1+m^2)y=(1+4m^2)\cos (mx)$ avec $y(0)=1$ et $y'(0)=0$
+
+(discuter selon que $m=0$ ou $m\neq 0$)
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Changement de variables}}
+
+Résoudre sur $\mathbb R_+^*$ l'équation différentielle $x^2y''-3xy'+4y = 0$.
+
+\begin{enumerate}
+\item Cette équation est-elle linéaire ?
+\item Pour $y$ solution, on pose $z(t)=y(e^t)$.
+\begin{enumerate}
+\item Calculer $z'(t)$ et $z''(t)$.
+\item En déduire que $z$ vérifie une équation à coefficients constants.
+\item Résoudre cette équation et en déduire $y$.
+\end{enumerate}
+\item Vérifier les solutions trouvées.
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Changement de fonction inconnue}}
+
+Résoudre sur $\R$ les équations différentielles suivantes :
+\begin{enumerate}
+\item $(1+e^x)y''+2e^x y'+(2e^x+1)y=xe^x$ en posant $z(x)=(1+e^x)y(x)$
+\item $xy''+2(x+1)y'+(x+2)y=0$, en posant $z=xy$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Changement de variable}}
+
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}
+\item $y''-y'-e^{2x}y=e^{3x}$ en posant $t=e^x$
+\item $y''+y'\tan(x)-y\cos^2(x)=0$ en posant $t=\sin x$
+\item $x^2y''+y=0$ en posant $t=\ln x$
+\item $(1-x^2)y''-xy'+y=0$ sur $]-1,1[$
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Variation de la constante}}
+
+Résoudre l'équation différentielle $y''+4y=\tan t$.
+
+\medskip\hrule\medskip
+
+\exo{\textbf{La remorque}}
+
+On étudie la suspension d'une remorque. Le centre d'inertie $G$ se déplace sur un axe vertical $(Ox)$ dirigé vers le bas. Son abscisse $x(t)$ vérifie :
+$$M\, x''(t) + k\, x(t) = 0$$
+où $M = 250$ kg et $k = 6250$ N.m$^{-1}$.
+
+\begin{center}
+\includegraphics[height=4cm]{images/figRemorque.png}
+\end{center}
+
+\begin{enumerate}
+\item Déterminer la solution avec $x(0) = 0$ m et $x'(0) = -0,1$ m.s$^{-1}$.
+\item Préciser la période de cette solution.
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Ressort amorti}}
+
+Un objet de masse $m$ est fixé à un ressort horizontal immergé dans un fluide. La position $x(t)$ vérifie :
+$$mx'' + c x' + k x = 0$$
+avec $m=2$, $c=2$ et $k=5$.
+
+\begin{center}
+\includegraphics[height=4cm]{images/figRessort.png}
+\end{center}
+
+\begin{enumerate}
+\item Déterminer l'ensemble des solutions.
+\item On suppose $x(0)=2$ et $x'(0)=3\sqrt{3}-1$. Déterminer $x(t)$.
+\item Quelle est la limite de $x(t)$ quand $t\to +\infty$ ?
+\item Déterminer le plus petit temps $t_0>0$ tel que $x(t_0)=0$.
+\end{enumerate}
+
+\medskip\hrule\medskip
+
+\exo{\textbf{Équation d'ordre 3}}
+
+Soit $(E_1)$ l'équation différentielle $y^{(3)}=y$.
+\begin{enumerate}
+\item Soit $f$ une solution à valeurs complexes. On pose $g=f+f'+f''$. Montrer que $g$ vérifie une équation du premier ordre $(E_2)$.
+\item Résoudre $(E_2)$.
+\item Résoudre $(E_1)$.
+\end{enumerate}
+
+\end{document}

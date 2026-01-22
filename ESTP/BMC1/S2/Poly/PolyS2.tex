@@ -1,0 +1,71 @@
+\input{configPoly}
+\lhead{BMC1 Dijon}
+
+\newcommand{\Lim}[2]{\lim_{\substack{(x,y)\ra #1}}#2}
+\newcommand{\limx}[1]{\ds\lim_{x\ra #1}}
+\newcommand{\limy}[1]{\ds\lim_{y\ra #1}}
+
+\newcommand{\ra}{\rightarrow}
+\usepackage{stmaryrd}
+\begin{document}
+
+
+\includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{images/front.pdf}
+
+\pagenumbering{roman}  % Numérotation romaine pour la table des matières
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}  % Recommence à 1 en chiffres arabes
+
+\chapter{Introduction}
+\input{intro}
+
+
+% Equadiff du premier ordre. (Remi)
+% Equadiff du second ordre. (Karine) 
+% Fonctions de plusieurs variables (Remi)
+% Intégrales multiples (Remi)
+% Etude de fonction (Karine)
+% Intégration (Karine)
+% Fonctions trigonométriques (Karine)
+
+% Karine : equadiff second ordre, fonctions plusieurs variable, intégrales multiples
+% Rémi : equadiff premier ordre, étude de fonctions, intégration, fonctions trigo
+
+\chapter{Etude de fonctions}
+\subfile{chapitres/R-continuiteDerivabilite}
+
+\chapter{Intégration}
+\subfile{chapitres/R-Integrales}
+
+\chapter{Intégrales multiples}
+\subfile{chapitres/K-IntegraleMultiple}
+
+\chapter{Fonctions trigonométriques}
+\subfile{chapitres/R-FonctionsTrigo}
+
+\chapter{Equations différentielles : Ordre 1}
+\subfile{chapitres/R-EquadiffOrdre1}
+
+\chapter{Equations différentielles : Ordre 2}
+\subfile{chapitres/K-EquadiffOrdre2}
+
+\chapter{Fonctions de plusieurs variables}
+\subfile{chapitres/K-PlusieursVariables}
+
+
+\chapter{Annales 2024-2025}
+Voici les sujets qui ont été posés lors des contrôles continus de l'année 2024-2025.
+\subfile{annales/2024}
+
+
+% Liens vers les autres projets : 
+% S1 : https://fr.overleaf.com/4534764743nhkfvmwwrbpy#55af2b
+% S2 : https://fr.overleaf.com/4128697822vdfqstywdjmx#4c6293
+
+% S3 : https://fr.overleaf.com/4578387271pywhzmryfgtw#642977
+% S4 : https://fr.overleaf.com/1782189891wyfhvccrfxsm#b018ec
+
+% S5 : https://fr.overleaf.com/2583585623qjvnxpgbsrdc#d6d95a
+\end{document}

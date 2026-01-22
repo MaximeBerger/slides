@@ -1,0 +1,345 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+Ce chapitre reprend les propriétés fondamentales des fonctions circulaires (sinus, cosinus, tangente) et introduit leurs fonctions réciproques (arcsinus, arccosinus, arctangente). Ces fonctions sont essentielles en analyse, en géométrie et dans de nombreuses applications scientifiques.
+
+\textit{N'hésitez pas à vous replonger dans la section fonctions circulaires du chapitre trigonométrie du premier semestre !}
+
+\section{Fonctions circulaires}
+
+\subsection{Fonction sinus}
+
+\begin{Def}
+\textbf{Fonction sinus.}
+
+La fonction $f(x) = \sin x$ est définie sur $\R$ à valeurs dans $[-1, 1]$.
+
+\textbf{Propriétés :}
+\begin{itemize}
+    \item \textbf{Parité :} impaire : $\sin(-x) = -\sin(x)$
+    \item \textbf{Périodicité :} $2\pi$-périodique
+    \item \textbf{Dérivée :} $(\sin x)' = \cos x$
+\end{itemize}
+\end{Def}
+
+\begin{Prop}
+\textbf{Dérivées successives.}
+
+La fonction sinus est indéfiniment dérivable. Pour tout entier $n \in \N$ :
+$$(\sin x)^{(n)} = \sin\left(x + n\frac{\pi}{2}\right)$$
+\end{Prop}
+
+\begin{Prop}
+\textbf{Dérivée de la composée.}
+
+Si $u$ est une fonction dérivable, alors :
+$$(\sin u)' = u' \cos u$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Limite fondamentale.}
+$$\lim_{x \to 0} \frac{\sin x}{x} = 1$$
+\end{Thm}
+
+\begin{Ex}
+Calculons $\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{x}$.
+
+En posant $u = 3x$, on a $x = \frac{u}{3}$ et quand $x \to 0$, $u \to 0$ :
+$$\frac{\sin(3x)}{x} = \frac{\sin u}{u/3} = 3 \cdot \frac{\sin u}{u} \xrightarrow[u \to 0]{} 3 \times 1 = 3$$
+\end{Ex}
+
+\subsection{Fonction cosinus}
+
+\begin{Def}
+\textbf{Fonction cosinus.}
+
+La fonction $f(x) = \cos x$ est définie sur $\R$ à valeurs dans $[-1, 1]$.
+
+\textbf{Propriétés :}
+\begin{itemize}
+    \item \textbf{Parité :} paire : $\cos(-x) = \cos(x)$
+    \item \textbf{Périodicité :} $2\pi$-périodique
+    \item \textbf{Dérivée :} $(\cos x)' = -\sin x$
+\end{itemize}
+\end{Def}
+
+\begin{Prop}
+\textbf{Dérivées successives.}
+
+La fonction cosinus est indéfiniment dérivable. Pour tout entier $n \in \N$ :
+$$(\cos x)^{(n)} = \cos\left(x + n\frac{\pi}{2}\right)$$
+\end{Prop}
+
+\begin{Prop}
+\textbf{Dérivée de la composée.}
+
+Si $u$ est une fonction dérivable, alors :
+$$(\cos u)' = -u' \sin u$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Limites fondamentales.}
+$$\lim_{x \to 0} \frac{1 - \cos x}{x} = 0 \qquad \text{et} \qquad \lim_{x \to 0} \frac{1 - \cos x}{x^2/2} = 1$$
+
+Cette dernière limite peut aussi s'écrire : $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}$
+\end{Thm}
+
+\subsection{Fonction tangente}
+
+\begin{Def}
+\textbf{Fonction tangente.}
+
+La fonction $f(x) = \tan x = \dfrac{\sin x}{\cos x}$ est définie pour tout réel $x$ tel que $x \neq \frac{\pi}{2} + k\pi$ avec $k \in \Z$.
+
+\textbf{Propriétés :}
+\begin{itemize}
+    \item \textbf{Ensemble de définition :} $D_f = \R \setminus \left\{\frac{\pi}{2} + k\pi, k \in \Z\right\}$
+    \item \textbf{Ensemble image :} $\R$
+    \item \textbf{Parité :} impaire ($\tan(-x) = -\tan(x)$)
+    \item \textbf{Périodicité :} $\pi$-périodique
+\end{itemize}
+\end{Def}
+
+\begin{Prop}
+\textbf{Dérivée de la tangente.}
+
+$$(\tan x)' = 1 + \tan^2 x = \frac{1}{\cos^2 x}$$
+\end{Prop}
+
+\begin{Ex}
+Calculons la dérivée de $f(x) = \tan(x^2)$.
+
+On utilise la formule de dérivation de la composée avec $u(x) = x^2$ :
+$$f'(x) = u'(x) \cdot (1 + \tan^2(u)) = 2x(1 + \tan^2(x^2)) = \frac{2x}{\cos^2(x^2)}$$
+\end{Ex}
+
+\subsection{Tableau récapitulatif}
+
+\renewcommand{\arraystretch}{1.8}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Fonction} & \textbf{Domaine} & \textbf{Parité} & \textbf{Période} & \textbf{Dérivée} \\
+\hline
+$\sin x$ & $\R$ & impaire & $2\pi$ & $\cos x$ \\
+\hline
+$\cos x$ & $\R$ & paire & $2\pi$ & $-\sin x$ \\
+\hline
+$\tan x$ & $\R \setminus \{\frac{\pi}{2} + k\pi\}$ & impaire & $\pi$ & $\dfrac{1}{\cos^2 x}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+%======================================================================
+\section{Fonctions circulaires réciproques}
+%======================================================================
+
+\subsection{Fonction arcsinus}
+
+\begin{Def}
+\textbf{Fonction arcsinus.}
+
+La fonction $f(x) = \arcsin x$ est définie sur $[-1, 1]$ à valeurs dans $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$.
+
+C'est la \textbf{fonction réciproque} de la restriction de sinus à $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$.
+\end{Def}
+
+\begin{Prop}
+\textbf{Propriétés de l'arcsinus.}
+\begin{itemize}
+    \item Pour tout $x \in [-1, 1]$ : $\sin(\arcsin x) = x$
+    \item Pour tout $x \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ : $\arcsin(\sin x) = x$
+    \item \textbf{Parité :} impaire
+    \item \textbf{Monotonie :} strictement croissante
+    \item \textbf{Dérivée :} $(\arcsin x)' = \dfrac{1}{\sqrt{1-x^2}}$ sur $]-1, 1[$
+\end{itemize}
+\end{Prop}
+
+\begin{Prop}
+\textbf{Dérivée de la composée.}
+
+Si $u$ est une fonction dérivable avec $|u| < 1$, alors :
+$$(\arcsin u)' = \frac{u'}{\sqrt{1-u^2}}$$
+\end{Prop}
+
+\subsection{Fonction arccosinus}
+
+\begin{Def}
+\textbf{Fonction arccosinus.}
+
+La fonction $f(x) = \arccos x$ est définie sur $[-1, 1]$ à valeurs dans $[0, \pi]$.
+
+C'est la \textbf{fonction réciproque} de la restriction de cosinus à $[0, \pi]$.
+\end{Def}
+
+\begin{Prop}
+\textbf{Propriétés de l'arccosinus.}
+\begin{itemize}
+    \item Pour tout $x \in [-1, 1]$ : $\cos(\arccos x) = x$
+    \item Pour tout $x \in [0, \pi]$ : $\arccos(\cos x) = x$
+    \item \textbf{Parité :} ni paire ni impaire
+    \item \textbf{Monotonie :} strictement décroissante
+    \item \textbf{Dérivée :} $(\arccos x)' = -\dfrac{1}{\sqrt{1-x^2}}$ sur $]-1, 1[$
+\end{itemize}
+\end{Prop}
+
+\begin{Prop}
+\textbf{Dérivée de la composée.}
+
+Si $u$ est une fonction dérivable avec $|u| < 1$, alors :
+$$(\arccos u)' = -\frac{u'}{\sqrt{1-u^2}}$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Relations fondamentales.}
+
+Pour tout $x \in [-1, 1]$ :
+$$\arccos x + \arcsin x = \frac{\pi}{2}$$
+$$\cos(\arcsin x) = \sin(\arccos x) = \sqrt{1-x^2}$$
+\end{Thm}
+
+\subsection{Fonction arctangente}
+
+\begin{Def}
+\textbf{Fonction arctangente.}
+
+La fonction $f(x) = \arctan x$ est définie sur $\R$ à valeurs dans $\left]-\frac{\pi}{2}, \frac{\pi}{2}\right[$.
+
+C'est la \textbf{fonction réciproque} de la restriction de tangente à $\left]-\frac{\pi}{2}, \frac{\pi}{2}\right[$.
+\end{Def}
+
+\begin{Prop}
+\textbf{Propriétés de l'arctangente.}
+\begin{itemize}
+    \item Pour tout $x \in \R$ : $\tan(\arctan x) = x$
+    \item Pour tout $x \in \left]-\frac{\pi}{2}, \frac{\pi}{2}\right[$ : $\arctan(\tan x) = x$
+    \item \textbf{Parité :} impaire
+    \item \textbf{Monotonie :} strictement croissante
+    \item \textbf{Dérivée :} $(\arctan x)' = \dfrac{1}{1+x^2}$
+    \item \textbf{Limites :} $\displaystyle\lim_{x \to +\infty} \arctan x = \frac{\pi}{2}$ et $\displaystyle\lim_{x \to -\infty} \arctan x = -\frac{\pi}{2}$
+\end{itemize}
+\end{Prop}
+
+\begin{Prop}
+\textbf{Dérivée de la composée.}
+
+Si $u$ est une fonction dérivable, alors :
+$$(\arctan u)' = \frac{u'}{1+u^2}$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Relations avec l'inverse.}
+
+Pour tout $x > 0$ : $\displaystyle\arctan x + \arctan \frac{1}{x} = \frac{\pi}{2}$
+
+Pour tout $x < 0$ : $\displaystyle\arctan x + \arctan \frac{1}{x} = -\frac{\pi}{2}$
+\end{Thm}
+
+\subsection{Tableau récapitulatif des réciproques}
+
+\renewcommand{\arraystretch}{1.8}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Fonction} & \textbf{Domaine} & \textbf{Image} & \textbf{Dérivée} \\
+\hline
+$\arcsin x$ & $[-1, 1]$ & $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ & $\dfrac{1}{\sqrt{1-x^2}}$ \\
+\hline
+$\arccos x$ & $[-1, 1]$ & $[0, \pi]$ & $-\dfrac{1}{\sqrt{1-x^2}}$ \\
+\hline
+$\arctan x$ & $\R$ & $\left]-\frac{\pi}{2}, \frac{\pi}{2}\right[$ & $\dfrac{1}{1+x^2}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{Rmq}
+\textbf{Attention à la dérivée de l'arctangente !}
+
+Dans le fichier original, il y avait une erreur : la dérivée de $\arctan x$ est $\dfrac{1}{1+x^2}$ et non $\dfrac{1}{\sqrt{1-x^2}}$.
+\end{Rmq}
+
+%======================================================================
+\section{Exercices}
+%======================================================================
+
+\exo[1]{\textbf{Étude de fonction trigonométrique}}
+
+Soit $f$ la fonction définie sur $\R$ par $f(x) = \cos(3x) \cos^3 x$.
+\begin{enumerate}
+    \item Exprimer $f(-x)$ et $f(x+\pi)$ en fonction de $f(x)$. Sur quel intervalle $I$ peut-on se contenter d'étudier $f$ ?
+    \item Vérifier que $f'(x)$ est du signe de $-\sin(4x)$ et en déduire le sens de variation de $f$ sur $I$.
+\end{enumerate}
+
+\exo[1]{\textbf{Fonction quotient trigonométrique}}
+
+On considère la fonction $f$ définie par :
+$$f(x) = \frac{\sin x}{1 + \sin x}$$
+\begin{enumerate}
+    \item Quel est le domaine de définition de $f$ ? Vérifier qu'elle est $2\pi$-périodique.
+    \item Comparer $f(\pi - x)$ et $f(x)$. Que peut-on en déduire ?
+    \item Étudier les variations de $f$ sur $\left]-\frac{\pi}{2}, \frac{\pi}{2}\right]$.
+\end{enumerate}
+
+\exo[2]{\textbf{Simplification d'arcsinus}}
+
+Soit $f$ la fonction définie par :
+$$f(x) = \arcsin\left(2x\sqrt{1-x^2}\right)$$
+\begin{enumerate}
+    \item Quel est l'ensemble de définition de $f$ ?
+    \item En posant $x = \sin t$, simplifier l'écriture de $f$.
+\end{enumerate}
+
+\exo[1]{\textbf{Relation fondamentale}}
+
+Montrer que pour tout $x \in [-1, 1]$ :
+$$\arccos x + \arcsin x = \frac{\pi}{2}$$
+
+\textit{Indication : On pourra dériver la fonction $g(x) = \arccos x + \arcsin x$.}
+
+\exo[2]{\textbf{Étude complète d'une fonction arcsinus}}
+
+Soit $f$ la fonction qui à $x$ associe $\arcsin\left(\dfrac{1+x}{1-x}\right)$.
+
+Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
+
+\exo[2]{\textbf{Simplification d'arccosinus}}
+
+Soit $f$ la fonction qui à $x$ associe $\arccos(1-2x^2)$.
+
+Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
+
+\exo[3]{\textbf{Fonction mixte}}
+
+Soit $f$ la fonction qui à $x$ associe $\arcsin x - \dfrac{x}{\sqrt{1-x^2}}$.
+
+Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
+
+\exo[2]{\textbf{Calculs de dérivées}}
+
+Calculer les dérivées des fonctions suivantes :
+\begin{enumerate}
+    \item $f(x) = \arctan(x^2 + 1)$
+    \item $g(x) = \arcsin(\sqrt{x})$
+    \item $h(x) = x \arctan x - \frac{1}{2}\ln(1+x^2)$
+    \item $k(x) = \arctan\left(\frac{1-x}{1+x}\right)$
+\end{enumerate}
+
+\exo[2]{\textbf{Primitives trigonométriques}}
+
+Calculer les primitives suivantes :
+\begin{enumerate}
+    \item $\displaystyle\int \frac{1}{1+x^2} \dx$
+    \item $\displaystyle\int \frac{1}{\sqrt{1-x^2}} \dx$
+    \item $\displaystyle\int \frac{x}{1+x^4} \dx$ \quad \textit{(Indication : poser $u = x^2$)}
+    \item $\displaystyle\int \frac{1}{\sqrt{4-x^2}} \dx$ \quad \textit{(Indication : factoriser par 4)}
+\end{enumerate}
+
+\exo[3]{\textbf{Identité remarquable}}
+
+Démontrer que pour tous $a, b \in \R$ :
+$$\arctan a + \arctan b = \arctan\left(\frac{a+b}{1-ab}\right) + k\pi$$
+où $k \in \{-1, 0, 1\}$ dépend des signes de $a$, $b$ et $1-ab$.
+
+En déduire la valeur de $\arctan 1 + \arctan 2 + \arctan 3$.
+
+\end{document}

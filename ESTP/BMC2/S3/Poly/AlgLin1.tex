@@ -1,0 +1,240 @@
+\section{Espaces vectoriels}
+
+    \subsection{Des ensembles que vous connaissez déjà}
+
+    \subsection{Définition d'un espace vectoriel}
+
+        \begin{Def}\textbf{Espace vectoriel}\\
+        Soit \(K\) un corps (toujours \(\R\) ou \(\C\)).\\
+        Un \textbf{espace vectoriel} sur \(K\) est un ensemble \(E\) muni de deux opérations :
+        \begin{itemize}
+            \item une addition interne \( + : E \times E \to E \),
+            \item une multiplication externe \( \cdot : K \times E \to E \)
+        \end{itemize}
+        telles que :
+        \begin{enumerate}
+            \item l'addition est commutative : \(u + v = v + u\),
+            \item il existe un élément neutre appelé \textbf{vecteur nul} noté \(\vec{0}\),
+            \item tout élément \(u\) admet un opposé noté \(-u\), leur somme donne le vecteur nul. 
+            \item \(\forall \lambda, \mu \in K\) et \(\forall u, v \in E\) :
+            \begin{align*}
+                \lambda \cdot (u + v) &= \lambda \cdot u + \lambda \cdot v, \\
+                (\lambda + \mu) \cdot u &= \lambda \cdot u + \mu \cdot u, \\
+                (\lambda \mu) \cdot u &= \lambda \cdot (\mu \cdot u), \\
+                1_K \cdot u &= u.
+            \end{align*}
+        \end{enumerate}
+        \end{Def}
+
+        \begin{Ex}
+        \begin{itemize}
+            \item $\emptyset$ n'est pas un espace vectoriel sur $\mathbb{R}$.
+            \item $\{0\}$ est un espace vectoriel sur $\mathbb{R}$.
+            \item \(\R^n\) est un espace vectoriel sur \(\R\).
+            \item L'ensemble des suites réelles est un espace vectoriel sur $\mathbb{R}$. (qui pourrait s'écrire $\mathbb{R}^{\infty}$, on l'écrit généralement $\mathbb{R}^{\mathbb{N}}$).
+            \item L'ensemble \(\mathcal{M}_{n,p}(\R)\) des matrices réelles de taille \(n \times p\) est un espace vectoriel sur \(\R\).
+            \item L'ensemble des fonctions continues sur \([0,1]\), noté \(\mathcal{C}([0,1],\R)\), est un espace vectoriel.
+        \end{itemize}
+        \end{Ex}
+
+        Faire trouver le vecteur nul, l'opposé d'un vecteur, etc. 
+
+        Faire trouver un vecteur qui n'est pas dans l'espace vectoriel. 
+
+        Au-delà des vecteurs \og géométriques \fg , d'autres ensembles possèdent les mêmes propriétés et constituent des espaces vectoriels :
+        \begin{itemize}
+            \item l'ensemble des polynômes à coefficients réels,
+            \item l'ensemble des matrices réelles de taille donnée,
+            \item l'ensemble des suites réelles,
+            \item l'ensemble des fonctions définies sur un domaine fixé,
+            \item l'ensemble des images en niveaux de gris de format \(400 \times 400\) pixels (considérées comme des matrices de réels).
+        \end{itemize}
+
+        Ainsi, on peut :
+        \begin{itemize}
+            \item calculer le milieu de deux polynômes par la formule du milieu utilisée sur les vecteurs,
+            \item définir un barycentre pour trois matrices,
+            \item mais il n'existe pas toujours de notion de distance ou d'angle entre vecteurs dans un espace vectoriel sans structure supplémentaire (produit scalaire).
+        \end{itemize}
+
+        \begin{Rmq}
+        Pour définir des notions de distance ou d'angle (comme dans le plan usuel), il faut introduire un \textbf{produit scalaire}, ce qui n'est pas inclus dans la définition d'espace vectoriel. Sans cela, aucune base n'est meilleure qu'une autre — la notion de base orthogonale n'existe pas toujours.
+        \end{Rmq}
+
+    
+
+    \subsection{Sous-espaces vectoriels}
+
+        \begin{Def}\textbf{Sous-espace vectoriel}\\
+        Un sous-ensemble \(F\) d'un espace vectoriel \(E\) est appelé \textbf{sous-espace vectoriel} si :
+        \begin{itemize}
+            \item \(\vec{0} \in F\),
+            \item \(F\) est stable par addition : \(u, v \in F \implies u+v \in F\),
+            \item \(F\) est stable par multiplication externe : \(\lambda \in K, u \in F \implies \lambda u \in F\).
+        \end{itemize}
+        \end{Def}
+
+        \begin{Ex}
+        \begin{itemize}
+            \item L'ensemble des vecteurs du plan \(xy\) dans \(\R^3\) est un sous-espace vectoriel de \(\R^3\).
+            \item L'ensemble des polynômes de degré au plus 2 est un sous-espace vectoriel de l'espace des polynômes.
+        \end{itemize}
+        \end{Ex}
+
+        \begin{Rmq}
+        L'intersection de deux sous-espaces vectoriels est toujours un sous-espace vectoriel. La réunion de deux sous-espaces vectoriels n'est pas toujours un sous-espace vectoriel.
+        \end{Rmq}
+
+        Sommes de sous-espaces vectoriels. 
+        \begin{Def}\textbf{Somme de sous-espaces vectoriels}\\
+        Soient \(F\) et \(G\) deux sous-espaces vectoriels d'un espace vectoriel \(E\). La \textbf{somme} de \(F\) et \(G\) est l'ensemble :
+        \[
+        F + G = \{ u + v \mid u \in F, v \in G \}.
+        \]
+        C'est le plus petit sous-espace vectoriel de $E$ contenant $F$ et $G$. 
+        \end{Def}
+        Des exemples.
+
+        Somme directe ?
+        Une somme qui n'est pas directe ? 
+
+\section{Dimension}
+    \subsection{Combinaisons linéaires et familles de vecteurs}
+        \begin{itemize}
+            \item En dimension \(1\), tous les vecteurs sont colinéaires : 
+            on peut choisir celui qu'on veut (sauf le vecteur nul) et décrire tous les autres comme des multiples de ce vecteur.
+            \item En dimension \(2\), il faut choisir deux vecteurs non colinéaires pour former une base. Il y a une infinité de choix possibles.
+            \item En dimension \(3\), même principe : il faut trois vecteurs non coplanaires.
+            \item En dimension \(n\), il faut \(n\) vecteurs non coplanaires.
+        \end{itemize}
+
+        Une fois une base choisie, on décrit un vecteur par ses \textbf{coordonnées}, c'est-à-dire une liste de scalaires. Ces coordonnées s'écrivent souvent sous forme de colonne (ce qui rapproche la notion de vecteur de celle de matrice colonne).
+
+        Les opérations sur les vecteurs se traduisent alors par des opérations sur leurs coordonnées :
+        \begin{itemize}
+            \item l'addition de vecteurs correspond à l'addition coordonnée par coordonnée,
+            \item la multiplication par un scalaire également.
+        \end{itemize}
+
+        \begin{Def}\textbf{Combinaison linéaire}
+
+        Soient \(u_1, \dots, u_p \in E\). Tout vecteur de la forme
+        \[
+        \lambda_1 u_1 + \cdots + \lambda_p u_p, \quad \lambda_i \in K
+        \]
+        est appelé une \textbf{combinaison linéaire} de \(u_1, \dots, u_p\).
+        \end{Def}
+
+        \begin{Def}\textbf{Sous-espace engendré}\\
+        L'ensemble de toutes les combinaisons linéaires de \(u_1, \dots, u_p\) est appelé le sous-espace vectoriel \textbf{engendré} par \(u_1, \dots, u_p\) et se note :
+        \[
+        \text{Vect}(u_1, \dots, u_p).
+        \]
+        \end{Def}
+        \begin{Def} Famille génératrice
+        On dit que la famille \((u_1, \dots, u_p)\) est \textbf{génératrice} de \(E\) si :
+        \[
+        \text{Vect}(u_1, \dots, u_p) = E.
+        \]
+        \end{Def}
+
+        
+        \begin{Def}\textbf{Indépendance linéaire}\\
+        Une famille \((u_1, \dots, u_p)\) de vecteurs est dite \textbf{libre} (ou linéairement indépendante) si :
+        \[
+        \lambda_1 u_1 + \cdots + \lambda_p u_p = \vec{0}
+        \implies \lambda_1 = \cdots = \lambda_p = 0.
+        \]
+        \end{Def}
+
+        \begin{Rmq}
+        Toute sous-famille d'une famille libre est libre.
+        \end{Rmq}
+
+        \begin{Def}\textbf{Base et dimension}\\
+        Une famille \((u_1, \dots, u_p)\) est une \textbf{base} de \(E\) si elle est :
+        \begin{itemize}
+            \item libre,
+            \item génératrice de \(E\).
+        \end{itemize}
+        Dans ce cas, le nombre \(p\) de vecteurs est appelé la \textbf{dimension} de \(E\).
+        \end{Def}
+
+        \begin{Thm}\textbf{Théorème de la base incomplète}\\
+        Toute famille libre de vecteurs dans un espace vectoriel \(E\) peut être complétée en une base de \(E\).
+        \end{Thm}
+
+        \begin{Thm}\textbf{Théorème de la dimension}\\
+        Toutes les bases d'un espace vectoriel \(E\) ont le même nombre d'éléments.
+        \end{Thm}
+
+        \begin{Rmq}
+        Pour montrer qu'une famille est une base d'un espace vectoriel, il suffit de prouver :
+        \begin{itemize}
+            \item soit qu'elle est libre et qu'elle contient \(\dim E\) vecteurs,
+            \item soit qu'elle est génératrice et qu'elle contient \(\dim E\) vecteurs.
+        \end{itemize}
+        \end{Rmq}
+
+
+        \begin{Def} Famille libre
+        On dit que la famille \((u_1, \dots, u_p)\) est \textbf{libre} si :
+        \[
+        \lambda_1 u_1 + \cdots + \lambda_p u_p = \vec{0}
+        \implies \lambda_1 = \cdots = \lambda_p = 0.
+        \]
+        \end{Def}
+
+        \begin{Def} Famille liée
+        On dit que la famille \((u_1, \dots, u_p)\) est \textbf{liée} si elle n'est pas libre.
+        \end{Def}
+
+       Famille liée
+
+        \begin{Def} Base
+        Une famille \((u_1, \dots, u_p)\) est une \textbf{base} de \(E\) si elle est libre et génératrice.
+        \end{Def}
+
+        \begin{Thm} Théorème de la dimension
+
+            Toutes les bases d'un espace vectoriel \(E\) ont le même nombre d'éléments.
+            Ce nombre est appelé la \textbf{dimension} de \(E\).
+        \end{Thm}
+
+    \subsection{Exercices}
+
+
+        \exo[2]{Sous-espace vectoriel}
+
+        Montrer que l'ensemble \(F = \{ (x,y,z)\in \mathbb{R}^3 \mid x - y + 2z = 0 \}\) est un sous-espace vectoriel de \(\mathbb{R}^3\). Déterminer une base de \(F\) et sa dimension.
+
+        \vspace{1em}
+        \hrule
+        \vspace{1em}
+
+        \exo[1]{Liberté d'une famille}
+
+        Déterminer si la famille \(\big( (1,2), (3,6) \big)\) est libre dans \(\mathbb{R}^2\). Même question dans \(\mathbb{R}^3\).
+
+        \vspace{1em}
+        \hrule
+        \vspace{1em}
+
+        \exo[2]{Dimension d'un espace de polynômes}
+
+        Montrer que l'espace des polynômes réels de degré au plus 4 est de dimension 5. Proposer une base.
+
+        \vspace{1em}
+        \hrule
+        \vspace{1em}
+
+        \exo[2]{Famille génératrice}
+
+        Soit \( E = \mathbb{R}^3 \). La famille \(\big\{ (1,0,1), (0,1,1), (1,1,2)\big\}\) est-elle une base de \( E \) ?
+
+        \vspace{1em}
+        \hrule
+        \vspace{1em}
+    
+\section{Applications linéaires}
+\section{Matrices}

@@ -1,0 +1,1260 @@
+
+\thispagestyle{empty}
+
+
+\section{Premières notions}
+\subsection{ Variables al\' eatoires}
+La th\'eorie des probabilit\' es a pour objet l'\' etude des ph\' enomènes al\' eatoires
+ou du moins consid\' er\' es comme tels par l'observateur. Pour cela on introduit
+le concept d'exp\' erience1 al\' eatoire dont l'ensemble des r\' esultats possibles
+constitue l'ensemble fondamental, not\' e habituellement $\Omega$. On parle de variable
+al\' eatoire (abr\' eviation : v.a.) lorsque les r\' esultats sont num\' eriques, c'est-à-dire
+que  $\Omega$ est identique à tout ou partie de l'ensemble des nombres r\' eels $\mathbb{R}$.
+On distingue habituellement :
+\begin{itemize}
+\item les variables al\' eatoires discrètes pour lesquelles l'ensemble  $\Omega$ des r\' esultats
+possibles est un ensemble discret de valeurs num\' eriques $x_1, x_2, \dots, x_n, \dots$
+fini ou infini (typiquement : l'ensemble des entiers naturels) ;
+\item les variables al\' eatoires continues pour lesquelles l'ensemble  $\Omega$ est tout $\mathbb{R}$ (ou
+un intervalle de $\mathbb{R}$ ou, plus rarement, une union d'intervalles).\\
+\end{itemize}
+
+
+
+\begin{Def}
+{\textbf{Fonction de r\' epartition}}
+
+Soit $X$ une variable al\'eatoire, on appelle fonction de répartition de $X$, que l'on note $F_X$, la fonction définie sur $\mathbb{R}$ par :
+$$F_X(x) = P(X \leq x).$$
+$\quad$
+\end{Def}
+
+\begin{Rmq}$\,$
+
+S'il n'y a pas de confusion possible, on note simplement $F$ la fonction de répartition d'une variable aléatoire $X$.
+\end{Rmq}
+
+\begin{Prop}
+Avec les notations précédentes, dans le cas discret, on obtient que
+$$F_X (x) = \sum_{x_i\leq x} \mathbb{P}_X (x_i)$$
+alors que dans le cas continu :
+$$F_X (x) =
+\int^x_{-\infty}
+f_X (t) dt.$$
+\end{Prop}
+
+
+
+\begin{Thm}
+\textbf{Fonction de répartition}\\
+ La fonction de répartition $F_X$ d'une variable aléatoire réelle $X$ a les propriétés caractéristiques suivantes :
+\begin{itemize}
+  \item  $F_X$ est croissante ;
+   \item Elle est partout continue à droite ;
+     \item Elle a pour limite $0$ en $\displaystyle -\infty $, i.e.$\displaystyle \lim _{x\to -\infty }F_{X}(x)=0$ ;
+    Elle a pour limite $1$ en $\displaystyle +\infty $, i.e. $\displaystyle \lim _{x\to +\infty }F_{X}(x)=1$.
+    \end{itemize}
+\end{Thm}
+
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Dé de 6}
+
+Soit l'expérience aléatoire consistant à jeter un dé jusqu'à ce qu'un six apparaisse pour la première fois et soit $X$ la v.a. «nombre de jets nécessaires». 
+
+\begin{enumerate}
+\item Déterminer la fonction de probabilité de $X$.
+\item Vérifier que la somme des probabilités sur l'ensemble des valeurs possibles est bien égale à $1$. 
+\item Calculer $\mathbb{P}(1 < X \leq 3)$.
+\item Écrire et dessiner la fonction de répartition de $X$.
+
+\textit{Aide : calculer d'abord $\mathbb{P}(X > k)$.}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\begin{Def}
+{\textbf{Quantile d'ordre $q$}\\}
+On appelle quantile d'ordre $q$ de la variable X, o\`u $q \in [0, 1]$,
+la valeur $x_q$ telle que $P(X \leq x_q) = q$ ou, de m\^eme, $F_X(x_q) = q$.
+\end{Def}
+
+
+\begin{Def}
+{\textbf{Fonction densité}\\}
+Une variable aléatoire réelle $X$ est dite à densité s'il existe une fonction $f$ positive et intégrable sur $\displaystyle \mathbb {R} $, appelée fonction de densité, telle que pour tout $\displaystyle (a,b)\in \mathbb {R} ^{2}$ on ait $$\displaystyle \mathbb {P} (a\leqslant X\leqslant b)=\int _{a}^{b}f(t)\,\mathrm {d} t.$$
+
+\end{Def}
+
+
+\exo[1]{Médiane}
+
+Soit la fonction $f(x) = cx(1 - x)$ pour $x \in [0, 1]$ et $0$ sinon.
+
+\begin{enumerate}
+\item Pour quelle valeur de $c$ est-ce une densité de probabilité ? 
+\item Déterminer alors la fonction de répartition de cette loi et sa médiane.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[1]{Quantiles}
+
+\begin{enumerate}
+\item Justifier que la fonction $F(x) = 1 - e^{-\frac{x}{2}}$ pour $x > 0$ et $0$ sinon, est une fonction de répartition.
+\item Déterminer les quantiles d'ordres $0,25$ et $0,75$ (appelés premier et troisième quartiles).
+\item Soit $X$ une v.a. suivant cette loi, calculer $\mathbb{P}(1 < X \leq 2)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+\exo[2]{Densité}
+
+Soit $X$ de densité $f_X(x) = 2x$ pour $x \in [0, 1]$ et $0$ sinon.
+
+\begin{enumerate}
+\item Déterminer la fonction de répartition et la densité de $\dfrac{1}{X}$.
+\item Même question pour $\ln\left(\dfrac{1}{X}\right)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+\exo[2]{Uniforme}
+
+Soit $X$ de loi continue uniforme sur $[0, 1]$ et $Y = -\theta \ln(1 - X)$ avec $\theta > 0$. Déterminer la fonction de répartition et la densité de $Y$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{ Moments}
+
+\begin{Def}
+{\textbf{Espérance}\\}
+On appelle espérance mathématique de $X$, si elle existe,
+la valeur notée $\mathbb{E}(X)$ telle que :
+\begin{itemize}
+\item $\mathbb{E}(X) =\sum_{i=1}
+x_i \mathbb{P}_X(x_i)$ dans le cas discret,
+\item $\mathbb{E}(X) =\int_{-\infty}^{+\infty}xf_X(x)dx$ dans le cas continu.
+\end{itemize}
+\end{Def}
+
+
+
+\begin{Prop}
+{\textbf{Linéarité de l'espérance}\\}
+Pout toute combinaison lin\'eaire $ag(X) + bh(X)$ de fonctions $g$ et $h$ de $X$
+on a :
+$$\mathbb{E}(ag(X) + bh(X)) = a\mathbb{E}(g(X)) + b\mathbb{E}(h(X)) .$$
+
+\end{Prop}
+
+\begin{Def}
+{\textbf{Moment d'ordre $r$}\\}
+On appelle moment simple d'ordre $r$ de la v.a. $X$, où $r$ est
+un entier positif, la valeur (si elle existe) $\mu_r = \mathbb{E}(X^r)$.\\
+
+On appelle moment centré d'ordre $r$ de la v.a. $X$, où $r$ est
+un entier positif, la valeur (si elle existe)$\mu_r' = \mathbb{E}((X-\mu)^r)$.\\
+\end{Def}
+
+
+
+\begin{Def}
+{\textbf{Variance}\\}
+On appelle variance de $X$, la valeur (si elle existe) notée
+$V (X)$, définie par :
+$$V (X) = \mathbb{E}((X - \mu)^2).$$
+\end{Def}
+
+\begin{Rmq}
+\begin{itemize}
+\item Le moment centré d'ordre $3$, moyennant une standardisation pour éliminer
+l'effet d'échelle, fournit le coefficient d'asymétrie :
+$$\dfrac{\mathbb{E}((X - \mu)^3)}{\sigma^3}$$
+dont on voit qu'il est nul en cas de symétrie (nécessairement par rapport à $\mu$ ).
+\item Du moment centré d'ordre $4$ on déduit le coefficient d'aplatissement ou
+curtose :
+$$\dfrac{\mathbb{E}((X - \mu)^4)}{\sigma^4}- 3$$
+qui indique, en comparaison avec la loi de Gauss, le degré de concentration
+autour de la moyenne (pour la loi de Gauss $\mu'^4$ est égal  à $3\sigma^4$ et ce coefficient
+est donc nul).\\
+\end{itemize}
+\end{Rmq}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Discrète}
+
+Soit la v.a. discrète $X$ prenant pour valeurs $0$, $1$, $2$ avec les probabilités respectives $0,7$ ; $0,2$ ; $0,1$. Soit $Y = X^2 - 1$. Calculer $\mathbb{E}(Y)$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+\exo[2]{Densité et espérance}
+
+Soit la v.a. $X$ de densité $f(x) = 3x^2$ si $x \in [0, 1]$ et $0$ sinon.
+
+\begin{enumerate}
+\item Calculer $\mathbb{E}\left(\dfrac{1}{X}\right)$.
+\item Déterminer la fonction de répartition de $Y = \dfrac{1}{X}$ et en déduire sa densité.
+\item Calculer $\mathbb{E}(Y)$ et vérifier ainsi le résultat obtenu au point précédent.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une variable aléatoire réelle est dite discrète si :
+\begin{enumerate}
+\item son ensemble de valeurs est un intervalle de $\mathbb{R}$
+\item sa fonction de répartition est continue
+\item son ensemble de valeurs est fini ou dénombrable
+\item elle admet toujours une densité
+\end{enumerate}
+
+\item La fonction de répartition $F_X$ d'une v.a. $X$ est définie par :
+\begin{enumerate}
+\item $F_X(x)=\mathbb P(X=x)$
+\item $F_X(x)=\mathbb P(X\ge x)$
+\item $F_X(x)=\mathbb P(X<x)$
+\item $F_X(x)=\mathbb P(X\le x)$
+\end{enumerate}
+
+\item Pour toute variable aléatoire réelle $X$, la fonction de répartition :
+\begin{enumerate}
+\item est strictement croissante
+\item est continue
+\item est croissante et continue à droite
+\item est bornée par $-1$ et $1$
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{ Fonction génératrice et fonction caractéristique}
+
+
+La fonction génératrice des moments nous intéresse dans la mesure où elle peut faciliter le calcul des moments d'une loi. Cependant son existence - et donc  son usage - sera limitée aux lois dont la densité (éventuellement la fonction de  probabilité) décroît plus vite qu'une exponentielle à l'infini (la fonction caractéristique des moments qui, elle, est toujours définie).\\
+Nous supposons ci-après qu'elle existe au moins au voisinage de $0$ et que la loi admet des moments de tous ordres.\\
+
+\begin{Def}{\textbf{Fonction génératrice}}
+
+ On appelle fonction génératrice des moments de la v.a.
+$X$, si elle existe, la fonction :
+$$\phi_X(t) = \mathbb{E}(e^{tX}).$$
+ \end{Def}
+
+
+% \begin{figure}
+%   \caption{Pierre-Simon de Laplace}
+%   \centering
+% \includegraphics[height=5cm]{figs/Laplace.jpg}
+% \end{figure}
+
+
+\exo[2]{Laplace}
+
+Soit la loi (dite exponentielle double ou loi de Laplace) de densité :
+$$f(x) = \dfrac{1}{2} e^{-|x|}, \quad x \in \mathbb{R}.$$
+
+\begin{enumerate}
+\item Montrer que sa fonction génératrice des moments est $\phi(t) = (1 - t^2)^{-1}$. 
+\item En déduire sa variance et son moment d'ordre $4$.
+\item Calculer son coefficient d'aplatissement.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+\begin{Prop}
+{\textbf{Moment d'ordre $r$}\\}
+ Le moment d'ordre $r$ de la v.a. $X$ est donné par :
+$$\mu_r = \phi^{(r)}
+_X (0)$$
+où $\phi^{(r)}_X$ est la dérivée d'ordre $r$ de $\phi_X$.\\
+ En particulier l'espérance mathématique
+$(\mu_1)$ de $X$ est la valeur de la dérivée première $\phi_X'$ pour $t = 0$.
+\end{Prop}
+
+
+% \begin{figure}
+%   \caption{Vilfredo Pareto}
+%   \centering
+% \includegraphics[height=5cm]{figs/pareto.jpg}
+% \end{figure}
+
+
+
+
+\exo[2]{Pareto}
+
+Soit la loi de Pareto de paramètres strictement positifs $a$ et $\theta$, dont la fonction de densité est :
+$$f(x) =
+\left\{
+\begin{array}{ll}
+\dfrac{\theta}{a}\left(\dfrac{a}{x}\right)^{\theta+1}& \text{ si } x \geq a\\
+0& \text{ si } x<a\\
+\end{array}
+\right.$$
+
+\begin{enumerate}
+\item Calculer la moyenne et la variance de cette loi. Quand ces moments existent-ils ? 
+\item Généraliser à l'existence d'un moment d'ordre quelconque.
+\item Montrer que sa fonction génératrice des moments n'existe pas.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+
+
+
+\begin{Def}{\textbf{Fonction caractéristique}}
+
+
+
+La fonction caractéristique d'une variable aléatoire réelle $X$ est la fonction à valeurs complexes définie sur $ \mathbb {R} $ par\\
+
+$$\displaystyle {\begin{aligned}\varphi _{X}(t)&=\mathbb {E} \left[\operatorname {e} ^{\mathrm {i} tX}\right]\\&=\mathbb {E} \left[\cos(tX)\right]+\mathrm {i} \ \mathbb {E} \left[\sin(tX)\right].\end{aligned}}$$
+
+\begin{itemize}
+    \item Si cette variable aléatoire possède une densité, disons fX, alors
+
+      $$\displaystyle \varphi _{X}(t)=\int _{\mathbb {R} }f_{X}(x)\operatorname {e} ^{\mathrm {i} tx}\,\mathrm {d} x.$$
+
+  \item
+
+    Si cette variable est à valeurs dans l'ensemble des entiers naturels alors
+
+ $$\displaystyle \varphi _{X}(t)=\sum _{k=0}^{\infty }\mathbb {P} (X=k){\rm {e}}^{\mathrm {i} tk}=G_{X}({\rm {e}}^{\mathrm {i} t})$$
+
+    où $G_X$ désigne sa fonction génératrice des probabilités généralisée à un paramètre complexe.
+\end{itemize}
+\end{Def}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item La fonction génératrice des moments d'une v.a. $X$ est :
+\begin{enumerate}
+\item $\mathbb E(X^t)$
+\item $\mathbb E(e^{tX})$
+\item $\mathbb E(\cos(tX))$
+\item $\mathbb E(t^X)$
+\end{enumerate}
+
+\item Si la fonction génératrice $\phi_X$ existe, alors :
+\begin{enumerate}
+\item elle est toujours finie sur $\mathbb R$
+\item elle permet de calculer les moments par dérivation en $0$
+\item elle est définie uniquement pour $t>0$
+\item elle remplace la fonction de répartition
+\end{enumerate}
+
+\item La fonction caractéristique d'une v.a. réelle est :
+\begin{enumerate}
+\item réelle et positive
+\item toujours définie
+\item définie uniquement si la variance existe
+\item identique à la fonction génératrice
+\end{enumerate}
+\end{enumerate}
+
+
+\section{Lois usuelles}
+\subsection{Les lois discrètes}
+\subsubsection{ La loi uniforme discrète}
+L'ensemble des valeurs possibles est $\{1, 2, 3, \dots , r\}$, $r$ étant un paramètre
+de la loi.\\
+ Uniforme signifie que chaque valeur reçoit la même probabilité $\dfrac{1}{r}$.\\
+
+
+Pour une v.a. $X$ qui suit cette loi, on a :
+$$\mathbb{E}(X) =\dfrac{r + 1}{2} \qquad 
+V (X) =\dfrac{1}{12}(r^2 - 1) .$$
+\subsubsection{ La loi de Bernoulli et la loi binomiale $\mathcal{B}(n,p)$}
+%\begin{multicols}{2}
+%\begin{minipage}[t]{0.48\linewidth}%
+% \begin{figure}
+%   \caption{Jakob Bernoulli}
+%   \centering
+% \includegraphics[height=5cm]{figs/Jakob_Bernoulli.jpg}
+% \end{figure}
+  %\end{minipage}    
+%\begin{minipage}[t]{0.48\linewidth}%
+C'est la loi la plus simple que l'on puisse envisager puisqu'il n'y a que deux valeurs possibles, codées 1 et 0.\\
+ On note $p$ la probabilité associée à la valeur $1$, $p$ étant le paramètre de la loi (la probabilité $1-p$ associée à la valeur $0$ est souvent notée $q$ dans les ouvrages). On
+écrit $X \sim \mathcal{B}(p)$.\\
+  %\end{minipage}  
+%\end{multicols}
+$$\mathbb{P}(X = x) = p^x(1 - p)^{1-x} , x \in \{0, 1\}.$$
+On a $$\mathbb{E}(X) = p \text{ et } V (X) = p(1 - p).$$
+
+\begin{Rmq}$\,$
+
+$X$ prend la valeur $1$ si l'événement se produit et $0$ s'il ne se produit pas à l'issue de l'expérience. Dans ce contexte, $p$ représente la probabilité de l'événement considéré. La v.a. $X$ sera une variable de comptage lors de répétitions de l'expérience constituant le processus de Bernoulli décrit ci-après et conduisant notamment à la loi binomiale. Par convention, la réalisation de l'événement sera appelée «succès» et sera codée $1$, sa non-réalisation sera appelée «échec» et sera codée $0$.
+\end{Rmq}
+
+
+La loi binomiale est la loi de la v.a. $X$ correspondant au nombre de succès au cours de $n$ répétitions du processus. Elle est omniprésente en statistique.
+L'application la plus fréquente se situe dans le domaine des sondages. Ayant
+sélectionné au hasard n individus dans une grande population  on peut «estimer» la proportion p d'individus ayant un caractère1 donné (succès).\\
+ Si le taux de sondage est faible, on a vu que l'on pouvait admettre que le tirage sans remise est très proche du tirage avec remise. Pour ce dernier la probabilité de succès à chaque tirage est $p$
+et il y a indépendance des tirages.\\
+ La v.a. $X$ correspond au nombre d'individus ayant le caractère d'intérêt parmi $n$ individus sélectionnés.\\
+La loi binomiale a deux paramètres $n$ et $p$, et l'ensemble des valeurs possibles
+est $\{0, 1, 2,\dots, n\}$ . \\
+
+
+
+\begin{Def}\textbf{Loi binomiale}\\
+ On dit que la v.a. discrète $X$ suit une loi binomiale $\mathcal{B}(n, p)$ si
+sa fonction de probabilité est :$$
+p(x) =
+\binom{n}{x}p^x(1 -p)^{n-x} , x = 0, 1, 2, \dots, n .$$
+\end{Def}
+
+\begin{Prop}
+
+ Soit $X_1,X_2,\dots ,X_n$ une suite de v.a. i.i.d. de loi $\mathcal{B}(p)$, alors
+$Sn =\sum_{i=1}^n X_i$ suit une loi $\mathcal{B}(n, p)$.
+\end{Prop}
+
+
+
+
+\begin{Prop}\textbf{Eléments caractéristiques}\\
+
+Soit$ X \sim \mathcal{ B}(n, p)$, alors :\\
+\begin{itemize}
+\item $\mathbb{E}(X) = np$
+\item $V (X) = np(1 - p)$
+\item $\phi_X(t) = [pe^t + (1 - p)]^n.$
+\end{itemize}
+
+\end{Prop}
+
+
+
+\subsubsection{ Les lois g\' eom\' etrique $\mathcal{G}(p)$ et binomiale n\' egative $\mathcal{BN}(r,p)$}
+
+\begin{Def}\textbf{Loi géométrique}\\
+Soit un processus de Bernoulli de paramètre p. La loi géométrique $\mathcal{G}(p)$, ou loi de Pascal, est la loi de la v.a. $X$ «nombre d'échecs avant de parvenir au premier succès». L'ensemble des valeurs possibles est $\mathbb{N}$ et la fonction de probabilité est :
+$$p(x) = p(1 - p)^x, x \in \mathbb{N} ,$$
+car il n'y a qu'une séquence possible : $x$ échecs suivis d'un succès.\\
+\end{Def}
+\begin{Prop}
+On a alors :
+$$\mathbb{E}(X) =\dfrac{1- p}{p}$$
+$$V (X) =\dfrac{1 - p}{p^2}$$
+$$\mathbb{E}(e^{tX}) =\dfrac{p}{1 - (1 - p)e^t}
+.$$
+\end{Prop}
+
+La loi binomiale négative est une généralisation de la loi géométrique où l'on considère $X$ «nombre d'échecs avant de parvenir au r-ième succès». Sa fonction de probabilité est :
+$$p(x) =\binom{r + x - 1}{x}p^r(1 - p)^x, x \in \mathbb{ N}.$$
+En effet pour toute séquence de $x$ échecs et $r$ succès la probabilité est $pr(1-p)x$.\\
+Sachant que le dernier résultat de la séquence doit être un succès, il reste à dénombrer les séquences avec $x$ échecs et $r-1$ succès ce qui revient à dénombrer les possibilités de choix de $x$ positions parmi $x + r - 1$ positions, soit
+$\binom{r+x-1}{ x}$.
+
+\begin{Prop}
+On a alors :
+$$E(X) =\dfrac{r(1 - p)}{p}$$
+$$V (X) =\dfrac{r(1 - p)}{p^2}$$
+$$\phi_X(t) = \left[
+\dfrac{p}{1- (1 -p)e^t} \right]^r \text{(au voisinage de $0$)} .$$
+\end{Prop}
+\subsubsection{Loi de Poisson}
+
+
+% \begin{figure}
+%   \caption{Siméon Denis Poisson}
+%   \centering
+% \includegraphics[height=5cm]{figs/Simeon_Poisson.jpg}
+% \end{figure}
+
+\begin{Def}\textbf{Processus de Poisson}\\
+On considère un processus d'occurrences d'un événement donné sur l'échelle du temps, par exemple l'arrivée des appels à un standard téléphonique. Pour un temps $ t > 0$ fixé (à partir d'une certaine origine des temps) on définit la variable aléatoire $X(t)$ «nombre d'occurrences dans l'intervalle ]0, t]». Par commodité on pose :
+$$pk(t) = P(X(t) = k), \text{ où }k \in N.$$
+En bref, on dit qu'on a un processus de Poisson si :
+\begin{itemize} 
+\item il y a une invariance temporelle, à savoir que pk(t) ne dépend pas de l'origine
+des temps, mais dépend uniquement de la longueur t de l'intervalle,
+quels que soient k et t ;
+\item il y a indépendance des nombres d'occurrences pour deux intervalles disjoints
+;
+\item pour un très petit intervalle la probabilité d'avoir deux occurrences ou
+plus est négligeable devant la probabilité d'avoir une occurrence exactement
+et cette dernière est proportionnelle à la longueur de cet intervalle.
+\end{itemize}
+Plus formellement :
+$$p_1(h) = \lambda h + o(h)$$
+$$\sum_{k=2} p_k(h) = o(h)$$
+où, rappelons-le, $o(h)$ est une fonction telle que
+$\dfrac{o(h)} {h}\to 0$ quand $h \to 0$.
+Le paramètre $\lambda > 0$ caractérise l'intensité de fréquence des occurrences.\\
+\end{Def}
+
+Sous ces hypothèses on démontre que :
+$$pk(t) =
+\dfrac{e^{-\lambda t}(\lambda t)^k}{k!}
+, k \in N.$$
+\begin{Def}\textbf{Loi de Poisson}\\
+La loi de Poisson est la loi du nombre d'occurrences dans une unité de temps, donc pour $ t = 1$ dans les formulations ci-dessus. Par conséquent on dit que la v.a. $X$ suit une loi de Poisson $\mathcal P(\lambda)$ si sa fonction de probabilité est :
+$$p(k) = \dfrac{e^{-\lambda}\lambda^k} {k!} , k \in N.$$
+\end{Def}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une loi de Bernoulli $\mathcal B(p)$ prend ses valeurs dans :
+\begin{enumerate}
+\item $\mathbb N$
+\item $\{0,1\}$
+\item $[0,1]$
+\item $\mathbb R$
+\end{enumerate}
+
+\item Si $X\sim\mathcal B(n,p)$, alors $\mathbb E(X)$ vaut :
+\begin{enumerate}
+\item $p$
+\item $np$
+\item $p(1-p)$
+\item $n(1-p)$
+\end{enumerate}
+
+\item Une variable suivant une loi de Poisson $\mathcal P(\lambda)$ a pour variance :
+\begin{enumerate}
+\item $1/\lambda$
+\item $\lambda^2$
+\item $\lambda$
+\item $2\lambda$
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Les lois continues}
+\subsubsection{ La loi continue uniforme $\mathcal{U}_{[a,b]}$}
+
+\begin{Def}\textbf{Loi uniforme}\\
+On dit que $X$ suit une loi uniforme sur l'intervalle fini [a, b] si sa densité
+est constante sur $[a, b]$ et nulle à l'extérieur de cet intervalle, soit :
+$$f(x) =
+\left\{
+\begin{array}{ll}
+\dfrac{1}{b-a}& \text{ si } a \leq  x \leq b\\
+0& \text{ sinon }\\
+\end{array}
+\right.$$
+
+Sa fonction de répartition est :
+$$F(x) =
+\left\{
+\begin{array}{ll}
+0& \text{ si } x<a\\
+\dfrac{x-a}{b-a}& \text{ si } a \leq  x \leq b\\
+1& \text{ si } x>b\\
+\end{array}
+\right.$$
+
+
+$$\mathbb E(X) =\dfrac{(a+b)}{2}$$
+$$V (X) =\dfrac{(b-a)^2}{12}$$
+\end{Def}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Loi uniforme}
+
+Soit $X \sim \mathcal{U}_{[0, 1]}$, montrer que $Y = (b - a)X + a$ suit une loi $\mathcal{U}[a, b]$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsubsection{La loi exponentielle $\mathcal{E}(\lambda)$}
+
+\begin{Def}\textbf{Loi exponentielle}\\
+La loi exponentielle correspond à la variable aléatoire $X$ du temps s'écoulant entre deux occurrences successives lors d'un processus de Poisson. La probabilité qu'il n'y ait aucune occurrence dans un intervalle de temps de longueur t est égale à $p_0(t) = e^{-\lambda t}$, d'où $\mathbb{P}(X > t) = e^{ -\lambda t}$.
+Sa fonction de répartition est :
+$$F(x) =
+\left\{
+\begin{array}{ll}
+1-e^{-\lambda t}& \text{ si } t \geq  0\\
+0& \text{ si } t<0\\
+\end{array}
+\right.$$
+
+puis de la densité, par dérivation :
+$$f(x) =
+\left\{
+\begin{array}{ll}
+\lambda e^{-\lambda t}& \text{ si } t \geq 0\\
+0& \text{ si } t<0\\
+\end{array}
+\right.$$
+\end{Def}
+
+
+\begin{Prop}
+$$E(X) =\dfrac{1}{\lambda}$$
+$$V (X) =\dfrac{1}{\lambda^2}$$
+$$\phi_x(t)=\dfrac{\lambda}{\lambda-t}$$
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Logiquement, puisque $\lambda$ est le nombre moyen d'occurrences par unité de temps, $\dfrac{1}{\lambda}$ est la durée moyenne entre deux occurrences successives. On reparamétrise souvent la loi en posant $\theta = \dfrac{1}{\lambda}$, d'où :
+$$f(x) = \dfrac{1}{\theta}e^{-\frac{x}{\theta}}, \quad x \geq 0,$$
+qui met en évidence sa moyenne $\theta$, la variance étant alors $\theta^2$.
+\end{Rmq}
+
+
+La loi exponentielle est également le modèle de durée de vie pour un système idéal sans usure, $\dfrac{1}{\lambda}$ étant l'espérance de vie du système. En effet on peut voir que l'âge du système ne joue aucun rôle quant aux chances de survie à un horizon donné puisque :
+$$\mathbb{P}(X >t + h|X >t) =
+\dfrac{\mathbb{P}((X >t + h) \cap (X >t))}{\mathbb{P}(X >t)}
+=\dfrac{\mathbb{P}(X >t + h)}{\mathbb{P}(X >t)}=\dfrac{
+e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} ,$$
+qui ne dépend pas de $t$.\\
+
+\subsubsection{ La loi de Gauss ou loi normale $\mathcal{N}(\mu,\sigma^2)$}
+
+% \begin{figure}
+%   \caption{Carl Friedrich Gauss}
+%   \centering
+% \includegraphics[height=5cm]{figs/Gauss.jpg}
+% \end{figure}
+\begin{Def}\textbf{Loi normale}\\
+On dit que la variable aléatoire $X$ suit une loi de Gauss, ou loi normale,
+notée $\mathcal{N}(\mu, \sigma^2)$, si elle a pour densité :
+$$f(x) =\dfrac{1}{\sqrt{2 \pi \sigma^2}} exp\left(  -\dfrac{(x-\mu)^2}{2\sigma^2}\right), x \in \mathbb{R} .$$
+Les paramètres sont notés $\mu$ et $\sigma^2$ du fait qu'ils correspondent respectivement à la moyenne et à la variance de la loi, $\sigma$ étant donc son écart-type. Le graphe de la densité est la fameuse courbe en cloche symétrique autour de la valeur $\mu$.
+Pour $\mu = 0$ et $\sigma^2 = 1$ on a la loi de Gauss centrée-réduite $\mathcal{N}(0 ; 1)$ dont la fonction de répartition, notée $F_X$, est donnée dans les tables statistiques usuelles :
+$$F_X(x) =\dfrac{1}{\sqrt{2 \pi}}\int_{-\infty}^x e^{\frac{-z^2}{2}} dz$$
+\end{Def}
+
+\begin{Prop}{\textbf{Centrer Réduire}}\\
+Si $X \sim \mathcal{N}(\mu, \sigma^2)$ alors sa transformée centrée-réduite $Z = \dfrac{X-\mu}{\sigma} $ suit la loi $\mathcal{N}(0 ; 1)$.\\
+Si $Z \sim \mathcal{N}(0 ; 1)$ alors $X = \mu+\sigma Z \sim \mathcal{N}(\mu, \sigma^2)$ et, plus généralement, ceci implique que toute fonction linéaire d'une v.a. gaussienne est une v.a. gaussienne.\\
+\end{Prop}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Une densité de probabilité $f$ vérifie :
+\begin{enumerate}
+\item $f(x)\le 1$
+\item $\int_{\mathbb R}f(x)\,dx=1$
+\item $f$ est croissante
+\item $f$ est continue
+\end{enumerate}
+
+\item Si $X\sim\mathcal U[a,b]$, alors $\mathbb E(X)$ vaut :
+\begin{enumerate}
+\item $a+b$
+\item $\dfrac{b-a}{2}$
+\item $\dfrac{a+b}{2}$
+\item $\dfrac{a^2+b^2}{2}$
+\end{enumerate}
+
+\item La loi exponentielle est caractérisée par :
+\begin{enumerate}
+\item la symétrie
+\item la propriété sans mémoire
+\item une variance finie uniquement
+\item un support borné
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Les lois fondamentales de l'\' echantillonage}
+
+Pour ce qui est des notations on distinguera la notion d'échantillon aléatoire $X_1,X_2,\dots X_n$ dont on peut dire qu'elle se réfère à des résultats potentiels avant expérience ou a priori, de celle d'échantillon réalisé $x_1, x_2, \dots, x_n$ correspondant aux valeurs observées après expérience ou a posteriori.\\
+
+\begin{Def} {\textbf{Echantillon}}\\
+On appelle échantillon aléatoire de taille $n$ (en bref n-échantillon) une suite de n variables aléatoires indépendantes et de même loi (ou v.a. i.i.d). Cette loi est appelée la loi mère de l'échantillon.\\
+\end{Def}
+
+
+\begin{Def} {\textbf{Statistique}}\\
+ Soit $X_1,X_2, \dots,X_n$ un n-échantillon, on appelle statistique
+toute v.a. $T_n = h(X_1,X_2, \dots,X_n)$, fonction de $X_1,X_2, \dots,X_n$.
+\end{Def}
+
+\subsubsection{ La loi du Khi-deux $\chi^2(n)$}
+
+\begin{Def} {\textbf{Khi-deux}}\\
+ Soit $Z_1, Z_2, \dots,Z_\nu$ une suite de variables aléatoires i.i.d. de loi $\mathcal{N}(0 ; 1)$. Alors la v.a.  $$\sum_{i=1}^\nu Z_i^2$$
+suit une loi appelée loi du Khi-deux à $\nu$ degrés de liberté, notée $\chi^2(\nu)$.
+
+\end{Def}
+
+
+\begin{Prop} {\textbf{Paramètres du Khi-deux}}\\
+
+La moyenne de la loi $\chi^2(\nu)$ est égale au nombre de degrés
+de liberté $\nu$, sa variance est $2\nu$.
+\end{Prop}
+
+
+\subsubsection{ La loi de Student}
+
+% \begin{figure}
+%   \caption{William Sealy Gosset}
+%   \centering
+% \includegraphics[height=5cm]{figs/student.jpg}
+% \end{figure}
+
+
+\begin{Def} {\textbf{Loi de Student}}\\
+Soit $Z$ et $Q$ deux v.a. indépendantes telles que $Z \sim \mathcal{N}(0 ; 1)$
+et $Q \sim \chi^2(\nu)$. Alors la v.a. $$T =\dfrac{Z}{\sqrt{\dfrac{Q}{\nu}}}$$
+suit une loi appelée loi de Student à $\nu$ degrés de liberté, notée $t(\nu)$.
+\end{Def}
+
+
+\begin{Prop} {\textbf{Paramètres de la loi du Student}}\\
+Soit $T \sim t(\nu)$ alors $E(T) = 0$ si $\nu \leq 2$ et $V (T) =\dfrac{\nu}{\nu-2}$ si $\nu \geq 3$.
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Le fait que la moyenne est nulle est évident puisque la densité est une fonction paire. On notera que la variance vaut 3 dès qu'elle est définie $(\nu = 3)$ et tend vers $1$ quand $\nu \to +\infty$. Pour être plus précis, l'allure de la loi de Student est similaire à celle d'une loi de Gauss centrée-réduite avec un étalement un peu plus fort, cette différence s'estompant rapidement lorsque $\nu$ s'accroît et devenant négligeable pour $\nu > 200$. Ceci s'explique, en fait, par sa définition même mettant en jeu une v.a. $\mathcal{N}(0 ; 1)$ au numérateur et une v.a. qui converge en probabilité vers 1, au dénominateur.
+\end{Rmq}
+
+\section{Ind\' ependance}
+
+
+
+\subsection{Indépendance}
+
+L'indépendance d'une v.a. $X$ d'une part et d'une v.a. $Y$ d'autre part se rapporte aux occurrences simultanées d'événements sur X et d'événements sur $Y$. Nous devons donc partir du couple $(X, Y )$.\\
+
+
+\begin{Def} {\textbf{Variables aléatoires indépendantes}}\\
+ Deux v.a. $X$ et $Y$ sont dites indépendantes si, étant donné
+deux événements quelconques $(X \in A)$ et $(Y \in B)$, on a :
+$$\mathbb P(X \in A, Y \in B) = \mathbb P(X \in A) \times \mathbb P(Y \in B).$$
+\end{Def}
+
+
+
+\begin{Prop} 
+ {\textbf{Fonction de répartition}}\\
+ $X$ et $Y$ sont indépendantes si et seulement si :
+pour tout $$(x, y) \in \mathbb{R}^2, F_{X,Y} (x, y) = F_X(x) F_Y (y).$$
+\end{Prop}
+
+
+
+
+\begin{Prop}  {\textbf{Fonction de densité}}\\
+\begin{itemize}
+\item
+ Deux v.a. discrètes $X$ et $Y$ sont indépendantes si et seulement
+si , pour tout $i = 1, 2, \dots$ et tout $j = 1, 2, \dots ,$
+$$p_{X,Y} (x_i, y_j) = p_X(x_i) p_Y (y_j) .$$
+\item Deux v.a. continues $X$ et $Y$ sont indépendantes si et seulement
+si, pour tout $(x, y) \in \mathbb R^2$,
+$$f_{X,Y} (x, y) = f_X(x) f_Y (y) .$$
+\end{itemize}
+\end{Prop}
+
+\begin{Prop}  {\textbf{Fonction et indépendance}}\\
+ Si $X$ et Y sont indépendantes, alors pour toutes fonctions $g$ et $h$, les v.a. $g(X)$ et $h(Y )$ sont également indépendantes.\\
+
+\end{Prop}
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item Deux v.a. $X$ et $Y$ sont indépendantes si :
+\begin{enumerate}
+\item $\mathbb E(XY)=\mathbb E(X)\mathbb E(Y)$
+\item $F_{X,Y}(x,y)=F_X(x)F_Y(y)$
+\item $cov(X,Y)=0$
+\item $X+Y$ est indépendante de $X$
+\end{enumerate}
+
+\item Si $X$ et $Y$ sont indépendantes, alors :
+\begin{enumerate}
+\item $g(X)$ et $Y$ sont toujours indépendantes
+\item $g(X)$ et $h(Y)$ sont indépendantes
+\item $X$ et $X+Y$ sont indépendantes
+\item $X=Y$ presque sûrement
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{Covariance}
+
+\begin{Def} {\textbf{Covariance}}\\ 
+On appelle covariance de $X$ et de $Y$, que l'on note $cov(X, Y )$, le nombre (s'il existe) :
+$$cov(X, Y ) = \mathbb E([X - \mathbb E(X)][Y - \mathbb E(Y )]).$$
+On remarquera d'emblée que c'est une notion symétrique en $X$ et $Y$, i.e.
+$cov(X, Y ) = cov(Y,X)$.
+\end{Def}
+
+\begin{Prop}{\textbf{Formule de décentrage de la covariance}}\\ 
+
+$$cov(X, Y ) = \mathbb E(XY ) - \mathbb E(X) \mathbb E(Y ).$$
+et
+$$cov(X,X) = \mathbb E([X-\mathbb E(X)]2) = V (X).$$
+\end{Prop}
+
+\begin{Prop}{\textbf{Formule de décentrage de la covariance}}\\ 
+Si $X$ et $Y$ sont indépendantes alors $cov(X, Y ) = 0$.
+\end{Prop}
+
+\begin{Rmq}$\,$
+
+Notons bien que deux v.a. peuvent avoir une covariance nulle sans pour autant être indépendantes. 
+\end{Rmq}
+
+
+\begin{Prop}{\textbf{Propriétés de la covariance}}\\ 
+$\forall (a,b,c,d) \in \mathbb R ^4$, et des v.a.r. $X$ , $Y$ et $Z$ tels que les calculs suivants aient du sens \\
+$$ cov(aX + b, cY + d) = ac cov(X, Y )$$
+$$cov(X + Y,Z) = cov(X,Z) + cov(Y,Z)$$
+\end{Prop}
+
+
+\subsubsection*{QCM}
+
+\begin{enumerate}
+\item La covariance de $X$ et $Y$ vaut :
+\begin{enumerate}
+\item $\mathbb E(XY)$
+\item $\mathbb E(X)\mathbb E(Y)$
+\item $\mathbb E(XY)-\mathbb E(X)\mathbb E(Y)$
+\item $\sqrt{V(X)V(Y)}$
+\end{enumerate}
+
+\item Si $X$ et $Y$ sont indépendantes, alors :
+\begin{enumerate}
+\item $cov(X,Y)=1$
+\item $cov(X,Y)=0$
+\item $V(X+Y)=0$
+\item $X=Y$
+\end{enumerate}
+
+\item Une covariance nulle implique :
+\begin{enumerate}
+\item l'indépendance
+\item l'absence de lien linéaire
+\item l'égalité des espérances
+\item l'égalité des lois
+\end{enumerate}
+\end{enumerate}
+
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Carré de la loi uniforme}
+
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $[a,b]$, avec $0<a<b$.
+Donner la fonction de répartition, la densité, l'espérance et la variance de $Y=X^2$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Loi uniforme, moyenne et écart-type}
+
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $[a,b]$. 
+On note $m$ sa moyenne et $\sigma$ son écart-type.
+ Calculer la probabilité $P(X\in [m-\sigma,m+\sigma])$.\\
+
+
+% Exercice 2077
+
+
+
+Soient $X_0,\dots,X_n$ des variables aléatoires suivant une loi uniforme sur $[0,1]$, indépendantes.
+
+\begin{enumerate}
+\item Soit $0\leq k\leq n$ et soit $U_k=\min(X_0,\dots,X_k)$. Démontrer que $U_k$ admet une densité que l'on déterminera.
+\item Soit $N$ une variable aléatoire suivant une loi binomiale $\mathcal B(n,1/2)$, indépendante de $X_0,\dots,X_n$. Démontrer que $U=\min(X_0,\dots,X_N)$ admet une densité que l'on déterminera.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Temps d'attente}
+
+À partir de 7 heures du matin, les bus passent toutes les quinze minutes à un arrêt précis. Un usager se présente à cet arrêt entre 7h et 7h30. On fait l'hypothèse que l'heure exacte de son arrivée, représentée par le nombre de minutes après 7h, est une variable aléatoire uniformément répartie sur l'intervalle $[0, 30]$. 
+
+Quelle est la probabilité que l'usager attende moins de cinq minutes le prochain bus ? Qu'il l'attende plus de dix minutes ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{La rencontre}
+
+Clément et Amélie se donnent rendez-vous devant une salle de concert entre 19h et 20h. Les instants d'arrivée de Clément et Amélie après 19h sont assimilés à une loi uniforme sur $[0,1]$. Chacun attend jusqu'à un quart d'heure que l'autre arrive, puis rentre dans la salle. 
+
+Quelle est la probabilité que Clément et Amélie entrent ensemble dans la salle de concert ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Image de la loi uniforme}
+
+Soit $U$ une variable aléatoire suivant une loi uniforme sur $[-\pi/2,\pi/2]$. On pose $X=\tan U$. Déterminer la loi de $X$, sa densité.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Un problème de train!}
+
+La distance en train entre Paris et Clermont-Ferrand fait environ 400km. Les motrices tombent souvent en panne sur ce trajet. On fait l'hypothèse que cette panne peut se produire de façon uniforme sur tout le trajet. Lorsqu'un train tombe en panne, on doit faire venir une locomotive de rechange. On suppose que la SNCF dispose pour cette ligne de deux locomotives de rechange. Bien sûr, c'est toujours la locomotive la plus proche qui se rend au lieu de la panne.
+
+\begin{enumerate}
+\item On suppose que les locomotives sont disposées respectivement dans les gares de départ et d'arrivée. Quelle est la distance moyenne parcourue par la locomotive de rechange ?
+\item Un ingénieur de la SNCF se dit : ce serait plus malin de placer les locomotives respectivement au 1/3 et au 2/3 du parcours. Qu'en pensez-vous ?
+\item Déterminer la position optimale des deux locomotives de secours pour minimiser la distance parcourue par la locomotive de rechange.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Chaîne de fabrication}
+
+Une usine fabrique des cadres de vélo. Pour qu'une pièce soit terminée, il faut qu'elle passe par la chaîne $A$ puis par la chaîne $B$. Le temps de passage exprimé en minutes pour un objet sur la chaîne $A$ est une variable aléatoire $M$ suivant une loi exponentielle de paramètre 2. Le temps de passage exprimé en minutes pour un objet sur la chaîne $B$ est une variable aléatoire $N$ suivant une loi uniforme sur $[0,1]$. Les variables $M$ et $N$ sont indépendantes.
+
+\begin{enumerate}
+\item Rappeler l'expression d'une densité de probabilité $v$ de $M$ et d'une densité $w$ de $N$.
+\item On note $S$ la variable aléatoire représentant le temps total de fabrication d'une pièce. Exprimer $S$ en fonction de $M$ et de $N$ et déterminer le temps moyen de fabrication d'une pièce.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Désintégration radioactive}
+
+La durée de vie des atomes de radon suit une loi exponentielle. La probabilité qu'un atome de radon ne soit pas désintégré en 40s sachant qu'il ne l'est pas en 12s vaut $\frac{\sqrt{2}}{2}$. 
+
+Quelle est la probabilité qu'il ne soit pas désintégré avant 76s sachant qu'il ne l'est pas en 20s ?
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Uniforme et exponentielle}
+
+Soit $U$ une variable aléatoire de loi uniforme sur $[0,1]$. Démontrer que la variable aléatoire $X=-\ln U$ suit une loi exponentielle dont on précisera le paramètre.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Pannes}
+
+Le fonctionnement d'une machine est perturbé par des pannes. On considère les variables aléatoires $X_1, X_2$ et $X_3$ définies par : $X_1$ est le temps, exprimé en heures, écoulé entre la mise en route de la machine et la première panne. $X_2$ (resp. $X_3$), est le temps, en heures, écoulé entre la remise en route de la machine après la première (resp. la deuxième) panne et la panne suivante. On suppose que les variables aléatoires $X_1, X_2$ et $X_3$ sont indépendantes et suivent la même loi exponentielle de paramètre $1/2$.
+
+\begin{enumerate}
+\item Quelle est la durée moyenne de fonctionnement entre deux pannes consécutives ?
+\item Soit $E$ l'événement : « chacune des 3 périodes de fonctionnement de la machine dure plus de 2 heures ». Calculer $P(E)$.
+\item Soit $Y$ la variable aléatoire égale à la plus grande des 3 durées de fonctionnement de la machine sans interruption. 
+\begin{enumerate}
+\item Calculer $P(Y\leq t)$ pour tout $t\in\mathbb{R}$.
+\item Déterminer une densité de $Y$.
+\item Pour $a<0$, calculer $\int_0^{+\infty}te^{at}dt$.
+\item Démontrer que la variable aléatoire $Y$ admet une espérance, dont on calculera, en heures et minutes, la valeur.
+\end{enumerate}
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Durée de vie de composants}
+
+Une usine fabrique des appareils électroniques constitués de deux composants $A$ et $B$ dont les fonctionnements sont indépendants l'un de l'autre et dont les durées 
+de vie (en heures) sont des variables aléatoires $X_1$ et $X_2$ qui suivent une loi exponentielle de paramètre respectif $\lambda_1$ et $\lambda_2$.
+\begin{enumerate}
+\item On a observé que la durée de vie moyenne des composants de type $A$ est de $1000$ heures. Que vaut $\lambda_1$?
+\item On a observé que, en moyenne, un composant sur deux de type $B$  avait une durée de vie inférieure ou égale à 1500 heures, et un sur deux avait une durée de vie supérieure ou égale à 1500 heures. Que vaut $\lambda_2$?
+\item Un appareil fonctionne si et seulement si ses deux composants fonctionnent. On note $T$ la durée de vie d'un appareil. Pour $x$ un réel strictement positif, exprimer $P(T> x)$ en fonction de $P(X_1> x)$ et de $P(X_2> x)$.
+\item En déduire $P(T\leq x)$ en fonction de $\lambda_1$, de $\lambda_2$ et de $x$, puis reconnaitre la loi de $T$.
+\item Sachant que la durée de vie de l'appareil dépasse l'espérance de vie du premier composant, quelle est la probabilité que la durée de vie de l'appareil dépasse l'espérance de vie du deuxième composant ?
+\item Sachant que la durée de vie de l'appareil dépasse l'espérance de vie du deuxième composant, quelle est la probabilité que la durée de vie de l'appareil dépasse l'espérance de vie du premier composant ?\\
+\end{enumerate}
+
+
+% Exercice 2074
+
+
+
+\exo[3]{\textbf{Variable aléatoire sans mémoire}}
+
+On dit qu'une variable aléatoire $T$ à valeurs dans $\mathbb R_+$ est sans mémoire si elle vérifie,
+pour tous $s,t> 0.$
+$$P(T> t+s)=P(T>t)P(T>s).$$
+\begin{enumerate}
+\item Vérifier qu'une variable aléatoire $T$ vérifiant une loi exponentielle de paramètre $\lambda>0$, c'est-à-dire
+dont la densité est donnée par $f(t)=\lambda\exp(-\lambda t)\mathbf 1_{[0,+\infty[}(t)$ est une variable aléatoire sans mémoire.
+\item Réciproquement, soit $T$ une variable aléatoire à valeurs dans $\mathbb R_+$ sans mémoire et vérifiant $P(T>0)>0$.
+\begin{enumerate}
+\item On suppose qu'il existe $t>0$ tel que $P(T>t)=0$. Calculer $P(T>t/2^n)$ en fonction de $P(T>t)$. En déduire que $P(T>0)=0$. Conclusion?
+\item Soit $\alpha=P(T>1)$. On souhaite démontrer que $P(T>t)=\alpha^t$ pour tout $t\in\mathbb R_+$.
+\begin{enumerate}
+\item Démontrer ce résultat si $t\in\mathbb N^*$.
+\item On suppose $t\in\mathbb Q_+^*$ et on note $t=p/q$. Démontrer que 
+$$P(T>p)=\big(P(T>p/q)\big)^q$$
+et en déduire que le résultat est vrai pout $t\in\mathbb Q_+^*$.
+\item En utilisant la décroissance de $x\mapsto P(T>x)$, démontrer que le résultat est vrai pour tout $t\in\mathbb R_+$.
+\end{enumerate}
+\item Conclure.
+\end{enumerate}
+\item Justifier le terme "sans mémoire". On pourra calculer $P(T>s+t|T>s)$.\\
+\end{enumerate}
+
+
+% Exercice 2075
+
+
+\exo[2]{\textbf{Minimum de deux lois exponentielles}}
+
+Soient $X_1$ et $X_2$ deux variables aléatoires indépendantes suivant une loi exponentielle
+de paramètres respectifs $\lambda_1$ et $\lambda_2$. On pose $Y=\min(X_1,X_2)$.
+\begin{enumerate}
+ \item Pour tout réel $y$, calculer $\mathbb P(Y>y)$. En déduire que $Y$ suit une loi exponentielle
+de paramètre $\lambda_1+\lambda_2$.
+\item Deux guichets sont ouverts à une banque. Le temps de service au premier guichet (resp. au deuxième) suit
+une loi exponentielle de moyenne 20 min (resp. 30 min). Deux clients rentrent simultanément, l'un choisit le 
+guichet 1 et l'autre le guichet 2. En moyenne, après combien de temps sort le premier?
+\item En moyenne, après combien de temps sort le dernier?\\
+\end{enumerate}
+
+
+% Exercice 2166
+
+
+
+\exo[2]{\textbf{Tunnel}}
+
+Les ampoules électriques d'un tunnel routier sont allumées 24 heures sur 24 et la durée
+de vie de chaque ampoule suit une loi exponentielle d'espérance 10000 heures. Il y a
+100 ampoules dans le tunnel et à l'instant t = 0, on installe des ampoules neuves.
+Au bout de combien de temps, la probabilité qu'au moins une ampoule soit en panne
+dépasse-t-elle 95\% ?\\
+
+
+% Exercice 2319
+
+
+
+\exo[2]{\textbf{L'entreprise d'autocars}}
+
+Une entreprise d'autocars dessert une région montagneuse. En chemin, les véhicules peuvent être bloqués par des incidents extérieurs comme des pierres, la présence de troupeaux sur la route. Un autocar part de son entrepôt. On note $D$ la variable aléatoire qui mesure la distance, en kilomètres, que l'autocar va parcourir jusqu'à ce que survienne un incident. On admet que $D$ suit une loi exponentielle de paramètre $\lambda$. Une étude statistique a montré qu'une fois sur deux, le premier incident survient avant le 62ème kilomètre et une fois sur deux, il survient après le 62ème kilomètre. 
+
+\begin{enumerate}
+ \item Quelle est la distance moyenne, arrondie au kilomètre, parcourue par un autocar sans incident ?
+ \item Calculer la probabilité que la distance parcourue sans incident soit :
+ \begin{enumerate}
+ \item supérieure à 300 km ;
+ \item comprise entre 50 et 100 km.
+\end{enumerate}
+\item Sachant que l'autocar a parcouru 350 kilomètres sans incident, quelle est la probabilité qu'il n'en n'ait pas non plus au cours des 25 kilomètres suivants ?
+\item L'entreprise possède $N_0$ autocars. Les distances parcourues par chacun des autocars entre l'entrepôt et le lieu où survient le premier incident sont des variables aléatoires deux à deux indépendantes et de même loi exponentielle de paramètre $\lambda$. On note $X_d$ la variable aléatoire égale au nombre d'autocars n'ayant subi aucun incident après avoir parcouru $d$ kilomètres.
+\begin{enumerate}
+\item Quelle est la loi de $X_d$ ?
+\item Donner le nombre moyen d'autocars n'ayant subi aucun incident après $d$ kilomètres.
+\item On note $d_0$ le nombre minimum de kilomètres parcourus par chacun des autocars dans une journée. A partir de quelle valeur de $d_0$ a-t-on au moins 99 chances sur 100 qu'un incident se soit produit dans la flotte ? 
+Application numérique : calculer cette valeur lorsque la flotte compte 25 autocars. Commenter.\\
+\end{enumerate}
+\end{enumerate}
+
+
+% Exercice 2076
+
+
+\exo[3]{\textbf{Lien entre lois exponentielles et lois géométriques}}
+
+\vspace{0.2cm}
+Soit $X$ une variable aléatoire suivant une loi exponentielle de paramètre $1$.
+On note $Y=\lceil X\rceil$ sa partie entière ``supérieure'', c'est-à-dire que
+$\lceil 1.5\rceil=2$ et $\lceil 3\rceil=3$. 
+\begin{enumerate}
+ \item Démontrer que $Y$ suit une loi géométrique dont on précisera le paramètre.
+\item On note $Z=Y-X$. Quelle est sa fonction de répartition?
+\item En déduire que $Z$ est une variable aléatoire à densité dont la densité est
+$$f(t)=\frac{e^{t-1}}{1-e^{-1}}\mathbf 1_{[0,1]}(t).$$
+\end{enumerate}
+
+
+% Exercice 2083
+
+
+\exo[1]{\textbf{Tailles}}
+
+La taille d'un homme âgé de 25 ans suit une loi normale de moyenne 175cm et d'écart-type 6cm.
+\begin{enumerate}
+ \item Quel est le pourcentage d'hommes ayant une taille supérieure à 1m85?
+\item Parmi les hommes mesurant plus de 1m80, quelle proportion mesure plus de 1m92?
+\end{enumerate}
+
+% Exercice 2071
+
+
+
+\exo[1]{\textbf{Lecture de la table de la loi normale}}
+
+\begin{enumerate}
+\item Lecture directe : soit $X$ une variable aléatoire suivant une loi normale $\mathcal N(0,1)$. 
+Déterminer $t>0$ tel que $P(-t<X<t)\simeq 0,95$.
+\item Renormalisation : soit $X$ une variable aléatoire suivant une loi normale $\mathcal N(8,4)$.
+Donner des valeurs approchées pour 
+$$P(X<7,5),\ P(X>8,5),\ P(6,5<X<10),\ P(X>6|X>5).$$
+\item Lecture inverse : Soit $X$ une variable aléatoire suivant une loi gaussienne. Déterminer
+l'espérance et la variance de $X$ sachant que 
+$$\left\{
+\begin{array}{rcl}
+P(X<-1)&\simeq& 0,05\\
+P(X>3)&\simeq& 0,12.
+\end{array}\right.$$
+\end{enumerate}
+
+
+% Exercice 2352
+
+
+
+\exo[2]{\textbf{Javelot!}}
+
+On suppose que la distance en mètres parcourues par un javelot lancé par un athlète A suit une loi normale. Au cours d'un entraînement, on constate que
+\begin{itemize}
+\item exactement $10\%$ des javelots atteignent plus de $75$ mètres.
+\item exactement $25\%$ des javelots atteignent moint de $50$ mètres.
+\end{itemize}
+Calculer la longueur moyenne parcourue par un javelot ainsi que l'écart-type de cette longueur.\\
+
+
+
+% Exercice 2181
+
+
+\exo[1]{\textbf{C'est le pied!}}
+
+On a observé que la longueur d'un pied adulte, en cm, suivait une loi normale $\mathcal N(26,36)$. Une entreprise décide de fabriquer des chaussettes, en proposant trois tailles. 
+\begin{enumerate}
+\item Déterminer un intervalle centré en $26$ qui concentre au moins $95\%$ des tailles.
+\item Diviser l'intervalle obtenu en trois intervalles égaux, qui détermineront les trois tailles.
+\item Déterminer quelle part de production on doit réserver à chacune des tailles.\\
+\end{enumerate}
+
+
+% Exercice 2188
+
+
+\exo[2]{\textbf{Meilleur intervalle pour la loi normale}}
+
+\begin{enumerate}
+\item Soit $X$ une variable aléatoire suivant une loi normale centrée réduite. On note $a$ un réel strictement positif. Déterminer, parmi tous les intervalles $I$ de longueur $2a$, celui pour lequel $P(X\in I)$ est maximal.
+\item Reprendre la même question si $X$ suit une loi normale d'espérance $m$ et d'écart-type $\sigma$.\\
+\end{enumerate}
+
+
+% Exercice 2172
+
+
+
+\exo[2]{\textbf{Usinage d'un lingot}}
+
+\begin{enumerate}
+\item {\bf Restitution de connaissances.}
+\begin{enumerate}[label=\alph*.]
+\item Soit $Z$ une variable aléatoire qui suit une loi normale ${\mathcal N}(m,\sigma^2)$. Donner une valeur approchée à $10^{-2}$ près de  $$P(m-2\sigma\le Z\le m+2\sigma)\ ?$$
+\item Soit $N$ une variable aléatoire de loi normale centrée réduite. Donner une valeur approchée à $10^{-2}$ près du réel $a$ tel que $$P(-a\le N\le a)=99\%\ .$$
+\end{enumerate}
+Au sortir d'un laminoir, un lingot est découpé en billettes de 6 mètres de longueur. On sait que la tête du lingot présente un défaut sur une longueur $X$, où $X$ est une variable aléatoire qui suit une loi normale ${\mathcal N}(8,4)$. Pour tenter d'éliminer la longueur défectueuse, on détruit systématiquement les deux billettes de tête.
+\item Quel est le risque pour que la troisième billette présente encore un défaut ?
+\item Calculer le nombre de billettes à détruire pour que la première billette retenue soit sans défaut avec une probabilité d'au moins 99\%.
+\end{enumerate}
+
+
+% Exercice 2072
+
+
+\exo[2]{\textbf{Somme}}
+
+Un grossiste fournit en viande hachée trois cantines. Il reçoit chaque matin leurs commandes. Ce sont des variables aléatoires indépendantes
+suivant des lois normales d'espérance respective 55 kg, 65 kg et 30kg, et d'écart-type respectif 4 kg, 10 kg et 3 kg. Calculer la quantité de viande dont
+le grossiste dois disposer pour que le risque de ne pouvoir satisfaire la demande soit inférieur à 5\%.\\
+
+
+% Exercice 2298
+
+
+\exo[2]{\textbf{L'ascenseur}}
+
+La capacité des ascenseurs est déterminée par le fait que la
+masse d'une personne suit une loi normale de moyenne 75 kg et d'écart-type
+5 kg. Dans un ascenseur du type WH1 le nombre maximum de personnes est
+de 9. Un voyant lumineux affiche qu'il y a surpoids pour une masse supérieure
+à 700 kg, dans ce cas l'ascenseur ne démarre pas.
+\begin{enumerate}
+\item Calculer la probabilité qu'il y ait surpoids, quand un groupe de 9 personnes
+monte dans l'ascenseur.
+\item Une enquête récente a montré qu'aux USA, le poids moyen est de 76 kg
+et l'écart-type de 6 kg. Le building de la World-Company, à New York,
+est équipé d'un ascenseur du type WH1. Calculer la probabilité qu'il y
+ait surpoids, quand un groupe de 9 personnes monte dans cet ascenseur.\\
+\end{enumerate}
+
+
+% Exercice 2073
+
+
+\exo[3]{\textbf{Un équivalent de la queue de la gaussienne}}
+
+Pour $x>0$, on pose $F(x)=\int_{x}^{+\infty}e^{-t^2/2}dt$ et $G(x)=\int_{x}^{+\infty}\frac1{t^2}e^{-t^2/2}dt$.
+\begin{enumerate}
+ \item Démontrer que $G(x)=_{+\infty}o\big(F(x))$.
+\item Soit $X$ suivant une loi normale $\mathcal N(0,1)$. Donner un équivalent de $P(X>x)$ lorsque $x$
+tend vers $+\infty$.\\
+\end{enumerate}

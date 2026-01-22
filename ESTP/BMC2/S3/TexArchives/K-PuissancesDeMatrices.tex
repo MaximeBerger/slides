@@ -1,0 +1,248 @@
+
+
+
+
+
+
+
+
+
+\section{La conjecture des puissances}
+
+Soit $n \in \mathbb{N}$.\\
+Pour toute matrice $A \in \mathcal{M}_n(\mathbb{R})$, on peut calculer les premières puissances de $A$, puis conjecturer la « forme » de la matrice $A^n$ en toute généralité sur $n$. Il faut ensuite démontrer cette conjecture par récurrence.
+
+%\begin{Ex}
+Une conjecture importante à connaître est celle associée à la matrice suivante :
+
+\[
+J = 
+\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{pmatrix}
+\]
+
+Avec cette matrice, on obtient :
+
+\[
+J^2 = 
+\begin{pmatrix}
+3 & 3 & 3\\
+3 & 3 & 3\\
+3 & 3 & 3
+\end{pmatrix}
+\quad \text{et} \quad
+J^3 = 
+\begin{pmatrix}
+9 & 9 & 9\\
+9 & 9 & 9\\
+9 & 9 & 9
+\end{pmatrix}
+\]
+
+La conjecture à faire est : 
+\[
+\forall k \in \mathbb{N}^*, J^k = 3^{k-1} J.
+\]
+
+\textbf{Démonstration par récurrence :}\\
+Montrons par récurrence que $\forall k \in \mathbb{N}^*, J^k = 3^{k-1} J$.\\
+
+\textbf{Initialisation :}\\
+Pour $k = 1$, $J^1 = J$, donc la propriété est vraie au rang $k=1$.\\
+
+\textbf{Hérédité :}\\
+Supposons que $\forall k \geq 1$, $J^k = 3^{k-1} J$. Montrons que cela reste vrai pour $k+1$.\\
+
+\[
+J^{k+1} = J^k \cdot J = (3^{k-1} J) \cdot J \quad \text{(par hypothèse de récurrence)} 
+\]
+\[
+= 3^{k-1}
+\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{pmatrix}
+\cdot 
+\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{pmatrix}
+= 3^{k-1}
+\begin{pmatrix}
+3 & 3 & 3\\
+3 & 3 & 3\\
+3 & 3 & 3
+\end{pmatrix}
+\]
+\[
+= 3^k 
+\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{pmatrix} = 3^k J.
+\]
+
+Ainsi, la propriété est vraie au rang $k+1$. Par le principe de récurrence, on conclut que la propriété est vraie $\forall k \in \mathbb{N}^*$.
+%\end{Ex}
+
+\section{Utilisation des relations entre certaines matrices}
+
+
+\textbf{Exemple :} Soit $A = 
+\begin{pmatrix}
+4 & -3\\
+3 & 2
+\end{pmatrix}
+$.\\
+
+Posons $B = A - I_2$, alors $B = 
+\begin{pmatrix}
+3 & -3\\
+3 & -3
+\end{pmatrix}
+$ et $B^2 = 
+\begin{pmatrix}
+0 & 0\\
+0 & 0
+\end{pmatrix}
+$.
+
+Par conséquent, 
+\[
+A^n = (B + I_2)^n.
+\]
+
+Développons cette expression en utilisant le binôme de Newton :
+\[
+A^n = \sum_{k=0}^n \binom{n}{k} B^k I_2^{n-k}.
+\]
+
+Puisque $B^2 = 0$, les termes pour $k \geq 2$ sont nuls. On en déduit :
+\[
+A^n = B + I_2.
+\]
+
+\section{Les matrices diagonales et nilpotentes}
+
+Les matrices diagonales sont simples à manipuler. Si $A$ est diagonale :
+\[
+A = 
+\begin{pmatrix}
+a & 0 & 0\\
+0 & b & 0\\
+0 & 0 & c
+\end{pmatrix}
+\quad \Rightarrow \quad
+A^n = 
+\begin{pmatrix}
+a^n & 0 & 0\\
+0 & b^n & 0\\
+0 & 0 & c^n
+\end{pmatrix}.
+\]
+
+Les matrices nilpotentes $N$ sont telles qu'il existe un $k$ tel que $N^k = 0$. Pour $n \geq k$, $N^n = 0$.
+
+\section{Exercices}
+
+\exo{\textbf{Puissance $n$-ième, par récurrence}\\
+\vskip0.2cm
+On considère les matrices suivantes : 
+$$A=\left(\begin{array}{cc}
+1&-1\\
+-1&1\\
+\end{array}\right),\ B=\left(\begin{array}{cc}
+1&1\\
+0&2\\
+\end{array}\right).$$
+Calculer $A^2$, $A^3$. En déduire la valeur de $A^n$ pour tout $n\geq 1$. Répondre aux mêmes questions pour $B$.\\
+}
+
+
+% Exercice 914
+
+
+\exo{\textbf{Puissance $n$-ième - avec la formule du binôme}\\
+\vskip0.2cm
+Soit $$A=\left(
+\begin{array}{ccc}
+1&1&0\\
+0&1&1\\
+0&0&1
+\end{array}\right),\quad
+I=\left(
+\begin{array}{ccc}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{array}\right)\textrm{ et }
+B=A-I.$$
+Calculer $B^n$ pour tout $n\in\mathbb N$. En déduire $A^n$.\\
+}
+
+% Exercice 2387
+
+
+\exo{\textbf{Puissance $k$-ième sans division euclidienne}\\
+\vskip0.2cm
+Soit $U$ la matrice $$U=\left(\begin{array}{cccc}
+0&1&1&1\\
+1&0&1&1\\
+1&1&0&1\\
+1&1&1&0
+\end{array}\right).$$
+\begin{enumerate}
+\item Calculer $U^2$ et en déduire une relation simple liant $U^2$, $U$ et $I_4$.
+\item Soit $(\alpha_k)$ et $(\beta_k)$ les suites définies par $\alpha_0=1$, $\beta_0=0$, $\alpha_{k+1}=3\beta_k$, $\beta_{k+1}=\alpha_k+2\beta_k$. Démontrer que, pour tout $k\in\mathbb N$, on a 
+$$U^k=\left(
+\begin{array}{cccc}
+\alpha_k&\beta_k&\beta_k&\beta_k\\
+\beta_k&\alpha_k&\beta_k&\beta_k\\
+\beta_k&\beta_k&\alpha_k&\beta_k\\
+\beta_k&\beta_k&\beta_k&\alpha_k
+\end{array}\right).$$
+\item Démontrer que, pour tout $k\in\mathbb N$, on a $\beta_{k+2}=2\beta_{k+1}+3\beta_k$.
+\item En déduire que, pour tout $k\in\mathbb N$, 
+$\beta_k=\frac{3^k-(-1)^k}{4}$ et $\alpha_k=\frac{3^k+3(-1)^k}{4}$.\\ 
+\end{enumerate}
+}
+
+
+% Exercice 915
+
+
+\exo{\textbf{Puissance $n$-ième - avec un polynôme annulateur}\\
+\vskip0.2cm
+\begin{enumerate}
+\item Pour $n\geq 2$, déterminer le reste de la division euclidienne de $X^n$ par $X^2-3X+2$.
+\item Soit  $A=\begin{pmatrix} 
+0&1&-1\\
+-1&2&-1\\
+1&-1&2
+\end{pmatrix}$. Déduire de la question précédente la valeur de $A^n$, pour $n\geq 2$.\\
+\end{enumerate}
+
+}
+% Exercice 2388
+
+
+\exo{\textbf{ Puissance $k$-ième, avec polynôme annulateur}\\
+\vskip0.2cm
+Soit $U$ la matrice $$U=\left(\begin{array}{cccc}
+0&1&1&1\\
+1&0&1&1\\
+1&1&0&1\\
+1&1&1&0
+\end{array}\right).$$
+
+\begin{enumerate}
+\item Déterminer une relation simple liant $I_4,U$ et $U^2$.
+\item En déduire, pour $k\geq 0$, la valeur de $U^k$.\\
+\end{enumerate}
+}

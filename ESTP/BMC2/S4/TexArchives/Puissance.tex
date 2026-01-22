@@ -1,0 +1,337 @@
+
+\section{Puissance de matrices}
+
+\subsection{La méthode de la conjecture}
+
+\begin{Meth}\textbf{Conjecture et récurrence}
+\vspace{1em}
+
+Pour calculer $A^n$, on peut :
+\begin{enumerate}
+    \item Calculer les premières puissances de $A$ : $A^2$, $A^3$, ...
+    \item Conjecturer la forme générale de $A^n$.
+    \item Démontrer cette conjecture par récurrence.
+\end{enumerate}
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Conjecture classique}
+
+Soit la matrice dont tous les coefficients valent $1$ :
+$$J = \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Calculer $J^2$ et $J^3$.
+    \item Conjecturer la forme de $J^k$ pour tout $k \in \mathbb{N}^*$.
+    \item Démontrer par récurrence que $\forall k \in \mathbb{N}^*, J^k = 3^{k-1} J$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\begin{Rmq}
+\textbf{Démonstration :}\textbf{Solution de l'exercice précédent}
+\vspace{1em}
+
+\textbf{Initialisation :} Pour $k = 1$, $J^1 = J = 3^0 J$. Vrai.
+
+\textbf{Hérédité :} Supposons que $J^k = 3^{k-1} J$. Alors :
+$$J^{k+1} = J^k \cdot J = (3^{k-1} J) \cdot J = 3^{k-1} J^2$$
+Or $J^2 = 3J$, donc :
+$$J^{k+1} = 3^{k-1} \cdot 3J = 3^k J$$
+\end{Rmq}
+
+
+\subsection{Utilisation des relations algébriques}
+
+\begin{Meth}\textbf{Décomposition $A = B + I$}
+\vspace{1em}
+
+Si $B = A - I$ vérifie $B^k = 0$ pour un certain $k$, alors on utilise le binôme de Newton :
+$$A^n = (B + I)^n = \sum_{j=0}^n \binom{n}{j} B^j$$
+Cette somme est finie car $B^j = 0$ pour $j \geq k$.
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Méthode avec $B = A - I$}
+
+Soit $A = \begin{pmatrix}
+4 & -3 \\
+3 & -2
+\end{pmatrix}$.
+
+\begin{enumerate}
+    \item Poser $B = A - I_2$ et calculer $B^2$.
+    \item En déduire $A^n$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\textit{Indication :} On trouve $B^2 = 0$, donc $A^n = (B + I)^n = I + nB$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\subsection{Matrices diagonales et nilpotentes}
+
+\begin{Prop}\textbf{Puissance d'une matrice diagonale}
+\vspace{1em}
+
+Si $A$ est diagonale :
+$$A = \begin{pmatrix}
+a & 0 & 0 \\
+0 & b & 0 \\
+0 & 0 & c
+\end{pmatrix}
+\quad \Rightarrow \quad
+A^n = \begin{pmatrix}
+a^n & 0 & 0 \\
+0 & b^n & 0 \\
+0 & 0 & c^n
+\end{pmatrix}$$
+\end{Prop}
+
+\begin{Def}\textbf{Matrice nilpotente}
+\vspace{1em}
+
+Une matrice $N$ est \textbf{nilpotente} s'il existe un entier $k$ tel que $N^k = 0$.
+\end{Def}
+
+\begin{Rmq}$\,$
+
+Pour une matrice nilpotente $N$ avec $N^k = 0$, on a $N^n = 0$ pour tout $n \geq k$.
+\end{Rmq}
+
+\subsection{Méthode avec polynôme annulateur}
+
+\begin{Meth}\textbf{Division euclidienne}
+\vspace{1em}
+
+Si $P(A) = 0$ pour un polynôme $P$ de degré $d$, on effectue la division euclidienne de $X^n$ par $P(X)$ :
+$$X^n = Q(X) \cdot P(X) + R(X) \quad \text{avec } \deg R < d$$
+Alors $A^n = R(A)$.
+\end{Meth}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section{Exercices}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[1]{Puissance $n$-ième par récurrence}
+
+On considère les matrices :
+$$A = \begin{pmatrix}
+1 & -1 \\
+-1 & 1
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+1 & 1 \\
+0 & 2
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Calculer $A^2$, $A^3$. En déduire $A^n$ pour tout $n \geq 1$.
+    \item Calculer $B^2$, $B^3$. En déduire $B^n$ pour tout $n \geq 1$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Puissance $n$-ième avec le binôme}
+
+Soit :
+$$A = \begin{pmatrix}
+1 & 1 & 0 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix}, \quad
+I = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}, \quad
+B = A - I$$
+
+\begin{enumerate}
+    \item Calculer $B^n$ pour tout $n \in \mathbb{N}$.
+    \item En déduire $A^n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Puissance $k$-ième sans division euclidienne}
+
+Soit la matrice :
+$$U = \begin{pmatrix}
+0 & 1 & 1 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Calculer $U^2$ et en déduire une relation simple liant $U^2$, $U$ et $I_4$.
+    
+    \item Soit $(\alpha_k)$ et $(\beta_k)$ les suites définies par :
+    $$\alpha_0 = 1, \quad \beta_0 = 0, \quad \alpha_{k+1} = 3\beta_k, \quad \beta_{k+1} = \alpha_k + 2\beta_k$$
+    Démontrer que pour tout $k \in \mathbb{N}$ :
+    $$U^k = \begin{pmatrix}
+    \alpha_k & \beta_k & \beta_k & \beta_k \\
+    \beta_k & \alpha_k & \beta_k & \beta_k \\
+    \beta_k & \beta_k & \alpha_k & \beta_k \\
+    \beta_k & \beta_k & \beta_k & \alpha_k
+    \end{pmatrix}$$
+    
+    \item Démontrer que pour tout $k \in \mathbb{N}$, $\beta_{k+2} = 2\beta_{k+1} + 3\beta_k$.
+    
+    \item En déduire que :
+    $$\beta_k = \frac{3^k - (-1)^k}{4} \quad \text{et} \quad \alpha_k = \frac{3^k + 3(-1)^k}{4}$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Puissance $n$-ième avec polynôme annulateur}
+
+\begin{enumerate}
+    \item Pour $n \geq 2$, déterminer le reste de la division euclidienne de $X^n$ par $X^2 - 3X + 2$.
+    
+    \item Soit $A = \begin{pmatrix}
+    0 & 1 & -1 \\
+    -1 & 2 & -1 \\
+    1 & -1 & 2
+    \end{pmatrix}$.
+    
+    Vérifier que $A^2 - 3A + 2I = 0$ et en déduire $A^n$ pour $n \geq 2$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Puissance $k$-ième avec polynôme annulateur}
+
+Soit la matrice :
+$$U = \begin{pmatrix}
+0 & 1 & 1 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Déterminer une relation simple liant $I_4$, $U$ et $U^2$.
+    \item En déduire, pour $k \geq 0$, la valeur de $U^k$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Matrice de rotation}
+
+Soit la matrice de rotation :
+$$R_\theta = \begin{pmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Montrer que $R_\theta^n = R_{n\theta}$ pour tout $n \in \mathbb{N}$.
+    \item En déduire une formule pour $\cos(n\theta)$ et $\sin(n\theta)$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Fibonacci et matrices}
+
+Soit la matrice :
+$$F = \begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Calculer $F^2$, $F^3$, $F^4$.
+    \item Montrer que $F^n = \begin{pmatrix}
+    f_{n+1} & f_n \\
+    f_n & f_{n-1}
+    \end{pmatrix}$ où $(f_n)$ est la suite de Fibonacci.
+    \item En diagonalisant $F$, retrouver la formule de Binet :
+    $$f_n = \frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n\right]$$
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Suite récurrente linéaire}
+
+Soit $(u_n)$ la suite définie par $u_0 = 1$, $u_1 = 2$ et $u_{n+2} = 3u_{n+1} - 2u_n$.
+
+\begin{enumerate}
+    \item Écrire ce système sous forme matricielle $X_{n+1} = AX_n$ avec $X_n = \begin{pmatrix} u_{n+1} \\ u_n \end{pmatrix}$.
+    \item Diagonaliser $A$ et en déduire $A^n$.
+    \item Exprimer $u_n$ en fonction de $n$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[3]{Matrice trigonalisable et puissance}
+
+Soit :
+$$A = \begin{pmatrix}
+2 & 1 & 0 \\
+0 & 2 & 1 \\
+0 & 0 & 2
+\end{pmatrix}$$
+
+\begin{enumerate}
+    \item Montrer que $A$ n'est pas diagonalisable.
+    \item Écrire $A = 2I + N$ et calculer $N^2$, $N^3$.
+    \item En déduire $A^n$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\exo[2]{Application aux suites}
+
+Soit $(x_n, y_n, z_n)$ la suite définie par :
+$$\begin{cases}
+x_{n+1} = 2x_n + y_n \\
+y_{n+1} = x_n + 2y_n \\
+z_{n+1} = z_n
+\end{cases}$$
+avec $(x_0, y_0, z_0) = (1, 0, 1)$.
+
+\begin{enumerate}
+    \item Écrire ce système sous forme matricielle.
+    \item Calculer les valeurs propres de la matrice.
+    \item Exprimer $x_n$, $y_n$, $z_n$ en fonction de $n$.
+\end{enumerate}
+

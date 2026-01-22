@@ -1,0 +1,412 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+Ce chapitre aborde les notions fondamentales de continuité et de dérivabilité des fonctions d'une variable réelle. Ces concepts sont essentiels pour l'analyse mathématique et constituent la base de nombreux résultats importants comme le théorème des valeurs intermédiaires ou le théorème des accroissements finis.
+
+\section{Continuité}
+
+\subsection{Définition et propriétés}
+
+\begin{Def}
+\textbf{Continuité en un point.}
+
+Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$. On dit que $f$ est \textbf{continue en $a$} si :
+$$\lim_{x \to a} f(x) = f(a)$$
+
+Autrement dit, $f$ est continue en $a$ si $f(x)$ se \og rapproche \fg{} de $f(a)$ quand $x$ se \og rapproche \fg{} de $a$.
+\end{Def}
+
+\begin{Def}
+\textbf{Continuité sur un intervalle.}
+
+On dit que $f$ est \textbf{continue sur $I$} si elle est continue en chaque point de $I$.
+\end{Def}
+
+\begin{Rmq}
+Les fonctions usuelles (polynômes, fractions rationnelles, exponentielles, logarithmes, fonctions trigonométriques...) sont continues sur leur ensemble de définition. Intuitivement, une fonction continue peut être tracée \og sans lever le crayon \fg{}.
+\end{Rmq}
+
+\begin{Ex}
+\textbf{Étude de continuité.}
+
+Soit $f$ la fonction définie par :
+$$f(x) = \begin{cases}
+    x & \text{si } x < 1 \\
+    x^2 & \text{si } 1 \leq x \leq 4 \\
+    8\sqrt{x} & \text{si } x > 4
+\end{cases}$$
+
+Étudions la continuité de $f$ :
+\begin{itemize}
+    \item Sur chaque intervalle $]-\infty, 1[$, $[1, 4]$ et $]4, +\infty[$, $f$ est continue car c'est une fonction usuelle.
+    \item En $x = 1$ : $\displaystyle\lim_{x \to 1^-} f(x) = 1$ et $f(1) = 1^2 = 1$. Donc $f$ est continue en 1.
+    \item En $x = 4$ : $\displaystyle\lim_{x \to 4^-} f(x) = 16$ et $\displaystyle\lim_{x \to 4^+} f(x) = 8\sqrt{4} = 16$. Donc $f$ est continue en 4.
+\end{itemize}
+Conclusion : $f$ est continue sur $\R$.
+\end{Ex}
+
+
+\exo[1]{\textbf{Continuité d'une fonction définie par morceaux}}
+
+Soit $f$ la fonction définie par :
+$$f(x) = \begin{cases}
+    2x & \text{si } x < 3 \\
+    5x - 1 & \text{si } 3 \leq x \leq 7 \\
+    \dfrac{1}{2}x^2 & \text{si } x > 7
+\end{cases}$$
+
+
+\subsection{Caractérisation séquentielle}
+
+\begin{Thm}
+\textbf{Caractérisation séquentielle de la continuité.}
+
+$f$ est continue en $a$ si et seulement si pour toute suite $(u_n)$ convergeant vers $a$ :
+$$\lim_{n \to +\infty} f(u_n) = f(a)$$
+\end{Thm}
+
+\begin{Rmq}
+Cette caractérisation est très utile pour :
+\begin{itemize}
+    \item Démontrer qu'une fonction n'est pas continue (en trouvant une suite qui ne vérifie pas la propriété)
+    \item Calculer des limites de suites de la forme $f(u_n)$ quand on connaît la limite de $(u_n)$
+\end{itemize}
+\end{Rmq}
+
+\begin{Ex}
+\textbf{Application de la caractérisation séquentielle.}
+
+Soit $f$ une fonction définie sur $\R$, continue en $0$, vérifiant pour tout $x \in \R$ :
+$$f(x) = f(2x)$$
+
+Montrons que $f$ est constante.
+
+\textbf{Solution :} Soit $x \in \R$ et posons $u_n = \dfrac{x}{2^n}$.
+
+Par récurrence : $f(x) = f\left(\dfrac{x}{2}\right) = f\left(\dfrac{x}{4}\right) = \cdots = f\left(\dfrac{x}{2^n}\right) = f(u_n)$
+
+Or $\displaystyle\lim_{n \to +\infty} u_n = 0$, donc par continuité de $f$ en 0 :
+$$f(x) = \lim_{n \to +\infty} f(u_n) = f(0)$$
+
+Ainsi $f(x) = f(0)$ pour tout $x \in \R$, donc $f$ est constante.
+\end{Ex}
+
+\subsection{Théorème des valeurs intermédiaires}
+
+\begin{Thm}
+\textbf{Théorème des valeurs intermédiaires (TVI).}
+
+Soit $f$ une fonction \textbf{continue} sur un intervalle $[a, b]$.
+
+Si $f(a)$ et $f(b)$ sont de signes contraires (c'est-à-dire $f(a) \cdot f(b) < 0$), alors il existe $c \in ]a, b[$ tel que :
+$$f(c) = 0$$
+\end{Thm}
+
+\begin{Prop}
+\textbf{Corollaire : Image d'un intervalle.}
+
+L'image d'un intervalle par une fonction continue est un intervalle.
+
+En particulier, l'image d'un segment $[a, b]$ par une fonction continue est un segment $[m, M]$ où $m$ et $M$ sont respectivement le minimum et le maximum de $f$ sur $[a, b]$.
+\end{Prop}
+
+\begin{Thm}
+\textbf{Corollaire : Bijection.}
+
+Si $f$ est continue et \textbf{strictement monotone} sur $[a, b]$, alors l'équation $f(x) = 0$ admet \textbf{au plus une solution} sur $[a, b]$.
+
+De plus, si $f(a) \cdot f(b) < 0$, cette solution existe et est unique.
+\end{Thm}
+
+\begin{Meth}
+Pour montrer qu'une équation $f(x) = 0$ admet une unique solution sur un intervalle $I$ :
+\begin{enumerate}
+    \item Vérifier que $f$ est continue sur $I$
+    \item Étudier les variations de $f$ (montrer qu'elle est strictement monotone)
+    \item Calculer $f$ aux bornes de $I$ et vérifier qu'il y a changement de signe
+    \item Conclure par le TVI et la stricte monotonie
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+\textbf{Application du TVI.}
+
+Soit $f$ la fonction définie sur $\R$ par :
+$$f(x) = x^3 - x^2 + x + 2$$
+
+Que pouvez-vous dire de l'équation $f(x) = 0$ ?
+
+\vspace{1em}
+
+\textbf{1. Tableau de variations :}
+
+$f'(x) = 3x^2 - 2x + 1$
+
+Le discriminant est $\Delta = 4 - 12 = -8 < 0$ et le coefficient dominant est positif, donc $f'(x) > 0$ pour tout $x$.
+
+Ainsi $f$ est strictement croissante sur $\R$.
+
+\vspace{1em}
+
+\textbf{2. Limites aux bornes :}
+\begin{itemize}
+    \item $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$
+    \item $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{3. Existence et unicité de la racine :}
+
+$f$ est continue, strictement croissante sur $\R$, avec $f(-2) = -8 - 4 - 2 + 2 = -12 < 0$ et $f(0) = 2 > 0$.
+
+Par le TVI, l'équation $f(x) = 0$ admet une unique solution $\alpha \in ]-2, 0[$.
+
+\vspace{1em}
+
+\textbf{4. Encadrement :}
+
+$f(-1) = -1 - 1 - 1 + 2 = -1 < 0$ et $f(0) = 2 > 0$, donc $\alpha \in ]-1, 0[$.
+
+Par dichotomie : $f(-0{,}5) = 1{,}125 > 0$, donc $\alpha \in ]-1, -0{,}5[$, etc.
+
+On trouve $\alpha \approx -0{,}81$.
+\end{Ex}
+
+\exo[1]{\textbf{Application du TVI}}
+
+Soit $f$ la fonction définie sur $\R$ par $f(x) = e^x - x - 2$.
+\begin{enumerate}
+    \item Étudier les variations de $f$.
+    \item Montrer que l'équation $f(x) = 0$ admet exactement deux solutions $\alpha$ et $\beta$ avec $\alpha < 0 < \beta$.
+    \item Encadrer $\alpha$ et $\beta$ à $0{,}1$ près.
+\end{enumerate}
+
+
+%======================================================================
+\section{Dérivabilité}
+%======================================================================
+
+\subsection{Définition}
+
+\begin{Def}
+\textbf{Dérivabilité en un point.}
+
+Soit $f$ une fonction définie sur un intervalle $I$ et $x_0 \in I$. On dit que $f$ est \textbf{dérivable en $x_0$} si la limite suivante existe et est finie :
+$$\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}$$
+
+Cette limite, si elle existe, est notée $f'(x_0)$ et s'appelle le \textbf{nombre dérivé} de $f$ en $x_0$.
+\end{Def}
+
+\begin{Prop}
+\textbf{Formulation équivalente.}
+
+On peut aussi définir la dérivée par :
+$$f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$$
+\end{Prop}
+
+\begin{Thm}
+\textbf{Dérivabilité implique continuité.}
+
+Si $f$ est dérivable en $x_0$, alors $f$ est continue en $x_0$.
+
+\vspace{1em}
+
+\textbf{Attention :} La réciproque est fausse ! Une fonction peut être continue sans être dérivable.
+\end{Thm}
+
+\begin{Rmq}
+Il existe des fonctions continues partout mais dérivables nulle part ! La plus célèbre est la fonction de Weierstrass.
+\end{Rmq}
+
+\begin{Ex}
+\textbf{La fonction valeur absolue.}
+
+Soit $f(x) = |x|$. Étudions sa dérivabilité en $x_0 = 0$.
+
+Pour $h > 0$ : $\dfrac{f(0+h) - f(0)}{h} = \dfrac{|h|}{h} = \dfrac{h}{h} = 1$
+
+Pour $h < 0$ : $\dfrac{f(0+h) - f(0)}{h} = \dfrac{|h|}{h} = \dfrac{-h}{h} = -1$
+
+Les limites à droite et à gauche sont différentes, donc $f$ n'est \textbf{pas dérivable en 0}.
+
+Géométriquement, la courbe présente un \og point anguleux \fg{} en 0.
+\end{Ex}
+
+\subsection{Théorème de Rolle et des accroissements finis}
+
+\begin{Thm}
+\textbf{Théorème de Rolle.}
+
+Soit $f$ une fonction :
+\begin{itemize}
+    \item continue sur $[a, b]$
+    \item dérivable sur $]a, b[$
+    \item telle que $f(a) = f(b)$
+\end{itemize}
+
+Alors il existe $c \in ]a, b[$ tel que :
+$$f'(c) = 0$$
+\end{Thm}
+
+\begin{Rmq}
+Interprétation géométrique : si une fonction continue prend la même valeur en deux points, alors il existe un point intermédiaire où la tangente est horizontale.
+\end{Rmq}
+
+\begin{Thm}
+\textbf{Théorème des accroissements finis (TAF).}
+
+Soit $f$ une fonction :
+\begin{itemize}
+    \item continue sur $[a, b]$
+    \item dérivable sur $]a, b[$
+\end{itemize}
+
+Alors il existe $c \in ]a, b[$ tel que :
+$$f(b) - f(a) = f'(c)(b - a)$$
+\end{Thm}
+
+\begin{Rmq}
+Interprétation géométrique : il existe toujours un point où la tangente est parallèle à la corde reliant les points $(a, f(a))$ et $(b, f(b))$.
+\end{Rmq}
+
+\begin{Thm}
+\textbf{Inégalité des accroissements finis (IAF).}
+
+Avec les mêmes hypothèses que le TAF, si de plus il existe $k \geq 0$ tel que :
+$$\forall x \in ]a, b[, \quad |f'(x)| \leq k$$
+
+Alors :
+$$|f(b) - f(a)| \leq k|b - a|$$
+\end{Thm}
+
+\begin{Rmq}
+\textbf{Important pour les fonctions à plusieurs variables.}
+
+L'égalité du TAF ne se généralise pas en dimension supérieure. En revanche, l'inégalité des accroissements finis reste valable et est très utilisée.
+\end{Rmq}
+
+\begin{Meth}
+L'inégalité des accroissements finis est très utile pour étudier la convergence des suites récurrentes :
+\begin{enumerate}
+    \item On définit $u_{n+1} = f(u_n)$ et on cherche le point fixe $\ell$ tel que $f(\ell) = \ell$
+    \item On majore $|f'(x)|$ par une constante $k < 1$ sur l'intervalle contenant la suite
+    \item On en déduit : $|u_{n+1} - \ell| = |f(u_n) - f(\ell)| \leq k|u_n - \ell|$
+    \item Par récurrence : $|u_n - \ell| \leq k^n |u_0 - \ell| \to 0$
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+\textbf{Convergence d'une suite récurrente.}
+
+On définit la suite $(u_n)$ par :
+$$\begin{cases}
+    u_0 = \dfrac{3}{2} \\[1em]
+    u_{n+1} = f(u_n)
+\end{cases}$$
+avec $f(x) = (x+1)^2 e^{-x}$.
+
+\vspace{2em}
+
+\vspace{1em}
+
+\textbf{1. Tableau de variations de $f$ sur $[-1, +\infty[$ :}
+
+$f'(x) = 2(x+1)e^{-x} - (x+1)^2 e^{-x} = (x+1)(1-x)e^{-x}$
+
+Sur $[-1, +\infty[$ : $(x+1) \geq 0$ et $e^{-x} > 0$, donc le signe de $f'(x)$ est celui de $(1-x)$.
+
+Ainsi $f' > 0$ sur $]-1, 1[$ et $f' < 0$ sur $]1, +\infty[$.
+
+\vspace{1em}
+
+\textbf{2. Encadrement de $(u_n)$ :}
+
+On montre par récurrence que pour tout $n$ : $1 \leq u_n \leq \dfrac{3}{2}$.
+
+\vspace{1em}
+
+\textbf{3. Majoration de $|f'|$ :}
+
+Sur $\left[1, \dfrac{3}{2}\right]$, on peut vérifier que $|f'(x)| \leq \dfrac{1}{2}$.
+
+\vspace{1em}
+
+\textbf{4. Point fixe :}
+
+L'équation $f(x) = x$ admet une unique solution $\alpha$ sur $\left[1, \dfrac{3}{2}\right]$.
+
+\vspace{1em}
+
+\textbf{5. Convergence :}
+
+Par l'IAF : $|u_{n+1} - \alpha| = |f(u_n) - f(\alpha)| \leq \dfrac{1}{2}|u_n - \alpha|$
+
+Par récurrence : $|u_n - \alpha| \leq \left(\dfrac{1}{2}\right)^n |u_0 - \alpha| \leq \left(\dfrac{1}{2}\right)^{n+1}$
+
+Donc $(u_n)$ converge vers $\alpha$.
+\end{Ex}
+
+%======================================================================
+\section{Exercices}
+%======================================================================
+
+\exo[1]{\textbf{Continuité d'une fonction définie par morceaux}}
+
+Déterminer les valeurs de $a$ et $b$ pour que la fonction $f$ définie par :
+$$f(x) = \begin{cases}
+    (x+1)^2 & \text{si } x \leq 2 \\
+    2x^2 + b & \text{si } x > 2
+\end{cases}$$
+soit continue sur $\R$.
+
+\exo[2]{\textbf{Continuité et dérivabilité}}
+
+Étudier la continuité et la dérivabilité des fonctions suivantes :
+\begin{enumerate}
+    \item $f(x) = x^2 \cos\dfrac{1}{x}$ si $x \neq 0$ et $f(0) = 0$
+    \item $f(x) = \sin x \sin\dfrac{1}{x}$ si $x \neq 0$ et $f(0) = 0$
+    \item $f(x) = x \cdot E(x)$ où $E$ désigne la fonction partie entière
+    \item $f(x) = \dfrac{|x|\sqrt{x^2 - 2x + 1}}{x - 1}$ si $x \neq 1$ et $f(1) = 1$
+\end{enumerate}
+
+\exo[2]{\textbf{Suite récurrente et point fixe}}
+
+On définit la suite $(u_n)$ par :
+$$\begin{cases}
+    u_0 = 1 \\
+    u_{n+1} = f(u_n)
+\end{cases}$$
+avec $f(x) = \dfrac{1}{x+1}$.
+\begin{enumerate}
+    \item Montrer que l'équation $x^2 + x - 1 = 0$ a une seule solution $\alpha$ dans l'intervalle $]0, 1[$.
+    \item Montrer que pour tout $n$ : $\dfrac{1}{2} \leq u_n \leq 1$.
+    \item Montrer que pour tout $x \in \left[\dfrac{1}{2}, 1\right]$ : $|f'(x)| \leq \dfrac{4}{9}$.
+    \item Montrer que pour tout $n$ : $|u_{n+1} - \alpha| \leq \dfrac{4}{9}|u_n - \alpha|$, puis que $|u_n - \alpha| \leq \left(\dfrac{4}{9}\right)^n |u_0 - \alpha|$.
+    \item En déduire la limite de $(u_n)$.
+\end{enumerate}
+
+\exo[2]{\textbf{Application du TVI}}
+
+Soit $f$ la fonction définie sur $\R$ par $f(x) = e^x - x - 2$.
+\begin{enumerate}
+    \item Étudier les variations de $f$.
+    \item Montrer que l'équation $f(x) = 0$ admet exactement deux solutions $\alpha$ et $\beta$ avec $\alpha < 0 < \beta$.
+    \item Encadrer $\alpha$ et $\beta$ à $0{,}1$ près.
+\end{enumerate}
+
+\exo[2]{\textbf{Théorème de Rolle}}
+
+Soit $f$ la fonction définie sur $\R$ par $f(x) = (x-1)(x-2)(x-3)$.
+\begin{enumerate}
+    \item Calculer $f(1)$, $f(2)$ et $f(3)$.
+    \item Justifier l'existence de $c_1 \in ]1, 2[$ et $c_2 \in ]2, 3[$ tels que $f'(c_1) = f'(c_2) = 0$.
+    \item Déterminer explicitement $c_1$ et $c_2$.
+\end{enumerate}
+
+\exo[3]{\textbf{Inégalité classique}}
+
+En utilisant le théorème des accroissements finis, montrer que :
+$$\forall x > 0, \quad \frac{x}{1+x} < \ln(1+x) < x$$
+
+\end{document}

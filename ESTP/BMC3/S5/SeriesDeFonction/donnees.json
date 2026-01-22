@@ -161,14 +161,14 @@
           "numero": 1,
           "titre": "Enoncé",
           "description": "",
-          "lien": "ExamP3/enonce.pdf",
+          "lien": "ExamP3/Blancs/1/enonce.pdf",
           "cible": "_blank"
         },
         {
           "numero": 2,
           "titre": "Corrigé",
           "description": "",
-          "lien": "ExamP3/corrige.pdf",
+          "lien": "ExamP3/Blancs/1/corrige.pdf",
           "cible": "_blank"
         }
       ]

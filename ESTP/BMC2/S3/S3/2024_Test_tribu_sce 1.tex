@@ -1,0 +1,101 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+%\usepackage{wrapfig}
+\usepackage{dsfont}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+%\usepackage{tikz}
+\usepackage{multicol}
+\newcommand{\xB}{{\cal B}}
+\newcommand{\xC}{{\cal C}}
+\newcommand{\R}{\mathbf{R}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\noindent
+\begin{minipage}[l]{8cm}
+  \scriptsize{ESTP, S3\\Ann\'ee universitaire 2024/2025}
+\end{minipage}
+
+\begin{center}
+  {\large\textbf{Petit test } \\
+10 minutes\\}
+  \bigskip
+  
+
+ 
+\end{center}
+
+\bigskip
+
+\begin{center}
+  \fbox{%
+    \begin{minipage}{0.95\linewidth}
+      NOM: \hspace*{5cm} Pr\'enom: \hspace*{4cm} Groupe: TD 
+    \end{minipage}
+  }
+  \end{center}
+
+\bigskip
+ 
+ 
+
+\noindent\textbf{Exercice  : 3 points}\\
+
+
+\begin{enumerate}
+    \item 
+
+Donner la définition d'une tribu.
+ \item
+ Donner la tribu triviale.
+\end{enumerate}
+
+\noindent\textbf{Exercice  : 2 points}\\
+
+
+Donner la définition d'un système complet d'événements.
+
+
+
+\section*{Solutions}
+
+\begin{enumerate}
+    \item \textbf{Définition d'une tribu :} \\
+    
+    Soit $\Omega$ un univers. Une \textbf{tribu} $\mathcal{F}$ sur $\Omega$ est une collection de parties de $\Omega$ qui vérifie les propriétés suivantes :
+    \begin{enumerate}
+        \item $\Omega \in \mathcal{F}$.
+        \item Si $A \in \mathcal{F}$ alors son complémentaire $A^c \in \mathcal{F}$.
+        \item Si $\{A_n\}_{n \in \mathbb{N}}$ est une suite d'éléments de $\mathcal{F}$, alors leur union $\bigcup\limits_{n=1}^{\infty} A_n$ appartient aussi à $\mathcal{F}$.
+    \end{enumerate}
+    
+    \item \textbf{La tribu triviale :} \\
+    
+    La \textbf{tribu triviale} sur un univers $\Omega$ est la plus petite tribu possible. Elle est donnée par :
+    \[
+    \mathcal{F} = \{\emptyset, \Omega\}.
+    \]
+
+\end{enumerate}
+
+\noindent\textbf{Exercice : 2 points} \\
+
+\textbf{Définition d'un système complet d'événements :} \\
+
+Un ensemble fini ou dénombrable d'événements $\{A_i\}_{i \in I}$ est un \textbf{système complet d'événements} si :
+\begin{enumerate}
+    \item Les événements sont deux à deux disjoints : $A_i \cap A_j = \emptyset$ pour tout $i \neq j$.
+    \item Leur union couvre tout l'univers : $\bigcup\limits_{i \in I} A_i = \Omega$.
+\end{enumerate}
+
+\end{document}
+
+
+
+\end{document}
