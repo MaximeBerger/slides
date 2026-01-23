@@ -19,7 +19,7 @@
         \textbf{Contrôle de connaissances et de compétences} & 
         \textbf{FO-002-VLA-XX-002} \\
         \hline
-        \textbf{26/01/2026}  &  & \textbf{Page 1/2} \\
+        \textbf{26/01/2026}  &  & \textbf{Page 1/3} \\
         \hline
     \end{tabular}
 \end{center}
@@ -53,13 +53,13 @@
 \vspace{2em}
 
 %==============================================================================
-\section*{Exercice 1 : Développements limités (5 points)}
+\section*{Exercice 1 : Développements limités \hfill \normalfont\textit{(5 points)}}
 %==============================================================================
 
 \begin{enumerate}
     \item \textbf{Calculs de développements limités.}
     \begin{enumerate}
-        \item Donner le développement limité de $\cos x$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        \item Donner le développement limité de $\cos x$ à l'ordre 4 au voisinage de 0. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -69,7 +69,7 @@
         \end{solution}
         }{}
         
-        \item Donner le développement limité de $\dfrac{1}{1-x}$ à l'ordre 4 au voisinage de 0. \textit{(0.5 pt)}
+        \item Donner le développement limité de $\dfrac{1}{1-x}$ à l'ordre 4 au voisinage de 0. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -91,9 +91,37 @@
         \end{align*}
         \end{solution}
         }{}
+
+        \item Calculer les deux premiers termes du développement limité de la fonction tangente au voisinage de 0. \textit{(1 pt)}
+        \textit{On pourra utiliser le DL de $\sin x$ et $\cos x$ et celui de $\frac{1}{1-u}$, avec $u$ bien choisi.}
+
+        \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+        Pour obtenir le DL de $\tan x$ à l'ordre 2, on peut écrire $\tan x = \frac{\sin x}{\cos x}$ et utiliser les développements limités de $\sin x$ et $\cos x$, puis effectuer la division (ou multiplier par le DL de $\frac{1}{\cos x}$).
+        \[
+        \sin x = x - \frac{x^3}{6} + o(x^3)
+        \]
+        \[
+        \cos x = 1 - \frac{x^2}{2} + o(x^2)
+        \]
+        Donc 
+        \[
+        \frac{1}{\cos x} = 1 + \frac{x^2}{2} + o(x^2)
+        \]
+        Finalement:
+        \begin{align*}
+        \tan x &= \sin x \cdot \frac{1}{\cos x} \\
+        &= \left(x - \frac{x^3}{6}\right) \left(1 + \frac{x^2}{2}\right) + o(x^3) \\
+        &= x + \frac{x^3}{2} - \frac{x^3}{6} + o(x^3) \\
+        &= x + \frac{x^3}{3} + o(x^3)
+        \end{align*}
+        Donc les deux premiers termes sont \fbox{$x$ et $\frac{x^3}{3}$}.
+        \end{solution}
+        }{}
+        
     \end{enumerate}
     
-    \item \textbf{Calcul de limite.} Calculer la limite suivante à l'aide d'un développement limité : \textit{(1.5 pts)}
+    \item \textbf{Calcul de limite.} Calculer la limite suivante à l'aide d'un développement limité : \textit{(1 pt)}
     \[
     \lim_{x \to 0} \frac{e^x - 1 - x - \frac{x^2}{2}}{x^3}
     \]
@@ -117,7 +145,7 @@
     
     \item \textbf{Étude d'une fonction.} Soit $g(x) = \dfrac{\tan x - x}{x^3}$ pour $x \neq 0$.
     \begin{enumerate}
-        \item À l'aide d'un développement limité, montrer que $g$ admet un prolongement par continuité en 0 et déterminer sa valeur. \textit{(0.75 pt)}
+        \item À l'aide d'un développement limité, montrer que $g$ admet un prolongement par continuité en 0 et déterminer sa valeur. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -133,7 +161,7 @@
         \end{solution}
         }{}
         
-        \item En déduire la position de la courbe de $g$ par rapport à sa tangente horizontale en 0. \textit{(0.75 pt)}
+        \item En déduire la position de la courbe de $g$ par rapport à sa tangente horizontale en 0. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -157,13 +185,13 @@
     \renewcommand{\arraystretch}{1.5} 
     \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
         \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/3}\\
             \hline
     \end{tabular}
 \end{center}
 
 %==============================================================================
-\section*{Exercice 2 : Équations aux dérivées partielles (5 points)}
+\section*{Exercice 2 : Équations aux dérivées partielles \hfill \normalfont\textit{(5 points)}}
 %==============================================================================
 
 \begin{enumerate}
@@ -172,7 +200,7 @@
     (3x^2 + 2y) \, dx + (2x + 4y^3) \, dy = 0
     \]
     \begin{enumerate}
-        \item Vérifier que cette équation est exacte, c'est-à-dire que l'expression $f(x,y)\,dx + g(x,y)\,dy$ est une différentielle totale. \textit{(0.75 pt)}
+        \item Vérifier que cette équation est exacte, c'est-à-dire que l'expression $f(x,y)\,dx + g(x,y)\,dy$ est une différentielle totale. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -200,7 +228,7 @@
         \end{solution}
         }{}
         
-        \item En déduire la solution générale de l'équation différentielle. \textit{(0.5 pt)}
+        \item En déduire la solution générale de l'équation différentielle. \textit{(0,5 pt)}
         
         \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
@@ -216,7 +244,7 @@
     \[
     3\frac{\partial f}{\partial x} - \frac{\partial f}{\partial y} = 6x
     \]
-    en utilisant un changement de variables linéaire. \textit{(1.5 pts)}
+    en utilisant un changement de variables linéaire. \textit{(1,5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -244,7 +272,7 @@
     \[
     \frac{\partial f}{\partial x} + 2\frac{\partial f}{\partial y} = -f
     \]
-    En cherchant des solutions sous la forme $f(x,y) = X(x)Y(y)$, déterminer les solutions de cette équation. \textit{(1.25 pts)}
+    En cherchant des solutions sous la forme $f(x,y) = X(x)Y(y)$, déterminer les solutions de cette équation. \textit{(1,5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -271,7 +299,7 @@
 \vspace{1em}
 
 %==============================================================================
-\section*{Exercice 3 : Modélisation -- Circuit RC (5 points)}
+\section*{Exercice 3 : Modélisation -- Circuit RC  \hfill \normalfont\textit{(5 points)}}
 %==============================================================================
 
 Un condensateur de capacité $C = 10$ $\mu$F est initialement chargé à la tension $U_0 = 12$ V. À l'instant $t = 0$, on le décharge à travers une résistance $R = 100$ k$\Omega$.
@@ -282,7 +310,7 @@ RC\frac{dU}{dt} + U = 0
 \]
 
 \begin{enumerate}
-    \item Calculer la valeur numérique de la constante de temps $\tau = RC$. \textit{(0.5 pt)}
+    \item Calculer la valeur numérique de la constante de temps $\tau = RC$. \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -292,7 +320,7 @@ RC\frac{dU}{dt} + U = 0
     \end{solution}
     }{}
     
-    \item Réécrire l'équation différentielle sous la forme $\dfrac{dU}{dt} = -\dfrac{U}{\tau}$. \textit{(0.5 pt)}
+    \item Réécrire l'équation différentielle sous la forme $\dfrac{dU}{dt} = -\dfrac{U}{\tau}$. \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -305,7 +333,7 @@ RC\frac{dU}{dt} + U = 0
     \end{solution}
     }{}
     
-    \item Résoudre cette équation différentielle avec la condition initiale $U(0) = U_0$. \textit{(1.5 pts)}
+    \item Résoudre cette équation différentielle avec la condition initiale $U(0) = U_0$. \textit{(1,5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -362,7 +390,7 @@ RC\frac{dU}{dt} + U = 0
     \end{solution}
     }{}
     
-    \item Vers quelle valeur tend $U(t)$ quand $t \to +\infty$ ? Interpréter physiquement. \textit{(0.5 pt)}
+    \item Vers quelle valeur tend $U(t)$ quand $t \to +\infty$ ? Interpréter physiquement. \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -375,8 +403,19 @@ RC\frac{dU}{dt} + U = 0
     }{}
 \end{enumerate}
 
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
 %==============================================================================
-\section*{Exercice 4 : Modélisation -- Pharmacocinétique (5 points)}
+\section*{Exercice 4 : Modélisation -- Pharmacocinétique  \hfill \normalfont\textit{(5 points)}}
 %==============================================================================
 
 On étudie l'évolution de la concentration $C(t)$ d'un médicament dans le sang après une injection intraveineuse.
@@ -410,7 +449,7 @@ où $k = 0{,}2$ h$^{-1}$ est la constante d'élimination et $C_0 = 100$ mg/L la 
     \end{solution}
     }{}
     
-    \item Calculer la demi-vie $T_{1/2}$ du médicament (temps pour que $C(T_{1/2}) = \frac{C_0}{2}$). \textit{(0.5 pt)}
+    \item Calculer la demi-vie $T_{1/2}$ du médicament (temps pour que $C(T_{1/2}) = \frac{C_0}{2}$). \textit{(0,5 pt)}
     
     \textit{On donne $\ln(2) \approx 0{,}7$.}
     
@@ -435,7 +474,7 @@ On administre maintenant le médicament par perfusion continue à un débit cons
 \]
 
 \begin{enumerate}[resume]
-    \item Déterminer la concentration d'équilibre $C_{\text{eq}}$ (solution constante de l'équation). \textit{(0.5 pt)}
+    \item Déterminer la concentration d'équilibre $C_{\text{eq}}$ (solution constante de l'équation). \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -446,7 +485,7 @@ On administre maintenant le médicament par perfusion continue à un débit cons
     \end{solution}
     }{}
     
-    \item On pose $\theta(t) = C(t) - C_{\text{eq}}$. Montrer que $\theta$ vérifie l'équation $\dfrac{d\theta}{dt} = -k\theta$. \textit{(0.5 pt)}
+    \item On pose $\theta(t) = C(t) - C_{\text{eq}}$. Montrer que $\theta$ vérifie l'équation $\dfrac{d\theta}{dt} = -k\theta$. \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -464,7 +503,7 @@ On administre maintenant le médicament par perfusion continue à un débit cons
     \end{solution}
     }{}
     
-    \item Résoudre et en déduire $C(t)$ avec $C(0) = 0$ (perfusion démarrant sans médicament dans le sang). \textit{(1.5 pts)}
+    \item Résoudre et en déduire $C(t)$ avec $C(0) = 0$ (perfusion démarrant sans médicament dans le sang). \textit{(1,5 pts)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -488,7 +527,7 @@ On administre maintenant le médicament par perfusion continue à un débit cons
     \end{solution}
     }{}
     
-    \item Déterminer $\lim_{t \to +\infty} C(t)$. Interpréter médicalement ce résultat. \textit{(0.5 pt)}
+    \item Déterminer $\lim_{t \to +\infty} C(t)$. Interpréter médicalement ce résultat. \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
@@ -503,7 +542,7 @@ On administre maintenant le médicament par perfusion continue à un débit cons
     \end{solution}
     }{}
     
-    \item Si la concentration thérapeutique souhaitée est $C_{\text{th}} = 50$ mg/L, quel débit de perfusion $D$ doit-on utiliser ? \textit{(0.5 pt)}
+    \item Si la concentration thérapeutique souhaitée est $C_{\text{th}} = 50$ mg/L, quel débit de perfusion $D$ doit-on utiliser ? \textit{(0,5 pt)}
     
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}

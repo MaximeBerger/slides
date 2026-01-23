@@ -1,0 +1,377 @@
+\input{configTD}
+
+\title{TD de Préparation à l'Examen S5}
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[backgroundcolor=ThemeLight,linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    {\Large\textbf{Révisions -- Mathématiques S5}}
+    
+    \vspace{0.5em}
+    {\textit{BMC3 -- Semestre 5}}
+\end{center}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Développements limités}
+%==============================================================================
+
+%------------------------------------------------------------------------------
+\subsection*{Exercice 1 -- Produit et quotient de DL}
+%------------------------------------------------------------------------------
+
+\begin{enumerate}
+    \item Calculer le DL de $\dfrac{\sin x}{1+x}$ à l'ordre 3 au voisinage de 0.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On multiplie les DL en ne gardant que les termes d'ordre $\leq 3$ :
+    \begin{align*}
+    \dfrac{\sin x}{1+x} &= \left(x - \dfrac{x^3}{6}\right)\left(1 - x + x^2 - x^3\right) + o(x^3) \\
+    &= x - x^2 + x^3 - \dfrac{x^3}{6} + o(x^3) \\
+    &= x - x^2 + \dfrac{5x^3}{6} + o(x^3)
+    \end{align*}
+    \end{solution}
+    }{}
+    
+    \item Calculer le DL de $\dfrac{e^x}{1+x}$ à l'ordre 3.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $e^x = 1 + x + \dfrac{x^2}{2} + \dfrac{x^3}{6} + o(x^3)$ et $\dfrac{1}{1+x} = 1 - x + x^2 - x^3 + o(x^3)$.
+    
+    \begin{align*}
+    \dfrac{e^x}{1+x} &= \left(1 + x + \dfrac{x^2}{2} + \dfrac{x^3}{6}\right)(1 - x + x^2 - x^3) + o(x^3) \\
+    &= 1 - x + x^2 + x - x^2 + x^3 + \dfrac{x^2}{2} - \dfrac{x^3}{2} + \dfrac{x^3}{6} + o(x^3) \\
+    &= 1 + \dfrac{x^2}{2} + \dfrac{2x^3}{3} + o(x^3)
+    \end{align*}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+%------------------------------------------------------------------------------
+\subsection*{Exercice 2 -- DL par composition}
+%------------------------------------------------------------------------------
+
+On cherche le DL de $\ln(\cos x)$ à l'ordre 4 au voisinage de 0.
+
+\begin{enumerate}
+    \item En posant $u = \cos x - 1$, montrer que $u = -\dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $\cos x = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)$, donc :
+    
+    $u = \cos x - 1 = -\dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)$
+    \end{solution}
+    }{}
+    
+    \item En utilisant $\ln(1+u) = u - \dfrac{u^2}{2} + o(u^2)$, en déduire le DL de $\ln(\cos x)$ à l'ordre 4.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On a $u^2 = \dfrac{x^4}{4} + o(x^4)$.
+    \begin{align*}
+    \ln(\cos x) &= \ln(1+u) = u - \dfrac{u^2}{2} + o(u^2) \\
+    &= -\dfrac{x^2}{2} + \dfrac{x^4}{24} - \dfrac{1}{2} \cdot \dfrac{x^4}{4} + o(x^4) \\
+    &= -\dfrac{x^2}{2} + \dfrac{x^4}{24} - \dfrac{x^4}{8} + o(x^4) \\
+    &= -\dfrac{x^2}{2} - \dfrac{x^4}{12} + o(x^4)
+    \end{align*}
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+%------------------------------------------------------------------------------
+\subsection*{Exercice 3 -- Calcul de limites par DL}
+%------------------------------------------------------------------------------
+
+Calculer les limites suivantes à l'aide de développements limités :
+
+\begin{enumerate}
+    \item $\displaystyle\lim_{x \to 0} \dfrac{\ln(1+x) - x + \frac{x^2}{2}}{x^3}$
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $\ln(1+x) = x - \dfrac{x^2}{2} + \dfrac{x^3}{3} + o(x^3)$, donc :
+    
+    $\ln(1+x) - x + \dfrac{x^2}{2} = \dfrac{x^3}{3} + o(x^3)$
+    
+    $\dfrac{\ln(1+x) - x + \frac{x^2}{2}}{x^3} = \dfrac{1}{3} + o(1) \xrightarrow[x \to 0]{} \boxed{\dfrac{1}{3}}$
+    \end{solution}
+    }{}
+    
+    \item $\displaystyle\lim_{x \to 0} \dfrac{\sin x - x\cos x}{x^3}$
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $\sin x = x - \dfrac{x^3}{6} + o(x^3)$ et $\cos x = 1 - \dfrac{x^2}{2} + o(x^2)$
+    
+    $x\cos x = x - \dfrac{x^3}{2} + o(x^3)$
+    
+    $\sin x - x\cos x = x - \dfrac{x^3}{6} - x + \dfrac{x^3}{2} + o(x^3) = \dfrac{x^3}{3} + o(x^3)$
+    
+    $\dfrac{\sin x - x\cos x}{x^3} = \dfrac{1}{3} + o(1) \xrightarrow[x \to 0]{} \boxed{\dfrac{1}{3}}$
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+%------------------------------------------------------------------------------
+\subsection*{Exercice 4 -- Prolongement et position par rapport à la tangente}
+%------------------------------------------------------------------------------
+
+Soit $f(x) = \dfrac{e^x - 1 - x}{x^2}$ pour $x \neq 0$.
+
+\begin{enumerate}
+    \item Montrer que $f$ admet un prolongement par continuité en 0 et déterminer $f(0)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $e^x = 1 + x + \dfrac{x^2}{2} + \dfrac{x^3}{6} + o(x^3)$, donc $e^x - 1 - x = \dfrac{x^2}{2} + \dfrac{x^3}{6} + o(x^3)$.
+    
+    $f(x) = \dfrac{e^x - 1 - x}{x^2} = \dfrac{1}{2} + \dfrac{x}{6} + o(x) \xrightarrow[x \to 0]{} \dfrac{1}{2}$
+    
+    On peut prolonger $f$ par continuité en posant $f(0) = \dfrac{1}{2}$.
+    \end{solution}
+    }{}
+    
+    \item Donner le DL de $f$ à l'ordre 2 en 0, puis l'équation de la tangente à la courbe en 0.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $e^x - 1 - x = \dfrac{x^2}{2} + \dfrac{x^3}{6} + \dfrac{x^4}{24} + o(x^4)$
+    
+    $f(x) = \dfrac{1}{2} + \dfrac{x}{6} + \dfrac{x^2}{24} + o(x^2)$
+    
+    La tangente en 0 a pour équation : $y = \dfrac{1}{2} + \dfrac{x}{6}$
+    \end{solution}
+    }{}
+    
+    \item En déduire la position de la courbe par rapport à sa tangente au voisinage de 0.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $f(x) - \left(\dfrac{1}{2} + \dfrac{x}{6}\right) = \dfrac{x^2}{24} + o(x^2) \sim \dfrac{x^2}{24} > 0$ pour $x \neq 0$ petit.
+    
+    Donc la courbe est \textbf{au-dessus} de sa tangente au voisinage de 0.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\newpage
+%==============================================================================
+\section*{Équations différentielles exactes}
+%==============================================================================
+
+%------------------------------------------------------------------------------
+\subsection*{Exercice 5 -- Équation exacte}
+%------------------------------------------------------------------------------
+
+Résoudre l'équation différentielle $(2xy + 1)\,dx + (x^2 + 2y)\,dy = 0$.
+
+\begin{enumerate}
+    \item Vérifier que l'équation est exacte.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $f(x,y) = 2xy + 1$ et $g(x,y) = x^2 + 2y$.
+    
+    $\dfrac{\partial f}{\partial y} = 2x$ et $\dfrac{\partial g}{\partial x} = 2x$
+    
+    Comme $\dfrac{\partial f}{\partial y} = \dfrac{\partial g}{\partial x}$, l'équation est exacte.
+    \end{solution}
+    }{}
+    
+    \item Trouver $F(x,y)$ telle que $dF = f\,dx + g\,dy$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On cherche $F$ telle que $\dfrac{\partial F}{\partial x} = 2xy + 1$.
+    
+    En intégrant par rapport à $x$ : $F(x,y) = x^2y + x + H(y)$
+    
+    On vérifie avec $\dfrac{\partial F}{\partial y} = x^2 + H'(y) = x^2 + 2y$.
+    
+    Donc $H'(y) = 2y$, soit $H(y) = y^2$.
+    
+    \textbf{Conclusion :} $F(x,y) = x^2y + x + y^2$
+    \end{solution}
+    }{}
+    
+    \item En déduire la solution générale.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    Les solutions sont données par $F(x,y) = K$ :
+    \[\boxed{x^2y + x + y^2 = K}\]
+    où $K$ est une constante.
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Équations aux dérivées partielles}
+%==============================================================================
+
+%------------------------------------------------------------------------------
+\subsection*{Exercice 6 -- EDP}
+%------------------------------------------------------------------------------
+
+Résoudre l'équation $2\dfrac{\partial f}{\partial x} + \dfrac{\partial f}{\partial y} = 4x$ par changement de variables.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+Avec $X = x - 2y$ et $Y = x$, on a $x = Y$ et $y = \frac{Y-X}{2}$.
+
+On pose $F(X,Y) = f(x,y)$. Par la règle de la chaîne :
+
+$\dfrac{\partial f}{\partial x} = \dfrac{\partial F}{\partial X} \cdot 1 + \dfrac{\partial F}{\partial Y} \cdot 1 = \dfrac{\partial F}{\partial X} + \dfrac{\partial F}{\partial Y}$
+
+$\dfrac{\partial f}{\partial y} = \dfrac{\partial F}{\partial X} \cdot (-2) + \dfrac{\partial F}{\partial Y} \cdot 0 = -2\dfrac{\partial F}{\partial X}$
+
+L'équation devient : $2\left(\dfrac{\partial F}{\partial X} + \dfrac{\partial F}{\partial Y}\right) - 2\dfrac{\partial F}{\partial X} = 4Y$
+
+$2\dfrac{\partial F}{\partial Y} = 4Y$, soit $\dfrac{\partial F}{\partial Y} = 2Y$
+
+En intégrant par rapport à $Y$ : $F(X,Y) = Y^2 + K(X)$
+
+En revenant aux variables initiales : $\boxed{f(x,y) = x^2 + K(x-2y)}$
+
+où $K$ est une fonction $\mathcal{C}^1$ quelconque.
+\end{solution}
+}{}
+\vspace{1em}
+
+Résoudre par séparation de variables : $\dfrac{\partial f}{\partial x} - 3\dfrac{\partial f}{\partial y} = 2f$.
+
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On cherche $f(x,y) = X(x)Y(y)$.
+
+$X'Y - 3XY' = 2XY$
+
+En divisant par $XY$ : $\dfrac{X'}{X} - 3\dfrac{Y'}{Y} = 2$
+
+Donc $\dfrac{X'}{X} = 2 + 3\dfrac{Y'}{Y}$. Le membre de gauche ne dépend que de $x$, le membre de droite que de $y$. Ils sont égaux à une constante $k$.
+
+\textbf{Pour $X$ :} $\dfrac{X'}{X} = k \Rightarrow X(x) = C_1 e^{kx}$
+
+\textbf{Pour $Y$ :} $3\dfrac{Y'}{Y} = k - 2 \Rightarrow Y' = \dfrac{k-2}{3}Y \Rightarrow Y(y) = C_2 e^{(k-2)y/3}$
+
+\textbf{Solutions :} $\boxed{f(x,y) = C \, e^{kx} e^{(k-2)y/3}}$ pour $k \in \mathbb{R}$, $C \in \mathbb{R}$.
+\end{solution}
+}{}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Modélisation}
+%==============================================================================
+
+%------------------------------------------------------------------------------
+\subsection*{Exercice 7 -- Refroidissement de Newton}
+%------------------------------------------------------------------------------
+
+Un objet de température initiale $T_0 = 80$ °C est placé dans une pièce à température ambiante $T_a = 20$ °C. La loi de Newton stipule que :
+\[
+\frac{dT}{dt} = -k(T - T_a)
+\]
+avec $k = 0{,}1$ min$^{-1}$.
+
+\begin{enumerate}
+    \item En posant $\theta(t) = T(t) - T_a$, montrer que $\theta' = -k\theta$ et résoudre.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $\theta' = T' = -k(T - T_a) = -k\theta$
+    
+    Donc $\theta(t) = \theta_0 e^{-kt}$ avec $\theta_0 = T_0 - T_a = 80 - 20 = 60$ °C.
+    
+    $\theta(t) = 60 e^{-0{,}1t}$, donc $T(t) = T_a + \theta(t) = 20 + 60e^{-0{,}1t}$ °C
+    \end{solution}
+    }{}
+    
+    \item Calculer la température après 10 minutes. \textit{(On donne $e^{-1} \approx 0{,}37$.)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    $T(10) = 20 + 60e^{-1} \approx 20 + 60 \times 0{,}37 = 20 + 22{,}2 = \boxed{42{,}2 \text{ °C}}$
+    \end{solution}
+    }{}
+    
+    \item Au bout de combien de temps la température sera-t-elle de 30 °C ? \textit{(On donne $\ln 6 \approx 1{,}8$.)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On résout $T(t) = 30$ :
+    
+    $20 + 60e^{-0{,}1t} = 30 \Rightarrow 60e^{-0{,}1t} = 10 \Rightarrow e^{-0{,}1t} = \dfrac{1}{6}$
+    
+    $-0{,}1t = -\ln 6 \Rightarrow t = \dfrac{\ln 6}{0{,}1} = \dfrac{1{,}8}{0{,}1} = \boxed{18 \text{ min}}$
+    \end{solution}
+    }{}
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+\subsection*{Exercice 8 -- Croissance bactérienne avec limitation}
+%------------------------------------------------------------------------------
+
+Une population de bactéries $N(t)$ croît dans un milieu où les nutriments sont renouvelés à débit constant $D$, mais sont consommés proportionnellement à la population :
+\[
+\frac{dN}{dt} = D - kN
+\]
+avec $k = 0{,}5$ h$^{-1}$, $D = 1000$ bactéries/h, et $N(0) = 100$ bactéries.
+
+\begin{enumerate}
+    \item Déterminer la population d'équilibre $N_{eq}$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    À l'équilibre, $\dfrac{dN}{dt} = 0$, donc $D - kN_{eq} = 0$.
+    
+    $N_{eq} = \dfrac{D}{k} = \dfrac{1000}{0{,}5} = 2000$ bactéries
+    \end{solution}
+    }{}
+    
+    \item Résoudre l'équation et donner $N(t)$.
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On pose $\theta = N - N_{eq}$. Alors $\theta' = N' = D - kN = D - k(N_{eq} + \theta) = -k\theta$.
+    
+    Donc $\theta(t) = \theta_0 e^{-kt}$ avec $\theta_0 = N(0) - N_{eq} = 100 - 2000 = -1900$.
+    
+    $N(t) = N_{eq} + \theta(t) = 2000 - 1900e^{-0{,}5t}$
+    
+    $\boxed{N(t) = 2000 - 1900e^{-0{,}5t}}$
+    \end{solution}
+    }{}
+    
+    \item Au bout de combien de temps la population atteint-elle 95\% de sa valeur d'équilibre ?
+    
+    \textit{(On donne $\ln 20 \approx 3$.)}
+    
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+    On cherche $t$ tel que $N(t) = 0{,}95 \times 2000 = 1900$.
+    
+    $2000 - 1900e^{-0{,}5t} = 1900 \Rightarrow 1900e^{-0{,}5t} = 100 \Rightarrow e^{-0{,}5t} = \dfrac{1}{19} \approx \dfrac{1}{20}$
+    
+    $-0{,}5t = -\ln 20 \Rightarrow t = \dfrac{\ln 20}{0{,}5} = \dfrac{3}{0{,}5} = \boxed{6 \text{ h}}$
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

@@ -1,55 +1,42 @@
 \input{configPoly}
 
-\newcommand{\titulo}{\color{black} BACHELOR Semestre 3}
-\newcommand{\autor}{Maxime Berger, Rémi Blanquet \& Karine Serier }
-\newcommand{\fecha}{ESTP Dijon}
-
-
 \begin{document}
 
 
-\includepdf[pages=-]{front.pdf}
 
-% % Page de titre exemple
-% \begin{titlepage}
-%   {\centering
-%     \vspace{1cm}
-%     Trouver une image ? 
-%     \par\vspace{3cm}
-%     {\scshape\Huge\textbf{\titulo}} \par\vspace{2cm}
-%     \begin{flushright}
-%       \autor \\
-%       \textit{\fecha}
-%     \end{flushright}
-%   }
-% \end{titlepage}
 
+\includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{images/front.pdf}
+
+\pagenumbering{roman}  % Numérotation romaine pour la table des matières
 \tableofcontents
 
+\newpage
+\pagenumbering{arabic}  % Recommence à 1 en chiffres arabes
 
-% \chapter{Introduction}
-% \input{intro}
+
+\chapter{Introduction}
+\input{chapitres/intro}
 
 %Rémi
 %Révisions
 \chapter{Calcul Matriciel, révisions}
-\input{CalculMatriciel}
+\input{chapitres/CalculMatriciel}
 
 %Karine : 
 \chapter{Développements limités}
-\input{DL}
+\input{chapitres/DL}
 
 %Karine : 
 \chapter{Courbes du plan}
-\input{courbesPar}
+\input{chapitres/courbesPar}
 
 %Karine : 
 \chapter{Séries numériques}
-\input{serieNumerique}
+\input{chapitres/serieNumerique}
 
 %Karine : 
 \chapter{Calculs de champs de vecteurs}
-\input{ic}
+\input{chapitres/ic}
 
 %Maxou
 % \chapter{Algèbre linéaire}
