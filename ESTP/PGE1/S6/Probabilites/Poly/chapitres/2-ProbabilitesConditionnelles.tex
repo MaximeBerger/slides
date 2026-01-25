@@ -1,0 +1,108 @@
+% Chapitre 2 : Probabilités conditionnelles
+
+\section{Formule des probabilités totales}
+
+\begin{Prop}[Formule des probabilités totales]
+Si $(B_i)_{i \in I}$ est une partition de l'univers $\Omega$ (c'est-à-dire que les $B_i$ sont disjoints deux à deux et que $\bigcup_{i \in I} B_i = \Omega$), alors pour tout événement $A$ :
+$$\mathbb{P}(A) = \sum_{i \in I} \mathbb{P}(A \cap B_i) = \sum_{i \in I} \mathbb{P}(A | B_i) \mathbb{P}(B_i)$$
+\end{Prop}
+
+\begin{Ex}
+L'ESTP est réparti sur 4 sites. Chaque site fait sortir une certaine proportion d'étudiants brillants :
+\begin{itemize}
+    \item Dijon : 100\% (des 100 étudiants)
+    \item Cachan : 10\% (des 300 étudiants)
+    \item Troyes : 50\% (des 100 étudiants)
+    \item Orléans : 30\% (des 30 étudiants)
+\end{itemize}
+
+Un étudiant sort de l'ESTP, quelle est la probabilité qu'il soit brillant ?
+
+Notons $A$ l'événement "l'étudiant est brillant" et $B_D$, $B_C$, $B_T$, $B_O$ les événements correspondant aux différents sites.
+
+On a :
+\begin{align*}
+\mathbb{P}(A) &= \mathbb{P}(A | B_D) \mathbb{P}(B_D) + \mathbb{P}(A | B_C) \mathbb{P}(B_C) \\
+&\quad + \mathbb{P}(A | B_T) \mathbb{P}(B_T) + \mathbb{P}(A | B_O) \mathbb{P}(B_O) \\
+&= 1 \times \frac{100}{530} + 0.1 \times \frac{300}{530} + 0.5 \times \frac{100}{530} + 0.3 \times \frac{30}{530} \\
+&= \frac{100 + 30 + 50 + 9}{530} = \frac{189}{530} \approx 0.357
+\end{align*}
+\end{Ex}
+
+\section{Probabilité conditionnelle}
+
+\begin{Def}
+Si $A$ et $B$ sont deux événements avec $\mathbb{P}(B) > 0$, la \textbf{probabilité conditionnelle} de $A$ sachant $B$ est définie par :
+$$\mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}$$
+\end{Def}
+
+\begin{Rmq}
+L'idée de base : une information supplémentaire modifie la vraisemblance que l'on accorde à l'événement étudié.
+\end{Rmq}
+
+Cette définition permet de réécrire la formule des probabilités totales :
+$$\mathbb{P}(A) = \sum_{i \in I} \mathbb{P}(A | B_i) \mathbb{P}(B_i)$$
+
+\section{Formule des probabilités composées}
+
+\begin{Prop}[Formule des probabilités composées]
+Si $A_1, A_2, \ldots, A_n$ sont des événements de $\Omega$ tels que $\mathbb{P}(A_1 \cap \cdots \cap A_{n-1}) > 0$, alors :
+$$\mathbb{P}(A_1 \cap A_2 \cap \cdots \cap A_n) = \mathbb{P}(A_1) \times \mathbb{P}(A_2 | A_1) \times \mathbb{P}(A_3 | A_1 \cap A_2) \times \cdots \times \mathbb{P}(A_n | A_1 \cap \cdots \cap A_{n-1})$$
+\end{Prop}
+
+\begin{Ex}
+Tirer sans remise $k$ boules rouges dans une urne contenant $r$ boules rouges et $n$ noires ?
+
+La probabilité de tirer $k$ boules rouges successivement est :
+$$\mathbb{P}(R_1 \cap R_2 \cap \cdots \cap R_k) = \frac{r}{r+n} \times \frac{r-1}{r+n-1} \times \cdots \times \frac{r-k+1}{r+n-k+1}$$
+\end{Ex}
+
+\section{Formule de Bayes}
+
+\begin{Thm}[Formule de Bayes]
+Si $A$ et $B$ sont deux événements avec $\mathbb{P}(A) > 0$ et $\mathbb{P}(B) > 0$, alors :
+$$\mathbb{P}(B | A) = \frac{\mathbb{P}(A | B) \mathbb{P}(B)}{\mathbb{P}(A)}$$
+\end{Thm}
+
+\begin{Rmq}
+La formule de Bayes permet d'inverser une probabilité conditionnelle. Cette formule est le point de départ de toute une \textbf{philosophie bayésienne} :
+
+Si on a une hypothèse $H$ et qu'on observe des données $D$, on peut réécrire la formule :
+$$\mathbb{P}(H | D) = \frac{\mathbb{P}(D | H) \mathbb{P}(H)}{\mathbb{P}(D)}$$
+
+où :
+\begin{itemize}
+    \item $\mathbb{P}(D | H)$ est la \textbf{vraisemblance} des résultats $D$ sous l'hypothèse $H$
+    \begin{itemize}
+        \item Si cette probabilité est très petite, c'est que $H$ est peu valable
+        \item Si cette probabilité est grande, c'est que $H$ décrit bien le phénomène étudié
+    \end{itemize}
+    \item $\mathbb{P}(H | D)$ est la \textbf{plausibilité} de l'hypothèse $H$ sachant qu'on a observé ces données
+    \item $\mathbb{P}(H)$ est la probabilité \textbf{a priori} de l'hypothèse
+\end{itemize}
+
+Dans notre tête, chaque croyance $H$ est associée à une probabilité. À chaque événement, ces probabilités sont modifiées. Si $\mathbb{P}(H)$ est réglée \textbf{a priori}, on peut alors calculer la probabilité \textbf{a posteriori} $\mathbb{P}(H | D)$, c'est votre nouvelle probabilité de croire à $H$.
+
+On a mis à jour la crédence d'une hypothèse $H$ en observant des données.
+\end{Rmq}
+
+\begin{Ex}
+Un maître de jeu de rôle possède plusieurs dés : 2, 3, 6, 8 et 10 faces. Il fait un lancer et obtient un 6. Quel dé a-t-il lancé ?
+
+Notons $D_i$ l'événement "le dé à $i$ faces a été lancé" et $R_6$ l'événement "on obtient un 6".
+
+Si on suppose que chaque dé a la même probabilité d'être choisi a priori ($\mathbb{P}(D_i) = 1/5$), alors :
+$$\mathbb{P}(D_i | R_6) = \frac{\mathbb{P}(R_6 | D_i) \mathbb{P}(D_i)}{\sum_{j \in \{2,3,6,8,10\}} \mathbb{P}(R_6 | D_j) \mathbb{P}(D_j)}$$
+
+On a :
+\begin{itemize}
+    \item $\mathbb{P}(R_6 | D_2) = 0$ (impossible d'obtenir 6 avec un dé à 2 faces)
+    \item $\mathbb{P}(R_6 | D_3) = 0$ (impossible d'obtenir 6 avec un dé à 3 faces)
+    \item $\mathbb{P}(R_6 | D_6) = 1/6$
+    \item $\mathbb{P}(R_6 | D_8) = 1/8$
+    \item $\mathbb{P}(R_6 | D_{10}) = 1/10$
+\end{itemize}
+
+Donc le dé le plus probable est celui à 6 faces.
+\end{Ex}
+

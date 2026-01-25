@@ -1,0 +1,125 @@
+% Chapitre 1 : Espace probabilisé
+
+\section{Définitions de base}
+
+\subsection{Univers et événements}
+
+\begin{Def}
+L'\textbf{univers} $\Omega$ est l'ensemble de toutes les issues possibles d'une expérience aléatoire.
+\end{Def}
+
+\begin{Def}
+Un \textbf{événement} $A$ est une partie de l'univers $\Omega$, c'est-à-dire $A \subset \Omega$.
+\end{Def}
+
+\begin{Def}
+Une \textbf{tribu} (ou $\sigma$-algèbre) $\mathcal{A}$ sur $\Omega$ est un ensemble de parties de $\Omega$ vérifiant :
+\begin{itemize}
+    \item $\Omega \in \mathcal{A}$
+    \item Si $A \in \mathcal{A}$, alors $\overline{A} \in \mathcal{A}$ (stabilité par passage au complémentaire)
+    \item Si $(A_n)_{n \in \N} \subset \mathcal{A}$, alors $\bigcup_{n \in \N} A_n \in \mathcal{A}$ (stabilité par réunion dénombrable)
+\end{itemize}
+\end{Def}
+
+\subsection{Mesure de probabilité}
+
+\begin{Def}
+Une \textbf{mesure de probabilité} $\mathbb{P}$ sur $(\Omega, \mathcal{A})$ est une fonction $\mathbb{P} : \mathcal{A} \to [0,1]$ vérifiant :
+\begin{itemize}
+    \item $\mathbb{P}(\Omega) = 1$
+    \item Pour toute famille dénombrable d'événements disjoints $(A_n)_{n \in \N}$, on a :
+    $$\mathbb{P}\left(\bigcup_{n \in \N} A_n\right) = \sum_{n \in \N} \mathbb{P}(A_n)$$
+    (propriété de $\sigma$-additivité)
+\end{itemize}
+\end{Def}
+
+\begin{Def}
+Un \textbf{espace probabilisé} est le triplet $(\Omega, \mathcal{A}, \mathbb{P})$ où :
+\begin{itemize}
+    \item $\Omega$ est l'univers
+    \item $\mathcal{A}$ est une tribu sur $\Omega$
+    \item $\mathbb{P}$ est une mesure de probabilité sur $(\Omega, \mathcal{A})$
+\end{itemize}
+\end{Def}
+
+\section{Exemples d'espaces probabilisés}
+
+\begin{Ex}
+\textbf{Proportion de sol recouvert par de la peinture}
+
+Vous jetez un pot de peinture par terre et mesurez la proportion de sol recouvert. L'univers est l'intervalle $\Omega = [0,1]$.
+
+On ne peut pas associer une probabilité à chaque valeur individuelle, mais seulement calculer la probabilité d'obtenir une valeur comprise entre deux bornes. Par exemple, la probabilité de tomber sur un nombre entre $0.3$ et $0.7$ peut être définie comme la longueur de l'intervalle : $\mathbb{P}([0.3, 0.7]) = 0.4$.
+\end{Ex}
+
+\begin{Ex}
+\textbf{Infinité de pièces de monnaie}
+
+On lance une infinité de pièces de monnaie équilibrées. L'univers $\Omega$ est l'ensemble de toutes les suites infinies de résultats (Pile/Face).
+
+Événements possibles :
+\begin{itemize}
+    \item Il y a une infinité de "Face"
+    \item La suite commence par $n$ fois "Pile"
+\end{itemize}
+
+Événements non mesurables :
+\begin{itemize}
+    \item La proportion de Face ne tend pas vers $1/2$
+\end{itemize}
+\end{Ex}
+
+\begin{Ex}
+\textbf{Fissure dans un matériau}
+
+L'univers est l'ensemble de toutes les fissures possibles sur une plaque soumise à un stress mécanique.
+
+Événement possible : Une fissure traverse complètement la plaque.
+\end{Ex}
+
+\begin{Ex}
+\textbf{Déformation d'un pont}
+
+L'univers est l'ensemble des formes possibles de déformation d'un pont sous l'effet du trafic.
+
+Événement possible : La déformation au centre du pont dépasse celle prévue par le cahier des charges.
+\end{Ex}
+
+\begin{Ex}
+\textbf{Turbulences autour d'un avion}
+
+L'univers est l'ensemble des champs de vitesse des écoulements de l'air autour de l'avion.
+
+Événement possible : Le flux d'air entraîne une turbulence sentie par les passagers.
+\end{Ex}
+
+\begin{Ex}
+\textbf{Chemin aléatoire dans Dijon}
+
+L'univers est l'ensemble des positions d'un ivrogne immortel qui part de l'ESTP.
+
+Événements possibles :
+\begin{itemize}
+    \item Au bout de $n$ pas, l'ivrogne se situe à plus de 100m de l'ESTP
+    \item L'ivrogne repasse par l'ESTP plusieurs fois
+\end{itemize}
+\end{Ex}
+
+\begin{Ex}
+\textbf{Actifs financiers}
+
+L'univers est l'ensemble des trajectoires possibles de l'actif. Si on se limite à un intervalle de temps $[0,T]$, $\Omega$ est l'ensemble des fonctions continues sur $[0,T]$.
+
+Événement possible : Le cours de l'actif atteint 10.000 euros.
+\end{Ex}
+
+\section{Opérations sur les événements}
+
+Soient $A$ et $B$ deux événements :
+\begin{itemize}
+    \item $A \cup B$ correspond à la réalisation de "$A$ ou $B$"
+    \item $A \cap B$ correspond à la réalisation de "$A$ et $B$"
+    \item $\overline{A}$ correspond à la non-réalisation de $A$
+    \item $A \setminus B = A \cap \overline{B}$ correspond à "$A$ mais pas $B$"
+\end{itemize}
+

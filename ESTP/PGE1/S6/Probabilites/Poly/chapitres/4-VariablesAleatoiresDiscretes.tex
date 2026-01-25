@@ -1,0 +1,115 @@
+% Chapitre 4 : Variables aléatoires discrètes
+
+\section{Définition}
+
+\begin{Def}
+Une \textbf{variable aléatoire} $X$ est une fonction qui associe une valeur numérique à chaque issue d'une expérience aléatoire :
+$$X : \Omega \to \R$$
+\end{Def}
+
+\begin{Rmq}
+Une variable aléatoire n'est ni une variable, ni quelque chose d'aléatoire. C'est une grandeur qui dépend des résultats de l'expérience. C'est la pire définition du 21e siècle, mais c'est celle qui est utilisée !
+\end{Rmq}
+
+\begin{Def}
+Une variable aléatoire $X$ est dite \textbf{discrète} si elle prend un nombre fini ou dénombrable de valeurs.
+\end{Def}
+
+\section{Loi d'une variable aléatoire discrète}
+
+\begin{Def}
+Soit $X$ une variable aléatoire discrète prenant les valeurs $(x_i)_{i \in I}$ où $I$ est fini ou dénombrable. La \textbf{loi} de $X$ est l'ensemble des couples $(x_i, p_i)_{i \in I}$ où :
+$$p_i = \mathbb{P}(X = x_i) = \mathbb{P}(\{\omega \in \Omega : X(\omega) = x_i\})$$
+\end{Def}
+
+\begin{Rmq}
+La loi d'une variable aléatoire contient l'essence de la variable : on conserve seulement les images de la fonction $X$ et la taille des sous-ensembles de $\Omega$ qui font que $X$ prenne chaque valeur.
+\end{Rmq}
+
+\begin{Prop}
+Si $X$ est une variable aléatoire discrète de loi $(x_i, p_i)_{i \in I}$, alors :
+$$\sum_{i \in I} p_i = 1$$
+\end{Prop}
+
+\section{Fonction de répartition}
+
+\begin{Def}
+La \textbf{fonction de répartition} d'une variable aléatoire $X$ est la fonction $F_X : \R \to [0,1]$ définie par :
+$$F_X(x) = \mathbb{P}(X \leq x)$$
+\end{Def}
+
+\begin{Prop}
+Pour une variable aléatoire discrète $X$ de loi $(x_i, p_i)_{i \in I}$, la fonction de répartition est :
+$$F_X(x) = \sum_{i : x_i \leq x} p_i$$
+\end{Prop}
+
+\begin{Prop}
+La fonction de répartition $F_X$ vérifie :
+\begin{itemize}
+    \item $\lim_{x \to -\infty} F_X(x) = 0$
+    \item $\lim_{x \to +\infty} F_X(x) = 1$
+    \item $F_X$ est croissante
+    \item $F_X$ est continue à droite
+    \item Pour $a < b$ : $\mathbb{P}(a < X \leq b) = F_X(b) - F_X(a)$
+\end{itemize}
+\end{Prop}
+
+\section{Espérance et variance}
+
+\begin{Def}
+L'\textbf{espérance} d'une variable aléatoire discrète $X$ de loi $(x_i, p_i)_{i \in I}$ est définie par :
+$$\mathbb{E}[X] = \sum_{i \in I} x_i p_i$$
+à condition que cette somme soit absolument convergente.
+\end{Def}
+
+\begin{Def}
+La \textbf{variance} d'une variable aléatoire $X$ est définie par :
+$$\Var(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+\end{Def}
+
+\begin{Def}
+L'\textbf{écart-type} de $X$ est :
+$$\sigma(X) = \sqrt{\Var(X)}$$
+\end{Def}
+
+\begin{Prop}[Linéarité de l'espérance]
+Si $X$ et $Y$ sont deux variables aléatoires et $a, b \in \R$, alors :
+$$\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$$
+\end{Prop}
+
+\begin{Prop}
+Si $X$ et $Y$ sont deux variables aléatoires indépendantes, alors :
+$$\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]$$
+et
+$$\Var(X + Y) = \Var(X) + \Var(Y)$$
+\end{Prop}
+
+\section{Fonction indicatrice d'un événement}
+
+\begin{Def}
+Si $A$ est un événement de $\Omega$, on peut définir la variable aléatoire \textbf{fonction indicatrice} :
+$$\mathbf{1}_A(\omega) = \begin{cases}
+1 & \text{si } \omega \in A \\
+0 & \text{si } \omega \notin A
+\end{cases}$$
+\end{Def}
+
+\begin{Prop}
+Pour une fonction indicatrice $\mathbf{1}_A$ :
+\begin{itemize}
+    \item $\mathbb{E}[\mathbf{1}_A] = \mathbb{P}(A)$
+    \item $\Var(\mathbf{1}_A) = \mathbb{P}(A)(1 - \mathbb{P}(A))$
+\end{itemize}
+\end{Prop}
+
+\section{Indépendance de variables aléatoires}
+
+\begin{Def}
+Deux variables aléatoires $X$ et $Y$ définies sur $\Omega$ sont \textbf{indépendantes} si pour tous intervalles $I$ et $J$ de $\R$ :
+$$\mathbb{P}(X \in I, Y \in J) = \mathbb{P}(X \in I) \times \mathbb{P}(Y \in J)$$
+\end{Def}
+
+\begin{Rmq}
+On aura d'autres moyens pour montrer l'indépendance plus tard (notamment avec les fonctions de répartition jointes ou les densités).
+\end{Rmq}
+
