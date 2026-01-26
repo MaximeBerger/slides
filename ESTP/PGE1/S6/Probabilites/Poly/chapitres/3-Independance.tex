@@ -1,0 +1,66 @@
+% Chapitre 3 : Indépendance
+
+\section{Événements indépendants}
+
+\begin{Def}
+Deux événements $A$ et $B$ sont dits \textbf{indépendants} si :
+$$\mathbb{P}(A \cap B) = \mathbb{P}(A) \times \mathbb{P}(B)$$
+\end{Def}
+
+\begin{Rmq}
+C'est une définition \textbf{fondamentale} : la probabilité que $A$ soit réalisé ne change pas si on sait que $B$ est réalisé. En effet, si $A$ et $B$ sont indépendants et $\mathbb{P}(B) > 0$, alors :
+$$\mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)} = \frac{\mathbb{P}(A) \mathbb{P}(B)}{\mathbb{P}(B)} = \mathbb{P}(A)$$
+\end{Rmq}
+
+\begin{Rmq}
+Ce sera souvent difficile de prouver que deux événements sont indépendants ! Pour le faire, il faut :
+\begin{enumerate}
+    \item Calculer $\mathbb{P}(A)$
+    \item Calculer $\mathbb{P}(B)$
+    \item Calculer $\mathbb{P}(A \cap B)$
+\end{enumerate}
+
+Si le produit des deux premiers est égal au troisième, ils sont indépendants, sinon, ils ne le sont pas.
+\end{Rmq}
+
+\begin{Prop}
+Si $A$ et $B$ sont indépendants, alors :
+\begin{itemize}
+    \item $A$ et $\overline{B}$ sont indépendants
+    \item $\overline{A}$ et $B$ sont indépendants
+    \item $\overline{A}$ et $\overline{B}$ sont indépendants
+\end{itemize}
+\end{Prop}
+
+\begin{proof}
+Montrons que $A$ et $\overline{B}$ sont indépendants :
+\begin{align*}
+\mathbb{P}(A \cap \overline{B}) &= \mathbb{P}(A) - \mathbb{P}(A \cap B) \\
+&= \mathbb{P}(A) - \mathbb{P}(A) \mathbb{P}(B) \\
+&= \mathbb{P}(A)(1 - \mathbb{P}(B)) \\
+&= \mathbb{P}(A) \mathbb{P}(\overline{B})
+\end{align*}
+\end{proof}
+
+\section{Indépendance mutuelle}
+
+\begin{Def}
+Les événements $A_1, A_2, \ldots, A_n$ sont dits \textbf{mutuellement indépendants} (ou simplement \textbf{indépendants}) si pour toute partie $I \subset \{1, 2, \ldots, n\}$ :
+$$\mathbb{P}\left(\bigcap_{i \in I} A_i\right) = \prod_{i \in I} \mathbb{P}(A_i)$$
+\end{Def}
+
+\begin{Rmq}
+Attention : l'indépendance deux à deux ne suffit pas pour avoir l'indépendance mutuelle. Il faut que toutes les intersections vérifient la propriété de factorisation.
+\end{Rmq}
+
+\begin{Ex}
+On lance deux dés équilibrés. Notons :
+\begin{itemize}
+    \item $A$ : "le premier dé donne un nombre pair"
+    \item $B$ : "le second dé donne un nombre pair"
+    \item $C$ : "la somme des deux dés est paire"
+\end{itemize}
+
+Les événements $A$ et $B$ sont indépendants, $A$ et $C$ sont indépendants, $B$ et $C$ sont indépendants, mais $A$, $B$ et $C$ ne sont pas mutuellement indépendants car $\mathbb{P}(A \cap B \cap C) = \mathbb{P}(A \cap B) = 1/4$ alors que $\mathbb{P}(A) \mathbb{P}(B) \mathbb{P}(C) = (1/2)^3 = 1/8$.
+\end{Ex}
+

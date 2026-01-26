@@ -1,0 +1,130 @@
+% Chapitre 5 : Variables aléatoires continues
+
+\section{Définition}
+
+\begin{Def}
+Une variable aléatoire $X$ est dite \textbf{continue} si elle peut prendre toute valeur dans un intervalle (ou une réunion d'intervalles) de $\R$.
+\end{Def}
+
+\begin{Rmq}
+Pour une variable continue, on ne peut généralement pas associer une probabilité à chaque valeur individuelle. On ne peut calculer que la probabilité d'obtenir une valeur comprise entre deux bornes.
+\end{Rmq}
+
+\section{Densité de probabilité}
+
+\begin{Def}
+Une variable aléatoire $X$ est dite \textbf{absolument continue} s'il existe une fonction $f_X : \R \to \R_+$ appelée \textbf{densité de probabilité} telle que pour tout intervalle $[a,b]$ :
+$$\mathbb{P}(a \leq X \leq b) = \int_a^b f_X(x) \, dx$$
+\end{Def}
+
+\begin{Prop}
+Si $X$ admet une densité $f_X$, alors :
+\begin{itemize}
+    \item $f_X(x) \geq 0$ pour tout $x \in \R$
+    \item $\int_{-\infty}^{+\infty} f_X(x) \, dx = 1$
+    \item Pour tout $x \in \R$ : $\mathbb{P}(X = x) = 0$
+    \item La fonction de répartition est : $F_X(x) = \int_{-\infty}^x f_X(t) \, dt$
+    \item Si $F_X$ est dérivable, alors $f_X(x) = F_X'(x)$ presque partout
+\end{itemize}
+\end{Prop}
+
+\section{Fonction de répartition}
+
+\begin{Def}
+Pour une variable aléatoire continue $X$ de densité $f_X$, la \textbf{fonction de répartition} est :
+$$F_X(x) = \mathbb{P}(X \leq x) = \int_{-\infty}^x f_X(t) \, dt$$
+\end{Def}
+
+\begin{Prop}
+La fonction de répartition $F_X$ d'une variable continue vérifie :
+\begin{itemize}
+    \item $\lim_{x \to -\infty} F_X(x) = 0$
+    \item $\lim_{x \to +\infty} F_X(x) = 1$
+    \item $F_X$ est continue et croissante
+    \item Pour $a < b$ : $\mathbb{P}(a < X < b) = F_X(b) - F_X(a) = \int_a^b f_X(x) \, dx$
+\end{itemize}
+\end{Prop}
+
+\section{Espérance et variance}
+
+\begin{Def}
+L'\textbf{espérance} d'une variable aléatoire continue $X$ de densité $f_X$ est définie par :
+$$\mathbb{E}[X] = \int_{-\infty}^{+\infty} x f_X(x) \, dx$$
+à condition que cette intégrale soit absolument convergente.
+\end{Def}
+
+\begin{Def}
+La \textbf{variance} d'une variable aléatoire continue $X$ est :
+$$\Var(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \int_{-\infty}^{+\infty} (x - \mathbb{E}[X])^2 f_X(x) \, dx = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+\end{Def}
+
+\begin{Def}
+L'\textbf{écart-type} de $X$ est :
+$$\sigma(X) = \sqrt{\Var(X)}$$
+\end{Def}
+
+\begin{Prop}[Linéarité de l'espérance]
+Si $X$ et $Y$ sont deux variables aléatoires continues et $a, b \in \R$, alors :
+$$\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$$
+\end{Prop}
+
+\section{Exemples de variables continues}
+
+\begin{Ex}
+\textbf{Loi uniforme sur $[a,b]$}
+
+Une variable aléatoire $X$ suit une loi uniforme sur $[a,b]$ si sa densité est :
+$$f_X(x) = \begin{cases}
+\frac{1}{b-a} & \text{si } x \in [a,b] \\
+0 & \text{sinon}
+\end{cases}$$
+
+On a :
+\begin{itemize}
+    \item $\mathbb{E}[X] = \frac{a+b}{2}$
+    \item $\Var(X) = \frac{(b-a)^2}{12}$
+\end{itemize}
+\end{Ex}
+
+\begin{Ex}
+\textbf{Loi exponentielle de paramètre $\lambda > 0$}
+
+Une variable aléatoire $X$ suit une loi exponentielle de paramètre $\lambda$ si sa densité est :
+$$f_X(x) = \begin{cases}
+\lambda e^{-\lambda x} & \text{si } x \geq 0 \\
+0 & \text{si } x < 0
+\end{cases}$$
+
+On a :
+\begin{itemize}
+    \item $\mathbb{E}[X] = \frac{1}{\lambda}$
+    \item $\Var(X) = \frac{1}{\lambda^2}$
+    \item $F_X(x) = \begin{cases} 1 - e^{-\lambda x} & \text{si } x \geq 0 \\ 0 & \text{sinon} \end{cases}$
+\end{itemize}
+\end{Ex}
+
+\begin{Ex}
+\textbf{Loi normale (ou gaussienne) de paramètres $\mu$ et $\sigma^2$}
+
+Une variable aléatoire $X$ suit une loi normale $\mathcal{N}(\mu, \sigma^2)$ si sa densité est :
+$$f_X(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$
+
+On a :
+\begin{itemize}
+    \item $\mathbb{E}[X] = \mu$
+    \item $\Var(X) = \sigma^2$
+\end{itemize}
+\end{Ex}
+
+\section{Indépendance de variables aléatoires continues}
+
+\begin{Def}
+Deux variables aléatoires continues $X$ et $Y$ sont \textbf{indépendantes} si pour tous intervalles $I$ et $J$ de $\R$ :
+$$\mathbb{P}(X \in I, Y \in J) = \mathbb{P}(X \in I) \times \mathbb{P}(Y \in J)$$
+\end{Def}
+
+\begin{Prop}
+Si $X$ et $Y$ sont deux variables aléatoires continues indépendantes de densités respectives $f_X$ et $f_Y$, alors le couple $(X,Y)$ admet une densité jointe :
+$$f_{(X,Y)}(x,y) = f_X(x) f_Y(y)$$
+\end{Prop}
+
