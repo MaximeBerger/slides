@@ -1,0 +1,106 @@
+% Template pour les corrigés d'exercices
+% Compiler avec : pdflatex corrige-template.tex
+
+\documentclass[12pt,a4paper]{article}
+
+% Langue et encodage
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+
+% Mise en page compacte
+\usepackage{geometry}
+\geometry{top=1.5cm, bottom=1.5cm, left=2cm, right=2cm}
+
+% Mathématiques
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+
+% Couleurs et style
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{orange}\leaders\hrule height \headrulewidth\hfill}}
+
+% === MÉTADONNÉES DU CORRIGÉ (À MODIFIER) ===
+\newcommand{\numchapitre}{2}
+\newcommand{\nomchapitre}{Intégration}
+\newcommand{\numexo}{2}
+\newcommand{\titreexo}{Calculs directs de primitives}
+% ===========================================
+
+\lhead{\textbf{Chapitre \numchapitre} -- \nomchapitre}
+\rhead{Exercice \numchapitre.\numexo}
+\cfoot{\thepage}
+
+% Raccourcis mathématiques (copie de configPoly)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+
+\begin{center}
+\colorbox{orange!20}{\parbox{0.9\textwidth}{
+\centering\large\bfseries
+Corrigé -- Exercice \numchapitre.\numexo : \titreexo
+}}
+\end{center}
+
+\vspace{1em}
+
+% === CONTENU DU CORRIGÉ ===
+
+\textbf{Énoncé :} Déterminer une primitive des fonctions suivantes.
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item $f(x) = 3x + 1$
+
+\textcolor{teal}{\textbf{Solution :}} Une primitive est $F(x) = \dfrac{3x^2}{2} + x + C$.
+
+\item $f(x) = 3x^2 - x + 1$
+
+\textcolor{teal}{\textbf{Solution :}} Une primitive est $F(x) = x^3 - \dfrac{x^2}{2} + x + C$.
+
+\item $f(x) = \dfrac{1}{x} + 2$
+
+\textcolor{teal}{\textbf{Solution :}} Une primitive est $F(x) = \ln|x| + 2x + C$ (pour $x \neq 0$).
+
+\item $f(x) = e^x + 1$
+
+\textcolor{teal}{\textbf{Solution :}} Une primitive est $F(x) = e^x + x + C$.
+
+\item $f(x) = \dfrac{3}{x+1} - e^{2x+1}$
+
+\textcolor{teal}{\textbf{Solution :}} Une primitive est $F(x) = 3\ln|x+1| - \dfrac{1}{2}e^{2x+1} + C$.
+
+\item $f(t) = t \cdot e^{t^2+1}$
+
+\textcolor{teal}{\textbf{Solution :}} On reconnaît la forme $u'e^u$ avec $u = t^2 + 1$ et $u' = 2t$.
+
+Donc $F(t) = \dfrac{1}{2}e^{t^2+1} + C$.
+
+\item $f(t) = \dfrac{e^t}{e^t+1}$
+
+\textcolor{teal}{\textbf{Solution :}} On reconnaît la forme $\dfrac{u'}{u}$ avec $u = e^t + 1$ et $u' = e^t$.
+
+Donc $F(t) = \ln(e^t + 1) + C$.
+
+\item $f(t) = \dfrac{e^{2t}-1}{e^t}$
+
+\textcolor{teal}{\textbf{Solution :}} On simplifie : $f(t) = e^t - e^{-t}$.
+
+Donc $F(t) = e^t + e^{-t} + C$.
+
+\item $f(t) = \dfrac{t^2-t}{t^3}$
+
+\textcolor{teal}{\textbf{Solution :}} On simplifie : $f(t) = \dfrac{1}{t} - \dfrac{1}{t^2}$.
+
+Donc $F(t) = \ln|t| + \dfrac{1}{t} + C$.
+
+\end{enumerate}
+
+\end{document}

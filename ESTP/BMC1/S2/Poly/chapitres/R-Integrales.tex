@@ -1,5 +1,7 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../PolyS2.tex]{subfiles}
 \begin{document}
+\setcounter{chapter}{1}
+\chapter{Intégration}
 
 L'intégration correspond au processus inverse de la dérivation. C'est un outil fondamental en mathématiques et en sciences, permettant de calculer des aires, des volumes, ou de résoudre des équations différentielles.
 
@@ -90,6 +92,8 @@ $\dfrac{1}{\sqrt{x}}$ & $2\sqrt{x} + C$ & $\dfrac{1}{1+x^2}$ & $\arctan x + C$ \
 \end{enumerate}
 \end{multicols}
 
+\newpage 
+
 \item $\displaystyle\int_1^e \frac{1}{x} \, dx$ vaut :
 \begin{multicols}{3}
 \begin{enumerate}[label=\alph*.]
@@ -178,6 +182,8 @@ Ainsi : $\displaystyle\int_2^4 \dfrac{1}{x^2-1} \, dx = \dfrac{1}{2}\int_2^4 \df
 
 \vspace{1em}\hrule\vspace{1em}
 
+\newpage 
+
 \subsection{Changement de variable}
 
 \begin{Thm}\textbf{Formule de changement de variable}
@@ -209,7 +215,7 @@ On retrouve bien l'aire d'un demi-disque de rayon 1.
 
 \section{Exercices}
 
-\exo[1]{\textbf{Calculs directs de primitives}}
+\exo[1]{\textbf{Calculs directs de primitives}}\corrige{exo-2.2}
 
 Déterminer une primitive des fonctions suivantes :
 
@@ -229,7 +235,9 @@ Déterminer une primitive des fonctions suivantes :
 
 \vspace{1em}\hrule\vspace{1em}
 
-\exo[2]{\textbf{Intégration par parties}}
+\newpage 
+
+\exo[2]{\textbf{Intégration par parties}}\corrige{exo-2.3}
 
 Calculer les intégrales suivantes :
 
@@ -244,7 +252,7 @@ Calculer les intégrales suivantes :
 
 \vspace{1em}\hrule\vspace{1em}
 
-\exo[2]{\textbf{Changement de variable}}
+\exo[2]{\textbf{Changement de variable}}\corrige{exo-2.4}
 
 \begin{enumerate}
 \item En posant $u = \ln x$, calculer $\displaystyle\int_1^e \frac{1}{x\sqrt{\ln x + 1}} \, dx$
@@ -268,7 +276,7 @@ En déduire $\displaystyle\int_0^1 \frac{x-2}{(x^2+1)(2x+1)} \, dx$.
 
 \vspace{1em}\hrule\vspace{1em}
 
-\exo[3]{\textbf{Problème - Aire d'un logo}}
+\exo[3]{\textbf{Problème - Aire d'un logo}}\corrige{exo-2.6}
 
 On s'intéresse au logo ci-dessous, symétrique par rapport à l'axe des ordonnées :
 
@@ -284,6 +292,8 @@ L'unité choisie sur chacun des axes est de 2,5 cm.
 \end{enumerate}
 
 \vspace{1em}\hrule\vspace{1em}
+
+\newpage
 
 \exo[3]{\textbf{Application - Réserve d'eau}}
 
