@@ -1,4 +1,8 @@
+\documentclass[../PolyS4.tex]{subfiles}
+\begin{document}
 
+\setcounter{chapter}{6}
+\chapter{Compléments d'algèbre linéaire}
 \section{Algèbre linéaire : compléments}
 
 \textit{Dans tout le chapitre, $E$ désigne un espace vectoriel de dimension finie $n$ sur un corps $K$ (généralement $\mathbb{R}$ ou $\mathbb{C}$). Toutes les propriétés énoncées restent vraies pour n'importe quel corps.}
@@ -184,9 +188,7 @@ Soit $f : \mathbb{R}^2 \to \mathbb{R}^2$ défini par $f(x, y) = (y, x)$ et $g : 
     \item Les endomorphismes $f$ et $g$ commutent-ils ?
 \end{enumerate}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\newpage
 
 %==============================================================================
 \subsection{Déterminant et trace d'un endomorphisme}
@@ -306,9 +308,7 @@ $$A \sim \begin{pmatrix} 1 & 2 & 3 \\ 0 & -1 & -2 \\ 0 & 0 & 0 \end{pmatrix}$$
 Donc $\text{rg}(A) = 2$ (deux pivots non nuls).
 \end{Ex}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\newpage
 
 %==============================================================================
 \subsection{Relation entre rang et déterminant}
@@ -340,10 +340,7 @@ La sous-matrice $\begin{pmatrix} 1 & -4 & 2 \\ 0 & 6 & 3 \\ 0 & 0 & 5 \end{pmatr
 Donc $\text{rg}(A) \geq 3$. Comme $\det(A) = 0$ (à vérifier), on a $\text{rg}(A) = 3$.
 \end{Ex}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
-
+\newpage
 %==============================================================================
 \subsection{Équations de l'image}
 %==============================================================================
@@ -451,6 +448,8 @@ $$G = \text{Vect}((1, 0, 1, 0), (0, 1, 0, 1))$$
 \hrule
 \vspace{1em}
 
+\newpage
+
 \exo[2]{Projecteur associé à une somme directe}
 
 On considère $E = \mathbb{R}^3$ avec $F = \text{Vect}((1, 1, 0))$ et $G = \{(x, y, z) \mid x + y = 0\}$.
@@ -540,7 +539,5 @@ Soit $f \in \mathcal{L}(E)$ et $F$ un sous-espace vectoriel de $E$ stable par $f
     \item En déduire que $\det(f) = \det(f|_F) \cdot \det(f|_G)$ et $\text{tr}(f) = \text{tr}(f|_F) + \text{tr}(f|_G)$.
 \end{enumerate}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\end{document}
 

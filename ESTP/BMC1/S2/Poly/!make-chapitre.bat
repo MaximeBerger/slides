@@ -4,7 +4,7 @@ REM Modifier la variable CHAPITRE ci-dessous pour choisir le chapitre a compiler
 
 REM ============================================================
 REM CHAPITRE A COMPILER (modifier cette ligne) :
-set CHAPITRE=R-continuiteDerivabilite
+set CHAPITRE=K-PlusieursVariables
 
 REM ============================================================
 REM Chapitres disponibles:
