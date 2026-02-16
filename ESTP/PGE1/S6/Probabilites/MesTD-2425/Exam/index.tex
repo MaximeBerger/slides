@@ -1,0 +1,191 @@
+\documentclass[10pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\setboolean{showSolutions}{true}
+% \setboolean{showSolutions}{false}
+
+\title{Analyse Numérique : Examen}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{05/06/2025}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2024-2025 -- Semestre 6}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime BERGER \\
+        \hline 
+        \textbf{Matière} & Analyse Numérique  \\
+        \hline 
+        \textbf{Durée de l'examen} & 2h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé
+        \end{itemize} \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\section*{Exercice 1}
+On considère la fonction $f(x)=x-\frac{5}{x}$.
+\begin{enumerate}
+    \item Calculer les solutions de l'équation $f(x)=0$ puis tracer le graphe de $f$ et la tangente à $f$ en $x=5$.
+    \item Rappeler la méthode de Newton (ou Newton-Raphson) et calculer le premier point $x_1$ de la suite commencant en $x_0=5$.
+    \item La méthode donne $x_2 = 45/21 \mathop{\sim} 2.14$. On donne $\sqrt{5} \mathop{\sim} 2.24$. \newline 
+    Donner les expressions des erreurs relative et absolue commises lorsqu'on remplace $\sqrt{5}$ par $x_2$.
+
+    \vspace{1em}
+
+\noindent Le théorème de Taylor-Lagrange appliqué à la fonction $f$ au point $\sqrt{5}$ permet de montrer que 
+$$
+\frac{1}{2\sqrt{5}}\left|x_{n+1}-\sqrt{5}\right| \leq\left(\frac{|x_0-\sqrt{5}|}{2\sqrt{5}}\right)^{2^{n+1}}
+$$
+
+    \item Donner l'expression de $n$, le nombre d'étapes nécessaires pour approcher $\sqrt{5}$ à $10^{-20}$ près.
+    \item Cette méthode converge-t-elle pour toute valeur initiale $x_0$ ?
+\end{enumerate}
+
+\vspace{1em}
+\section*{Exercice 2}
+Le tableau suivant présente la concentration d'une molécule en fonction du temps :
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+\hline Temps (min) & 10 & 20 & 30 & 40 \\
+\hline concentration & 200 & 100 & 60 & 40 \\
+\hline
+\end{tabular}
+\end{center}
+\begin{enumerate}
+    \item Donner l'expression du polynôme de Lagrange $P_1$ de degré 2 passant par les 3 premiers points du tableau.
+    \item Donner l'expression du polynôme de Lagrange $P_2$ de degré 2 passant par les 3 derniers points du tableau.
+    \item Comment peut-on estimer la concentration à $t=15$ minutes avec $P_1$ ou $P_2$ ? Détailler. 
+    \item Est-il possible de prédire la concentration à $t=50$ minutes  avec $P_1$ ou $P_2$ ? Justifier votre réponse.
+    \item Décrivez deux méthodes pour estimer l'intégrale de la concentration entre $t=0$ et $t=40$ minutes, \newline 
+    la première sans utiliser les polynômes de Lagrange, la seconde en les utilisant.
+\end{enumerate}
+
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+        \textbf{05/06/2025} &\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+\vspace{1em}
+\section*{Exercice 3}
+On considère le système suivant :
+
+$$
+\begin{cases}x_1+2 x_2-2 x_3 & =7 \\ x_1+x_2+x_3 & =2 \\ 2 x_1+2 x_2+x_3 & =5\end{cases}
+$$
+
+\begin{enumerate}
+    \item Décomposer la matrice du système sous forme $L U$.
+    \item En déduire le déterminant de la matrice. 
+    \item Résoudre le système linéaire en résolvant deux systèmes triangulaires. 
+    \item Rappeler le principe de la méthode de Jacobi.
+
+\end{enumerate}
+
+
+\vspace{1em}
+\section*{Exercice 4}
+Pour toute fonction dérivable $f:[-1,1] \longrightarrow \mathbb{R}$, on pose
+
+$$
+I(f)=\int_{-1}^1 f(x) d x
+$$
+
+
+On va utiliser une méthode de quadrature de la forme
+
+$$
+J(f)=\alpha f(0)+\beta\big(f^{\prime}(1)-f^{\prime}(-1)\big)
+$$
+
+\begin{enumerate}
+    \item Déterminer $\alpha$ et $\beta$ tels que $I(P)=J(P)$ pour tout polynôme $P$ de degré inférieur ou égal à 2 .
+    \item Cette égalité restera t-elle vraie pour un polynôme de degré 3 ?
+    \item Calculer l'intégrale $\int_{-1}^1 3 x^3-1 d x$.
+    \item Donner une valeur approchée de $\int_{-1}^1 3 x^3-1 d x$ par $J(f)$ puis par la méthode de Newton-Cotes en divisant l'intervalle en 2 sous-intervalles : $[-1,0]$ et $[0,1]$.
+\end{enumerate}
+
+\vspace{1em}
+\section*{Exercice 5}
+On considère le problème de Cauchy suivant défini sur l'intervalle $[0,1]$: 
+    \[
+    \begin{cases}
+        y' = f(t,y) \\
+        y(0) = y_0
+    \end{cases}
+    \]
+    Pour obtenir une solution approchée, on discrétisera l'intervalle $[0,1]$ en $n$ sous-intervalles de longueur $h=1/n$.\newline 
+    On définit alors 
+    \[
+    t_i = i h \quad \text{et} \quad y_i = y(t_i)
+    \]
+    Une solution approchée sera donnée par la valeur de $y_i$ pour $i=0, \cdots, n$.
+    \begin{enumerate}
+        \item En intégrant l'équation différentielle sur l'intervalle $[t_i, t_{i+1}]$, déterminer une relation entre $y_{i}$ et $y_{i+1}$.
+        \item En utilisant la méthode des rectangles à droite, déterminer l'expression de $y_i$ à partir de $y_0$ et en prenant $f(t, y) = q y$, avec~$q$ une constante réelle.
+    \end{enumerate}
+\end{document}
