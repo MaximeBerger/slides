@@ -1,6 +1,7 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../PolyS2.tex]{subfiles}
 \begin{document}
-
+\setcounter{chapter}{2}
+\chapter{Intégrales multiples}
 L'intégrale double généralise la notion d'intégrale simple à des fonctions de deux variables. Elle permet de calculer des volumes, des aires, des masses, des centres d'inertie et bien d'autres grandeurs physiques.
 
 \textit{Dans tout ce chapitre, l'espace est muni d'un repère orthonormé $(O;\vec i,\vec j,\vec k)$.}
@@ -61,6 +62,7 @@ Quel est le volume $V$ du solide ci-dessous, obtenu par révolution autour de l'
 Déterminer le volume d'un cône circulaire de révolution, de hauteur $h$ et de génératrice d'équation (dans le plan $(yOz)$) $z = ay$ où $a$ est un nombre réel strictement positif donné.
 
 \vspace{1em}\hrule\vspace{1em}
+\newpage 
 
 \section{Intégrale double}
 
@@ -338,11 +340,14 @@ $$y = \rho \sin \theta$$
 \end{minipage}
 \end{center}
 
+\newpage
+
 \subsection{Formule d'intégration en polaires}
 
 \begin{Thm}\textbf{Changement de variables en coordonnées polaires}
 
-$$\colorbox{yellow}{$\displaystyle\iint_D f(x,y) \, dxdy = \iint_D f(\rho \cos \theta, \rho \sin \theta) \cdot \rho \, d\rho \, d\theta$}$$
+$$\iint_D f(x,y) \, dxdy = \iint_{\tilde{D}} f(\rho \cos \theta, \rho \sin \theta) \cdot \rho \, d\rho \, d\theta$$
+où $\tilde{D}$ est le domaine en coordonnées polaires correspondant à $D$.
 \end{Thm}
 
 \begin{Rmq}\textbf{Attention !}
@@ -424,6 +429,7 @@ On considère $J = \displaystyle\iint_D e^{-(x^2+y^2)} dxdy$ où $D$ est le quar
 \end{enumerate}
 
 \vspace{1em}\hrule\vspace{1em}
+\newpage 
 
 \section{Applications de l'intégrale double}
 
@@ -530,6 +536,8 @@ Calculer le moment d'inertie d'un carré homogène de côté $a$ et de masse $M$
 
 \vspace{1em}\hrule\vspace{1em}
 
+\newpage 
+
 \section{Changement de variables dans les intégrales doubles}
 
 \subsection{Matrice jacobienne et jacobien}
@@ -560,6 +568,8 @@ Pour $x = \rho \cos\theta$ et $y = \rho \sin\theta$ :
 $$J_\varphi(\rho,\theta) = \begin{pmatrix} \cos\theta & -\rho\sin\theta \\ \sin\theta & \rho\cos\theta \end{pmatrix}$$
 $$\text{Jac}_\varphi(\rho,\theta) = \rho\cos^2\theta + \rho\sin^2\theta = \rho$$
 \end{Prop}
+
+\newpage 
 
 \subsection{Coordonnées sphériques (dans $\mathbb{R}^3$)}
 
@@ -601,6 +611,8 @@ $$I = \int_0^1 \left(\int_{-u}^0 u \, dv\right) \frac{1}{2} \, du = \frac{1}{2} 
 \end{Ex}
 
 \vspace{1em}\hrule\vspace{1em}
+
+\newpage
 
 \section{Exercices récapitulatifs}
 
@@ -654,6 +666,8 @@ Soit $D = \{(x,y) \mid x^2+y^2-2x \leq 0\}$.
 
 \vspace{1em}\hrule\vspace{1em}
 
+\newpage 
+
 \exo[3]{\textbf{Changement de variables}}
 
 Soit $D = \{(x,y) \mid x < y < 2x, x < y^2 < 2x\}$.
@@ -694,6 +708,7 @@ Calculer $\displaystyle\iiint_D f(x,y,z) \, dxdydz$ pour :
 
 \vspace{1em}\hrule\vspace{1em}
 
+\newpage 
 \exo[3]{\textbf{Calcul d'une intégrale simple par intégrale double}}
 
 Soit $I = \displaystyle\int_0^1 \frac{\ln(1+x)}{1+x^2} \, dx$.

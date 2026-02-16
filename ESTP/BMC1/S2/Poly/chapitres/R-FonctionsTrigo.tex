@@ -1,5 +1,7 @@
-\documentclass[../main.tex]{subfiles}
+\documentclass[../PolyS2.tex]{subfiles}
 \begin{document}
+\setcounter{chapter}{3}
+\chapter{Fonctions trigonométriques}
 
 Ce chapitre reprend les propriétés fondamentales des fonctions circulaires (sinus, cosinus, tangente) et introduit leurs fonctions réciproques (arcsinus, arccosinus, arctangente). Ces fonctions sont essentielles en analyse, en géométrie et dans de nombreuses applications scientifiques.
 
@@ -162,6 +164,7 @@ Si $u$ est une fonction dérivable avec $|u| < 1$, alors :
 $$(\arcsin u)' = \frac{u'}{\sqrt{1-u^2}}$$
 \end{Prop}
 
+\newpage
 \subsection{Fonction arccosinus}
 
 \begin{Def}
@@ -198,6 +201,7 @@ $$\arccos x + \arcsin x = \frac{\pi}{2}$$
 $$\cos(\arcsin x) = \sin(\arccos x) = \sqrt{1-x^2}$$
 \end{Thm}
 
+\newpage
 \subsection{Fonction arctangente}
 
 \begin{Def}
@@ -270,6 +274,8 @@ Soit $f$ la fonction définie sur $\R$ par $f(x) = \cos(3x) \cos^3 x$.
     \item Vérifier que $f'(x)$ est du signe de $-\sin(4x)$ et en déduire le sens de variation de $f$ sur $I$.
 \end{enumerate}
 
+\medskip\hrule\medskip
+
 \exo[1]{\textbf{Fonction quotient trigonométrique}}
 
 On considère la fonction $f$ définie par :
@@ -280,6 +286,9 @@ $$f(x) = \frac{\sin x}{1 + \sin x}$$
     \item Étudier les variations de $f$ sur $\left]-\frac{\pi}{2}, \frac{\pi}{2}\right]$.
 \end{enumerate}
 
+\medskip\hrule\medskip
+
+
 \exo[2]{\textbf{Simplification d'arcsinus}}
 
 Soit $f$ la fonction définie par :
@@ -289,6 +298,9 @@ $$f(x) = \arcsin\left(2x\sqrt{1-x^2}\right)$$
     \item En posant $x = \sin t$, simplifier l'écriture de $f$.
 \end{enumerate}
 
+\medskip\hrule\medskip
+
+
 \exo[1]{\textbf{Relation fondamentale}}
 
 Montrer que pour tout $x \in [-1, 1]$ :
@@ -296,11 +308,17 @@ $$\arccos x + \arcsin x = \frac{\pi}{2}$$
 
 \textit{Indication : On pourra dériver la fonction $g(x) = \arccos x + \arcsin x$.}
 
+\medskip\hrule\medskip
+\newpage
+
 \exo[2]{\textbf{Étude complète d'une fonction arcsinus}}
 
 Soit $f$ la fonction qui à $x$ associe $\arcsin\left(\dfrac{1+x}{1-x}\right)$.
 
 Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
+
+\medskip\hrule\medskip
+
 
 \exo[2]{\textbf{Simplification d'arccosinus}}
 
@@ -308,11 +326,17 @@ Soit $f$ la fonction qui à $x$ associe $\arccos(1-2x^2)$.
 
 Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
 
+\medskip\hrule\medskip
+
+
 \exo[3]{\textbf{Fonction mixte}}
 
 Soit $f$ la fonction qui à $x$ associe $\arcsin x - \dfrac{x}{\sqrt{1-x^2}}$.
 
 Donner son domaine de définition, son domaine de dérivabilité et étudier ses variations.
+
+\medskip\hrule\medskip
+
 
 \exo[2]{\textbf{Calculs de dérivées}}
 
@@ -324,6 +348,9 @@ Calculer les dérivées des fonctions suivantes :
     \item $k(x) = \arctan\left(\frac{1-x}{1+x}\right)$
 \end{enumerate}
 
+\medskip\hrule\medskip
+
+
 \exo[2]{\textbf{Primitives trigonométriques}}
 
 Calculer les primitives suivantes :
@@ -333,6 +360,9 @@ Calculer les primitives suivantes :
     \item $\displaystyle\int \frac{x}{1+x^4} \dx$ \quad \textit{(Indication : poser $u = x^2$)}
     \item $\displaystyle\int \frac{1}{\sqrt{4-x^2}} \dx$ \quad \textit{(Indication : factoriser par 4)}
 \end{enumerate}
+
+\medskip\hrule\medskip
+
 
 \exo[3]{\textbf{Identité remarquable}}
 

@@ -1,5 +1,8 @@
+\documentclass[../PolyS4.tex]{subfiles}
+\begin{document}
 
-\thispagestyle{empty}
+\setcounter{chapter}{5}
+\chapter{Intégrales généralisées}
 
 \section{Définitions et premières propriétés}
 
@@ -64,6 +67,8 @@ $$\int_{\varepsilon}^{1} \frac{1}{\sqrt{t}} \, dt = \left[2\sqrt{t}\right]_{\var
 Quand $\varepsilon \to 0^{+}$, cette expression tend vers $2$. Donc l'intégrale converge et :
 $$\int_{0}^{1} \frac{1}{\sqrt{t}} \, dt = 2$$
 \end{Ex}
+
+\newpage
 
 \subsection{Intégrales sur un intervalle ouvert}
 
@@ -198,6 +203,8 @@ Pour étudier une intégrale généralisée :
 \item $\alpha > 1$
 \item $\alpha = 1$
 \end{enumerate}
+
+\newpage
 
 \item L'intégrale $\displaystyle\int_{0}^{+\infty} e^{-2t} \, dt$ vaut :
 \begin{enumerate}
@@ -335,6 +342,8 @@ Au voisinage de $0$ : $1 - \cos t \sim \dfrac{t^2}{2}$, donc $\dfrac{1}{1 - \cos
 Comme $\displaystyle\int_{0}^{1} \frac{dt}{t^2}$ diverge (exposant $2 \geq 1$), l'intégrale $\displaystyle\int_{0}^{1} \frac{dt}{1 - \cos t}$ diverge.
 \end{Ex}
 
+\newpage
+
 \subsection{Critères de Riemann}
 
 \begin{Thm}
@@ -386,6 +395,8 @@ L'intégrale converge.
 \item Si on trouve le bon $\alpha$, l'intégrale converge absolument.
 \end{itemize}
 \end{Meth}
+
+\newpage
 
 \subsubsection*{QCM}
 
@@ -477,11 +488,8 @@ Donc :
 $$\int_{0}^{+\infty} \frac{\ln t}{1 + t^2} \, dt = \int_{0}^{1} \frac{\ln t}{1 + t^2} \, dt - \int_{0}^{1} \frac{\ln t}{1 + t^2} \, dt = 0$$
 \end{Ex}
 
+\newpage
 \section{Exercices}
-
-\vspace{1em}
-\hrule
-\vspace{1em}
 
 \exo[1]{Convergence simple}
 
@@ -526,6 +534,8 @@ Les intégrales impropres suivantes sont-elles convergentes ?
 \vspace{1em}
 \hrule
 \vspace{1em}
+
+\newpage
 
 \exo[2]{Intégrales de Bertrand}
 
@@ -636,6 +646,8 @@ On admet que $\displaystyle\int_{0}^{+\infty} e^{-t^2} \, dt = \frac{\sqrt{\pi}}
 \hrule
 \vspace{1em}
 
+\newpage
+
 \exo[3]{Fonction Gamma}
 
 On définit la fonction Gamma par :
@@ -706,4 +718,7 @@ On pose $I = \displaystyle\int_{0}^{+\infty} \frac{\sin t}{t} \, dt$.
 
 \textit{Indication : utiliser l'identité $\sin^2 t = \frac{1 - \cos(2t)}{2}$ et une intégration par parties.}
 \end{enumerate}
+
+
+\end{document}
 

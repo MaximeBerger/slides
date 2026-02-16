@@ -1,3 +1,11 @@
+
+\documentclass[../PolyS4.tex]{subfiles}
+\begin{document}
+
+\setcounter{chapter}{1}
+\chapter{Statistiques}
+
+
 \section{Rappels en statistiques univariées}
 
 \begin{Def}\textbf{Population et caractère}\\
@@ -104,7 +112,7 @@ Série que l'on résume sous la forme :
 \end{Ex}
 
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Une série statistique discrète est définie par :
@@ -154,7 +162,7 @@ L'intervalle $[a_i; a_{i+1}[$ est une classe.
 \end{itemize}
 \end{Rmq}
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Dans le cas continu, les valeurs de la variable sont :
@@ -187,7 +195,9 @@ L'intervalle $[a_i; a_{i+1}[$ est une classe.
 
 La collecte massive de données permise par la révolution numérique de ces dernières années a rendu l'emploi des statistiques de plus en plus nécessaire. Comme le souligne R.A Fisher, un des objectifs des statistiques est d'introduire des quantités pertinentes pour l'analyse des données afin d'en extraire les informations pertinentes. Les plus élémentaires étant la moyenne, la variance, l'écart-type...
 
-\subsubsection{Paramètres de position}
+\newpage
+
+\textbf{Paramètres de position}
 
 \begin{Def}\textbf{Mode}\\
 
@@ -350,7 +360,16 @@ Soit $x$ une série statistique.
 \begin{itemize}
     \item Pour les notes d'Inès :
     \[
-    \sigma(x)^2 = \frac{1}{12} \left( 1 \times (8 - 12.5)^2 + 2 \times (10 - 12.5)^2 + 4 \times (12 - 12.5)^2 + 1 \times (14 - 12.5)^2 + 4 \times (15 - 12.5)^2 \right) \approx 5.08
+    \begin{aligned}
+        \sigma(x)^2 =\; & \frac{1}{12} \bigg(
+            1 \times (8 - 12.5)^2 \\
+        &\quad +\, 2 \times (10 - 12.5)^2 \\
+        &\quad +\, 4 \times (12 - 12.5)^2 \\
+        &\quad +\, 1 \times (14 - 12.5)^2 \\
+        &\quad +\, 4 \times (15 - 12.5)^2
+        \bigg)
+        \approx 5.08
+    \end{aligned}
     \]
     puis un écart-type de 2.25.
     
@@ -427,7 +446,7 @@ Soit $x = (x_i)_{1 \ldots N}$ une série statistique avec $\bar{x}$ et $\sigma(x
 \hrule
 \vspace{1em}
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Le mode d'une série statistique est :
@@ -471,7 +490,7 @@ plt.show()
 \end{verbatim}
 \end{Meth}
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Dans un histogramme, l'aire d'un rectangle est proportionnelle :
@@ -499,6 +518,8 @@ plt.show()
 \end{enumerate}
 \end{enumerate}
 
+
+\newpage
 
 \section{Statistiques bivariées}
 
@@ -557,7 +578,7 @@ La corrélation n'est pas causalité.
 \end{Rmq}
 
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item La covariance empirique mesure :
@@ -678,11 +699,9 @@ Soient $x, y$ deux séries statistiques avec $\sigma(x) \neq 0$. Soit $f$ la fon
 Retenons que lorsque le coefficient de corrélation linéaire est proche de $\pm 1$, la droite de régression approche bien le nuage de points. Dans ce cas, on peut modéliser la dépendance et faire des prédictions. De plus, si le coefficient de corrélation est positif, les données $x_i$ « auront tendance » à augmenter lorsque $y_i$ augmente et inversement si le coefficient est négatif.
 \end{Rmq}
 
+\newpage
 \section{Exercices}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
 
 \exo[1]{Quelques biais statistiques}
 
@@ -818,9 +837,7 @@ que $a\vec x+b\vec u$ soit le projeté orthogonal de $\vec y$ sur $\textrm{vect}
 \end{enumerate}
 \end{enumerate}
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\newpage
 
 \exo[2]{Prédiction}
 
@@ -878,3 +895,6 @@ Analysez la production de chaque élève en mettant en évidence ses réussites 
 \vspace{1em}
 \hrule
 \vspace{1em}
+
+\end{document}
+

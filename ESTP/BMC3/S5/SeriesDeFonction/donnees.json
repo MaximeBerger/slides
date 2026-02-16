@@ -170,6 +170,20 @@
           "description": "",
           "lien": "ExamP3/Blancs/1/corrige.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 3,
+          "titre": "Révisions",
+          "description": "",
+          "lien": "ExamP3/TD-Preparation/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 4,
+          "titre": "Révisions - Corrigé",
+          "description": "",
+          "lien": "ExamP3/TD-Preparation/corrige.pdf",
+          "cible": "_blank"
         }
       ]
     },

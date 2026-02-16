@@ -1,5 +1,8 @@
+\documentclass[../PolyS4.tex]{subfiles}
+\begin{document}
 
-\thispagestyle{empty}
+\setcounter{chapter}{3}
+\chapter{Variables aléatoires}
 
 
 \section{Premières notions}
@@ -139,9 +142,7 @@ Soit $X$ de densité $f_X(x) = 2x$ pour $x \in [0, 1]$ et $0$ sinon.
 
 Soit $X$ de loi continue uniforme sur $[0, 1]$ et $Y = -\theta \ln(1 - X)$ avec $\theta > 0$. Déterminer la fonction de répartition et la densité de $Y$.
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\newpage 
 
 \subsection{ Moments}
 
@@ -227,7 +228,7 @@ Soit la v.a. $X$ de densité $f(x) = 3x^2$ si $x \in [0, 1]$ et $0$ sinon.
 \hrule
 \vspace{1em}
 
-\subsubsection*{QCM}
+\textbf*{QCM}
 
 \begin{enumerate}
 \item Une variable aléatoire réelle est dite discrète si :
@@ -361,7 +362,7 @@ $$\displaystyle {\begin{aligned}\varphi _{X}(t)&=\mathbb {E} \left[\operatorname
 \end{itemize}
 \end{Def}
 
-\subsubsection*{QCM}
+\textbf*{QCM}
 
 \begin{enumerate}
 \item La fonction génératrice des moments d'une v.a. $X$ est :
@@ -392,7 +393,7 @@ $$\displaystyle {\begin{aligned}\varphi _{X}(t)&=\mathbb {E} \left[\operatorname
 
 \section{Lois usuelles}
 \subsection{Les lois discrètes}
-\subsubsection{ La loi uniforme discrète}
+\textbf{ La loi uniforme discrète}
 L'ensemble des valeurs possibles est $\{1, 2, 3, \dots , r\}$, $r$ étant un paramètre
 de la loi.\\
  Uniforme signifie que chaque valeur reçoit la même probabilité $\dfrac{1}{r}$.\\
@@ -401,7 +402,7 @@ de la loi.\\
 Pour une v.a. $X$ qui suit cette loi, on a :
 $$\mathbb{E}(X) =\dfrac{r + 1}{2} \qquad 
 V (X) =\dfrac{1}{12}(r^2 - 1) .$$
-\subsubsection{ La loi de Bernoulli et la loi binomiale $\mathcal{B}(n,p)$}
+\textbf{ La loi de Bernoulli et la loi binomiale $\mathcal{B}(n,p)$}
 %\begin{multicols}{2}
 %\begin{minipage}[t]{0.48\linewidth}%
 % \begin{figure}
@@ -465,7 +466,7 @@ Soit$ X \sim \mathcal{ B}(n, p)$, alors :\\
 
 
 
-\subsubsection{ Les lois g\' eom\' etrique $\mathcal{G}(p)$ et binomiale n\' egative $\mathcal{BN}(r,p)$}
+\textbf{ Les lois g\' eom\' etrique $\mathcal{G}(p)$ et binomiale n\' egative $\mathcal{BN}(r,p)$}
 
 \begin{Def}\textbf{Loi géométrique}\\
 Soit un processus de Bernoulli de paramètre p. La loi géométrique $\mathcal{G}(p)$, ou loi de Pascal, est la loi de la v.a. $X$ «nombre d'échecs avant de parvenir au premier succès». L'ensemble des valeurs possibles est $\mathbb{N}$ et la fonction de probabilité est :
@@ -493,7 +494,9 @@ $$V (X) =\dfrac{r(1 - p)}{p^2}$$
 $$\phi_X(t) = \left[
 \dfrac{p}{1- (1 -p)e^t} \right]^r \text{(au voisinage de $0$)} .$$
 \end{Prop}
-\subsubsection{Loi de Poisson}
+
+\newpage
+\textbf{Loi de Poisson}
 
 
 % \begin{figure}
@@ -534,7 +537,8 @@ $$p(k) = \dfrac{e^{-\lambda}\lambda^k} {k!} , k \in N.$$
 \end{Def}
 
 
-\subsubsection*{QCM}
+\newpage
+\textbf{QCM}
 
 \begin{enumerate}
 \item Une loi de Bernoulli $\mathcal B(p)$ prend ses valeurs dans :
@@ -564,7 +568,7 @@ $$p(k) = \dfrac{e^{-\lambda}\lambda^k} {k!} , k \in N.$$
 
 
 \subsection{Les lois continues}
-\subsubsection{ La loi continue uniforme $\mathcal{U}_{[a,b]}$}
+\textbf{ La loi continue uniforme $\mathcal{U}_{[a,b]}$}
 
 \begin{Def}\textbf{Loi uniforme}\\
 On dit que $X$ suit une loi uniforme sur l'intervalle fini [a, b] si sa densité
@@ -604,7 +608,7 @@ Soit $X \sim \mathcal{U}_{[0, 1]}$, montrer que $Y = (b - a)X + a$ suit une loi 
 \hrule
 \vspace{1em}
 
-\subsubsection{La loi exponentielle $\mathcal{E}(\lambda)$}
+\textbf{La loi exponentielle $\mathcal{E}(\lambda)$}
 
 \begin{Def}\textbf{Loi exponentielle}\\
 La loi exponentielle correspond à la variable aléatoire $X$ du temps s'écoulant entre deux occurrences successives lors d'un processus de Poisson. La probabilité qu'il n'y ait aucune occurrence dans un intervalle de temps de longueur t est égale à $p_0(t) = e^{-\lambda t}$, d'où $\mathbb{P}(X > t) = e^{ -\lambda t}$.
@@ -649,7 +653,7 @@ $$\mathbb{P}(X >t + h|X >t) =
 e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} ,$$
 qui ne dépend pas de $t$.\\
 
-\subsubsection{ La loi de Gauss ou loi normale $\mathcal{N}(\mu,\sigma^2)$}
+\textbf{ La loi de Gauss ou loi normale $\mathcal{N}(\mu,\sigma^2)$}
 
 % \begin{figure}
 %   \caption{Carl Friedrich Gauss}
@@ -671,7 +675,7 @@ Si $Z \sim \mathcal{N}(0 ; 1)$ alors $X = \mu+\sigma Z \sim \mathcal{N}(\mu, \si
 \end{Prop}
 
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Une densité de probabilité $f$ vérifie :
@@ -681,6 +685,8 @@ Si $Z \sim \mathcal{N}(0 ; 1)$ alors $X = \mu+\sigma Z \sim \mathcal{N}(\mu, \si
 \item $f$ est croissante
 \item $f$ est continue
 \end{enumerate}
+
+\newpage 
 
 \item Si $X\sim\mathcal U[a,b]$, alors $\mathbb E(X)$ vaut :
 \begin{enumerate}
@@ -714,7 +720,7 @@ On appelle échantillon aléatoire de taille $n$ (en bref n-échantillon) une su
 toute v.a. $T_n = h(X_1,X_2, \dots,X_n)$, fonction de $X_1,X_2, \dots,X_n$.
 \end{Def}
 
-\subsubsection{ La loi du Khi-deux $\chi^2(n)$}
+\textbf{ La loi du Khi-deux $\chi^2(n)$}
 
 \begin{Def} {\textbf{Khi-deux}}\\
  Soit $Z_1, Z_2, \dots,Z_\nu$ une suite de variables aléatoires i.i.d. de loi $\mathcal{N}(0 ; 1)$. Alors la v.a.  $$\sum_{i=1}^\nu Z_i^2$$
@@ -730,7 +736,7 @@ de liberté $\nu$, sa variance est $2\nu$.
 \end{Prop}
 
 
-\subsubsection{ La loi de Student}
+\textbf{ La loi de Student}
 
 % \begin{figure}
 %   \caption{William Sealy Gosset}
@@ -754,6 +760,8 @@ Soit $T \sim t(\nu)$ alors $E(T) = 0$ si $\nu \leq 2$ et $V (T) =\dfrac{\nu}{\nu
 
 Le fait que la moyenne est nulle est évident puisque la densité est une fonction paire. On notera que la variance vaut 3 dès qu'elle est définie $(\nu = 3)$ et tend vers $1$ quand $\nu \to +\infty$. Pour être plus précis, l'allure de la loi de Student est similaire à celle d'une loi de Gauss centrée-réduite avec un étalement un peu plus fort, cette différence s'estompant rapidement lorsque $\nu$ s'accroît et devenant négligeable pour $\nu > 200$. Ceci s'explique, en fait, par sa définition même mettant en jeu une v.a. $\mathcal{N}(0 ; 1)$ au numérateur et une v.a. qui converge en probabilité vers 1, au dénominateur.
 \end{Rmq}
+
+\newpage 
 
 \section{Ind\' ependance}
 
@@ -798,7 +806,7 @@ $$f_{X,Y} (x, y) = f_X(x) f_Y (y) .$$
 
 \end{Prop}
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item Deux v.a. $X$ et $Y$ sont indépendantes si :
@@ -852,7 +860,7 @@ $$cov(X + Y,Z) = cov(X,Z) + cov(Y,Z)$$
 \end{Prop}
 
 
-\subsubsection*{QCM}
+\textbf{QCM}
 
 \begin{enumerate}
 \item La covariance de $X$ et $Y$ vaut :
@@ -892,9 +900,7 @@ $$cov(X + Y,Z) = cov(X,Z) + cov(Y,Z)$$
 Soit $X$ une variable aléatoire suivant une loi uniforme sur $[a,b]$, avec $0<a<b$.
 Donner la fonction de répartition, la densité, l'espérance et la variance de $Y=X^2$.
 
-\vspace{1em}
-\hrule
-\vspace{1em}
+\newpage
 
 \exo[2]{Loi uniforme, moyenne et écart-type}
 
@@ -942,10 +948,7 @@ Quelle est la probabilité que Clément et Amélie entrent ensemble dans la sall
 
 Soit $U$ une variable aléatoire suivant une loi uniforme sur $[-\pi/2,\pi/2]$. On pose $X=\tan U$. Déterminer la loi de $X$, sa densité.
 
-\vspace{1em}
-\hrule
-\vspace{1em}
-
+\newpage
 \exo[2]{Un problème de train!}
 
 La distance en train entre Paris et Clermont-Ferrand fait environ 400km. Les motrices tombent souvent en panne sur ce trajet. On fait l'hypothèse que cette panne peut se produire de façon uniforme sur tout le trajet. Lorsqu'un train tombe en panne, on doit faire venir une locomotive de rechange. On suppose que la SNCF dispose pour cette ligne de deux locomotives de rechange. Bien sûr, c'est toujours la locomotive la plus proche qui se rend au lieu de la panne.
@@ -987,10 +990,7 @@ Quelle est la probabilité qu'il ne soit pas désintégré avant 76s sachant qu'
 
 Soit $U$ une variable aléatoire de loi uniforme sur $[0,1]$. Démontrer que la variable aléatoire $X=-\ln U$ suit une loi exponentielle dont on précisera le paramètre.
 
-\vspace{1em}
-\hrule
-\vspace{1em}
-
+\newpage
 \exo[2]{Pannes}
 
 Le fonctionnement d'une machine est perturbé par des pannes. On considère les variables aléatoires $X_1, X_2$ et $X_3$ définies par : $X_1$ est le temps, exprimé en heures, écoulé entre la mise en route de la machine et la première panne. $X_2$ (resp. $X_3$), est le temps, en heures, écoulé entre la remise en route de la machine après la première (resp. la deuxième) panne et la panne suivante. On suppose que les variables aléatoires $X_1, X_2$ et $X_3$ sont indépendantes et suivent la même loi exponentielle de paramètre $1/2$.
@@ -1027,6 +1027,7 @@ de vie (en heures) sont des variables aléatoires $X_1$ et $X_2$ qui suivent une
 
 % Exercice 2074
 
+\newpage 
 
 
 \exo[3]{\textbf{Variable aléatoire sans mémoire}}
@@ -1087,6 +1088,7 @@ dépasse-t-elle 95\% ?\\
 % Exercice 2319
 
 
+\newpage
 
 \exo[2]{\textbf{L'entreprise d'autocars}}
 
@@ -1140,7 +1142,7 @@ La taille d'un homme âgé de 25 ans suit une loi normale de moyenne 175cm et d'
 
 % Exercice 2071
 
-
+\newpage
 
 \exo[1]{\textbf{Lecture de la table de la loi normale}}
 
@@ -1201,7 +1203,7 @@ On a observé que la longueur d'un pied adulte, en cm, suivait une loi normale $
 
 % Exercice 2172
 
-
+\newpage
 
 \exo[2]{\textbf{Usinage d'un lingot}}
 
@@ -1254,7 +1256,10 @@ ait surpoids, quand un groupe de 9 personnes monte dans cet ascenseur.\\
 
 Pour $x>0$, on pose $F(x)=\int_{x}^{+\infty}e^{-t^2/2}dt$ et $G(x)=\int_{x}^{+\infty}\frac1{t^2}e^{-t^2/2}dt$.
 \begin{enumerate}
- \item Démontrer que $G(x)=_{+\infty}o\big(F(x))$.
+ \item Démontrer que $G(x)=_{+\infty}o\big(F(x)\big)$.
 \item Soit $X$ suivant une loi normale $\mathcal N(0,1)$. Donner un équivalent de $P(X>x)$ lorsque $x$
 tend vers $+\infty$.\\
 \end{enumerate}
+
+\end{document}
+
