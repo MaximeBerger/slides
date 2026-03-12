@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[obsidian]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>site-lib/media/favicon.png</url><title>obsidian</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 12 Mar 2026 15:13:03 GMT</lastBuildDate><atom:link href="site-lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 12 Mar 2026 15:13:00 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[TP Matrices de population]]></title><description><![CDATA[Une matrice est représentée en Python par une liste de listes (ou : un tableau de tableaux), chaque sous-liste correspondant à une ligne de la matrice.Par exemple, la matriceest représentée par :M = [[1, 0, 3], [2, 2, 1]]
+Ainsi, la première sous-liste [1, 0, 3] correspond à la première ligne de la matrice et [2, 2, 1] correspond à la deuxième ligne.On accède à l'élément sur la ligne i, colonne j de la matrice avec M[i][j]. Par exemple :M[0][2] # élément ligne 0, colonne 2
+# Résultat : 3 Remarque : Les lignes et colonnes commencent à (au lieu de en mathématiques).
+On peut modifier l'élément ligne i, colonne j avec M[i][j] = .... Par exemple :M[1][0] = 42
+M # M a bien été modifiée
+# Résultat : [[1, 0, 3], [42, 2, 1]]
+Le nombre de lignes de la matrice est le nombre de sous-listes, obtenu avec len(M) :len(M) # nombre de lignes de M
+# Résultat : 2
+Le nombre de colonnes est égal au nombre d'éléments sur une ligne, obtenu avec len(M[0]) :len(M[0]) # la 1ère ligne contient 3 éléments, donc il y a 3 colonnes
+# Résultat : 3
+Pour créer une matrice de taille remplie de , on peut :
+Utiliser np.zeros((n, p)) du module numpy (import numpy as np).
+Définir une liste contenant listes de zéros :
+M = []
+for i in range(3): L = [] # la ième ligne for j in range(5): L.append(0) M.append(L)
+M # matrice 3x5 remplie de 0
+Pour parcourir une matrice, on utilise deux indices (un pour la ligne, un pour la colonne), dans deux boucles for. Par exemple, pour mettre des partout dans :for i in range(3): # i est le numéro de ligne for j in range(5): # j est le numéro de colonne M[i][j] = 2 Pensez à tester vos fonctions avec de petites matrices.
+Exercice 1Écrire une fonction somme(M) renvoyant la somme des éléments d'une matrice M.Exercice 2Écrire une fonction nulle(M) déterminant si une matrice est nulle (ne contient que des ). nulle(M) doit renvoyer True si M est nulle, False sinon.Exercice 3Écrire une fonction identite(n) renvoyant la matrice identité de taille .Exercice 4Écrire une fonction transpose(M) renvoyant la transposée d'une matrice M.Exercice 5Écrire une fonction produit(A, B) renvoyant le produit matriciel de A et B.On rappelle que où , où est le nombre de colonnes de (qui doit être égal au nombre de lignes de ). On supposera et compatibles.On pourra compléter le code suivant :]]></description><link>tp-matrices-de-population.html</link><guid isPermaLink="false">Maths/Bachelor/S4/TP Matrices de population.md</guid><pubDate>Thu, 12 Mar 2026 15:11:50 GMT</pubDate></item></channel></rss>
