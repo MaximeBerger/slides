@@ -1,0 +1,168 @@
+\documentclass[a4paper,11pt]{article}
+
+%	Tous les packages pour francisation compl\' ete
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+
+%\usepackage{auto-pst-pdf}
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{D\'efinition}
+\newtheorem{theoreme}{Th\'eor\`eme}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}} %vecteur
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+\newcommand{\encad}[1]{\begin{center}%
+\fcolorbox{black}{gray!20}{\begin{minipage}[t]{0.8\linewidth}%
+#1\end{minipage}}\end{center}}
+
+
+\pagestyle{fancy}
+\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{ESTP / Bachelor 2 / \the\year}
+\fancyhead[R]{Composition de math\'ematiques}
+\renewcommand\footrulewidth{1pt}
+%\fancyfoot[L]{Math\' ematiques : les polyn\' emes}
+%\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+\begin{center}\bf {\Large\underline{Composition de MATH\'EMATIQUES  (3h)}}\end{center}
+%\begin{center}\bf {{\small Rendre le sujet avec votre copie si le graphe de l'exercice 4 pr\' esente la courbe de la fonction $f$.}}\end{center}
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 1 : Intégrale } \bf{(5 points)}}
+\medskip
+
+
+
+\begin{enumerate}
+    \item Montrer que l'intégrale $\displaystyle \int_{2}^{+\infty} \frac{4x}{x^4 - 1} \, dx$ converge. (2 points)
+    \item Vérifier que pour tout $x \in \mathbb{R} \setminus \{-1, 1\}$ :
+    \[ \frac{4x}{x^4 - 1} = -\frac{2x}{x^2 + 1} + \frac{1}{x - 1} + \frac{1}{x + 1} \] (1 point)
+    \item En déduire la valeur de l'intégrale. (2 points)
+\end{enumerate}
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+\underline {\ding{110}\, \bf{Exercice 2  : Diagonalisation (12 points)}}
+\medskip
+
+
+\noindent On considère l'endomorphisme $f$ de $\mathbb{R}^3$ défini par :
+\[ f(x, y, z) = (3x - z, 2x + 4y + 2z, -x + 3z) \]
+
+\begin{enumerate}
+    \item Déterminer la matrice $A = \mathrm{Mat}_{\mathcal{B}}(f)$ de $f$ dans la base canonique $\mathcal{B}$ de $\mathbb{R}^3$. (1 point)
+    \item Déterminer le polynôme caractéristique de $f$. En déduire les valeurs propres de $f$.(3 points)
+    \item Déterminer une base pour chaque espace propre de $f$. L'endomorphisme $f$ est-il diagonalisable ? (4 points)
+    \item Trouver une matrice $P$ telle que $A = PDP^{-1}$, où $D$ est une matrice diagonale que l'on explicitera. (2 points)
+    \item Déterminer la matrice $A^n$ pour tout $n \geq 1$.(2 points)
+\end{enumerate}
+
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\underline {\ding{110}\, \bf{Exercice 3 : Dénombrement (8 points)}}\\
+\medskip
+
+
+Une entreprise du bâtiment TOUTBETON dispose de $10$ ouvriers spécialisés :
+\begin{itemize}
+    \item $4$ Maçons (numérotés de $1$ à $4$).
+    \item $6$ Électriciens (numérotés de $5$ à $10$).
+\end{itemize}
+
+\begin{enumerate}
+\item Pour créer un nouveau nom de dossier, la direction s'amuse à la nommer à partir d'un anagramme du nom de la société, soit ''TOUTBETON''. Combien de dossiers (d'anagrammes) existe-t-il? (2 points)
+    \item 
+On choisit simultanément $5$ ouvriers parmi les $10$ pour former une équipe.
+\begin{enumerate}
+    \item Combien y a-t-il de compositions d'équipe possibles ? (1 point)
+    \item Combien d'équipes sont composées de $2$ maçons et $3$ électriciens ?(1 point)
+    \item  Combien d'équipes comportent au moins un maçon ?(1 point)
+\end{enumerate}
+
+\item
+On sélectionne $5$ ouvriers pour intervenir successivement sur un poste de travail (le tirage est successif et sans remise). L'ordre d'intervention est ici important.
+\begin{enumerate}
+    \item Combien y a-t-il de séquences d'intervention possibles ?(1 point)
+    \item Combien de séquences comportent exactement $2$ maçons et $3$ électriciens ?(1 point)
+    \item Combien de séquences comportent au moins un maçon ?(1 point)
+\end{enumerate}
+
+
+\end{enumerate}
+
+%
+%
+%{\color{blue}\underline{\bf SOLUTION :}
+%
+
+%}
+
+
+\end{document}

@@ -1,0 +1,199 @@
+\input{configTD}
+\usepackage{listings}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    columns=fullflexible,
+    keepspaces=true
+}
+
+\title{Analyse Numérique TP2 - Systèmes linéaires, conditionnement et comparaison de méthodes}
+
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{Objectifs}
+\begin{itemize}
+    \item Comparer une méthode directe et une méthode itérative pour résoudre un système linéaire.
+    \item Mesurer le temps de calcul sur des matrices de tailles différentes.
+    \item Observer l'effet d'une perturbation du second membre.
+    \item Relier une matrice tridiagonale à une discrétisation de type chaleur ou barre élastique.
+\end{itemize}
+
+\section*{Partie 1 - Une matrice issue d'une discrétisation}
+On considere pour $n\geq 2$ la matrice tridiagonale
+\[
+A_n=
+\begin{pmatrix}
+2 & -1 & 0 & \cdots & 0\\
+-1 & 2 & -1 & \ddots & \vdots\\
+0 & -1 & 2 & \ddots & 0\\
+\vdots & \ddots & \ddots & \ddots & -1\\
+0 & \cdots & 0 & -1 & 2
+\end{pmatrix}.
+\]
+Cette matrice apparaît dans plusieurs problèmes de différences finies ou d'éléments finis 1D.
+
+\begin{enumerate}
+    \item Écrire une fonction Python qui construit $A_n$.
+
+    \item Construire le second membre
+    \[
+    b_n=(1,\dots,1)^T.
+    \]
+
+    \item Vérifier pour quelques tailles que $A_n$ est inversible.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import time
+
+def build_matrix(n):
+    A = 2 * np.eye(n)
+    A += -1 * np.eye(n, k=1)
+    A += -1 * np.eye(n, k=-1)
+    return A
+
+def build_rhs(n):
+    return np.ones(n)
+\end{lstlisting}
+
+\section*{Partie 2 - Méthode directe}
+On utilisera d'abord la résolution directe de \texttt{numpy}.
+
+\begin{enumerate}
+    \item Résoudre $A_nx=b_n$ pour $n=10$, $100$ et $500$.
+
+    \item Mesurer le temps de calcul avec \texttt{time.perf\_counter()}.
+
+    \item Tracer le temps de calcul en fonction de $n$.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+def solve_direct(A, b):
+    return np.linalg.solve(A, b)
+
+sizes = [10, 100, 500]
+times_direct = []
+
+for n in sizes:
+    A = build_matrix(n)
+    b = build_rhs(n)
+    t0 = time.perf_counter()
+    x = solve_direct(A, b)
+    t1 = time.perf_counter()
+    times_direct.append(t1 - t0)
+    print(n, times_direct[-1], np.linalg.norm(A @ x - b))
+\end{lstlisting}
+
+\section*{Partie 3 - Méthode de Jacobi}
+On implémente maintenant la méthode itérative de Jacobi.
+
+\begin{enumerate}
+    \item Compléter la fonction suivante.
+
+    \item Pour $n=10$, faire afficher le nombre d'itérations nécessaires pour atteindre
+    \[
+    \|x^{(k+1)}-x^{(k)}\|_{\infty} < 10^{-8}.
+    \]
+
+    \item Recommencer pour $n=100$ puis $n=500$.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+def jacobi(A, b, x0=None, tol=1e-8, nmax=20000):
+    n = len(b)
+    if x0 is None:
+        x = np.zeros(n)
+    else:
+        x = x0.copy()
+
+    D = np.diag(A)
+    R = A - np.diag(D)
+
+    for k in range(nmax):
+        x_new = (b - R @ x) / D
+        if np.linalg.norm(x_new - x, ord=np.inf) < tol:
+            return x_new, k + 1
+        x = x_new
+
+    return x, nmax
+\end{lstlisting}
+
+\section*{Partie 4 - Comparaison directe / itérative}
+\begin{enumerate}
+    \item Comparer les temps de calcul des deux approches.
+
+    \item Comparer les résidus
+    \[
+    \|Ax-b\|_{\infty}
+    \]
+    obtenus par les deux méthodes.
+
+    \item Discuter l'intérêt pratique d'une méthode itérative lorsque la matrice est grande et creuse.
+\end{enumerate}
+
+\section*{Partie 5 - Perturbation du second membre}
+On modifie maintenant le second membre en posant
+\[
+\tilde b_n=b_n+\varepsilon e_1
+\]
+ou $e_1=(1,0,\dots,0)^T$ et $\varepsilon=10^{-3}$.
+
+\begin{enumerate}
+    \item Résoudre $A_n\tilde x=\tilde b_n$.
+
+    \item Comparer $x$ et $\tilde x$ avec la norme infinie.
+
+    \item Calculer le rapport
+    \[
+    \frac{\|\tilde x-x\|_{\infty}}{\|x\|_{\infty}}
+    \qquad \text{et} \qquad
+    \frac{\|\tilde b-b\|_{\infty}}{\|b\|_{\infty}}.
+    \]
+
+    \item Interpréter le résultat.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+def perturb_rhs(b, eps=1e-3):
+    bp = b.copy()
+    bp[0] += eps
+    return bp
+\end{lstlisting}
+
+\section*{Partie 6 - Nombre de condition}
+\begin{enumerate}
+    \item Calculer \texttt{np.linalg.cond(A)} pour plusieurs tailles.
+
+    \item Commenter l'évolution du conditionnement avec la taille.
+
+    \item Relier cette observation à la sensibilité des calculs précédents.
+\end{enumerate}
+
+\section*{Partie 7 - Bonus applicatif}
+Choisir l'une des deux ouvertures suivantes.
+
+\subsection*{Option A - PageRank}
+Construire une petite matrice de transition stochastique associée à un graphe de $4$ pages, puis approcher sa distribution stationnaire par itérations.
+
+\subsection*{Option B - Element fini 1D}
+Interpréter $A_n$ comme matrice de rigidité d'une barre 1D et commenter le lien entre maillage fin, taille de la matrice et coût numérique.
+
+\section*{Compte rendu attendu}
+\begin{itemize}
+    \item Les fonctions Python sont exécutées.
+    \item Les temps de calcul sont comparés sur plusieurs tailles.
+    \item L'effet de la perturbation est discuté.
+    \item Le rôle du conditionnement est expliqué en quelques lignes.
+    \item Le bonus est traité au moins partiellement.
+\end{itemize}
+
+\end{document}

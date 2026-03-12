@@ -1,30 +1,52 @@
-\input{../../../../Config/configPoly}
-
+%\input{../../../../Config/configPoly}
+\input{configPolyLocal}
 \lhead{PGE1 Dijon - S6}
+\newcommand{\Var}{\operatorname{Var}}
 
 \begin{document}
 
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+{\Huge\bfseries Probabilités et statistiques\par}
+\vspace{0.5cm}
+{\Large PGE1 - Semestre 6\par}
+\vspace{0.8cm}
+{\Large Année 2025-2026\par}
+\vspace{1.5cm}
+\vspace{0.5cm}
+\vspace{2cm}
+\begin{tabular}{rl}
+Enseignant : & Maxime Berger \\
+Formation : & PGE1 Dijon \\
+Volume : & 12 h de CM et 5 TD \\
+\end{tabular}
+\vfill
+\begin{minipage}{0.85\textwidth}
+\centering
+Ce polycopié rassemble les définitions, les outils, les méthodes de calcul et les exemples utiles pour le module. 
+Les TD sont indispensables pour la préparation de l'examen.
+\end{minipage}
+\vfill
+{\large ESTP\par}
+\end{center}
+\end{titlepage}
 
-
-\includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{images/front.pdf}
-
-\pagenumbering{roman}  % Numérotation romaine pour la table des matières
+\pagenumbering{roman}
 \tableofcontents
 
 \newpage
-\pagenumbering{arabic}  % Recommence à 1 en chiffres arabes
+\pagenumbering{arabic}
 
 \chapter{Introduction}
 \input{intro}
 
-\chapter{Espace probabilisé}
+\chapter{Modéliser l'aléa en ingénierie}
 \input{chapitres/1-EspaceProbabilise}
 
-\chapter{Probabilités conditionnelles}
+\chapter{Conditionner l'information et décider}
 \input{chapitres/2-ProbabilitesConditionnelles}
-
-\chapter{Indépendance}
-\input{chapitres/3-Independance}
 
 \chapter{Variables aléatoires discrètes}
 \input{chapitres/4-VariablesAleatoiresDiscretes}
@@ -32,15 +54,17 @@
 \chapter{Variables aléatoires continues}
 \input{chapitres/5-VariablesAleatoiresContinues}
 
-\chapter{Annales 2024-2025}
-Voici les sujets qui ont été posés lors des contrôles continus de l'année 2024-2025.
-% \input{annales/2024}
+\chapter{Échantillonnage et théorème central limite}
+\input{chapitres/6-EchantillonnageEtTCL}
 
+\chapter{Estimation et intervalles de confiance}
+\input{chapitres/7-EstimationEtIC}
 
-% Liens vers les autres projets : 
-% S1 : https://fr.overleaf.com/4534764743nhkfvmwwrbpy#55af2b
-% S2 : https://fr.overleaf.com/4128697822vdfqstywdjmx#4c6293
-% S3 : https://fr.overleaf.com/4578387271pywhzmryfgtw#642977
-% S4 : https://fr.overleaf.com/1782189891wyfhvccrfxsm#b018ec
-% S5 : https://fr.overleaf.com/2583585623qjvnxpgbsrdc#d6d95a
+\chapter{Estimateurs et tests d'hypothèses}
+\input{chapitres/8-EstimateursEtTests}
+
+\appendix
+\chapter{Fiches méthode}
+\input{chapitres/8-FichesMethode}
+
 \end{document}

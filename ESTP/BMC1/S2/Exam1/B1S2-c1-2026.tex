@@ -1,0 +1,215 @@
+\documentclass[a4paper,12pt]{article}
+
+%	Tous les packages pour francisation compl\' ete
+%\usepackage[applemac]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+\usepackage{multicol}
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists, enumitem}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+%\usepackage{pst-all,pstricks,pstricks-add,pst-plot,pst-eucl,pst-text,pst-tree,pst-math,pst-eps}
+
+%\usepackage{auto-pst-pdf}
+\makeatletter
+\let\Test@pr@shipout\pr@shipout%% save the original definition
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout%% restore it 
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{D\'efinition}
+\newtheorem{theoreme}{Th\'eor\`eme}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}} %vecteur
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+\newcommand{\encad}[1]{\begin{center}%
+\fcolorbox{black}{gray!20}{\begin{minipage}[t]{0.8\linewidth}%
+#1\end{minipage}}\end{center}}
+
+
+\pagestyle{fancy}
+\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{ESTP / Bachelor 1 / \the\year}
+\fancyhead[R]{Composition de math\'ematiques}
+\renewcommand\footrulewidth{1pt}
+%\fancyfoot[L]{Math\' ematiques : les polyn\' emes}
+%\fancyfoot[R]{\thepage}
+
+
+\begin{document}
+
+\vspace{2em}
+
+\begin{center}\bf {\Large\underline{Composition de MATH\'EMATIQUES  (3h) 25 points}}\end{center}
+%\begin{center}\bf {{\small Rendre le sujet avec votre copie si le graphe de l'exercice 4 pr\' esente la courbe de la fonction $f$.}}\end{center}
+\hfill\break
+
+%%%%%%%%%%
+%\includegraphics[trim = gauche bas droit haut, clip, width=3cm]
+%%%%%%%%%%
+\vspace{2em}
+\underline {\ding{110}\, \bf{Exercice 1}}\hfill  6 points\\
+\vspace{1em}
+%\medskip
+
+On considère la fonction $f$ définie par $f (x) = 2 \, \text{arcsin} x + \text{arcsin}\,(1 - 2x^2)$.
+\begin{enumerate}
+    \item Déterminer les domaines de définition, de continuité et de dérivabilité de $f$ .
+\item Calculer la dérivée $f $' de $f$, lorsqu’elle existe.
+\item En déduire une expression simplifiée de $f$.
+
+\end{enumerate}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\vspace{2em}
+\underline {\ding{110}\, \bf{Exercice 2}} \hfill 4 points\\
+\vspace{1em}
+
+
+Donner toutes les solutions des équations différentielles suivantes : 
+$$
+y' -3y = xe^{-x}, \qquad \qquad  y' + y = cos(2x)\,.
+$$
+%{\color{blue}\underline{\bf SOLUTION :}
+%
+%}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+\vspace{2em}
+\underline {\ding{110}\, \bf{Exercice 3}} \hfill 5 points\\
+\vspace{1em}
+
+\begin{enumerate}
+    \item Soit $f$ la fonction définie en posant : $f (x) = \dfrac{1}{x (x^2 - 1)} .$
+\begin{enumerate}
+    \item Quel est l'ensemble de définition de $f$ ? Dans la suite, nous noterons $D$ cet ensemble.
+\item Déterminer la décomposition en éléments simples de $f$ , c'est-à-dire déterminer trois réels $a$, $b$ et $c$ tels que :
+$$\forall x \in D, \qquad f (x) = \dfrac{a}{x} + \dfrac{b}{x- 1} +\dfrac{ c}{x + 1}$$
+\end{enumerate}
+\item Résoudre l’équation différentielle suivante :
+$(E) : x(x^2 - 1)y ' + 2y = 0$
+en n’oubliant pas de préciser l’intervalle de résolution (que vous êtes libre de choisir).
+\item Calculer l'intégrale suivante :
+$$
+\int_3^5 \frac{1}{x(x^2-1)} dx
+$$
+
+\end{enumerate}
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+$\,$
+
+\vspace{2em}
+\underline {\ding{110}\, \bf{Exercice 4 }}\hfill  6 points
+\vspace{1em}
+
+
+
+Calculer les intégrales suivantes, on pourra intégrer par parties, faire un changement de variable ou identifier directement une primitive. 
+\begin{itemize}[itemsep=0.5em]
+  \item $\displaystyle I=\int_{-\pi}^\pi (1 - x) \cos(x)dx$
+  \item $\displaystyle J=\int_{1}^2 \dfrac{e^{2x}}{e^x+1}dx$ en utilisant le changement de variable $u = e^x$
+  \item $\displaystyle K=\int_{-\pi}^\pi \sin(x)\cos^3(x)dx$
+  \item $\displaystyle L=\int_0^1 \frac{x+1}{\sqrt{x^2+2x+3}}dx$
+  \item $\displaystyle M=\int_0^1 \frac{\ln(x+1)}{x+1}dx$
+  \end{itemize}
+
+
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+\vspace{2em}
+\underline {\ding{110}\, \bf{Exercice 5}} \hfill 4 points\\
+\vspace{1em}
+\medskip
+
+Toutes les questions suivantes sont indépendantes entre elles.
+
+  \begin{enumerate}
+  \item
+  Étudier la continuité de $g : (\mathbb R_+)^2 \longrightarrow \mathbb R$ définie par
+\[
+\begin{cases}
+\, y^x &\text{si } y > 0 ;\\
+\, 0 &\text{ si } y = 0 \text{ et } x > 0 ;\\
+\,  1 &\text{ si } x = y = 0.\\
+\end{cases}
+\]
+  \item Étudier l’éventuelle limite en $(0, 0)$ de $(x, y) \mapsto \dfrac{x^3}{x^2 + y^3}$ pour $(x, y)$ dans l'ensemble de définition.
+
+  \item Trouver l'ensemble de définition de la fonction $f$ définie sur $\mathbb{R}^2$ par $f(x)=\sqrt{x^2+y^2-16}$
+
+\item Calculer les dérivées partielles de $f(x,y)=x^3y+5xy+2$.
+
+\end{enumerate}
+
+
+\hfill\break
+\hrule
+\hfill\break
+
+
+
+\end{document}

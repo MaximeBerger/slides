@@ -1,0 +1,156 @@
+% Chapitre 6 : Estimation et intervalles de confiance
+
+\section{Pourquoi faire de l'estimation ?}
+
+En pratique, on ne connaît pas la moyenne ou la proportion exacte d'une population. On observe un échantillon et l'on cherche à \textbf{estimer} le paramètre inconnu.
+
+\begin{Ex}
+\begin{itemize}
+    \item Estimer la résistance moyenne d'une production de béton.
+    \item Estimer la proportion de pièces défectueuses sur une chaîne.
+    \item Estimer la part de jours défavorables à un type d'intervention.
+\end{itemize}
+\end{Ex}
+
+\section{Estimateur ponctuel}
+
+\begin{Def}
+Un \textbf{estimateur ponctuel} est une formule qui fournit une valeur unique pour approcher un paramètre inconnu.
+\end{Def}
+
+\begin{Ex}
+\begin{itemize}
+    \item La moyenne empirique $\overline{X}$ estime la moyenne $\mu$.
+    \item La proportion empirique $\widehat{P}$ estime la proportion $p$.
+\end{itemize}
+\end{Ex}
+
+\begin{Rmq}
+Une estimation ponctuelle est simple à utiliser, mais elle ne donne pas à elle seule la précision de l'estimation.
+\end{Rmq}
+
+\section{Intervalle de confiance : idée générale}
+
+\begin{Def}
+Un \textbf{intervalle de confiance} est un intervalle aléatoire construit à partir de l'échantillon, censé encadrer le paramètre inconnu avec un niveau de confiance donné.
+\end{Def}
+
+\begin{Rmq}
+Dans ce cours, on utilisera principalement les niveaux de confiance :
+\begin{itemize}
+    \item $90\%$ ;
+    \item $95\%$ ;
+    \item $99\%$.
+\end{itemize}
+\end{Rmq}
+
+\section{Intervalle de confiance d'une moyenne}
+
+\begin{Prop}
+Si la moyenne d'échantillon est approximativement normale, alors un intervalle de confiance asymptotique de niveau $95\%$ pour $\mu$ est
+$$
+\left[\overline{x}-1.96\frac{\sigma}{\sqrt{n}},\ \overline{x}+1.96\frac{\sigma}{\sqrt{n}}\right]
+$$
+si $\sigma$ est connu.
+\end{Prop}
+
+\begin{Rmq}
+Dans de nombreux exercices de ce cours, on remplace $\sigma$ par une valeur fournie par l'énoncé ou par un écart-type estimé lorsque cela est explicitement demandé.
+\end{Rmq}
+
+\begin{Ex}
+On observe une résistance moyenne de $\overline{x}=32.4$ MPa sur $n=36$ éprouvettes, avec un écart-type connu $\sigma=3$ MPa.
+
+Alors :
+$$
+IC_{95\%} =
+\left[
+32.4 - 1.96\times \frac{3}{6},
+32.4 + 1.96\times \frac{3}{6}
+\right]
+= [31.42,\ 33.38].
+$$
+\end{Ex}
+
+\section{Intervalle de confiance d'une proportion}
+
+\begin{Prop}
+Pour un grand échantillon, un intervalle de confiance asymptotique de niveau $95\%$ pour une proportion $p$ est
+$$
+\left[
+\widehat{p} - 1.96\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}},
+\widehat{p} + 1.96\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}
+\right].
+$$
+\end{Prop}
+
+\begin{Ex}
+Sur $200$ pièces contrôlées, $18$ sont non conformes. Alors
+$$
+\widehat{p}=\frac{18}{200}=0.09.
+$$
+Un intervalle de confiance à $95\%$ s'obtient avec
+$$
+0.09 \pm 1.96 \sqrt{\frac{0.09\times 0.91}{200}}.
+$$
+\end{Ex}
+
+\section{Marge d'erreur}
+
+\begin{Def}
+La \textbf{marge d'erreur} est la demi-largeur de l'intervalle de confiance.
+\end{Def}
+
+\begin{Rmq}
+La marge d'erreur :
+\begin{itemize}
+    \item diminue quand $n$ augmente ;
+    \item augmente quand le niveau de confiance augmente ;
+    \item dépend aussi de la dispersion des données.
+\end{itemize}
+\end{Rmq}
+
+\section{Comment interpréter un intervalle ?}
+
+\begin{Meth}
+Pour commenter un intervalle de confiance :
+\begin{enumerate}
+    \item on rappelle le paramètre estimé ;
+    \item on donne l'intervalle numérique ;
+    \item on le compare à une valeur de référence ou à un seuil technique ;
+    \item on conclut sans sur-interpréter.
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+Si un seuil de conformité moyen est fixé à $30$ MPa et que l'intervalle à $95\%$ pour la moyenne est $[31.42 ; 33.38]$, alors le seuil $30$ MPa est en dessous de tout l'intervalle. Les données sont donc compatibles avec une moyenne supérieure à $30$ MPa.
+\end{Ex}
+
+\section{Ce qu'un intervalle ne dit pas}
+
+\begin{Rmq}
+Un intervalle de confiance ne dit pas :
+\begin{itemize}
+    \item que le paramètre a $95\%$ de chance d'être dans cet intervalle une fois l'intervalle calculé ;
+    \item que $95\%$ des observations sont dans l'intervalle ;
+    \item qu'il n'existe aucun risque d'erreur de décision.
+\end{itemize}
+\end{Rmq}
+
+\section{Erreurs fréquentes}
+
+\begin{itemize}
+    \item Oublier le facteur $\sqrt{n}$.
+    \item Utiliser $p$ à la place de $\widehat{p}$ dans un exercice d'estimation de proportion.
+    \item Confondre intervalle sur le paramètre et intervalle contenant les observations.
+    \item Donner un résultat numérique sans interprétation.
+\end{itemize}
+
+\section{Ce qu'il faut savoir faire}
+
+\begin{itemize}
+    \item calculer une estimation ponctuelle de moyenne ou de proportion ;
+    \item construire un intervalle de confiance usuel ;
+    \item identifier la marge d'erreur ;
+    \item conclure par rapport à un seuil de décision.
+\end{itemize}

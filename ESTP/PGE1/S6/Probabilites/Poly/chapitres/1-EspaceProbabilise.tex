@@ -1,125 +1,160 @@
-% Chapitre 1 : Espace probabilisé
+% Chapitre 1 : Modéliser l'aléa
 
-\section{Définitions de base}
+\section{Pourquoi faire des probabilités en ingénierie ?}
 
-\subsection{Univers et événements}
+Sur un chantier ou dans un laboratoire, on prend des décisions en présence d'incertitude :
+\begin{itemize}
+    \item un lot de béton est-il conforme ?
+    \item combien de pièces non conformes peut-on attendre sur une livraison ?
+    \item quelle est la probabilité d'avoir trois jours favorables au coulage ?
+    \item une mesure observée est-elle compatible avec le cahier des charges ?
+\end{itemize}
 
-\begin{Def}
-L'\textbf{univers} $\Omega$ est l'ensemble de toutes les issues possibles d'une expérience aléatoire.
+Les probabilités servent à \textbf{transformer une situation incertaine en modèle calculable}. Le but n'est pas de décrire toute la réalité, mais de garder ce qui est utile pour la décision.
+
+\begin{Rmq}
+Dans ce cours, on suit toujours le même raisonnement :
+\begin{center}
+\textbf{situation de terrain} $\rightarrow$ \textbf{modèle} $\rightarrow$ \textbf{calcul} $\rightarrow$ \textbf{interprétation} $\rightarrow$ \textbf{décision}
+\end{center}
+\end{Rmq}
+
+\section{Univers, événements et probabilité}
+
+\begin{Def} 
+\leavevmode \\
+L'\textbf{univers} $\Omega$ est l'ensemble de tous les résultats possibles d'une expérience aléatoire.
 \end{Def}
 
 \begin{Def}
-Un \textbf{événement} $A$ est une partie de l'univers $\Omega$, c'est-à-dire $A \subset \Omega$.
+Un \textbf{événement} est une question à laquelle on peut répondre par \og oui \fg{} ou \og non \fg{}. Mathématiquement, c'est une partie de l'univers.
 \end{Def}
+
+\begin{Ex}
+\textbf{Contrôle d'une éprouvette de béton}
+
+On mesure la résistance à 28 jours d'une éprouvette prélevée sur chantier.
+\begin{itemize}
+    \item Si l'on s'intéresse à la résistance en MPa, on peut prendre $\Omega = [0,+\infty[$.
+    \item L'événement $A = \{\omega \geq 25\}$ signifie : \og l'éprouvette atteint au moins $25$ MPa \fg.
+    \item L'événement $B = \{24 \leq \omega \leq 28\}$ signifie : \og la résistance est dans la plage attendue \fg.
+\end{itemize}
+\end{Ex}
 
 \begin{Def}
-Une \textbf{tribu} (ou $\sigma$-algèbre) $\mathcal{A}$ sur $\Omega$ est un ensemble de parties de $\Omega$ vérifiant :
-\begin{itemize}
-    \item $\Omega \in \mathcal{A}$
-    \item Si $A \in \mathcal{A}$, alors $\overline{A} \in \mathcal{A}$ (stabilité par passage au complémentaire)
-    \item Si $(A_n)_{n \in \N} \subset \mathcal{A}$, alors $\bigcup_{n \in \N} A_n \in \mathcal{A}$ (stabilité par réunion dénombrable)
-\end{itemize}
+Une \textbf{probabilité} $\mathbb{P}$ associe à chaque événement un nombre entre $0$ et $1$.
 \end{Def}
 
-\subsection{Mesure de probabilité}
-
-\begin{Def}
-Une \textbf{mesure de probabilité} $\mathbb{P}$ sur $(\Omega, \mathcal{A})$ est une fonction $\mathbb{P} : \mathcal{A} \to [0,1]$ vérifiant :
+\begin{Prop}
+Pour tout événement $A$ :
 \begin{itemize}
-    \item $\mathbb{P}(\Omega) = 1$
-    \item Pour toute famille dénombrable d'événements disjoints $(A_n)_{n \in \N}$, on a :
-    $$\mathbb{P}\left(\bigcup_{n \in \N} A_n\right) = \sum_{n \in \N} \mathbb{P}(A_n)$$
-    (propriété de $\sigma$-additivité)
+    \item $0 \leq \mathbb{P}(A) \leq 1$  
+    \item $\mathbb{P}(\Omega)=1$  
+    \item $\mathbb{P}(\varnothing)=0$.
 \end{itemize}
-\end{Def}
+\end{Prop}
 
-\begin{Def}
-Un \textbf{espace probabilisé} est le triplet $(\Omega, \mathcal{A}, \mathbb{P})$ où :
-\begin{itemize}
-    \item $\Omega$ est l'univers
-    \item $\mathcal{A}$ est une tribu sur $\Omega$
-    \item $\mathbb{P}$ est une mesure de probabilité sur $(\Omega, \mathcal{A})$
-\end{itemize}
-\end{Def}
-
-\section{Exemples d'espaces probabilisés}
-
-\begin{Ex}
-\textbf{Proportion de sol recouvert par de la peinture}
-
-Vous jetez un pot de peinture par terre et mesurez la proportion de sol recouvert. L'univers est l'intervalle $\Omega = [0,1]$.
-
-On ne peut pas associer une probabilité à chaque valeur individuelle, mais seulement calculer la probabilité d'obtenir une valeur comprise entre deux bornes. Par exemple, la probabilité de tomber sur un nombre entre $0.3$ et $0.7$ peut être définie comme la longueur de l'intervalle : $\mathbb{P}([0.3, 0.7]) = 0.4$.
-\end{Ex}
-
-\begin{Ex}
-\textbf{Infinité de pièces de monnaie}
-
-On lance une infinité de pièces de monnaie équilibrées. L'univers $\Omega$ est l'ensemble de toutes les suites infinies de résultats (Pile/Face).
-
-Événements possibles :
-\begin{itemize}
-    \item Il y a une infinité de "Face"
-    \item La suite commence par $n$ fois "Pile"
-\end{itemize}
-
-Événements non mesurables :
-\begin{itemize}
-    \item La proportion de Face ne tend pas vers $1/2$
-\end{itemize}
-\end{Ex}
-
-\begin{Ex}
-\textbf{Fissure dans un matériau}
-
-L'univers est l'ensemble de toutes les fissures possibles sur une plaque soumise à un stress mécanique.
-
-Événement possible : Une fissure traverse complètement la plaque.
-\end{Ex}
-
-\begin{Ex}
-\textbf{Déformation d'un pont}
-
-L'univers est l'ensemble des formes possibles de déformation d'un pont sous l'effet du trafic.
-
-Événement possible : La déformation au centre du pont dépasse celle prévue par le cahier des charges.
-\end{Ex}
-
-\begin{Ex}
-\textbf{Turbulences autour d'un avion}
-
-L'univers est l'ensemble des champs de vitesse des écoulements de l'air autour de l'avion.
-
-Événement possible : Le flux d'air entraîne une turbulence sentie par les passagers.
-\end{Ex}
-
-\begin{Ex}
-\textbf{Chemin aléatoire dans Dijon}
-
-L'univers est l'ensemble des positions d'un ivrogne immortel qui part de l'ESTP.
-
-Événements possibles :
-\begin{itemize}
-    \item Au bout de $n$ pas, l'ivrogne se situe à plus de 100m de l'ESTP
-    \item L'ivrogne repasse par l'ESTP plusieurs fois
-\end{itemize}
-\end{Ex}
-
-\begin{Ex}
-\textbf{Actifs financiers}
-
-L'univers est l'ensemble des trajectoires possibles de l'actif. Si on se limite à un intervalle de temps $[0,T]$, $\Omega$ est l'ensemble des fonctions continues sur $[0,T]$.
-
-Événement possible : Le cours de l'actif atteint 10.000 euros.
-\end{Ex}
 
 \section{Opérations sur les événements}
 
-Soient $A$ et $B$ deux événements :
+Si $A$ et $B$ sont deux événements :
 \begin{itemize}
-    \item $A \cup B$ correspond à la réalisation de "$A$ ou $B$"
-    \item $A \cap B$ correspond à la réalisation de "$A$ et $B$"
-    \item $\overline{A}$ correspond à la non-réalisation de $A$
-    \item $A \setminus B = A \cap \overline{B}$ correspond à "$A$ mais pas $B$"
+    \item $A \cup B$ signifie \og $A$ ou $B$ \fg{}  
+    \item $A \cap B$ signifie \og $A$ et $B$ \fg{}  
+    \item $\overline{A}$ signifie \og non $A$ \fg{}  
+    \item $A \setminus B$ signifie \og $A$ mais pas $B$ \fg.
+\end{itemize}
+
+\begin{Ex}
+\textbf{Lecture en langage chantier}
+
+On note :
+\begin{itemize}
+    \item $A$ : \og la résistance dépasse $25$ MPa \fg  
+    \item $B$ : \og il pleut le jour du coulage \fg.
+\end{itemize}
+
+Alors :
+\begin{itemize}
+    \item $A \cap B$ : le béton est suffisamment résistant \textbf{et} il pleut le jour du coulage  
+    \item $A \cup B$ : au moins une des deux affirmations est vraie  
+    \item $\overline{B}$ : il ne pleut pas le jour du coulage.
+\end{itemize}
+\end{Ex}
+
+\section{Variable aléatoire : ce que l'on mesure}
+
+\begin{Def}
+Une \textbf{variable aléatoire} $X$ est une grandeur numérique qui dépend du résultat de l'expérience.
+\end{Def}
+
+\begin{Rmq}
+Dans la pratique, une variable aléatoire est souvent la quantité qu'on observe ou qu'on calcule :
+\begin{itemize}
+    \item résistance d'une éprouvette  
+    \item nombre de pièces non conformes  
+    \item temps d'attente d'une toupie  
+    \item hauteur de pluie d'une journée.
+\end{itemize}
+\end{Rmq}
+
+\begin{Def}
+Une variable aléatoire est dite \textbf{discrète} si elle prend des valeurs isolées, en nombre fini ou dénombrable.
+
+Elle est dite \textbf{continue} si elle peut prendre toutes les valeurs d'un intervalle.
+\end{Def}
+
+\begin{Ex}
+\textbf{Exemples typiques}
+\begin{itemize}
+    \item Nombre de pieux défectueux dans un lot de $20$ pieux : variable discrète.
+    \item Nombre de jours de pluie dans un mois : variable discrète.
+    \item Résistance d'une éprouvette en MPa : variable continue.
+    \item Longueur d'une fissure en mm : variable continue.
+\end{itemize}
+\end{Ex}
+
+\section{Modéliser une situation concrète}
+
+\begin{Meth}
+Pour traduire un énoncé en langage probabiliste, on peut suivre les quatre étapes suivantes :
+\begin{enumerate}
+    \item Identifier l'expérience aléatoire : que regarde-t-on exactement ?
+    \item Choisir la variable ou les événements utiles à la décision.
+    \item Préciser si la grandeur est discrète ou continue.
+    \item Écrire en français la question que l'on veut calculer.
+\end{enumerate}
+\end{Meth}
+
+\begin{Ex}
+\textbf{Météo et planification de chantier}
+
+Un chef de chantier veut couler une dalle un jour sans pluie forte.
+\begin{itemize}
+    \item Expérience : observer la météo du jour choisi.
+    \item Variable : $X =$ nombre de jours de pluie sur une période donnée.
+    \item Événement utile : $A =$ \og le jour choisi est favorable au coulage \fg.
+    \item Question typique : calculer $\mathbb{P}(A)$ ou la probabilité d'avoir plusieurs jours favorables successifs.
+\end{itemize}
+\end{Ex}
+
+\section{Erreurs fréquentes}
+
+\begin{itemize}
+    \item Confondre un \textbf{résultat observé} avec un \textbf{événement}.
+    \item Choisir un univers trop compliqué pour la question posée.
+    \item Oublier d'écrire l'événement en français avant de manipuler des formules.
+    \item Confondre une grandeur discrète avec une grandeur continue.
+\end{itemize}
+
+\section{Ce qu'il faut savoir faire}
+
+À la fin de ce chapitre, il faut savoir :
+\begin{itemize}
+    \item proposer un univers simple et pertinent  
+    \item définir des événements utiles à la décision  
+    \item manipuler union, intersection et complémentaire  
+    \item reconnaître si une variable est discrète ou continue  
+    \item traduire un contexte d'ingénierie en question probabiliste.
 \end{itemize}
 

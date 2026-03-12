@@ -1,0 +1,465 @@
+\documentclass[11pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{listings}
+
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% \input \jobname.adr
+
+
+\title{TD1 - Probabilités discrètes}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{1 - Manipulation d'événements}
+On lance une pièce une infinité de fois. Pour $n \geq 1$, on note $A_n$ l'événement "le $n$-ème lancer amène pile".
+\begin{enumerate}
+    \item Comment écrire à partir des $A_i$ les évenements : 
+    \begin{itemize}
+        \item Les 3 premiers lancers donnent pile
+        \item Parmi les 2 premiers lancers, le premier est pile et le second est face. 
+        \item Parmi les 2 premiers lancers, 1 est pile et 1 face. 
+    \end{itemize}
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    \begin{itemize}
+        \item $A_1 \cap A_2 \cap A_3$
+        \item $A_1 \cap \bar{A_2}$
+        \item $(A_1\cap \bar{A_2}) \cup (\bar{A_1}\cap A_2)$
+    \end{itemize}
+\end{solution}
+    }{}
+    \item Décrire par une phrase les événements suivants:
+    $$
+B=\bigcap_{i=5}^{+\infty} A_i, C=\bigcup_{i=5}^{+\infty} A_i
+$$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    $B$ signifie qu'à partir du cinquième lancer, on n'obtient que des piles. $C$ signifie qu'un lancer au moins à partir du cinquième lancer donne pile. On peut décrire $D$ par la formule
+        \end{solution}
+    }{}
+
+
+\item  Écrire à l'aide de $A_i$ l'événement $D$ "On n'obtient plus que des piles à partir d'un certain lancer".
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+$$
+D=\bigcup_{n=1}^{+\infty} \bigcap_{i \geq n} A_i\,.
+$$
+
+    \end{solution}
+}{}
+
+\item La pièce est équilibrée, calculer la probabilité que parmi les deux premiers lancers, l'un des deux soit pile. 
+
+\item Quelle est la probabilité que le deuxième lancer soit pile sachant que le premier lancer est pile ? 
+
+\item Sachant qu'un des deux premiers lancers est pile, quelle est la probabilité que l'autre lancer soit pile ? 
+\end{enumerate}
+\vspace{2em}
+
+\section*{2 - Mesure de Probabilité}
+Soit $a \in] 0,1[$.
+
+On appelle mesure de probabilité sur un ensemble dénombrable $X = \{x_1, x_2, \cdots\}$ une fonction $P: X \rightarrow [0,1]$ qui soit sous-additive et telle que la somme des poids est égale à $1$:
+\[
+\sum_{k\geq 1} P\big(\{x_k\}\big) = 1
+\]
+\begin{enumerate}
+
+\item Déterminer $a$ tel que la fonction $P$, qui à tout $n \in \mathbb{N}$ associe $P(\{n\})=(1-a) a^n$ soit une mesure de probabilité sur $\mathbb{N}$. 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+ Il suffit de vérifier que, pour tout $\left.n \in \mathbb{N}, a^n(1-a) \in\right] 0,1[$ - ce qui est clair puisque $a \in] 0,1[$, donc $\left.\left.a^n \in\right] 0,1\right]$ ( $n$ peut être égal à 0 ) et $\left.1-a \in\right] 0,1[$ - et que
+
+$$
+\sum_{n=0}^{+\infty}(1-a) a^n=\frac{1-a}{1-a}=1
+$$
+    \end{solution}
+}{}
+
+\item On considère les deux événements $A=\{2 k: k \in \mathbb{N}\}$ et $B=\{2 k+1: k \in \mathbb{N}\}$. Calculer $P(A)$ et $P(B)$. Les événements $A$ et $B$ sont-ils incompatibles ? sont-ils indépendants ?
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On a
+
+$$
+P(A)=\sum_{k=0}^{+\infty}(1-a) a^{2 k}=\frac{1-a}{1-a^2}=\frac{1}{1+a}
+$$
+
+
+Comme $B=\bar{A}$, on a
+
+$$
+P(B)=1-P(A)=\frac{a}{1+a}
+$$
+
+
+Puisque $A \cap B=\varnothing$, les événements $A$ et $B$ sont incompatibles. Puisque $P(A \cap B)=P(\varnothing)=0$ et $P(A) P(B) \neq 0$, les événements $A$ et $B$ ne sont pas indépendants.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{3 - Indépendance d'événements}
+\begin{enumerate}
+\item Une urne contient $12$ boules numérotées de $1$ à $12$. On en tire une hasard, et on considère les événements
+
+$$
+\begin{aligned}
+& A=\text { "tirage d'un nombre pair", } \\
+& B=\text { "tirage d'un multiple de } 3 \text { ". }
+\end{aligned}
+$$
+
+
+Les événements $A$ et $B$ sont-ils indépendants?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a :
+
+$$
+\begin{gathered}
+A=\{2,4,6,8,10,12\} \\
+B=\{3,6,9,12\} \\
+A \cap B=\{6,12\}
+\end{gathered}
+$$
+On a donc $P(A)=1 / 2, P(B)=1 / 3$ et $P(A \cap B)=1 / 6=P(A) P(B)$. Les événements $A$ et $B$ sont indépendants.
+
+\end{solution}
+}{}
+
+\item  Reprendre la question avec une urne contenant 13 boules.
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Les événements $A, B$ et $A \cap B$ s'écrivent encore exactement de la même façon. Mais cette fois, on a : $P(A)=6 / 13, P(B)=4 / 13$ et $P(A \cap B)=2 / 13 \neq 24 / 169$. Les événements $A$ et $B$ ne sont pas indépendants. C'est conforme à l'intuition. It n'y a plus la même répartition de boules paires et de boules impaires, et dans les multiples de 3 compris entre 1 et 13 , la répartition des nombres pairs et impairs est restée inchangée.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{4 - Formule des probabilités totales}
+Dans une entreprise deux ateliers fabriquent les mêmes pièces. 
+L'atelier 1 fabrique en une journée deux fois plus de pièces que l'atelier 2. 
+Le pourcentage de pièces défectueuses est $3 \%$ pour l'atelier 1 et $4 \%$ pour l'atelier 2. 
+On prélève une pièce au hasard dans l'ensemble de la production d'une journée. 
+
+Déterminer (\textit{On pourra représenter un arbre de probabilités})
+\begin{enumerate}
+    \item la probabilité que cette pièce provienne de l'atelier 1 ;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Notons $A$ l'événement " la pièce provient de l'atelier 1 ", $B$ l'événement " la pièce provient de l'atelier 2" et $D$ l'événement " la pièce est défectueuse".
+    
+            L'énoncé nous dit que les $2 / 3$ des pièces produites proviennent de l'atelier 1. Donc $P(A)=2 / 3$
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette pièce provienne de l'atelier 1 et est défectueuse;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    On cherche $P(A \cap D)=P_A(D) P(A)=0,03 \times \frac{2}{3}=\frac{1}{50}$.
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette pièce provienne de l'atelier 1 sachant qu'elle est défectueuse.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On démontre de même que $P(B \cap D)=\frac{1}{75}$ et donc que
+
+$$
+P(D)=P(A \cap D)+P(B \cap D)=\frac{1}{30}
+$$
+
+
+Ainsi, on a
+
+$$
+P_D(A)=\frac{P(A \cap D)}{P(D)}=\frac{3}{5}
+$$
+
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{5 - Loi de variables aléatoires}
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $\{1, \ldots, 20\}$. Déterminer la loi de $\lfloor\sqrt{X}\rfloor$.
+
+Vous pourrez vérifier vos calculs en montrant que la loi de $\sqrt{X}$ est bien une mesure de probabilité, sur quel ensemble ?
+
+Calculer l'espérance de $X$ et l'espérance de $\lfloor\sqrt{X}\rfloor$.
+
+On donne la formule pour calculer l'espérance : si une variable aléatoire $X$ peut prendre les valeurs $x_1, x_2, \cdots$, alors
+\[
+E(X) =  \sum_{k\geq 1}x_k P(X=x_k)\,. 
+\]
+En français, l'espérance est la moyenne des valeurs que peut prendre $X$, pondérée par les probabilités que $X$ prenne ces valeurs. 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour simplifier les notations, posons $Y=\lfloor\sqrt{X}\rfloor$. Alors, $Y$ peut prendre les valeurs $1,2,3,4$. Plus précisément,
+
+    \begin{itemize}
+
+\item  si $X=1, X=2$ ou $X=3$, alors $Y=1$. En particulier,
+
+$$
+P(Y=1)=P(X=1)+P(X=2)+P(X=3)=\frac{3}{20}
+$$
+
+\item  si $X=4, X=5, X=6, X=7$ ou $X=8$, alors $Y=2$. En particulier,
+
+$$
+P(Y=2)=\frac{5}{20}
+$$
+
+\item si $X=9, X=10, X=11, X=12, X=13, X=14$ ou $X=15$, alors $Y=3$. En particulier,
+
+$$
+P(Y=3)=\frac{7}{20}
+$$
+
+\item si $X=16,17,18,19$ ou 20 , alors $Y=4$. En particulier,
+
+$$
+P(Y=4)=\frac{5}{20}
+$$
+    \end{itemize}
+
+Pour calculer l'espérance, on utilise la formule : $X$ peut prendre toutes les valeurs entre $1$ et $20$, chacune avec probabilité $1/20$, l'espérance de $X$ est donc : 
+\begin{align*}
+E(X) &=  1 \times  \frac{1}{20} +  2 \times  \frac{1}{20}  +  3 \times  \frac{1}{20}  + \cdots +  20 \times  \frac{1}{20} \\
+    & = \frac{1}{20} \sum_{k=1}^{20} k \\
+    & = \frac{1}{20} \frac{20\times 21}{2} \\ 
+    & = \frac{21}{2}\,.
+\end{align*}
+
+Calculons maintenant l'espérance de $Y$ : on multiplie les valeurs que peut prendre $Y$ par les probabilités qu'on a calculé : 
+\[
+E(Y) = 1 \times \frac{3}{20} + 2 \times \frac{5}{20} + 3\times \frac{7}{20} + 4 \times \frac{5}{20}
+\]
+
+
+    \end{solution}
+}{}
+
+\vspace{2em}
+
+\section*{6 - Un avant-goût de statistiques}
+Un étang contient des brochets et des truites. On note $p$ la proportion de truites dans l'étang. On souhaite évaluer $p$, on prélève 20 poissons au hasard. On suppose que le nombre de poissons est suffisamment grand pour que ce prélèvement s'apparente à 20 tirages indépendants avec remise. 
+On note $X$ le nombre de truites obtenues.
+\begin{enumerate}
+\item Quelle est la loi de $X$ ?
+\item Le prélèvement a donné 8 truites. Pour quelle valeur de $p$ la quantité $P(X=8)$ est-elle maximale?
+\item On réalise un deuxième prélèvement de $20$ poissons qui a donné $9$ truites, comment modifier votre estimation pour $p$ ?
+\item On réalise $n$ prélèvements de $20$ poissons, comment obtenir une bonne estimation de $p$ ?
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        1. On reconnait le principe d'un schéma de Bernoulli, avec 20 épreuves indépendantes et une probabilité $p$ de succès. $X$ suit donc une loi binomiale $\mathcal{B}(20, p)$.
+
+        2. On a $P(X=8)=\binom{20}{8} p^8(1-p)^{12}$. On va étudier cette fonction de $p$ de sorte de trouver son maximum. Il suffit en réalité d'étudier, sur $[0,1]$, la fonction $g(p)=p^8(1-p)^{12} . g$ est dérivable et sa dérivée est
+
+$$
+\begin{aligned}
+g^{\prime}(p) & =8 p^7(1-p)^{12}-12 p^8(1-p)^{11} \\
+& =(8(1-p)-12 p) p^7(1-p)^{11} \\
+& =(8-20 p) p^7(1-p)^{11}
+\end{aligned}
+$$
+
+
+On en déduit que $g^{\prime}(p) \geq 0$ sur $[0,2 / 5]$ et $g^{\prime}(p) \leq 0$ sur $[2 / 5,1]$. La probabilité $P(X=8)$ est maximale pour $p=2 / 5$.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{7 - Loi de Poisson}
+On rappelle que la loi de Poisson est une mesure de probabilité sur $\mathbb{N}$ telle que 
+\[
+P(n) = e^{-\lambda} \, \frac{\lambda^k}{k!}\,.
+\]
+\begin{enumerate}
+\item[0.] Montrer que cette fonction est bien une mesure de probabilité. 
+
+\vspace{1em}
+
+Un insecte pond des oeufs. Le nombre d'oeufs pondus est une variable aléatoire $X$ suivant une loi de Poisson $\mathcal{P}(\lambda)$. Chaque oeuf a une probabilité $p$ d'éclore, indépendante des autres oeufs. Soit $Z$ le nombre d'oeufs qui ont éclos.
+    \item Pour $(k, n) \in \mathbb{N}^2$, calculer $P(Z=k \mid X=n)$.
+\item En déduire la loi de $Z$ ?
+\item Quelle est l'espérance de $Z$ ?
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        1. On doit déterminer le nombre d'oeufs éclos sachant que $n$ oeufs ont été pondus. On a alors une succession de $n$ épreuves de Bernoulli indépendantes (l'oeuf $i$ éclot) avec probabilité $p$ de réussite à chaque fois. On reconnait donc une loi binomiale et on a
+
+$$
+P(Z=k \mid X=n)=\binom{n}{k} p^k(1-p)^{n-k}
+$$
+
+si $0 \leq k \leq n, P(Z=k \mid X=n)=0$ sinon.
+2. On va appliquer la formule des probabilités totales : pour $k \in \mathbb{N}$,
+
+$$
+\begin{aligned}
+P(Z=k) & =\sum_{n \geq k} P(Z=k \mid X=n) P(X=n) \\
+& =\sum_{n \geq k}\binom{n}{k} p^k(1-p)^{n-k} \frac{e^{-\lambda} \lambda^n}{n!} \\
+& =\frac{e^{-\lambda} p^k \lambda^k}{k!} \sum_{n \geq k} \frac{(1-p)^{n-k} \lambda^{n-k}}{(n-k)!}
+\end{aligned}
+$$
+
+
+On réindexe la somme en posant $u=n-k$. Il vient
+
+$$
+\begin{aligned}
+P(Z=k) & =\frac{e^{-\lambda} p^k \lambda^k}{k!} \sum_{u \geq 0} \frac{(\lambda(1-p))^u}{u!} \\
+& =\frac{e^{-\lambda} p^k \lambda^k}{k!} e^{\lambda-\lambda p} \\
+& =\frac{e^{-\lambda p}(\lambda p)^k}{k!}
+\end{aligned}
+$$
+
+
+Ainsi, $Z$ suit une loi de Poisson de paramètre $\lambda p$.
+3. L'espérance de $Z$ est donc $\lambda p$.
+    \end{solution}
+}{}
+
+
+
+\section*{8 - Densité continue}
+On appelle densité une fonction $f \,: \,\mathbb{R} \rightarrow \mathbb{R}$ telle que 
+\begin{itemize}
+    \item[$\bullet$] $f$ est positive
+    \item[$\bullet$] $f$ est continue (sauf en un nombre fini de points)
+    \item[$\bullet$] $f$ est d'intégrale $1$. 
+\end{itemize}
+
+Les fonctions suivantes sont-elles des densités ? 
+\begin{enumerate}
+        \item $f_1(x) = \lambda \, e^{-\lambda x}$ définie sur $[0, \infty]$ avec $\lambda$ un paramètre positif. 
+        \item $f_2(x) = \frac{1}{5}\, 1_{[-5, 5]}$ définie sur $\mathbb{R}$
+        \item $f_3(x) = \begin{cases}\cos x & \text { si } x \in[0, \pi / 2] \\ 0 & \text { sinon }\end{cases}$
+        \item $f_4(x) =\frac{1}{1+x^2}, x \in \mathbb{R}$
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+        On vérifie d'abord que les fonctions données sont continues sauf en un nombre fini de points et positives sur $\mathbb{R}$. On doit donc vérifier que $\int_{-\infty}^{+\infty} f(t) d t$ converge et est égal à 1 pour déterminer s'il s'agit d'une densité.
+        
+        3. On a bien \[
+        \int_0^{\pi / 2} \cos (x)=\sin (\pi / 2)-\sin (0)=1 
+        \]
+        $f_3$ définit bien une densité de probabilité. 
+        % Notons $X_1$ une variable aléatoire de densité $f_3$. Sa fonction de répartition est alors donnée par $F_{X_1}(x)=0$ si $x<0, F_{X_1}(x)=\sin (x)$ si $x \in[0, \pi / 2]$ et $F_{X_1}(x)=1$ si $x \geq \pi / 2$. De plus, puisque $f_1$ est non-nulle seulement sur l'intervalle $[0, \pi / 2], X_1$ admet une espérance donnée par
+        % $$
+        % E\left(X_1\right)=\int_0^{\pi / 2} x \cos (x) d x=\frac{1}{2}(\pi-2)
+        % $$
+        
+        % (intégrale qu'on peut calculer à l'aide d'une intégration par parties).
+        
+        4. On a
+        
+        $$
+        \int_{-\infty}^{+\infty} \frac{d x}{1+x^2}=\lim _{x \rightarrow+\infty} \arctan (x)-\lim _{x \rightarrow-\infty} \arctan (x)=\pi \neq 1
+        $$
+        
+        
+        Ainsi, $f_4$ n'est pas une densité.
+    \end{solution}
+}{}
+
+\section*{9 - Lois discrètes classiques}
+On considère les lois discrètes suivantes :
+
+\begin{enumerate}
+    \item La loi binomiale $B(n, p)$ avec $n$ un entier positif et $p$ la probabilité de succès.
+    \item La loi de Poisson $P(\lambda)$ avec $\lambda$ un paramètre positif.
+    \item La loi géométrique $G(p)$ avec $p$ la probabilité de succès.
+    \item La loi uniforme discrète $U(a, b)$ avec $a$ et $b$ des entiers tels que $a \leq b$.
+\end{enumerate}
+
+Pour chacune des lois précédentes, calculer l'espérance et la variance.
+
+La variance mathématique d'une variable aléatoire discrète $X$ est la moyenne des écarts à la moyenne : 
+\[
+\mathop{Var}(X) = E\Big((X-E(X))^2\Big)
+\]
+
+En développant, on peut l'écrire aussi comme : 
+\[
+\mathop{Var}(X) = E(X^2) - E(X)^2
+\]
+
+
+Si $X$ prend des valeurs $x_i$, on a aussi :
+\[
+\mathop{Var}(X) = \sum_{i} \big(x_i - E(X)\big)^2 \cdot P(X=x_i)
+\]
+
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+        On donne seulement les résultats, envoyez-moi vos calculs si vous ne tombez pas sur les mêmes.
+        \begin{enumerate}
+            \item Pour la loi binomiale $B(n, p)$, l'espérance est $E(X) = np$ et la variance est $Var(X) = np(1-p)$.
+            \item Pour la loi de Poisson $P(\lambda)$, l'espérance est $E(X) = \lambda$ et la variance est $Var(X) = \lambda$.
+            \item Pour la loi géométrique $G(p)$, l'espérance est $E(X) = \frac{1}{p}$ et la variance est $Var(X) = \frac{1-p}{p^2}$.
+            \item Pour la loi uniforme discrète $U(a, b)$, l'espérance est $E(X) = \frac{a+b}{2}$ et la variance est $Var(X) = \frac{(b-a+1)^2-1}{12}$.
+        \end{enumerate}
+    \end{solution}
+}{}
+
+\end{document}

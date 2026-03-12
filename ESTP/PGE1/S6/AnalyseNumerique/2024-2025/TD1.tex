@@ -1,0 +1,465 @@
+\documentclass[10pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{listings}
+
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% \input \jobname.adr
+
+
+\title{TD1 - Analyse Numérique}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+\vspace{1cm}
+\section*{Polynômes de Lagrange}
+
+\begin{enumerate}
+    \item Déterminer le polynôme de degré minimal qui coïncide avec la fonction $\sin$ aux points d'abscisse $0, 1$ et $2$.
+\ifthenelse{\boolean{showSolutions}}{
+\begin{solution}
+On commence par déterminer 3 polynômes $\ell_0, \ell_1, \ell_2$ tels que 
+\begin{align*}
+    \ell_0(0) &= 1, \\
+    \ell_0(1) &= 0, \\
+    \ell_0(2) &= 0, \\
+\end{align*}
+
+\begin{align*}
+    \ell_1(0) &= 0, \\
+    \ell_1(1) &= 1, \\
+    \ell_1(2) &= 0, \\
+\end{align*}
+
+\begin{align*}
+    \ell_2(0) &= 0, \\
+    \ell_2(1) &= 0, \\
+    \ell_2(2) &= 1, \\
+\end{align*}
+
+On posera alors 
+\[
+P(x) =  \sin(0)\ell_0(x) + \sin(1)\ell_1(x) + \sin(2)\ell_2(x)
+\]
+C'est un polynôme qui vaut $\sin(0)$ en $x=0$, $\sin(1)$ en $x=1$ et $\sin(2)$ en $x=2$.
+
+Pour déterminer $\ell_0$, on remarque que 
+\begin{itemize}
+    \item $\ell_0$ est un polynôme de degré 2
+    \item $\ell_0$ admet deux racines $x=1$ et $x=2$. On en déduit que $\ell_O$ est multiple de $(x-1)(x-2)$
+    \vspace{1em}
+    On déduit de ces deux informations qu'il existe une constante $a$ telle que 
+    \[
+    \ell_0(x) = a(x-1)(x-2)
+    \]
+    \item $\ell_0$ est égal à 1 en $x=0$, on en déduit 
+    \[
+    \ell_0(0) = a(0-1)(0-2) = 2a = 1 \text{ donc } a = \frac{1}{2}
+    \]
+\end{itemize}
+
+On peut donc écrire 
+\[
+\ell_0(x) = \frac{1}{2}(x-1)(x-2)
+\]
+
+On procède de la même manière pour $\ell_1$ et $\ell_2$ :
+\[
+\ell_1(x) = -x(x-2)
+\]
+\[
+\ell_2(x) = \frac{1}{2}x(x-1)
+\]
+
+On peut aussi apprendre par coeur la formule du cours : 
+Si $x_0, \cdots, x_n$ sont $n+1$ points distincts, alors le polynôme de Lagrange qui vaut $1$ en $x_i$ et $0$ en chaque autre points $x_0, \cdots, x_n$ est 
+\[
+\ell_i(x) = \prod_{\substack{0 \leq j \leq n \\ j \neq i}} \frac{x-x_j}{x_i-x_j}
+\]
+
+Cette formule fait gagner du temps ! 
+\end{solution}
+}{}
+    \item Représenter le graphe de ce polynôme et de la fonction $\sin$ sur le même graphique.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut tracer ce graphe sans calculatrice, c'est une parabole qui passe par les points $(0,0)$, $(1,\sin(1))$ et $(2,\sin(2))$.
+        On dessine donc le graphe de sinus, et le graphe de la parabole qui passe par ces points.
+    \end{solution}
+    }{}
+    \item Représenter le graphe du polynôme de Taylor de $\sin$ en $0$ de degré $3$ et le comparer avec le graphe du polynôme de Lagrange.
+    \noindent Vous pourrez utiliser \url{https://www.desmos.com/}.
+    \item lequel de ces deux polynômes vous semble mieux approcher $\sin$ dans les cas suivants : 
+    \begin{enumerate}
+        \item Pour calculer une valeur approchée de $\sin(0.5)$ ?
+        \item Pour calculer une valeur approchée de $\sin(3)$ ?
+        \item Pour estimer l'intégrale de la fonction $\sin$ sur l'intervalle $[0.5, 2.5]$ ?
+    \end{enumerate}
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}
+            \item $0.5$ est proche de $0$, on peut utiliser le polynôme de Taylor. 
+            \item $3$ est loin de $0$, on peut utiliser le polynôme de Lagrange. Le polynôme de Taylor donnera une valeur très loin de zéro. 
+            \item Le polynôme de Lagrange est le plus approprié.
+        \end{enumerate}
+    \end{solution}
+    }{}
+
+\vspace{1em}
+    On veut trouver un polynôme de degré minimal qui coïncide avec une fonction $f$ en $n+1$ points distincts $x_0, \cdots, x_n$.
+    \item Déterminer l'expression générale du polynôme $\ell_0$ qui vaut $1$ en $x_0$ et $0$ en chaque autre points $x_1, \cdots, x_n$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \ell_0(x) = \prod_{\substack{1 \leq j \leq n}} \frac{x-x_j}{x_0-x_j}
+        \]
+    \end{solution}
+    }{}
+    \item Déterminer l'expression générale du polynôme $\ell_i$ qui vaut $1$ en $x_i$ et $0$ en chaque autre points $x_0, \cdots, x_n$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        \ell_i(x) = \prod_{\substack{0 \leq j \leq n \\ j \neq i}} \frac{x-x_j}{x_i-x_j}
+        \]
+    \end{solution}
+    }{}
+    \item Déterminer l'expression du polynôme qui coïncide avec la fonction $f$ aux points d'abscisse $0, 1$ et $2$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        P(x) = \sum_{i=0}^n f(x_i) \ell_i(x)
+        \]
+    \end{solution}
+    }{}
+    \vspace{1em}
+    \item Trouver le polynôme d'interpolation de Lagrange de la fonction $f(x)=\sqrt{x}$ relativement aux points 
+    \[
+    x_0=1,\qquad x_1=4,\qquad x_2=9
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \[
+        P(x) = \sqrt{1} \ell_0(x) + \sqrt{4} \ell_1(x) + \sqrt{9} \ell_2(x)
+        \]
+    \end{solution}
+    }{}
+    \item Tracer le graphe de ce polynôme et de la fonction $f$ sur le même graphique.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut tracer le graphe de la fonction racine carrée, et la parabole qui passe par les points $(1,1)$, $(4,2)$ et $(9,3)$.
+    \end{solution}
+    }{}
+    \item Déduire une approximation de $\sqrt{5}$ et donner l'erreur commise. 
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut utiliser le polynôme de Lagrange pour approximer $\sqrt{5}$:
+        \[
+        P(5) = \sqrt{1} \ell_0(5) + \sqrt{4} \ell_1(5) + \sqrt{9} \ell_2(5)
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1cm}
+\section*{Sommes de Riemann}
+En vous ramenant à des sommes de Riemann, calculer $\lim _{n \rightarrow+\infty} S_n$ dans les cas suivants :
+    \[
+    S_n=\frac{1}{n} \sum_{k=1}^{n} \ln \left(1 + \frac{k}{n} \right), \qquad
+    S_n=\frac{1}{n} \sum_{k=1}^{n} \sin \left( \frac{k}{n} \pi \right)
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Il faut reconnaître les sommes générales : 
+        \[
+        \frac{1}{n}\sum_{k=1}^{n} f\Big(\frac{k}{n}\Big) \to_{n\to infty} \int_0^1 f(x) dx
+        \]
+        On peut donc écrire : 
+        \[
+        \frac{1}{n}\sum_{k=1}^{n} \ln\Big(1 + \frac{k}{n}\Big) \to_{n\to infty} \int_0^1 \ln(1+x) dx
+        \]
+
+        Pour la deuxième somme, elle converge vers :
+        \[
+        \int_0^1 \sin(x\pi) dx
+        \]
+    \end{solution}
+    }{}
+    \[
+    S_n= \sum_{k=1}^{n} \frac{1}{n} e^{-k/n}, \qquad
+    S_n= \sum_{k=1}^{n} \frac{1}{\sqrt{n^2 + k^2}},
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut écrire : 
+        \[
+        \frac{1}{n}\sum_{k=1}^{n} e^{-k/n} \to_{n\to infty} \int_0^1 e^{-x} dx
+        \]
+
+        Pour la deuxième somme, on peut écrire : 
+        \[
+        \frac{1}{n}\sum_{k=1}^{n} \frac{1}{\sqrt{n^2 + k^2}} \to_{n\to infty} \int_0^1 \frac{1}{\sqrt{1+x^2}} dx
+        \]
+    \end{solution}
+    }{}
+    \[
+    S_n= \frac{1}{n^2} \sum_{k=1}^{n} k^2 e^{-k/n}, \qquad
+    S_n= \frac{\sqrt{n}}{n^2} \sum_{k=1}^n \sqrt{k}
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Il manque un facteur $1/n$ dans la somme, $(S_n)$ converge donc vers l'infini.
+
+        Pour la deuxième somme, on peut écrire : 
+        \[
+        \frac{\sqrt{n}}{n^2} \sum_{k=1}^n \sqrt{k} \to_{n\to infty} \int_0^1 \sqrt{x} dx
+        \]
+    \end{solution}
+    }{}
+\vspace{1cm}
+\section*{Intégrer une fonction inconnue}
+On donne une fonction $f$ telle que 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline x & 0 & 0.5 & 1 & 1.5 & 2 & 2.5 \\
+    \hline $\mathrm{f}(\mathrm{x})$ & 1.5 & 2 & 2 & 1.6364 & 1.2500 & 0.9565 \\
+    \hline
+    \end{tabular}
+\end{center}
+\begin{enumerate}
+    \item Représenter le principe de la méthode des rectangles avec un schéma. 
+    \item Quelle estimation fournit la méthode des rectangles pour $\int_0^{2.5} f(x) dx$ ?
+    \item Une autre méthode consiste à approcher $f$ par un polynôme de degré $1$ sur chaque intervalle $[x_i, x_{i+1}]$ et à intégrer ce polynôme. Quelle estimation fournit cette méthode ?
+    \item Une troisième méthode consiste à approcher $f$ par morceaux par des polynômes de Lagrange de degré $3$ et à intégrer chaque morceau. Quelle estimation fournit cette méthode ?
+\end{enumerate}
+
+\vspace{1cm}
+\section*{Intégration numérique. Une autre méthode de quadrature}
+Soit $f \in \mathbb{C}([-1,1])$, on considère la formule de quadrature suivante :
+$$
+M(f)=\alpha f\left(-\frac{1}{2}\right)+\beta f(0)+\gamma f\left(\frac{1}{2}\right)
+$$
+C'est-à-dire que $M$ est une valeur approchée de l'intégrale de $f$ sur $[-1,1]$.
+
+\begin{enumerate}
+    \item Déterminer $\alpha, \beta$ et $\gamma$ de telle sorte que $M(f)=\int_{-1}^1 f(x) d x$, si $f$ est un polynôme de degré inférieur ou égal à 2.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        La formule doit fonctionner si $f$ est une constante $a$, si $f$ est de type $b x$ et si $f$ est de type $c x^2$.
+
+        Si $f$ est une constante, il faut : 
+        \[
+        \alpha a + \beta a + \gamma a = 2a
+        \]
+        C'est-à-dire : 
+        \[
+        \alpha + \beta + \gamma = 2
+        \]
+
+        Si $f$ est de type $b x$, il faut : 
+        \[
+        -\alpha \frac{b}{2} + \beta 0 + \gamma \frac{b}{2} = 0
+        \]
+        C'est-à-dire : 
+        \[
+        -\alpha \frac{b}{2} + \gamma \frac{b}{2} = 0
+        \]
+        C'est-à-dire : 
+        \[
+        -\alpha + \gamma = 0
+        \]
+
+        Si $f$ est de type $c x^2$, il faut : 
+        \[
+        \alpha \frac{c}{4} + \beta 0 + \gamma \frac{c}{4} = \frac{2c}{3}
+        \]
+        C'est-à-dire : 
+        \[
+        \alpha \frac{c}{4} + \gamma \frac{c}{4} = \frac{2c}{3}
+        \]
+        C'est-à-dire : 
+        \[
+        \alpha + \gamma = \frac{8}{3}
+        \]
+
+        On résout le système : 
+        \[
+        \begin{cases}
+            \alpha + \beta + \gamma = 2 \\
+            -\alpha + \gamma = 0 \\
+            \alpha + \gamma = \frac{8}{3}
+        \end{cases}
+        \]
+        On trouve : 
+        \[
+        \alpha = \frac{4}{3}, \quad \beta = -\frac{2}{3}, \quad \gamma = \frac{4}{3}
+        \]
+        
+    \end{solution}
+    }{}
+    \item Cette égalité est-elle aussi vraie pour un polynôme de degré 3 ou 4 ?
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Essayons avec $f(x) = x^3$ : 
+        \[
+        \int_{-1}^1 x^3 dx = 0
+        \]
+        \[
+        \frac{4}{3} \left(-\frac{1}{2}\right)^3 + \left(-\frac{2}{3}\right) 0 + \frac{4}{3} \left(\frac{1}{2}\right)^3 = 0
+        \]
+        La formule fonctionne donc pour tous les polynômes de degré inférieur ou égal à 3.
+
+        Essayons avec $f(x) = x^4$ : 
+        \[
+        \int_{-1}^1 x^4 dx = \frac{2}{5}
+        \]
+        \[
+        \frac{4}{3} \left(-\frac{1}{2}\right)^4 + \left(-\frac{2}{3}\right) 0 + \frac{4}{3} \left(\frac{1}{2}\right)^4 = \frac{1}{6}
+        \]
+        La formule ne fonctionne pas pour les polynômes de degré 4.
+    \end{solution}
+    }{}
+    \item Calculer l'intégrale $\int_{-1}^1 \frac{1}{1+x^2} d x$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On connait une primitive de cette fonction : 
+        \[
+        \int_{-1}^1 \frac{1}{1+x^2} dx = \left[ \arctan(x) \right]_{-1}^1 = \arctan(1) - \arctan(-1) = \frac{\pi}{4} - \left(-\frac{\pi}{4}\right) = \frac{\pi}{2}
+        \]
+    \end{solution}
+    }{}
+    \item Donner une valeur approchée de $\int_{-1}^1 \frac{1}{1+x^2} d x$ par $M(f)$ puis par la méthode de Newton-Cotes vu à la fin du CM2 en divisant l'intervalle en 2 sous-intervalles : $[-1,0]$ et $[0,1]$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut utiliser la formule de quadrature : 
+        \begin{align*}
+        M(f) = \frac{4}{3} \left(\frac{1}{1+1/4}\right) + \left(-\frac{2}{3}\right) \left(\frac{1}{1+0}\right) + \frac{4}{3} \left(\frac{1}{1+1/4}\right) \\
+        = \frac{2}{3}\Big(\frac{16}{5} - 1\Big) =  \frac{22}{15}
+        \end{align*}
+    On pourrait en déduire une valeur approchée de $\pi : 44/15 \approx 2.9$, ce qui est plutôt moyen. 
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1cm}
+\section*{Polynômes de Hermite pour approcher la dérivée}
+On propose de construire un polynôme $P$ qui interpole $f$ et sa dérivée aux points $x_0, x_1, \ldots, x_n$.
+
+\begin{enumerate}
+    \item Ecrivez le polynôme de Lagrange $P$ de degré $2$ qui interpole $f$ aux points $x_0, x_1$ et $x_2$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        En construisant les polynômes $\ell_0$, $\ell_1$ et $\ell_2$ de Lagrange :
+        \[
+        \ell_0(x) = \frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}
+        \] 
+        \[
+        \ell_1(x) = \frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}
+        \]
+        \[
+        \ell_2(x) = \frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}
+        \]
+        On pose alors 
+        \[
+        P(x) = f(x_0) \ell_0(x) + f(x_1) \ell_1(x) + f(x_2) \ell_2(x)
+        \]
+    \end{solution}
+    }{}
+    \item Quelle est la dérivée de $P$ en ces points ? Les polynômes de Lagrange peuvent-ils être utilisés pour résoudre notre problème ?
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Les $\ell_i$ sont des polynômes de degré $2$ : 
+        \[
+        \ell_0'(x) = \frac{2x -(x_1+x_2)}{(x_0-x_1)(x_0-x_2)}
+        \]
+        \[
+        \ell_1'(x) = \frac{2x -(x_0+x_2)}{(x_1-x_0)(x_1-x_2)}
+        \]
+        \[
+        \ell_2'(x) = \frac{2x -(x_0+x_1)}{(x_2-x_0)(x_2-x_1)}
+        \]
+        Quand on remplace $x=0$, on obtient des valeurs non nulles.
+        Ainsi on aurait bien aimé que : 
+        \[
+        P'(x) = f'(x_0) \ell_0'(x) + f'(x_1) \ell_1'(x) + f'(x_2) \ell_2'(x)
+        \]
+       mais cela ne peut pas fonctionner, nous n'avons pas assez de polynômes et trop de contraintes. 
+    \end{solution}
+    }{}
+    \vspace{1em}
+    Si $\ell_i$ est le polynôme de Lagrange associé au point $x_i$, on définit les polynômes 
+    \[
+    H_i(x)=\Big(1-2\left(x-x_i\right) \ell_i^{\prime}\left(x_i\right)\Big) \ell_i^2(x)
+    \]
+    et 
+    \[
+    G_i(x)=(x-x_i) \ell_i^2(x)
+    \]
+    où $L_i(x)$ sont les polynômes de Lagrange.
+    \item De quels degrés sont les polynômes $H_i$ et $G_i$ ?
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Les polynômes $\ell_i$ sont de degré $n$, $\ell_i'$ est de degré $n-1$ et $\ell_i^2$ est de degré $2n$.
+        Ainsi $H_i$ est de degré $2n$ et $G_i$ est de degré $2n+1$.
+    \end{solution}
+    }{}
+    \item Montrer que 
+    \[
+    \left\{\begin{array}{l}H_i\left(x_j\right)=\delta_{i j} \\ H_i^{\prime}\left(x_j\right)=0\end{array}\right., \qquad
+    \left\{\begin{array}{l}G_i\left(x_j\right)=0 \\ G_i^{\prime}\left(x_j\right)=\delta_{i j}\end{array}\right.
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Il suffit de calculer en utilisant les propriétés des polynômes de Lagrange.
+    \end{solution}
+    }{}
+    \item En déduire l'expression d'un polynôme $P$ qui interpole $f$ et sa dérivée aux points $x_0, x_1, \ldots, x_n$.
+    \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On peut écrire : 
+        \[
+        P(x) = \sum_{i=0}^n f(x_i) H_i(x) + \sum_{i=0}^n f'(x_i) G_i(x)
+        \]
+    \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

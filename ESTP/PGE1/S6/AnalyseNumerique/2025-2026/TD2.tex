@@ -1,0 +1,265 @@
+\input{configTD}
+
+\title{Analyse Numérique TD2 - Systèmes linéaires, LU et conditionnement}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{Exercice 1 - Un système tridiagonal}
+On considère le système linéaire
+\[
+A x=b,
+\qquad
+A=\begin{pmatrix}
+4 & -1 & 0\\
+-1 & 4 & -1\\
+0 & -1 & 4
+\end{pmatrix},
+\qquad
+b=\begin{pmatrix}
+7\\
+6\\
+7
+\end{pmatrix}.
+\]
+Cette matrice peut être vue comme une matrice de rigidité simplifiée issue d'une discrétisation 1D.
+
+\begin{enumerate}
+    \item Résoudre le système par pivot de Gauss.
+
+    \item Déterminer une factorisation $A=LU$ avec $L$ triangulaire inférieure unitaire et $U$ triangulaire supérieure.
+
+    \item Résoudre ensuite le système en introduisant la variable intermédiaire $y$ définie par $Ly=b$ puis $Ux=y$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La factorisation s'écrit
+            \[
+            L=\begin{pmatrix}
+            1 & 0 & 0\\
+            -\frac14 & 1 & 0\\
+            0 & -\frac{4}{15} & 1
+            \end{pmatrix},
+            \qquad
+            U=\begin{pmatrix}
+            4 & -1 & 0\\
+            0 & \frac{15}{4} & -1\\
+            0 & 0 & \frac{56}{15}
+            \end{pmatrix}.
+            \]
+            On résout d'abord
+            \[
+            Ly=b
+            \]
+            ce qui donne
+            \[
+            y_1=7,\qquad
+            y_2=6+\frac74=\frac{31}{4},\qquad
+            y_3=7+\frac{4}{15}\times \frac{31}{4}=\frac{139}{15}.
+            \]
+            Puis
+            \[
+            Ux=y.
+            \]
+            On obtient
+            \[
+            x_3=\frac{139}{56},\qquad
+            x_2=\frac{31}{15}+\frac{4}{15}x_3=\frac{19}{7},\qquad
+            x_1=\frac{7+x_2}{4}=\frac{17}{7}.
+            \]
+            Donc
+            \[
+            x=\begin{pmatrix}
+            17/7\\
+            19/7\\
+            139/56
+            \end{pmatrix}.
+            \]
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 2 - Effet d'une perturbation du second membre}
+On reprend la matrice $A$ de l'exercice précédent. On remplace le second membre par
+\[
+\tilde b=\begin{pmatrix}
+7\\
+6.1\\
+7
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Sans refaire toute la factorisation, expliquer comment obtenir rapidement la nouvelle solution $\tilde x$.
+
+    \item Résoudre numériquement le système $A\tilde x=\tilde b$.
+
+    \item Comparer $x$ et $\tilde x$. Une faible perturbation sur $b$ produit-elle ici une grande variation de la solution ?
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La factorisation $A=LU$ ne change pas. Il suffit donc de résoudre
+            \[
+            Ly=\tilde b,\qquad U\tilde x=y.
+            \]
+            On obtient
+            \[
+            y_1=7,\qquad
+            y_2=6.1+\frac74=\frac{157}{20},\qquad
+            y_3=7+\frac{4}{15}\times \frac{157}{20}=\frac{683}{75}.
+            \]
+            Puis
+            \[
+            \tilde x_3=\frac{683}{280},\qquad
+            \tilde x_2=\frac{157}{75}+\frac{4}{15}\tilde x_3=\frac{159}{56},\qquad
+            \tilde x_1=\frac{7+\tilde x_2}{4}=\frac{551}{224}.
+            \]
+            Numériquement,
+            \[
+            \tilde x\approx \begin{pmatrix}
+            2.460\\
+            2.839\\
+            2.439
+            \end{pmatrix}.
+            \]
+            La variation reste modérée : le système n'est pas particulièrement sensible sur cet exemple.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 3 - Conditionnement}
+On considère la matrice
+\[
+B=\begin{pmatrix}
+1 & 1\\
+1 & 1.01
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Calculer $\det(B)$ puis $B^{-1}$.
+
+    \item Calculer la norme infinie $\|B\|_{\infty}$ puis $\|B^{-1}\|_{\infty}$.
+
+    \item En déduire le nombre de condition
+    \[
+    \kappa_{\infty}(B)=\|B\|_{\infty}\|B^{-1}\|_{\infty}.
+    \]
+
+    \item Interpréter ce résultat.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a
+            \[
+            \det(B)=1.01-1=0.01.
+            \]
+            Donc
+            \[
+            B^{-1}=\frac{1}{0.01}\begin{pmatrix}
+            1.01 & -1\\
+            -1 & 1
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+            101 & -100\\
+            -100 & 100
+            \end{pmatrix}.
+            \]
+            La norme infinie vaut
+            \[
+            \|B\|_{\infty}=\max(2,2.01)=2.01.
+            \]
+            Et
+            \[
+            \|B^{-1}\|_{\infty}=\max(201,200)=201.
+            \]
+            Ainsi
+            \[
+            \kappa_{\infty}(B)=2.01\times 201 \approx 404.
+            \]
+            Le système est mal conditionné : une petite erreur sur les données peut produire une variation beaucoup plus visible sur la solution.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 4 - Application à un modèle discrétisé}
+On cherche à approcher la solution du problème
+\[
+-u''(x)=1,\qquad x\in [0,1],\qquad u(0)=u(1)=0
+\]
+par différences finies avec un pas $h=1/4$.
+
+\begin{enumerate}
+    \item Écrire l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$.
+
+    \item En déduire un système linéaire vérifié par les inconnues intérieures $u_1,u_2,u_3$.
+
+    \item Résoudre ce système.
+
+    \item Comparer avec la solution exacte
+    \[
+    u(x)=\frac{x(1-x)}{2}.
+    \]
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On utilise
+            \[
+            u''(x_i)\approx \frac{u_{i+1}-2u_i+u_{i-1}}{h^2}.
+            \]
+            Comme $-u''=1$, on obtient
+            \[
+            -\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}=1.
+            \]
+            Avec $h=1/4$, on a $h^2=1/16$, donc
+            \[
+            -u_{i+1}+2u_i-u_{i-1}=\frac{1}{16}.
+            \]
+            En utilisant $u_0=0$ et $u_4=0$ :
+            \[
+            \begin{cases}
+            2u_1-u_2=\frac{1}{16}\\
+            -u_1+2u_2-u_3=\frac{1}{16}\\
+            -u_2+2u_3=\frac{1}{16}
+            \end{cases}
+            \]
+            soit
+            \[
+            \begin{pmatrix}
+            2 & -1 & 0\\
+            -1 & 2 & -1\\
+            0 & -1 & 2
+            \end{pmatrix}
+            \begin{pmatrix}
+            u_1\\u_2\\u_3
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+            1/16\\1/16\\1/16
+            \end{pmatrix}.
+            \]
+            La solution est
+            \[
+            u_1=\frac{3}{32},\qquad u_2=\frac18,\qquad u_3=\frac{3}{32}.
+            \]
+            Or
+            \[
+            u\left(\frac14\right)=\frac{3}{32},\quad
+            u\left(\frac12\right)=\frac18,\quad
+            u\left(\frac34\right)=\frac{3}{32}.
+            \]
+            Ici, on retrouve exactement les valeurs de la solution aux noeuds.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

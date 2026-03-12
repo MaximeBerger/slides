@@ -1,0 +1,222 @@
+% Chapitre 8 : Estimateurs et tests d'hypothèses
+
+\section{Pourquoi parler d'estimateurs et de tests ?}
+
+En statistique appliquée, l'ingénieur ne cherche pas seulement à calculer un intervalle de confiance. Il doit aussi :
+\begin{itemize}
+    \item choisir un \textbf{estimateur} pertinent pour approcher un paramètre inconnu ;
+    \item décider si des données sont \textbf{compatibles} avec une hypothèse de départ ;
+    \item formuler une conclusion claire pour une décision technique.
+\end{itemize}
+
+\begin{Rmq}
+Ce chapitre doit être lu comme un chapitre de \textbf{prise de décision raisonnée}. On ne demande pas aux étudiants de mémoriser une théorie sophistiquée des tests, mais de comprendre ce que signifie : poser une hypothèse, mesurer un écart, puis conclure sans sur-interpréter.
+\end{Rmq}
+
+\begin{Rmq}
+Dans le cadre du module `2025-2026`, ce chapitre est proposé comme un \textbf{complément de culture statistique}. Il peut nourrir la compréhension générale du cours, mais les tests d'hypothèses ne feront pas l'objet de questions spécifiques à l'examen.
+\end{Rmq}
+
+\begin{Ex}
+Quelques questions typiques :
+\begin{itemize}
+    \item la résistance moyenne d'un béton est-elle conforme à la valeur cible ?
+    \item la proportion de pièces défectueuses dépasse-t-elle le seuil acceptable ?
+    \item un nouveau procédé semble-t-il meilleur que l'ancien ?
+\end{itemize}
+\end{Ex}
+
+\section{Qu'est-ce qu'un estimateur ?}
+
+\begin{Def}
+Un \textbf{estimateur} est une variable aléatoire construite à partir d'un échantillon et destinée à approcher un paramètre inconnu.
+\end{Def}
+
+\begin{Ex}
+\begin{itemize}
+    \item la moyenne empirique $\overline{X}$ estime la moyenne $\mu$ ;
+    \item la proportion empirique $\widehat{p}$ estime la proportion $p$ ;
+    \item la variance empirique estime la dispersion de la population.
+\end{itemize}
+\end{Ex}
+
+\begin{Rmq}
+Il faut distinguer :
+\begin{itemize}
+    \item l'\textbf{estimateur}, qui est une formule aléatoire ;
+    \item l'\textbf{estimation}, qui est la valeur numérique obtenue sur l'échantillon observé.
+\end{itemize}
+\end{Rmq}
+
+\section{Qualités attendues d'un estimateur}
+
+\begin{Def}
+Un estimateur est dit \textbf{sans biais} si sa moyenne est égale au paramètre qu'il estime.
+\end{Def}
+
+\begin{Ex}
+La moyenne empirique $\overline{X}$ est un estimateur sans biais de $\mu$.
+\end{Ex}
+
+\begin{Def}
+Un estimateur est \textbf{précis} lorsque sa dispersion est faible.
+\end{Def}
+
+\begin{Rmq}
+Dans ce cours, on retiendra surtout l'idée suivante :
+\begin{itemize}
+    \item un bon estimateur vise juste ;
+    \item un bon estimateur varie peu d'un échantillon à l'autre.
+\end{itemize}
+\end{Rmq}
+
+\section{Principe d'un test d'hypothèses}
+
+\begin{Def}
+Un \textbf{test d'hypothèses} est une procédure qui permet de confronter une hypothèse de départ, appelée \textbf{hypothèse nulle} et notée $H_0$, à des données observées.
+\end{Def}
+
+\begin{Def}
+L'hypothèse alternative, notée $H_1$, décrit ce que l'on conclut si les données sont trop peu compatibles avec $H_0$.
+\end{Def}
+
+\begin{Ex}
+Dans un contrôle de conformité sur une moyenne :
+\begin{itemize}
+    \item $H_0$ : la moyenne vaut la valeur cible ;
+    \item $H_1$ : la moyenne est inférieure à la valeur cible.
+\end{itemize}
+\end{Ex}
+
+\section{Les étapes d'un test}
+
+\begin{Meth}
+Pour mener un test d'hypothèses, on suit toujours le même schéma :
+\begin{enumerate}
+    \item écrire clairement $H_0$ et $H_1$ ;
+    \item choisir une statistique de test ;
+    \item calculer sa valeur sur l'échantillon ;
+    \item comparer cette valeur à un seuil, ou calculer une \textit{p-value} ;
+    \item conclure dans le contexte.
+\end{enumerate}
+\end{Meth}
+
+\begin{Meth}
+Formulation attendue dans une copie :
+\begin{itemize}
+    \item \textbf{étape 1} : écrire clairement ce que l'on cherche à vérifier ;
+    \item \textbf{étape 2} : traduire cette question en $H_0$ et $H_1$ ;
+    \item \textbf{étape 3} : faire le calcul ;
+    \item \textbf{étape 4} : conclure en français simple pour l'ingénieur.
+\end{itemize}
+\end{Meth}
+
+\section{Risque de première espèce}
+
+\begin{Def}
+Le \textbf{risque de première espèce}, noté $\alpha$, est la probabilité de rejeter $H_0$ alors qu'elle est vraie.
+\end{Def}
+
+\begin{Rmq}
+Dans les exercices usuels, on prend souvent :
+\begin{itemize}
+    \item $\alpha = 5\%$ ;
+    \item parfois $\alpha = 1\%$.
+\end{itemize}
+\end{Rmq}
+
+\section{Lien avec la p-value}
+
+\begin{Def}
+La \textbf{p-value} est le plus petit niveau de risque pour lequel les données conduiraient à rejeter $H_0$.
+\end{Def}
+
+\begin{Meth}
+Règle de décision avec la p-value :
+\begin{itemize}
+    \item si $\text{p-value} \leq \alpha$, on rejette $H_0$ ;
+    \item sinon, on ne rejette pas $H_0$.
+\end{itemize}
+\end{Meth}
+
+\begin{Rmq}
+Ne pas rejeter $H_0$ ne signifie pas que $H_0$ est vraie avec certitude. Cela signifie seulement que l'échantillon ne fournit pas assez d'arguments pour la rejeter.
+\end{Rmq}
+
+\section{Test sur une moyenne : idée générale}
+
+\begin{Ex}
+\textbf{Résistance moyenne d'un béton}
+
+On veut vérifier si une production atteint une résistance moyenne cible de $30$ MPa.
+
+On peut poser :
+\begin{itemize}
+    \item $H_0 : \mu = 30$ ;
+    \item $H_1 : \mu < 30$.
+\end{itemize}
+
+Si l'on observe une moyenne d'échantillon très inférieure à $30$, on sera conduit à rejeter $H_0$.
+\end{Ex}
+
+\begin{Prop}
+Lorsque l'on connaît l'écart-type $\sigma$ et que la taille d'échantillon est suffisante, on utilise souvent la statistique
+$$
+Z=\frac{\overline{X}-\mu_0}{\sigma/\sqrt{n}}.
+$$
+\end{Prop}
+
+\section{Test sur une proportion : idée générale}
+
+\begin{Ex}
+\textbf{Taux de pièces défectueuses}
+
+On veut vérifier si la proportion de pièces défectueuses dépasse $5\%$.
+
+On peut poser :
+\begin{itemize}
+    \item $H_0 : p = 0.05$ ;
+    \item $H_1 : p > 0.05$.
+\end{itemize}
+
+Si la proportion observée $\widehat{p}$ est nettement supérieure à $0.05$, on s'oriente vers le rejet de $H_0$.
+\end{Ex}
+
+\begin{Prop}
+Pour une proportion, la statistique usuelle est
+$$
+Z=\frac{\widehat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}
+$$
+lorsque l'approximation normale est justifiée.
+\end{Prop}
+
+\section{Lien entre test et intervalle de confiance}
+
+\begin{Rmq}
+Les tests et les intervalles de confiance racontent souvent la même chose sous deux formes différentes :
+\begin{itemize}
+    \item si une valeur de référence est \textbf{hors} de l'intervalle de confiance, on a tendance à rejeter l'hypothèse correspondante ;
+    \item si elle est \textbf{dans} l'intervalle, on ne la rejette généralement pas.
+\end{itemize}
+\end{Rmq}
+
+\section{Erreurs fréquentes}
+
+\begin{itemize}
+    \item confondre \og ne pas rejeter $H_0$ \fg{} et \og prouver $H_0$ \fg ;
+    \item oublier de formuler explicitement $H_0$ et $H_1$ ;
+    \item conclure sans revenir au contexte technique ;
+    \item oublier que le niveau $\alpha$ est un risque choisi à l'avance ;
+    \item transformer un test en recette automatique sans discuter ce que mesurent réellement les données.
+\end{itemize}
+
+\section{Ce qu'il faut savoir faire}
+
+\begin{itemize}
+    \item distinguer estimateur et estimation ;
+    \item citer les qualités attendues d'un estimateur ;
+    \item écrire correctement $H_0$ et $H_1$ ;
+    \item expliquer le rôle du risque $\alpha$ et de la p-value ;
+    \item interpréter un test comme un outil d'aide à la décision ;
+    \item distinguer un écart \textbf{statistiquement significatif} d'un écart \textbf{techniquement important}.
+\end{itemize}

@@ -1,0 +1,256 @@
+\input{configTD}
+
+\title{Analyse Numérique TD3 - Méthodes itératives et matrices stochastiques}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{Exercice 1 - Méthode de Jacobi}
+On considère le système
+\[
+\begin{cases}
+4x_1-x_2=7,\\
+-x_1+4x_2-x_3=6,\\
+-x_2+4x_3=7.
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item Écrire ce système sous la forme $Ax=b$.
+
+    \item Écrire les formules de Jacobi permettant de construire $x^{(k+1)}$ à partir de $x^{(k)}$.
+
+    \item À partir de $x^{(0)}=(0,0,0)^T$, calculer $x^{(1)}$ puis $x^{(2)}$.
+
+    \item Expliquer pourquoi on peut raisonnablement s'attendre à la convergence.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice est
+            \[
+            A=\begin{pmatrix}
+            4 & -1 & 0\\
+            -1 & 4 & -1\\
+            0 & -1 & 4
+            \end{pmatrix},
+            \qquad
+            b=\begin{pmatrix}
+            7\\6\\7
+            \end{pmatrix}.
+            \]
+            Les équations de Jacobi sont
+            \[
+            x_1^{(k+1)}=\frac{7+x_2^{(k)}}{4},
+            \qquad
+            x_2^{(k+1)}=\frac{6+x_1^{(k)}+x_3^{(k)}}{4},
+            \qquad
+            x_3^{(k+1)}=\frac{7+x_2^{(k)}}{4}.
+            \]
+            Avec $x^{(0)}=(0,0,0)^T$,
+            \[
+            x^{(1)}=\begin{pmatrix}
+            7/4\\
+            3/2\\
+            7/4
+            \end{pmatrix}.
+            \]
+            Puis
+            \[
+            x^{(2)}=\begin{pmatrix}
+            17/8\\
+            19/8\\
+            17/8
+            \end{pmatrix}.
+            \]
+            La matrice est à diagonale strictement dominante, donc la méthode de Jacobi converge.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 2 - Jacobi ou divergence ?}
+On considère maintenant le système
+\[
+\begin{cases}
+x_1+3x_2=4,\\
+3x_1+x_2=4.
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item Écrire l'itération de Jacobi.
+
+    \item À partir de $x^{(0)}=(0,0)^T$, calculer $x^{(1)}$, $x^{(2)}$ et $x^{(3)}$.
+
+    \item Que constate-t-on ?
+
+    \item Calculer la solution exacte et comparer avec le comportement itératif.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            L'itération de Jacobi est
+            \[
+            x_1^{(k+1)}=4-3x_2^{(k)},
+            \qquad
+            x_2^{(k+1)}=4-3x_1^{(k)}.
+            \]
+            À partir de $(0,0)$ :
+            \[
+            x^{(1)}=(4,4),\qquad
+            x^{(2)}=(-8,-8),\qquad
+            x^{(3)}=(28,28).
+            \]
+            La suite diverge.
+            Pourtant la solution exacte existe :
+            \[
+            x_1=x_2=1.
+            \]
+            Le problème ne vient donc pas de l'existence de la solution, mais du choix de la méthode itérative sur ce système.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 3 - PageRank simplifié}
+On considère trois pages web $A$, $B$ et $C$.
+Le lien sortant de $A$ pointe vers $B$ et $C$ avec probabilité $1/2$ chacune.
+Le lien sortant de $B$ pointe toujours vers $C$.
+Le lien sortant de $C$ pointe toujours vers $A$.
+
+On note
+\[
+P=
+\begin{pmatrix}
+0 & 0 & 1\\
+1/2 & 0 & 0\\
+1/2 & 1 & 0
+\end{pmatrix}.
+\]
+La distribution stationnaire $\pi=(\pi_A,\pi_B,\pi_C)^T$ vérifie
+\[
+P\pi=\pi,
+\qquad
+\pi_A+\pi_B+\pi_C=1.
+\]
+
+\begin{enumerate}
+    \item Écrire le système vérifié par $\pi$.
+
+    \item Déterminer la distribution stationnaire.
+
+    \item Quelle page obtient le score le plus élevé ?
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Le système est
+            \[
+            \pi_A=\pi_C,\qquad
+            \pi_B=\frac12\pi_A,\qquad
+            \pi_C=\frac12\pi_A+\pi_B.
+            \]
+            Avec la condition de normalisation,
+            \[
+            \pi_A+\frac12\pi_A+\pi_A=1
+            \]
+            donc
+            \[
+            \frac52\pi_A=1,\qquad \pi_A=\frac25.
+            \]
+            Ainsi
+            \[
+            \pi_B=\frac15,\qquad \pi_C=\frac25.
+            \]
+            Les pages $A$ et $C$ obtiennent ici le même score maximal.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 4 - Matrice stochastique et classes de risque}
+Un assureur classe un portefeuille en trois catégories de risque : faible ($F$), moyen ($M$), élevé ($E$).
+D'une année à l'autre, la probabilité de changer de classe est modélisée par
+\[
+T=
+\begin{pmatrix}
+0.8 & 0.2 & 0\\
+0.1 & 0.7 & 0.2\\
+0 & 0.3 & 0.7
+\end{pmatrix}.
+\]
+Le vecteur ligne $p_n=(f_n,m_n,e_n)$ représente la répartition l'année $n$.
+
+\begin{enumerate}
+    \item Vérifier que $T$ est stochastique.
+
+    \item Si
+    \[
+    p_0=(0.6,0.3,0.1),
+    \]
+    calculer $p_1$ puis $p_2$.
+
+    \item On associe les primes annuelles suivantes :
+    \[
+    800\ \text{euros},\qquad 1200\ \text{euros},\qquad 1800\ \text{euros}.
+    \]
+    Donner la prime moyenne attendue après une année.
+
+    \item Expliquer en quelques lignes l'intérêt d'un tel modèle.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Chaque ligne somme à $1$, donc $T$ est bien stochastique.
+            On calcule
+            \[
+            p_1=p_0T=(0.51,0.40,0.09).
+            \]
+            Puis
+            \[
+            p_2=p_1T=(0.448,0.409,0.143).
+            \]
+            La prime moyenne après une année vaut
+            \[
+            0.51\times 800+0.40\times 1200+0.09\times 1800=1050\ \text{euros}.
+            \]
+            Ce modèle permet d'anticiper l'évolution du portefeuille, de chiffrer une prime moyenne attendue et d'étudier un régime stationnaire à long terme.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\section*{Exercice 5 - Application à une discrétisation}
+On retrouve la matrice
+\[
+A=\begin{pmatrix}
+2 & -1 & 0 & 0\\
+-1 & 2 & -1 & 0\\
+0 & -1 & 2 & -1\\
+0 & 0 & -1 & 2
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Montrer que $A$ est symétrique définie positive.
+
+    \item Expliquer pourquoi cette propriété est favorable à l'utilisation de méthodes itératives.
+
+    \item Citer un contexte de discrétisation dans lequel une telle matrice apparaît naturellement.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La matrice est symétrique. De plus, pour tout vecteur $x=(x_1,\dots,x_4)^T$,
+            \[
+            x^TAx=x_1^2+(x_1-x_2)^2+(x_2-x_3)^2+(x_3-x_4)^2+x_4^2>0
+            \]
+            pour tout $x\neq 0$.
+            Donc $A$ est définie positive.
+            Cette structure favorise la convergence de plusieurs méthodes itératives et garantit une solution unique.
+            Une telle matrice apparaît naturellement dans les discrétisations 1D de type chaleur, diffusion ou barre élastique.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\end{document}

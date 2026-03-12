@@ -1,0 +1,234 @@
+\input{configTD}
+
+\title{Probabilités TD2 - Modélisation avec des lois discrètes}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+
+
+
+\section*{0 - TD précédent}
+Reprendre/Terminer le dernier exercice du TD1.
+
+\vspace{1em}
+
+\section*{1 - Formule des probabilités totales}
+Sur un chantier, deux équipes de pose réalisent le même type d'interventions.
+L'équipe 1 réalise en une journée deux fois plus d'interventions que l'équipe 2.
+Le pourcentage d'interventions donnant lieu à une non-conformité est de $3 \%$ pour l'équipe 1 et de $4 \%$ pour l'équipe 2.
+On choisit au hasard une intervention réalisée dans la journée.
+
+Déterminer (\textit{On pourra représenter un arbre de probabilités})
+\begin{enumerate}
+    \item la probabilité que cette intervention provienne de l'équipe 1 ;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Notons $A$ l'événement " l'intervention provient de l'équipe 1 ", $B$ l'événement " l'intervention provient de l'équipe 2" et $D$ l'événement " l'intervention donne lieu à une non-conformité".
+    
+L'énoncé nous dit que les $2 / 3$ des interventions réalisées proviennent de l'équipe 1. Donc $P(A)=2 / 3$
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette intervention provienne de l'équipe 1 et donne lieu à une non-conformité;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    On cherche $P(A \cap D)=P_A(D) P(A)=0,03 \times \frac{2}{3}=\frac{1}{50}$.
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette intervention provienne de l'équipe 1 sachant qu'elle donne lieu à une non-conformité.
+\end{enumerate}
+
+
+\section*{2 - Espérance et variance}
+Calculer l'espérance des variables aléatoires suivantes.
+
+\begin{enumerate}
+    \item Soit $X$ le résultat obtenu lors du lancer d'un dé équilibré à six faces. Déterminer l'espérance de $X$.
+    \item Soit $Y$ une variable aléatoire suivant la loi géométrique de paramètre $p \in ]0,1[$, c'est-à-dire telle que, pour tout $k \in \mathbb{N}^*$,
+    $$
+    P(Y=k)=(1-p)^{k-1}p.
+    $$
+    Déterminer l'espérance de $Y$.
+    \item Soit $Z$ une variable aléatoire définie par
+    $$
+    P(Z=-1)=0,2,\qquad P(Z=0)=0,3,\qquad P(Z=2)=0,4,\qquad P(Z=5)=0,1.
+    $$
+    Vérifier qu'il s'agit bien d'une loi de probabilité, puis calculer l'espérance de $Z$.
+    \item Dans chacun des trois cas précédents, indiquer brièvement ce que représente concrètement l'espérance obtenue.
+\end{enumerate}
+
+
+La variance mesure à quel point une variable aléatoire prend des valeurs éloignées de sa moyenne, elle est définie par :
+$$
+\text{Var}(X) = E\Big(\,\big(X-E(X)\big)^2\, \Big)
+$$
+
+\begin{enumerate}
+    \item Dire pourquoi la variance est toujours positive.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variance est une moyenne pondérée des carrés des écarts à la moyenne, c'est une moyenne de quantités positives, donc elle est toujours positive.
+        \end{solution}
+    }{}
+    \vspace{0.5em}
+    
+    \item En développant le carré et en utilisant la linéarité de l'espérance, montrer que :
+    $$
+    \text{Var}(X) = E\big(\,X^2\, \big) - \big(E(X)\big)^2
+    $$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                \text{Var}(X) &= E\Big(\,\big(X-E(X)\big)^2\, \Big) \\
+                &= E\Big(\,X^2 - 2X E(X) + E(X)^2\, \Big) \\
+                &= E\big(\,X^2\, \big) - 2E(X)E(X) + E\big(\,E(X)^2\, \big) \\
+                &= E\big(\,X^2\, \big) - E\big(\,X\, \big)^2\,.
+            \end{align*}
+            On a utilisé le fait que l'espérance d'une quantité non aléatoire (comme $E(X)$) est égale à la quantité elle-même.
+        \end{solution}
+    }{}
+    \item Calculer la variance d'une variable aléatoire $X$ suivant une loi de Bernoulli de paramètre $p$. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                \text{Var}(X) &= E\big(\,X^2\, \big) - E\big(\,X\, \big)^2 
+                \end{align*}
+                Calculons $E\big(\,X^2\, \big)$ : $X^2$ peut prendre les valeurs $0$, avec probabilité $1-p$, et $1$, avec probabilité $p$. Donc $X^2$ suit aussi une loi de Bernoulli de paramètre $p$.
+                \begin{align*}
+                    E\big(\,X^2\, \big) = p
+                \end{align*}
+                On a donc :
+                \begin{align*}
+                    \text{Var}(X) = p - p^2 = p(1-p)
+            \end{align*}    
+        \end{solution}
+    }{}
+    \item Calculer la variance des variables aléatoires $X$, $Y$ et $Z$ définies au début de l'exercice.
+    
+\end{enumerate}
+
+\vspace{2em}
+
+\section*{3 - Surbooking}
+Une ligne aérienne est équipée d'Airbus A320 dotés de 174 places. On a observé qu'en moyenne $3 \%$ des personnes ayant acheté un billet ne se présentent pas à l'embarquement. Pour augmenter son bénéfice, la compagnie aérienne pratique le surbooking : elle vend deux billets de plus qu'il n'y a de places, soit 176 billets pour chaque vol. Pour un vol donné, on note $X_i$ la variable aléatoire valant 1 si le détenteur du $i^{\mathrm{e}}$ billet ne se présente pas à l'embarquement, et 0 sinon.
+\begin{enumerate}
+    \item En supposant, pour simplifier, les $X_i$ indépendantes, déterminer la loi du nombre $N$ de détenteurs de billets pour un vol ne se présentant pas à l'embarquement.
+    \item Quelle est la probabilité qu'il manque exactement une place dans l'avion au moment de l'embarquement ?
+    \item Quelle est la probabilité qu'il manque exactement deux places dans l'avion au moment de l'embarquement ?
+    \item Quelle est la probabilité qu'il y ait assez de place dans l'avion pour toutes les personnes se présentant à l'embarquement ?
+    \vspace{1em}
+    
+    Lorsqu'une personne munie d'un billet ne peut pas embarquer faute de place, elle est indemnisée à hauteur de $x$ euros. Les billets supplémentaires vendus dans le cadre du surbooking rapportent 90 euros chacun. On note $D$ le montant total des dédommagements versés lors d'un vol sur cette ligne.
+    \item Exprimer $D$ en fonction de $N$, puis déterminer la loi de $D$.
+    \item Exprimer l'espérance de $D$ en fonction de $x$.
+    \item Pour quelles valeurs de $x$, la stratégie de surbooking est-elle en moyenne rentable sur cette ligne ?
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{4 - Fonctions de variables aléatoires - cas discret}
+
+Soient $X \sim \mathcal{B}(p), 0<p<1$, et $Y \sim \mathcal{U}(\{-1,0,1\}), 0<p<1$ deux v.a. indépendantes. 
+
+\begin{enumerate}
+    \item Déterminer la loi de $X-Y$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variable $X$ peut prendre les valeurs $0$ et $1$, la variable $Y$ peut prendre les valeurs $-1$, $0$ et $1$.
+            
+            La variable $X-Y$ peut donc prendre les valeurs $-1$, $0$, $1$ et $2$.
+
+            il faut calculer pour chaque valeur, la probabilité associée : 
+            \begin{itemize} 
+                \item[$\bullet$] \[
+                P(X-Y = -1) = P(X = 0, Y = 1) = P(X = 0) P(Y = 1) = \frac{1}{3}(1-p) 
+                \]
+                \item[$\bullet$] \begin{align*}
+                P(X-Y = 0) = P(X = 0, Y = 0\text{ ou } X = 1, Y = 1) = \frac{1}{3}(1-p) + \frac{1}{3}p = \frac{1}{3}
+                \end{align*}
+                \item[$\bullet$] \[
+                P(X-Y = 1) = P(X = 1, Y = 0 \text{ ou } X = 0, Y = -1) = \frac{1}{3}p + \frac{1}{3}(1-p) = \frac{1}{3}
+                \]
+                \item[$\bullet$] \[
+                P(X-Y = 2) = P(X = 1, Y = -1) = P(X = 1) P(Y = -1) = \frac{1}{3}p
+                \]
+            \end{itemize}
+        \end{solution}
+    }{}
+    \item Déterminer la loi de $X Y$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variable $XY$ peut prendre les valeurs $-1$, $0$ et $1$.
+
+            il faut calculer pour chaque valeur, la probabilité associée : 
+            \begin{itemize} 
+                \item[$\bullet$] \[
+                P(XY = -1) = P(X = 1, Y = -1) = P(X = 1) P(Y = -1) = \frac{1}{3}p 
+                \]
+                \item[$\bullet$] \[
+                P(XY = 0) = P(X = 0 \text{ ou } Y = 0) = 1-p + \frac{1}{3} - \frac{1}{3}(1-p)  = 1- \frac{2}{3}p
+                \]
+                \item[$\bullet$] \[
+                P(XY = 1) = P(X = 1, Y = 1) = P(X = 1) P(Y = 1) = \frac{1}{3}p
+                \]
+            \end{itemize}
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+\section*{5 - Centre d'appels}
+Dans un centre d'assistance téléphonique, on modélise le nombre d'appels reçus pendant une heure par une variable aléatoire $N$ suivant une loi de Poisson de paramètre $\lambda$, où $\lambda > 0$ représente le nombre moyen d'appels reçus par heure.
+
+On suppose qu'un salarié peut traiter au maximum 8 appels par heure. Les appels qui ne peuvent pas être traités dans l'heure sont perdus, ce qui occasionne un coût de 15 euros par appel perdu.
+
+On se demande s'il serait rentable d'embaucher un deuxième salarié, au coût horaire de 40 euros.
+
+\begin{enumerate}
+    \item Déterminer la loi de $N$ puis rappeler son espérance.
+    \item Quelle est la probabilité de recevoir exactement 5 appels en une heure ?
+    \item Quelle est la probabilité de ne recevoir aucun appel en une heure ?
+    \item Quelle est la probabilité de recevoir au moins un appel en une heure ?
+    \item Dans l'organisation 1, exprimer en fonction de $N$ le nombre $P_1$ d'appels perdus pendant une heure.
+    \item Dans l'organisation 2, exprimer en fonction de $N$ le nombre $P_2$ d'appels perdus pendant une heure.
+    \item En déduire les coûts horaires aléatoires $C_1$ et $C_2$ associés aux deux organisations.
+    \item Exprimer les coûts horaires moyens $\mathbb{E}(C_1)$ et $\mathbb{E}(C_2)$.
+    \item En fonction du paramètre $\lambda$, à quelle condition devient-il rentable d'embaucher un deuxième salarié ?
+\end{enumerate}
+% \vspace{1em}
+
+% \section*{6 - coût de dépistage}
+% On cherche à dépister une maladie $M$ dans une population de $N$ personnes. On suppose que chaque personne est atteinte de la maladie avec probabilité $p$, indépendamment des autres. Le coût d'un test sanguin est $c$. On suppose de plus que le test est parfait.
+
+% On compare les deux stratégies suivantes.
+
+% \textbf{Stratégie 1} : effectuer un test individuel pour chaque personne.
+
+% \textbf{Stratégie 2 :} on fixe un entier $n \geq 2$ tel que $N/n$ soit entier, puis on répartit les $N$ personnes en $N/n$ groupes de $n$ personnes. Pour chaque groupe, on mélange les prélèvements sanguins et on effectue un unique test. Si ce test est positif, alors on effectue ensuite un test individuel pour chacune des $n$ personnes du groupe.
+% \begin{enumerate}
+%     \item Calculer le coût de la Stratégie 1.
+%     \item Déterminer la probabilité pour qu'un groupe de $n$ personnes contienne au moins une personne infectée.
+%     \item Soit $X$ la variable aléatoire égale au nombre de groupes pour lesquels des tests individuels seront effectués. Déterminer la loi de $X$.
+%     \item En déduire le coût moyen de la Stratégie 2.
+%     \item On supposera $n p \ll 1$, et on montrera que $n \simeq 1 / \sqrt{p}$ est une taille qui minimise correctement le coût moyen de la stratégie 2.
+%     Indication: On pourra utiliser (en le justifiant) que si $n p \ll 1$, alors
+
+% $$
+% c N\left(1+\frac{1}{n}-(1-p)^n\right)=c N\left(n p+\frac{1}{n}\right)+o(n p)
+% $$
+
+%     \item Quelle stratégie choisissez-vous? Illustrer vos conclusions pour le cas où $p=5 \%$ en calculant le pourcentage moyen d'économie réalisée.
+% \end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,565 @@
+\documentclass[10pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{listings}
+
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% \input \jobname.adr
+
+
+\title{TD2 - Probabilités continues}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+
+
+
+
+
+\section*{Exercice 1 - Variance}
+La variance mesure à quel point une variable aléatoire prend des valeurs éloignées de sa moyenne, elle est définie par :
+$$
+\text{Var}(X) = E\Big(\,\big(X-E(X)\big)^2\, \Big)
+$$
+
+\begin{enumerate}
+    \item Dire pourquoi la variance est toujours positive.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variance est une moyenne pondérée des carrés des écarts à la moyenne, c'est une moyenne de quantités positives, donc elle est toujours positive.
+        \end{solution}
+    }{}
+    La variance mesure à quel point une variable aléatoire prend des valeurs éloignées de sa moyenne.
+    \vspace{0.5em}
+    
+    \item En développant le carré et en utilisant la linéarité de l'espérance, montrer que :
+    $$
+    \text{Var}(X) = E\big(\,X^2\, \big) - \big(E(X)\big)^2
+    $$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                \text{Var}(X) &= E\Big(\,\big(X-E(X)\big)^2\, \Big) \\
+                &= E\Big(\,X^2 - 2X E(X) + E(X)^2\, \Big) \\
+                &= E\big(\,X^2\, \big) - 2E(X)E(X) + E\big(\,E(X)^2\, \big) \\
+                &= E\big(\,X^2\, \big) - E\big(\,X\, \big)^2\,.
+            \end{align*}
+            On a utilisé le fait que l'espérance d'une quantité non aléatoire (comme $E(X)$) est égale à la quantité elle-même.
+        \end{solution}
+    }{}
+    \item Calculer la variance d'une variable aléatoire $X$ suivant une loi de Bernoulli de paramètre $p$. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                \text{Var}(X) &= E\big(\,X^2\, \big) - E\big(\,X\, \big)^2 
+                \end{align*}
+                Calculons $E\big(\,X^2\, \big)$ : $X^2$ peut prendre les valeurs $0$, avec probabilité $1-p$, et $1$, avec probabilité $p$. Donc $X^2$ suit aussi une loi de Bernoulli de paramètre $p$.
+                \begin{align*}
+                    E\big(\,X^2\, \big) = p
+                \end{align*}
+                On a donc :
+                \begin{align*}
+                    \text{Var}(X) = p - p^2 = p(1-p)
+            \end{align*}    
+        \end{solution}
+    }{}
+    
+    \item On rappelle la formule de l'espérance pour une variable continue : 
+    \[
+    E(X) = \int_{-\infty}^\infty x f_X(x) \, dx\,.
+    \]
+    Cette intégrale fait la moyenne pondérée des valeurs prises par $X$, avec les probabilités associées.\newline 
+    Exrpimez l'espérance de $X^2$ par analogie avec l'intégrale ci-dessus.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            E(X^2) = \int_{-\infty}^\infty x^2 f_X(x) \, dx
+            $$
+        \end{solution}
+    }{}
+    \item Rappeler la densité de la loi uniforme sur l'intervalle $[-5, 5]$ puis calculer la variance d'une variable aléatoire $Y$ suivant cette loi. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La densité de la loi uniforme sur l'intervalle $[-5, 5]$ est :
+            $$
+            f_Y(y) = \frac{1}{10} \mathbf{1}_{[-5, 5]}(y)
+            $$
+
+            Calculons la variance :
+            \begin{align*}
+                \text{Var}(Y) &= E\big(\,Y^2\, \big) - E\big(\,Y\, \big)^2 \\
+            \end{align*}
+            On peut calculer $E\big(\,Y^2\, \big)$ en intégrant $y^2$ sur l'intervalle $[-5, 5]$ et en multipliant par la densité de la loi uniforme :
+            $$
+            E\big(\,Y^2\, \big) = \frac{1}{10} \int_{-5}^5 y^2 \, dy = \frac{1}{10} \left[ \frac{y^3}{3} \right]_{-5}^5 = \frac{1}{10} \left( 2\,  \frac{5^3}{3} \right) = \frac{25}{3}\,.
+            $$
+            On peut calculer $E\big(\,Y\, \big)$ en intégrant $y$ sur l'intervalle $[-5, 5]$ et en multipliant par la densité de la loi uniforme :
+            $$
+            E\big(\,Y\, \big) = \frac{1}{10} \int_{-5}^5 y \, dy = \frac{1}{10} \left[ \frac{y^2}{2} \right]_{-5}^5 = \frac{1}{10} \left( \frac{25}{2} - \frac{25}{2} \right) = 0
+            $$
+            Donc :
+            $$
+            \text{Var}(Y) = \frac{25}{3} - 0^2 = \frac{25}{3}
+            $$
+        \end{solution}
+    }{}
+    \item Rappelez la densité, puis calculez la variance d'une variable aléatoire $Z$ suivant une loi exponentielle de paramètre~$\lambda$. 
+    \ifthenelse{\boolean{showSolutions}}{ 
+        \begin{solution}
+            La densité de la loi exponentielle de paramètre $\lambda$ est :
+            $$
+            f_Z(z) = \lambda e^{-\lambda z} \mathbf{1}_{z>0}
+            $$
+            Calculons la variance :
+            \begin{align*}
+                \text{Var}(Z) &= E\big(\,Z^2\, \big) - E\big(\,Z\, \big)^2 \\
+            \end{align*}
+            On peut calculer $E\big(\,Z^2\, \big)$ en intégrant $z^2$ sur l'intervalle $[0, \infty)$ et en multipliant par la densité de la loi exponentielle :
+            $$
+            E\big(\,Z^2\, \big) = \int_0^\infty z^2 \lambda e^{-\lambda z} \, dz
+            $$
+            Deux intégrations par parties successives permettent de calculer cette intégrale :
+            \begin{align*}
+                E\big(\,Z^2\, \big) &= \left[ -\frac{z^2}{\lambda} e^{-\lambda z} \right]_0^\infty + \int_0^\infty \frac{2z}{\lambda} e^{-\lambda z} \, dz \\
+                &= 0 + \int_0^\infty \frac{2z}{\lambda} e^{-\lambda z} \, dz \\
+                &= \left[ -\frac{2z}{\lambda^2} e^{-\lambda z} \right]_0^\infty + \int_0^\infty \frac{2}{\lambda^2} e^{-\lambda z} \, dz \\
+                &= 0 + \frac{2}{\lambda^2} \int_0^\infty e^{-\lambda z} \, dz \\
+                &= \frac{2}{\lambda^2}
+            \end{align*}
+
+            Dans le cours, on a calculé $E\big(\,Z\, \big) = \frac{1}{\lambda}$.
+
+            Finalement, on a :
+            $$
+            \text{Var}(Z) = \frac{1}{\lambda^2}
+            $$
+        \end{solution}
+    }{}
+\end{enumerate}
+\vspace{0.5cm}
+
+\section*{Exercice 2 - Fonction de répartition}
+La fonction de répartition d'une variable aléatoire $X$ est définie par :
+$$
+F_X(x) = P(X\leq x)\,.
+$$
+
+\begin{enumerate}
+    \item Exprimez $F_X$ à l'aide d'une intégrale et de la fonction de densité $f_X$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Nous avons vu dans le cours que :
+            \[
+            P(X \in [a, b]) = \int_a^b f_X(t) \, dt
+            \]
+            Donc :
+            $$
+            F_X(x) = \int_{-\infty}^x f_X(t) \, dt
+            $$
+        \end{solution}
+    }{}
+    \item Exprimez la densité $f_X$ à l'aide de la dérivée de $F_X$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            f_X(x) = F_X'(x)
+            $$
+            La densité est la dérivée de la fonction de répartition.
+        \end{solution}
+    }{}
+    \item Donner une égalité reliant $P(X > x)$ et $F_X(x)$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            P(X > x) = 1 - F_X(x)
+            $$
+        \end{solution}
+    }{}
+
+    \item Donner une égalité reliant $P(X \in [a, b])$ et $F_X(b) - F_X(a)$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            P(X \in [a, b]) = F_X(b) - F_X(a)
+            $$
+        \end{solution}
+    }{}
+    \item Calculez la fonction de répartition d'une variable aléatoire suivant une loi uniforme sur l'intervalle $[0,1]$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Si $x$ est compris entre $0$ et $1$, on a :
+            $$
+            F_X(x) = \int_0^x 1 \, dt = x
+            $$
+            Si $x$ est supérieur à $1$, on a :
+            $$
+            F_X(x) = \int_0^1 1 \, dt = 1
+            $$
+            Si $x$ est inférieur à $0$, on a :
+            $$
+            F_X(x) = 0
+            $$
+        \end{solution}
+    }{}
+    \item Calculez la fonction de répartition d'une variable aléatoire suivant une loi exponentielle de paramètre $\lambda$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a, si $x$ est positif :
+            $$
+            F_X(x) = \int_0^x \lambda e^{-\lambda t} \, dt
+            $$
+            On connait une primitive de cette fonction :
+            \[
+            F_X(x) = \left[ -e^{-\lambda t} \right]_0^x = 1 - e^{-\lambda x}
+            \]
+            Cette fonction tend bien vers $1$ lorsque $x$ tend vers l'infini.
+            Si $x$ est négatif, on a :
+            $$
+            F_X(x) = 0
+            $$
+            
+        \end{solution}
+    }{}
+\end{enumerate}
+
+Dans certains cas, il sera plus pratique de travailler avec la fonction de répartition plutôt que la densité, comme dans l'exercice suivant par exemple :  
+\vspace{0.5cm}
+
+\section*{Exercice 3 - Fonctions de répartitions, applications}
+
+Soient $X_1, X_2 \sim \operatorname{Exp}(\lambda)$ des variables exponentielles indépendantes. 
+On pose $M=\max \left(X_1, X_2\right)$.
+
+\begin{enumerate}
+    \item Montrer que la fonction de répartition de $M$ en fonction de celle de $X_1$ et $X_2$ est :
+    $$
+    F_M(x) = (1 - e^{-\lambda x})^2
+    $$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            $$
+            F_M(x) = P(M \leq x) = P(\max(X_1, X_2) \leq x) = P(X_1 \leq x\text{ et } X_2 \leq x)
+            $$
+            Or, $X_1$ et $X_2$ sont indépendantes, donc :
+            $$
+            F_M(x) = P(X_1 \leq x) P(X_2 \leq x) = (1 - e^{-\lambda x})(1 - e^{-\lambda x}) = (1 - e^{-\lambda x})^2
+            $$
+        \end{solution}
+    }{}
+    \item En déduire la densité de $M$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            f_M(x) = F_M'(x) = 2\lambda e^{-\lambda x}(1 - e^{-\lambda x})
+            $$
+        \end{solution}
+    }{}
+    \newpage
+
+    On pose $m=\min \left(X_1, X_2\right)$.
+
+    \item Montrer que la fonction de répartition de $m$ en fonction de celle de $X_1$ et $X_2$ est :
+    $$
+    F_m(x) = 1 - e^{-2\lambda x}
+    $$
+    On pourra passer au complémentaire. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            $$
+            F_m(x) = P(m \leq x) = P(\min(X_1, X_2) \leq x) = P(X_1 \leq x\text{ ou } X_2 \leq x)
+            $$
+            En passant au complémentaire, on a :
+            $$
+            F_m(x) = 1 - P(X_1 > x \text{ et } X_2 > x)
+            $$
+            Or, $X_1$ et $X_2$ sont indépendantes, donc :
+            $$
+            F_m(x) = 1 - P(X_1 > x) P(X_2 > x) = 1 - (1 - F_{X_1}(x))(1 - F_{X_2}(x))
+            $$
+            On a $F_{X_1}(x) = 1 - e^{-\lambda x}$ et $F_{X_2}(x) = 1 - e^{-\lambda x}$, donc :
+            $$
+            F_m(x) = 1 - (1 - (1 - e^{-\lambda x}))(1 - (1 - e^{-\lambda x})) = 1 - (e^{-\lambda x})^2 = 1 - e^{-2\lambda x}
+            $$
+        \end{solution}
+    }{}    
+    \item En déduire la densité de $m$ et identifier sa loi. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            f_m(x) = F_m'(x) = 2\lambda e^{-2\lambda x}
+            $$
+            Cette densité est celle d'une loi exponentielle de paramètre $2\lambda$.
+        \end{solution}
+    }{}
+    
+
+    \vspace{1em}
+    On modélise deux files d'attente indépendantes. par des variables aléatoires $X_1$ et $X_2$ suivant une loi exponentielle de paramètre $1/10$ minutes.
+    \item Quelle est la probabilité que la file qui finit en premier soit la file 1 ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Par symétrie, comme les deux files suivent la même loi et sont indépendantes, la probabilité que la file qui finit en premier soit la file 1 est $1/2$.
+        \end{solution}
+    }{}
+    \item Quelle est la probabilité que la file qui finit en premier mette moins de 10 minutes ? 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $$
+            P(m < 10) = F_m(10) = 1 - e^{-2\lambda \times 10} = 1 - e^{-2} \approx 86 \%\,.
+            $$
+        \end{solution}
+    }{}
+\end{enumerate}
+
+
+\vspace{0.5cm}
+
+\section*{Exercice 4 - Fonctions de variables aléatoires - cas discret}
+
+Soient $X \sim \mathcal{B}(p), 0<p<1$, et $Y \sim \mathcal{U}(\{-1,0,1\}), 0<p<1$ deux v.a. indépendantes. 
+
+\begin{enumerate}
+    \item Déterminer la loi de $X-Y$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variable $X$ peut prendre les valeurs $0$ et $1$, la variable $Y$ peut prendre les valeurs $-1$, $0$ et $1$.
+            
+            La variable $X-Y$ peut donc prendre les valeurs $-1$, $0$, $1$ et $2$.
+
+            il faut calculer pour chaque valeur, la probabilité associée : 
+            \begin{itemize} 
+                \item[$\bullet$] \[
+                P(X-Y = -1) = P(X = 0, Y = 1) = P(X = 0) P(Y = 1) = \frac{1}{3}(1-p) 
+                \]
+                \item[$\bullet$] \begin{align*}
+                P(X-Y = 0) = P(X = 0, Y = 0\text{ ou } X = 1, Y = 1) = \frac{1}{3}(1-p) + \frac{1}{3}p = \frac{1}{3}
+                \end{align*}
+                \item[$\bullet$] \[
+                P(X-Y = 1) = P(X = 1, Y = 0 \text{ ou } X = 0, Y = -1) = \frac{1}{3}p + \frac{1}{3}(1-p) = \frac{1}{3}
+                \]
+                \item[$\bullet$] \[
+                P(X-Y = 2) = P(X = 1, Y = -1) = P(X = 1) P(Y = -1) = \frac{1}{3}p
+                \]
+            \end{itemize}
+        \end{solution}
+    }{}
+    \item Déterminer la loi de $X Y$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La variable $XY$ peut prendre les valeurs $-1$, $0$ et $1$.
+
+            il faut calculer pour chaque valeur, la probabilité associée : 
+            \begin{itemize} 
+                \item[$\bullet$] \[
+                P(XY = -1) = P(X = 1, Y = -1) = P(X = 1) P(Y = -1) = \frac{1}{3}p 
+                \]
+                \item[$\bullet$] \[
+                P(XY = 0) = P(X = 0 \text{ ou } Y = 0) = 1-p + \frac{1}{3} - \frac{1}{3}(1-p)  = 1- \frac{2}{3}p
+                \]
+                \item[$\bullet$] \[
+                P(XY = 1) = P(X = 1, Y = 1) = P(X = 1) P(Y = 1) = \frac{1}{3}p
+                \]
+            \end{itemize}
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{0.5cm}
+\section*{Exercice 5 - Fonctions de variables aléatoires - cas continu}
+
+Soit la fonction $f$ définie sur $\mathbf{R}$ par : 
+$$
+f(x)=x e^{-\frac{x^2}{2}} \mathbf{1}_{x>0}
+$$
+\begin{enumerate}
+    \item Montrez que $f$ est une densité de probabilité.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On calcule l'intégrale :
+            $$
+            \int_0^\infty x e^{-\frac{x^2}{2}} \, dx 
+            $$
+            On connait une primitive de cette fonction : 
+            \[
+            \int_0^\infty x e^{-\frac{x^2}{2}} \, dx = \left[ -e^{-\frac{x^2}{2}} \right]_0^\infty = 1
+            \]
+            De plus, $f$ est positive et continue sur $\mathbf{R}$ donc $f$ est une densité de probabilité.
+        \end{solution}
+    }{}
+    \vspace{1em}
+
+
+    \item Soit $X$ une variable aléatoire continue dont la loi a pour densité $f$ et $Y=X^2$.\newline
+    Exprimer $P\big(\,Y \in[a, b]\,\big)$ en fonction de la probabilité que $X$ se situe dans un certain intervalle.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            $$
+            P(Y \in [a, b]) = P(X^2 \in [a, b]) = P( X \in [\sqrt{a}, \sqrt{b}])
+            $$
+        \end{solution}
+    }{}
+
+    \item En déduire que
+    \[
+    P(Y \in [a, b]) = \int_{a}^{b} \frac{1}{2}e^{-\frac{x}{2}} \, dx
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            \begin{align*}
+                P(Y \in [a, b]) 
+                &= P( X \in [\sqrt{a}, \sqrt{b}]) \\
+                &= \int_{\sqrt{a}}^{\sqrt{b}} xe^{-\frac{x^2}{2}} \, dx
+            \end{align*}
+            On effectue le changement de variable $u = x^2$, on obtient :
+            $$
+            P(Y \in [a, b]) = \int_{a}^{b} \frac{1}{2}e^{-\frac{u}{2}} \, du
+            $$
+        \end{solution}
+    }{}
+    \item En déduire la loi de $Y$, puis rappeler l'espérance et la variance de $Y$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La loi de $Y$ est une loi exponentielle de paramètre $1/2$. On rappelle que :
+            $$
+            E(Y) = \frac{1}{\lambda} = 2
+            $$
+            $$
+            \text{Var}(Y) = \frac{1}{\lambda^2} = 4
+            $$
+        \end{solution}
+    }{}
+\end{enumerate}
+\vspace{1em}
+\textbf{On peut dire qu'une fonction $f$ est la densité d'une variable aléatoire $X$ si pour tout $a, b$ :}   
+\[
+P\big(\,X \in[a, b]\,\big)=\int_{a}^b f(s) \mathrm{d} s
+\]
+
+
+\vspace{0.5cm}
+\section*{Exercice 6 - Fonctions de variables aléatoires - cas continu 2}
+
+Soit $X \sim U(0,1)$, une variable aléatoire suivant une loi uniforme sur $[0,1]$. Soit $Y=-\ln (X)$.
+\begin{enumerate}
+    \item On suit le même schéma que l'exercice précédent:
+     \begin{itemize}
+        \item partez des probabilités $P(Y \in [a, b])$, 
+        \item reliez ces probabilités à $X$, 
+        \item écrivez les sous forme d'intégrale
+        \item faites un changement de variable 
+        \item déterminez la loi de $Y$.
+    \end{itemize}
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            $$
+            P(Y \in [a, b]) = P(-\ln (X) \in [a, b]) = P(X \in [e^{-b}, e^{-a}])
+            $$
+            Donc, en utilisant la densité de $X$ :
+            $$
+            P(Y \in [a, b]) = \int_{e^{-b}}^{e^{-a}} \mathbf{1}_{[0, 1]}(x) \, dx
+            $$
+            En effectuant le changement de variable $u = -\ln(x)$, on obtient :
+            \begin{align*}
+                P(Y \in [a, b]) 
+                &= \int_{b}^{a} \mathbf{1}_{[0, 1]}(e^{-u}) \big(-e^{-u}\big) \, du \\
+                &= \int_{a}^{b} \mathbf{1}_{u\geq 0}\cdot e^{-u} \, du
+            \end{align*}
+            La densité de $Y$ est donc :
+            $$
+            f_Y(y) = e^{-y} \mathbf{1}_{y>0}\,.
+            $$
+        \end{solution}
+    }{}
+    \item En déduire que $Y$ suit une loi exponentielle et donner son paramètre.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            C'est la densité d'une loi exponentielle de paramètre $1$.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1cm}
+\section*{Exercice 7 - Fonctions de variables aléatoires - cas continu 3}
+
+Soit $X \sim \operatorname{Exp}(\lambda)$.
+\begin{enumerate}
+    \item On rappelle que la loi exponentielle modélise des temps d'attente ou des durées de vie. A l'instinct, quelle loi suit la variable aléatoire $Y=X/2$ ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $Y$ suit aussi une loi exponentielle.
+
+            Dans une loi exponentielle, l'espérance est l'inverse du paramètre, ici, si on divise un temps d'attente par deux, on s'attend à ce que l'espérance soit également divisée par deux, donc $Y$ devrait suivre une loi exponentielle de paramètre $2\lambda$.
+        \end{solution}
+    }{}
+    \item Soit $Y=\frac{X}{\theta}$, où $\theta>0$ est une constante. En suivant encore le même schéma, quelle est la loi de $Y$ ? \newline 
+    Ceci confirme-t-il votre intuition de la question précédente ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a :
+            $$
+            P(Y \in [a, b]) = P\Big(\frac{X}{\theta} \in [a, b]\Big) = P\big(X \in [\theta a, \theta b]\big)
+            $$
+            Donc, en utilisant la densité de $X$ :
+            $$
+            P(Y \in [a, b]) = \int_{\theta a}^{\theta b} \lambda e^{-\lambda x} \, dx
+            $$
+            En effectuant le changement de variable $u = \frac{x}{\theta}$, on obtient :
+            $$
+            P(Y \in [a, b]) = \theta \int_{ a}^{ b} \lambda e^{-\lambda \theta u} \, du
+            $$
+            La densité de $Y$ est donc :
+            $$
+            f_Y(y) = \theta \lambda e^{-\lambda \theta y} \mathbf{1}_{y>0}
+            $$
+            $Y$ suit donc une loi exponentielle de paramètre $\theta\lambda$. Ce qui confirme notre intuition de la question précédente. 
+        \end{solution}
+    }{}
+    \end{enumerate}
+
+
+\end{document}

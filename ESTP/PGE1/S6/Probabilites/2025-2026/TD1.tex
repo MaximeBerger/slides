@@ -1,0 +1,238 @@
+\input{configTD}
+
+\title{Probabilités TD1 - Evénements et probabilités}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{1 - Manipulation d'événements}
+On contrôle successivement une suite de pièces utilisées sur un chantier. Pour $n \geq 1$, on note $A_n$ l'événement "la $n$-ième pièce contrôlée est conforme".
+\begin{enumerate}
+    \item Comment écrire à partir des $A_i$ les événements :
+    \begin{itemize}
+        \item Les 3 premières pièces contrôlées sont conformes
+        \item Parmi les 2 premières pièces contrôlées, la première est conforme et la seconde ne l'est pas.
+        \item Parmi les 2 premières pièces contrôlées, 1 est conforme et 1 ne l'est pas.
+    \end{itemize}
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    \begin{itemize}
+        \item $A_1 \cap A_2 \cap A_3$
+        \item $A_1 \cap \bar{A_2}$
+        \item $(A_1\cap \bar{A_2}) \cup (\bar{A_1}\cap A_2)$
+    \end{itemize}
+\end{solution}
+    }{}
+    \item Décrire par une phrase les événements suivants:
+    $$
+B=\bigcap_{i=5}^{+\infty} A_i,\qquad  C=\bigcup_{i=5}^{+\infty} A_i
+$$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    $B$ signifie qu'à partir du cinquième contrôle, toutes les pièces contrôlées sont conformes. $C$ signifie qu'au moins une pièce contrôlée à partir du cinquième contrôle est conforme. On peut décrire $D$ par la formule
+        \end{solution}
+    }{}
+
+
+\item  Écrire à l'aide de $A_i$ l'événement $D$ "À partir d'un certain contrôle, toutes les pièces contrôlées sont conformes".
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+
+$$
+D=\bigcup_{n=1}^{+\infty} \bigcap_{i \geq n} A_i\,.
+$$
+
+    \end{solution}
+}{}
+
+\item On suppose que chaque pièce a une probabilité $\frac{1}{2}$ d'être conforme, indépendamment des autres. Calculer la probabilité que, parmi les deux premières pièces contrôlées, l'une au moins soit conforme.
+
+\item Quelle est la probabilité que la deuxième pièce soit conforme sachant que la première l'est ?
+
+\item Sachant qu'une des deux premières pièces est conforme, quelle est la probabilité que l'autre le soit aussi ?
+\end{enumerate}
+\vspace{2em}
+
+\section*{2 - Mesure de Probabilité}
+Soit $a \in] 0,1[$.
+
+Sur $\mathbb{N}$, une mesure de probabilité est entièrement déterminée par les poids $P(\{k\})$ pour $k \in \mathbb{N}$, avec
+\[
+P(\{k\}) \geq 0
+\qquad \text{et} \qquad
+\sum_{k=0}^{+\infty} P(\{k\}) = 1.
+\]
+Pour toute partie $A \subset \mathbb{N}$, on a alors
+\[
+P(A)=\sum_{k \in A} P(\{k\}).
+\]
+\begin{enumerate}
+
+\item Déterminer $a$ tel que la fonction $P$, qui à tout $n \in \mathbb{N}$ associe $P(\{n\})=(1-a) a^n$ soit une mesure de probabilité sur $\mathbb{N}$. 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+ Il suffit de vérifier que, pour tout $\left.n \in \mathbb{N}, a^n(1-a) \in\right] 0,1[$ - ce qui est clair puisque $a \in] 0,1[$, donc $\left.\left.a^n \in\right] 0,1\right]$ ( $n$ peut être égal à 0 ) et $\left.1-a \in\right] 0,1[$ - et que
+
+$$
+\sum_{n=0}^{+\infty}(1-a) a^n=\frac{1-a}{1-a}=1
+$$
+    \end{solution}
+}{}
+
+\item On considère les deux événements $A=\{2 k: k \in \mathbb{N}\}$ et $B=\{2 k+1: k \in \mathbb{N}\}$. Calculer $P(A)$ et $P(B)$. Les événements $A$ et $B$ sont-ils incompatibles ? sont-ils indépendants ?
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On a
+
+$$
+P(A)=\sum_{k=0}^{+\infty}(1-a) a^{2 k}=\frac{1-a}{1-a^2}=\frac{1}{1+a}
+$$
+
+
+Comme $B=\bar{A}$, on a
+
+$$
+P(B)=1-P(A)=\frac{a}{1+a}
+$$
+
+
+Puisque $A \cap B=\varnothing$, les événements $A$ et $B$ sont incompatibles. Puisque $P(A \cap B)=P(\varnothing)=0$ et $P(A) P(B) \neq 0$, les événements $A$ et $B$ ne sont pas indépendants.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{3 - Indépendance d'événements}
+\begin{enumerate}
+\item Un atelier fabrique $12$ pièces numérotées de $1$ à $12$. On en prélève une au hasard pour contrôle, et on considère les événements
+
+$$
+\begin{aligned}
+& A=\text { "la pièce prélevée porte un numéro pair", } \\
+& B=\text { "la pièce prélevée porte un numéro multiple de } 3 \text { ". }
+\end{aligned}
+$$
+
+
+Les événements $A$ et $B$ sont-ils indépendants?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a :
+
+$$
+\begin{gathered}
+A=\{2,4,6,8,10,12\} \\
+B=\{3,6,9,12\} \\
+A \cap B=\{6,12\}
+\end{gathered}
+$$
+On a donc $P(A)=1 / 2, P(B)=1 / 3$ et $P(A \cap B)=1 / 6=P(A) P(B)$. Les événements $A$ et $B$ sont indépendants.
+
+\end{solution}
+}{}
+
+\item  Reprendre la question avec un atelier fabriquant $13$ pièces numérotées.
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Les événements $A, B$ et $A \cap B$ s'écrivent encore exactement de la même façon. Mais cette fois, on a : $P(A)=6 / 13, P(B)=4 / 13$ et $P(A \cap B)=2 / 13 \neq 24 / 169$. Les événements $A$ et $B$ ne sont pas indépendants. C'est conforme à l'intuition. It n'y a plus la même répartition de boules paires et de boules impaires, et dans les multiples de 3 compris entre 1 et 13 , la répartition des nombres pairs et impairs est restée inchangée.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{4 - Lois discrètes classiques}
+Dans cet exercice, on cherche \`a reconna\^itre dans quelles situations les lois discr\`etes classiques fournissent un mod\`ele adapt\'e.
+
+\begin{enumerate}
+    \item Relier chaque loi discr\`ete de la colonne de gauche \`a la situation correspondante de la colonne de droite. On justifiera bri\`evement chaque choix.
+    
+    \medskip
+    \noindent
+    \begin{minipage}[t]{0.33\textwidth}
+    \textbf{Colonne A -- Lois}\vspace{1em}
+    
+    Loi binomiale $B(n, p)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi de Poisson $P(\lambda)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi g\'eom\'etrique $G(p)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi uniforme discr\`ete $U(a, b)$ \hfill \rule{1.2ex}{1.2ex}
+    \end{minipage}
+    \hspace{0.14\textwidth}
+    \begin{minipage}[t]{0.43\textwidth}
+    \textbf{Colonne B -- Situations}\vspace{1em}
+    
+    \rule{1.2ex}{1.2ex}\quad Nombre de reprises parmi $20$ interventions.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Nombre d'incidents rares en une journ\'ee.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Rang du premier contr\^ole concluant.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Choix al\'eatoire d'un cr\'eneau entre $t_1$ et $t_2$.
+    \end{minipage}
+    
+    \vspace{2em}
+
+    \item Pour chacune des variables al\'eatoires suivantes, dire quelle loi discr\`ete permet de la mod\'eliser et pr\'eciser ses param\`etres.
+    \begin{enumerate}
+        \item $X$ d\'esigne le nombre d'\'el\'ements non conformes parmi $12$ \'el\'ements contr\^ol\'es, chaque \'el\'ement ayant une probabilit\'e $0{,}03$ d'\^etre non conforme ;
+        \item $Y$ d\'esigne le nombre de jours de pluie pendant une semaine de $7$ jours, chaque jour ayant une probabilit\'e $0{,}3$ d'\^etre pluvieux, ind\'ependamment des autres ;
+        \item $Z$ d\'esigne le nombre d'incidents mineurs observ\'es pendant une semaine sur un chantier, sachant qu'on en observe en moyenne $1{,}2$ par semaine ;
+        \item $T$ d\'esigne le rang du premier essai concluant lors d'une s\'erie d'essais ind\'ependants, chaque essai ayant une probabilit\'e $0{,}75$ de r\'eussir ;
+        \item $U$ d\'esigne le num\'ero du quai de d\'echargement attribu\'e au hasard \`a un camion parmi les quais num\'erot\'es de $1$ \`a $6$ ;
+        \item $V$ d\'esigne le nombre d'appels de maintenance re\c cus en une journ\'ee, sachant que ce nombre vaut en moyenne $3$ par jour.
+    \end{enumerate}
+    
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+        \begin{enumerate}
+            \item Correspondances :
+            \[
+            1 \leftrightarrow A,
+            \qquad
+            2 \leftrightarrow B,
+            \qquad
+            3 \leftrightarrow C,
+            \qquad
+            4 \leftrightarrow D.
+            \]
+            En effet, $A$ correspond \`a un nombre de succ\`es dans un nombre fix\'e d'essais ind\'ependants, $B$ \`a un nombre d'\'ev\'enements rares sur une dur\'ee donn\'ee, $C$ au rang du premier succ\`es, et $D$ \`a un choix \'equiprobable parmi des entiers.
+            
+            \item Mod\'elisation des variables al\'eatoires :
+            \begin{enumerate}
+                \item $X \sim B(12,0{,}03)$ ;
+                \item $Y \sim B(7,0{,}3)$ ;
+                \item $Z \sim P(1{,}2)$ ;
+                \item $T \sim G(0{,}75)$ ;
+                \item $U \sim U(1,6)$ ;
+                \item $V \sim P(3)$.
+            \end{enumerate}
+            
+        \end{enumerate}
+    \end{solution}
+}{}
+
+\end{document}

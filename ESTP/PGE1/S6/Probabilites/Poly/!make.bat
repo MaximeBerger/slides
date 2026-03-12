@@ -3,7 +3,7 @@ REM Définir TEXINPUTS pour inclure la racine du projet (où se trouve config.te
 set TEXINPUTS=c:\Users\mberge04\OneDrive - association E.S.T.P\Documents\Projets\slides\ESTP\Config;%TEXINPUTS%
 
 
-xelatex PolyProb.tex
+xelatex PolyProba.tex
 
 REM Deuxieme passe pour generer le PDF final
 xelatex PolyProba.tex
