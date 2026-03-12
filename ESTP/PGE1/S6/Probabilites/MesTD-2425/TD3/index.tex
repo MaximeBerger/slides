@@ -1,0 +1,502 @@
+\documentclass[10pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{listings}
+
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\input \jobname.adr
+% \input \jobname.adr
+
+
+\title{TD3 - Analyse Numérique}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{Des polynômes familiers}
+On note $(p_n)_{n\in\mathbb{N}}$ la suite des nombres premiers. 
+\begin{enumerate}
+    \item Donner le polynôme de degré minimal tel que pour chaque $k\in\{1, \cdots, n\}$ $P(k)$ soit le $k$-ième nombre premier. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On commence par former les polynômes de Lagrange $\ell_0, \cdots, \ell_n$ tels que $\ell_i(j) = \delta_{ij}$:
+            \[
+            \ell_i(x) = \prod_{\substack{0 \leq j \leq n \\ j \neq i}} \frac{x-j}{i-j}
+            \]
+            On peut alors écrire $P(x) = \sum_{i=0}^n p_i \ell_i(x)$.
+        \end{solution}
+    }{}
+    \item A votre avis, $P(n+1)$ est-il premier ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Aucune chance...  
+            Il n'y a même aucune raison pour que $P(n+1)$ soit un nombre entier. 
+        \end{solution}
+    }{}
+\end{enumerate}
+
+
+\vspace{1cm}
+\section*{Deux décompositions LU}
+
+
+\begin{enumerate}
+    \item On donne la matrice $
+    A=\left(\begin{array}{cccc}
+    2 & -1 & 0 & 0 \\
+    -1 & 2 & -1 & 0 \\
+    0 & -1 & 2 & -1 \\
+    0 & 0 & -1 & 2
+    \end{array}\right)
+    $
+    Former la décomposition $L U$ de $A$, où $L$ est une matrice triangulaire inférieure dont les éléments diagonaux sont égaux à l'unité et $U$ est une matrice triangulaire supérieure. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $A = LU$ avec 
+            \[
+            L = \left(\begin{array}{cccc}
+                    1 & 0 & 0 & 0 \\ 
+                    -1/2 & 1 & 0 & 0 \\ 
+                    0 & -2/3 & 1 & 0 \\ 
+                    0 & 0 & -3/4 & 1
+                \end{array}\right), \qquad 
+            U = \left(\begin{array}{cccc}
+                    2 & -1 & 0 & 0 \\
+                    0 & 3/2 & -1 & 0 \\
+                    0 & 0 & 4/3 & -1 \\
+                    0 & 0 & 0 & 5/4
+                \end{array}\right)
+            \]
+        \end{solution}
+    }{}
+    
+    \item Calculer $D=\operatorname{det} A$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $D = \operatorname{det} A = \operatorname{det} L \cdot  \operatorname{det} U = 1 \cdot \frac{3}{2} \cdot \frac{4}{3} \cdot \frac{5}{4} = 5$
+        \end{solution}
+    }{}
+    \item Utiliser la factorisation précédente pour résoudre le système linéaire $A x = b$, avec $b = [2,3,4,2]$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On cherche à résoudre $LUX = b$, on pose $Y = UX$ et on résout $LY = b$. Comme on connait $L^{-1}$, on obtient directement 
+            \[
+            Y = L^{-1} b = \left(\begin{array}{cccc}
+                1 & 0 & 0 & 0 \\ 
+                1/2 & 1 & 0 & 0 \\ 
+                1/3 & 2/3 & 1 & 0 \\ 
+                1/4 & 1/2 & 3/4 & 1
+            \end{array}\right) \left(\begin{array}{c}
+                2 \\
+                3 \\
+                4 \\
+                2
+            \end{array}\right) = \left(\begin{array}{c}
+                2 \\
+                4 \\
+                20/3 \\
+                7
+            \end{array}\right)
+            \]
+
+
+            On résout ensuite $UX = Y$, le système linéaire s'écrit : 
+            \[
+            \left(\begin{array}{cccc}
+                2 & -1 & 0 & 0 \\
+                0 & 3/2 & -1 & 0 \\
+                0 & 0 & 4/3 & -1 \\
+                0 & 0 & 0 & 5/4
+            \end{array}\right) \left(\begin{array}{c}   
+                x_1 \\
+                x_2 \\
+                x_3 \\
+                x_4
+            \end{array}\right) = \left(\begin{array}{c}
+                2 \\
+                4 \\
+                20/3 \\
+                7
+            \end{array}\right)
+            \]
+
+            On trouve $x_4 = 28/5$, $x_3 = 46/5$, $x_2 = 44/5$ et $x_1 = 54/10 = 27/5$.
+            
+            En vérifiant, on obtient bien $A x = b$.
+        \end{solution}
+    }{}
+
+
+\item Ecrire la décomposition LU de la matrice 
+$\left(\begin{array}{ccc}1 & 2 & -3 \\ 2 & 6 & -5 \\ 1 & -2 & 7\end{array}\right)$
+\ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $A = LU$ avec 
+            $L = \left(\begin{array}{ccc}1 & 0 & 0 \\ 2 & 1 & 0 \\ 1 & -2 & 1\end{array}\right)$
+            $U = \left(\begin{array}{ccc}1 & 2 & -3 \\ 0 & 2 & 1 \\ 0 & 0 & 12\end{array}\right)$
+                    \end{solution}
+    }{}
+
+\item Résoudre le système linéaire 
+$\left\{\begin{aligned} x_1+2 x_2-3 x_3 & =1 \\ 2 x_1+6 x_2-5 x_3 & =-1 \\ x_1-2 x_2+7 x_3 & =2\end{aligned}\right.$
+
+\ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On résout par descente $Ly=b$ et on trouve $y=(1,-3,-5)^t$. 
+            
+            Puis on résout $Ux=y$ par remontée, et on trouve $x=\left(\frac{7}{3},-\frac{31}{24},-\frac{5}{12}\right)^t$.
+        \end{solution}
+    }{}
+    
+    \item En raisonnant par l'absurde, montrer que la décomposition LU est unique, si $\boldsymbol{L}$ une matrice triangulaire inférieure avec des $1$ sur la diagonale et $\boldsymbol{U}$ une matrice triangulaire supérieure. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Supposons que $A = LU = L'U'$ avec $L$ et $L'$ triangulaires inférieures avec des $1$ sur la diagonale et $U$ et $U'$ triangulaires supérieures. 
+            $L$ et $L'$ sont donc inversibles. Si $U$ ou $U'$ n'est pas inversible, alors $A$ ne serait pas inversible non plus. 
+            
+            Alors $L'^{-1}L = UU'^{-1}$. Or $L'^{-1}L$ est triangulaire inférieure avec des $1$ sur la diagonale et $UU'^{-1}$ est triangulaire supérieure, donc $L'^{-1}L = I$. Donc $L = L'$ et $U = U'$.
+        \end{solution}
+    }{}
+    \vspace{1em}
+
+    On peut obtenir les matrices $L$ et $U$ à partir de l'égalité $A = LU$ sans effectuer l'algorithme de Gauss:
+    
+    \item En posant des inconnues pour les matrices $L$ et $U$ de taille $3\times 3$, déterminer les équations vérifiées par les coefficients de $L$ et $U$.\newline
+    On pourra regarder dans l'ordre la première ligne de $A = LU$, puis la première colonne, ensuite la deuxième ligne puis la deuxième colonne, ... 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour des matrices $3\times 3$: 
+
+            On pose $L = \left(\begin{array}{ccc}
+                1 & 0 & 0 \\
+                l_{21} & 1 & 0 \\
+                l_{31} & l_{32} & 1
+            \end{array}\right)$ et $U = \left(\begin{array}{ccc}
+                u_{11} & u_{12} & u_{13} \\
+                0 & u_{22} & u_{23} \\ 
+                0 & 0 & u_{33}
+            \end{array}\right)$.
+
+            Regardons la première ligne de l'équation $A = LU$ : 
+            \[
+            \left(\begin{array}{ccc}
+                a_{11} & a_{12} & a_{13} \\
+            \end{array}\right) = \left(\begin{array}{ccc}
+                u_{11} & u_{12} & u_{13} \\
+            \end{array}\right)
+            \]
+            On obtient donc directement la première ligne de $U$. 
+
+            Regardons ensuite la première coolonne de l'équation $A = LU$ : 
+            \[
+            \left(\begin{array}{c}
+                a_{11} \\
+                a_{21} \\
+                a_{31}
+            \end{array}\right) = \left(\begin{array}{c}
+                u_{11} \\
+                l_{21}u_{11} \\
+                l_{31}u_{11}
+            \end{array}\right)
+            \]
+            On obtient donc facilement la première colonne de $L$: 
+            \[
+            l_{21} = \frac{a_{21}}{a_{11}}, \quad l_{31} = \frac{a_{31}}{a_{11}}
+            \]
+
+            Regardons ensuite la deuxième ligne de l'équation $A = LU$ : 
+            \[
+            \left(\begin{array}{ccc}
+                a_{21} & a_{22} & a_{23} \\
+            \end{array}\right) = \left(\begin{array}{ccc}
+                l_{21}u_{11} & l_{21}u_{12} + u_{22} & l_{21}u_{13} + u_{23} \\
+            \end{array}\right)
+            \]
+            On peut donc en déduire la deuxième ligne de $U$ ...            
+            
+        \end{solution}
+    }{}
+    
+    \item Ecrire un algorithme qui calcule $L$ et $U$ à partir de $A$ sans effectuer l'algorithme de Gauss.
+
+
+    \end{enumerate}
+    \vspace{1em}
+
+    \section*{Méthode de Jacobi}
+    On donne les deux systèmes linéaires :
+    
+    $$
+    \left[\begin{array}{cc}
+    10 & 1 \\
+    2 & 10
+    \end{array}\right]\left[\begin{array}{l}
+    x_1 \\
+    x_2
+    \end{array}\right]=\left[\begin{array}{l}
+    11 \\
+    12
+    \end{array}\right]; \qquad\left[\begin{array}{cc}
+    1 & 10 \\
+    10 & 2
+    \end{array}\right]\left[\begin{array}{l}
+    x_1 \\
+    x_2
+    \end{array}\right]=\left[\begin{array}{l}
+    11 \\
+    12
+    \end{array}\right]
+    $$
+    \begin{enumerate}
+        \item Trouver les solutions exactes.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                On peut utiliser un pivot de Gauss, pour le premier système, changer $L_2$ en $L_2 - L_1/5$ donne
+                \[
+                \left(\begin{array}{cc}
+                    10 & 1 \\
+                    0 & 49/5 \\
+                \end{array}\right) \left(\begin{array}{l}
+                    x_1 \\
+                    x_2
+                \end{array}\right) = \left(\begin{array}{l}11 \\ 49/5\end{array}\right)
+                \]
+                On peut alors résoudre le système pour trouver $x_1 = 1$ et $x_2 = 1$.
+
+                Le second système admet la même solution. 
+            \end{solution}
+        }{}
+        \item Résoudre chaque système par la méthode itérative de Jacobi, à partir du vecteur initial $x^{(0)}=(0,0)^T$, jusqu'au vecteur $x^{(4)}$ inclus.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+            La méthode de Jacobi est une méthode itérative pour résoudre les systèmes linéaires de la forme $Ax = b$. 
+            Elle repose sur la décomposition de la matrice $A$ en trois matrices : $A = D - E - F$, où $D$ est la matrice diagonale contenant les éléments diagonaux de $A$, $E$ est la matrice triangulaire inférieure contenant les éléments sous la diagonale, et $F$ est la matrice triangulaire supérieure contenant les éléments au-dessus de la diagonale.
+
+            \begin{itemize}
+                \item[$\bullet$] D'abord on choisit un vecteur initial, dans notre cas, nous avons $x^{(0)} = (0,0)^T$.
+
+                \item[$\bullet$] On calcule le vecteur $x^{(k+1)}$ à partir de $x^{(k)}$ en utilisant la formule matricielle suivante :
+                \[
+                x^{(k+1)} = D^{-1}(b + Ex^{(k)} + Fx^{(k)})
+                \]
+                où $D^{-1}$ est l'inverse de la matrice diagonale $D$.
+
+                \item[$\bullet$] On répète l'étape 2 jusqu'à ce que la solution converge, c'est-à-dire jusqu'à ce que la différence entre deux itérations successives soit inférieure à un certain seuil de tolérance, ou jusqu'à atteindre un nombre maximum d'itérations.
+            \end{itemize}
+
+            Appliquons cette méthode aux deux systèmes donnés :
+
+            \[
+            \left[\begin{array}{cc}
+            10 & 1 \\
+            2 & 10
+            \end{array}\right]\left[\begin{array}{l}
+            x_1 \\
+            x_2
+            \end{array}\right]=\left[\begin{array}{l}
+            11 \\
+            12
+            \end{array}\right]
+            \]
+            \begin{itemize}
+                \item[$\bullet$] Décomposition : $D = \left[\begin{array}{cc} 10 & 0 \\ 0 & 10 \end{array}\right]$, $E = \left[\begin{array}{cc} 0 & 0 \\ -2 & 0 \end{array}\right]$, $F = \left[\begin{array}{cc} 0 & -1 \\ 0 & 0 \end{array}\right]$
+                \item[$\bullet$] Itération 0 : $x^{(0)} = (0,0)^T$
+                \item[$\bullet$] Itération 1 : $x^{(1)} = D^{-1}(b + Ex^{(0)} + Fx^{(0)}) = \left[\begin{array}{c} 1.1 \\ 1.2 \end{array}\right]$
+                \item[$\bullet$] Itération 2 : $x^{(2)} = D^{-1}(b + Ex^{(1)} + Fx^{(1)}) = \left[\begin{array}{c} 0.98 \\ 0.98 \end{array}\right]$
+                \item[$\bullet$] Itération 3 : $x^{(3)} = D^{-1}(b + Ex^{(2)} + Fx^{(2)}) = \left[\begin{array}{c} 1.002 \\ 1.004 \end{array}\right]$
+                \item[$\bullet$] Itération 4 : $x^{(4)} = D^{-1}(b + Ex^{(3)} + Fx^{(3)}) = \left[\begin{array}{c} 0.9996 \\ 0.9996 \end{array}\right]$
+            \end{itemize}
+
+            **Deuxième système :**
+            \[
+            \left[\begin{array}{cc}
+            1 & 10 \\
+            10 & 2
+            \end{array}\right]\left[\begin{array}{l}
+            x_1 \\
+            x_2
+            \end{array}\right]=\left[\begin{array}{l}
+            11 \\
+            12
+            \end{array}\right]
+            \]
+
+            \begin{itemize}
+                \item[$\bullet$] Décomposition : $D = \left[\begin{array}{cc} 1 & 0 \\ 0 & 2 \end{array}\right]$, $E = \left[\begin{array}{cc} 0 & 0 \\ -10 & 0 \end{array}\right]$, $F = \left[\begin{array}{cc} 0 & -10 \\ 0 & 0 \end{array}\right]$
+                \item[$\bullet$] Itération 0 : $x^{(0)} = (0,0)^T$
+                \item[$\bullet$] Itération 1 : $x^{(1)} = D^{-1}(b + Ex^{(0)} + Fx^{(0)}) = \left[\begin{array}{c} 11 \\ 6 \end{array}\right]$
+                \item[$\bullet$] Itération 2 : $x^{(2)} = D^{-1}(b + Ex^{(1)} + Fx^{(1)}) = \left[\begin{array}{c} -49 \\ -49 \end{array}\right]$
+                \item[$\bullet$] Itération 3 : $x^{(3)} = D^{-1}(b + Ex^{(2)} + Fx^{(2)}) = \left[\begin{array}{c} 501 \\ 251 \end{array}\right]$
+                \item[$\bullet$] Itération 4 : $x^{(4)} = D^{-1}(b + Ex^{(3)} + Fx^{(3)}) = \left[\begin{array}{c} -2499 \\ -2499 \end{array}\right]$
+            \end{itemize}
+
+            \end{solution}
+        }{}
+        \item Expliquer qualitativement le comportement différent des deux suites de vecteurs.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                On observe que pour le premier système, la méthode de Jacobi converge rapidement vers la solution exacte $(1, 1)^T$. En revanche, pour le deuxième système, la méthode semble diverger.
+            \end{solution}
+        }{}
+    \end{enumerate}
+    
+    \ifthenelse{\boolean{showSolutions}}{}
+    {
+       \newpage 
+    }
+    
+
+    \vspace{1cm}
+    \section*{Une décomposition LU qui se passe mal}
+
+    \begin{enumerate}
+        \item Montrer que la matrice 
+$
+A=\left(\begin{array}{lll}
+0 & 3 & 0 \\
+1 & 2 & 0 \\
+3 & 5 & 2
+\end{array}\right)$
+        n'est pas décomposable sous la forme $L U$
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                Le premier pivot est nul donc nous ne pouvons pas effectuer la décomposition $LU$.
+            \end{solution}
+        }{}
+        \item Trouver $P$ une matrice de permutation et $B$ une matrice décomposable sous la forme $L U$ telles que $B=P A$ et déduire une factorisation $L U$ de la matrice $B$.
+        \ifthenelse{\boolean{showSolutions}}{
+            \begin{solution}
+                On peut permuter les lignes 1 et 2 pour obtenir la matrice $B$ :
+                \[
+                B = \left(\begin{array}{ccc}
+                1 & 2 & 0 \\    
+                0 & 3 & 0 \\
+                3 & 5 & 2
+                \end{array}\right)
+                \]
+                Cela correspond à multiplier $A$ à gauche par la matrice de permutation $P$ :
+                \[
+                P = \left(\begin{array}{ccc}
+                0 & 1 & 0 \\
+                1 & 0 & 0 \\
+                0 & 0 & 1
+                \end{array}\right)
+                \]
+                On peut alors effectuer la décomposition $LU$ de $B$. 
+                \end{solution}
+        }{}
+        
+        \item Utiliser ce résultat pour résoudre $A\left(\begin{array}{l}x \\ y \\ z\end{array}\right)=\left(\begin{array}{l}1 \\ 0 \\ 1\end{array}\right)$.
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{Vers la résolution des équations différentielles}
+Seule une infime minorité des équations différentielles est soluble mathématiquement.
+
+% Discrétisation, intégration sur chaque intervalle. Approximation de l'intégrale. 
+% Runge Kutta, utilisation des formules de quadrature. 
+Nous verrons dans la suite comment obtenir des solutions approchées d'équations différentielles.
+Regardons par exemple le problème de Cauchy suivant défini sur l'intervalle $[0,1]$: 
+\[
+\begin{cases}
+    y' = f(t,y) \\
+    y(0) = y_0
+\end{cases}
+\]
+
+Par exemple, ces problèmes regroupent 
+\begin{itemize}
+    \item l'équation décrivant le lancer d'une balle 
+    $k \overrightarrow{v(t)}+m \frac{d \overrightarrow{v(t)}}{d t}=\vec{G}$
+    \item l'équation décrivant la charge d'un condensateur 
+    $R \frac{d q(t)}{d t}+\frac{1}{C} q(t)=E$
+    \item l'équation décrivant la vitesse d'un parachutiste 
+    $m \frac{d v(t)}{d t}-g-\frac{1}{2} \rho v(t)^2 S C_x=0$
+\end{itemize}
+
+\begin{enumerate}
+    \item Parmi les équations ci-dessus, lesquelles sont des équations différentielles linéaires ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les deux premières sont linéaires, la troisième non.
+        \end{solution}
+    }{}
+    \item Parmi les équations linéaires, lesquelles sont à coefficients constants ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Elles sont toutes les deux à coefficients constants.
+        \end{solution}
+    }{}
+    \vspace{1em}
+    Reprenons la forme générale du début de l'exercice. 
+    L'idée des méthodes numériques que nous utiliserons est de discrétiser l'intervalle $[0,1]$ en $n$ sous-intervalles de longueur $h=1/n$.
+    On définit alors 
+    \[
+    t_i = i h \quad \text{et} \quad y_i = y(t_i)
+    \]
+    Une solution approchée sera donnée par la valeur de $y_i$ pour $i=0, \cdots, n$.
+    \item En intégrant l'équation différentielle sur l'intervalle $[t_i, t_{i+1}]$, déterminer une relation entre $y_{i}$ et $y_{i+1}$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On intègre l'équation différentielle sur l'intervalle $[t_i, t_{i+1}]$, on obtient : 
+            \[
+            \int_{t_i}^{t_{i+1}} y'(t) dt = \int_{t_i}^{t_{i+1}} f(t,y(t)) dt
+            \]
+            On peut alors écrire : 
+            \[
+        y_{i+1} - y_i = \int_{t_i}^{t_{i+1}} f(t,y(t)) dt
+        \]       
+        \end{solution}
+    }{}
+    \item On ne peut pas calculer l'intégrale présente dans l'équation que vous avez trouvé. 
+    Proposez $3$ méthodes différentes pour obtenir une valeur approchée de cette intégrale et résoudre l'équation de départ de manière approchée. 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On peut utiliser la méthode des rectangles, la méthode des trapèzes, ou la méthode de Simpson.
+        \end{solution}
+    }{}
+\vspace{1em}
+    Chacune de ces méthodes conduira à un algorithme classique de résolution approchée de l'équation différentielle. Nous les détaillerons au prochain TD. 
+\end{enumerate}
+    
+
+\end{document}

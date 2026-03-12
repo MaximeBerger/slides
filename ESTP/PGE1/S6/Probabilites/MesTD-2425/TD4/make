@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+pdflatex --shell-escape -jobname=enonce ./index.tex 
+pdflatex --shell-escape -jobname=corrige ./index.tex 
+rm *.aux
+rm *.log
