@@ -1,5 +1,7 @@
 # Progression 2025-2026 - Analyse numérique
 
+Eplorer https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html
+
 ## Positionnement du module
 
 - Public : `PGE1`, semestre 6.
