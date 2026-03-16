@@ -1,0 +1,27 @@
+{
+  "titre": "Probabilités et Statistiques",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 1,
+      "titre": "Rappels",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD1 - Evénements et probabilités",
+          "lien": "TD1-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD1 - Corrigé",
+          "lien": "TD1-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }
+  ]
+}
