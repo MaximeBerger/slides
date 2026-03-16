@@ -1,0 +1,605 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+
+% Bloc à compléter en cours.
+% Mode corrigé : contenu sur fond coloré (mdframed).
+% Mode énoncé  : cadre gris vide de hauteur #1 (défaut 3 cm).
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+% Valeur dans un tableau : visible en corrigé, fantôme en énoncé.
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+% Espace pour un croquis.
+\newcommand{\esquisse}[1][5.5cm]{%
+  \begin{center}%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \centering\vfill
+      \textit{\small Croquis réalisé en cours :
+      courbe exacte, tangente au point $(t_n,T_n)$,
+      pas d'Euler, écart avec la solution.}%
+      \vfill
+    \end{minipage}}%
+  }{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \hfill\vfill\hfill
+    \end{minipage}}%
+  }%
+  \end{center}%
+}
+
+\newcommand{\degC}{\text{\textdegree C}}
+
+\title{\sffamily\bfseries Analyse Numérique --- CM1\\[0.3em]
+  \Large De l'erreur numérique à la méthode d'Euler}
+\author{}
+\date{17 mars 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Le problème}
+% ====================================================================
+
+Partons d'une situation très simple,
+qui ne demande a priori ni formule ni ordinateur :
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+\og Voici un café trop chaud.
+Combien de temps faut-il attendre pour pouvoir le boire ?\fg{}
+\end{mdframed}
+\end{center}
+
+Pour y répondre, il faut d'abord se poser les bonnes questions.
+
+\medskip
+
+\textbf{Questions préliminaires.}
+\begin{itemize}[leftmargin=*]
+  \item Quelle grandeur varie au cours du temps ?
+  \item Comment modéliser le système ?
+\end{itemize}
+
+\atrou[3.6cm]{%
+\begin{itemize}[leftmargin=*]
+  \item La température $T(t)$ varie au cours du temps.
+  \item On peut modéliser le système par une équation différentielle : Plus la température du café est élevée, plus il refroidit vite.
+  L'équation serait de type $T'(t) = -kT(t)$.
+
+  A l'équilibre, la température du café est égale à la température de la pièce:
+  L'équation devient $T'(t) = -k(T(t)-T_{\mathrm{amb}})$.
+\end{itemize}
+}
+
+% ====================================================================
+\section*{2. Modélisation --- Bilan thermique}
+% ====================================================================
+
+Pour répondre à la question, il faut un modèle :
+une équation qui décrit comment la température évolue.
+
+\medskip
+
+On considère un café de température $T(t)$ dans une pièce à température
+ambiante constante $T_{\mathrm{amb}}$.
+En supposant la température uniforme dans la tasse
+(modèle à paramètres localisés), le bilan d'énergie s'écrit :
+\[
+  m\,c_p\,\frac{dT}{dt}
+  = -h_{\mathrm{eff}}\,A\,\bigl(T(t) - T_{\mathrm{amb}}\bigr).
+\]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llcl}
+  \hline
+  \textbf{Grandeur} & \textbf{Symbole}
+    & \textbf{Valeur} & \textbf{Unité} \\
+  \hline
+  Masse de café
+    & $m$ & $0{,}25$ & kg \\
+  Capacité thermique massique
+    & $c_p$ & $4180$ & $\mathrm{J\,kg^{-1}\,K^{-1}}$ \\
+  Coefficient d'échange global
+    & $h_{\mathrm{eff}}$ & $\approx 50$
+    & $\mathrm{W\,m^{-2}\,K^{-1}}$ \\
+  Surface d'échange de la tasse
+    & $A$ & $\approx 0{,}035$ & $\mathrm{m}^{2}$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\smallskip
+
+\textit{Le coefficient $h_{\mathrm{eff}}$ regroupe convection naturelle,
+rayonnement et évaporation (dominante pour un café chaud non couvert).}
+
+\medskip
+
+\textbf{Forme simplifiée.} En divisant par $m\,c_p$, on peut simplifier l'équation en :
+
+\[
+  \frac{dT}{dt} = -k\bigl(T(t) - T_{\mathrm{amb}}\bigr),
+  \qquad k = \frac{h_{\mathrm{eff}}\,A}{m\,c_p}\,.
+\]
+
+\textbf{Application numérique :}
+\[
+  k = \frac{50 \times 0{,}035}{0{,}25 \times 4180}
+    = \frac{1{,}75}{1045}
+    \approx 0{,}0017\;\mathrm{s^{-1}}
+    \approx 0{,}10\;\mathrm{min^{-1}}.
+\]
+
+On vient d'obtenir une EDO à coefficients constants, on peut la résoudre de manière exacte.
+
+
+
+% ====================================================================
+\section*{3. A quoi sert l'analyse numérique ?}
+% ====================================================================
+
+But du module : faire résoudre par un ordinateur des problèmes issues de différentes modélisations. 
+
+Dans l'exemple précédent, on peut tout résoudre à la main, mais ce modèle est volontairement simplifié :
+
+\medskip
+
+\textbf{Complexification du café.}
+
+Si on veut pousser un peu notre modélisation, $h_{\mathrm{eff}}$ n'est pas constant :
+il dépend de la température $T$ du café.
+Il regroupe trois contributions, chacune non linéaire :
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Convection naturelle} :
+    $h_{\mathrm{conv}}$ est proportionnel à $(T - T_{\mathrm{amb}})^{1/4}$
+    \qquad (corrélation de type Churchill-Chu).
+  \item \textbf{Rayonnement} :
+    $h_{\mathrm{rad}}
+    = \varepsilon\,\sigma\,(T^2+T_{\mathrm{amb}}^2)\,(T+T_{\mathrm{amb}})$
+    \qquad ($T$ en Kelvin).
+  \item \textbf{Évaporation} (terme dominant) :
+    le flux évaporatif dépend de la pression
+    de vapeur saturante,
+    $$p_{\mathrm{sat}}(T)
+    \approx 611 \times
+    \exp\!\Bigl(\dfrac{17{,}27\,T_C}{T_C+237}\Bigr)
+    \;[Pa],$$
+    qui croît quasi exponentiellement avec $T$.
+\end{itemize}
+
+\smallskip
+
+À $90\;\degC$, l'évaporation représente
+${\sim}\,80\,\%$ du transfert total
+et $h_{\mathrm{eff}} \approx 100\;\mathrm{W\,m^{-2}\,K^{-1}}$.
+
+À $40\;\degC$, les trois contributions sont comparables
+et $h_{\mathrm{eff}} \approx 25\;\mathrm{W\,m^{-2}\,K^{-1}}$.
+
+Le coefficient varie donc d'un facteur $\sim\!4$
+entre un café brûlant et un café tiède.
+
+\smallskip
+
+L'équation devient :
+\[
+  m\,c_p\,\frac{dT}{dt}
+  = -\underbrace{\bigl[h_{\mathrm{conv}}(T)
+    + h_{\mathrm{rad}}(T)
+    + h_{\mathrm{evap}}(T)\bigr]}_{h_{\mathrm{eff}}(T)}
+  \,A\,\bigl(T(t) - T_{\mathrm{amb}}\bigr).
+\]
+Puissance $1/4$, produit de carrés, exponentielle :
+chaque terme est non linéaire en $T$.
+On ne sait plus résoudre cette équation par une formule.
+
+\medskip
+
+Ce phénomène n'est pas propre au café.
+Voici deux autres situations d'ingénierie
+qui posent le même problème.
+
+\medskip
+
+\textbf{Vidange d'un réservoir} (loi de Torricelli).
+La hauteur d'eau $h(t)$ vérifie :
+\[
+  \frac{dh}{dt} = -\alpha\,\sqrt{h(t)},
+  \qquad h(t) \geq 0.
+\]
+La non-linéarité en $\sqrt{h}$ change la dynamique :
+le réservoir se vide de plus en plus lentement.
+Si en plus la section du réservoir varie avec $h$,
+aucune formule simple n'est disponible.
+
+\medskip
+
+\textbf{Pendule simple} (grandes oscillations).
+L'angle $\theta(t)$ vérifie :
+\[
+  \theta''(t)
+  = -\frac{g}{L}\sin\,\theta(t).
+\]
+Pour de petites oscillations,
+$\sin(\theta)\approx\theta$ et on retrouve
+un oscillateur harmonique que l'on sait résoudre.
+Mais pour de grandes amplitudes,
+le $\sin$ empêche toute solution en termes
+de fonctions élémentaires.
+
+\medskip
+
+\textbf{Qu'ont en commun ces trois modèles ?}
+
+\atrou[3.6cm]{%
+Dans chaque cas, on connaît une \textbf{loi d'évolution locale}
+(une dérivée, un taux de variation),
+mais la solution globale n'est pas accessible par une formule.
+
+C'est exactement là que l'analyse numérique intervient :
+elle fournit une méthode de calcul approché,
+applicable à tous ces problèmes.
+}
+
+% ====================================================================
+\section*{4. Implémentation dans un ordinateur}
+% ====================================================================
+
+Les ordinateurs savent seulement réaliser des sommes et des produits. Pas de calcul d'intégrales, pas de dérivée, pas de fonctions trigonométriques ou de racine carrée. 
+
+Comment les ordinateurs/calculatrices modernes calculent des racines carrées ou des cosinus ? 
+\atrou[3.6cm]{%
+  La réponse est presque la même pour les deux types de calculs, on stocke des valeurs qu'on a calculées à l'avance avec des méthodes numériques (méthodes de Newton, séries de Taylor, etc.). Si on a besoin d'une valeur intermédiaire, on réalise une interpolation (voir la suite du cours) pour obtenir une valeur approchée.
+
+}
+
+
+Que nous dit exactement l'équation différentielle ? 
+
+\medskip
+
+Revenons au modèle simple du café :
+$\displaystyle\frac{dT}{dt}
+= -k\bigl(T(t) - T_{\mathrm{amb}}\bigr).$
+
+\begin{itemize}[leftmargin=*]
+  \item Si le café est beaucoup plus chaud que la pièce,
+        la température baisse-t-elle vite ou lentement ?
+  \item Quand le café approche de $T_{\mathrm{amb}}$,
+        que devient la vitesse de refroidissement ?
+  \item Si à un instant $t$ on connaît $T(t)$,
+        l'équation donne-t-elle directement $T(t+10)$,
+        ou seulement la manière dont $T$ évolue à cet instant ?
+\end{itemize}
+
+\atrou[4cm]{%
+\textbf{Conclusion :}
+l'EDO donne une \textbf{information locale} ---
+la pente (taux de variation) à l'instant courant.
+Elle ne donne pas directement la valeur future.
+}
+
+La question qui se pose alors naturellement est :
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+\og Si je connais la valeur actuelle et la pente actuelle,
+comment approcher la valeur un peu plus tard\,?\fg{}
+\end{mdframed}
+\end{center}
+
+% ====================================================================
+\section*{5. Méthode d'Euler explicite}
+% ====================================================================
+
+L'idée est simple : si l'on connaît la valeur actuelle
+et la pente actuelle, on peut estimer la valeur
+un petit moment plus tard en suivant cette pente.
+C'est le principe de la méthode d'Euler.
+
+\medskip
+
+On note $T_n \approx T(t_n)$ la valeur approchée au temps
+$t_n = t_0 + n\,\Delta t$.
+
+\medskip
+
+\textbf{Construction sur le café.}
+
+\atrou[6.4cm]{%
+La pente à l'instant $t_n$ vaut
+$f(t_n,T_n) = -k\,(T_n - T_{\mathrm{amb}})$.
+
+En supposant cette pente presque constante sur
+$[t_n,\,t_n+\Delta t]$ :
+\[
+  \boxed{T_{n+1} = T_n
+    + \Delta t\left[-k\bigl(T_n - T_{\mathrm{amb}}\bigr)\right].}
+\]
+}
+
+\medskip
+
+\textbf{Formule générale.}
+Pour $y'=f(t,y)$ avec $y(t_0)=y_0$ :
+
+\atrou[4cm]{%
+\[
+  \boxed{y_{n+1} = y_n + \Delta t\,f(t_n,\,y_n).}
+\]
+
+\begin{itemize}
+  \item $y_n$ : valeur approchée au temps $t_n$ ;
+  \item $\Delta t$ : pas de temps ;
+  \item $f(t_n,y_n)$ : pente fournie par le modèle.
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Interprétation géométrique}
+--- tracer la courbe exacte, la tangente au point
+$(t_n,T_n)$ et le pas d'Euler :
+
+\esquisse[10cm]
+
+% ====================================================================
+\section*{6. Activité --- Euler à la main}
+% ====================================================================
+
+On va maintenant appliquer le schéma d'Euler sur le café
+avec des valeurs numériques concrètes,
+pour voir la méthode en action et comparer
+deux pas de temps différents.
+
+\medskip
+
+\textbf{Paramètres :}\;
+$T_0 = 90\;\degC$,\;
+$T_{\mathrm{amb}} = 20\;\degC$,\;
+$k = 0{,}1\;\mathrm{min^{-1}}$.
+\[
+  T_{n+1} = T_n - 0{,}1\;\Delta t\;(T_n - 20).
+\]
+
+\medskip
+
+\textbf{Cas $\boldsymbol{\Delta t = 2}$~min}
+\quad(\,calculer $T_1$ à $T_5$,
+soit $10$ min de simulation\,) :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  $n$ & $t_n\;\text{(min)}$ & $T_n\;(\degC)$
+      & Pente $-0{,}1(T_n-20)$ & $T_{n+1}\;(\degC)$ \\
+  \hline
+  0 & 0 & 90
+    & \val{$-7{,}0$} & \val{$76$} \\
+  \hline
+  1 & 2 & \val{$76$}
+    & \val{$-5{,}6$} & \val{$64{,}8$} \\
+  \hline
+  2 & 4 & \val{$64{,}8$}
+    & \val{$-4{,}48$} & \val{$55{,}84$} \\
+  \hline
+  3 & 6 & \val{$55{,}84$}
+    & \val{$-3{,}584$} & \val{$48{,}67$} \\
+  \hline
+  4 & 8 & \val{$48{,}67$}
+    & \val{$-2{,}867$} & \val{$42{,}94$} \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{Questions.}
+\begin{itemize}[leftmargin=*]
+  \item La température calculée baisse-t-elle bien
+        à chaque étape ?
+  \item La correction ajoutée diminue-t-elle d'un pas
+        à l'autre ? Pourquoi est-ce cohérent avec le modèle ?
+  \item L'évolution semble-t-elle physiquement crédible ?
+\end{itemize}
+
+\medskip
+
+\textbf{Cas $\boldsymbol{\Delta t = 5}$~min}
+\quad(\,calculer $T_1$ et $T_2$\,) :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  $n$ & $t_n\;\text{(min)}$ & $T_n\;(\degC)$
+      & Pente $-0{,}1(T_n-20)$ & $T_{n+1}\;(\degC)$ \\
+  \hline
+  0 & 0 & 90
+    & \val{$-7{,}0$} & \val{$55$} \\
+  \hline
+  1 & 5 & \val{$55$}
+    & \val{$-3{,}5$} & \val{$37{,}5$} \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Solution exacte} à $t=10$ :
+$T(10) = 20 + 70\,e^{-1} \approx 45{,}75\;\degC$.
+
+\medskip
+
+\textbf{Questions.}
+\begin{itemize}[leftmargin=*]
+  \item Quel pas donne le résultat le plus proche
+        de la solution exacte ?
+  \item Le pas $\Delta t = 5$ demande moins de calculs :
+        que perd-on en contrepartie ?
+\end{itemize}
+
+\medskip
+
+\textbf{Comparaison :}
+
+\atrou[3.6cm]{%
+\begin{itemize}
+  \item $\Delta t = 2$ : $T \approx 42{,}94\;\degC$,
+        écart $\approx 2{,}8\;\degC$.
+  \item $\Delta t = 5$ : $T \approx 37{,}5\;\degC$,
+        écart $\approx 8{,}3\;\degC$.
+  \item Pas plus petit $\Rightarrow$ plus de calculs,
+        mais meilleure précision.
+\end{itemize}
+}
+
+% ====================================================================
+\section*{7. Peut-on faire confiance au résultat ?}
+% ====================================================================
+
+On vient de calculer $T(10) \approx 42{,}94\;\degC$ avec
+$\Delta t = 2$ et $T(10) \approx 37{,}5\;\degC$ avec $\Delta t = 5$,
+alors que la valeur exacte est $45{,}75\;\degC$.
+Ni l'un ni l'autre ne tombent juste.
+D'où viennent ces écarts ?
+Et si l'on confie le calcul à un ordinateur,
+peut-on faire une confiance absolue au résultat affiché ?
+
+\medskip
+
+\textbf{Quiz.}
+\begin{itemize}[leftmargin=*]
+  \item Que vaut $0{,}1 + 0{,}2$ sur un ordinateur ?
+  \item $\sqrt{2}^{\,2}$ vaut-il exactement $2$ ?
+  \item Une petite erreur répétée peut-elle s'accumuler ?
+\end{itemize}
+
+\medskip
+
+\textbf{Trois sources d'erreur :}
+
+\atrou[6cm]{%
+\begin{enumerate}
+  \item \textbf{Erreur de modèle} :
+    le café réel $\neq$ modèle de Newton.
+  \item \textbf{Erreur de méthode} :
+    Euler remplace la dérivée par
+    $\dfrac{T_{n+1}-T_n}{\Delta t}$.
+  \item \textbf{Erreur d'arrondi} :
+    la machine stocke des nombres en précision finie.
+\end{enumerate}
+}
+
+\textbf{Mesurer un écart :}
+
+\atrou[4.4cm]{%
+\begin{itemize}
+  \item \textbf{Erreur absolue} :
+    $\bigl|T_{\mathrm{exact}} - T_{\mathrm{calculé}}\bigr|$.
+  \item \textbf{Erreur relative} :
+    $\dfrac{\bigl|T_{\mathrm{exact}}
+      - T_{\mathrm{calculé}}\bigr|}
+    {\bigl|T_{\mathrm{exact}}\bigr|}$.
+  \item \textbf{Chiffres significatifs} :
+    nombre de décimales fiables du résultat.
+\end{itemize}
+}
+
+% ====================================================================
+\section*{8. Que se passe-t-il si le pas est trop grand ?}
+% ====================================================================
+
+On a vu qu'un pas plus petit donne un meilleur résultat,
+mais coûte plus de calculs.
+Peut-on aller dans l'autre sens et prendre un pas très grand ?
+Poussons l'expérience à l'extrême.
+
+\medskip
+
+Avec $k = 0{,}1$, $T_0 = 90\;\degC$, $T_{\mathrm{amb}} = 20\;\degC$
+et une pente initiale de $-7$ :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ccc}
+  \hline
+  $\Delta t$ & $T_1$ & Commentaire \\
+  \hline
+  $2$ & $76\;\degC$ & raisonnable \\
+  $10$ & $20\;\degC$ & équilibre en une étape \\
+  $15$ & $-15\;\degC$ & température négative ! \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\atrou[4.4cm]{%
+\begin{itemize}
+  \item Un pas trop grand peut produire un résultat
+        \textbf{physiquement absurde}.
+  \item Plus le pas est petit, plus le calcul est fidèle
+        --- mais il coûte plus cher.
+  \item Le choix du pas est un \textbf{compromis
+        entre précision et coût}.
+\end{itemize}
+}
+
+\medskip
+
+\textit{Au CM2, on formalisera ces notions de précision,
+stabilité et convergence, et on verra comment la même
+logique de discrétisation s'applique à des problèmes
+plus complexes --- par exemple la diffusion de chaleur
+dans une paroi.}
+
+% ====================================================================
+\section*{9. Bilan}
+% ====================================================================
+
+Trois idées à retenir :
+
+\atrou[7cm]{%
+\begin{enumerate}
+  \item Un calcul numérique est une \textbf{approximation}.
+  \item Une EDO peut être transformée en procédure de calcul
+        par \textbf{discrétisation} (méthode d'Euler) :
+        \[
+          y_{n+1} = y_n + \Delta t\,f(t_n,\,y_n).
+        \]
+  \item Le choix du pas $\Delta t$ est un
+        \textbf{compromis entre précision et coût}.
+\end{enumerate}
+}
+
+\end{document}

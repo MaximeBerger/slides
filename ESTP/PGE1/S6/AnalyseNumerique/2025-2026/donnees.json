@@ -1,0 +1,21 @@
+{
+  "titre": "Analyse numérique",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 1,
+      "titre": "Méthode d'Euler",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        {
+          "titre": "CM 1 - à remplir",
+          "lien": "CM1-enonce.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+      ]
+    }
+  ]
+}
