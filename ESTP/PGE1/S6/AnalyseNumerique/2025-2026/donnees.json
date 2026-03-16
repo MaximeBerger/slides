@@ -9,7 +9,9 @@
       "lien": "#",
       "sousParties": [
         {
+          "numero": 1,
           "titre": "CM 1 - à remplir",
+          "description": "",
           "lien": "CM1-enonce.pdf",
           "cible": "_blank"
         }
