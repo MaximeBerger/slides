@@ -40,6 +40,19 @@
 \usepackage[sf]{titlesec}
 \usepackage{environ}
 
+
+\newenvironment{solution}
+{
+    \vspace{0.5em}
+    \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
+    \textbf{Solution.}\\[0.5em]
+}
+{
+    \end{mdframed}
+    \vspace{0.5em}
+}
+
+
 % Définition de la variable pour afficher les corrections
 \newboolean{showSolutions}
 % Décommentez la ligne suivante pour afficher les solutions

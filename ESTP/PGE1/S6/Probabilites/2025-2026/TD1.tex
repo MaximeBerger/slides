@@ -5,10 +5,6 @@
 \author{}
 \date{}
 
-\newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
-    {\end{mdframed}\par\vspace{0.5em}}
-
 \begin{document}
 \sffamily
 \maketitle
@@ -57,9 +53,72 @@ $$
 
 \item On suppose que chaque pièce a une probabilité $\frac{1}{2}$ d'être conforme, indépendamment des autres. Calculer la probabilité que, parmi les deux premières pièces contrôlées, l'une au moins soit conforme.
 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On note $A_1$ l'événement "la première pièce est conforme" et $A_2$ l'événement "la deuxième pièce est conforme". On cherche
+
+$$
+P(A_1 \cup A_2)=1-P(\bar{A_1}\cap \bar{A_2}).
+$$
+
+Par indépendance,
+
+$$
+P(\bar{A_1}\cap \bar{A_2})=P(\bar{A_1})P(\bar{A_2})=\frac{1}{2}\times \frac{1}{2}=\frac{1}{4}.
+$$
+
+Donc
+
+$$
+P(A_1 \cup A_2)=1-\frac{1}{4}=\frac{3}{4}.
+$$
+    \end{solution}
+}{}
+
 \item Quelle est la probabilité que la deuxième pièce soit conforme sachant que la première l'est ?
 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Comme les contrôles sont indépendants,
+
+$$
+P(A_2 \mid A_1)=P(A_2)=\frac{1}{2}.
+$$
+
+Autrement dit, savoir que la première pièce est conforme ne change pas la probabilité que la deuxième le soit.
+    \end{solution}
+}{}
+
 \item Sachant qu'une des deux premières pièces est conforme, quelle est la probabilité que l'autre le soit aussi ?
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+L'information "une des deux premières pièces est conforme" correspond à l'événement $A_1 \cup A_2$. Dire que l'autre l'est aussi signifie alors que les deux sont conformes, c'est-à-dire l'événement $A_1 \cap A_2$.
+
+On cherche donc
+
+$$
+P(A_1 \cap A_2 \mid A_1 \cup A_2)=\frac{P(A_1 \cap A_2)}{P(A_1 \cup A_2)}.
+$$
+
+Or, par indépendance,
+
+$$
+P(A_1 \cap A_2)=\frac{1}{2}\times \frac{1}{2}=\frac{1}{4}
+$$
+
+et, d'après la question précédente,
+
+$$
+P(A_1 \cup A_2)=\frac{3}{4}.
+$$
+
+Ainsi,
+
+$$
+P(A_1 \cap A_2 \mid A_1 \cup A_2)=\frac{\frac{1}{4}}{\frac{3}{4}}=\frac{1}{3}.
+$$
+    \end{solution}
+}{}
 \end{enumerate}
 \vspace{2em}
 

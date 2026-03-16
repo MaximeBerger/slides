@@ -2,7 +2,7 @@
 setlocal
 
 set "TEXINPUTS=c:\Users\mberge04\OneDrive - association E.S.T.P\Documents\Projets\slides\ESTP\Config;%TEXINPUTS%"
-set "BASE=TD4"
+set "BASE=TD1"
 
 xelatex -jobname=corrige "%BASE%.tex"
 if errorlevel 1 exit /b 1

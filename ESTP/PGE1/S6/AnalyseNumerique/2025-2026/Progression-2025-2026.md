@@ -1,6 +1,6 @@
 # Progression 2025-2026 - Analyse numérique
 
-Eplorer https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html
+Eplorer [https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html](https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html)
 
 ## Positionnement du module
 
@@ -32,24 +32,25 @@ Eplorer https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html
 - Équilibre d'une structure simplifiée et calibration d'un paramètre par Newton.
 - Diffusion de chaleur dans une paroi.
 - Matrice de rigidité tridiagonale issue d'un maillage 1D.
-- Classement d'importance par `PageRank`.
 - Matrices stochastiques pour l'évolution de classes de risque en assurance.
 
 ## Progression des séances
 
-| Séance | Date | Nature | Durée | Contenu principal |
-| ------ | ---- | ------ | ----- | ----------------- |
-| CM1 | 17/03/2026 | CM | 2h30 | Rappels sur les erreurs numériques, modélisation par EDO, méthode d'Euler explicite, lecture qualitative d'un schéma numérique. |
-| CM2 | 19/03/2026 | CM | 1h30 | Différences finies pour EDO et EDP simples, lien entre discrétisation et systèmes linéaires, introduction à la stabilité et à la convergence. |
-| TP1 | 24/03/2026 ou 31/03/2026 | TP | 2h30 | Notebook Python : Euler sur une EDO simple, visualisation temporelle, pendule, ajout de frottements, première animation. |
-| TD1 | 01/04/2026 ou 02/04/2026 | TD | 2h30 | Interpolation de Lagrange et intégration numérique avec applications à une façade et à des mesures expérimentales. |
-| TD2 | 03/04/2026 ou 07/04/2026 | TD | 2h30 | Pivot de Gauss, `LU`, systèmes linéaires issus d'un modèle discrétisé, perturbation du second membre et conditionnement. |
-| TD3 | 08/04/2026 ou 14/04/2026 | TD | 2h30 | Méthodes itératives, convergence, matrices stochastiques, PageRank, interprétation de solutions stationnaires. |
-| TP2 | 15/04/2026 | TP | 2h30 | Python : comparaison méthodes directes / itératives, temps de calcul, convergence, perturbations, nombre de condition. |
-| TD4 | 17/04/2026 | TD | 2h30 | Estimation d'erreurs sur Euler, quadrature et différences finies, méthode de Newton pour une équation non linéaire issue d'un modèle simplifié. |
-| CM3 | 23/04/2026 | CM | 2h00 | Synthèse sur les schémas de résolution d'EDO, comparaison Euler / Runge-Kutta, introduction à Newton, quasi-Newton et à l'ajustement de paramètres. |
-| CM4 | 29/04/2026 | CM | 3h00 | Révisions et ouvertures : éléments finis 1D, conditionnement, optimisation, usages de bibliothèques Python et coût algorithmique. |
-| Examen | 26/05/2026 | Evaluation | 2h00 | Mobiliser les outils du module sur un sujet mêlant système linéaire, approximation d'EDO/EDP, interpolation ou intégration numérique. |
+
+| Séance | Date                     | Nature     | Durée | Contenu principal                                                                                                                                   |
+| ------ | ------------------------ | ---------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CM1    | 17/03/2026               | CM         | 2h30  | Rappels sur les erreurs numériques, modélisation par EDO, méthode d'Euler explicite, lecture qualitative d'un schéma numérique.                     |
+| CM2    | 19/03/2026               | CM         | 1h30  | Différences finies pour EDO et EDP simples, lien entre discrétisation et systèmes linéaires, introduction à la stabilité et à la convergence.       |
+| TP1    | 24/03/2026 ou 31/03/2026 | TP         | 2h30  | Notebook Python : Euler sur une EDO simple, visualisation temporelle, pendule, ajout de frottements, première animation.                            |
+| TD1    | 01/04/2026 ou 02/04/2026 | TD         | 2h30  | Interpolation de Lagrange et intégration numérique avec applications à une façade et à des mesures expérimentales.                                  |
+| TD2    | 03/04/2026 ou 07/04/2026 | TD         | 2h30  | Pivot de Gauss, `LU`, systèmes linéaires issus d'un modèle discrétisé, perturbation du second membre et conditionnement.                            |
+| TD3    | 08/04/2026 ou 14/04/2026 | TD         | 2h30  | Méthodes itératives, convergence, matrices stochastiques, PageRank, interprétation de solutions stationnaires.                                      |
+| TP2    | 15/04/2026               | TP         | 2h30  | Python : comparaison méthodes directes / itératives, temps de calcul, convergence, perturbations, nombre de condition.                              |
+| TD4    | 17/04/2026               | TD         | 2h30  | Estimation d'erreurs sur Euler, quadrature et différences finies, méthode de Newton pour une équation non linéaire issue d'un modèle simplifié.     |
+| CM3    | 23/04/2026               | CM         | 2h00  | Synthèse sur les schémas de résolution d'EDO, comparaison Euler / Runge-Kutta, introduction à Newton, quasi-Newton et à l'ajustement de paramètres. |
+| CM4    | 29/04/2026               | CM         | 3h00  | Révisions et ouvertures : éléments finis 1D, conditionnement, optimisation, usages de bibliothèques Python et coût algorithmique.                   |
+| Examen | 26/05/2026               | Evaluation | 2h00  | Mobiliser les outils du module sur un sujet mêlant système linéaire, approximation d'EDO/EDP, interpolation ou intégration numérique.               |
+
 
 ## Répartition pédagogique
 
@@ -72,3 +73,4 @@ Eplorer https://cpge-itc.github.io/bcpst2/dl/bcpst/4_euler/euler.html
 - Commenter l'effet d'une perturbation sur le second membre ou sur les données du problème.
 - Appliquer un schéma simple de résolution d'EDO ou de différences finies et évaluer l'erreur.
 - Réaliser une ou deux itérations d'une méthode de Newton et interpréter leur intérêt.
+
