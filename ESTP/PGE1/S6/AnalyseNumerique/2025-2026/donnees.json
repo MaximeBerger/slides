@@ -25,6 +25,31 @@
       ],
       "sexercer" : [
       ]
+    },
+    {
+      "id": "sec2",
+      "numero": 2,
+      "titre": "Différences finies et systèmes linéaires",
+      "description": "Discrétisation · Stabilité · Convergence",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 2 - à remplir",
+          "description": "",
+          "lien": "CM2-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 2 - annoté",
+          "description": "",
+          "lien": "CM2-annote.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+      ]
     }
   ]
 }

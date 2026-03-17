@@ -1,0 +1,618 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\esquisse}[1][5.5cm]{%
+  \begin{center}%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \centering\vfill
+      \textit{\small Croquis réalisé en cours.}%
+      \vfill
+    \end{minipage}}%
+  }{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \hfill\vfill\hfill
+    \end{minipage}}%
+  }%
+  \end{center}%
+}
+
+\newcommand{\degC}{\text{\textdegree C}}
+
+\title{\sffamily\bfseries Analyse Numérique --- CM2\\[0.3em]
+  \Large Différences finies, systèmes linéaires,\\
+  stabilité et convergence}
+\author{}
+\date{19 mars 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Rappel --- Ce qu'on a retenu du CM1}
+% ====================================================================
+
+Au CM1, on a construit une méthode de calcul approché
+(méthode d'Euler) à partir du refroidissement d'un café.
+
+\medskip
+
+\textbf{Questions de rappel.}
+\begin{itemize}[leftmargin=*]
+  \item Qu'a-t-on remplacé dans la méthode d'Euler ?
+  \item Pourquoi faut-il choisir un pas ?
+  \item Qu'est-ce qui peut rendre une approximation peu fiable ?
+\end{itemize}
+
+\atrou[3.6cm]{%
+\begin{itemize}[leftmargin=*]
+  \item On a remplacé la \textbf{dérivée} (information continue)
+        par un \textbf{quotient de différences} (information discrète).
+  \item Le pas $\Delta t$ contrôle la \textbf{précision} :
+        plus il est petit, plus on suit fidèlement la courbe exacte,
+        mais plus le calcul coûte cher.
+  \item Un pas trop grand peut produire des résultats
+        \textbf{physiquement absurdes}
+        (température négative, divergence).
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Question de transition.}
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+\og La méthode d'Euler est-elle un cas isolé,
+ou bien l'exemple d'une idée plus générale\,?\fg{}
+\end{mdframed}
+\end{center}
+
+La réponse que l'on va construire aujourd'hui :
+l'analyse numérique repose souvent sur la même stratégie
+--- remplacer des objets continus par des objets discrets,
+transformer une équation en relations algébriques,
+et obtenir un problème calculable.
+
+% ====================================================================
+\section*{2. Des taux de variation aux différences finies}
+% ====================================================================
+
+Au CM1, pour construire Euler, on a remplacé
+la dérivée $\frac{dT}{dt}$ par un quotient :
+$\frac{T_{n+1}-T_n}{\Delta t}$.
+Cette idée porte un nom : les \textbf{différences finies}.
+Elle s'étend à toute dérivée, en espace comme en temps.
+
+\medskip
+
+\textbf{Rappel.} La dérivée de $u$ en $x$ est définie comme :
+\[
+  u'(x) = \lim_{h \to 0} \frac{u(x+h) - u(x)}{h}.
+\]
+
+Si l'on supprime le passage à la limite
+et que l'on garde $h > 0$ fixé,
+on obtient une \textbf{approximation} de la dérivée.
+
+\medskip
+
+\textbf{Question.}
+Supposons que $u$ n'est connue qu'en des points
+$x_{i-1}$, $x_i$, $x_{i+1}$ régulièrement espacés de $h$.
+Comment approximer $u'(x_i)$ ?
+
+\atrou[4cm]{%
+Trois approximations classiques (on note $u_j = u(x_j)$) :
+\begin{itemize}
+  \item \textbf{Différence progressive} (avant) :
+    $\displaystyle u'(x_i) \approx \frac{u_{i+1} - u_i}{h}$
+  \item \textbf{Différence rétrograde} (arrière) :
+    $\displaystyle u'(x_i) \approx \frac{u_i - u_{i-1}}{h}$
+  \item \textbf{Différence centrée} :
+    $\displaystyle u'(x_i) \approx \frac{u_{i+1} - u_{i-1}}{2h}$
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Et la dérivée seconde ?}
+La dérivée seconde mesure comment la pente elle-même varie.
+On sait que :
+\[
+  u''(x) = \lim_{h\to 0}
+  \frac{u(x+h) - 2\,u(x) + u(x-h)}{h^2}.
+\]
+
+\textbf{Question.}
+Comment approximer $u''(x_i)$
+à partir de $u_{i-1}$, $u_i$ et $u_{i+1}$ ?
+
+\atrou[3cm]{%
+\[
+  \boxed{u''(x_i) \approx
+  \frac{u_{i+1} - 2\,u_i + u_{i-1}}{h^2}.}
+\]
+Cette formule fait intervenir trois points voisins :
+c'est un \textbf{stencil à trois points}.
+}
+
+\medskip
+
+\textbf{Interprétation graphique}
+--- la dérivée seconde mesure la courbure de $u$ :
+
+\esquisse[6cm]
+
+% ====================================================================
+\section*{3. Exemple --- De la physique au système linéaire}
+% ====================================================================
+
+On va maintenant utiliser les différences finies
+pour résoudre un problème d'un type nouveau :
+un \textbf{problème aux limites},
+où l'inconnue est un profil spatial
+et non une trajectoire temporelle.
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+\og Une barre métallique, chauffée uniformément,\\
+est maintenue à $0\;\degC$ à ses deux extrémités.\\
+Quel est le profil de température à l'équilibre\,?\fg{}
+\end{mdframed}
+\end{center}
+
+\textbf{Questions préliminaires.}
+\begin{itemize}[leftmargin=*]
+  \item À quoi ressemble le profil de température ?
+        Faites un croquis.
+  \item Si l'on isole une petite tranche de barre,
+        quels échanges thermiques y a-t-il ?
+\end{itemize}
+
+\atrou[4cm]{%
+\begin{itemize}[leftmargin=*]
+  \item Le profil est nul aux deux bouts et maximal au milieu
+        (la chaleur générée au centre doit
+        parcourir la plus grande distance pour atteindre les bords).
+  \item Trois contributions : le \textbf{flux de conduction
+        entrant} par la gauche, le \textbf{flux sortant}
+        par la droite, et la \textbf{chaleur générée}
+        dans la tranche. À l'équilibre, le bilan est nul.
+\end{itemize}
+}
+
+\textbf{Bilan thermique sur une tranche $[x,\,x+dx]$.}
+La loi de Fourier donne le flux de chaleur :
+$\varphi = -\lambda\,\dfrac{du}{dx}$.
+
+\smallskip
+
+Le bilan d'énergie à l'équilibre :
+\[
+  \underbrace{\varphi(x)\,A}_{\text{flux entrant}}
+  - \underbrace{\varphi(x+dx)\,A}_{\text{flux sortant}}
+  + \underbrace{q\,A\,dx}_{\text{chaleur générée}}
+  = 0.
+\]
+
+En divisant par $A\,dx$ et en passant à la limite :
+
+\atrou[2.5cm]{%
+\[
+  -\frac{d\varphi}{dx} + q = 0
+  \qquad\Longrightarrow\qquad
+  \boxed{-\lambda\,\frac{d^2 u}{dx^2} = q.}
+\]
+}
+
+\textbf{Forme simplifiée.}
+Après adimensionnement ($L = 1$, division par $\lambda$) :
+\[
+  -u''(x) = 1, \qquad x \in {]0,\,1[},
+  \qquad u(0) = 0,\quad u(1) = 0.
+\]
+
+$u(x)$ représente la température en un point $x$ de la barre.
+
+\medskip
+
+\textbf{Étape 1 --- Maillage.}
+On découpe l'intervalle $[0,1]$ en $N$ sous-intervalles
+de même longueur $h = \frac{1}{N}$.
+Les \textbf{nœuds} sont $x_i = i\,h$ pour $i = 0, 1, \ldots, N$.
+On cherche des valeurs approchées $u_i \approx u(x_i)$.
+
+\esquisse[4cm]
+
+\textbf{Questions.}
+\begin{itemize}[leftmargin=*]
+  \item Parmi $u_0, u_1, \ldots, u_N$,
+        lesquels sont déjà connus ?
+  \item Combien d'inconnues reste-t-il ?
+  \item Combien d'équations faut-il ?
+\end{itemize}
+
+\atrou[2.5cm]{%
+$u_0 = 0$ et $u_N = 0$ sont imposés
+par les conditions aux limites.
+Il reste $N-1$ inconnues :
+$u_1, u_2, \ldots, u_{N-1}$.
+Il faut donc $N-1$ équations.
+}
+
+\medskip
+
+\textbf{Étape 2 --- Écriture des équations.}
+En chaque nœud intérieur $x_i$ ($i = 1, \ldots, N-1$),
+on remplace $-u''(x_i)$ par la formule
+de différences finies :
+
+\atrou[3cm]{%
+\[
+  -\frac{u_{i+1} - 2\,u_i + u_{i-1}}{h^2} = 1,
+  \qquad i = 1, \ldots, N-1.
+\]
+En multipliant par $h^2$ :
+\[
+  -u_{i-1} + 2\,u_i - u_{i+1} = h^2.
+\]
+}
+
+\medskip
+
+\textbf{Étape 3 --- Construction du système.}
+Prenons $N = 5$
+(donc $h = 0{,}2$, $h^2 = 0{,}04$
+et $4$ inconnues : $u_1, u_2, u_3, u_4$).
+
+\smallskip
+
+\textbf{Activité :} écrire les $4$ équations
+en utilisant $u_0 = u_5 = 0$.
+
+\atrou[7cm]{%
+\begin{align*}
+  i=1 :\quad 2u_1 - u_2 &= 0{,}04
+  && \text{(car $u_0 = 0$)} \\
+  i=2 :\quad -u_1 + 2u_2 - u_3 &= 0{,}04 \\
+  i=3 :\quad -u_2 + 2u_3 - u_4 &= 0{,}04 \\
+  i=4 :\quad -u_3 + 2u_4 &= 0{,}04
+  && \text{(car $u_5 = 0$)}
+\end{align*}
+
+\medskip
+Sous forme matricielle : $A\,\mathbf{u} = \mathbf{b}$, soit :
+\[
+  \underbrace{\begin{pmatrix}
+    2 & -1 & 0 & 0 \\
+    -1 & 2 & -1 & 0 \\
+    0 & -1 & 2 & -1 \\
+    0 & 0 & -1 & 2
+  \end{pmatrix}}_{A}
+  \begin{pmatrix} u_1 \\ u_2 \\ u_3 \\ u_4 \end{pmatrix}
+  =
+  \begin{pmatrix} 0{,}04 \\ 0{,}04 \\ 0{,}04 \\ 0{,}04 \end{pmatrix}.
+\]
+}
+
+\medskip
+
+\textbf{Questions.}
+\begin{itemize}[leftmargin=*]
+  \item Quelle est la structure de la matrice $A$ ?
+  \item Pourquoi n'y a-t-il que trois diagonales non nulles ?
+  \item Si l'on prenait $N = 100$,
+        quelle serait la taille du système ?
+\end{itemize}
+
+\atrou[3.6cm]{%
+\begin{itemize}
+  \item $A$ est \textbf{tridiagonale} :
+        seules la diagonale principale
+        et les deux diagonales adjacentes sont non nulles.
+  \item Cela vient du stencil à trois points :
+        chaque équation en $x_i$ ne fait intervenir
+        que $u_{i-1}$, $u_i$ et $u_{i+1}$.
+  \item Avec $N = 100$, le système serait
+        de taille $99 \times 99$,
+        mais la matrice resterait tridiagonale :
+        très peu de coefficients non nuls.
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Vérification.}
+La solution exacte du problème continu est
+$u(x) = \frac{x\,(1-x)}{2}$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  $i$ & $x_i$ & $u_i$ (numérique) & $u(x_i) = \frac{x_i(1-x_i)}{2}$ \\
+  \hline
+  1 & $0{,}2$ & \val{$0{,}08$} & $0{,}08$ \\
+  \hline
+  2 & $0{,}4$ & \val{$0{,}12$} & $0{,}12$ \\
+  \hline
+  3 & $0{,}6$ & \val{$0{,}12$} & $0{,}12$ \\
+  \hline
+  4 & $0{,}8$ & \val{$0{,}08$} & $0{,}08$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\smallskip
+
+\textit{Ici, les valeurs coïncident car la solution exacte
+est un polynôme de degré~$2$
+et le schéma est exact pour de tels polynômes.
+Pour une source $f(x)$ plus complexe,
+on observerait un écart qui diminue quand $N$ augmente.}
+
+% ====================================================================
+\section*{4. Ouverture --- Diffusion de chaleur dans une paroi}
+% ====================================================================
+
+Les mêmes idées de discrétisation s'appliquent
+à des problèmes plus riches.
+Reprenons un exemple de transfert thermique,
+cette fois avec une dimension d'espace
+\emph{et} une dimension de temps.
+
+\medskip
+
+La température $T(x,t)$ dans une paroi d'épaisseur $L$
+vérifie l'\textbf{équation de la chaleur} :
+\[
+  \frac{\partial T}{\partial t}
+  = \alpha\,\frac{\partial^2 T}{\partial x^2},
+\]
+où $\alpha > 0$ est la diffusivité thermique du matériau.
+
+\medskip
+
+\textbf{Lien avec ce qu'on vient de voir.}
+\begin{itemize}[leftmargin=*]
+  \item En \textbf{régime permanent}
+        ($\frac{\partial T}{\partial t} = 0$),
+        on retombe sur $T''(x) = 0$
+        (ou $-T'' = f$ avec source de chaleur) :
+        c'est le problème aux limites de la section~3.
+  \item Si l'évolution temporelle intervient,
+        on peut d'abord discrétiser en espace
+        (différences finies sur $x$),
+        puis avancer en temps avec Euler (CM1).
+\end{itemize}
+
+\atrou[5cm]{%
+Discrétisation en espace de
+$\frac{\partial^2 T}{\partial x^2}$
+au nœud $x_i$ :
+\[
+  \frac{\partial T_i}{\partial t}
+  \approx \alpha\;\frac{T_{i+1} - 2\,T_i + T_{i-1}}{h^2}.
+\]
+
+On obtient un système d'EDO couplées.
+Un pas d'Euler en temps donne :
+\[
+  \boxed{T_i^{n+1} = T_i^n
+  + \frac{\alpha\,\Delta t}{h^2}
+    \bigl(T_{i+1}^n - 2\,T_i^n + T_{i-1}^n\bigr).}
+\]
+
+La même logique --- discrétisation puis calcul pas à pas ---
+permet de simuler l'évolution de la température.
+}
+
+\medskip
+
+\textbf{Question.}
+À quoi reconnaît-on qu'une solution numérique
+est absurde dans un contexte physique ?
+
+\atrou[4cm]{%
+Signaux d'alerte :
+\begin{itemize}
+  \item \textbf{Oscillations non physiques} :
+        la température alterne entre chaud et froid
+        d'un nœud à l'autre.
+  \item \textbf{Explosion des valeurs} :
+        la température diverge vers l'infini.
+  \item \textbf{Incohérence avec les bords} :
+        la solution ne respecte pas
+        les températures imposées aux extrémités.
+  \item \textbf{Comportement non compatible
+        avec le phénomène} :
+        la chaleur semble se propager dans le mauvais sens.
+\end{itemize}
+}
+
+% ====================================================================
+\section*{5. Stabilité et convergence --- Premières intuitions}
+% ====================================================================
+
+On a vu qu'en discrétisant un problème continu,
+on obtient une solution approchée qui dépend
+du pas de maillage.
+Comment juger si cette approximation est fiable ?
+
+\medskip
+
+\textbf{Convergence.}
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Quand le pas tend vers zéro,
+la solution numérique se rapproche-t-elle
+de la solution exacte\,?
+\end{mdframed}
+\end{center}
+
+\atrou[3.6cm]{%
+Si la méthode est \textbf{convergente},
+l'écart entre solution numérique et solution exacte
+tend vers zéro quand le pas diminue.
+
+\smallskip
+
+Exemple (CM1) : pour le café,
+Euler avec $\Delta t = 5$ donne une erreur de $8{,}3\;\degC$,
+avec $\Delta t = 2$ l'erreur tombe à $2{,}8\;\degC$.
+En diminuant le pas, on se rapproche de la solution exacte.
+}
+
+\medskip
+
+\textbf{Stabilité.}
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Les petites erreurs de calcul restent-elles
+sous contrôle, ou explosent-elles\,?
+\end{mdframed}
+\end{center}
+
+\atrou[4cm]{%
+Une méthode est \textbf{stable} si les erreurs
+(arrondis, perturbations) ne sont pas amplifiées
+de façon catastrophique au fil des itérations.
+
+\smallskip
+
+Exemple (CM1) : Euler sur le café
+avec $\Delta t = 15$ donne $T_1 = -15\;\degC$.
+L'erreur a explosé en une seule étape :
+le schéma est \textbf{instable} pour ce pas.
+
+\smallskip
+
+Pour l'équation de la chaleur,
+la condition de stabilité s'écrit :
+\[
+  \frac{\alpha\,\Delta t}{h^2} \leq \frac{1}{2}.
+\]
+Un pas de temps trop grand par rapport au maillage spatial
+provoque des oscillations et la divergence.
+}
+
+\medskip
+
+\textbf{Compromis précision / coût.}
+
+\atrou[3.6cm]{%
+Raffiner le maillage améliore l'approximation,
+mais augmente le nombre d'inconnues
+et le temps de calcul.
+\begin{itemize}
+  \item En 1D avec $N$ sous-intervalles :
+        système de taille $N-1$.
+  \item En 2D sur un maillage $N \times N$ :
+        de l'ordre de $N^2$ inconnues.
+  \item Le choix du pas est un \textbf{compromis
+        entre précision et coût}.
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Discussion.}
+Deux maillages différents pour le même problème :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{cccl}
+  \hline
+  Maillage & Inconnues & Coût & Précision \\
+  \hline
+  $N = 10$ & $9$ & \val{faible} & \val{modérée} \\
+  $N = 1000$ & $999$ & \val{élevé} & \val{excellente} \\
+  \hline
+\end{tabular}
+\end{center}
+
+En ingénierie, quel compromis vous semblerait raisonnable ?
+
+\atrou[3cm]{%
+La réponse dépend du contexte :
+\begin{itemize}
+  \item \textbf{Conception préliminaire} :
+        un calcul rapide avec un maillage grossier suffit
+        pour explorer des variantes.
+  \item \textbf{Dimensionnement final} :
+        un calcul plus fin est nécessaire
+        pour garantir la sécurité.
+  \item Dans tous les cas, il est essentiel de
+        \textbf{vérifier la plausibilité physique
+        du résultat}.
+\end{itemize}
+}
+
+% ====================================================================
+\section*{6. Bilan}
+% ====================================================================
+
+Quatre idées à retenir :
+
+\atrou[7cm]{%
+\begin{enumerate}
+  \item L'idée de \textbf{différences finies}
+        est une généralisation de ce qu'on a fait avec Euler :
+        on remplace des dérivées par des quotients
+        de différences.
+  \item La discrétisation d'un problème aux limites
+        conduit naturellement à un \textbf{système linéaire}
+        $A\,\mathbf{u} = \mathbf{b}$.
+  \item La matrice obtenue a une structure particulière
+        (\textbf{tridiagonale} en 1D)
+        qui reflète le caractère local du stencil.
+  \item La fiabilité d'un calcul numérique repose sur
+        trois propriétés :
+        \textbf{convergence}
+        (le résultat s'améliore quand on raffine),
+        \textbf{stabilité}
+        (les erreurs ne sont pas amplifiées),
+        et un \textbf{compromis entre précision et coût}.
+\end{enumerate}
+}
+
+\end{document}
