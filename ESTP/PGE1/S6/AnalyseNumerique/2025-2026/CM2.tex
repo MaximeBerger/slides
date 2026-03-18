@@ -44,8 +44,7 @@
 \newcommand{\degC}{\text{\textdegree C}}
 
 \title{\sffamily\bfseries Analyse Numérique --- CM2\\[0.3em]
-  \Large Différences finies, systèmes linéaires,\\
-  stabilité et convergence}
+  \Large Différences finies, stabilité et convergence}
 \author{}
 \date{19 mars 2026}
 
@@ -91,16 +90,13 @@ Au CM1, on a construit une méthode de calcul approché
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
 \centering\itshape
-\og La méthode d'Euler est-elle un cas isolé,
-ou bien l'exemple d'une idée plus générale\,?\fg{}
+\og Au CM1, on a discrétisé le temps
+pour suivre l'évolution d'un café.
+Mais dans la vie réelle, les phénomènes
+se déploient aussi dans l'espace.
+Peut-on appliquer la même idée\,?\fg{}
 \end{mdframed}
 \end{center}
-
-La réponse que l'on va construire aujourd'hui :
-l'analyse numérique repose souvent sur la même stratégie
---- remplacer des objets continus par des objets discrets,
-transformer une équation en relations algébriques,
-et obtenir un problème calculable.
 
 % ====================================================================
 \section*{2. Des taux de variation aux différences finies}
@@ -144,43 +140,61 @@ Trois approximations classiques (on note $u_j = u(x_j)$) :
 
 \medskip
 
-\textbf{Et la dérivée seconde ?}
-La dérivée seconde mesure comment la pente elle-même varie.
-On sait que :
-\[
-  u''(x) = \lim_{h\to 0}
-  \frac{u(x+h) - 2\,u(x) + u(x-h)}{h^2}.
-\]
-
-\textbf{Question.}
-Comment approximer $u''(x_i)$
-à partir de $u_{i-1}$, $u_i$ et $u_{i+1}$ ?
-
-\atrou[3cm]{%
-\[
-  \boxed{u''(x_i) \approx
-  \frac{u_{i+1} - 2\,u_i + u_{i-1}}{h^2}.}
-\]
-Cette formule fait intervenir trois points voisins :
-c'est un \textbf{stencil à trois points}.
-}
-
-\medskip
-
 \textbf{Interprétation graphique}
---- la dérivée seconde mesure la courbure de $u$ :
+--- trois façons d'approcher la pente en $x_i$ :
 
 \esquisse[6cm]
 
+\textbf{Retour sur Euler.}
+Au CM1, on a approché $\dfrac{dT}{dt}$
+par la différence \textbf{progressive}
+$\dfrac{T_{n+1} - T_n}{\Delta t}$,
+ce qui donne le schéma d'Euler explicite :
+$T_{n+1} = T_n + \Delta t\,f(t_n, T_n)$.
+
+\medskip
+
+\textbf{Question.}
+Et si l'on utilisait la différence
+\textbf{rétrograde} en temps :
+$\dfrac{T_n - T_{n-1}}{\Delta t} = f(t_n,\,T_n)$\,?
+
+\atrou[4cm]{%
+En décalant d'un cran, on obtient :
+\[
+  \frac{T_{n+1} - T_n}{\Delta t} = f(t_{n+1},\,T_{n+1})
+  \qquad\Longrightarrow\qquad
+  \boxed{T_{n+1} = T_n + \Delta t\,f(t_{n+1},\,T_{n+1}).}
+\]
+Problème : $T_{n+1}$ apparaît \textbf{des deux côtés}
+de l'équation. On ne peut plus le calculer directement
+--- il faut \textbf{résoudre une équation}
+(linéaire si $f$ est linéaire).
+
+\smallskip
+
+C'est le schéma d'\textbf{Euler implicite}.
+\begin{itemize}
+  \item Euler \textbf{explicite} :
+        on utilise les données du \textbf{présent}
+        $\to$ calcul direct.
+  \item Euler \textbf{implicite} :
+        on utilise les données du \textbf{futur}
+        $\to$ équation à résoudre.
+\end{itemize}
+
+On retrouvera cette distinction plus loin
+sur un problème à deux variables.
+}
+
 % ====================================================================
-\section*{3. Exemple --- De la physique au système linéaire}
+\section*{3. Exemple --- Du colorant au schéma numérique}
 % ====================================================================
 
 On va maintenant utiliser les différences finies
 pour résoudre un problème d'un type nouveau :
-un \textbf{problème aux limites},
-où l'inconnue est un profil spatial
-et non une trajectoire temporelle.
+une \textbf{EDP} (équation aux dérivées partielles),
+où l'inconnue dépend de l'espace \emph{et} du temps.
 
 \medskip
 
@@ -188,288 +202,315 @@ et non une trajectoire temporelle.
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
 \centering\large\itshape
-\og Une barre métallique, chauffée uniformément,\\
-est maintenue à $0\;\degC$ à ses deux extrémités.\\
-Quel est le profil de température à l'équilibre\,?\fg{}
+\og Un canal d'irrigation rectiligne ;
+l'eau y coule à vitesse constante~$c$.\\
+On verse un colorant à un endroit du canal.
+Que se passe-t-il\,?\fg{}
 \end{mdframed}
 \end{center}
 
 \textbf{Questions préliminaires.}
 \begin{itemize}[leftmargin=*]
-  \item À quoi ressemble le profil de température ?
-        Faites un croquis.
-  \item Si l'on isole une petite tranche de barre,
-        quels échanges thermiques y a-t-il ?
+  \item Faites un croquis du profil de concentration
+        10 secondes plus tard.
+  \item À quelle vitesse se déplace la tache de colorant ?
 \end{itemize}
-
-\atrou[4cm]{%
-\begin{itemize}[leftmargin=*]
-  \item Le profil est nul aux deux bouts et maximal au milieu
-        (la chaleur générée au centre doit
-        parcourir la plus grande distance pour atteindre les bords).
-  \item Trois contributions : le \textbf{flux de conduction
-        entrant} par la gauche, le \textbf{flux sortant}
-        par la droite, et la \textbf{chaleur générée}
-        dans la tranche. À l'équilibre, le bilan est nul.
-\end{itemize}
-}
-
-\textbf{Bilan thermique sur une tranche $[x,\,x+dx]$.}
-La loi de Fourier donne le flux de chaleur :
-$\varphi = -\lambda\,\dfrac{du}{dx}$.
-
-\smallskip
-
-Le bilan d'énergie à l'équilibre :
-\[
-  \underbrace{\varphi(x)\,A}_{\text{flux entrant}}
-  - \underbrace{\varphi(x+dx)\,A}_{\text{flux sortant}}
-  + \underbrace{q\,A\,dx}_{\text{chaleur générée}}
-  = 0.
-\]
-
-En divisant par $A\,dx$ et en passant à la limite :
-
-\atrou[2.5cm]{%
-\[
-  -\frac{d\varphi}{dx} + q = 0
-  \qquad\Longrightarrow\qquad
-  \boxed{-\lambda\,\frac{d^2 u}{dx^2} = q.}
-\]
-}
-
-\textbf{Forme simplifiée.}
-Après adimensionnement ($L = 1$, division par $\lambda$) :
-\[
-  -u''(x) = 1, \qquad x \in {]0,\,1[},
-  \qquad u(0) = 0,\quad u(1) = 0.
-\]
-
-$u(x)$ représente la température en un point $x$ de la barre.
-
-\medskip
-
-\textbf{Étape 1 --- Maillage.}
-On découpe l'intervalle $[0,1]$ en $N$ sous-intervalles
-de même longueur $h = \frac{1}{N}$.
-Les \textbf{nœuds} sont $x_i = i\,h$ pour $i = 0, 1, \ldots, N$.
-On cherche des valeurs approchées $u_i \approx u(x_i)$.
 
 \esquisse[4cm]
 
-\textbf{Questions.}
-\begin{itemize}[leftmargin=*]
-  \item Parmi $u_0, u_1, \ldots, u_N$,
-        lesquels sont déjà connus ?
-  \item Combien d'inconnues reste-t-il ?
-  \item Combien d'équations faut-il ?
-\end{itemize}
+% ── De l'intuition à l'EDP ─────────────────────────────────────────
 
-\atrou[2.5cm]{%
-$u_0 = 0$ et $u_N = 0$ sont imposés
-par les conditions aux limites.
-Il reste $N-1$ inconnues :
-$u_1, u_2, \ldots, u_{N-1}$.
-Il faut donc $N-1$ équations.
-}
-
-\medskip
-
-\textbf{Étape 2 --- Écriture des équations.}
-En chaque nœud intérieur $x_i$ ($i = 1, \ldots, N-1$),
-on remplace $-u''(x_i)$ par la formule
-de différences finies :
-
-\atrou[3cm]{%
-\[
-  -\frac{u_{i+1} - 2\,u_i + u_{i-1}}{h^2} = 1,
-  \qquad i = 1, \ldots, N-1.
-\]
-En multipliant par $h^2$ :
-\[
-  -u_{i-1} + 2\,u_i - u_{i+1} = h^2.
-\]
-}
-
-\medskip
-
-\textbf{Étape 3 --- Construction du système.}
-Prenons $N = 5$
-(donc $h = 0{,}2$, $h^2 = 0{,}04$
-et $4$ inconnues : $u_1, u_2, u_3, u_4$).
+\textbf{De l'intuition à l'équation.}
 
 \smallskip
 
-\textbf{Activité :} écrire les $4$ équations
-en utilisant $u_0 = u_5 = 0$.
+\textbf{Question 1.}
+\og La tache en $x_0$ à $t=0$
+se retrouve où à $t = \Delta t$\,?\fg{}
 
-\atrou[7cm]{%
-\begin{align*}
-  i=1 :\quad 2u_1 - u_2 &= 0{,}04
-  && \text{(car $u_0 = 0$)} \\
-  i=2 :\quad -u_1 + 2u_2 - u_3 &= 0{,}04 \\
-  i=3 :\quad -u_2 + 2u_3 - u_4 &= 0{,}04 \\
-  i=4 :\quad -u_3 + 2u_4 &= 0{,}04
-  && \text{(car $u_5 = 0$)}
-\end{align*}
+\atrou[1.5cm]{%
+En $x_0 + c\,\Delta t$ :
+elle a avancé de $c\,\Delta t$ vers l'aval.
+}
+
+\textbf{Question 2.}
+\og Postons-nous en un point fixe $x$ du canal.
+Ce qu'on y observe à $t + \Delta t$,
+ça vient d'où\,?\fg{}
+
+\atrou[1.5cm]{%
+Du point $x - c\,\Delta t$, situé en amont.
+C'est le même raisonnement, mais retourné :
+au lieu de suivre la tache,
+on attend à un endroit fixe.
+}
+
+\textbf{Question 3.}
+\og Comment écrire ça mathématiquement\,?\fg{}
+
+\atrou[2.5cm]{%
+\[
+  \boxed{u(x,\; t + \Delta t) \;=\; u(x - c\,\Delta t,\; t).}
+\]
+La concentration en $x$ à l'instant suivant
+est celle qui se trouvait en $x - c\,\Delta t$
+à l'instant précédent.
+}
+
+\textbf{Obtenir l'EDP.}
+On développe chaque côté au premier ordre (Taylor) :
+\begin{itemize}
+  \item à gauche :
+    $u(x,\,t+\Delta t)
+    \approx u + \Delta t\;\dfrac{\partial u}{\partial t}$ ;
+  \item à droite :
+    $u(x - c\,\Delta t,\,t)
+    \approx u - c\,\Delta t\;\dfrac{\partial u}{\partial x}$
+    \quad (le signe $-$ vient de ce qu'on recule vers l'amont).
+\end{itemize}
+
+En égalant et en simplifiant $u$ :
+
+\atrou[2.5cm]{%
+\[
+  \Delta t\;\frac{\partial u}{\partial t}
+  = -c\,\Delta t\;\frac{\partial u}{\partial x}
+  \qquad\Longrightarrow\qquad
+  \boxed{\frac{\partial u}{\partial t}
+    + c\,\frac{\partial u}{\partial x} = 0.}
+\]
+C'est l'\textbf{équation de transport}.
+La concentration $u(x,t)$ dépend de deux variables :
+c'est une EDP.
+}
+
+\smallskip
+
+\textit{Solution exacte :
+$u(x,t) = u_0(x - ct)$,
+translation pure à vitesse~$c$.}
+
+% ── Maillage espace-temps ──────────────────────────────────────────
 
 \medskip
-Sous forme matricielle : $A\,\mathbf{u} = \mathbf{b}$, soit :
+
+\textbf{Maillage espace-temps.}
+On discrétise l'espace (pas $\Delta x$)
+\emph{et} le temps (pas $\Delta t$).
+On note $u_i^n \approx u(x_i,\,t^n)$.
+
+\esquisse[5cm]
+
+% ── Schéma décentré amont ──────────────────────────────────────────
+
+\medskip
+
+\textbf{Construction du schéma.}
+
+\textbf{Question.}
+Comment approcher $\dfrac{\partial u}{\partial t}$
+et $\dfrac{\partial u}{\partial x}$
+au point $(x_i,\,t^n)$\,?
+
+\atrou[4cm]{%
+\begin{itemize}
+  \item Euler en temps (CM1) :
+    $\dfrac{\partial u}{\partial t}
+    \approx \dfrac{u_i^{n+1} - u_i^n}{\Delta t}$.
+  \item Différence rétrograde en espace
+    (le colorant vient de l'amont) :
+    $\dfrac{\partial u}{\partial x}
+    \approx \dfrac{u_i^n - u_{i-1}^n}{\Delta x}$.
+\end{itemize}
+
+En combinant et en isolant $u_i^{n+1}$ :
 \[
-  \underbrace{\begin{pmatrix}
-    2 & -1 & 0 & 0 \\
-    -1 & 2 & -1 & 0 \\
-    0 & -1 & 2 & -1 \\
-    0 & 0 & -1 & 2
-  \end{pmatrix}}_{A}
-  \begin{pmatrix} u_1 \\ u_2 \\ u_3 \\ u_4 \end{pmatrix}
-  =
-  \begin{pmatrix} 0{,}04 \\ 0{,}04 \\ 0{,}04 \\ 0{,}04 \end{pmatrix}.
+  \boxed{u_i^{n+1}
+    = u_i^n - r\,(u_i^n - u_{i-1}^n),
+    \qquad r = \frac{c\,\Delta t}{\Delta x}.}
 \]
 }
 
-\medskip
-
-\textbf{Questions.}
-\begin{itemize}[leftmargin=*]
-  \item Quelle est la structure de la matrice $A$ ?
-  \item Pourquoi n'y a-t-il que trois diagonales non nulles ?
-  \item Si l'on prenait $N = 100$,
-        quelle serait la taille du système ?
-\end{itemize}
-
-\atrou[3.6cm]{%
-\begin{itemize}
-  \item $A$ est \textbf{tridiagonale} :
-        seules la diagonale principale
-        et les deux diagonales adjacentes sont non nulles.
-  \item Cela vient du stencil à trois points :
-        chaque équation en $x_i$ ne fait intervenir
-        que $u_{i-1}$, $u_i$ et $u_{i+1}$.
-  \item Avec $N = 100$, le système serait
-        de taille $99 \times 99$,
-        mais la matrice resterait tridiagonale :
-        très peu de coefficients non nuls.
-\end{itemize}
-}
+% ── Activité à la main ────────────────────────────────────────────
 
 \medskip
 
-\textbf{Vérification.}
-La solution exacte du problème continu est
-$u(x) = \frac{x\,(1-x)}{2}$.
+\textbf{Activité.}
+Canal de $14$~m, $c = 2$~m/s,
+$\Delta x = 2$~m (8 noeuds),
+$\Delta t = 0{,}5$~s.
+
+Condition initiale :
+concentration $u = 1$~g/L entre $x = 4$~m et $x = 6$~m,
+nulle ailleurs.
+
+\smallskip
+
+Calculer $u^1$ et $u^2$.
+La formule se simplifie en :
+$u_i^{n+1} = 0{,}5\;u_i^n + 0{,}5\;u_{i-1}^n$.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|c|c|cccccccc|}
   \hline
-  $i$ & $x_i$ & $u_i$ (numérique) & $u(x_i) = \frac{x_i(1-x_i)}{2}$ \\
+  $n$ & $t$ (s)
+    & $u_0$ & $u_1$ & $u_2$ & $u_3$ & $u_4$ & $u_5$ & $u_6$ & $u_7$ \\
   \hline
-  1 & $0{,}2$ & \val{$0{,}08$} & $0{,}08$ \\
+  0 & 0
+    & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
   \hline
-  2 & $0{,}4$ & \val{$0{,}12$} & $0{,}12$ \\
+  1 & 0,5
+    & 0 & 0
+    & \val{$0{,}5$} & \val{$1$}
+    & \val{$0{,}5$} & 0 & 0 & 0 \\
   \hline
-  3 & $0{,}6$ & \val{$0{,}12$} & $0{,}12$ \\
-  \hline
-  4 & $0{,}8$ & \val{$0{,}08$} & $0{,}08$ \\
+  2 & 1,0
+    & 0 & 0
+    & \val{$0{,}25$} & \val{$0{,}75$}
+    & \val{$0{,}75$} & \val{$0{,}25$} & 0 & 0 \\
   \hline
 \end{tabular}
 \end{center}
 
 \smallskip
 
-\textit{Ici, les valeurs coïncident car la solution exacte
-est un polynôme de degré~$2$
-et le schéma est exact pour de tels polynômes.
-Pour une source $f(x)$ plus complexe,
-on observerait un écart qui diminue quand $N$ augmente.}
+\textit{La solution exacte devrait être une translation pure de $2$~m vers la droite.\newline 
+Le schéma capte le déplacement mais
+\textbf{étale} le profil :
+c'est la \textbf{diffusion numérique}.}
 
-% ====================================================================
-\section*{4. Ouverture --- Diffusion de chaleur dans une paroi}
-% ====================================================================
-
-Les mêmes idées de discrétisation s'appliquent
-à des problèmes plus riches.
-Reprenons un exemple de transfert thermique,
-cette fois avec une dimension d'espace
-\emph{et} une dimension de temps.
+% ── Schéma centré : le moment clé ─────────────────────────────────
 
 \medskip
 
-La température $T(x,t)$ dans une paroi d'épaisseur $L$
-vérifie l'\textbf{équation de la chaleur} :
+\textbf{Et si on prend les différences centrées\,?}
+
+\smallskip
+
+On remplace la différence rétrograde
+par la différence centrée :
 \[
-  \frac{\partial T}{\partial t}
-  = \alpha\,\frac{\partial^2 T}{\partial x^2},
+  u_i^{n+1} = u_i^n
+  - \frac{r}{2}\,(u_{i+1}^n - u_{i-1}^n).
 \]
-où $\alpha > 0$ est la diffusivité thermique du matériau.
 
-\medskip
+Calculer $u^1$
+à partir de la même condition initiale :
 
-\textbf{Lien avec ce qu'on vient de voir.}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  $i$ & $u_i^0$ & Calcul & $u_i^1$ \\
+  \hline
+  0 & 0 & (bord) & 0 \\
+  \hline
+  1 & 0 & $0 - 0{,}25\times(1-0)$
+    & \val{$-0{,}25$} \\
+  \hline
+  2 & 1 & $1 - 0{,}25\times(1-0)$
+    & \val{$0{,}75$} \\
+  \hline
+  3 & 1 & $1 - 0{,}25\times(0-1)$
+    & \val{$1{,}25$} \\
+  \hline
+  4 & 0 & $0 - 0{,}25\times(0-1)$
+    & \val{$0{,}25$} \\
+  \hline
+  5 & 0 & & 0 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{Questions.}
 \begin{itemize}[leftmargin=*]
-  \item En \textbf{régime permanent}
-        ($\frac{\partial T}{\partial t} = 0$),
-        on retombe sur $T''(x) = 0$
-        (ou $-T'' = f$ avec source de chaleur) :
-        c'est le problème aux limites de la section~3.
-  \item Si l'évolution temporelle intervient,
-        on peut d'abord discrétiser en espace
-        (différences finies sur $x$),
-        puis avancer en temps avec Euler (CM1).
+  \item Une concentration de $-0{,}25$~g/L,
+        est-ce physiquement possible ?
+  \item Une concentration de $1{,}25$
+        alors que le maximum initial était~$1$ ?
 \end{itemize}
-
-\atrou[5cm]{%
-Discrétisation en espace de
-$\frac{\partial^2 T}{\partial x^2}$
-au nœud $x_i$ :
-\[
-  \frac{\partial T_i}{\partial t}
-  \approx \alpha\;\frac{T_{i+1} - 2\,T_i + T_{i-1}}{h^2}.
-\]
-
-On obtient un système d'EDO couplées.
-Un pas d'Euler en temps donne :
-\[
-  \boxed{T_i^{n+1} = T_i^n
-  + \frac{\alpha\,\Delta t}{h^2}
-    \bigl(T_{i+1}^n - 2\,T_i^n + T_{i-1}^n\bigr).}
-\]
-
-La même logique --- discrétisation puis calcul pas à pas ---
-permet de simuler l'évolution de la température.
-}
-
-\medskip
-
-\textbf{Question.}
-À quoi reconnaît-on qu'une solution numérique
-est absurde dans un contexte physique ?
 
 \atrou[4cm]{%
-Signaux d'alerte :
-\begin{itemize}
-  \item \textbf{Oscillations non physiques} :
-        la température alterne entre chaud et froid
-        d'un nœud à l'autre.
-  \item \textbf{Explosion des valeurs} :
-        la température diverge vers l'infini.
-  \item \textbf{Incohérence avec les bords} :
-        la solution ne respecte pas
-        les températures imposées aux extrémités.
-  \item \textbf{Comportement non compatible
-        avec le phénomène} :
-        la chaleur semble se propager dans le mauvais sens.
-\end{itemize}
+Après \textbf{un seul pas de temps},
+le schéma centré produit
+des valeurs physiquement impossibles :
+une concentration \textbf{négative}
+et une concentration \textbf{supérieure au maximum initial}.
+C'est le signe d'une \textbf{instabilité}.
+Si l'on continuait, les oscillations
+grandiraient et la solution
+deviendrait complètement aberrante.
+
+\medskip
+
+Deux schémas d'apparence similaire
+donnent des résultats radicalement différents.
+Le \textbf{choix du schéma} n'est pas
+un détail technique.
 }
 
+% ── Schéma implicite ───────────────────────────────────────────────
+
+\medskip
+
+\textbf{Vers le schéma implicite.}
+Et si on évaluait le terme d'espace
+au temps $n+1$ au lieu de $n$\,?
+
+\atrou[5cm]{%
+\[
+  \frac{u_i^{n+1} - u_i^n}{\Delta t}
+  + c\;\frac{u_i^{n+1} - u_{i-1}^{n+1}}{\Delta x} = 0
+  \qquad\Longrightarrow\qquad
+  (1+r)\,u_i^{n+1} - r\,u_{i-1}^{n+1} = u_i^n.
+\]
+
+Les inconnues au temps $n+1$
+sont \textbf{couplées} entre elles :
+on ne peut plus les calculer une par une.
+Il faut résoudre un \textbf{système linéaire}
+à chaque pas de temps.
+
+\medskip
+
+La matrice est \textbf{bidiagonale}
+(deux diagonales non nulles).
+Pour des problèmes du second ordre
+(diffusion, flexion),
+la matrice devient \textbf{tridiagonale}
+--- c'est ce qu'on verra en TD2.
+}
+
+% ── Vérification ──────────────────────────────────────────────────
+
+\medskip
+
+\textbf{Comparaison des deux schémas} (à $t = 1$~s) :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+  \hline
+  \textbf{Schéma} & \textbf{Défaut} & \textbf{Gravité} \\
+  \hline
+  Décentré amont
+    & Diffusion numérique (étalement)
+    & Bénin \\
+  Centré explicite
+    & Oscillations, valeurs négatives
+    & \textbf{Grave} \\
+  \hline
+\end{tabular}
+\end{center}
+
 % ====================================================================
-\section*{5. Stabilité et convergence --- Premières intuitions}
+\section*{4. Stabilité et convergence --- Premières intuitions}
 % ====================================================================
 
 On a vu qu'en discrétisant un problème continu,
 on obtient une solution approchée qui dépend
-du pas de maillage.
+du maillage et du schéma choisi.
 Comment juger si cette approximation est fiable ?
 
 \medskip
@@ -480,23 +521,25 @@ Comment juger si cette approximation est fiable ?
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
 \centering\itshape
-Quand le pas tend vers zéro,
+Quand on raffine le maillage
+(plus de noeuds, pas plus petits),
 la solution numérique se rapproche-t-elle
 de la solution exacte\,?
 \end{mdframed}
 \end{center}
 
-\atrou[3.6cm]{%
+\atrou[3cm]{%
 Si la méthode est \textbf{convergente},
 l'écart entre solution numérique et solution exacte
-tend vers zéro quand le pas diminue.
+tend vers zéro quand les pas diminuent.
 
 \smallskip
 
-Exemple (CM1) : pour le café,
-Euler avec $\Delta t = 5$ donne une erreur de $8{,}3\;\degC$,
-avec $\Delta t = 2$ l'erreur tombe à $2{,}8\;\degC$.
-En diminuant le pas, on se rapproche de la solution exacte.
+Pour le schéma décentré amont :
+si on double le nombre de noeuds
+(et qu'on adapte $\Delta t$ pour garder $r$ constant),
+la diffusion numérique diminue
+et le profil se rapproche de la translation exacte.
 }
 
 \medskip
@@ -512,27 +555,29 @@ sous contrôle, ou explosent-elles\,?
 \end{mdframed}
 \end{center}
 
-\atrou[4cm]{%
+\atrou[5cm]{%
 Une méthode est \textbf{stable} si les erreurs
-(arrondis, perturbations) ne sont pas amplifiées
-de façon catastrophique au fil des itérations.
+ne sont pas amplifiées de façon catastrophique.
 
 \smallskip
 
-Exemple (CM1) : Euler sur le café
-avec $\Delta t = 15$ donne $T_1 = -15\;\degC$.
-L'erreur a explosé en une seule étape :
-le schéma est \textbf{instable} pour ce pas.
+Trois exemples d'instabilité :
+\begin{enumerate}
+  \item \textbf{CM1, café :}
+    Euler avec $\Delta t = 15$ donne $T_1 = -15\;\degC$.
+  \item \textbf{Schéma centré} (section~3) :
+    après un seul pas, la concentration est négative.
+  \item \textbf{Schéma décentré amont :}
+    stable si $r \leq 1$,
+    mais explose si $r > 1$.
+\end{enumerate}
 
-\smallskip
-
-Pour l'équation de la chaleur,
-la condition de stabilité s'écrit :
-\[
-  \frac{\alpha\,\Delta t}{h^2} \leq \frac{1}{2}.
-\]
-Un pas de temps trop grand par rapport au maillage spatial
-provoque des oscillations et la divergence.
+La \textbf{condition CFL} ($r \leq 1$)
+exprime un équilibre nécessaire
+entre $\Delta t$ et $\Delta x$ :
+ce n'est pas seulement
+\og un pas petit suffit\fg{},
+c'est un \textbf{rapport} entre les deux pas.
 }
 
 \medskip
@@ -541,78 +586,79 @@ provoque des oscillations et la divergence.
 
 \atrou[3.6cm]{%
 Raffiner le maillage améliore l'approximation,
-mais augmente le nombre d'inconnues
-et le temps de calcul.
+mais augmente le nombre de calculs.
 \begin{itemize}
-  \item En 1D avec $N$ sous-intervalles :
-        système de taille $N-1$.
-  \item En 2D sur un maillage $N \times N$ :
-        de l'ordre de $N^2$ inconnues.
-  \item Le choix du pas est un \textbf{compromis
+  \item Doubler les noeuds en espace
+        \emph{et} diviser $\Delta t$ par~$2$
+        (pour garder $r$ constant)
+        $\Rightarrow$ $4$ fois plus de calculs.
+  \item En 2D, le coût explose encore plus vite.
+  \item Le choix du maillage est un \textbf{compromis
         entre précision et coût}.
 \end{itemize}
 }
 
 \medskip
 
-\textbf{Discussion.}
-Deux maillages différents pour le même problème :
+En ingénierie, quel compromis
+vous semblerait raisonnable\,?
 
-\begin{center}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{cccl}
-  \hline
-  Maillage & Inconnues & Coût & Précision \\
-  \hline
-  $N = 10$ & $9$ & \val{faible} & \val{modérée} \\
-  $N = 1000$ & $999$ & \val{élevé} & \val{excellente} \\
-  \hline
-\end{tabular}
-\end{center}
-
-En ingénierie, quel compromis vous semblerait raisonnable ?
-
-\atrou[3cm]{%
-La réponse dépend du contexte :
+\atrou[2.5cm]{%
 \begin{itemize}
   \item \textbf{Conception préliminaire} :
-        un calcul rapide avec un maillage grossier suffit
-        pour explorer des variantes.
+        un calcul rapide avec un maillage grossier suffit.
   \item \textbf{Dimensionnement final} :
         un calcul plus fin est nécessaire
         pour garantir la sécurité.
-  \item Dans tous les cas, il est essentiel de
-        \textbf{vérifier la plausibilité physique
-        du résultat}.
 \end{itemize}
 }
 
 % ====================================================================
-\section*{6. Bilan}
+\section*{5. Bilan et ouverture}
 % ====================================================================
 
 Quatre idées à retenir :
 
-\atrou[7cm]{%
+\atrou[5cm]{%
 \begin{enumerate}
-  \item L'idée de \textbf{différences finies}
-        est une généralisation de ce qu'on a fait avec Euler :
+  \item Les \textbf{différences finies}
+        généralisent l'idée d'Euler :
         on remplace des dérivées par des quotients
-        de différences.
-  \item La discrétisation d'un problème aux limites
-        conduit naturellement à un \textbf{système linéaire}
-        $A\,\mathbf{u} = \mathbf{b}$.
-  \item La matrice obtenue a une structure particulière
-        (\textbf{tridiagonale} en 1D)
-        qui reflète le caractère local du stencil.
-  \item La fiabilité d'un calcul numérique repose sur
-        trois propriétés :
-        \textbf{convergence}
-        (le résultat s'améliore quand on raffine),
-        \textbf{stabilité}
-        (les erreurs ne sont pas amplifiées),
+        de différences, en espace comme en temps.
+  \item En combinant Euler (temps) et différences finies
+        (espace), on obtient un \textbf{schéma numérique complet}
+        pour une EDP.
+  \item Le \textbf{choix du schéma compte} :
+        deux discrétisations d'apparence similaire
+        peuvent donner des résultats radicalement
+        différents (diffusion numérique vs.\ oscillations).
+  \item La fiabilité d'un calcul repose sur
+        la \textbf{convergence},
+        la \textbf{stabilité}
         et un \textbf{compromis entre précision et coût}.
 \end{enumerate}
+}
+
+\medskip
+
+\textbf{Ouverture : et la dérivée seconde\,?}
+
+Aujourd'hui, on a approché la dérivée première.
+Mais certains problèmes
+(diffusion de chaleur, flexion d'une poutre)
+font intervenir la dérivée seconde.
+Comment l'approcher\,?
+
+\atrou[3cm]{%
+\[
+  \boxed{u''(x_i) \approx
+  \frac{u_{i+1} - 2\,u_i + u_{i-1}}{h^2}.}
+\]
+Ce stencil utilise \textbf{trois points} voisins
+(au lieu de deux pour la dérivée première).
+Conséquence : la matrice du système linéaire
+devient \textbf{tridiagonale}
+--- c'est ce qu'on verra en TD2.
 }
 
 \end{document}
