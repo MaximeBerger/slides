@@ -43,6 +43,20 @@ $$
 
 \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
+Si on avait voulu l'évennement $D_{10}$: "A partir du 10eme contrôle, toutes les pièces sont conformes", on écrirait 
+$$
+D_{10}=\bigcap_{i=10}^{+\infty} A_i
+$$
+Pour écrire $D$, il faut considérer que c'est :
+\begin{enumerate}
+    \item soit à partir du premier, toutes sont conformes,
+    \item soit à partir du deuxième, toutes sont conformes, 
+    \item etc .. 
+    \item soit à partir du dixième toutes sont conformes, 
+    \item etc ...
+\end{enumerate}
+
+C'est donc la réunion de tous ces évennements: 
 
 $$
 D=\bigcup_{n=1}^{+\infty} \bigcap_{i \geq n} A_i\,.
