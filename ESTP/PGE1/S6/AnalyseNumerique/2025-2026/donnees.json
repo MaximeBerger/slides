@@ -10,7 +10,7 @@
       "sousParties": [
         {
           "numero": 1,
-          "titre": "CM 1 Méthode d'Euler - à remplir",
+          "titre": "CM 1 - Méthode d'Euler - à remplir",
           "description": "",
           "lien": "CM1-enonce.pdf",
           "cible": "_blank"
@@ -24,7 +24,7 @@
         },
         {
           "numero": 1,
-          "titre": "CM 2 Différences finies - à remplir",
+          "titre": "CM 2 - Différences finies - à remplir",
           "description": "",
           "lien": "CM2-enonce.pdf",
           "cible": "_blank"
