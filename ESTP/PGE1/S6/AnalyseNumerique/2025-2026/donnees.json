@@ -3,7 +3,7 @@
   "chapitres": [
     {
       "id": "sec1",
-      "numero": 1,
+      "numero": 0,
       "titre": "Méthode d'Euler et différences finies",
       "description": "Motivation · Illustration",
       "lien": "#",
