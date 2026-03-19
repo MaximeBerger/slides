@@ -311,14 +311,43 @@ Dans cet exercice, on cherche \`a reconna\^itre dans quelles situations les lois
 \newpage
 
 \section*{5 - Rebuts}
-Une fabrication automatique de pièces embouties donne un pourcentage de rebuts s'élevant à $5 \%$. On considère un échantillon de 10 pièces issues de cette fabrication. Calculer la probabilité de trouver dans cet échantillon au plus 2 rebuts.
+Une fabrication automatique de pièces embouties donne un pourcentage de rebuts s'élevant à $5 \%$. On considère un échantillon de $10$ pièces issues de cette fabrication. Calculer la probabilité de trouver dans cet échantillon au plus $2$ rebuts.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Soit $X$ le nombre de rebuts parmi les $10$ pièces. Chaque pièce est défectueuse indépendamment avec probabilité $0{,}05$, donc $X \sim B(10;\, 0{,}05)$.
+
+On cherche $P(X \leq 2) = P(X=0)+P(X=1)+P(X=2)$. Par la formule binomiale :
+\begin{align*}
+P(X=0) &= 0{,}95^{10} \approx 0{,}5987\,,\\
+P(X=1) &= \binom{10}{1}\times 0{,}05 \times 0{,}95^{9} \approx 0{,}3151\,,\\
+P(X=2) &= \binom{10}{2}\times 0{,}05^{2} \times 0{,}95^{8} \approx 0{,}0746\,.
+\end{align*}
+Donc $P(X \leq 2) \approx 0{,}9884$.
+    \end{solution}
+}{}
 
 \vspace{1em}
 
-\section*{6 - un dé}
+\section*{6 - Un dé}
 
+Combien de fois faut-il lancer un dé pour faire au moins un six avec une probabilité supérieure ou égale à $0{,}95$ ?
 
-Combien de fois faut-il lancer un dé pour faire au moins un six avec une probabilité supérieure ou égale à 0,95 ?
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+L'événement contraire est "aucun six en $n$ lancers", de probabilité $\left(\tfrac{5}{6}\right)^n$. On cherche le plus petit entier $n$ tel que
+$$
+1 - \left(\frac{5}{6}\right)^n \geq 0{,}95
+\iff
+\left(\frac{5}{6}\right)^n \leq 0{,}05.
+$$
+En passant au logarithme (en base $e$) :
+$$
+n \geq \frac{\ln(0{,}05)}{\ln\!\left(\tfrac{5}{6}\right)} = \frac{\ln(0{,}05)}{\ln 5 - \ln 6} \approx \frac{-2{,}996}{-0{,}182} \approx 16{,}4\,.
+$$
+Il faut donc au moins $\mathbf{17}$ lancers.
+    \end{solution}
+}{}
 
 \vspace{1em}
 
