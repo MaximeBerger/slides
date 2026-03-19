@@ -4,13 +4,13 @@
     {
       "id": "sec1",
       "numero": 1,
-      "titre": "Méthode d'Euler",
+      "titre": "Méthode d'Euler et différences finies",
       "description": "Motivation · Illustration",
       "lien": "#",
       "sousParties": [
         {
           "numero": 1,
-          "titre": "CM 1 - à remplir",
+          "titre": "CM 1 Méthode d'Euler - à remplir",
           "description": "",
           "lien": "CM1-enonce.pdf",
           "cible": "_blank"
@@ -21,21 +21,10 @@
           "description": "",
           "lien": "CM1-annote.pdf",
           "cible": "_blank"
-        }
-      ],
-      "sexercer" : [
-      ]
-    },
-    {
-      "id": "sec2",
-      "numero": 2,
-      "titre": "Différences finies et systèmes linéaires",
-      "description": "Discrétisation · Stabilité · Convergence",
-      "lien": "#",
-      "sousParties": [
+        },
         {
           "numero": 1,
-          "titre": "CM 2 - à remplir",
+          "titre": "CM 2 Différences finies - à remplir",
           "description": "",
           "lien": "CM2-enonce.pdf",
           "cible": "_blank"
