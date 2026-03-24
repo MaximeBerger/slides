@@ -38,6 +38,13 @@
         }
       ],
       "sexercer" : [
+        {
+          "numero": 1,
+          "titre": "TP 1 - Voir la méthode d'Euler",
+          "description": "",
+          "lien": "TP1.ipynb",
+          "cible": "_blank"
+        }
       ]
     }
   ]
