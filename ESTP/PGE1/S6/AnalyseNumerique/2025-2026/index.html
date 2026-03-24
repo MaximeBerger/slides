@@ -298,9 +298,21 @@
         function createExerciseLink(exercise) {
             const link = document.createElement('a');
             link.href = exercise.lien;
-            link.target = exercise.cible || '_self';
             link.className = 'exercise-link';
             link.textContent = exercise.titre;
+            const href = exercise.lien || '';
+            const forceDownload =
+                exercise.telecharger === true ||
+                typeof exercise.download === 'string' ||
+                /\.ipynb$/i.test(href);
+            if (forceDownload) {
+                link.download =
+                    typeof exercise.download === 'string'
+                        ? exercise.download
+                        : href.split('/').pop() || '';
+            } else {
+                link.target = exercise.cible || '_self';
+            }
             return link;
         }
 
