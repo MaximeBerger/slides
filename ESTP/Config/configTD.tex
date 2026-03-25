@@ -40,20 +40,18 @@
 \usepackage[sf]{titlesec}
 \usepackage{environ}
 
+% Définition de la variable pour afficher les corrections (lue dans \jobname.adr)
+\newboolean{showSolutions}
+\input \jobname.adr
 
-\newenvironment{solution}
-{
-    \vspace{0.5em}
+% En mode énoncé (showSolutions = false), le corps des solutions est entièrement omis.
+\NewEnviron{solution}{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \vspace{0.5em}%
     \begin{mdframed}[backgroundcolor=ThemeLight,leftmargin=0,rightmargin=0,skipabove=0.2em,skipbelow=0.2em]
     \textbf{Solution.}\\[0.5em]
-}
-{
+    \BODY
     \end{mdframed}
-    \vspace{0.5em}
+    \vspace{0.5em}%
+  }{}%
 }
-
-
-% Définition de la variable pour afficher les corrections
-\newboolean{showSolutions}
-% Décommentez la ligne suivante pour afficher les solutions
-\input \jobname.adr
