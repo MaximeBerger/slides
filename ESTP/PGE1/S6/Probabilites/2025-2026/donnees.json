@@ -8,6 +8,20 @@
       "description": "Motivation · Illustration",
       "lien": "#",
       "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 1 - Espérance et variance",
+          "description": "Espérance · Variance",
+          "lien": "CM1-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 1 - annoté",
+          "description": "Espérance · Variance",
+          "lien": "CM1-annote.pdf",
+          "cible": "_blank"
+        }
         
       ],
       "sexercer" : [

@@ -5,9 +5,6 @@
 \author{}
 \date{}
 
-\newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
-    {\end{mdframed}\par\vspace{0.5em}}
 
 \begin{document}
 \sffamily
@@ -16,40 +13,8 @@
 
 
 
-\section*{0 - TD précédent}
-Reprendre/Terminer le dernier exercice du TD1.
 
-\vspace{1em}
-
-\section*{1 - Formule des probabilités totales}
-Sur un chantier, deux équipes de pose réalisent le même type d'interventions.
-L'équipe 1 réalise en une journée deux fois plus d'interventions que l'équipe 2.
-Le pourcentage d'interventions donnant lieu à une non-conformité est de $3 \%$ pour l'équipe 1 et de $4 \%$ pour l'équipe 2.
-On choisit au hasard une intervention réalisée dans la journée.
-
-Déterminer (\textit{On pourra représenter un arbre de probabilités})
-\begin{enumerate}
-    \item la probabilité que cette intervention provienne de l'équipe 1 ;
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            Notons $A$ l'événement " l'intervention provient de l'équipe 1 ", $B$ l'événement " l'intervention provient de l'équipe 2" et $D$ l'événement " l'intervention donne lieu à une non-conformité".
-    
-L'énoncé nous dit que les $2 / 3$ des interventions réalisées proviennent de l'équipe 1. Donc $P(A)=2 / 3$
-        \end{solution}
-    }{}
-
-    \item  la probabilité que cette intervention provienne de l'équipe 1 et donne lieu à une non-conformité;
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-    On cherche $P(A \cap D)=P_A(D) P(A)=0,03 \times \frac{2}{3}=\frac{1}{50}$.
-        \end{solution}
-    }{}
-
-    \item  la probabilité que cette intervention provienne de l'équipe 1 sachant qu'elle donne lieu à une non-conformité.
-\end{enumerate}
-
-
-\section*{2 - Espérance et variance}
+\section*{1 - Espérance et variance}
 Calculer l'espérance des variables aléatoires suivantes.
 
 \begin{enumerate}
@@ -117,26 +82,9 @@ $$
     
 \end{enumerate}
 
-\vspace{2em}
-
-\section*{3 - Surbooking}
-Une ligne aérienne est équipée d'Airbus A320 dotés de 174 places. On a observé qu'en moyenne $3 \%$ des personnes ayant acheté un billet ne se présentent pas à l'embarquement. Pour augmenter son bénéfice, la compagnie aérienne pratique le surbooking : elle vend deux billets de plus qu'il n'y a de places, soit 176 billets pour chaque vol. Pour un vol donné, on note $X_i$ la variable aléatoire valant 1 si le détenteur du $i^{\mathrm{e}}$ billet ne se présente pas à l'embarquement, et 0 sinon.
-\begin{enumerate}
-    \item En supposant, pour simplifier, les $X_i$ indépendantes, déterminer la loi du nombre $N$ de détenteurs de billets pour un vol ne se présentant pas à l'embarquement.
-    \item Quelle est la probabilité qu'il manque exactement une place dans l'avion au moment de l'embarquement ?
-    \item Quelle est la probabilité qu'il manque exactement deux places dans l'avion au moment de l'embarquement ?
-    \item Quelle est la probabilité qu'il y ait assez de place dans l'avion pour toutes les personnes se présentant à l'embarquement ?
-    \vspace{1em}
-    
-    Lorsqu'une personne munie d'un billet ne peut pas embarquer faute de place, elle est indemnisée à hauteur de $x$ euros. Les billets supplémentaires vendus dans le cadre du surbooking rapportent 90 euros chacun. On note $D$ le montant total des dédommagements versés lors d'un vol sur cette ligne.
-    \item Exprimer $D$ en fonction de $N$, puis déterminer la loi de $D$.
-    \item Exprimer l'espérance de $D$ en fonction de $x$.
-    \item Pour quelles valeurs de $x$, la stratégie de surbooking est-elle en moyenne rentable sur cette ligne ?
-\end{enumerate}
-
 \vspace{1em}
 
-\section*{4 - Fonctions de variables aléatoires - cas discret}
+\section*{2 - Fonctions de variables aléatoires - cas discret}
 
 Soient $X \sim \mathcal{B}(p), 0<p<1$, et $Y \sim \mathcal{U}(\{-1,0,1\}), 0<p<1$ deux v.a. indépendantes. 
 
@@ -185,9 +133,27 @@ Soient $X \sim \mathcal{B}(p), 0<p<1$, et $Y \sim \mathcal{U}(\{-1,0,1\}), 0<p<1
         \end{solution}
     }{}
 \end{enumerate}
+\vspace{2em}
+
+\section*{3 - Surbooking}
+Une ligne aérienne est équipée d'Airbus A320 dotés de 174 places. On a observé qu'en moyenne $3 \%$ des personnes ayant acheté un billet ne se présentent pas à l'embarquement. Pour augmenter son bénéfice, la compagnie aérienne pratique le surbooking : elle vend deux billets de plus qu'il n'y a de places, soit 176 billets pour chaque vol. Pour un vol donné, on note $X_i$ la variable aléatoire valant 1 si le détenteur du $i^{\mathrm{e}}$ billet ne se présente pas à l'embarquement, et 0 sinon.
+\begin{enumerate}
+    \item En supposant, pour simplifier, les $X_i$ indépendantes, déterminer la loi du nombre $N$ de détenteurs de billets pour un vol ne se présentant pas à l'embarquement.
+    \item Quelle est la probabilité qu'il manque exactement une place dans l'avion au moment de l'embarquement ?
+    \item Quelle est la probabilité qu'il manque exactement deux places dans l'avion au moment de l'embarquement ?
+    \item Quelle est la probabilité qu'il y ait assez de place dans l'avion pour toutes les personnes se présentant à l'embarquement ?
+    \vspace{1em}
+    
+    Lorsqu'une personne munie d'un billet ne peut pas embarquer faute de place, elle est indemnisée à hauteur de $x$ euros. Les billets supplémentaires vendus dans le cadre du surbooking rapportent 90 euros chacun. On note $D$ le montant total des dédommagements versés lors d'un vol sur cette ligne.
+    \item Exprimer $D$ en fonction de $N$, puis déterminer la loi de $D$.
+    \item Exprimer l'espérance de $D$ en fonction de $x$.
+    \item Pour quelles valeurs de $x$, la stratégie de surbooking est-elle en moyenne rentable sur cette ligne ?
+\end{enumerate}
+
+
 
 \vspace{1em}
-\section*{5 - Centre d'appels}
+\section*{4 - Centre d'appels}
 Dans un centre d'assistance téléphonique, on modélise le nombre d'appels reçus pendant une heure par une variable aléatoire $N$ suivant une loi de Poisson de paramètre $\lambda$, où $\lambda > 0$ représente le nombre moyen d'appels reçus par heure.
 
 On suppose qu'un salarié peut traiter au maximum 8 appels par heure. Les appels qui ne peuvent pas être traités dans l'heure sont perdus, ce qui occasionne un coût de 15 euros par appel perdu.
@@ -205,30 +171,246 @@ On se demande s'il serait rentable d'embaucher un deuxième salarié, au coût h
     \item Exprimer les coûts horaires moyens $\mathbb{E}(C_1)$ et $\mathbb{E}(C_2)$.
     \item En fonction du paramètre $\lambda$, à quelle condition devient-il rentable d'embaucher un deuxième salarié ?
 \end{enumerate}
-% \vspace{1em}
+\vspace{1em}
 
-% \section*{6 - coût de dépistage}
-% On cherche à dépister une maladie $M$ dans une population de $N$ personnes. On suppose que chaque personne est atteinte de la maladie avec probabilité $p$, indépendamment des autres. Le coût d'un test sanguin est $c$. On suppose de plus que le test est parfait.
+\section*{5 - coût de dépistage}
+On cherche à dépister une maladie $M$ dans une population de $N$ personnes. On suppose que chaque personne est atteinte de la maladie avec probabilité $p$, indépendamment des autres. Le coût d'un test sanguin est $c$. On suppose de plus que le test est parfait.
 
-% On compare les deux stratégies suivantes.
+On compare les deux stratégies suivantes.
 
-% \textbf{Stratégie 1} : effectuer un test individuel pour chaque personne.
+\textbf{Stratégie 1} : effectuer un test individuel pour chaque personne.
 
-% \textbf{Stratégie 2 :} on fixe un entier $n \geq 2$ tel que $N/n$ soit entier, puis on répartit les $N$ personnes en $N/n$ groupes de $n$ personnes. Pour chaque groupe, on mélange les prélèvements sanguins et on effectue un unique test. Si ce test est positif, alors on effectue ensuite un test individuel pour chacune des $n$ personnes du groupe.
-% \begin{enumerate}
-%     \item Calculer le coût de la Stratégie 1.
-%     \item Déterminer la probabilité pour qu'un groupe de $n$ personnes contienne au moins une personne infectée.
-%     \item Soit $X$ la variable aléatoire égale au nombre de groupes pour lesquels des tests individuels seront effectués. Déterminer la loi de $X$.
-%     \item En déduire le coût moyen de la Stratégie 2.
-%     \item On supposera $n p \ll 1$, et on montrera que $n \simeq 1 / \sqrt{p}$ est une taille qui minimise correctement le coût moyen de la stratégie 2.
-%     Indication: On pourra utiliser (en le justifiant) que si $n p \ll 1$, alors
+\textbf{Stratégie 2 :} on fixe un entier $n \geq 2$ tel que $N/n$ soit entier, puis on répartit les $N$ personnes en $N/n$ groupes de $n$ personnes. Pour chaque groupe, on mélange les prélèvements sanguins et on effectue un unique test. Si ce test est positif, alors on effectue ensuite un test individuel pour chacune des $n$ personnes du groupe.
+\begin{enumerate}
+    \item Calculer le coût de la Stratégie 1.
+    \item Déterminer la probabilité pour qu'un groupe de $n$ personnes contienne au moins une personne infectée.
+    \item Soit $X$ la variable aléatoire égale au nombre de groupes pour lesquels des tests individuels seront effectués. Déterminer la loi de $X$.
+    \item En déduire le coût moyen de la Stratégie 2.
+    \item On supposera $n p \ll 1$, et on montrera que $n \simeq 1 / \sqrt{p}$ est une taille qui minimise correctement le coût moyen de la stratégie 2.
+    Indication: On pourra utiliser (en le justifiant) que si $n p \ll 1$, alors
 
-% $$
-% c N\left(1+\frac{1}{n}-(1-p)^n\right)=c N\left(n p+\frac{1}{n}\right)+o(n p)
-% $$
+$$
+c N\left(1+\frac{1}{n}-(1-p)^n\right)=c N\left(n p+\frac{1}{n}\right)+o(n p)
+$$
 
-%     \item Quelle stratégie choisissez-vous? Illustrer vos conclusions pour le cas où $p=5 \%$ en calculant le pourcentage moyen d'économie réalisée.
-% \end{enumerate}
+    \item Quelle stratégie choisissez-vous? Illustrer vos conclusions pour le cas où $p=5 \%$ en calculant le pourcentage moyen d'économie réalisée.
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{6 - Temps d'attente et inspection de pieux}
+
+Sur un chantier de fondations profondes, un contrôleur inspecte des pieux forés un par un. Chaque pieu, indépendamment des autres, a une probabilité $p = 0{,}1$ d'être non conforme.
+
+\medskip
+\textbf{Partie A --- Attente du premier défaut}
+
+\medskip
+
+On note $T$ le rang du premier pieu non conforme.
+
+\begin{enumerate}
+    \item Quelle loi suit $T$ ? Préciser ses paramètres.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $T$ suit une \textbf{loi géométrique} de paramètre $p=0{,}1$. En effet, on répète des essais de Bernoulli indépendants (conforme/non conforme) et $T$ est le rang du premier succès (ici : premier défaut).
+        \end{solution}
+    }{}
+
+    \item Montrer que $P(T > n) = (1-p)^{n}$ pour tout $n \geq 0$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $T > n$ signifie que les $n$ premiers pieux sont tous conformes. Comme les essais sont indépendants, $P(T > n) = (1-p)^n$.
+        \end{solution}
+    }{}
+    
+    \item Calculer la probabilité d'inspecter plus de $20$ pieux avant de trouver le premier non conforme.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $P(T > 20) = (1-0{,}1)^{20} = 0{,}9^{20} \approx 0{,}122$.
+        \end{solution}
+    }{}
+
+    \item \textbf{Propriété sans mémoire.} Montrer que pour tous entiers $n, k \geq 0$ :
+    $$
+    P(T > n + k \mid T > n) = P(T > k).
+    $$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                P(T > n+k \mid T > n)
+                &= \frac{P(T > n+k \text{ et } T > n)}{P(T > n)}
+                = \frac{P(T > n+k)}{P(T > n)} \\
+                &= \frac{(1-p)^{n+k}}{(1-p)^{n}}
+                = (1-p)^{k}
+                = P(T > k).
+            \end{align*}
+        \end{solution}
+    }{}
+    
+    \item Interpréter ce résultat : sachant que les $n$ premiers pieux sont conformes, que peut-on dire de l'attente restante ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Sachant que les $n$ premiers pieux sont conformes, la probabilité de devoir attendre encore plus de $k$ pieux est exactement la même que si l'on repartait de zéro. Le processus \og ne se souvient pas \fg{} du passé : c'est la \textbf{propriété d'absence de mémoire}. C'est la seule loi discrète à posséder cette propriété.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\medskip
+\textbf{Partie B --- Loi binomiale négative}
+
+\medskip
+
+Le chantier est arrêté dès que le contrôleur a trouvé $r$ pieux non conformes. On note $T_r$ le nombre total de pieux inspectés à ce moment-là.
+
+\begin{enumerate}[resume]
+    \item Pour $r = 1$, quelle est la loi de $T_1$ ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $T_1 = T$ suit la loi géométrique de paramètre $p$ : c'est le cas de la partie~A.
+        \end{solution}
+    }{}
+
+    \item On découpe l'inspection en phases : la phase~$j$ commence juste après le $(j-1)$-ème défaut et se termine au $j$-ème défaut. Soit $W_j$ le nombre de pieux inspectés pendant la phase~$j$. Justifier que les $W_j$ sont indépendantes et de même loi géométrique de paramètre $p$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Après le $(j-1)$-ème défaut, on recommence à inspecter des pieux un par un. Par indépendance des essais, le nombre de pieux jusqu'au prochain défaut est indépendant de ce qui précède et suit la même loi géométrique de paramètre $p$. Donc $W_1, W_2, \ldots, W_r$ sont i.i.d. de loi $\mathcal{G}(p)$.
+        \end{solution}
+    }{}
+
+    \item En déduire que $T_r = W_1 + W_2 + \cdots + W_r$, puis calculer $E[T_r]$ et $\text{Var}(T_r)$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $T_r = W_1 + \cdots + W_r$ est une somme de $r$ v.a. géométriques indépendantes de paramètre $p$. Par linéarité de l'espérance et additivité des variances :
+            \[
+                E[T_r] = r \cdot \frac{1}{p} = \frac{r}{p},
+                \qquad
+                \text{Var}(T_r) = r \cdot \frac{1-p}{p^2} = \frac{r(1-p)}{p^2}.
+            \]
+        \end{solution}
+    }{}
+
+    \item Montrer que, pour $k \geq r$ :
+    $$
+    P(T_r = k) = \binom{k-1}{r-1}\, p^{\,r}\, (1-p)^{k-r}.
+    $$
+    On pourra interpréter l'événement $\{T_r = k\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $\{T_r = k\}$ signifie que le $r$-ème défaut est trouvé exactement au $k$-ème pieu. Cela impose :
+            \begin{itemize}
+                \item[$\bullet$] parmi les $k-1$ premiers pieux, exactement $r-1$ sont non conformes : $\binom{k-1}{r-1}\, p^{r-1}\, (1-p)^{k-r}$ ;
+                \item[$\bullet$] le $k$-ème pieu est non conforme : $\times\, p$.
+            \end{itemize}
+            D'où $P(T_r = k) = \binom{k-1}{r-1}\, p^{\,r}\,(1-p)^{k-r}$ pour $k \geq r$.
+
+            C'est la \textbf{loi binomiale négative} (ou loi de Pascal) de paramètres $r$ et $p$.
+        \end{solution}
+    }{}
+    
+    \item Application numérique : pour $r = 3$ et $p = 0{,}1$, combien de pieux faut-il inspecter en moyenne avant l'arrêt du chantier ? Quel est l'écart-type ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $E[T_3] = \dfrac{3}{0{,}1} = 30$ pieux. \quad
+            $\sigma(T_3) = \sqrt{\dfrac{3 \times 0{,}9}{0{,}01}} = \sqrt{270} \approx 16{,}4$ pieux.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{7 - Retrouver la loi de Poisson}
+
+On observe des fissures sur un revêtement routier.
+L'expérience montre qu'en moyenne, il apparaît $\lambda = 3$ fissures par kilomètre.
+
+\medskip
+
+Pour modéliser ce phénomène, on découpe un tronçon de $1$~km en $n$ petits segments de longueur $\frac{1}{n}$~km. On suppose que :
+\begin{itemize}
+    \item chaque segment contient au plus une fissure ;
+    \item les segments sont indépendants ;
+    \item la probabilité qu'un segment contienne une fissure est $p_n = \dfrac{\lambda}{n}$.
+\end{itemize}
+
+On note $X_n$ le nombre total de fissures sur le kilomètre.
+
+\begin{enumerate}
+    \item Quelle est la loi de $X_n$ ? Donner $P(X_n = k)$ pour $k \in \{0, \ldots, n\}$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $X_n$ est une somme de $n$ Bernoulli indépendantes de paramètre $p_n = \lambda/n$, donc $X_n \sim \mathcal{B}(n, \lambda/n)$ et :
+            \[
+                P(X_n = k) = \binom{n}{k} \left(\frac{\lambda}{n}\right)^k \left(1-\frac{\lambda}{n}\right)^{n-k}.
+            \]
+        \end{solution}
+    }{}
+    
+    \item On veut faire tendre $n \to +\infty$ (segments de plus en plus petits). Réécrire $P(X_n = k)$ sous la forme :
+    $$
+    P(X_n = k)
+    = \frac{\lambda^k}{k!}
+    \;\times\;
+    \underbrace{\frac{n(n-1)\cdots(n-k+1)}{n^k}}_{A_n}
+    \;\times\;
+    \underbrace{\left(1-\frac{\lambda}{n}\right)^{n}}_{B_n}
+    \;\times\;
+    \underbrace{\left(1-\frac{\lambda}{n}\right)^{-k}}_{C_n}.
+    $$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On développe $\binom{n}{k} = \dfrac{n!}{k!(n-k)!} = \dfrac{n(n-1)\cdots(n-k+1)}{k!}$, puis on sépare $\left(\frac{\lambda}{n}\right)^k$ et $\left(1-\frac{\lambda}{n}\right)^{n-k} = \left(1-\frac{\lambda}{n}\right)^{n} \cdot \left(1-\frac{\lambda}{n}\right)^{-k}$.
+
+            On obtient bien la décomposition demandée.
+        \end{solution}
+    }{}
+    
+    \item Déterminer les limites de $A_n$, $B_n$ et $C_n$ quand $n \to +\infty$ (on rappelle que $\lim_{n\to\infty}(1-\lambda/n)^n = e^{-\lambda}$).
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{itemize}
+                \item[$\bullet$] $A_n = \dfrac{n}{n} \cdot \dfrac{n-1}{n} \cdots \dfrac{n-k+1}{n} \xrightarrow[n\to\infty]{} 1 \times 1 \times \cdots \times 1 = 1$.
+                \item[$\bullet$] $B_n = \left(1-\dfrac{\lambda}{n}\right)^{n} \xrightarrow[n\to\infty]{} e^{-\lambda}$.
+                \item[$\bullet$] $C_n = \left(1-\dfrac{\lambda}{n}\right)^{-k} \xrightarrow[n\to\infty]{} 1^{-k} = 1$.
+            \end{itemize}
+        \end{solution}
+    }{}
+    
+    \item En déduire que :
+    $$
+    \lim_{n \to +\infty} P(X_n = k) = e^{-\lambda}\,\frac{\lambda^k}{k!}.
+    $$
+    Quelle loi reconnaît-on ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            En passant à la limite : $P(X_n = k) \to \dfrac{\lambda^k}{k!} \times 1 \times e^{-\lambda} \times 1 = e^{-\lambda}\dfrac{\lambda^k}{k!}$.
+
+            On reconnaît la \textbf{loi de Poisson} de paramètre $\lambda$.
+        \end{solution}
+    }{}
+
+    \item Retrouver l'espérance et la variance de la loi de Poisson par passage à la limite.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Pour $X_n \sim \mathcal{B}(n, \lambda/n)$ :
+            \[
+                E[X_n] = n \cdot \frac{\lambda}{n} = \lambda,
+                \qquad
+                \text{Var}(X_n) = n \cdot \frac{\lambda}{n} \cdot \left(1 - \frac{\lambda}{n}\right) = \lambda\left(1 - \frac{\lambda}{n}\right) \xrightarrow[n\to\infty]{} \lambda.
+            \]
+            Donc $E[X] = \lambda$ et $\text{Var}(X) = \lambda$.
+        \end{solution}
+    }{}
+
+    \item Retour à la route : $\lambda = 3$ fissures/km. En utilisant la loi de Poisson, calculer la probabilité qu'un tronçon de 1~km contienne exactement 2 fissures, puis qu'il n'en contienne aucune.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $P(X = 2) = e^{-3}\,\dfrac{3^2}{2!} = \dfrac{9}{2}\,e^{-3} \approx 0{,}224$.
+
+            $P(X = 0) = e^{-3} \approx 0{,}050$.
+        \end{solution}
+    }{}
+\end{enumerate}
 
 
 \end{document}
