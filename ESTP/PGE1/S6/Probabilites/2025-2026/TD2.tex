@@ -245,7 +245,15 @@ Une ligne aérienne est équipée d'Airbus A320 dotés de 174 places. On a obser
     \item Exprimer $D$ en fonction de $N$, puis déterminer la loi de $D$.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Le nombre de personnes refusées à l'embarquement est $\max(176-N-174,\,0) = \max(2-N,\,0)$. Donc :
+            Le nombre de personnes refusées à l'embarquement est 
+            \begin{itemize}
+                \item[$\bullet$] $2$ si $N =0$ ;
+                \item[$\bullet$] $1$ si $N =1$ ;
+                \item[$\bullet$] $0$ si $N \geq 2$.
+            \end{itemize}
+            On peut écrire cela comme : $\max(2-N,\,0)$. 
+            
+            Donc :
             \[
                 D = x\,\max(2-N,\,0).
             \]
