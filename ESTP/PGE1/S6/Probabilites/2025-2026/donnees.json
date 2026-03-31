@@ -34,6 +34,16 @@
           "titre": "TD1 - Corrigé",
           "lien": "TD1-corrige.pdf",
           "cible": "_blank"
+        },
+        {
+          "titre": "TD2 - Modélisation",
+          "lien": "TD2-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD2 - Corrigé",
+          "lien": "TD2-corrige.pdf",
+          "cible": "_blank"
         }
       ]
     }

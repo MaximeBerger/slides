@@ -19,17 +19,54 @@ Calculer l'espérance des variables aléatoires suivantes.
 
 \begin{enumerate}
     \item Soit $X$ le résultat obtenu lors du lancer d'un dé équilibré à six faces. Déterminer l'espérance de $X$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $X$ prend les valeurs $1, 2, 3, 4, 5, 6$ chacune avec probabilité $\frac{1}{6}$.
+            \[
+                E(X) = \frac{1}{6}(1+2+3+4+5+6) = \frac{21}{6} = \frac{7}{2} = 3{,}5.
+            \]
+        \end{solution}
+    }{}
     \item Soit $Y$ une variable aléatoire suivant la loi géométrique de paramètre $p \in ]0,1[$, c'est-à-dire telle que, pour tout $k \in \mathbb{N}^*$,
     $$
     P(Y=k)=(1-p)^{k-1}p.
     $$
     Déterminer l'espérance de $Y$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                E(Y) &= \sum_{k=1}^{+\infty} k\,(1-p)^{k-1}\,p
+                = p \sum_{k=1}^{+\infty} k\,(1-p)^{k-1}.
+            \end{align*}
+            On reconnaît la dérivée de la série géométrique : $\displaystyle\sum_{k=1}^{+\infty} k\,x^{k-1} = \frac{1}{(1-x)^2}$ pour $|x|<1$. Avec $x = 1-p$ :
+            \[
+                E(Y) = p \cdot \frac{1}{p^2} = \frac{1}{p}.
+            \]
+        \end{solution}
+    }{}
     \item Soit $Z$ une variable aléatoire définie par
     $$
     P(Z=-1)=0,2,\qquad P(Z=0)=0,3,\qquad P(Z=2)=0,4,\qquad P(Z=5)=0,1.
     $$
     Vérifier qu'il s'agit bien d'une loi de probabilité, puis calculer l'espérance de $Z$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Les probabilités sont toutes positives et leur somme vaut $0{,}2 + 0{,}3 + 0{,}4 + 0{,}1 = 1$. Il s'agit bien d'une loi de probabilité.
+            \[
+                E(Z) = (-1)\times 0{,}2 + 0\times 0{,}3 + 2\times 0{,}4 + 5\times 0{,}1 = -0{,}2 + 0 + 0{,}8 + 0{,}5 = 1{,}1.
+            \]
+        \end{solution}
+    }{}
     \item Dans chacun des trois cas précédents, indiquer brièvement ce que représente concrètement l'espérance obtenue.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{itemize}
+                \item[$\bullet$] $E(X) = 3{,}5$ : c'est la valeur moyenne obtenue sur un grand nombre de lancers du dé. On s'attend à obtenir en moyenne $3{,}5$ par lancer.
+                \item[$\bullet$] $E(Y) = 1/p$ : c'est le nombre moyen d'essais nécessaires avant d'obtenir le premier succès. Plus $p$ est petit, plus il faut attendre longtemps en moyenne.
+                \item[$\bullet$] $E(Z) = 1{,}1$ : c'est la valeur moyenne de $Z$ sur un grand nombre de réalisations, autrement dit le gain moyen de l'expérience aléatoire.
+            \end{itemize}
+        \end{solution}
+    }{}
 \end{enumerate}
 
 
@@ -79,6 +116,34 @@ $$
         \end{solution}
     }{}
     \item Calculer la variance des variables aléatoires $X$, $Y$ et $Z$ définies au début de l'exercice.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \textbf{Variance de $X$ (dé) :}
+            \[
+                E(X^2) = \frac{1}{6}(1^2+2^2+3^2+4^2+5^2+6^2) = \frac{91}{6}.
+            \]
+            \[
+                \text{Var}(X) = E(X^2) - E(X)^2 = \frac{91}{6} - \left(\frac{7}{2}\right)^2 = \frac{91}{6} - \frac{49}{4} = \frac{182 - 147}{12} = \frac{35}{12} \approx 2{,}92.
+            \]
+
+            \textbf{Variance de $Y$ (géométrique) :} On calcule $E(Y(Y-1))$ :
+            \begin{align*}
+                E(Y(Y-1)) &= \sum_{k=2}^{+\infty} k(k-1)(1-p)^{k-1}p = p(1-p)\sum_{k=2}^{+\infty} k(k-1)(1-p)^{k-2} = p(1-p)\cdot \frac{2}{p^3} = \frac{2(1-p)}{p^2}.
+            \end{align*}
+            Donc $E(Y^2) = E(Y(Y-1)) + E(Y) = \dfrac{2(1-p)}{p^2} + \dfrac{1}{p} = \dfrac{2-p}{p^2}$ et :
+            \[
+                \text{Var}(Y) = \frac{2-p}{p^2} - \frac{1}{p^2} = \frac{1-p}{p^2}.
+            \]
+
+            \textbf{Variance de $Z$ :}
+            \[
+                E(Z^2) = (-1)^2\times 0{,}2 + 0^2\times 0{,}3 + 2^2\times 0{,}4 + 5^2\times 0{,}1 = 0{,}2 + 0 + 1{,}6 + 2{,}5 = 4{,}3.
+            \]
+            \[
+                \text{Var}(Z) = E(Z^2) - E(Z)^2 = 4{,}3 - 1{,}1^2 = 4{,}3 - 1{,}21 = 3{,}09.
+            \]
+        \end{solution}
+    }{}
     
 \end{enumerate}
 
@@ -139,15 +204,81 @@ Soient $X \sim \mathcal{B}(p), 0<p<1$, et $Y \sim \mathcal{U}(\{-1,0,1\}), 0<p<1
 Une ligne aérienne est équipée d'Airbus A320 dotés de 174 places. On a observé qu'en moyenne $3 \%$ des personnes ayant acheté un billet ne se présentent pas à l'embarquement. Pour augmenter son bénéfice, la compagnie aérienne pratique le surbooking : elle vend deux billets de plus qu'il n'y a de places, soit 176 billets pour chaque vol. Pour un vol donné, on note $X_i$ la variable aléatoire valant 1 si le détenteur du $i^{\mathrm{e}}$ billet ne se présente pas à l'embarquement, et 0 sinon.
 \begin{enumerate}
     \item En supposant, pour simplifier, les $X_i$ indépendantes, déterminer la loi du nombre $N$ de détenteurs de billets pour un vol ne se présentant pas à l'embarquement.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $N = X_1 + X_2 + \cdots + X_{176}$ est une somme de 176 variables de Bernoulli indépendantes de paramètre $p = 0{,}03$. Donc :
+            \[
+                N \sim \mathcal{B}(176,\; 0{,}03).
+            \]
+        \end{solution}
+    }{}
     \item Quelle est la probabilité qu'il manque exactement une place dans l'avion au moment de l'embarquement ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Il y a 176 billets vendus et 174 places. Le nombre de personnes se présentant est $176 - N$. Il manque exactement une place lorsque $176 - N = 175$, soit $N = 1$.
+            \[
+                P(N = 1) = \binom{176}{1}\,(0{,}03)^1\,(0{,}97)^{175} = 176 \times 0{,}03 \times 0{,}97^{175} \approx 0{,}0275.
+            \]
+        \end{solution}
+    }{}
     \item Quelle est la probabilité qu'il manque exactement deux places dans l'avion au moment de l'embarquement ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Il manque exactement deux places lorsque $176 - N = 176$, soit $N = 0$ (tout le monde se présente).
+            \[
+                P(N = 0) = 0{,}97^{176} \approx 0{,}0048.
+            \]
+        \end{solution}
+    }{}
     \item Quelle est la probabilité qu'il y ait assez de place dans l'avion pour toutes les personnes se présentant à l'embarquement ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Il y a assez de places lorsque $176 - N \leq 174$, soit $N \geq 2$.
+            \[
+                P(N \geq 2) = 1 - P(N=0) - P(N=1) = 1 - 0{,}97^{176} - 176\times 0{,}03\times 0{,}97^{175} \approx 0{,}968.
+            \]
+        \end{solution}
+    }{}
     \vspace{1em}
     
     Lorsqu'une personne munie d'un billet ne peut pas embarquer faute de place, elle est indemnisée à hauteur de $x$ euros. Les billets supplémentaires vendus dans le cadre du surbooking rapportent 90 euros chacun. On note $D$ le montant total des dédommagements versés lors d'un vol sur cette ligne.
     \item Exprimer $D$ en fonction de $N$, puis déterminer la loi de $D$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Le nombre de personnes refusées à l'embarquement est $\max(176-N-174,\,0) = \max(2-N,\,0)$. Donc :
+            \[
+                D = x\,\max(2-N,\,0).
+            \]
+            La loi de $D$ est :
+            \begin{itemize}
+                \item[$\bullet$] $D = 2x$ si $N = 0$, avec probabilité $P(N=0) = 0{,}97^{176}$ ;
+                \item[$\bullet$] $D = x$ si $N = 1$, avec probabilité $P(N=1) = 176\times 0{,}03\times 0{,}97^{175}$ ;
+                \item[$\bullet$] $D = 0$ si $N \geq 2$, avec probabilité $P(N \geq 2) = 1 - P(N=0) - P(N=1)$.
+            \end{itemize}
+        \end{solution}
+    }{}
     \item Exprimer l'espérance de $D$ en fonction de $x$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                E(D) &= 2x\,P(N=0) + x\,P(N=1) + 0\cdot P(N \geq 2) \\
+                &= x\,\big[\,2\times 0{,}97^{176} + 176\times 0{,}03\times 0{,}97^{175}\,\big] \\
+                &= x\,\times 0{,}97^{175}\,\big[\,2\times 0{,}97 + 5{,}28\,\big] \\
+                &= x\,\times 0{,}97^{175}\times 7{,}22 \\
+                &\approx 0{,}0371\,x.
+            \end{align*}
+        \end{solution}
+    }{}
     \item Pour quelles valeurs de $x$, la stratégie de surbooking est-elle en moyenne rentable sur cette ligne ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La stratégie de surbooking rapporte $2\times 90 = 180$~\euro{} par vol (deux billets supplémentaires). Elle est rentable en moyenne si le gain net est positif :
+            \[
+                180 - E(D) > 0 \iff 180 > 0{,}0371\,x \iff x < \frac{180}{0{,}0371} \approx 4\,852~\text{\euro}.
+            \]
+            La stratégie est rentable tant que l'indemnité $x$ est inférieure à environ $4\,852$~\euro.
+        \end{solution}
+    }{}
 \end{enumerate}
 
 
@@ -162,14 +293,84 @@ On se demande s'il serait rentable d'embaucher un deuxième salarié, au coût h
 
 \begin{enumerate}
     \item Déterminer la loi de $N$ puis rappeler son espérance.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $N$ suit une loi de Poisson de paramètre $\lambda$ :
+            \[
+                P(N = k) = e^{-\lambda}\,\frac{\lambda^k}{k!}, \qquad k \in \mathbb{N}.
+            \]
+            Son espérance vaut $E(N) = \lambda$.
+        \end{solution}
+    }{}
     \item Quelle est la probabilité de recevoir exactement 5 appels en une heure ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $P(N = 5) = e^{-\lambda}\,\dfrac{\lambda^5}{5!} = e^{-\lambda}\,\dfrac{\lambda^5}{120}$.
+        \end{solution}
+    }{}
     \item Quelle est la probabilité de ne recevoir aucun appel en une heure ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $P(N = 0) = e^{-\lambda}\,\dfrac{\lambda^0}{0!} = e^{-\lambda}$.
+        \end{solution}
+    }{}
     \item Quelle est la probabilité de recevoir au moins un appel en une heure ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $P(N \geq 1) = 1 - P(N = 0) = 1 - e^{-\lambda}$.
+        \end{solution}
+    }{}
     \item Dans l'organisation 1, exprimer en fonction de $N$ le nombre $P_1$ d'appels perdus pendant une heure.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Avec un seul salarié pouvant traiter au maximum 8 appels, les appels au-delà de 8 sont perdus :
+            \[
+                P_1 = \max(N - 8,\, 0) = (N-8)^+.
+            \]
+        \end{solution}
+    }{}
     \item Dans l'organisation 2, exprimer en fonction de $N$ le nombre $P_2$ d'appels perdus pendant une heure.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Avec deux salariés pouvant traiter au maximum $2 \times 8 = 16$ appels :
+            \[
+                P_2 = \max(N - 16,\, 0) = (N-16)^+.
+            \]
+        \end{solution}
+    }{}
     \item En déduire les coûts horaires aléatoires $C_1$ et $C_2$ associés aux deux organisations.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Le coût de chaque appel perdu est de 15~\euro. L'organisation~2 a un coût salarial supplémentaire de 40~\euro/h.
+            \[
+                C_1 = 15\,P_1 = 15\,(N-8)^+, \qquad C_2 = 40 + 15\,P_2 = 40 + 15\,(N-16)^+.
+            \]
+        \end{solution}
+    }{}
     \item Exprimer les coûts horaires moyens $\mathbb{E}(C_1)$ et $\mathbb{E}(C_2)$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            \begin{align*}
+                E(C_1) &= 15\,E\!\left[(N-8)^+\right] = 15 \sum_{k=9}^{+\infty} (k-8)\,e^{-\lambda}\,\frac{\lambda^k}{k!}. \\[0.5em]
+                E(C_2) &= 40 + 15\,E\!\left[(N-16)^+\right] = 40 + 15 \sum_{k=17}^{+\infty} (k-16)\,e^{-\lambda}\,\frac{\lambda^k}{k!}.
+            \end{align*}
+            Ces sommes se calculent numériquement pour une valeur donnée de $\lambda$.
+        \end{solution}
+    }{}
     \item En fonction du paramètre $\lambda$, à quelle condition devient-il rentable d'embaucher un deuxième salarié ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Il est rentable d'embaucher un deuxième salarié lorsque $E(C_2) < E(C_1)$, c'est-à-dire :
+            \[
+                40 + 15\sum_{k=17}^{+\infty}(k-16)\,e^{-\lambda}\frac{\lambda^k}{k!} < 15\sum_{k=9}^{+\infty}(k-8)\,e^{-\lambda}\frac{\lambda^k}{k!},
+            \]
+            soit :
+            \[
+                15\left[\sum_{k=9}^{+\infty}(k-8)\,\frac{\lambda^k}{k!} - \sum_{k=17}^{+\infty}(k-16)\,\frac{\lambda^k}{k!}\right] > \frac{40}{e^{-\lambda}}\cdot e^{-\lambda} = 40.
+            \]
+            En simplifiant, on obtient la condition $15\,E\!\left[(N-8)^+ - (N-16)^+\right] > 40$, soit $E\!\left[\min(P_1,\, 8)\right] > \dfrac{8}{3}$. Plus $\lambda$ est grand, plus le nombre d'appels perdus augmente et plus il devient rentable d'embaucher.
+        \end{solution}
+    }{}
 \end{enumerate}
 \vspace{1em}
 
@@ -183,9 +384,48 @@ On compare les deux stratégies suivantes.
 \textbf{Stratégie 2 :} on fixe un entier $n \geq 2$ tel que $N/n$ soit entier, puis on répartit les $N$ personnes en $N/n$ groupes de $n$ personnes. Pour chaque groupe, on mélange les prélèvements sanguins et on effectue un unique test. Si ce test est positif, alors on effectue ensuite un test individuel pour chacune des $n$ personnes du groupe.
 \begin{enumerate}
     \item Calculer le coût de la Stratégie 1.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On effectue un test par personne, soit $N$ tests au total. Le coût est :
+            \[
+                C_1 = Nc.
+            \]
+        \end{solution}
+    }{}
     \item Déterminer la probabilité pour qu'un groupe de $n$ personnes contienne au moins une personne infectée.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Chaque personne est saine avec probabilité $1-p$, indépendamment des autres. La probabilité qu'aucune des $n$ personnes du groupe ne soit infectée est $(1-p)^n$. Donc la probabilité qu'au moins une personne soit infectée est :
+            \[
+                q = 1 - (1-p)^n.
+            \]
+        \end{solution}
+    }{}
     \item Soit $X$ la variable aléatoire égale au nombre de groupes pour lesquels des tests individuels seront effectués. Déterminer la loi de $X$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Il y a $N/n$ groupes, et chaque groupe est testé positivement (au moins un infecté) avec probabilité $q = 1-(1-p)^n$, indépendamment des autres. Donc :
+            \[
+                X \sim \mathcal{B}\!\left(\frac{N}{n},\; 1-(1-p)^n\right).
+            \]
+        \end{solution}
+    }{}
     \item En déduire le coût moyen de la Stratégie 2.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Le coût de la stratégie~2 comprend :
+            \begin{itemize}
+                \item[$\bullet$] $\dfrac{N}{n}$ tests de groupe, coût : $\dfrac{N}{n}\,c$ ;
+                \item[$\bullet$] pour chaque groupe positif, $n$ tests individuels, coût : $X \cdot n \cdot c$.
+            \end{itemize}
+            Le coût total est $C_2 = \dfrac{N}{n}\,c + X\,n\,c$. En prenant l'espérance :
+            \begin{align*}
+                E(C_2) &= \frac{N}{n}\,c + n\,c\,E(X) = \frac{N}{n}\,c + n\,c \cdot \frac{N}{n}\,\big(1-(1-p)^n\big) \\
+                &= \frac{Nc}{n} + Nc\,\big(1-(1-p)^n\big) \\
+                &= Nc\left(\frac{1}{n} + 1 - (1-p)^n\right).
+            \end{align*}
+        \end{solution}
+    }{}
     \item On supposera $n p \ll 1$, et on montrera que $n \simeq 1 / \sqrt{p}$ est une taille qui minimise correctement le coût moyen de la stratégie 2.
     Indication: On pourra utiliser (en le justifiant) que si $n p \ll 1$, alors
 
@@ -193,7 +433,36 @@ $$
 c N\left(1+\frac{1}{n}-(1-p)^n\right)=c N\left(n p+\frac{1}{n}\right)+o(n p)
 $$
 
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Si $np \ll 1$, on utilise le développement limité $(1-p)^n \approx 1 - np$ (justifié par $(1-p)^n = e^{n\ln(1-p)} \approx e^{-np} \approx 1-np$ lorsque $np \to 0$). Donc $1-(1-p)^n \approx np$ et :
+            \[
+                E(C_2) \approx Nc\left(\frac{1}{n} + np\right).
+            \]
+            On minimise $f(n) = \dfrac{1}{n} + np$. En dérivant : $f'(n) = -\dfrac{1}{n^2} + p = 0$, soit $n^2 = \dfrac{1}{p}$, d'où :
+            \[
+                n^* = \frac{1}{\sqrt{p}}.
+            \]
+            On vérifie que c'est bien un minimum : $f''(n) = \dfrac{2}{n^3} > 0$. Le coût moyen minimal approché est :
+            \[
+                E(C_2) \approx Nc\left(\sqrt{p} + \sqrt{p}\right) = 2Nc\sqrt{p}.
+            \]
+        \end{solution}
+    }{}
     \item Quelle stratégie choisissez-vous? Illustrer vos conclusions pour le cas où $p=5 \%$ en calculant le pourcentage moyen d'économie réalisée.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La stratégie~2 est préférable dès que $E(C_2) < C_1$, soit $2Nc\sqrt{p} < Nc$, c'est-à-dire $2\sqrt{p} < 1$, soit $p < 1/4 = 25\,\%$. C'est largement vérifié en pratique.
+
+            Pour $p = 5\,\% = 0{,}05$ : la taille de groupe optimale est $n^* = 1/\sqrt{0{,}05} \approx 4{,}47$, on choisit $n = 4$ ou $n = 5$.
+
+            Le pourcentage d'économie est :
+            \[
+                1 - \frac{E(C_2)}{C_1} \approx 1 - 2\sqrt{p} = 1 - 2\sqrt{0{,}05} \approx 1 - 0{,}447 \approx 55{,}3\,\%.
+            \]
+            La stratégie~2 permet d'économiser environ $55\,\%$ du coût de dépistage.
+        \end{solution}
+    }{}
 \end{enumerate}
 
 \vspace{1em}
