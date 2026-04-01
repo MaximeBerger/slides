@@ -1,265 +1,480 @@
 \input{configTD}
 
-\title{Analyse Numérique TD2 - Systèmes linéaires, LU et conditionnement}
+\title{Analyse Numérique TD2 --- Systèmes linéaires, LU et conditionnement}
 
 \author{}
 \date{}
-
-\newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
-    {\end{mdframed}\par\vspace{0.5em}}
 
 \begin{document}
 \sffamily
 \maketitle
 
-\section*{Exercice 1 - Un système tridiagonal}
-On considère le système linéaire
+% ====================================================================
+%  RAPPELS DE COURS : SYSTÈMES LINÉAIRES, GAUSS, LU
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\textbf{\large Rappels --- Résolution de systèmes linéaires}
+
+\medskip
+
+\textbf{Problème.}
+On cherche $x \in \mathbb{R}^n$ tel que $Ax = b$,
+où $A$ est une matrice $n \times n$ inversible
+et $b \in \mathbb{R}^n$.
+
+\medskip
+
+\textbf{Systèmes triangulaires.}
+Si $A$ est \emph{triangulaire supérieure}, on résout
+par \textbf{substitution arrière} :
 \[
-A x=b,
-\qquad
-A=\begin{pmatrix}
-4 & -1 & 0\\
--1 & 4 & -1\\
-0 & -1 & 4
-\end{pmatrix},
-\qquad
-b=\begin{pmatrix}
-7\\
-6\\
-7
-\end{pmatrix}.
+  x_n = \frac{b_n}{a_{nn}}\,,
+  \qquad
+  x_i = \frac{1}{a_{ii}}
+    \Bigl(b_i - \sum_{j=i+1}^{n} a_{ij}\,x_j\Bigr),
+  \quad i = n\!-\!1, \ldots, 1.
 \]
-Cette matrice peut être vue comme une matrice de rigidité simplifiée issue d'une discrétisation 1D.
+Si $A$ est \emph{triangulaire inférieure}, on résout
+par \textbf{substitution avant} (de $i=1$ vers $i=n$).
 
-\begin{enumerate}
-    \item Résoudre le système par pivot de Gauss.
+\medskip
 
-    \item Déterminer une factorisation $A=LU$ avec $L$ triangulaire inférieure unitaire et $U$ triangulaire supérieure.
+\textbf{Pivot de Gauss.}
+On transforme le système $Ax=b$ en un système
+triangulaire supérieur $Ux=c$ par des opérations
+élémentaires sur les lignes :
+$L_i \leftarrow L_i - m_{ik}\,L_k$
+($m_{ik}$ est appelé \emph{multiplicateur}).
 
-    \item Résoudre ensuite le système en introduisant la variable intermédiaire $y$ définie par $Ly=b$ puis $Ux=y$.
+\medskip
 
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            La factorisation s'écrit
-            \[
-            L=\begin{pmatrix}
-            1 & 0 & 0\\
-            -\frac14 & 1 & 0\\
-            0 & -\frac{4}{15} & 1
-            \end{pmatrix},
-            \qquad
-            U=\begin{pmatrix}
-            4 & -1 & 0\\
-            0 & \frac{15}{4} & -1\\
-            0 & 0 & \frac{56}{15}
-            \end{pmatrix}.
-            \]
-            On résout d'abord
-            \[
-            Ly=b
-            \]
-            ce qui donne
-            \[
-            y_1=7,\qquad
-            y_2=6+\frac74=\frac{31}{4},\qquad
-            y_3=7+\frac{4}{15}\times \frac{31}{4}=\frac{139}{15}.
-            \]
-            Puis
-            \[
-            Ux=y.
-            \]
-            On obtient
-            \[
-            x_3=\frac{139}{56},\qquad
-            x_2=\frac{31}{15}+\frac{4}{15}x_3=\frac{19}{7},\qquad
-            x_1=\frac{7+x_2}{4}=\frac{17}{7}.
-            \]
-            Donc
-            \[
-            x=\begin{pmatrix}
-            17/7\\
-            19/7\\
-            139/56
-            \end{pmatrix}.
-            \]
-        \end{solution}
-    }{}
-\end{enumerate}
-
-\section*{Exercice 2 - Effet d'une perturbation du second membre}
-On reprend la matrice $A$ de l'exercice précédent. On remplace le second membre par
+\textbf{Factorisation $A = LU$.}
+Les multiplicateurs de Gauss forment une matrice
+$L$ triangulaire inférieure avec des $1$ sur la diagonale.
+On obtient
 \[
-\tilde b=\begin{pmatrix}
-7\\
-6.1\\
-7
-\end{pmatrix}.
+  A = L\,U
+\]
+où $U$ est la matrice triangulaire supérieure obtenue.
+La résolution se fait alors en \textbf{deux étapes} :
+\[
+  L\,y = b \quad \text{(substitution avant)}
+  \qquad \text{puis} \qquad
+  U\,x = y \quad \text{(substitution arrière)}.
 \]
 
+\textbf{Avantage.}
+Si le second membre $b$ change mais pas $A$,
+on réutilise $L$ et $U$ sans refaire l'élimination.
+\end{mdframed}
+
+% ====================================================================
+\section*{Exercice 1 --- Construction guidée : pivot de Gauss et LU}
+% ====================================================================
+
+On considère le système linéaire $Ax = b$ avec
+\[
+  A = \begin{pmatrix}
+    4 & -1 & 0\\
+    -1 & 4 & -1\\
+    0 & -1 & 4
+  \end{pmatrix},
+  \qquad
+  b = \begin{pmatrix} 7\\ 6\\ 7 \end{pmatrix}.
+\]
+Cette matrice tridiagonale apparaît comme matrice de rigidité
+simplifiée lors de la discrétisation d'une poutre.
+
 \begin{enumerate}
-    \item Sans refaire toute la factorisation, expliquer comment obtenir rapidement la nouvelle solution $\tilde x$.
 
-    \item Résoudre numériquement le système $A\tilde x=\tilde b$.
-
-    \item Comparer $x$ et $\tilde x$. Une faible perturbation sur $b$ produit-elle ici une grande variation de la solution ?
-
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            La factorisation $A=LU$ ne change pas. Il suffit donc de résoudre
-            \[
-            Ly=\tilde b,\qquad U\tilde x=y.
-            \]
-            On obtient
-            \[
-            y_1=7,\qquad
-            y_2=6.1+\frac74=\frac{157}{20},\qquad
-            y_3=7+\frac{4}{15}\times \frac{157}{20}=\frac{683}{75}.
-            \]
-            Puis
-            \[
-            \tilde x_3=\frac{683}{280},\qquad
-            \tilde x_2=\frac{157}{75}+\frac{4}{15}\tilde x_3=\frac{159}{56},\qquad
-            \tilde x_1=\frac{7+\tilde x_2}{4}=\frac{551}{224}.
-            \]
-            Numériquement,
-            \[
-            \tilde x\approx \begin{pmatrix}
-            2.460\\
-            2.839\\
-            2.439
-            \end{pmatrix}.
-            \]
-            La variation reste modérée : le système n'est pas particulièrement sensible sur cet exemple.
-        \end{solution}
-    }{}
+% ---------- Étape 1 : élimination ----------
+\item \textbf{Première étape de Gauss.}
+Pour éliminer le coefficient $-1$ en position $(2,1)$ :
+\begin{enumerate}
+  \item Quel multiplicateur $m_{21}$ faut-il utiliser
+        dans l'opération $L_2 \leftarrow L_2 - m_{21}\,L_1$ ?
+  \item Effectuer cette opération sur la matrice augmentée
+        $(A \mid b)$.
 \end{enumerate}
 
-\section*{Exercice 3 - Conditionnement}
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    $m_{21} = \dfrac{a_{21}}{a_{11}} = \dfrac{-1}{4}$.
+    L'opération $L_2 \leftarrow L_2 - (-\tfrac{1}{4})\,L_1
+    = L_2 + \tfrac{1}{4}\,L_1$ donne
+    \[
+      \left(\begin{array}{ccc|c}
+        4 & -1 & 0 & 7\\[4pt]
+        0 & \tfrac{15}{4} & -1 & \tfrac{31}{4}\\[4pt]
+        0 & -1 & 4 & 7
+      \end{array}\right).
+    \]
+  \end{solution}
+}{}
+
+\item \textbf{Deuxième étape de Gauss.}
+Déterminer le multiplicateur $m_{32}$ et effectuer
+l'opération $L_3 \leftarrow L_3 - m_{32}\,L_2$
+pour obtenir un système triangulaire supérieur.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    $m_{32} = \dfrac{-1}{15/4} = -\dfrac{4}{15}$.
+    L'opération $L_3 \leftarrow L_3 + \tfrac{4}{15}\,L_2$ donne
+    \[
+      \left(\begin{array}{ccc|c}
+        4 & -1 & 0 & 7\\[4pt]
+        0 & \tfrac{15}{4} & -1 & \tfrac{31}{4}\\[4pt]
+        0 & 0 & \tfrac{56}{15} & \tfrac{139}{15}
+      \end{array}\right).
+    \]
+  \end{solution}
+}{}
+
+% ---------- Résolution du système triangulaire ----------
+\item Résoudre le système triangulaire supérieur
+obtenu par substitution arrière.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    \[
+      x_3 = \frac{139/15}{56/15} = \frac{139}{56}\,,
+      \qquad
+      x_2 = \frac{4}{15}\Bigl(\frac{31}{4} + x_3\Bigr)
+           = \frac{19}{7}\,,
+      \qquad
+      x_1 = \frac{1}{4}(7 + x_2) = \frac{17}{7}\,.
+    \]
+    Donc
+    $x = \bigl(\tfrac{17}{7},\;\tfrac{19}{7},\;
+    \tfrac{139}{56}\bigr)^T$.
+  \end{solution}
+}{}
+
+% ---------- Extraction de L et U ----------
+\item \textbf{Factorisation LU.}
+Les multiplicateurs trouvés aux questions 1 et 2
+sont $m_{21} = -\tfrac{1}{4}$ et $m_{32} = -\tfrac{4}{15}$.
+Former les matrices $L$ et $U$ telles que $A = LU$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    \[
+      L = \begin{pmatrix}
+        1 & 0 & 0\\[3pt]
+        -\tfrac{1}{4} & 1 & 0\\[3pt]
+        0 & -\tfrac{4}{15} & 1
+      \end{pmatrix},
+      \qquad
+      U = \begin{pmatrix}
+        4 & -1 & 0\\[3pt]
+        0 & \tfrac{15}{4} & -1\\[3pt]
+        0 & 0 & \tfrac{56}{15}
+      \end{pmatrix}.
+    \]
+    On peut vérifier que $LU = A$.
+  \end{solution}
+}{}
+
+% ---------- Résolution via LU ----------
+\item Retrouver la solution $x$ en résolvant
+successivement $Ly = b$ puis $Ux = y$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    Substitution avant ($Ly = b$) :
+    \[
+      y_1 = 7,\qquad
+      y_2 = 6 + \tfrac{1}{4} \cdot 7 = \tfrac{31}{4},\qquad
+      y_3 = 7 + \tfrac{4}{15} \cdot \tfrac{31}{4} = \tfrac{139}{15}.
+    \]
+    Substitution arrière ($Ux = y$) :
+    on retrouve
+    $x = \bigl(\tfrac{17}{7},\;\tfrac{19}{7},\;
+    \tfrac{139}{56}\bigr)^T$.
+  \end{solution}
+}{}
+
+\end{enumerate}
+
+% ====================================================================
+\section*{Exercice 2 --- Effet d'une perturbation du second membre}
+% ====================================================================
+
+On reprend la matrice $A$ et sa factorisation $LU$
+de l'exercice précédent.
+On remplace le second membre par
+\[
+  \tilde{b} = \begin{pmatrix} 7\\ 6{,}1\\ 7 \end{pmatrix}.
+\]
+
+\begin{enumerate}
+\item Sans refaire l'élimination de Gauss,
+expliquer comment obtenir rapidement la nouvelle solution
+$\tilde{x}$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    La factorisation $A = LU$ ne dépend pas de $b$.
+    Il suffit de résoudre
+    $L\tilde{y} = \tilde{b}$ puis $U\tilde{x} = \tilde{y}$.
+  \end{solution}
+}{}
+
+\item Résoudre le système $A\tilde{x} = \tilde{b}$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    Substitution avant :
+    \[
+      \tilde{y}_1 = 7,\qquad
+      \tilde{y}_2 = 6{,}1 + \tfrac{7}{4} = \tfrac{157}{20},\qquad
+      \tilde{y}_3 = 7 + \tfrac{4}{15}\times \tfrac{157}{20}
+                   = \tfrac{683}{75}.
+    \]
+    Substitution arrière :
+    \[
+      \tilde{x}_3 = \tfrac{683}{280} \approx 2{,}439,\qquad
+      \tilde{x}_2 \approx 2{,}839,\qquad
+      \tilde{x}_1 \approx 2{,}460.
+    \]
+  \end{solution}
+}{}
+
+\item Comparer $x$ et $\tilde{x}$.
+La perturbation de $0{,}1$ sur $b_2$ produit-elle
+une grande variation de la solution ?
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    On avait $x \approx (2{,}429;\;2{,}714;\;2{,}482)^T$.
+    Les composantes varient de l'ordre de $0{,}03$ à $0{,}13$ :
+    la variation reste modérée.
+    Le système n'est pas particulièrement sensible
+    aux perturbations sur cet exemple.
+  \end{solution}
+}{}
+\end{enumerate}
+
+% ====================================================================
+%  RAPPELS DE COURS : CONDITIONNEMENT
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\textbf{\large Rappels --- Conditionnement d'un système linéaire}
+
+\medskip
+
+\textbf{Norme infinie d'une matrice.}
+\[
+  \|A\|_{\infty}
+  = \max_{1 \leq i \leq n}
+    \sum_{j=1}^{n} |a_{ij}|
+  \qquad
+  \text{(plus grande somme des valeurs absolues d'une ligne).}
+\]
+
+\textbf{Nombre de condition.}
+\[
+  \kappa(A)
+  = \|A\|\;\|A^{-1}\|.
+\]
+
+\textbf{Interprétation.}
+Si $Ax = b$ et $A\tilde{x} = \tilde{b}$
+avec $\tilde{b} = b + \delta b$, alors
+\[
+  \frac{\|\tilde{x} - x\|}{\|x\|}
+  \;\leq\;
+  \kappa(A)\;\frac{\|\delta b\|}{\|b\|}\,.
+\]
+Un $\kappa$ grand signifie qu'une \emph{petite} erreur
+relative sur $b$ peut produire une \emph{grande} erreur
+relative sur $x$ : le système est \textbf{mal conditionné}.
+
+\medskip
+
+\textbf{Ordres de grandeur.}
+$\kappa \approx 1$ : bien conditionné ;
+$\kappa \approx 10^k$ : on peut perdre
+environ $k$ chiffres significatifs.
+\end{mdframed}
+
+% ====================================================================
+\section*{Exercice 3 --- Système mal conditionné}
+% ====================================================================
+
 On considère la matrice
 \[
-B=\begin{pmatrix}
-1 & 1\\
-1 & 1.01
-\end{pmatrix}.
+  B = \begin{pmatrix}
+    1 & 1\\
+    1 & 1{,}01
+  \end{pmatrix}.
 \]
 
 \begin{enumerate}
-    \item Calculer $\det(B)$ puis $B^{-1}$.
+\item Calculer $\det(B)$ puis $B^{-1}$.
 
-    \item Calculer la norme infinie $\|B\|_{\infty}$ puis $\|B^{-1}\|_{\infty}$.
-
-    \item En déduire le nombre de condition
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    $\det(B) = 1 \times 1{,}01 - 1 \times 1 = 0{,}01$.
     \[
-    \kappa_{\infty}(B)=\|B\|_{\infty}\|B^{-1}\|_{\infty}.
+      B^{-1} = \frac{1}{0{,}01}
+      \begin{pmatrix} 1{,}01 & -1\\ -1 & 1 \end{pmatrix}
+      = \begin{pmatrix} 101 & -100\\ -100 & 100 \end{pmatrix}.
     \]
+  \end{solution}
+}{}
 
-    \item Interpréter ce résultat.
+\item Calculer $\|B\|_{\infty}$ et $\|B^{-1}\|_{\infty}$.
 
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            On a
-            \[
-            \det(B)=1.01-1=0.01.
-            \]
-            Donc
-            \[
-            B^{-1}=\frac{1}{0.01}\begin{pmatrix}
-            1.01 & -1\\
-            -1 & 1
-            \end{pmatrix}
-            =
-            \begin{pmatrix}
-            101 & -100\\
-            -100 & 100
-            \end{pmatrix}.
-            \]
-            La norme infinie vaut
-            \[
-            \|B\|_{\infty}=\max(2,2.01)=2.01.
-            \]
-            Et
-            \[
-            \|B^{-1}\|_{\infty}=\max(201,200)=201.
-            \]
-            Ainsi
-            \[
-            \kappa_{\infty}(B)=2.01\times 201 \approx 404.
-            \]
-            Le système est mal conditionné : une petite erreur sur les données peut produire une variation beaucoup plus visible sur la solution.
-        \end{solution}
-    }{}
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    $\|B\|_{\infty} = \max(1+1,\;1+1{,}01) = 2{,}01$.
+    \quad
+    $\|B^{-1}\|_{\infty} = \max(101+100,\;100+100) = 201$.
+  \end{solution}
+}{}
+
+\item En déduire $\kappa_{\infty}(B)$ et interpréter.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    \[
+      \kappa_{\infty}(B) = 2{,}01 \times 201 \approx 404.
+    \]
+    Le système est mal conditionné :
+    une erreur relative de $1\,\%$ sur $b$
+    peut produire une erreur relative
+    de l'ordre de $4\,\%$ sur $x$ (facteur $\approx 400$).
+  \end{solution}
+}{}
+
+\item On résout $Bx = (2,\;2{,}01)^T$
+puis $B\tilde{x} = (2,\;2{,}02)^T$.
+Calculer les deux solutions et vérifier
+que l'amplification de l'erreur est conforme
+à la borne donnée par $\kappa$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    $x = B^{-1}(2,\;2{,}01)^T
+    = (101 \times 2 - 100 \times 2{,}01,\;
+       -100 \times 2 + 100 \times 2{,}01)^T
+    = (1,\;1)^T$.
+
+    $\tilde{x} = B^{-1}(2,\;2{,}02)^T
+    = (101 \times 2 - 100 \times 2{,}02,\;
+       -100 \times 2 + 100 \times 2{,}02)^T
+    = (0,\;2)^T$.
+
+    \medskip
+
+    La perturbation relative sur $b$ :
+    $\|\delta b\|_\infty / \|b\|_\infty
+    = 0{,}01 / 2{,}02 \approx 0{,}5\,\%$.
+
+    La variation relative sur $x$ :
+    $\|\tilde{x}-x\|_\infty / \|x\|_\infty
+    = 1 / 1 = 100\,\%$.
+
+    Le facteur d'amplification est $\approx 200$,
+    inférieur à $\kappa \approx 404$ : la borne est respectée.
+  \end{solution}
+}{}
 \end{enumerate}
 
-\section*{Exercice 4 - Application à un modèle discrétisé}
+% ====================================================================
+\section*{Exercice 4 --- Application à un modèle discrétisé}
+% ====================================================================
+
 On cherche à approcher la solution du problème
 \[
--u''(x)=1,\qquad x\in [0,1],\qquad u(0)=u(1)=0
+  -u''(x) = 1,
+  \qquad x \in [0,1],
+  \qquad u(0) = u(1) = 0
 \]
-par différences finies avec un pas $h=1/4$.
+par différences finies avec un pas $h = 1/4$.
+On place les n\oe uds intérieurs
+$x_1 = \tfrac{1}{4}$, $x_2 = \tfrac{1}{2}$,
+$x_3 = \tfrac{3}{4}$,
+et on note $u_i \approx u(x_i)$.
 
 \begin{enumerate}
-    \item Écrire l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$.
+\item Écrire l'approximation centrée de $u''(x_i)$
+en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$.
 
-    \item En déduire un système linéaire vérifié par les inconnues intérieures $u_1,u_2,u_3$.
-
-    \item Résoudre ce système.
-
-    \item Comparer avec la solution exacte
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
     \[
-    u(x)=\frac{x(1-x)}{2}.
+      u''(x_i) \approx
+      \frac{u_{i+1} - 2u_i + u_{i-1}}{h^2}\,.
     \]
+  \end{solution}
+}{}
 
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            On utilise
-            \[
-            u''(x_i)\approx \frac{u_{i+1}-2u_i+u_{i-1}}{h^2}.
-            \]
-            Comme $-u''=1$, on obtient
-            \[
-            -\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}=1.
-            \]
-            Avec $h=1/4$, on a $h^2=1/16$, donc
-            \[
-            -u_{i+1}+2u_i-u_{i-1}=\frac{1}{16}.
-            \]
-            En utilisant $u_0=0$ et $u_4=0$ :
-            \[
-            \begin{cases}
-            2u_1-u_2=\frac{1}{16}\\
-            -u_1+2u_2-u_3=\frac{1}{16}\\
-            -u_2+2u_3=\frac{1}{16}
-            \end{cases}
-            \]
-            soit
-            \[
-            \begin{pmatrix}
-            2 & -1 & 0\\
-            -1 & 2 & -1\\
-            0 & -1 & 2
-            \end{pmatrix}
-            \begin{pmatrix}
-            u_1\\u_2\\u_3
-            \end{pmatrix}
-            =
-            \begin{pmatrix}
-            1/16\\1/16\\1/16
-            \end{pmatrix}.
-            \]
-            La solution est
-            \[
-            u_1=\frac{3}{32},\qquad u_2=\frac18,\qquad u_3=\frac{3}{32}.
-            \]
-            Or
-            \[
-            u\left(\frac14\right)=\frac{3}{32},\quad
-            u\left(\frac12\right)=\frac18,\quad
-            u\left(\frac34\right)=\frac{3}{32}.
-            \]
-            Ici, on retrouve exactement les valeurs de la solution aux noeuds.
-        \end{solution}
-    }{}
+\item En remplaçant dans $-u'' = 1$
+et en utilisant $u_0 = u_4 = 0$,
+écrire le système linéaire vérifié par $u_1, u_2, u_3$.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    Avec $h^2 = 1/16$, l'équation
+    $-\dfrac{u_{i+1}-2u_i+u_{i-1}}{h^2}=1$
+    devient $-u_{i+1}+2u_i-u_{i-1} = \tfrac{1}{16}$.
+    Le système s'écrit
+    \[
+      \underbrace{\begin{pmatrix}
+        2 & -1 & 0\\
+        -1 & 2 & -1\\
+        0 & -1 & 2
+      \end{pmatrix}}_{A_h}
+      \begin{pmatrix} u_1\\ u_2\\ u_3 \end{pmatrix}
+      =
+      \begin{pmatrix} 1/16\\ 1/16\\ 1/16 \end{pmatrix}.
+    \]
+  \end{solution}
+}{}
+
+\item Résoudre ce système (par Gauss ou LU).
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    Par Gauss (ou en exploitant la symétrie) :
+    \[
+      u_1 = \tfrac{3}{32},
+      \qquad
+      u_2 = \tfrac{1}{8},
+      \qquad
+      u_3 = \tfrac{3}{32}.
+    \]
+  \end{solution}
+}{}
+
+\item La solution exacte est
+$u(x) = \dfrac{x(1-x)}{2}$.
+Comparer les valeurs numériques aux n\oe uds.
+
+\ifthenelse{\boolean{showSolutions}}{
+  \begin{solution}
+    \[
+      u\bigl(\tfrac{1}{4}\bigr) = \tfrac{3}{32},
+      \quad
+      u\bigl(\tfrac{1}{2}\bigr) = \tfrac{1}{8},
+      \quad
+      u\bigl(\tfrac{3}{4}\bigr) = \tfrac{3}{32}.
+    \]
+    Les valeurs numériques coïncident exactement
+    avec la solution.
+    Ce résultat remarquable s'explique
+    par le fait que $u$ est un polynôme de degré $2$
+    et que la différence finie centrée est exacte
+    pour les polynômes de degré $\leq 3$.
+  \end{solution}
+}{}
 \end{enumerate}
 
 \end{document}

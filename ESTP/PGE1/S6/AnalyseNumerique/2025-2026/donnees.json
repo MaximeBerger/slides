@@ -46,6 +46,32 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Interpolation et intégration numérique",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        {
+          "numero": 1,
+          "titre": "TD 1 - Interpolation et intégration numérique",
+          "description": "",
+          "lien": "TD1-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "TD 1 - Corrigé",
+          "description": "",
+          "lien": "TD1-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
