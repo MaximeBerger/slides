@@ -72,6 +72,32 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Systèmes linéaires et décompsition LU",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        {
+          "numero": 1,
+          "titre": "TD 2",
+          "description": "",
+          "lien": "TD2-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "TD 2 - Corrigé",
+          "description": "",
+          "lien": "TD2-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
