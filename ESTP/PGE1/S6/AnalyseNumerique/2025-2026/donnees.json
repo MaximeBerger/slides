@@ -96,6 +96,20 @@
           "description": "",
           "lien": "TD2-corrige.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 1,
+          "titre": "TD 3, méthodes itératives",
+          "description": "",
+          "lien": "TD3-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "TD 3 - Corrigé",
+          "description": "",
+          "lien": "TD3-corrige.pdf",
+          "cible": "_blank"
         }
       ]
     }

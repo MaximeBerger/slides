@@ -5,75 +5,241 @@
 \author{}
 \date{}
 
-\newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
-    {\end{mdframed}\par\vspace{0.5em}}
-
 \begin{document}
 \sffamily
 \maketitle
 
-\section*{Exercice 1 - Méthode de Jacobi}
-On considère le système
-\[
-\begin{cases}
-4x_1-x_2=7,\\
--x_1+4x_2-x_3=6,\\
--x_2+4x_3=7.
-\end{cases}
-\]
+% ====================================================================
+%  EXERCICE PRÉLIMINAIRE : DÉCOMPOSITION LU
+% ====================================================================
+\section*{Exercice 0 - Petits rappels}
 
+\subsection*{Polynômes interpolateurs}
+On note $(p_n)_{n\in\mathbb{N^*}}$ la suite des nombres premiers. 
 \begin{enumerate}
-    \item Écrire ce système sous la forme $Ax=b$.
-
-    \item Écrire les formules de Jacobi permettant de construire $x^{(k+1)}$ à partir de $x^{(k)}$.
-
-    \item À partir de $x^{(0)}=(0,0,0)^T$, calculer $x^{(1)}$ puis $x^{(2)}$.
-
-    \item Expliquer pourquoi on peut raisonnablement s'attendre à la convergence.
-
+    \item Donner le polynôme de degré minimal tel que pour chaque $k\in\{1, \cdots, n\}$ $P(k)$ soit le $k$-ième nombre premier. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            La matrice est
+            On commence par former les polynômes de Lagrange $\ell_0, \cdots, \ell_n$ tels que $\ell_i(j) = \delta_{ij}$:
             \[
-            A=\begin{pmatrix}
-            4 & -1 & 0\\
-            -1 & 4 & -1\\
-            0 & -1 & 4
-            \end{pmatrix},
-            \qquad
-            b=\begin{pmatrix}
-            7\\6\\7
-            \end{pmatrix}.
+            \ell_i(x) = \prod_{\substack{1 \leq j \leq n \\ j \neq i}} \frac{x-j}{i-j}
             \]
-            Les équations de Jacobi sont
-            \[
-            x_1^{(k+1)}=\frac{7+x_2^{(k)}}{4},
-            \qquad
-            x_2^{(k+1)}=\frac{6+x_1^{(k)}+x_3^{(k)}}{4},
-            \qquad
-            x_3^{(k+1)}=\frac{7+x_2^{(k)}}{4}.
-            \]
-            Avec $x^{(0)}=(0,0,0)^T$,
-            \[
-            x^{(1)}=\begin{pmatrix}
-            7/4\\
-            3/2\\
-            7/4
-            \end{pmatrix}.
-            \]
-            Puis
-            \[
-            x^{(2)}=\begin{pmatrix}
-            17/8\\
-            19/8\\
-            17/8
-            \end{pmatrix}.
-            \]
-            La matrice est à diagonale strictement dominante, donc la méthode de Jacobi converge.
+            On peut alors écrire $P(x) = \sum_{i=1}^n p_i \ell_i(x)$.
+        \end{solution}
+    }{}
+    \item A votre avis, $P(n+1)$ est-il premier ?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Aucune chance...  
+            Il n'y a même aucune raison pour que $P(n+1)$ soit un nombre entier. 
         \end{solution}
     }{}
 \end{enumerate}
+
+\subsection*{Décomposition LU}
+
+On considère la matrice
+\[
+A = \begin{pmatrix}
+1 & 2 & -3\\
+2 & 6 & -5\\
+1 & -2 & 7
+\end{pmatrix}.
+\]
+
+\begin{enumerate}
+    \item Calculer la décomposition $A = LU$ où $L$ est triangulaire inférieure avec des $1$ sur la diagonale et $U$ est triangulaire supérieure.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On effectue le pivot de Gauss.
+
+            Première étape : $L_2 \leftarrow L_2 - 2L_1$ et $L_3 \leftarrow L_3 - L_1$.
+            \[
+            T_1 A = \begin{pmatrix}
+            1 & 2 & -3\\
+            0 & 2 & 1\\
+            0 & -4 & 10
+            \end{pmatrix}.
+            \]
+            Deuxième étape : $L_3 \leftarrow L_3 + 2L_2$.
+            \[
+            T_2 T_1 A = \begin{pmatrix}
+            1 & 2 & -3\\
+            0 & 2 & 1\\
+            0 & 0 & 12
+            \end{pmatrix} = U.
+            \]
+            En inversant les opérations élémentaires,
+            \[
+            L = \begin{pmatrix}
+            1 & 0 & 0\\
+            2 & 1 & 0\\
+            1 & -2 & 1
+            \end{pmatrix},
+            \qquad
+            U = \begin{pmatrix}
+            1 & 2 & -3\\
+            0 & 2 & 1\\
+            0 & 0 & 12
+            \end{pmatrix}.
+            \]
+        \end{solution}
+    }{}
+
+    \item En déduire $\det(A)$.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            $\det(A) = \det(L)\,\det(U) = 1 \times (1 \times 2 \times 12) = 24$.
+        \end{solution}
+    }{}
+
+    \item Résoudre le système $Ax = b$ avec $b = (0,\;3,\;6)^T$ en utilisant la décomposition LU.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Substitution avant ($Ly = b$) :
+            \[
+            y_1 = 0,\qquad
+            y_2 = 3 - 2 \times 0 = 3,\qquad
+            y_3 = 6 - 0 + 2 \times 3 = 12.
+            \]
+            Substitution arrière ($Ux = y$) :
+            \[
+            x_3 = \frac{12}{12} = 1,\qquad
+            x_2 = \frac{3-1}{2} = 1,\qquad
+            x_1 = 0 - 2 + 3 = 1.
+            \]
+            La solution est $x = (1,\;1,\;1)^T$.
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{2em}
+
+% ====================================================================
+%  RAPPELS DE COURS : MÉTHODES ITÉRATIVES
+% ====================================================================
+
+\section*{Exercice 1 - Méthode de Jacobi}
+Si trouver une solution exacte d'un système linéaire est trop coûteux, on utilise une méthode différente pour la résolution : la méthode de Jacobi.
+
+Une matrice $A$ d'un système linéaire $A X=B$ peut toujours s'écrire sous la forme $A=D-E-F$ avec
+\begin{itemize}
+    \item[$\bullet$] $D$ la matrice composée de la diagonale de $A$.
+    \item[$\bullet$] $-E$ matrice triangulaire inférieure composée des éléments de $A$ en-dessous de la diagonale.
+    \item[$\bullet$] $-F$ matrice triangulaire supérieure composée des éléments de $A$ au-dessus de la diagonale.
+\end{itemize}
+
+\begin{enumerate}
+    \item Montrer que $X$ vérifie 
+    \[
+        X = D^{-1}B + D^{-1}(E + F) X\,.
+    \]
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a $A X = B$ donc $D X = B + E X + F X$.
+            On en déduit que $X = D^{-1}B + D^{-1}(E + F) X$.
+        \end{solution}
+    }{}
+
+    \vspace{1em}
+    L'idée de la méthode de Jacobi est de construire une suite $\Big(X^{(k)}\Big)_{k \in \mathbb{N}}$ qui devrait converger vers la solution $X$ du système linéaire.
+    On part d'une valeur initiale $X^{(0)} = D^{-1}B$ et on construit la suite par récurrence :
+    \[
+        X^{(k+1)} = D^{-1}B + D^{-1}(E + F) X^{(k)}\,.
+    \]
+    \item Lorsqu'on travaille avec une suite réelle $(u_n)$ arithmético-géométrique : 
+    \[
+        u_{n+1} = a + b u_n\,,
+    \]
+    rappelez pourquoi la suite converge vers une solution $u^*$ si et seulement si $|b| < 1$.\newline
+    \textit{indications :} supposer qu'elle converge, on note $u^*$ sa limite et on montre que la suite $(u_{n+1} - u^*)$ est géométrique.
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            En notant $u^*$ la limite de la suite (en supposant qu'elle existe), on a $u^* = a + b u^*$.
+            On en déduit que $u^* = \frac{a}{1-b}$.
+            La suite récurrente se réécrit alors 
+            \[
+                u_{n+1} - u^* = b (u_n - u^*).
+            \]
+            La suite géométrique $(u_n - u^*)$ converge si et seulement si $|b| < 1$.
+        \end{solution}
+    }{}
+
+    \item Dans la méthode de Jacobi, la suite récurrente est une suite de matrice. A votre avis, quel est le critère sur la matrice $D^{-1}(E + F)$ pour que la méthode de Jacobi converge ?
+    \textit{Pensez à la diagonalisation.}
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La méthode de Jacobi converge si et seulement si la plus grande valeur propre de la matrice $D^{-1}(E + F)$ est inférieure strictement à 1.
+        \end{solution}
+    }{}
+
+    \vspace{1em}
+     On veut résoudre par la méthode itérative de Jacobi le système suivant :
+$$
+\left\{\begin{array}{l}
+4 x+2 y=64 \\
+x+4 y+2 z=84 \\
+y+5 z=77
+\end{array}\right.
+$$
+
+    \item Définir les matrices $D$ et $B$ qui interviennent dans la méthode de Jacobi.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a $D = \begin{pmatrix} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 5 \end{pmatrix}$ et $B = \begin{pmatrix} 64 \\ 84 \\ 77 \end{pmatrix}$.
+        \end{solution}
+    }{}
+
+    \item Calculer $X^{(0)}=D^{-1} B$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a $X^{(0)} = \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix}$.
+        \end{solution}
+    }{}
+
+    \item Calculer $X^{(1)}$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Calculons $D^{-1}(E + F)$ :
+            \begin{align*}
+                D^{-1}(E + F) &= \begin{pmatrix} \frac{1}{4} & 0 & 0 \\ 0 & \frac{1}{4} & 0 \\ 0 & 0 & \frac{1}{5} \end{pmatrix} \begin{pmatrix} 0 & -2 & 0 \\ -1 & 0 & -2 \\ 0 & -1 & 0 \end{pmatrix} \\
+                &= \frac{-1}{20} \begin{pmatrix} 0 & 10 & 0 \\ 5 & 0 & 10 \\ 0 & 4 & 0 \end{pmatrix}
+            \end{align*}
+            On en déduit que 
+            \[
+                X^{(1)} = \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix} + \frac{-1}{20} \begin{pmatrix} 0 & 10 & 0 \\ 5 & 0 & 10 \\ 0 & 4 & 0 \end{pmatrix} \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix}
+            \]
+            % On obtient $X^{(1)} = \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix}$.
+
+            % On a \[
+            % X^{(1)} = \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix} + \begin{pmatrix} 0 & -2 & 0 \\ -1 & 0 & -2 \\ 0 & -1 & 0 \end{pmatrix} \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix}
+            % \]
+            
+        \end{solution}
+    }{}
+
+    \item Calculer la solution exacte en factorisant $A$ en $LU$ et en résolvant les deux systèmes triangulaires, puis l'erreur commise par la solution approchée $X^{(1)}$.
+    % \ifthenelse{\boolean{showSolutions}}{
+    %     \begin{solution}
+    %         La solution exacte est $X = \begin{pmatrix} 16 \\ 21 \\ 77/5 \end{pmatrix}$.
+    %         L'erreur commise est $X - X^{(1)} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$.
+    %     \end{solution}
+    % }{}
+    \vspace{1em}
+
+    Cette méthode converge toujours si la matrice $A$ vérifie l'un des critères suivants : 
+    \begin{itemize}
+        \item[$\bullet$] est à diagonale strictement dominante, c'est-à-dire que pour tout $i$, $\sum_{j \neq i} |a_{ij}| < |a_{ii}|$.
+        \item[$\bullet$] est symétrique définie positive.
+    \end{itemize}
+    \item Montrer le premier critère. Généralisez à des matrices $n \times n$.
+\end{enumerate}
+
+\vspace{2em}
 
 \section*{Exercice 2 - Jacobi ou divergence ?}
 On considère maintenant le système
@@ -113,142 +279,6 @@ x_1+3x_2=4,\\
             x_1=x_2=1.
             \]
             Le problème ne vient donc pas de l'existence de la solution, mais du choix de la méthode itérative sur ce système.
-        \end{solution}
-    }{}
-\end{enumerate}
-
-\section*{Exercice 3 - PageRank simplifié}
-On considère trois pages web $A$, $B$ et $C$.
-Le lien sortant de $A$ pointe vers $B$ et $C$ avec probabilité $1/2$ chacune.
-Le lien sortant de $B$ pointe toujours vers $C$.
-Le lien sortant de $C$ pointe toujours vers $A$.
-
-On note
-\[
-P=
-\begin{pmatrix}
-0 & 0 & 1\\
-1/2 & 0 & 0\\
-1/2 & 1 & 0
-\end{pmatrix}.
-\]
-La distribution stationnaire $\pi=(\pi_A,\pi_B,\pi_C)^T$ vérifie
-\[
-P\pi=\pi,
-\qquad
-\pi_A+\pi_B+\pi_C=1.
-\]
-
-\begin{enumerate}
-    \item Écrire le système vérifié par $\pi$.
-
-    \item Déterminer la distribution stationnaire.
-
-    \item Quelle page obtient le score le plus élevé ?
-
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            Le système est
-            \[
-            \pi_A=\pi_C,\qquad
-            \pi_B=\frac12\pi_A,\qquad
-            \pi_C=\frac12\pi_A+\pi_B.
-            \]
-            Avec la condition de normalisation,
-            \[
-            \pi_A+\frac12\pi_A+\pi_A=1
-            \]
-            donc
-            \[
-            \frac52\pi_A=1,\qquad \pi_A=\frac25.
-            \]
-            Ainsi
-            \[
-            \pi_B=\frac15,\qquad \pi_C=\frac25.
-            \]
-            Les pages $A$ et $C$ obtiennent ici le même score maximal.
-        \end{solution}
-    }{}
-\end{enumerate}
-
-\section*{Exercice 4 - Matrice stochastique et classes de risque}
-Un assureur classe un portefeuille en trois catégories de risque : faible ($F$), moyen ($M$), élevé ($E$).
-D'une année à l'autre, la probabilité de changer de classe est modélisée par
-\[
-T=
-\begin{pmatrix}
-0.8 & 0.2 & 0\\
-0.1 & 0.7 & 0.2\\
-0 & 0.3 & 0.7
-\end{pmatrix}.
-\]
-Le vecteur ligne $p_n=(f_n,m_n,e_n)$ représente la répartition l'année $n$.
-
-\begin{enumerate}
-    \item Vérifier que $T$ est stochastique.
-
-    \item Si
-    \[
-    p_0=(0.6,0.3,0.1),
-    \]
-    calculer $p_1$ puis $p_2$.
-
-    \item On associe les primes annuelles suivantes :
-    \[
-    800\ \text{euros},\qquad 1200\ \text{euros},\qquad 1800\ \text{euros}.
-    \]
-    Donner la prime moyenne attendue après une année.
-
-    \item Expliquer en quelques lignes l'intérêt d'un tel modèle.
-
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            Chaque ligne somme à $1$, donc $T$ est bien stochastique.
-            On calcule
-            \[
-            p_1=p_0T=(0.51,0.40,0.09).
-            \]
-            Puis
-            \[
-            p_2=p_1T=(0.448,0.409,0.143).
-            \]
-            La prime moyenne après une année vaut
-            \[
-            0.51\times 800+0.40\times 1200+0.09\times 1800=1050\ \text{euros}.
-            \]
-            Ce modèle permet d'anticiper l'évolution du portefeuille, de chiffrer une prime moyenne attendue et d'étudier un régime stationnaire à long terme.
-        \end{solution}
-    }{}
-\end{enumerate}
-
-\section*{Exercice 5 - Application à une discrétisation}
-On retrouve la matrice
-\[
-A=\begin{pmatrix}
-2 & -1 & 0 & 0\\
--1 & 2 & -1 & 0\\
-0 & -1 & 2 & -1\\
-0 & 0 & -1 & 2
-\end{pmatrix}.
-\]
-
-\begin{enumerate}
-    \item Montrer que $A$ est symétrique définie positive.
-
-    \item Expliquer pourquoi cette propriété est favorable à l'utilisation de méthodes itératives.
-
-    \item Citer un contexte de discrétisation dans lequel une telle matrice apparaît naturellement.
-
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            La matrice est symétrique. De plus, pour tout vecteur $x=(x_1,\dots,x_4)^T$,
-            \[
-            x^TAx=x_1^2+(x_1-x_2)^2+(x_2-x_3)^2+(x_3-x_4)^2+x_4^2>0
-            \]
-            pour tout $x\neq 0$.
-            Donc $A$ est définie positive.
-            Cette structure favorise la convergence de plusieurs méthodes itératives et garantit une solution unique.
-            Une telle matrice apparaît naturellement dans les discrétisations 1D de type chaleur, diffusion ou barre élastique.
         \end{solution}
     }{}
 \end{enumerate}
