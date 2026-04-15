@@ -49,7 +49,7 @@
     },
     {
       "id": "sec1",
-      "numero": 0,
+      "numero": 1,
       "titre": "Interpolation et intégration numérique",
       "description": "Motivation · Illustration",
       "lien": "#",
@@ -75,7 +75,7 @@
     },
     {
       "id": "sec1",
-      "numero": 0,
+      "numero": 2,
       "titre": "Systèmes linéaires et décompsition LU",
       "description": "Motivation · Illustration",
       "lien": "#",
@@ -109,6 +109,13 @@
           "titre": "TD 3 - Corrigé",
           "description": "",
           "lien": "TD3-corrige.pdf",
+          "cible": "_blank"
+        }, 
+        {
+          "numero": 1,
+          "titre": "TP 2 - Lagrange et Systèmes linéaires",
+          "description": "",
+          "lien": "TP2.ipynb",
           "cible": "_blank"
         }
       ]
