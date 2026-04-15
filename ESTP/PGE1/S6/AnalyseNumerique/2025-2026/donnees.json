@@ -110,6 +110,13 @@
           "description": "",
           "lien": "TD3-corrige.pdf",
           "cible": "_blank"
+        }, 
+        {
+          "numero": 1,
+          "titre": "TP 1 - Voir la méthode d'Euler",
+          "description": "",
+          "lien": "TP1_v3.ipynb",
+          "cible": "_blank"
         }
       ]
     }
