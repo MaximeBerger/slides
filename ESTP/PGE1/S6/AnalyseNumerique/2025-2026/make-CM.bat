@@ -2,7 +2,7 @@
 setlocal
 
 set "TEXINPUTS=c:\Users\mberge04\OneDrive - association E.S.T.P\Documents\Projets\slides\ESTP\Config;%TEXINPUTS%"
-set "BASE=TD3"
+set "BASE=TD4"
 
 echo Compilation du corrige...
 xelatex -jobname=corrige "%BASE%.tex"
