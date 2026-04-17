@@ -119,6 +119,32 @@
           "cible": "_blank"
         }
       ]
+    }, 
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Erreurs et schémas d'équations différentielles",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        {
+          "numero": 1,
+          "titre": "TD 4 - Comparer les méthodes",
+          "description": "",
+          "lien": "TD4-enonce.pdf",
+          "cible": "_blank"
+        }, 
+        {
+          "numero": 2,
+          "titre": "TD 4 - corrigé",
+          "description": "",
+          "lien": "TD4-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }
