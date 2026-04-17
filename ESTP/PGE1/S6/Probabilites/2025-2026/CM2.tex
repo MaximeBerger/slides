@@ -1,0 +1,251 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\R}{\mathbb{R}}
+
+\title{\sffamily\bfseries Probabilités --- CM2\\[0.3em]
+  \Large Variables continues et loi normale (premiers outils)}
+\author{}
+\date{7 avril 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Le problème : une mesure, un risque, une décision}
+% ====================================================================
+
+Sur chantier (ou en labo), on mesure une grandeur physique :
+épaisseur d'enrobé, résistance, longueur, température, etc.
+Ces mesures sont \textbf{réelles} (pas des entiers) et varient
+\textbf{continûment}.
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+\og La résistance à 28 jours d'un béton est mesurée.\\
+Quelle est la probabilité d'être \textbf{sous} le seuil de conformité ?\fg{}
+\end{mdframed}
+\end{center}
+
+\textbf{Pourquoi une loi ?}
+Parce qu'il y a une multitude de petites causes d'écart :
+dosage, cure, température, capteur, opérateur, \dots
+On ne peut pas tout modéliser : on modélise l'\textbf{aléa global}.
+
+% ====================================================================
+\section*{2. Variable continue : ce que veut dire \og probabilité \fg{}}
+% ====================================================================
+
+Une variable aléatoire continue \(X\) prend des valeurs dans \(\R\).
+L'événement \(\{X=x\}\) a (en général) une probabilité nulle :
+on raisonne avec des \textbf{intervalles}.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Idée.}
+Pour une variable continue,
+\[
+  P(a\le X\le b)=\text{(aire sous une courbe entre \(a\) et \(b\)).}
+  \qquad\text{et}\qquad P(X=a)=0.
+\]
+\end{mdframed}
+
+On introduit alors une \textbf{densité} \(f\) (courbe) :
+\[
+  f(x)\ge 0,\qquad \int_{-\infty}^{+\infty} f(x)\,dx = 1,
+  \qquad
+  P(a\le X\le b)=\int_a^b f(x)\,dx.
+  \tag{\(\star\)}
+\]
+
+% ====================================================================
+\section*{3. Fonction de répartition : la question \og \(\le x\) \fg{}}
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+La \textbf{fonction de répartition} de \(X\) est
+\[
+  \boxed{F(x)=P(X\le x).}
+\]
+Si \(X\) admet une densité \(f\), alors
+\[
+  \boxed{F(x)=\int_{-\infty}^{x} f(t)\,dt}
+  \qquad\text{et}\qquad
+  \boxed{f(x)=F'(x)} \text{ (quand \(F\) est dérivable).}
+\]
+\end{mdframed}
+
+\textbf{Application.}
+Exprimer \(P(a\le X\le b)\) avec \(F\).
+
+\atrou[2.2cm]{%
+\[
+  P(a\le X\le b)=F(b)-F(a).
+\]
+}
+
+% ====================================================================
+\section*{4. Moyenne et dispersion : espérance et variance continues}
+% ====================================================================
+
+Comme en CM1 (centre de gravité / moment d'inertie), mais avec des intégrales.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+Si \(X\) admet une densité \(f\),
+\[
+  \boxed{E[X]=\int_{-\infty}^{+\infty} x\,f(x)\,dx.}
+  \qquad
+  \boxed{\text{Var}(X)=E[(X-E[X])^2].}
+\]
+Et, comme en discret :
+\[
+  \boxed{\text{Var}(X)=E[X^2]-E[X]^2.}
+\]
+\end{mdframed}
+
+% ====================================================================
+\section*{5. La loi normale : pourquoi elle apparaît partout}
+% ====================================================================
+
+\textbf{Observation empirique.}
+Beaucoup de mesures (résistance, erreurs de capteur, écarts de cote)
+donnent des histogrammes \og en cloche\fg{}.
+
+\medskip
+
+\textbf{Raison (très informelle).}
+Quand une quantité est la somme d'une multitude de petites contributions
+indépendantes (ou faiblement dépendantes), la distribution se rapproche
+d'une loi normale : c'est l'idée du \textbf{théorème central limite}.
+
+% ====================================================================
+\section*{6. Définition de la normale \(\mathcal{N}(\mu,\sigma^2)\)}
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+On dit que \(X\) suit une loi normale \(\mathcal{N}(\mu,\sigma^2)\) si \(X\)
+admet la densité
+\[
+  \boxed{f(x)=\frac{1}{\sigma\sqrt{2\pi}}
+  \exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),\qquad x\in\R.}
+\]
+On a \(E[X]=\mu\) et \(\text{Var}(X)=\sigma^2\).
+\end{mdframed}
+
+\textbf{Interprétation.}
+\(\mu\) \(\to\) centre ; \(\sigma\) \(\to\) largeur (\(\sigma\) grand = plus dispersé).
+
+% ====================================================================
+\section*{7. Standardisation : ramener tout à \(\mathcal{N}(0,1)\)}
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Propriété.}
+Si \(X\sim\mathcal{N}(\mu,\sigma^2)\), alors
+\[
+  \boxed{Z=\frac{X-\mu}{\sigma}\sim\mathcal{N}(0,1).}
+\]
+On note \(\Phi(z)=P(Z\le z)\) la répartition de la normale centrée réduite.
+\end{mdframed}
+
+\textbf{Conséquence pratique.}
+Pour calculer une probabilité sur \(X\), on transforme en une probabilité sur \(Z\),
+puis on lit \(\Phi\) (table/logiciel/calculatrice).
+
+\medskip
+
+\textbf{Exercice (seuil de conformité).}
+On modélise la résistance \(X\) (MPa) par \(X\sim\mathcal{N}(35,4^2)\).
+Quelle est \(P(X<30)\) ?
+
+\atrou[6cm]{%
+On standardise :
+\[
+  P(X<30)=P\!\left(\frac{X-35}{4}<\frac{30-35}{4}\right)
+  =P(Z<-1{,}25)=\Phi(-1{,}25).
+\]
+On utilise la symétrie \(\Phi(-a)=1-\Phi(a)\), donc
+\[
+  \Phi(-1{,}25)=1-\Phi(1{,}25)\approx 1-0{,}8944=0{,}1056.
+\]
+}
+
+% ====================================================================
+\section*{8. Deux réflexes utiles}
+% ====================================================================
+
+\textbf{Symétrie.}
+Pour \(Z\sim\mathcal{N}(0,1)\),
+\[
+  \Phi(-z)=1-\Phi(z).
+\]
+
+\textbf{Intervalle centré.}
+Pour \(a>0\),
+\[
+  P(|Z|\le a)=\Phi(a)-\Phi(-a)=2\Phi(a)-1.
+\]
+
+\textbf{Exercice.}
+Exprimer \(P(\mu-\sigma\le X\le \mu+\sigma)\) pour \(X\sim\mathcal{N}(\mu,\sigma^2)\).
+
+\atrou[3.5cm]{%
+\[
+  P(\mu-\sigma\le X\le \mu+\sigma)
+  =P(-1\le Z\le 1)=2\Phi(1)-1\approx 0{,}6827.
+\]
+}
+
+% ====================================================================
+\section*{9. Bilan}
+% ====================================================================
+
+\atrou[7cm]{%
+\begin{enumerate}
+  \item Une variable continue se manipule avec \textbf{densité} \(f\) :
+    \(P(a\le X\le b)=\int_a^b f(x)\,dx\) et \(P(X=a)=0\).
+  \item La répartition \(F(x)=P(X\le x)\) donne
+    \(P(a\le X\le b)=F(b)-F(a)\).
+  \item La loi normale \(\mathcal{N}(\mu,\sigma^2)\) modélise très souvent
+    des mesures et des erreurs.
+  \item Le calcul se fait via la \textbf{standardisation}
+    \(Z=(X-\mu)/\sigma\sim\mathcal{N}(0,1)\) et la fonction \(\Phi\).
+\end{enumerate}
+}
+
+\end{document}
+

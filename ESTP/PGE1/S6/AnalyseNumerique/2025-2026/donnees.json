@@ -119,6 +119,32 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec1",
+      "numero": 3,
+      "titre": "Résolution approchées d'équations différentielles",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+        {
+          "numero": 1,
+          "titre": "TD 4 - Résolution approchées d'équations différentielles",
+          "description": "",
+          "lien": "TD4-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "TD 4 - Corrigé",
+          "description": "",
+          "lien": "TD4-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
     }
   ]
 }

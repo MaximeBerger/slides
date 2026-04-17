@@ -1,0 +1,242 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\R}{\mathbb{R}}
+
+\title{\sffamily\bfseries Probabilités --- CM3\\[0.3em]
+  \Large Lois continues classiques : uniformes, exponentielles, \dots}
+\author{}
+\date{21 avril 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Un même chantier, plusieurs variables continues}
+% ====================================================================
+
+Les lois continues servent à modéliser des grandeurs \textbf{mesurées}
+(longueurs, résistances, températures) et des \textbf{durées}
+((temps d'attente), temps entre pannes, délais).
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt, nobreak=true]
+\centering\large\itshape
+\og On planifie un coulage.\\
+Quelle est la probabilité qu'il faille attendre \textbf{plus de 2 jours}
+avant une fenêtre météo favorable ?\fg{}
+\end{mdframed}
+\end{center}
+
+Ce CM introduit des \textbf{modèles standards} (lois)
+et des \textbf{réflexes de calcul}.
+
+% ====================================================================
+\section*{2. Rappels minimaux : densité, répartition, intégrales}
+% ====================================================================
+
+Si \(X\) a une densité \(f\), alors
+\[
+  P(a\le X\le b)=\int_a^b f(x)\,dx,\qquad F(x)=P(X\le x)=\int_{-\infty}^x f(t)\,dt.
+\]
+Et
+\[
+  E[X]=\int_{-\infty}^{+\infty} x f(x)\,dx,\qquad \text{Var}(X)=E[X^2]-E[X]^2.
+\]
+
+% ====================================================================
+\section*{3. Loi uniforme \(\mathcal{U}([a,b])\) : \og aucune raison de favoriser \fg{}}
+% ====================================================================
+
+\textbf{Quand ?}
+Quand on sait seulement que \(X\) est \textbf{bornée} entre \(a\) et \(b\)
+et qu'on suppose toutes les valeurs \og également plausibles \fg{}.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+\(X\sim \mathcal{U}([a,b])\) si
+\[
+  \boxed{f(x)=\frac{1}{b-a}\,\mathbf{1}_{[a,b]}(x).}
+\]
+Alors
+\[
+  \boxed{E[X]=\frac{a+b}{2}},\qquad
+  \boxed{\text{Var}(X)=\frac{(b-a)^2}{12}}.
+\]
+\end{mdframed}
+
+\textbf{Exercice (tolérance).}
+Une erreur de réglage \(X\) (mm) est supposée uniforme sur \([-2,2]\).
+Calculer \(P(|X|\le 1)\).
+
+\atrou[3.2cm]{%
+\[
+  P(|X|\le 1)=P(-1\le X\le 1)=\frac{1-(-1)}{2-(-2)}=\frac{2}{4}=\frac12.
+\]
+}
+
+% ====================================================================
+\section*{4. Loi exponentielle \(\mathcal{E}(\lambda)\) : \og attendre un événement \fg{}}
+% ====================================================================
+
+\textbf{Quand ?}
+Pour modéliser un \textbf{temps d'attente} avant un événement
+qui arrive \og au hasard \fg{} avec un taux moyen constant :
+panne, incident, arrivée d'une opportunité, \dots
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+Pour \(\lambda>0\), \(T\sim\mathcal{E}(\lambda)\) si
+\[
+  \boxed{f(t)=\lambda e^{-\lambda t}\,\mathbf{1}_{t\ge 0}.}
+\]
+Sa répartition vaut
+\[
+  \boxed{F(t)=P(T\le t)=1-e^{-\lambda t}\quad (t\ge 0).}
+\]
+Et
+\[
+  \boxed{E[T]=\frac{1}{\lambda}},\qquad
+  \boxed{\text{Var}(T)=\frac{1}{\lambda^2}}.
+\]
+\end{mdframed}
+
+\textbf{Probabilité de dépasser un délai.}
+Pour \(t\ge 0\),
+\[
+  P(T>t)=1-F(t)=e^{-\lambda t}.
+\]
+
+\textbf{Exercice (fenêtre météo).}
+On modélise le temps d'attente \(T\) (jours) avant un jour favorable par
+\(\mathcal{E}(\lambda)\) avec \(E[T]=1\) jour.
+Calculer \(P(T>2)\).
+
+\atrou[3.8cm]{%
+Ici \(E[T]=1/\lambda=1\), donc \(\lambda=1\).
+\[
+  P(T>2)=e^{-1\cdot 2}=e^{-2}\approx 0{,}1353.
+\]
+}
+
+\textbf{Propriété sans mémoire (analogue continu de la géométrique).}
+Pour \(s,t\ge 0\),
+\[
+  P(T>s+t\mid T>s)=P(T>t).
+\]
+
+\atrou[4.2cm]{%
+\textbf{Preuve.}
+\[
+  P(T>s+t\mid T>s)=\frac{P(T>s+t)}{P(T>s)}
+  =\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(T>t).
+\]
+}
+
+% ====================================================================
+\section*{5. Passage par la répartition : un réflexe de calcul}
+% ====================================================================
+
+Pour beaucoup de lois, \(F\) est plus simple que \(f\).
+Deux exemples utiles :
+
+\begin{enumerate}[leftmargin=1.2em]
+  \item \(P(a\le X\le b)=F(b)-F(a)\).
+  \item Si \(X\) est continue, \(P(X<a)=P(X\le a)\) (pas de masse en un point).
+\end{enumerate}
+
+% ====================================================================
+\section*{6. Changement de variable simple : linéaire et monotone}
+% ====================================================================
+
+\textbf{Transformation affine.}
+Si \(Y=aX+b\), alors
+\[
+  E[Y]=aE[X]+b,\qquad \text{Var}(Y)=a^2\text{Var}(X).
+\]
+
+\textbf{Exercice.}
+Si \(T\) est en jours et \(H=24T\) en heures, exprimer \(E[H]\) et \(\text{Var}(H)\).
+
+\atrou[3.4cm]{%
+\[
+  E[H]=24E[T],\qquad \text{Var}(H)=24^2\,\text{Var}(T).
+\]
+}
+
+\textbf{Cas monotone (par la répartition).}
+Si \(g\) est croissante et \(Y=g(X)\), alors
+\[
+  F_Y(y)=P(Y\le y)=P(g(X)\le y)=P(X\le g^{-1}(y))=F_X(g^{-1}(y)).
+\]
+
+\textbf{Exercice (max).}
+Supposons \(T\sim\mathcal{E}(\lambda)\) et \(Y=\min(T,3)\) (on attend au maximum 3 jours).
+Donner \(P(Y<3)\).
+
+\atrou[3.6cm]{%
+\[
+  P(Y<3)=P(\min(T,3)<3)=P(T<3)=F_T(3)=1-e^{-3\lambda}.
+\]
+}
+
+% ====================================================================
+\section*{7. Où se place la loi normale ?}
+% ====================================================================
+
+La normale \(\mathcal{N}(\mu,\sigma^2)\) est typiquement un modèle de
+\textbf{mesure} et d'\textbf{erreur}.
+On la manipule surtout via la standardisation
+\(\;Z=(X-\mu)/\sigma\sim\mathcal{N}(0,1)\).
+
+\medskip
+
+Dans la suite (CM4), on l'utilisera pour construire des
+\textbf{intervalles de confiance} sur une moyenne.
+
+% ====================================================================
+\section*{8. Bilan : choisir un modèle}
+% ====================================================================
+
+\atrou[8cm]{%
+\begin{enumerate}
+  \item \textbf{Uniforme} \(\mathcal{U}([a,b])\) : variable bornée, pas de valeur privilégiée.
+  \item \textbf{Exponentielle} \(\mathcal{E}(\lambda)\) : temps d'attente, taux constant,
+    propriété sans mémoire.
+  \item \textbf{Normale} \(\mathcal{N}(\mu,\sigma^2)\) : mesures/erreurs, cloche,
+    calcul via standardisation.
+  \item Pour calculer : passer par \(F\), utiliser \(P(a\le X\le b)=F(b)-F(a)\),
+    et exploiter les transformations simples.
+\end{enumerate}
+}
+
+\end{document}
+

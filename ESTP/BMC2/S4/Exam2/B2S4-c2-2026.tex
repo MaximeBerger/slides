@@ -1,0 +1,161 @@
+\documentclass[a4paper,11pt]{article}
+
+% Francisation
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp}
+\usepackage[frenchb]{babel}
+
+\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
+\usepackage{geometry}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{enumerate,tablists}
+\usepackage{eurosym}
+\usepackage{pst-solides3d}
+\usepackage{multirow}
+\usepackage{extsizes}
+\usepackage{calc}
+\usepackage{boites}
+\usepackage{color,colortbl}
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+
+\makeatletter
+\let\Test@pr@shipout\pr@shipout
+\let\Test@shipout\shipout
+\makeatother
+\usepackage{tikz,tkz-tab}
+\makeatletter
+\AtBeginDocument{%
+  \let\pr@shipout\Test@pr@shipout
+  \let\shipout\Test@shipout
+}
+\makeatother
+
+\newtheorem{definition}{Définition}
+\newtheorem{theoreme}{Théorème}
+
+\newcommand{\C} {\ensuremath{\mathbb{C}}}
+\newcommand{\R} {\ensuremath{\mathbb{R}}}
+\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
+\newcommand{\N} {\ensuremath{\mathbb{N}}}
+\newcommand{\ds} {\displaystyle}
+\newcommand{\p}{\par}
+\newcommand{\abs}[1]{\left |#1\right |}
+\newcommand{\eq}[1]{\underset{#1}{\sim}}
+\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
+\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
+\newcommand{\V}[1]{\overrightarrow{#1}}
+
+\definecolor{gris1}{gray}{0.85}
+\definecolor{gris2}{gray}{0.65}
+
+\setlength{\textwidth} {19cm}
+\setlength{\textheight} {26cm}
+\addtolength{\topmargin} {-2.5cm}
+\setlength{\oddsidemargin} {-1.5cm}
+\setlength{\evensidemargin} {-1.5cm}
+
+\pagestyle{fancy}
+\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
+\fancyhead[L]{ESTP / Bachelor 2 / \the\year}
+\fancyhead[R]{Composition de mathématiques}
+\renewcommand\footrulewidth{1pt}
+
+\begin{document}
+\begin{center}\bf {\Large\underline{Composition de MATHÉMATIQUES  (3h)}}\end{center}
+\hfill\break
+
+\vspace{2em}
+
+\underline {\ding{110}\, \bf{Exercice 1 : Système différentiel couplé } \bf{(10 points)}}
+\medskip
+
+On cherche les triplets de fonctions $\left(x_1, x_2, x_3\right) \in \mathcal{C}^1(\mathbb{R})$ vérifiant, pour tout $t \in \mathbb{R}$,
+\[
+\left\{\begin{array}{l}
+x_1^{\prime}(t)=x_1(t)+x_3(t), \\
+x_2^{\prime}(t)=-x_1(t)+2 x_2(t)+x_3(t), \\
+x_3^{\prime}(t)=2 x_1(t)-2 x_2(t).
+\end{array}\right.
+\]
+On pose, pour $t \in \mathbb{R}$,
+
+$$
+X(t)=\left(\begin{array}{l}
+x_1(t) \\
+x_2(t) \\
+x_3(t)
+\end{array}\right) .
+$$
+
+
+\begin{enumerate}
+    \item Écrire la matrice $A$ du système différentiel telle que $X^{\prime}(t)=A X(t)$.
+    \item Diagonaliser la matrice $A$.
+    \item Soit $\left(u_1, u_2, u_3\right)$ une base de vecteurs propres pour $A$ et $P$ la matrice de passage de la base canonique de $\mathbb{R}^3$ à la base $(u_1, u_2, u_3)$. On pose, pour tout $t \in \mathbb{R}$, $Y(t)=P^{-1} X(t)$. Quelle équation relie $Y^{\prime}$ et $Y$ ?
+    \item Résoudre cette équation, puis en déduire les solutions du système différentiel initial.
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+\vspace{1em}
+
+\underline {\ding{110}\, \bf{Exercice 2 : Chaîne de Markov et diagonalisation } \bf{(10 points)}}
+\medskip
+
+On modélise la circulation d'étudiants entre trois zones d'un campus :
+\[
+\text{B}=\text{Bibliothèque},\quad
+\text{C}=\text{Cafétéria},\quad
+\text{S}=\text{Salle informatique}.
+\]
+À chaque pas de temps (30 minutes), un étudiant change de zone selon les probabilités suivantes :
+\begin{itemize}
+    \item Depuis B : 50\% restent en B, 30\% vont en C, 20\% vont en S.
+    \item Depuis C : 20\% vont en B, 60\% restent en C, 20\% vont en S.
+    \item Depuis S : 30\% vont en B, 20\% vont en C, 50\% restent en S.
+\end{itemize}
+
+On note $P$ la matrice de transition (lignes dans l'ordre B, C, S), et $\pi_n$ le vecteur ligne des proportions à l'instant $n$.
+
+\begin{enumerate}
+    \item Écrire la matrice $P$. Vérifier que $P$ est stochastique. (1 point)
+    \item Déterminer le polynôme caractéristique de $P$, puis ses valeurs propres. (2 points)
+    \item Montrer que $P$ est diagonalisable et déterminer une matrice $Q$ inversible et une matrice diagonale $D$ telles que $P=QDQ^{-1}$. (3 points)
+    \item En déduire une expression de $P^n$ pour tout $n\geq 1$. (2 points)
+    \item À l'instant initial, la répartition est $\pi_0=(1,0,0)$. Exprimer $\pi_n$ puis déterminer $\displaystyle\lim_{n\to +\infty}\pi_n$. Interpréter ce résultat. (2 points)
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+\newpage
+
+\underline {\ding{110}\, \bf{Exercice 3 : Matrice à paramètre et diagonalisation } \bf{(5 points)}}\\
+\medskip
+Soit $m$ un nombre réel et $f$ l'endomorphisme de $\mathbb{R}^3$ dont la matrice dans la base canonique est
+
+$$
+A=\left(\begin{array}{rcc}
+1 & 0 & 1 \\
+-1 & 2 & 1 \\
+2-m & m-2 & m
+\end{array}\right) .
+$$
+
+\begin{enumerate}
+    \item Quelles sont les valeurs propres de $f$ ?
+    \item Pour quelles valeurs de $m$ l'endomorphisme est-il diagonalisable ?
+    \item On suppose $m=2$. Calculer $A^k$ pour tout $k \in \mathbb{N}$.
+\end{enumerate}
+
+\end{document}
