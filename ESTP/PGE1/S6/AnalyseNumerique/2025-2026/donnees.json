@@ -132,14 +132,14 @@
       "sexercer" : [
         {
           "numero": 1,
-          "titre": "TD 4 - Résolution approchées d'équations différentielles",
+          "titre": "TD 4 - Comparer les méthodes de résolution approchées",
           "description": "",
           "lien": "TD4-enonce.pdf",
           "cible": "_blank"
-        },
+        }, 
         {
           "numero": 2,
-          "titre": "TD 4 - Corrigé",
+          "titre": "TD 4 - corrigé",
           "description": "",
           "lien": "TD4-corrige.pdf",
           "cible": "_blank"
