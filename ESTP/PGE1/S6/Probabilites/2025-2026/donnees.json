@@ -46,6 +46,24 @@
           "cible": "_blank"
         }
       ]
+    }, 
+    {
+      "id": "sec2",
+      "numero": 2,
+      "titre": "Variables aléatoires continues",
+      "description": "Densité · Fonction de répartition",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 2 - Densité et fonction de répartition",
+          "description": "Densité · Fonction de répartition",
+          "lien": "CM2-enonce.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+      ]
     }
   ]
 }

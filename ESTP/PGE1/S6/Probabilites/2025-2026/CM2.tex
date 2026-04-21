@@ -1,4 +1,5 @@
 \input{configTD}
+\usepackage{tikz}
 
 % ── Poly à trous : commandes spécifiques ──────────────────────────
 \newcommand{\atrou}[2][3cm]{%
@@ -27,9 +28,9 @@
 \newcommand{\R}{\mathbb{R}}
 
 \title{\sffamily\bfseries Probabilités --- CM2\\[0.3em]
-  \Large Variables continues et loi normale (premiers outils)}
+  \Large Variables aléatoires continues}
 \author{}
-\date{7 avril 2026}
+\date{}
 
 \begin{document}
 \sffamily
@@ -37,215 +38,806 @@
 \thispagestyle{empty}
 
 % ====================================================================
-\section*{1. Le problème : une mesure, un risque, une décision}
+\section*{1. Le problème : une mesure ne tombe jamais juste}
 % ====================================================================
 
-Sur chantier (ou en labo), on mesure une grandeur physique :
-épaisseur d'enrobé, résistance, longueur, température, etc.
-Ces mesures sont \textbf{réelles} (pas des entiers) et varient
-\textbf{continûment}.
+Jusque maintenant, nos variables aléatoires prenaient des valeurs
+\textbf{entières} ou \textbf{isolées} : \newline 
+\og combien de pièces
+défectueuses ? \fg{} 
+\og à quel rang apparaît le premier défaut ? \fg{}\newline
+On pouvait alors lister les valeurs possibles $x_1,x_2,\dots$
+et leur associer une probabilité $p_i=P(X=x_i)$.
+
+\medskip
+
+Dans la vraie vie, on mesure des grandeurs \textbf{continues} :
+\textbf{physiques} :
 
 \begin{center}
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
 \centering\large\itshape
-\og La résistance à 28 jours d'un béton est mesurée.\\
-Quelle est la probabilité d'être \textbf{sous} le seuil de conformité ?\fg{}
+Quelle est la résistance à 28 jours d'une éprouvette de béton ? \newline 
+La longueur d'une pièce sortie d'atelier ? \newline 
+Le temps d'attente avant la prochaine livraison ? \newline
 \end{mdframed}
 \end{center}
 
-\textbf{Pourquoi une loi ?}
-Parce qu'il y a une multitude de petites causes d'écart :
-dosage, cure, température, capteur, opérateur, \dots
-On ne peut pas tout modéliser : on modélise l'\textbf{aléa global}.
+Ces grandeurs varient \textbf{continûment} : entre $34{,}1$ MPa
+et $34{,}2$ MPa, il y a une infinité de valeurs possibles.
+
+Faut-il alors écrire $P(X=34{,}17\ldots)$ ?
+Et que vaut cette probabilité ?
+
+\atrou[1.5cm]{%
+Ces probabilités avec des égalités seront toutes nulles. 
+
+On ne pourra calculer des probabilités que sur des intervalles.
+}
+
+\medskip
+
+\textbf{L'objectif du cours.}
+
+Adapter nos outils (espérance, variance, probabilités)
+au cas où $X$ prend ses valeurs dans un \textbf{intervalle réel}.
+
+Tout ce qu'on savait en discret a une \textbf{version continue} :\newline
+les sommes deviennent des intégrales, \newline 
+les probabilités ponctuelles
+deviennent des \textbf{densités}.
 
 % ====================================================================
-\section*{2. Variable continue : ce que veut dire \og probabilité \fg{}}
+\section*{2. De l'histogramme à la densité}
 % ====================================================================
 
-Une variable aléatoire continue \(X\) prend des valeurs dans \(\R\).
-L'événement \(\{X=x\}\) a (en général) une probabilité nulle :
-on raisonne avec des \textbf{intervalles}.
+Imaginons qu'on mesure la longueur $X$ (en cm) de $1000$ pièces
+sortant d'un atelier. On regroupe les mesures en classes et
+on trace un \textbf{histogramme des fréquences}.
+
+\medskip
+
+On normalise l'histogramme pour que \emph{l'aire totale vaille~$1$}
+(on divise la hauteur de chaque barre par la largeur de classe).
+
+A quoi correspond l'aire d'une barre ?
+\atrou[1.5cm]{%
+L'aire d'une barre vaut alors la fréquence des mesures
+tombées dans la classe.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % Histogramme grossier
+  \draw[thick,->] (0,0) -- (9,0) node[right] {\small $x$};
+  \draw[thick,->] (0,0) -- (0,3.2) node[above] {\small fréquence / largeur};
+  \foreach \x/\h in {1/0.4, 2/0.9, 3/1.7, 4/2.5, 5/2.7, 6/2.1, 7/1.2, 8/0.5}{
+    \draw[fill=ThemeLight, draw=Theme] (\x,0) rectangle (\x+1,\h);
+  }
+  \node at (4.5,-0.5) {\small largeur de classe : $1$ cm};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[scale=0.9]
+  % Histogramme plus fin + courbe
+  \draw[thick,->] (0,0) -- (9,0) node[right] {\small $x$};
+  \draw[thick,->] (0,0) -- (0,3.2) node[above] {\small fréquence / largeur};
+  \foreach \x/\h in {0.5/0.2, 1/0.35, 1.5/0.55, 2/0.8, 2.5/1.15, 3/1.55,
+    3.5/1.95, 4/2.35, 4.5/2.65, 5/2.75, 5.5/2.55, 6/2.15, 6.5/1.7,
+    7/1.25, 7.5/0.85, 8/0.5, 8.5/0.25}{
+    \draw[fill=ThemeLight, draw=Theme] (\x,0) rectangle (\x+0.5,\h);
+  }
+  \draw[thick, Theme, domain=0.3:8.9, smooth, samples=80]
+    plot (\x, {3*exp(-(\x-5)*(\x-5)/3.5)});
+  \node at (4.5,-0.5) {\small on raffine les classes\dots};
+\end{tikzpicture}
+\end{center}
+
+Quand on prend de plus en plus de mesures et des classes de
+plus en plus fines, l'histogramme normalisé tend vers une
+\textbf{courbe} $f$.
 
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Idée.}
-Pour une variable continue,
+\textbf{Idée centrale.}
+Pour une variable continue, ce qu'on associe à $X$ n'est plus
+une \emph{liste de probabilités ponctuelles}, mais une \textbf{courbe}~$f$
+(la densité) dont \textbf{l'aire sous la courbe} joue le rôle de probabilité :
 \[
-  P(a\le X\le b)=\text{(aire sous une courbe entre \(a\) et \(b\)).}
-  \qquad\text{et}\qquad P(X=a)=0.
+  P(a\le X\le b)=\text{(aire sous la courbe $f$ entre $a$ et $b$).}
 \]
 \end{mdframed}
 
-On introduit alors une \textbf{densité} \(f\) (courbe) :
-\[
-  f(x)\ge 0,\qquad \int_{-\infty}^{+\infty} f(x)\,dx = 1,
-  \qquad
-  P(a\le X\le b)=\int_a^b f(x)\,dx.
-  \tag{\(\star\)}
-\]
+
+
+Si $f(x_0)=2{,}7$, est-ce que \og la probabilité que $X$ vaille $x_0$ \fg{}
+vaut $2{,}7$ ? \newline 
+A quoi correspond cette valeur ? 
+
+\atrou[1.5cm]{%
+Évidemment non (une probabilité est $\le 1$).
+Cette valeur n'est \textbf{pas} une probabilité,
+c'est une \textbf{densité de probabilité}
+(probabilité \emph{par unité de longueur}).
+
+Cette valeur doit être comparée avec toutes les autres valeurs de la densité.
+}
+
+Pour obtenir une probabilité, il faut \textbf{intégrer}.
 
 % ====================================================================
-\section*{3. Fonction de répartition : la question \og \(\le x\) \fg{}}
+\section*{3. Densité : définition et premier usage}
 % ====================================================================
 
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
 \textbf{Définition.}
-La \textbf{fonction de répartition} de \(X\) est
+Une variable aléatoire $X$ est dite \textbf{continue}
+si elle admet une \textbf{densité}, c'est-à-dire une fonction
+$f:\R\to\R$ telle que :
+\[
+  f(x)\ge 0 \quad\text{pour tout } x\in\R,
+  \qquad
+  \int_{-\infty}^{+\infty} f(x)\,dx = 1,
+\]
+et pour tous réels $a\le b$,
+\[
+  \boxed{\,P(a\le X\le b)=\int_a^b f(x)\,dx.\,}
+\]
+\end{mdframed}
+
+\textbf{Analogie avec le discret} (à garder en tête en permanence) :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|l|}
+  \hline
+  \textbf{Discret} & \textbf{Continu} \\
+  \hline
+  valeurs $x_i$ isolées & valeurs $x\in\R$ \\
+  probabilités $p_i=P(X=x_i)$ & densité $f(x)$ \\
+  $p_i\ge 0$ & $f(x)\ge 0$ \\
+  $\displaystyle\sum_i p_i=1$ & $\displaystyle\int_{-\infty}^{+\infty} f(x)\,dx=1$ \\
+  $\displaystyle P(X\in A)=\sum_{x_i\in A} p_i$
+    & $\displaystyle P(X\in[a,b])=\int_a^b f(x)\,dx$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Problème 1 --- Est-ce bien une densité ?}
+On modélise la durée de vie $X$ (en années) d'un composant par
+\[
+  f(x)=
+  \begin{cases}
+    c\,(10-x) & \text{si } 0\le x\le 10,\\
+    0 & \text{sinon.}
+  \end{cases}
+\]
+\begin{enumerate}
+  \item Déterminer la constante $c$ pour que $f$ soit une densité.
+  \item Calculer la probabilité que le composant tombe en panne
+  avant $2$ ans.
+\end{enumerate}
+
+\atrou[5.5cm]{%
+\begin{enumerate}
+\item On impose la positivité (ok dès que $c\ge 0$)
+et que l'aire vaille $1$ :
+\[
+  \int_{-\infty}^{+\infty}\! f(x)\,dx
+  = \int_0^{10} c(10-x)\,dx
+  = c\,\Bigl[10x-\tfrac{x^2}{2}\Bigr]_0^{10}
+  = c\cdot 50 = 1
+  \;\;\Longrightarrow\;\; c=\tfrac{1}{50}.
+\]
+\item
+\[
+  P(X\le 2)
+  = \int_0^2 \tfrac{1}{50}(10-x)\,dx
+  = \tfrac{1}{50}\Bigl[10x-\tfrac{x^2}{2}\Bigr]_0^2
+  = \tfrac{1}{50}\cdot 18 = 0{,}36.
+\]
+Environ $36\,\%$ des composants tombent en panne
+dans les deux premières années.
+\end{enumerate}
+}
+
+% ====================================================================
+\section*{4. Un paradoxe apparent : $P(X=a)=0$}
+% ====================================================================
+
+Prenons $a=b$ dans la formule encadrée :
+\[
+  P(X=a)=P(a\le X\le a)=\int_a^a f(x)\,dx = 0.
+\]
+
+\textbf{Comment est-ce possible ?}
+Pourtant $X$ prend bien \emph{une} valeur quand on la mesure !
+
+\medskip
+
+\textbf{Intuition.} Il y a une infinité non dénombrable de valeurs
+possibles ; si chacune avait une probabilité strictement positive,
+la somme exploserait. En continu, la probabilité ne vit pas
+\og en un point \fg{}, mais \og sur un intervalle \fg{}.
+
+\medskip
+
+\textbf{Conséquence pratique.}
+Pour une variable continue, les inégalités strictes et larges
+donnent la même probabilité :
+\[
+  P(X<a)=P(X\le a),\qquad P(a<X<b)=P(a\le X\le b)
+  =\int_a^b f(x)\,dx.
+\]
+
+\textbf{Problème 2 --- Lecture d'une densité.}
+Soit $X$ de densité $f(x)=\dfrac{3}{4}(1-x^2)$ pour $x\in[-1,1]$,
+et $f(x)=0$ sinon.
+\begin{enumerate}
+  \item Vérifier que $f$ est bien une densité.
+  \item Calculer $P(X\ge 0{,}5)$.
+  \item Calculer $P(|X|\le 0{,}5)$.
+\end{enumerate}
+\atrou[6cm]{%
+\begin{enumerate}
+\item $f\ge 0$ sur $[-1,1]$ (car $1-x^2\ge 0$).
+De plus
+\[
+  \int_{-1}^{1}\tfrac{3}{4}(1-x^2)\,dx
+  =\tfrac{3}{4}\Bigl[x-\tfrac{x^3}{3}\Bigr]_{-1}^{1}
+  =\tfrac{3}{4}\cdot\tfrac{4}{3}=1.\;\checkmark
+\]
+\item 
+$P(X\ge 0{,}5)=\displaystyle\int_{0{,}5}^{1}\tfrac{3}{4}(1-x^2)\,dx
+=\tfrac{3}{4}\Bigl[x-\tfrac{x^3}{3}\Bigr]_{0{,}5}^{1}
+=\tfrac{3}{4}\bigl(\tfrac{2}{3}-\tfrac{11}{24}\bigr)
+=\tfrac{5}{32}\approx 0{,}156.$
+
+\item Par symétrie ou calcul direct :
+$P(|X|\le 0{,}5)=\displaystyle\int_{-0{,}5}^{0{,}5}\tfrac{3}{4}(1-x^2)\,dx
+=\tfrac{11}{16}\approx 0{,}688.$
+\end{enumerate}
+}
+
+% ====================================================================
+\section*{5. Fonction de répartition}
+% ====================================================================
+
+En discret, on manipulait déjà des \emph{cumuls} :
+\(P(X\le 3)=p_1+p_2+p_3\).
+On définit l'analogue en continu.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+La \textbf{fonction de répartition} de $X$ est
 \[
   \boxed{F(x)=P(X\le x).}
 \]
-Si \(X\) admet une densité \(f\), alors
+Si $X$ admet une densité $f$, alors
 \[
-  \boxed{F(x)=\int_{-\infty}^{x} f(t)\,dt}
-  \qquad\text{et}\qquad
-  \boxed{f(x)=F'(x)} \text{ (quand \(F\) est dérivable).}
+  F(x)=\int_{-\infty}^{x} f(t)\,dt
+  \qquad\text{et, là où $F$ est dérivable,}\qquad
+  f(x)=F'(x).
+\]
+
+On note souvent ces quantités avec le nom de la variable aléatoire en indice : 
+\[
+  F_X(x)=P(X\le x), \quad f_X(x)=F_X'(x).
 \]
 \end{mdframed}
 
-\textbf{Application.}
-Exprimer \(P(a\le X\le b)\) avec \(F\).
+\textbf{Propriétés}
+$F$ est croissante, continue, avec
+\[\lim_{x\to-\infty}F(x)=0
+\qquad \text{et} \qquad \lim_{x\to+\infty}F(x)=1.\]
 
-\atrou[2.2cm]{%
+\atrou[1.5cm]{%
+
+}
+\medskip
+
+\vspace{1em}
+\textbf{Problème 3 --- De $f$ à $F$, et calcul de probabilités.}
+
+On prend $f(x)=\tfrac{1}{50}(10-x)$ sur $[0,10]$
+(modélisant la durée de vie d'un composant).
+\begin{enumerate}
+  \item Déterminer $F(x)$ pour tout $x\in\R$.
+  \item En déduire $P(3\le X\le 7)$ sans refaire d'intégrale.
+\end{enumerate}
+\atrou[6cm]{%
+\begin{enumerate}
+\item Pour $x<0$, $F(x)=0$. Pour $x>10$, $F(x)=1$.
+Pour $x\in[0,10]$ :
+\[
+  F(x)=\int_0^x \tfrac{1}{50}(10-t)\,dt
+  =\tfrac{1}{50}\Bigl[10t-\tfrac{t^2}{2}\Bigr]_0^x
+  =\tfrac{x}{5}-\tfrac{x^2}{100}
+  =\tfrac{x(20-x)}{100}.
+\]
+\item Le \textbf{réflexe clé} :
 \[
   P(a\le X\le b)=F(b)-F(a).
 \]
+Donc
+\(
+  P(3\le X\le 7)=F(7)-F(3)
+  =\tfrac{7\cdot 13}{100}-\tfrac{3\cdot 17}{100}
+  =\tfrac{91-51}{100}=0{,}40.
+\)
+\end{enumerate}
+}
+
+\medskip
+
+\vspace{1em}
+\textbf{Problème 4 --- De $F$ à $f$.}
+
+La répartition du temps
+d'attente $T$ (en minutes) à un poste de contrôle est donnée par la fonction de répartition:
+\[
+  F_T(t)=
+  \begin{cases}
+    0 & \text{si } t<0,\\
+    1-\mathrm{e}^{-t/5} & \text{si } t\ge 0.
+  \end{cases}\]
+\begin{enumerate}
+  \item Vérifier que $F_T$ est bien une fonction de répartition.
+  \item En déduire la densité $f_T$ de $T$.
+  \item Calculer $P(T>10)$.
+\end{enumerate}
+
+\atrou[6.5cm]{%
+\begin{enumerate}
+\item $F_T$ est continue, croissante (sa dérivée
+sera positive), $F(t)\to 0$ en $-\infty$ et
+$F(t)\to 1$ en $+\infty$. \checkmark
+
+\item Là où $F_T$ est dérivable :
+$f(t)=F'(t)=\tfrac{1}{5}\mathrm{e}^{-t/5}$ pour $t\ge 0$,
+et $f(t)=0$ pour $t<0$.
+
+\item $P(T>10)=1-F_T(10)=\mathrm{e}^{-2}\approx 0{,}135.$
+\end{enumerate}
 }
 
 % ====================================================================
-\section*{4. Moyenne et dispersion : espérance et variance continues}
+\section*{6. Densité d'une fonction de variable aléatoire}
 % ====================================================================
 
-Comme en CM1 (centre de gravité / moment d'inertie), mais avec des intégrales.
+Souvent, on a besoin de transformer les variables aléatoires : 
+
+Si on connaît la loi d'une tension $X$, on voudra sans doute
+la loi de la puissance $Y=X^2$ ; 
+
+si on connaît le rayon $R$
+d'une section voudra la loi de l'aire $A=\pi R^2$.
+
+\medskip
+
+\textbf{La question.}
+Si $X$ a pour densité $f_X$, et si $Y=g(X)$, quelle est la densité $f_Y$ ?
+
+\medskip
+
+\textbf{L'idée.}
+On ne sait pas calculer directement $f_Y$, mais on sait calculer
+la \emph{répartition} $F_Y(y)=P(Y\le y)$ en repassant à $X$.
+Puis on dérive.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Méthode (via la fonction de répartition).}
+Pour déterminer la densité de $Y=g(X)$ :
+\begin{enumerate}
+  \item écrire $F_Y(y)=P\bigl(g(X)\le y\bigr)$ ;
+  \item \textbf{résoudre} l'inégalité $g(x)\le y$ pour faire apparaître
+    un intervalle sur~$x$ ;
+  \item exprimer $F_Y$ à l'aide de $F_X$ (ou comme une intégrale de $f_X$) ;
+  \item dériver : $f_Y(y)=F_Y'(y)$.
+\end{enumerate}
+\end{mdframed}
+
+\textbf{Problème 5 --- Transformation affine.}
+Soit $X$ une variable continue de densité $f_X$.
+On pose $Y=aX+b$ avec $a>0$.
+Exprimer $F_Y$ en fonction de $F_X$, puis $f_Y$ en fonction de $f_X$.
+
+\atrou[5cm]{%
+\[
+  F_Y(y)=P(aX+b\le y)
+  =P\!\left(X\le \tfrac{y-b}{a}\right)
+  =F_X\!\left(\tfrac{y-b}{a}\right).
+\]
+On dérive par la règle de la chaîne :
+\[
+  \boxed{\,f_Y(y)=\tfrac{1}{a}\,f_X\!\left(\tfrac{y-b}{a}\right).\,}
+\]
+(Dans le cas général $a\ne 0$, on obtient $f_Y(y)=\frac{1}{|a|}f_X\!\bigl(\tfrac{y-b}{a}\bigr)$.)
+}
+
+% ====================================================================
+\section*{7. Espérance : le centre de gravité, version continue}
+% ====================================================================
+
+En CM1 on a vu : \emph{l'espérance, c'est le centre de gravité
+de la loi.} Les \og masses \fg{} étaient les probabilités $p_i$
+placées aux positions $x_i$ :
+\(\,E[X]=\sum_i x_i\, p_i.\)
+
+\medskip
+
+Que devient cette idée si la masse est étalée continûment
+le long d'une tige ? 
+
+\atrou[1.5cm]{%
+On découpe la tige en petites tranches
+de largeur $dx$ autour du point $x$ ; cette tranche porte
+une \og masse \fg{} $f(x)\,dx$ (aire de la petite bande
+de l'histogramme). Le centre de gravité est alors :
+\[
+  \underbrace{\sum_i x_i\,p_i}_{\text{discret}}
+  \quad\longrightarrow\quad
+  \underbrace{\int_{-\infty}^{+\infty} x\,f(x)\,dx}_{\text{continu}}.
+\]
+}
 
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
 \textbf{Définition.}
-Si \(X\) admet une densité \(f\),
+Si $X$ admet une densité $f$, son \textbf{espérance} est
 \[
-  \boxed{E[X]=\int_{-\infty}^{+\infty} x\,f(x)\,dx.}
-  \qquad
-  \boxed{\text{Var}(X)=E[(X-E[X])^2].}
+  \boxed{\,E[X]=\int_{-\infty}^{+\infty} x\,f(x)\,dx\,}
 \]
-Et, comme en discret :
-\[
-  \boxed{\text{Var}(X)=E[X^2]-E[X]^2.}
-\]
+(lorsque cette intégrale est absolument convergente).
 \end{mdframed}
 
-% ====================================================================
-\section*{5. La loi normale : pourquoi elle apparaît partout}
-% ====================================================================
-
-\textbf{Observation empirique.}
-Beaucoup de mesures (résistance, erreurs de capteur, écarts de cote)
-donnent des histogrammes \og en cloche\fg{}.
-
-\medskip
-
-\textbf{Raison (très informelle).}
-Quand une quantité est la somme d'une multitude de petites contributions
-indépendantes (ou faiblement dépendantes), la distribution se rapproche
-d'une loi normale : c'est l'idée du \textbf{théorème central limite}.
-
-% ====================================================================
-\section*{6. Définition de la normale \(\mathcal{N}(\mu,\sigma^2)\)}
-% ====================================================================
-
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Définition.}
-On dit que \(X\) suit une loi normale \(\mathcal{N}(\mu,\sigma^2)\) si \(X\)
-admet la densité
-\[
-  \boxed{f(x)=\frac{1}{\sigma\sqrt{2\pi}}
-  \exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),\qquad x\in\R.}
-\]
-On a \(E[X]=\mu\) et \(\text{Var}(X)=\sigma^2\).
-\end{mdframed}
-
-\textbf{Interprétation.}
-\(\mu\) \(\to\) centre ; \(\sigma\) \(\to\) largeur (\(\sigma\) grand = plus dispersé).
-
-% ====================================================================
-\section*{7. Standardisation : ramener tout à \(\mathcal{N}(0,1)\)}
-% ====================================================================
-
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Propriété.}
-Si \(X\sim\mathcal{N}(\mu,\sigma^2)\), alors
-\[
-  \boxed{Z=\frac{X-\mu}{\sigma}\sim\mathcal{N}(0,1).}
-\]
-On note \(\Phi(z)=P(Z\le z)\) la répartition de la normale centrée réduite.
-\end{mdframed}
-
-\textbf{Conséquence pratique.}
-Pour calculer une probabilité sur \(X\), on transforme en une probabilité sur \(Z\),
-puis on lit \(\Phi\) (table/logiciel/calculatrice).
-
-\medskip
-
-\textbf{Exercice (seuil de conformité).}
-On modélise la résistance \(X\) (MPa) par \(X\sim\mathcal{N}(35,4^2)\).
-Quelle est \(P(X<30)\) ?
+\textbf{Problème 6 --- Calcul d'espérances.}
+\begin{enumerate}
+  \item Durée de vie $X$ de densité
+  $f(x)=\tfrac{1}{50}(10-x)$ sur $[0,10]$ : calculer $E[X]$.
+  Interpréter.
+  \item Temps d'attente $T$ de densité
+  $f(t)=\tfrac{1}{5}\mathrm{e}^{-t/5}$ sur $[0,+\infty[$ :
+  calculer $E[T]$ (on admettra
+  $\int_0^{+\infty} t\,\mathrm{e}^{-t/\lambda}\,dt = \lambda^2$).
+\end{enumerate}
 
 \atrou[6cm]{%
-On standardise :
+\begin{enumerate}
+\item
 \[
-  P(X<30)=P\!\left(\frac{X-35}{4}<\frac{30-35}{4}\right)
-  =P(Z<-1{,}25)=\Phi(-1{,}25).
+  E[X]=\int_0^{10} x\cdot\tfrac{1}{50}(10-x)\,dx
+  =\tfrac{1}{50}\Bigl[5x^2-\tfrac{x^3}{3}\Bigr]_0^{10}
+  =\tfrac{1}{50}\cdot\tfrac{500}{3}=\tfrac{10}{3}\approx 3{,}33\text{ ans}.
 \]
-On utilise la symétrie \(\Phi(-a)=1-\Phi(a)\), donc
-\[
-  \Phi(-1{,}25)=1-\Phi(1{,}25)\approx 1-0{,}8944=0{,}1056.
-\]
+En moyenne, un composant dure $3$ ans et $4$ mois.
+La densité décroît, donc les petites valeurs sont plus
+probables : le centre de gravité est bien dans la moitié
+gauche de l'intervalle.
+
+\item
+\(\displaystyle
+  E[T]=\int_0^{+\infty}\! t\cdot\tfrac{1}{5}\mathrm{e}^{-t/5}\,dt
+  =\tfrac{1}{5}\cdot 25 = 5\text{ min}.
+\)
+\end{enumerate}
 }
 
+\medskip
+
+\textbf{Théorème (de transfert).}
+Pour calculer l'espérance d'une \emph{fonction} de $X$, pas besoin
+de trouver la densité de $g(X)$ : on intègre directement,
+\[
+  \boxed{\,E[g(X)]=\int_{-\infty}^{+\infty} g(x)\,f(x)\,dx.\,}
+\]
+(Version continue de la formule $E[g(X)]=\sum_i g(x_i)\,p_i$
+du cas discret.)
+
 % ====================================================================
-\section*{8. Deux réflexes utiles}
+\section*{8. Applications du théorème de transfert}
 % ====================================================================
 
-\textbf{Symétrie.}
-Pour \(Z\sim\mathcal{N}(0,1)\),
-\[
-  \Phi(-z)=1-\Phi(z).
-\]
+Le théorème de transfert a deux usages pratiques majeurs.
 
-\textbf{Intervalle centré.}
-Pour \(a>0\),
-\[
-  P(|Z|\le a)=\Phi(a)-\Phi(-a)=2\Phi(a)-1.
-\]
+\medskip
 
-\textbf{Exercice.}
-Exprimer \(P(\mu-\sigma\le X\le \mu+\sigma)\) pour \(X\sim\mathcal{N}(\mu,\sigma^2)\).
+\textbf{1. Calculer directement $E[g(X)]$} sans déterminer la densité
+de $g(X)$ : on intègre $g(x)\,f_X(x)$. On s'en servira notamment
+pour calculer $E[X^2]$, qui intervient dans la variance (§9).
 
-\atrou[3.5cm]{%
+\medskip
+
+\textbf{2. Retrouver la densité de $Y=g(X)$} sans passer par la
+fonction de répartition. C'est la \og méthode de la fonction muette \fg{}.
+L'idée : pour toute fonction continue bornée $h$, le transfert donne
 \[
-  P(\mu-\sigma\le X\le \mu+\sigma)
-  =P(-1\le Z\le 1)=2\Phi(1)-1\approx 0{,}6827.
+  E[h(Y)] = E\bigl[h(g(X))\bigr]
+  = \int_{-\infty}^{+\infty} h(g(x))\,f_X(x)\,dx.
 \]
+Si on arrive à réécrire cette intégrale, par un changement de variable
+$y=g(x)$, sous la forme $\int h(y)\,\varphi(y)\,dy$, alors par
+comparaison avec $E[h(Y)] = \int h(y)\,f_Y(y)\,dy$ (vraie pour
+\emph{tout} $h$), on identifie directement $f_Y=\varphi$.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Méthode (via le transfert, dite \og de la fonction muette \fg).}
+Pour déterminer la densité de $Y=g(X)$ :
+\begin{enumerate}
+  \item pour une fonction $h$ continue bornée \emph{quelconque},
+    écrire $E[h(Y)]=\int h(g(x))\,f_X(x)\,dx$ grâce au transfert ;
+  \item effectuer le changement de variable $y=g(x)$ dans l'intégrale
+    pour obtenir une écriture de la forme $\int h(y)\,\varphi(y)\,dy$ ;
+  \item identifier avec $\int h(y)\,f_Y(y)\,dy$ : l'égalité étant
+    valable pour tout~$h$, on a $f_Y(y)=\varphi(y)$.
+\end{enumerate}
+\end{mdframed}
+
+\textbf{Problème 7 --- Passage au carré.}
+Soit $X$ de densité $f_X(x)=1$ pour $x\in[0,1]$, et $0$ sinon
+(chaque valeur de $[0,1]$ est \og également plausible \fg{}).
+On pose $Y=X^2$.
+\begin{enumerate}
+  \item Dans quel intervalle $Y$ prend-elle ses valeurs ?
+  \item Déterminer $F_Y(y)$ pour $y\in[0,1]$, puis $f_Y$ sur~$\R$
+    (méthode du §6).
+  \item Calculer $E[Y]$ de deux façons : directement avec $f_Y$, puis
+    \emph{via le théorème de transfert}. Comparer.
+\end{enumerate}
+
+\atrou[7.5cm]{%
+\begin{enumerate}
+\item $X\in[0,1]$ donc $Y=X^2\in[0,1]$.
+
+\item Pour $y\in[0,1]$, comme $X\ge 0$ :
+\[
+  F_Y(y)=P(X^2\le y)=P(0\le X\le\sqrt{y})
+  =\int_0^{\sqrt{y}}\! 1\,dx=\sqrt{y}.
+\]
+Pour $y<0$, $F_Y(y)=0$ ; pour $y>1$, $F_Y(y)=1$.
+En dérivant :
+\[
+  f_Y(y)=
+  \begin{cases}
+    \dfrac{1}{2\sqrt{y}} & \text{si } y\in\,]0,1],\\
+    0 & \text{sinon.}
+  \end{cases}
+\]
+(Noter que $f_Y$ tend vers $+\infty$ en $0$ : les petites valeurs
+de $Y$ sont \og concentrées \fg{}.)
+
+\item Via $f_Y$ :
+$\;E[Y]=\int_0^1 y\cdot\tfrac{1}{2\sqrt{y}}\,dy
+=\tfrac{1}{2}\int_0^1\!\sqrt{y}\,dy=\tfrac{1}{2}\cdot\tfrac{2}{3}=\tfrac{1}{3}.$
+
+Via le transfert, sans passer par $f_Y$ :
+$\;E[Y]=E[X^2]=\int_0^1 x^2\cdot 1\,dx=\tfrac{1}{3}.\;\checkmark$
+\end{enumerate}
 }
 
-% ====================================================================
-\section*{9. Bilan}
-% ====================================================================
+\medskip
+
+\textbf{Problème 8 --- La méthode de la fonction muette.}
+Soit $X$ de densité $f_X(x)=2x$ pour $x\in[0,1]$, $0$ sinon.
+On pose $Y=\sqrt{X}$, et on veut la densité de $Y$ par la méthode
+de la fonction muette.
+\begin{enumerate}
+  \item Soit $h$ une fonction continue bornée. Écrire $E[h(Y)]$ comme
+    une intégrale en $x$ grâce au théorème de transfert.
+  \item Effectuer le changement de variable $y=\sqrt{x}$ (soit $x=y^2$)
+    et donner la nouvelle intégrale.
+  \item Par identification, en déduire la densité $f_Y$.
+\end{enumerate}
 
 \atrou[7cm]{%
 \begin{enumerate}
-  \item Une variable continue se manipule avec \textbf{densité} \(f\) :
-    \(P(a\le X\le b)=\int_a^b f(x)\,dx\) et \(P(X=a)=0\).
-  \item La répartition \(F(x)=P(X\le x)\) donne
-    \(P(a\le X\le b)=F(b)-F(a)\).
-  \item La loi normale \(\mathcal{N}(\mu,\sigma^2)\) modélise très souvent
-    des mesures et des erreurs.
-  \item Le calcul se fait via la \textbf{standardisation}
-    \(Z=(X-\mu)/\sigma\sim\mathcal{N}(0,1)\) et la fonction \(\Phi\).
+\item Avec $g(x)=\sqrt{x}$, le transfert donne
+\[
+  E[h(Y)] = E\bigl[h(\sqrt{X})\bigr]
+  = \int_0^1 h(\sqrt{x})\cdot 2x\,dx.
+\]
+\item On pose $y=\sqrt{x}$, donc $x=y^2$ et $dx=2y\,dy$.
+Quand $x$ parcourt $[0,1]$, $y$ parcourt aussi $[0,1]$. Donc
+\[
+  E[h(Y)] = \int_0^1 h(y)\cdot 2y^2\cdot 2y\,dy
+  = \int_0^1 h(y)\cdot 4y^3\,dy.
+\]
+\item Cette égalité est valable pour \emph{toute} fonction $h$, donc
+par identification avec $E[h(Y)]=\int_\R h(y)\,f_Y(y)\,dy$ :
+\[
+  f_Y(y)=
+  \begin{cases}
+    4y^3 & \text{si } y\in[0,1],\\
+    0 & \text{sinon.}
+  \end{cases}
+\]
+\textit{Vérification :} $\int_0^1 4y^3\,dy=1$. \checkmark
+\end{enumerate}
+
+\textbf{Bilan.} On obtient la densité sans avoir à déterminer
+l'intervalle $\{g(X)\le y\}$ ni à dériver. Cette méthode est souvent
+plus rapide quand $g$ est une bijection régulière ; en revanche, quand
+$g$ n'est pas monotone (par exemple $g(x)=x^2$ sur un intervalle
+contenant $0$), il faut découper le changement de variable, et la
+méthode via $F_Y$ du §6 peut être plus simple.
+}
+
+% ====================================================================
+\section*{9. Variance : le moment d'inertie continu}
+% ====================================================================
+
+Même musique qu'en CM1 : une fois qu'on connaît le centre
+de gravité $E[X]$, on mesure la \textbf{dispersion} autour
+de lui par un moment d'inertie.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+Si $X$ a une densité $f$ et une espérance $E[X]$, sa \textbf{variance}
+est
+\[
+  \boxed{\text{Var}(X)=E\bigl[(X-E[X])^2\bigr]
+  =\int_{-\infty}^{+\infty}(x-E[X])^2\,f(x)\,dx.}
+\]
+L'\textbf{écart-type} est $\sigma(X)=\sqrt{\text{Var}(X)}$
+(même unité que $X$).
+\end{mdframed}
+
+\textbf{La formule pratique (Huygens) reste vraie.}
+En développant le carré, comme en CM1 :
+\[
+  \boxed{\text{Var}(X)=E[X^2]-E[X]^2}
+  \qquad\text{avec}\qquad
+  E[X^2]=\int_{-\infty}^{+\infty} x^2\,f(x)\,dx.
+\]
+
+\medskip
+
+\textbf{Problème 9 --- Variance de la durée de vie.}
+Reprenons $X$ avec $f(x)=\tfrac{1}{50}(10-x)$ sur $[0,10]$,
+$E[X]=10/3$.
+
+\atrou[5.5cm]{%
+\[
+  E[X^2]
+  =\int_0^{10} x^2\cdot\tfrac{1}{50}(10-x)\,dx
+  =\tfrac{1}{50}\Bigl[\tfrac{10x^3}{3}-\tfrac{x^4}{4}\Bigr]_0^{10}
+  =\tfrac{1}{50}\cdot\tfrac{2500}{6}
+  =\tfrac{50}{3}.
+\]
+\[
+  \text{Var}(X)=\tfrac{50}{3}-\Bigl(\tfrac{10}{3}\Bigr)^{\!2}
+  =\tfrac{50}{3}-\tfrac{100}{9}
+  =\tfrac{150-100}{9}
+  =\tfrac{50}{9}\approx 5{,}56.
+\]
+$\sigma(X)\approx 2{,}36$ ans.
+}
+
+\textbf{Problème 10 --- Un test de cohérence.}
+Pour la densité \og parabolique \fg{}
+$f(x)=\tfrac{3}{4}(1-x^2)$ sur $[-1,1]$ (problème~2),
+expliquer \emph{sans calcul} pourquoi $E[X]=0$,
+puis vérifier en calculant. Calculer ensuite $\text{Var}(X)$.
+
+\atrou[5.5cm]{%
+La densité est \textbf{paire} ($f(-x)=f(x)$), donc son
+centre de gravité est $0$ par symétrie. Calcul :
+$E[X]=\int_{-1}^{1} x\cdot\tfrac{3}{4}(1-x^2)\,dx=0$
+(intégrale d'une fonction impaire sur $[-1,1]$). \checkmark
+\[
+  E[X^2]=\int_{-1}^{1} x^2\cdot\tfrac{3}{4}(1-x^2)\,dx
+  =\tfrac{3}{4}\Bigl[\tfrac{x^3}{3}-\tfrac{x^5}{5}\Bigr]_{-1}^{1}
+  =\tfrac{3}{4}\cdot\tfrac{4}{15}=\tfrac{1}{5}.
+\]
+Donc $\text{Var}(X)=\tfrac{1}{5}-0^2=0{,}20$,
+$\sigma(X)\approx 0{,}447$.
+}
+
+% ====================================================================
+\section*{10. Propriétés : ce qui ne change pas par rapport au discret}
+% ====================================================================
+
+Les propriétés vues au CM1 restent valables : elles découlent
+de la définition de $E$ et $\text{Var}$, pas du type
+(discret ou continu) de la variable.
+
+\medskip
+
+\textbf{Linéarité de l'espérance.}
+Pour $a,b\in\R$,
+\[
+  E[aX+b]=a\,E[X]+b,
+  \qquad
+  E[X+Y]=E[X]+E[Y].
+\]
+
+\textbf{Variance et transformation affine.}
+\[
+  \text{Var}(aX+b)=a^2\,\text{Var}(X),
+  \qquad
+  \sigma(aX+b)=|a|\,\sigma(X).
+\]
+
+\textbf{Problème 11 --- Changement d'unité.}
+
+\textit{(Ce problème illustre aussi la méthode du §6, avec une
+transformation affine.)}
+La longueur $X$ d'une pièce est mesurée en cm, avec
+$E[X]=20$ cm et $\sigma(X)=0{,}5$ cm.
+On définit l'\textbf{écart au nominal} $Y=X-20$ (en mm,
+sachant que $1$ cm $=10$ mm, donc $Y=10(X-20)$ en mm).
+Calculer $E[Y]$ et $\sigma(Y)$.
+
+\atrou[3.5cm]{%
+$E[Y]=E[10(X-20)]=10\,(E[X]-20)=10\cdot 0=0$ mm.
+
+$\sigma(Y)=|10|\cdot\sigma(X)=10\cdot 0{,}5=5$ mm.
+L'écart au nominal est en moyenne nul, avec un écart-type
+de $5$ mm.
+}
+
+% ====================================================================
+\section*{11. Bilan}
+% ====================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|l|c|c|}
+  \hline
+  & \textbf{Discret (CM1)} & \textbf{Continu (CM2)} \\
+  \hline
+  Objet associé à $X$ & probabilités $p_i=P(X=x_i)$ & densité $f(x)$ \\
+  \hline
+  Normalisation & $\sum_i p_i = 1$
+    & $\displaystyle\int_{-\infty}^{+\infty} f(x)\,dx=1$ \\
+  \hline
+  Probabilité d'un événement & $\sum_{x_i\in A} p_i$
+    & $\displaystyle\int_A f(x)\,dx$ \\
+  \hline
+  Répartition & $F(x)=\sum_{x_i\le x}p_i$
+    & $F(x)=\int_{-\infty}^{x} f(t)\,dt$ \\
+  \hline
+  Espérance & $\sum_i x_i\,p_i$
+    & $\displaystyle\int_{-\infty}^{+\infty} x\,f(x)\,dx$ \\
+  \hline
+  Variance & $E[X^2]-E[X]^2$
+    & $E[X^2]-E[X]^2$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\atrou[6cm]{%
+\begin{enumerate}
+  \item Une variable continue se manipule avec une \textbf{densité}~$f$ :
+    positive, d'aire totale $1$, et
+    $P(a\le X\le b)=\int_a^b f(x)\,dx$.
+  \item En continu, $P(X=a)=0$ : seules les probabilités
+    \textbf{d'intervalles} ont un sens non trivial.
+    Les bornes strictes ou larges donnent la même valeur.
+  \item La \textbf{répartition} $F(x)=P(X\le x)$ s'obtient en intégrant $f$,
+    et inversement $f=F'$ ; la formule clé reste
+    $P(a\le X\le b)=F(b)-F(a)$.
+  \item Pour la \textbf{densité de $Y=g(X)$}, on passe par la
+    répartition : $F_Y(y)=P(g(X)\le y)$, qu'on exprime en fonction
+    de $F_X$, puis on dérive.
+  \item \textbf{Espérance} et \textbf{variance} sont définies comme en discret,
+    en remplaçant \og $\sum p_i\cdot\ldots$ \fg{} par
+    \og $\int f(x)\cdot\ldots\,dx$ \fg{}.
+    Les propriétés (linéarité, Huygens, $\text{Var}(aX+b)=a^2\text{Var}(X)$)
+    sont les mêmes.
+  \item \textbf{Au CM3}, nous découvrirons plusieurs lois continues
+    \emph{classiques} (uniforme, exponentielle, \dots) qui jouent le rôle
+    des lois de Bernoulli, binomiale, géométrique, Poisson du CM1.
 \end{enumerate}
 }
 
 \end{document}
-
