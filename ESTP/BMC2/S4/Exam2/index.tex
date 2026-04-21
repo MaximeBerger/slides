@@ -1,77 +1,53 @@
-\documentclass[a4paper,11pt]{article}
-
-% Francisation
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern,textcomp}
-\usepackage[frenchb]{babel}
-
-\usepackage{amsfonts,amsmath,amssymb,mathrsfs}
-\usepackage{geometry}
-\usepackage{aeguill}
-\usepackage{hyperref}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{asymptote}
-\usepackage{graphicx}
-\usepackage{tabularx}
-\usepackage{enumerate,tablists}
-\usepackage{eurosym}
-\usepackage{pst-solides3d}
-\usepackage{multirow}
-\usepackage{extsizes}
-\usepackage{calc}
-\usepackage{boites}
-\usepackage{color,colortbl}
-\usepackage{fancyhdr}
-\usepackage{stmaryrd}
+\input{configTD}
 \usepackage{pifont}
 
-\makeatletter
-\let\Test@pr@shipout\pr@shipout
-\let\Test@shipout\shipout
-\makeatother
-\usepackage{tikz,tkz-tab}
-\makeatletter
-\AtBeginDocument{%
-  \let\pr@shipout\Test@pr@shipout
-  \let\shipout\Test@shipout
-}
-\makeatother
 
-\newtheorem{definition}{Définition}
-\newtheorem{theoreme}{Théorème}
+\title{Mathématiques : Examen}
 
-\newcommand{\C} {\ensuremath{\mathbb{C}}}
-\newcommand{\R} {\ensuremath{\mathbb{R}}}
-\newcommand{\Z} {\ensuremath{\mathbb{Z}}}
-\newcommand{\N} {\ensuremath{\mathbb{N}}}
-\newcommand{\ds} {\displaystyle}
-\newcommand{\p}{\par}
-\newcommand{\abs}[1]{\left |#1\right |}
-\newcommand{\eq}[1]{\underset{#1}{\sim}}
-\newcommand{\tend}[1]{\underset{#1}{\longrightarrow}}
-\newcommand{\norme}[1]{\left\Vert #1\right\Vert}
-\newcommand{\V}[1]{\overrightarrow{#1}}
+\author{}
+\date{}
 
-\definecolor{gris1}{gray}{0.85}
-\definecolor{gris2}{gray}{0.65}
-
-\setlength{\textwidth} {19cm}
-\setlength{\textheight} {26cm}
-\addtolength{\topmargin} {-2.5cm}
-\setlength{\oddsidemargin} {-1.5cm}
-\setlength{\evensidemargin} {-1.5cm}
-
-\pagestyle{fancy}
-\fancyfoot[R]{\today}\renewcommand\headrulewidth{1pt}
-\fancyhead[L]{ESTP / Bachelor 2 / \the\year}
-\fancyhead[R]{Composition de mathématiques}
-\renewcommand\footrulewidth{1pt}
 
 \begin{document}
-\begin{center}\bf {\Large\underline{Composition de MATHÉMATIQUES  (3h)}}\end{center}
-\hfill\break
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{27/04/2026}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 4}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Maxime Berger \& Rémi Blanquet \\
+        \hline 
+        \textbf{Promotion} & BMC2 - S4 \\
+        \hline 
+        \textbf{Matière} & Mathématiques  \\
+        \hline 
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
 
 \vspace{2em}
 
@@ -107,6 +83,18 @@ $$
 \hfill\break
 \hrule
 \hfill\break
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} 
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+
 \vspace{1em}
 
 \underline {\ding{110}\, \bf{Exercice 2 : Chaîne de Markov et diagonalisation } \bf{(10 points)}}
@@ -138,7 +126,7 @@ On note $P$ la matrice de transition (lignes dans l'ordre B, C, S), et $\pi_n$ l
 \hfill\break
 \hrule
 \hfill\break
-\newpage
+
 
 \underline {\ding{110}\, \bf{Exercice 3 : Matrice à paramètre et diagonalisation } \bf{(5 points)}}\\
 \medskip
@@ -153,7 +141,7 @@ A=\left(\begin{array}{rcc}
 $$
 
 \begin{enumerate}
-    \item Quelles sont les valeurs propres de $f$ ?
+    \item Déterminer le polynômes caractéristique de $A$ puis déterminer ses valeurs propres.
     \item Pour quelles valeurs de $m$ l'endomorphisme est-il diagonalisable ?
     \item On suppose $m=2$. Calculer $A^k$ pour tout $k \in \mathbb{N}$.
 \end{enumerate}

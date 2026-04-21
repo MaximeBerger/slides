@@ -60,9 +60,26 @@
           "description": "Densité · Fonction de répartition",
           "lien": "CM2-enonce.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 2 - annoté",
+          "description": "Densité · Fonction de répartition",
+          "lien": "CM2-annote.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
+        {
+          "titre": "TD3 - Variables aléatoires continues",
+          "lien": "TD3-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD3 - pistes de solutions",
+          "lien": "TD3-corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     }
   ]
