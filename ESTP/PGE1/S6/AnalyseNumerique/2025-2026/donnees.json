@@ -74,7 +74,7 @@
       ]
     },
     {
-      "id": "sec1",
+      "id": "sec2",
       "numero": 2,
       "titre": "Systèmes linéaires et décompsition LU",
       "description": "Motivation · Illustration",
@@ -121,12 +121,19 @@
       ]
     },
     {
-      "id": "sec1",
+      "id": "sec3",
       "numero": 3,
       "titre": "Résolution approchées d'équations différentielles",
       "description": "Motivation · Illustration",
       "lien": "#",
       "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 3 - Du problème physique à l'équation différentielle, méthode de Newton",
+          "description": "",
+          "lien": "CM3-enonce.pdf",
+          "cible": "_blank"
+        }
         
       ],
       "sexercer" : [
@@ -145,6 +152,7 @@
           "cible": "_blank"
         }
       ]
-    }
+    }, 
+
   ]
 }

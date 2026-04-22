@@ -81,6 +81,24 @@
           "cible": "_blank"
         }
       ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 3,
+      "titre": "La loi normale",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 3 - Loi normale et Théorème central limite",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM3-enonce.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+      ]
     }
   ]
 }
