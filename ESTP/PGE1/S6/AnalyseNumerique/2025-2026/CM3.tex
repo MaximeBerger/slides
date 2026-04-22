@@ -1,0 +1,740 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\esquisse}[1][5.5cm]{%
+  \begin{center}%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \centering\vfill
+      \textit{\small Croquis réalisé en cours.}%
+      \vfill
+    \end{minipage}}%
+  }{%
+    \fbox{\begin{minipage}[c][#1]{0.85\textwidth}%
+      \hfill\vfill\hfill
+    \end{minipage}}%
+  }%
+  \end{center}%
+}
+
+\newcommand{\degC}{\text{\textdegree C}}
+
+\title{\sffamily\bfseries Analyse Numérique --- CM3\\[0.3em]
+  \Large Problème inverse, méthode de Newton et ajustement de paramètres}
+\author{}
+\date{23 avril 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Le problème --- une dalle de béton sur un chantier}
+% ====================================================================
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+Sur un chantier, une dalle de béton a été coulée à $45\,\degC$.\\
+Un capteur mesure sa température à 60 minutes : $24{,}03\,\degC$.\\
+On peut marcher sur la dalle si sa température est inférieure à $18\,\degC$ ?\\
+\textbf{Dans combien de temps pourra-t-on y circuler\,?}
+\end{mdframed}
+\end{center}
+
+\bigskip
+
+\textbf{Données.}
+\atrou[2cm]{%
+\begin{itemize}[leftmargin=*]
+  \item Température initiale : $T_0 = 45\,\degC$.
+  \item Température ambiante : $T_{\mathrm{amb}} = 15\,\degC$.
+  \item Mesure du capteur à $t = 60$ min : $T_{\mathrm{mes}} = 24{,}03\,\degC$.
+  \item Critère de sécurité : circulation possible dès que $T < 18\,\degC$.
+\end{itemize}
+}
+\medskip
+
+\textbf{Modèle.}
+\atrou[2cm]{%
+Comme au CM1 pour le café :
+\[
+  \frac{dT}{dt} = -k\,(T - T_{\mathrm{amb}}),
+  \qquad T(0) = T_0.
+\]}
+
+\medskip
+
+\textbf{Question.}
+Pour prédire quand $T(t) = 18$, de quoi a-t-on besoin\,?
+
+\atrou[2cm]{%
+Du coefficient d'échange thermique~$k$.
+Il dépend du chantier (vent, humidité, bâche...).
+On ne peut pas le mesurer directement.
+}
+
+\medskip
+
+\textbf{Ce qu'on sait faire (CM1, TD4).}
+Si $k$ est connu, on sait calculer $T(t)$ :
+soit par la formule exacte (si on peut résoudre),
+soit par un schéma numérique
+(Euler, Crank-Nicolson, RK4).
+
+\medskip
+
+\textbf{On veut faire l'inverse :}
+partir d'une mesure
+et retrouver le paramètre $k$.
+
+% ====================================================================
+\section*{2. Reformulation --- annuler le résidu}
+% ====================================================================
+
+Pour un $k$ donné, on peut calculer la température prédite
+à $t = 60$ min :
+\atrou[2cm]{%
+\[
+  T_{\mathrm{pred}}(k) = 15 + 30\,e^{-60\,k}.
+\]}
+
+Le bon $k$ est celui qui fait coïncider prédiction et mesure :
+\[
+  T_{\mathrm{pred}}(k) = T_{\mathrm{mes}}
+\]
+
+\medskip
+
+\textbf{La fonction résidu:}
+\[
+  g(k) = T_{\mathrm{pred}}(k) - T_{\mathrm{mes}} = 15 + 30\,e^{-60\,k} - 24{,}03.
+\]
+
+On cherche $k$ tel que : 
+\atrou[1cm]{%
+\[
+  g(k) = 0.
+\]
+}
+
+\medskip
+
+\textbf{Question.}
+Peut-on résoudre cette équation en $k$\,?
+
+\atrou[10cm]{%
+elle est exponentielle en $k$.
+
+On pourrait l'inverser à la main dans ce cas précis
+grâce au logarithme, mais en pratique $T_{\mathrm{pred}}(k)$ est souvent calculée
+par un schéma numérique et aucune formule explicite n'est disponible.
+
+\smallskip
+
+Il nous faut donc une méthode générale
+pour résoudre $g(k) = 0$.
+
+\[
+k = 
+\]
+}
+
+\bigskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Comment résoudre $g(x) = 0$
+quand $g$ est non linéaire
+et qu'on ne sait pas inverser sa formule\,?
+\end{mdframed}
+\end{center}
+  
+\newpage
+% ====================================================================
+\section*{3. Cas bâtiment (problème) --- local technique}
+% ====================================================================
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+Local technique d'un bâtiment tertiaire.\\
+Le chauffage à 22 degrés est coupé à 20h.\\
+À 22h, le capteur intérieur mesure $19\,\degC$.\\
+\textbf{Peut-on identifier le coefficient global de pertes thermiques $U$ ?}
+\end{mdframed}
+\end{center}
+
+\medskip
+
+\textbf{Modèle simplifié.}
+\[
+  C\,\frac{dT_{\mathrm{int}}}{dt}
+  = -U\,\bigl(T_{\mathrm{int}} - T_{\mathrm{ext}}(t)\bigr),
+  \qquad T_{\mathrm{int}}(20h)=22\,\degC.
+\]
+Le paramètre inconnu est $U$ (en W/K).
+
+\medskip
+
+\textbf{On fixe la capacité thermique globale $C=4{,}0\times10^5\;\mathrm{J/K}$ ?}
+
+elle mesure l'énergie nécessaire pour faire varier
+la température intérieure de $1$ K.
+
+
+
+\medskip
+
+\textbf{Données extérieures (mesures météo).}
+\[
+  T_{\mathrm{ext}}(20h)=12,\;
+  T_{\mathrm{ext}}(21h)=10,\;
+  T_{\mathrm{ext}}(22h)=8,\;
+\]
+
+\textbf{Question.}
+Comment définir $T_{\mathrm{ext}}(t)$ entre ces heures ?
+
+\atrou[5cm]{%
+On interpole les mesures (interpolation linéaire, TD1)
+pour obtenir une fonction continue
+$T_{\mathrm{ext}}(t)$ sur $[20h,22h]$
+\[
+  T_{\mathrm{ext}}(t) = 12 - 2\,(t - 20).
+\]
+}
+
+On peut donc résoudre l'équation : 
+\atrou[5cm]{%
+\[
+  T(t) = K e^{(-U/C)(t - 20)} -2t + 52+2C/U
+\]
+On détermine ensuite $K$ en utilisant la condition initiale :
+\[
+  T(20h) = 22.
+\]
+\[
+  22 = K e^{(-U/C)(20 - 20)} -2*20 + 52+2C/U
+\]
+\[
+  22 = K -40 + 52+2C/U
+\]
+\[
+  K = 22 - 12 - 2C/U
+  \]
+}
+\medskip
+
+\textbf{Problème inverse.}
+On définit le résidu :
+\[
+  g(U) = T_{\mathrm{int,pred}}(23h;U)-19.
+  g(U) = K(U) e^{(-U/C)(23 - 20)} -2*23 + 52+2C/U - 19
+\]
+On cherche $g(U)=0$.
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Ce cas n'est pas résoluble à la main :\\
+Comment faire  ?
+\end{mdframed}
+\end{center}
+
+\newpage
+% ====================================================================
+\section*{4. Méthode de Newton}
+% ====================================================================
+
+\textbf{Idée.}
+On ne sait pas résoudre $g(x) = 0$ en général,
+mais on sait résoudre un problème \emph{linéaire}. \newline
+À chaque étape, on \textbf{remplace $g$ par sa tangente}
+et on cherche le zéro de cette tangente.
+
+\medskip
+
+\esquisse[5.5cm]
+
+\textbf{Construction.}
+Partons d'un $x_n$ proche de la racine cherchée.
+La tangente à $g$ en $x_n$ a pour équation :
+\[
+  y = g(x_n) + g'(x_n)\,(x - x_n).
+\]
+
+\medskip
+
+\textbf{Question.}
+Pour quelle valeur de $x$ cette tangente
+coupe-t-elle l'axe des abscisses\,?
+
+\atrou[2.5cm]{%
+On résout $g(x_n) + g'(x_n)\,(x - x_n) = 0$ :
+\[
+  x = x_n - \frac{g(x_n)}{g'(x_n)}.
+\]
+On prend ce nouveau $x$ comme point
+de départ de l'itération suivante.
+}
+
+\medskip
+
+\textbf{La méthode de Newton.}
+À partir d'un $x_0$ donné, on itère :
+\[
+  \boxed{\;x_{n+1} = x_n - \frac{g(x_n)}{g'(x_n)}.\;}
+\]
+
+\medskip
+
+\textbf{Vocabulaire.}
+\begin{itemize}[leftmargin=*]
+  \item La courbe a été \textbf{linéarisée}
+        (on remplace $g$ par sa tangente).
+  \item À chaque itération, on résout
+        le \textbf{problème linéaire} et pas le problème exact.
+  \item On recommence à partir de la nouvelle valeur.
+\end{itemize}
+
+% ── Exemple scalaire d'appropriation ──────────────────────────────
+
+\medskip
+
+\textbf{Exemple pour s'approprier la méthode.}
+Calculons $\sqrt{2}$ à la main.
+On cherche $x > 0$ tel que $x^2 = 2$, soit
+\[
+  f(x) = x^2 - 2 = 0.
+\]
+
+\textbf{Question.}
+Écrire la formule de Newton pour ce $f$.
+
+\atrou[2cm]{%
+$f'(x) = 2x$, donc :
+\[
+  x_{n+1} = x_n - \frac{x_n^2 - 2}{2\,x_n}
+  = \frac{1}{2}\left(x_n + \frac{2}{x_n}\right).
+\]
+\textit{(On retrouve la célèbre \og méthode de Héron\fg{}
+pour calculer une racine carrée.)}
+}
+
+\medskip
+
+\textbf{Itérations à partir de $x_0 = 2$} :
+
+\atrou[5.5cm]{%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|c|c|c}
+  $n$ & $x_n$ & $f(x_n) = x_n^2 - 2$ & Chiffres corrects \\
+  \hline
+  $0$ & $2$                   & $2$                    & $0$ \\
+  $1$ & $\tfrac12(2 + 1) = 1{,}5$        & $0{,}25$              & $1$ \\
+  $2$ & $\tfrac12(1{,}5 + 4/3) \approx 1{,}41\overline{6}$ & $0{,}006\ldots$       & $3$ \\
+  $3$ & $\approx 1{,}414215\ldots$       & $2 \times 10^{-6}$    & $6$ \\
+  $4$ & $\approx 1{,}41421356\ldots$     & $\approx 10^{-12}$    & $12$ \\
+\end{tabular}
+\end{center}
+
+\smallskip
+
+Valeur exacte : $\sqrt{2} \approx 1{,}41421356$.
+}
+
+\medskip
+
+\textbf{Observation.}
+Le nombre de chiffres corrects \textbf{double}
+à chaque itération.
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+\textbf{Convergence quadratique.}\\
+Si $x_0$ est assez proche de la racine et si $g'$ ne s'annule pas,
+l'erreur se comporte comme $\varepsilon_{n+1} \sim C\,\varepsilon_n^2$ :\\
+le nombre de chiffres corrects double à chaque itération.
+\end{mdframed}
+\end{center}
+
+\medskip
+
+\textbf{Conditions d'application --- à retenir.}
+
+\atrou[3.5cm]{%
+\begin{itemize}[leftmargin=*]
+  \item Il faut pouvoir évaluer $g(x)$ \emph{et} $g'(x)$.
+  \item Le point de départ $x_0$ doit être
+        \textbf{pas trop loin} de la racine.
+  \item $g'(x)$ ne doit pas s'annuler
+        près de la racine (sinon division par zéro,
+        ou instabilité numérique).
+  \item En échange de ces contraintes :
+        convergence très rapide (quadratique).
+\end{itemize}
+}
+
+% ====================================================================
+\section*{5. Application de Newton --- local technique}
+% ====================================================================
+
+On applique maintenant Newton au \textbf{deuxième problème}
+(local technique), posé en section~3.
+
+\medskip
+
+\textbf{Rappel du résidu.}
+\[
+  g(U)=T_{\mathrm{int,pred}}(23h;U)-19.
+\]
+
+\textbf{Mise à jour de Newton.}
+\[
+  U_{n+1}=U_n-\frac{g(U_n)}{g'(U_n)},
+  \qquad
+  g'(U_n)\approx\frac{g(U_n+\delta U)-g(U_n)}{\delta U},
+  \quad \delta U=5.
+\]
+
+\medskip
+
+\textbf{Point de départ.}
+A priori, on ne connaît pas $U$.
+On prend une estimation raisonnable : $U_0=90\;\mathrm{W/K}$.
+
+\medskip
+
+\textbf{Pas 1 --- fait au tableau (sorties RK4 données).}
+
+\atrou[5cm]{%
+\begin{itemize}[leftmargin=*]
+  \item RK4 donne $T_{\mathrm{int,pred}}(23h;90)=20{,}4$,
+        donc $g(U_0)=20{,}4-19=\mathbf{+1{,}4}$.
+  \item RK4 donne $T_{\mathrm{int,pred}}(23h;95)=20{,}1$,
+        donc $g(95)=\mathbf{+1{,}1}$.
+  \item \[
+          g'(U_0)\approx\frac{1{,}1-1{,}4}{5}=-0{,}06.
+        \]
+  \item \[
+          U_1=90-\frac{1{,}4}{-0{,}06}\approx\mathbf{113{,}3}.
+        \]
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Pas 2 --- à vous.}
+On vous donne :
+\[
+  T_{\mathrm{int,pred}}(23h;113{,}3)=19{,}2,\qquad
+  T_{\mathrm{int,pred}}(23h;118{,}3)=18{,}9.
+\]
+Calculer $g(U_1)$, $g'(U_1)$, puis $U_2$.
+
+\atrou[5.5cm]{%
+\begin{itemize}[leftmargin=*]
+  \item $g(U_1)=19{,}2-19=\mathbf{+0{,}2}$.
+  \item $g(118{,}3)=18{,}9-19=\mathbf{-0{,}1}$.
+  \item \[
+          g'(U_1)\approx\frac{-0{,}1-0{,}2}{5}=-0{,}06.
+        \]
+  \item \[
+          U_2=113{,}3-\frac{0{,}2}{-0{,}06}\approx\mathbf{116{,}6}.
+        \]
+\end{itemize}
+}
+
+\medskip
+
+\textbf{Pas 3 (donné).}
+
+\smallskip
+
+Une itération de plus donne
+$U_3 \approx 117\;\mathrm{W/K}$.
+
+\medskip
+
+\textbf{Bilan des itérations.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|c|c|c}
+  Itération & $U_n$             & $g(U_n)$       & Chiffres corrects \\
+  \hline
+  $0$ & $90{,}0$             & $+1{,}4$       & $0$ \\
+  $1$ & $113{,}3$            & $+0{,}2$       & $1$ \\
+  $2$ & $116{,}6$            & proche de $0$  & $2$--$3$ \\
+  $3$ & $117{,}0$            & $\approx 0$    & $\geq 4$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textit{Le nombre de chiffres corrects double
+à chaque itération : c'est la signature
+de la convergence quadratique.}
+
+% ── Prédiction ────────────────────────────────────────────────────
+
+\medskip
+
+\textbf{Interprétation physique.}
+Le coefficient identifié est :
+\[
+  \boxed{U \approx 117\;\mathrm{W/K}.}
+\]
+
+\atrou[2.5cm]{%
+On a calibré les pertes thermiques globales
+du local sur la plage 20h--23h.
+Cette valeur de $U$ permet ensuite de faire
+des prévisions (durée de maintien en température,
+puissance de chauffage à prévoir, etc.).
+}
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+On a enchaîné : interpolation des données météo
+$\to$ EDO (résolue numériquement) $\to$ problème inverse
+$\to$ Newton.\\
+\textbf{Trois itérations} suffisent pour identifier $U$
+avec une bonne précision.
+\end{mdframed}
+\end{center}
+
+% ── Discussion ────────────────────────────────────────────────────
+
+\medskip
+
+\textbf{Deux points de recul.}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Problème direct vs inverse.}
+        Calculer $T$ sachant $U$ = \emph{une} résolution d'EDO.
+        Retrouver $U$ sachant $T$ = \emph{plusieurs} résolutions
+        d'EDO (une par itération de Newton).
+        L'identification est structurellement plus coûteuse.
+  \item \textbf{Et si on ne connaît pas la formule de $g'$\,?}
+        On l'approche par différence finie (CM2) :
+        \[
+          g'(U) \approx \frac{g(U + \delta U) - g(U)}{\delta U}.
+        \]
+        C'est ce que fait Python en arrière-plan
+        quand la formule explicite n'est pas disponible.
+\end{enumerate}
+
+% ====================================================================
+\section*{6. Ouverture --- plusieurs mesures et moindres carrés}
+% ====================================================================
+
+\textbf{Jeu complet de mesures.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|ccccc|}
+  \hline
+  $t$ (min) & $0$ & $30$ & $60$ & $90$ & $120$ \\
+  \hline
+  $T$ mesuré (\degC) & $45$ & $31{,}5$ & $24{,}0$ & $20{,}0$ & $17{,}7$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Question.}
+Avec une seule mesure, on avait une équation $g(k) = 0$.
+Avec cinq mesures, on a cinq équations en un seul inconnu.
+Que faire\,?
+
+\atrou[3cm]{%
+En général, ces cinq équations
+\textbf{n'ont pas de solution commune}
+(bruit de mesure, modèle imparfait).
+
+\smallskip
+
+On ne cherche plus à les annuler toutes,
+on minimise la \textbf{somme des carrés des résidus} :
+\[
+  \boxed{\;J(k) = \sum_{i=1}^N
+    \bigl(T_{\mathrm{pred}}(t_i; k)
+    - T_{\mathrm{mes},\,i}\bigr)^2.\;}
+\]
+
+On est passé d'une \emph{équation} à une \emph{optimisation}.
+C'est la méthode des \textbf{moindres carrés}.
+}
+
+\medskip
+
+\textbf{Pont avec Newton.}
+
+\atrou[3cm]{%
+Minimiser $J(k)$, c'est annuler sa dérivée :
+\[
+  J'(k) = 0.
+\]
+On est ramené à une équation non linéaire,
+que l'on sait traiter par Newton :
+\[
+  k_{n+1} = k_n - \frac{J'(k_n)}{J''(k_n)}.
+\]
+
+\smallskip
+
+\begin{center}
+\begin{tabular}{ll}
+  \hline
+  \textbf{Une mesure} & Newton sur $g(k) = 0$ \\
+  \textbf{Plusieurs mesures} & Newton sur $J'(k) = 0$ \\
+  \hline
+\end{tabular}
+\end{center}
+}
+
+\medskip
+
+\textbf{Illustration.}
+Allure de $J(k)$ et de sa dérivée $J'(k)$ :
+
+\esquisse[4.5cm]
+
+\textbf{Vocabulaire culturel (hors programme).}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Quasi-Newton (BFGS)} : on approche $J''$
+        par différences finies successives.
+        Utile quand la dérivée seconde est coûteuse
+        ou indisponible.
+  \item \textbf{Levenberg--Marquardt} : variante spécifique
+        aux moindres carrés non linéaires.
+        Standard en ingénierie pour l'ajustement de modèles.
+  \item En Python : \verb|scipy.optimize.curve_fit|,
+        \verb|scipy.optimize.least_squares|.
+\end{itemize}
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Les méthodes avancées ne sont pas magiques :\\
+différences finies $+$ Newton $+$ systèmes linéaires.\\
+Tout ce qu'on a vu cette année.
+\end{mdframed}
+\end{center}
+
+% ====================================================================
+\section*{7. Bilan --- ce qu'on emporte pour l'examen blanc}
+% ====================================================================
+
+\atrou[5.5cm]{%
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Problème inverse :}
+        on a des mesures, on veut un paramètre
+        $\to$ poser $g(k) = 0$.
+  \item \textbf{Méthode de Newton :}
+        on linéarise et on itère,
+        $x_{n+1} = x_n - g(x_n)/g'(x_n)$.
+        Convergence quadratique,
+        mais dépendante du point de départ.
+  \item \textbf{Convergence quadratique :}
+        le nombre de chiffres corrects
+        double à chaque itération.
+  \item \textbf{Moindres carrés :}
+        plusieurs mesures $\to$ fonction coût
+        $J(k) = \sum(\text{résidus})^2$ ;
+        minimiser $J \equiv$ annuler $J'$,
+        que l'on traite à nouveau par Newton.
+\end{enumerate}
+}
+
+\medskip
+
+\textbf{Rôle dans le module.}
+Le CM3 fait dialoguer tous les acquis :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ll}
+  \hline
+  \textbf{Outil} & \textbf{Provenance} \\
+  \hline
+  EDO de refroidissement & CM1 \\
+  Différences finies & CM2 (approche de $g'$ si besoin) \\
+  Schémas pour évaluer $T_{\mathrm{pred}}(k)$ & TD4 \\
+  Newton et moindres carrés & CM3 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Le CM4 sera un examen blanc.}
+Format et difficulté proches de l'examen du 26~mai.
+Il croisera système linéaire, EDO/EDP,
+interpolation ou intégration numérique,
+avec de courts raisonnements sur la stabilité
+ou le conditionnement.
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Aujourd'hui, une seule dalle de béton a fait tourner :\\
+une EDO, un problème inverse, Newton,
+et une ouverture vers les moindres carrés.\\
+C'est exactement le type d'enchaînement
+attendu à l'examen.
+\end{mdframed}
+\end{center}
+
+\end{document}

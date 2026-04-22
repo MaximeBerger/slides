@@ -1,4 +1,5 @@
 \input{configTD}
+\usepackage{tikz}
 
 % ── Poly à trous : commandes spécifiques ──────────────────────────
 \newcommand{\atrou}[2][3cm]{%
@@ -27,9 +28,9 @@
 \newcommand{\R}{\mathbb{R}}
 
 \title{\sffamily\bfseries Probabilités --- CM3\\[0.3em]
-  \Large Lois continues classiques : uniformes, exponentielles, \dots}
+  \Large Lois continues classiques --- focus sur la loi normale}
 \author{}
-\date{21 avril 2026}
+\date{}
 
 \begin{document}
 \sffamily
@@ -37,206 +38,818 @@
 \thispagestyle{empty}
 
 % ====================================================================
-\section*{1. Un même chantier, plusieurs variables continues}
+\section*{1. Pourquoi des lois \og classiques \fg{} ?}
 % ====================================================================
 
-Les lois continues servent à modéliser des grandeurs \textbf{mesurées}
-(longueurs, résistances, températures) et des \textbf{durées}
-((temps d'attente), temps entre pannes, délais).
-
-\begin{center}
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt, nobreak=true]
-\centering\large\itshape
-\og On planifie un coulage.\\
-Quelle est la probabilité qu'il faille attendre \textbf{plus de 2 jours}
-avant une fenêtre météo favorable ?\fg{}
-\end{mdframed}
-\end{center}
-
-Ce CM introduit des \textbf{modèles standards} (lois)
-et des \textbf{réflexes de calcul}.
-
-% ====================================================================
-\section*{2. Rappels minimaux : densité, répartition, intégrales}
-% ====================================================================
-
-Si \(X\) a une densité \(f\), alors
-\[
-  P(a\le X\le b)=\int_a^b f(x)\,dx,\qquad F(x)=P(X\le x)=\int_{-\infty}^x f(t)\,dt.
-\]
-Et
-\[
-  E[X]=\int_{-\infty}^{+\infty} x f(x)\,dx,\qquad \text{Var}(X)=E[X^2]-E[X]^2.
-\]
-
-% ====================================================================
-\section*{3. Loi uniforme \(\mathcal{U}([a,b])\) : \og aucune raison de favoriser \fg{}}
-% ====================================================================
-
-\textbf{Quand ?}
-Quand on sait seulement que \(X\) est \textbf{bornée} entre \(a\) et \(b\)
-et qu'on suppose toutes les valeurs \og également plausibles \fg{}.
-
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Définition.}
-\(X\sim \mathcal{U}([a,b])\) si
-\[
-  \boxed{f(x)=\frac{1}{b-a}\,\mathbf{1}_{[a,b]}(x).}
-\]
-Alors
-\[
-  \boxed{E[X]=\frac{a+b}{2}},\qquad
-  \boxed{\text{Var}(X)=\frac{(b-a)^2}{12}}.
-\]
-\end{mdframed}
-
-\textbf{Exercice (tolérance).}
-Une erreur de réglage \(X\) (mm) est supposée uniforme sur \([-2,2]\).
-Calculer \(P(|X|\le 1)\).
-
-\atrou[3.2cm]{%
-\[
-  P(|X|\le 1)=P(-1\le X\le 1)=\frac{1-(-1)}{2-(-2)}=\frac{2}{4}=\frac12.
-\]
-}
-
-% ====================================================================
-\section*{4. Loi exponentielle \(\mathcal{E}(\lambda)\) : \og attendre un événement \fg{}}
-% ====================================================================
-
-\textbf{Quand ?}
-Pour modéliser un \textbf{temps d'attente} avant un événement
-qui arrive \og au hasard \fg{} avec un taux moyen constant :
-panne, incident, arrivée d'une opportunité, \dots
-
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Définition.}
-Pour \(\lambda>0\), \(T\sim\mathcal{E}(\lambda)\) si
-\[
-  \boxed{f(t)=\lambda e^{-\lambda t}\,\mathbf{1}_{t\ge 0}.}
-\]
-Sa répartition vaut
-\[
-  \boxed{F(t)=P(T\le t)=1-e^{-\lambda t}\quad (t\ge 0).}
-\]
-Et
-\[
-  \boxed{E[T]=\frac{1}{\lambda}},\qquad
-  \boxed{\text{Var}(T)=\frac{1}{\lambda^2}}.
-\]
-\end{mdframed}
-
-\textbf{Probabilité de dépasser un délai.}
-Pour \(t\ge 0\),
-\[
-  P(T>t)=1-F(t)=e^{-\lambda t}.
-\]
-
-\textbf{Exercice (fenêtre météo).}
-On modélise le temps d'attente \(T\) (jours) avant un jour favorable par
-\(\mathcal{E}(\lambda)\) avec \(E[T]=1\) jour.
-Calculer \(P(T>2)\).
-
-\atrou[3.8cm]{%
-Ici \(E[T]=1/\lambda=1\), donc \(\lambda=1\).
-\[
-  P(T>2)=e^{-1\cdot 2}=e^{-2}\approx 0{,}1353.
-\]
-}
-
-\textbf{Propriété sans mémoire (analogue continu de la géométrique).}
-Pour \(s,t\ge 0\),
-\[
-  P(T>s+t\mid T>s)=P(T>t).
-\]
-
-\atrou[4.2cm]{%
-\textbf{Preuve.}
-\[
-  P(T>s+t\mid T>s)=\frac{P(T>s+t)}{P(T>s)}
-  =\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}=e^{-\lambda t}=P(T>t).
-\]
-}
-
-% ====================================================================
-\section*{5. Passage par la répartition : un réflexe de calcul}
-% ====================================================================
-
-Pour beaucoup de lois, \(F\) est plus simple que \(f\).
-Deux exemples utiles :
-
-\begin{enumerate}[leftmargin=1.2em]
-  \item \(P(a\le X\le b)=F(b)-F(a)\).
-  \item Si \(X\) est continue, \(P(X<a)=P(X\le a)\) (pas de masse en un point).
-\end{enumerate}
-
-% ====================================================================
-\section*{6. Changement de variable simple : linéaire et monotone}
-% ====================================================================
-
-\textbf{Transformation affine.}
-Si \(Y=aX+b\), alors
-\[
-  E[Y]=aE[X]+b,\qquad \text{Var}(Y)=a^2\text{Var}(X).
-\]
-
-\textbf{Exercice.}
-Si \(T\) est en jours et \(H=24T\) en heures, exprimer \(E[H]\) et \(\text{Var}(H)\).
-
-\atrou[3.4cm]{%
-\[
-  E[H]=24E[T],\qquad \text{Var}(H)=24^2\,\text{Var}(T).
-\]
-}
-
-\textbf{Cas monotone (par la répartition).}
-Si \(g\) est croissante et \(Y=g(X)\), alors
-\[
-  F_Y(y)=P(Y\le y)=P(g(X)\le y)=P(X\le g^{-1}(y))=F_X(g^{-1}(y)).
-\]
-
-\textbf{Exercice (max).}
-Supposons \(T\sim\mathcal{E}(\lambda)\) et \(Y=\min(T,3)\) (on attend au maximum 3 jours).
-Donner \(P(Y<3)\).
-
-\atrou[3.6cm]{%
-\[
-  P(Y<3)=P(\min(T,3)<3)=P(T<3)=F_T(3)=1-e^{-3\lambda}.
-\]
-}
-
-% ====================================================================
-\section*{7. Où se place la loi normale ?}
-% ====================================================================
-
-La normale \(\mathcal{N}(\mu,\sigma^2)\) est typiquement un modèle de
-\textbf{mesure} et d'\textbf{erreur}.
-On la manipule surtout via la standardisation
-\(\;Z=(X-\mu)/\sigma\sim\mathcal{N}(0,1)\).
+Au CM2, on a vu comment manipuler une variable aléatoire continue
+à partir d'une densité $f$ \textbf{donnée explicitement}
+(positive, d'aire $1$, $P(a\le X\le b)=\int_a^b f$, etc.).
 
 \medskip
 
-Dans la suite (CM4), on l'utilisera pour construire des
-\textbf{intervalles de confiance} sur une moyenne.
+Dans la pratique, on n'invente pas une densité au hasard à chaque
+problème : on \textbf{reconnaît} une \emph{situation type} et on lui
+associe une \textbf{loi standard}, exactement comme en discret on
+reconnaissait une loi binomiale, géométrique ou de Poisson.
 
-% ====================================================================
-\section*{8. Bilan : choisir un modèle}
-% ====================================================================
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+Une pièce sort d'atelier. Sa longueur fluctue autour
+de la cote nominale à cause d'une multitude de petits défauts.\newline
+Quelle est la probabilité qu'elle dépasse la tolérance de $0{,}3$ mm ?
+\end{mdframed}
+\end{center}
 
-\atrou[8cm]{%
+Trois \textbf{familles} de situations reviennent en permanence :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|l|l|}
+  \hline
+  \textbf{Situation} & \textbf{Modèle} & \textbf{Exemple} \\
+  \hline
+  Tirage \og au hasard \fg{} sur $[a,b]$ & Uniforme $\mathcal{U}([a,b])$
+    & erreur d'arrondi, heure d'arrivée \\
+  \hline
+  Temps d'attente avant un incident & Exponentielle $\mathcal{E}(\lambda)$
+    & durée avant panne, file d'attente \\
+  \hline
+  Mesure fluctuant autour d'une valeur & Normale $\mathcal{N}(\mu,\sigma^2)$
+    & longueur d'une pièce, erreur de mesure \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{L'objectif du cours.}
 \begin{enumerate}
-  \item \textbf{Uniforme} \(\mathcal{U}([a,b])\) : variable bornée, pas de valeur privilégiée.
-  \item \textbf{Exponentielle} \(\mathcal{E}(\lambda)\) : temps d'attente, taux constant,
-    propriété sans mémoire.
-  \item \textbf{Normale} \(\mathcal{N}(\mu,\sigma^2)\) : mesures/erreurs, cloche,
-    calcul via standardisation.
-  \item Pour calculer : passer par \(F\), utiliser \(P(a\le X\le b)=F(b)-F(a)\),
-    et exploiter les transformations simples.
+  \item Savoir \textbf{reconnaître} quand utiliser chaque loi.
+  \item Savoir \textbf{calculer} des probabilités avec
+    (en particulier : lire la \textbf{table} de la loi normale).
+\end{enumerate}
+
+% ====================================================================
+\section*{2. Rappels : densité et fonction de répartition}
+% ====================================================================
+
+Tout le cours repose sur deux outils déjà vus :
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+Si $X$ admet une densité $f$, alors
+\[
+  P(a\le X\le b)=\int_a^b f(x)\,dx,
+  \qquad
+  F(x)=P(X\le x)=\int_{-\infty}^{x} f(t)\,dt,
+\]
+et la formule clé pour tous les calculs :
+\[
+  \boxed{\,P(a\le X\le b)=F(b)-F(a).\,}
+\]
+\end{mdframed}
+
+Dans ce cours, chaque \og loi classique \fg{} arrive avec son
+\textbf{kit} : densité $f$, répartition $F$, espérance $E[X]$,
+variance $\text{Var}(X)$. Une fois le kit connu, \textbf{plus besoin
+d'intégrer} : les probabilités se calculent par différence de valeurs
+de~$F$.
+
+% ====================================================================
+\section*{3. Loi uniforme $\mathcal{U}([a,b])$}
+% ====================================================================
+
+\textbf{Situation.}
+Un bus passe à une heure \og au hasard \fg{} entre 8h00 et 8h10.
+Aucun instant n'est \emph{a priori} plus probable qu'un autre.
+On note $X$ l'heure d'arrivée (en minutes après 8h00),
+donc $X\in[0,10]$.
+
+\medskip
+
+\textbf{Étape 1 --- Forme de la densité.}
+Quelle forme doit avoir la densité $f$ de $X$\,?
+Peut-elle être croissante, décroissante, en cloche\,? Pourquoi\,?
+
+\atrou[2.3cm]{%
+Toutes les valeurs de $[0,10]$ jouent le \emph{même rôle} :
+rien ne distingue l'instant $3$ de l'instant $7$. Donc $f$ doit
+donner la même valeur partout sur $[0,10]$ : $f$ est \textbf{constante}
+sur $[0,10]$, et nulle en dehors.
+}
+
+\textbf{Étape 2 --- Trouver la constante.}
+On note $c$ cette constante : $f(x)=c$ sur $[0,10]$, $0$ sinon.
+Déterminer $c$.
+
+\atrou[2.3cm]{%
+On impose $\int_{-\infty}^{+\infty}f=1$ :
+\[
+  \int_0^{10} c\,dx = 10\,c = 1
+  \;\Longrightarrow\;
+  c=\dfrac{1}{10}.
+\]
+}
+
+\textbf{Étape 3 --- Généralisation à un intervalle $[a,b]$ quelconque.}
+Refaire exactement le même raisonnement pour $X\in[a,b]$ avec aucune
+valeur privilégiée. Que vaut $c$\,?
+
+\atrou[1.6cm]{%
+$f(x)=c$ sur $[a,b]$ et $\int_a^b c\,dx=(b-a)\,c=1$, d'où
+$c=\dfrac{1}{b-a}$.
+}
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition (loi uniforme).}
+$X\sim\mathcal{U}([a,b])$ lorsque
+\[
+  \boxed{\,f(x)=\dfrac{1}{b-a}\,\mathbf{1}_{[a,b]}(x).\,}
+\]
+Pour $x\in[a,b]$ :
+\[
+  F(x)=\dfrac{x-a}{b-a},\qquad
+  \boxed{E[X]=\dfrac{a+b}{2}},\qquad
+  \boxed{\text{Var}(X)=\dfrac{(b-a)^2}{12}}.
+\]
+\end{mdframed}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \draw[thick,->] (-0.5,0) -- (7,0) node[right] {\small $x$};
+  \draw[thick,->] (0,-0.2) -- (0,2.5) node[above] {\small $f(x)$};
+  \draw[thick, Theme, fill=ThemeLight] (1.5,0) rectangle (5.5,1.5);
+  \draw[dashed] (1.5,1.5) -- (0,1.5) node[left] {\small $\tfrac{1}{b-a}$};
+  \node at (1.5,-0.3) {\small $a$};
+  \node at (5.5,-0.3) {\small $b$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conséquence.}
+La probabilité d'un sous-intervalle est proportionnelle à sa
+\textbf{longueur} :
+\[
+  P(c\le X\le d)=\dfrac{d-c}{b-a}
+  \quad\text{pour}\quad a\le c\le d\le b.
+\]
+
+\medskip
+
+\textbf{Problème 1 --- Erreur d'arrondi.}
+Un capteur donne une mesure arrondie au mm. L'erreur d'arrondi $X$
+(en mm).
+\begin{enumerate}
+  \item Justifier qu'on puisse modéliser $X$ par
+    $\mathcal{U}([-0{,}5;\,0{,}5])$.
+  \item Calculer $P(|X|\le 0{,}2)$.
+  \item Donner $E[X]$ et $\sigma(X)$. Interpréter.
+\end{enumerate}
+
+\atrou[5.5cm]{%
+\begin{enumerate}
+\item L'arrondi au mm remplace une mesure réelle par l'entier le plus
+proche : l'erreur $X$ est donc bornée dans $[-0{,}5\,;\,0{,}5]$, et
+rien n'indique qu'une valeur serait privilégiée (sinon ce serait une
+erreur \emph{systématique}, pas une erreur d'arrondi). D'où le modèle
+uniforme.
+
+\item
+$P(|X|\le 0{,}2)=P(-0{,}2\le X\le 0{,}2)
+=\dfrac{0{,}2-(-0{,}2)}{0{,}5-(-0{,}5)}=\dfrac{0{,}4}{1}=0{,}40.$
+
+Autrement dit, $40\,\%$ des mesures ont une erreur d'arrondi
+inférieure (en valeur absolue) à $0{,}2$ mm.
+
+\item $E[X]=\dfrac{-0{,}5+0{,}5}{2}=0$ (l'arrondi n'introduit pas de
+biais en moyenne), et $\text{Var}(X)=\dfrac{1^2}{12}$, donc
+$\sigma(X)=\dfrac{1}{\sqrt{12}}\approx 0{,}289$ mm.
+\end{enumerate}
+}
+
+% ====================================================================
+\section*{4. Loi exponentielle : construire la densité par le taux}
+% ====================================================================
+
+\textbf{Situation.}
+Un composant électronique tombe en panne à un instant aléatoire $T>0$.
+On fait l'\textbf{hypothèse physique} suivante : \emph{pendant une
+très courte durée $dt$, la probabilité qu'il tombe en panne, sachant
+qu'il est encore en état, est $\lambda\,dt$, quelle que soit son
+âge $t$}. Le paramètre $\lambda>0$ est le \textbf{taux de panne}
+(unité : panne par unité de temps).
+
+\medskip
+
+Cette hypothèse modélise des systèmes \textbf{sans usure} : le
+composant ne \og vieillit \fg{} pas, c'est un pur \og coup du sort \fg.
+C'est un bon modèle pour :
+composants électroniques, désintégrations radioactives, arrivées de
+clients dans une file, prochain incident sur chantier, etc.
+
+\medskip
+
+\textbf{Étape 1 --- Traduction mathématique.}
+Notons $G(t)=P(T>t)$ la probabilité que le composant tienne plus de
+$t$. L'hypothèse s'écrit, pour $dt$ petit,
+\[
+  P(T\le t+dt\mid T>t)=\lambda\,dt.
+\]
+En déduire une relation entre $G(t+dt)$ et $G(t)$.
+
+\atrou[3.5cm]{%
+L'événement $\{T>t+dt\}$ est
+\og tenir jusqu'à $t$ \emph{et} ne pas tomber en panne entre
+$t$ et $t+dt$ \fg. Donc
+\[
+  G(t+dt)=P(T>t+dt)
+  =P(T>t)\cdot\bigl(1-\lambda\,dt\bigr)
+  =G(t)(1-\lambda\,dt).
+\]
+}
+
+\textbf{Étape 2 --- Passage à l'équation différentielle.}
+Réorganiser l'égalité précédente, faire tendre $dt\to 0$, et en
+déduire une équation différentielle sur $G$.
+
+\atrou[3cm]{%
+$\dfrac{G(t+dt)-G(t)}{dt}=-\lambda\,G(t)$ passe à la limite en
+\[
+  \boxed{\,G'(t)=-\lambda\,G(t),\qquad G(0)=1.\,}
+\]
+}
+
+\textbf{Étape 3 --- Résolution.}
+Résoudre cette équation.
+
+\atrou[2cm]{%
+Équation linéaire du 1$^\text{er}$ ordre : $G(t)=G(0)\,e^{-\lambda t}
+=e^{-\lambda t}$ pour $t\ge 0$.
+}
+
+\textbf{Étape 4 --- De $G$ à la densité.}
+En déduire $F(t)=P(T\le t)$, puis la densité $f(t)=F'(t)$.
+
+\atrou[3cm]{%
+$F(t)=1-G(t)=1-e^{-\lambda t}$ pour $t\ge 0$, et $F(t)=0$ pour $t<0$.
+En dérivant :
+\[
+  f(t)=\lambda\,e^{-\lambda t}\quad\text{pour }t\ge 0,\qquad f(t)=0\text{ sinon.}
+\]
+}
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition (loi exponentielle).}
+Pour $\lambda>0$, $T\sim\mathcal{E}(\lambda)$ lorsque
+\[
+  \boxed{\,f(t)=\lambda\,e^{-\lambda t}\,\mathbf{1}_{t\ge 0}.\,}
+\]
+Pour $t\ge 0$ :
+\[
+  \boxed{F(t)=1-e^{-\lambda t}},\qquad
+  \boxed{P(T>t)=e^{-\lambda t}},
+\]
+\[
+  \boxed{E[T]=\dfrac{1}{\lambda}},\qquad
+  \boxed{\text{Var}(T)=\dfrac{1}{\lambda^2}}.
+\]
+\end{mdframed}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \draw[thick,->] (-0.5,0) -- (7,0) node[right] {\small $t$};
+  \draw[thick,->] (0,-0.2) -- (0,2.5) node[above] {\small $f(t)$};
+  \draw[thick, Theme, domain=0:6.5, smooth, samples=80]
+    plot (\x, {2*exp(-0.6*\x)});
+  \draw[dashed] (0,2) -- (-0.1,2) node[left] {\small $\lambda$};
+  \node at (3,-0.4) {\small $f(t)=\lambda e^{-\lambda t}$ pour $t\ge 0$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Lecture du paramètre.}
+$\lambda$ s'exprime en \og par unité de temps \fg{} : si $T$ est en
+heures et $\lambda=0{,}5$~h$^{-1}$, on attend en moyenne
+$E[T]=1/\lambda=2$ heures.
+
+\medskip
+
+\textbf{Propriété \og sans mémoire \fg{}.}
+L'hypothèse physique de départ (\og le taux ne dépend pas de l'âge \fg)
+se retraduit dans une propriété remarquable de la loi : pour
+tous $s,t\ge 0$,
+\[
+  \boxed{\,P(T>s+t\mid T>s)=P(T>t).\,}
+\]
+
+\atrou[3.5cm]{%
+\textbf{Démonstration.}
+\[
+  P(T>s+t\mid T>s)
+  =\dfrac{P(T>s+t)}{P(T>s)}
+  =\dfrac{e^{-\lambda(s+t)}}{e^{-\lambda s}}
+  =e^{-\lambda t}
+  =P(T>t).
+\]
+
+\textbf{Sens.} Sachant que le composant a déjà tenu $s$ années, la
+probabilité qu'il tienne encore $t$ années est la même que s'il était
+neuf. C'est la signature d'un système \textbf{sans usure}.
+}
+
+\medskip
+
+\textbf{Problème 2 --- Durée de vie d'un composant.}
+On modélise la durée de vie $T$ (en années) d'un composant
+électronique par $\mathcal{E}(\lambda)$ avec un taux de panne
+$\lambda=0{,}2$ an$^{-1}$.
+\begin{enumerate}
+  \item Donner $E[T]$ et interpréter.
+  \item Calculer $P(T>5)$ : probabilité que le composant tienne plus
+    de $5$ ans\,?
+  \item Calculer $P(2\le T\le 4)$.
+\end{enumerate}
+
+\atrou[5.5cm]{%
+\begin{enumerate}
+\item $E[T]=1/\lambda=1/0{,}2=5$ ans.
+En moyenne, le composant tient $5$ ans.
+
+\item $P(T>5)=e^{-0{,}2\cdot 5}=e^{-1}\approx 0{,}368.$
+Environ $37\,\%$ des composants tiennent plus de $5$ ans.
+C'est typique d'une loi exponentielle : la \og queue à droite \fg{} est
+lourde.
+
+\item $P(2\le T\le 4)=F(4)-F(2)
+=(1-e^{-0{,}8})-(1-e^{-0{,}4})
+=e^{-0{,}4}-e^{-0{,}8}
+\approx 0{,}670-0{,}449\approx 0{,}221.$
+\end{enumerate}
+}
+
+% ====================================================================
+\section*{5. Loi normale : construire la cloche par accumulation}
+% ====================================================================
+
+\textbf{Situation.}
+La longueur $X$ d'une pièce usinée s'écrit
+\[
+  X = \underbrace{\mu}_{\text{cote nominale}}
+  + \underbrace{\varepsilon_1 + \varepsilon_2 + \cdots + \varepsilon_n}_{\text{petites erreurs indépendantes}},
+\]
+où chaque $\varepsilon_i$ est un petit défaut (vibration de l'outil,
+dilatation thermique, jeu mécanique, variation locale du matériau\dots),
+supposé \emph{indépendant} des autres et \emph{centré} (il peut être
+$+$ ou $-$).
+
+\medskip
+
+\textbf{Question.} À quoi ressemble la loi de $X$ quand le nombre $n$
+de petites erreurs est grand\,?
+
+\medskip
+
+\textbf{Expérience de pensée --- planche de Galton.}
+On lâche une bille qui, à chaque rangée de clous ($n$ rangées),
+dévie de $+1$ ou $-1$ avec probabilité $1/2$. La position finale
+$S_n=\varepsilon_1+\cdots+\varepsilon_n$ est comptée en bas.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+  % n = 4
+  \foreach \x/\h in {-4/0.10, -3/0.35, -2/0.85, -1/1.55, 0/2.00,
+                      1/1.55, 2/0.85, 3/0.35, 4/0.10}{
+    \draw[fill=ThemeLight, draw=Theme, thick] (\x-0.45,0) rectangle (\x+0.45,\h);
+  }
+  \draw[thick,->] (-5,0) -- (5,0) node[right] {\small $s$};
+  \node at (0,-0.45) {\small $n=8$ rangées};
+\end{tikzpicture}
+\quad
+\begin{tikzpicture}[scale=0.75]
+  % n grand : densité presque continue + courbe
+  \foreach \x in {-4.5,-4,-3.5,-3,-2.5,-2,-1.5,-1,-0.5,0,0.5,1,1.5,2,2.5,3,3.5,4,4.5}{
+    \pgfmathsetmacro\hh{2.2*exp(-\x*\x/3)}
+    \draw[fill=ThemeLight, draw=Theme] (\x-0.22,0) rectangle (\x+0.22,\hh);
+  }
+  \draw[thick, Theme, domain=-5:5, smooth, samples=80]
+    plot (\x, {2.2*exp(-\x*\x/3)});
+  \draw[thick,->] (-5,0) -- (5,0) node[right] {\small $s$};
+  \node at (0,-0.45) {\small $n$ grand : cloche};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observation cruciale.}
+Quand $n$ grandit, le profil des fréquences prend toujours la même
+\textbf{forme de cloche}, de plus en plus lisse. Ce phénomène est
+universel : il se produit quelles que soient les lois des petites
+erreurs $\varepsilon_i$ (binaires, uniformes, etc.), pourvu qu'elles
+soient indépendantes et d'écart-type comparable.
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Théorème central limite (version heuristique).}
+Une somme de nombreux petits termes indépendants et d'ordre de grandeur
+comparable suit \emph{approximativement} une loi dite \textbf{normale}
+(ou \textbf{gaussienne}), dont la densité est une cloche symétrique.
+\end{mdframed}
+
+C'est ce résultat qui explique que la loi normale soit \textbf{partout}
+en physique et en mesure : longueurs de pièces, résistance des bétons,
+erreurs d'instruments, bruit électronique, moyennes d'échantillons\dots
+
+\medskip
+
+\textbf{La densité gaussienne (admis).}
+Le théorème central limite fournit la forme précise de cette cloche :
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Définition.}
+$X\sim\mathcal{N}(\mu,\sigma^2)$ lorsque
+\[
+  \boxed{\,f(x)=\dfrac{1}{\sigma\sqrt{2\pi}}\,
+  \exp\!\left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right),
+  \quad x\in\R.\,}
+\]
+Alors
+\[
+  \boxed{E[X]=\mu},\qquad
+  \boxed{\text{Var}(X)=\sigma^2},\qquad
+  \boxed{\sigma(X)=\sigma}.
+\]
+\end{mdframed}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \draw[thick,->] (-3.5,0) -- (3.5,0) node[right] {\small $x$};
+  \draw[thick,->] (0,-0.2) -- (0,2.5) node[above] {\small $f(x)$};
+  \draw[thick, Theme, domain=-3.2:3.2, smooth, samples=100]
+    plot (\x, {2.2*exp(-\x*\x/2)});
+  \draw[dashed] (0,2.2) -- (0,0);
+  \node at (0,-0.35) {\small $\mu$};
+  \draw[dashed] (1,0) -- (1,{2.2*exp(-0.5)});
+  \draw[dashed] (-1,0) -- (-1,{2.2*exp(-0.5)});
+  \node at (1,-0.35) {\small $\mu+\sigma$};
+  \node at (-1,-0.35) {\small $\mu-\sigma$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Lecture géométrique.}
+La densité est une \textbf{cloche} symétrique autour de $\mu$
+(moyenne = mode = médiane). L'écart-type $\sigma$ mesure sa
+\textbf{largeur} : plus $\sigma$ est grand, plus la cloche est
+aplatie.
+
+\medskip
+
+\textbf{Un problème nouveau.}
+Impossible de calculer \og à la main \fg{} des probabilités
+$P(a\le X\le b)=\int_a^b f(x)\,dx$ : la primitive de $e^{-x^2/2}$
+\textbf{n'a pas d'expression élémentaire}. On ne peut pas donner $F$
+par une formule.
+
+\medskip
+
+\textbf{La solution.}
+On \textbf{tabule une fois pour toutes} la répartition d'une variable
+normale particulière : la loi \textbf{normale centrée réduite}
+$\mathcal{N}(0,1)$. C'est l'objet des sections suivantes.
+
+% ====================================================================
+\section*{6. Standardisation : tout se ramène à $\mathcal{N}(0,1)$}
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Proposition (standardisation).}
+Si $X\sim\mathcal{N}(\mu,\sigma^2)$, alors
+\[
+  \boxed{\,Z=\dfrac{X-\mu}{\sigma}\sim\mathcal{N}(0,1).\,}
+\]
+Inversement, si $Z\sim\mathcal{N}(0,1)$, alors
+$X=\mu+\sigma Z\sim\mathcal{N}(\mu,\sigma^2)$.
+\end{mdframed}
+
+\textbf{Idée.}
+On centre ($X-\mu$ retire la moyenne) puis on réduit
+(on divise par $\sigma$ pour avoir un écart-type de $1$).
+$Z$ s'interprète comme \og\,le nombre d'écarts-types au-dessus de la
+moyenne\,\fg{}.
+
+\medskip
+
+\textbf{Conséquence pratique.}
+Toute probabilité sur $X\sim\mathcal{N}(\mu,\sigma^2)$ se ramène à
+une probabilité sur $Z\sim\mathcal{N}(0,1)$ :
+\[
+  P(X\le x)
+  = P\!\left(\dfrac{X-\mu}{\sigma}\le \dfrac{x-\mu}{\sigma}\right)
+  = P\!\left(Z\le \dfrac{x-\mu}{\sigma}\right).
+\]
+
+\medskip
+
+\textbf{Notation standard.} On note
+\[
+  \boxed{\,\Phi(z)=P(Z\le z)\quad\text{avec}\quad Z\sim\mathcal{N}(0,1).\,}
+\]
+C'est cette fonction $\Phi$ qui est \textbf{lue dans la table}.
+
+% ====================================================================
+\section*{7. Lecture de la table de $\Phi$}
+% ====================================================================
+
+La \textbf{table} donne les valeurs de $\Phi(z)=P(Z\le z)$ pour
+$z\ge 0$, typiquement à deux décimales près.
+
+\medskip
+
+\textbf{Extrait de la table.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  $z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.08 & 0.09 \\
+  \hline
+  0.0 & 0.5000 & 0.5040 & 0.5080 & 0.5120 & 0.5160 & 0.5199 & 0.5239 & 0.5279 & 0.5319 & 0.5359 \\
+  \hline
+  0.5 & 0.6915 & 0.6950 & 0.6985 & 0.7019 & 0.7054 & 0.7088 & 0.7123 & 0.7157 & 0.7190 & 0.7224 \\
+  \hline
+  1.0 & 0.8413 & 0.8438 & 0.8461 & 0.8485 & 0.8508 & 0.8531 & 0.8554 & 0.8577 & 0.8599 & 0.8621 \\
+  \hline
+  1.5 & 0.9332 & 0.9345 & 0.9357 & 0.9370 & 0.9382 & 0.9394 & 0.9406 & 0.9418 & 0.9429 & 0.9441 \\
+  \hline
+  1.9 & 0.9713 & 0.9719 & 0.9726 & 0.9732 & 0.9738 & 0.9744 & 0.9750 & 0.9756 & 0.9761 & 0.9767 \\
+  \hline
+  2.0 & 0.9772 & 0.9778 & 0.9783 & 0.9788 & 0.9793 & 0.9798 & 0.9803 & 0.9808 & 0.9812 & 0.9817 \\
+  \hline
+  2.5 & 0.9938 & 0.9940 & 0.9941 & 0.9943 & 0.9945 & 0.9946 & 0.9948 & 0.9949 & 0.9951 & 0.9952 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{Mode d'emploi.}
+Pour lire $\Phi(1{,}96)$ : on cherche la ligne $1{,}9$ et la colonne
+$0{,}06$. On lit $\Phi(1{,}96)=0{,}9750$.
+
+\medskip
+
+\textbf{Mais la table ne donne que $z\ge 0$\,!} Que faire pour
+$P(Z\le -1{,}2)$ ?
+
+\atrou[1.5cm]{%
+On utilise la \textbf{symétrie} de la cloche autour de~$0$.
+}
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Les quatre réflexes.}
+Pour $Z\sim\mathcal{N}(0,1)$ et tous réels $a\le b$ :
+\begin{enumerate}
+  \item $P(Z\le a)=\Phi(a)$ (lecture directe si $a\ge 0$).
+  \item \textbf{Symétrie} : $\;\boxed{\Phi(-a)=1-\Phi(a).}$
+  \item $\boxed{P(a\le Z\le b)=\Phi(b)-\Phi(a).}$
+  \item $\boxed{P(|Z|\le a)=2\Phi(a)-1\;\;(a\ge 0).}$
+\end{enumerate}
+\end{mdframed}
+
+\textbf{D'où vient la symétrie ?}
+
+\atrou[2.5cm]{%
+La densité $f(z)=\tfrac{1}{\sqrt{2\pi}}e^{-z^2/2}$ est \textbf{paire} :
+$f(-z)=f(z)$. L'aire sous la cloche à gauche de $-a$ est donc
+égale à l'aire à droite de $+a$ :
+\[
+  \Phi(-a)=P(Z\le -a)=P(Z\ge a)=1-\Phi(a).
+\]
+}
+
+% ====================================================================
+\section*{8. Probabilités sur $\mathcal{N}(0,1)$ : les problèmes types}
+% ====================================================================
+
+\textbf{Problème 3 --- Lectures directes.}
+Soit $Z\sim\mathcal{N}(0,1)$. En utilisant la table, calculer :
+\begin{enumerate}
+  \item $P(Z\le 1{,}23)$.
+  \item $P(Z\le -0{,}58)$.
+  \item $P(Z\ge 1{,}50)$.
+  \item $P(-1\le Z\le 1)$.
+  \item $P(|Z|\le 1{,}96)$.
+\end{enumerate}
+
+\atrou[7.5cm]{%
+\begin{enumerate}
+\item Lecture directe : $P(Z\le 1{,}23)=\Phi(1{,}23)=0{,}8907$.
+
+\item Symétrie :
+$P(Z\le -0{,}58)=\Phi(-0{,}58)=1-\Phi(0{,}58)
+=1-0{,}7190=0{,}2810.$
+
+\item Complémentaire :
+$P(Z\ge 1{,}50)=1-\Phi(1{,}50)=1-0{,}9332=0{,}0668.$
+
+\item
+$P(-1\le Z\le 1)=\Phi(1)-\Phi(-1)=\Phi(1)-(1-\Phi(1))
+=2\Phi(1)-1=2\cdot 0{,}8413-1=0{,}6826.$
+
+Environ $68\,\%$ des valeurs sont dans $[\mu-\sigma,\mu+\sigma]$.
+
+\item
+$P(|Z|\le 1{,}96)=2\Phi(1{,}96)-1=2\cdot 0{,}9750-1=0{,}9500.$
+
+Environ $95\,\%$ des valeurs sont dans $[-1{,}96,\,1{,}96]$
+(la fameuse règle \og des $95\,\%$ \fg{}).
+\end{enumerate}
+}
+
+\medskip
+
+\textbf{Règle des 68/95/99.}
+Pour $X\sim\mathcal{N}(\mu,\sigma^2)$ :
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|}
+  \hline
+  Intervalle autour de $\mu$ & Probabilité \\
+  \hline
+  $[\mu-\sigma,\mu+\sigma]$ & $\approx 68\,\%$ \\
+  \hline
+  $[\mu-2\sigma,\mu+2\sigma]$ & $\approx 95\,\%$ \\
+  \hline
+  $[\mu-3\sigma,\mu+3\sigma]$ & $\approx 99{,}7\,\%$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+% ====================================================================
+\section*{9. Retour à $\mathcal{N}(\mu,\sigma^2)$ : standardiser pour calculer}
+% ====================================================================
+
+\textbf{La méthode en 3 temps.}
+Pour calculer une probabilité sur $X\sim\mathcal{N}(\mu,\sigma^2)$ :
+\begin{enumerate}
+  \item \textbf{Poser} $Z=(X-\mu)/\sigma\sim\mathcal{N}(0,1)$.
+  \item \textbf{Transformer} la probabilité sur $X$ en probabilité
+    sur $Z$ (mêmes opérations de part et d'autre de l'inégalité).
+  \item \textbf{Lire} la table avec les réflexes du §7.
+\end{enumerate}
+
+\medskip
+
+\textbf{Problème 4 --- Pièce dans la tolérance.}
+La longueur $X$ (en mm) d'une pièce usinée suit
+$\mathcal{N}(20;\,0{,}2^2)$ (cote nominale $20$ mm, écart-type
+$0{,}2$ mm). La pièce est \og dans la tolérance \fg{} si
+$|X-20|\le 0{,}3$ mm.
+\begin{enumerate}
+  \item Calculer la probabilité qu'une pièce soit dans la tolérance.
+  \item Calculer la probabilité qu'une pièce dépasse $20{,}5$ mm
+    (rebut par surépaisseur).
+\end{enumerate}
+
+\atrou[7cm]{%
+On pose $Z=(X-20)/0{,}2$, qui suit $\mathcal{N}(0,1)$.
+
+\begin{enumerate}
+\item
+\[
+  P(|X-20|\le 0{,}3)
+  = P\!\left(\dfrac{|X-20|}{0{,}2}\le \dfrac{0{,}3}{0{,}2}\right)
+  = P(|Z|\le 1{,}5).
+\]
+Puis
+$P(|Z|\le 1{,}5)=2\Phi(1{,}5)-1=2\cdot 0{,}9332-1=0{,}8664.$
+
+Environ $86{,}6\,\%$ des pièces sont dans la tolérance.
+
+\item
+\[
+  P(X>20{,}5)
+  =P\!\left(Z>\dfrac{20{,}5-20}{0{,}2}\right)
+  =P(Z>2{,}5)
+  =1-\Phi(2{,}5)=1-0{,}9938=0{,}0062.
+\]
+Environ $0{,}62\,\%$ des pièces dépassent $20{,}5$ mm.
+\end{enumerate}
+}
+
+\medskip
+
+\textbf{Problème 5 --- Résistance d'un béton.}
+La résistance à $28$ jours $R$ (en MPa) d'un béton est modélisée par
+$\mathcal{N}(32;\,3^2)$. La classe visée impose $R\ge 25$ MPa.
+\begin{enumerate}
+  \item Probabilité qu'une éprouvette respecte la classe.
+  \item Probabilité que $R\in[30,35]$.
+\end{enumerate}
+
+\atrou[6.5cm]{%
+On pose $Z=(R-32)/3$.
+
+\begin{enumerate}
+\item
+$P(R\ge 25)=P\!\left(Z\ge \tfrac{25-32}{3}\right)=P(Z\ge -2{,}33)
+=1-\Phi(-2{,}33)=\Phi(2{,}33)\approx 0{,}9901.$
+
+Environ $99\,\%$ des éprouvettes respectent la classe.
+
+\item
+$\tfrac{30-32}{3}\approx -0{,}67,\;\tfrac{35-32}{3}=1{,}00.$ Donc
+\[
+  P(30\le R\le 35)=\Phi(1)-\Phi(-0{,}67)
+  =\Phi(1)-(1-\Phi(0{,}67))
+  =0{,}8413-(1-0{,}7486)
+  =0{,}5899.
+\]
+Environ $59\,\%$ des éprouvettes ont une résistance dans $[30,35]$ MPa.
+\end{enumerate}
+}
+
+\medskip
+
+\textbf{Problème 6 --- Remonter d'une probabilité à un seuil.}
+On reprend $X\sim\mathcal{N}(20;\,0{,}2^2)$ du Problème~4.
+On cherche le seuil $t$ tel que $P(X\le t)=0{,}95$
+(c'est-à-dire : au-dessus de quelle longueur $95\,\%$ des pièces
+se situent-elles\,?).
+
+\atrou[4.5cm]{%
+On cherche $t$ tel que
+$\Phi\!\left(\tfrac{t-20}{0{,}2}\right)=0{,}95.$
+Dans la table, on lit $\Phi^{-1}(0{,}95)\approx 1{,}645$
+(valeur entre $1{,}64$ et $1{,}65$). Donc
+\[
+  \dfrac{t-20}{0{,}2}\approx 1{,}645
+  \;\;\Longrightarrow\;\;
+  t\approx 20+0{,}2\cdot 1{,}645\approx 20{,}33\text{ mm}.
+\]
+$95\,\%$ des pièces mesurent moins de $20{,}33$ mm.
+}
+
+% ====================================================================
+\section*{10. Bilan}
+% ====================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|l|c|c|c|}
+  \hline
+  & \textbf{Uniforme} & \textbf{Exponentielle} & \textbf{Normale} \\
+  & $\mathcal{U}([a,b])$ & $\mathcal{E}(\lambda)$ & $\mathcal{N}(\mu,\sigma^2)$ \\
+  \hline
+  Densité $f(x)$
+    & $\dfrac{1}{b-a}\mathbf{1}_{[a,b]}$
+    & $\lambda e^{-\lambda x}\mathbf{1}_{x\ge 0}$
+    & $\dfrac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/(2\sigma^2)}$ \\
+  \hline
+  Répartition $F(x)$
+    & $\dfrac{x-a}{b-a}$
+    & $1-e^{-\lambda x}$
+    & $\Phi\!\left(\dfrac{x-\mu}{\sigma}\right)$ (table) \\
+  \hline
+  $E[X]$
+    & $\dfrac{a+b}{2}$
+    & $\dfrac{1}{\lambda}$
+    & $\mu$ \\
+  \hline
+  $\text{Var}(X)$
+    & $\dfrac{(b-a)^2}{12}$
+    & $\dfrac{1}{\lambda^2}$
+    & $\sigma^2$ \\
+  \hline
+  Situation type
+    & tirage au hasard borné
+    & temps d'attente, durée de vie
+    & mesures, erreurs \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\atrou[6.5cm]{%
+\begin{enumerate}
+  \item Une \textbf{loi classique} est un modèle prêt à l'emploi :
+    on reconnaît la \emph{situation}, on applique le \emph{kit}
+    (densité, répartition, espérance, variance).
+  \item Loi \textbf{uniforme} : tirage borné, sans valeur privilégiée.
+    Probabilité proportionnelle à la longueur.
+  \item Loi \textbf{exponentielle} : durée d'attente d'un événement
+    à taux constant $\lambda$. Propriété \textbf{sans mémoire} :
+    $P(T>s+t\mid T>s)=P(T>t)$.
+  \item Loi \textbf{normale} : modèle universel des mesures et des
+    erreurs. On ne sait pas primitiver sa densité $\Rightarrow$
+    on passe par la \textbf{standardisation} $Z=(X-\mu)/\sigma$ et
+    on lit la table de $\Phi$.
+  \item \textbf{Réflexes de table} :
+    $\Phi(-a)=1-\Phi(a)$,
+    $P(a\le Z\le b)=\Phi(b)-\Phi(a)$,
+    $P(|Z|\le a)=2\Phi(a)-1$.
+  \item \textbf{Règle 68/95/99{,}7} : pour $\mathcal{N}(\mu,\sigma^2)$,
+    $68\,\%$ des valeurs sont à moins de $1\sigma$ de $\mu$,
+    $95\,\%$ à moins de $2\sigma$, $99{,}7\,\%$ à moins de $3\sigma$.
 \end{enumerate}
 }
 
 \end{document}
-
