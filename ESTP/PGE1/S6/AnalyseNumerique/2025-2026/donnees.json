@@ -133,6 +133,13 @@
           "description": "",
           "lien": "CM3-enonce.pdf",
           "cible": "_blank"
+        }, 
+        {
+          "numero": 2,
+          "titre": "CM 3 - annoté",
+          "description": "",
+          "lien": "CM3-annote.pdf",
+          "cible": "_blank"
         }
         
       ],

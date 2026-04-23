@@ -95,6 +95,13 @@
           "description": "Loi normale · Théorème central limite",
           "lien": "CM3-enonce.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 3 - annoté",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM3-annote.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
