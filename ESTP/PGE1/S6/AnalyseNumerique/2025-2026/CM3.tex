@@ -273,8 +273,6 @@ Ce cas n'est pas résoluble à la main :\\
 Comment faire  ?
 \end{mdframed}
 \end{center}
-
-\newpage
 % ====================================================================
 \section*{4. Méthode de Newton}
 % ====================================================================
@@ -639,6 +637,52 @@ que l'on sait traiter par Newton :
 
 \medskip
 
+\textbf{Détail du calcul.}
+
+Notons $r_i(k) = T_{\mathrm{pred}}(t_i; k) - T_{\mathrm{mes},i}$ le résidu de la $i$-ème mesure.
+On a :
+\[
+  J(k) = \sum_{i=1}^N r_i(k)^2.
+\]
+
+\atrou[4cm]{%
+En dérivant :
+\[
+  J'(k) = 2\sum_{i=1}^N r_i(k)\,r_i'(k),
+  \qquad
+  J''(k) = 2\sum_{i=1}^N \Bigl( r_i'(k)^2 + r_i(k)\,r_i''(k) \Bigr).
+\]
+La condition $J'(k) = 0$ s'écrit :
+\[
+  \sum_{i=1}^N r_i(k)\,r_i'(k) = 0.
+\]
+C'est une équation non linéaire en $k$ qu'on résout par Newton.
+}
+
+\medskip
+
+\textbf{Simplification de Gauss-Newton.}
+
+\atrou[4cm]{%
+Près de la solution, les résidus $r_i(k)$ sont petits (le modèle colle aux données).
+On néglige le terme $r_i(k)\,r_i''(k)$ dans $J''$ :
+\[
+  J''(k) \approx 2\sum_{i=1}^N r_i'(k)^2.
+\]
+C'est l'approximation de \textbf{Gauss-Newton} :
+elle évite de calculer les dérivées secondes $r_i''$.
+
+\smallskip
+
+La mise à jour devient :
+\[
+  k_{n+1} = k_n - \frac{\displaystyle\sum_{i=1}^N r_i(k_n)\,r_i'(k_n)}
+                       {\displaystyle\sum_{i=1}^N r_i'(k_n)^2}.
+\]
+}
+
+\medskip
+
 \textbf{Illustration.}
 Allure de $J(k)$ et de sa dérivée $J'(k)$ :
 
@@ -657,84 +701,5 @@ Allure de $J(k)$ et de sa dérivée $J'(k)$ :
   \item En Python : \verb|scipy.optimize.curve_fit|,
         \verb|scipy.optimize.least_squares|.
 \end{itemize}
-
-\medskip
-
-\begin{center}
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
-\centering\itshape
-Les méthodes avancées ne sont pas magiques :\\
-différences finies $+$ Newton $+$ systèmes linéaires.\\
-Tout ce qu'on a vu cette année.
-\end{mdframed}
-\end{center}
-
-% ====================================================================
-\section*{7. Bilan --- ce qu'on emporte pour l'examen blanc}
-% ====================================================================
-
-\atrou[5.5cm]{%
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Problème inverse :}
-        on a des mesures, on veut un paramètre
-        $\to$ poser $g(k) = 0$.
-  \item \textbf{Méthode de Newton :}
-        on linéarise et on itère,
-        $x_{n+1} = x_n - g(x_n)/g'(x_n)$.
-        Convergence quadratique,
-        mais dépendante du point de départ.
-  \item \textbf{Convergence quadratique :}
-        le nombre de chiffres corrects
-        double à chaque itération.
-  \item \textbf{Moindres carrés :}
-        plusieurs mesures $\to$ fonction coût
-        $J(k) = \sum(\text{résidus})^2$ ;
-        minimiser $J \equiv$ annuler $J'$,
-        que l'on traite à nouveau par Newton.
-\end{enumerate}
-}
-
-\medskip
-
-\textbf{Rôle dans le module.}
-Le CM3 fait dialoguer tous les acquis :
-
-\begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{ll}
-  \hline
-  \textbf{Outil} & \textbf{Provenance} \\
-  \hline
-  EDO de refroidissement & CM1 \\
-  Différences finies & CM2 (approche de $g'$ si besoin) \\
-  Schémas pour évaluer $T_{\mathrm{pred}}(k)$ & TD4 \\
-  Newton et moindres carrés & CM3 \\
-  \hline
-\end{tabular}
-\end{center}
-
-\medskip
-
-\textbf{Le CM4 sera un examen blanc.}
-Format et difficulté proches de l'examen du 26~mai.
-Il croisera système linéaire, EDO/EDP,
-interpolation ou intégration numérique,
-avec de courts raisonnements sur la stabilité
-ou le conditionnement.
-
-\medskip
-
-\begin{center}
-\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
-\centering\itshape
-Aujourd'hui, une seule dalle de béton a fait tourner :\\
-une EDO, un problème inverse, Newton,
-et une ouverture vers les moindres carrés.\\
-C'est exactement le type d'enchaînement
-attendu à l'examen.
-\end{mdframed}
-\end{center}
 
 \end{document}
