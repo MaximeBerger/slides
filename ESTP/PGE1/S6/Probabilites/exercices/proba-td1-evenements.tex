@@ -1,0 +1,117 @@
+%% Exercice : manipulation d'événements (TD1 Probabilités PGE1/S6 2025-2026, section 1)
+%% Source de vérité pour l'énoncé, le corrigé et (plus tard) indices/pistes.
+
+\ExoMeta{
+  slug=proba-td1-evenements,
+  titre=1 - Manipulation d'événements,
+  td=proba-td1,
+  niveau=1
+}
+
+\begin{Enonce}
+On contrôle successivement une suite de pièces utilisées sur un chantier. Pour $n \geq 1$, on note $A_n$ l'événement \og la $n$-ième pièce contrôlée est conforme \fg.
+\begin{enumerate}
+    \item Comment écrire à partir des $A_i$ les événements :
+    \begin{itemize}
+        \item Les 3 premières pièces contrôlées sont conformes ;
+        \item Parmi les 2 premières pièces contrôlées, la première est conforme et la seconde ne l'est pas ;
+        \item Parmi les 2 premières pièces contrôlées, 1 est conforme et 1 ne l'est pas.
+    \end{itemize}
+
+    \item Décrire par une phrase les événements suivants :
+    $$
+    B=\bigcap_{i=5}^{+\infty} A_i, \qquad  C=\bigcup_{i=5}^{+\infty} A_i.
+    $$
+
+    \item Écrire à l'aide des $A_i$ l'événement $D$ \og À partir d'un certain contrôle, toutes les pièces contrôlées sont conformes \fg.
+
+    \item On suppose que chaque pièce a une probabilité $\frac{1}{2}$ d'être conforme, indépendamment des autres. Calculer la probabilité que, parmi les deux premières pièces contrôlées, l'une au moins soit conforme.
+
+    \item Quelle est la probabilité que la deuxième pièce soit conforme sachant que la première l'est ?
+
+    \item Sachant qu'une des deux premières pièces est conforme, quelle est la probabilité que l'autre le soit aussi ?
+\end{enumerate}
+\end{Enonce}
+
+\begin{Corrige}
+\begin{enumerate}
+    \item
+    \begin{itemize}
+        \item $A_1 \cap A_2 \cap A_3$
+        \item $A_1 \cap \bar{A_2}$
+        \item $(A_1 \cap \bar{A_2}) \cup (\bar{A_1} \cap A_2)$
+    \end{itemize}
+
+    \item $B$ signifie qu'à partir du cinquième contrôle, toutes les pièces contrôlées sont conformes. $C$ signifie qu'au moins une pièce contrôlée à partir du cinquième contrôle est conforme.
+
+    \item Si on avait voulu l'événement $D_{10}$ : \og à partir du 10\ieme{} contrôle, toutes les pièces sont conformes \fg, on écrirait
+    $$
+    D_{10}=\bigcap_{i=10}^{+\infty} A_i.
+    $$
+    Pour écrire $D$, il faut considérer que c'est :
+    \begin{enumerate}
+        \item soit à partir du premier, toutes sont conformes,
+        \item soit à partir du deuxième, toutes sont conformes,
+        \item etc.
+        \item soit à partir du dixième, toutes sont conformes,
+        \item etc.
+    \end{enumerate}
+    C'est donc la réunion de tous ces événements :
+    $$
+    D=\bigcup_{n=1}^{+\infty} \bigcap_{i \geq n} A_i\,.
+    $$
+
+    \item On note $A_1$ l'événement \og la première pièce est conforme \fg{} et $A_2$ l'événement \og la deuxième pièce est conforme \fg. On cherche
+    $$
+    P(A_1 \cup A_2) = 1 - P(\bar{A_1} \cap \bar{A_2}).
+    $$
+    Par indépendance,
+    $$
+    P(\bar{A_1} \cap \bar{A_2}) = P(\bar{A_1}) \, P(\bar{A_2}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}.
+    $$
+    Donc
+    $$
+    P(A_1 \cup A_2) = 1 - \frac{1}{4} = \frac{3}{4}.
+    $$
+
+    \item Comme les contrôles sont indépendants,
+    $$
+    P(A_2 \mid A_1) = P(A_2) = \frac{1}{2}.
+    $$
+    Autrement dit, savoir que la première pièce est conforme ne change pas la probabilité que la deuxième le soit.
+
+    \item L'information \og une des deux premières pièces est conforme \fg{} correspond à l'événement $A_1 \cup A_2$. Dire que l'autre l'est aussi signifie alors que les deux sont conformes, c'est-à-dire l'événement $A_1 \cap A_2$.
+
+    On cherche donc
+    $$
+    P(A_1 \cap A_2 \mid A_1 \cup A_2) = \frac{P(A_1 \cap A_2)}{P(A_1 \cup A_2)}.
+    $$
+    Or, par indépendance,
+    $$
+    P(A_1 \cap A_2) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4},
+    $$
+    et, d'après la question précédente, $P(A_1 \cup A_2) = \frac{3}{4}$. Ainsi,
+    $$
+    P(A_1 \cap A_2 \mid A_1 \cup A_2) = \frac{\,\frac{1}{4}\,}{\,\frac{3}{4}\,} = \frac{1}{3}.
+    $$
+\end{enumerate}
+\end{Corrige}
+
+%% Les blocs suivants ne sont pas rendus dans le PDF : ils sont réservés à
+%% l'extraction par le script de publication vers la SPA / l'IA.
+
+\begin{Indices}
+\begin{enumerate}
+  \item Niveau 1 : pensez aux opérations ensemblistes classiques (intersection = \og et \fg, réunion = \og ou \fg, complémentaire = \og non \fg).
+  \item Niveau 2 : pour \og exactement une pièce parmi deux \fg, décomposez en deux cas disjoints selon laquelle est conforme.
+  \item Niveau 3 : pour l'événement $D$, commencez par écrire $D_n$ = \og toutes conformes à partir du rang $n$ \fg, puis prenez la réunion sur $n$.
+\end{enumerate}
+\end{Indices}
+
+\begin{PlusLoin}
+\begin{itemize}
+  \item \textbf{Événement limite supérieur / inférieur} : les formules de $D$ et de son complémentaire font apparaître les notions de $\limsup A_n$ et $\liminf A_n$, utiles pour le lemme de Borel-Cantelli.
+  \item \textbf{Indépendance mutuelle vs deux à deux} : dans la suite du TD on verra que l'indépendance mutuelle est strictement plus forte que l'indépendance deux à deux.
+  \item \textbf{Schéma de Bernoulli} : cet exercice préfigure l'étude de la loi binomiale, qui compte le nombre de succès parmi $n$ épreuves indépendantes de même probabilité $p$.
+\end{itemize}
+\end{PlusLoin}
