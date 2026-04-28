@@ -1,0 +1,235 @@
+\input{configTD}
+\usepackage{pifont}
+
+\newcommand{\degC}{\text{\textdegree C}}
+
+\title{Analyse numérique : Examen}
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  &
+        \textbf{Contrôle de connaissances et de compétences} &
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{26/05/2026}  &  & \textbf{Page 1/4} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 6}} \\
+        \hline
+        \textbf{Nom de l'enseignant} & Maxime Berger \\
+        \hline
+        \textbf{Promotion} & PGE1 - S6 \\
+        \hline
+        \textbf{Matière} & Analyse numérique \\
+        \hline
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline
+        \textbf{Consignes} &
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé
+            \item Toute réponse doit être justifiée
+            \item Les résultats numériques peuvent être donnés sous forme exacte ou approchée \vspace{1em}
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1.5em}
+
+\underline{\ding{110}\, \bf{Exercice 1 : Interpolation et quadrature} \bf{(5 points)}}
+\medskip
+
+On relève la hauteur $h(x)$, en mètres, d'un profil de terrain le long d'un axe horizontal.
+Les mesures suivantes sont disponibles :
+\[
+\begin{array}{c|ccc}
+x \text{ (m)} & 0 & 2 & 4 \\
+\hline
+h(x) \text{ (m)} & 1 & 3 & 2
+\end{array}
+\]
+
+\begin{enumerate}
+    \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par ces trois points. \hfill (2 pts)
+    \item En déduire une estimation de la hauteur au point $x=3$. \hfill (1 pt)
+    \item Estimer l'aire comprise entre le profil et l'axe horizontal sur $[0,4]$ par la méthode des trapèzes. \hfill (1 pt)
+    \item Estimer cette même aire par la méthode de Simpson. Commenter la différence entre les deux valeurs obtenues. \hfill (1 pt)
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\underline{\ding{110}\, \bf{Exercice 2 : Différences finies et système linéaire} \bf{(5 points)}}
+\medskip
+
+On cherche à approcher la solution du problème aux limites
+\[
+-u''(x)=2,\qquad x\in[0,1],
+\qquad u(0)=0,\qquad u(1)=1.
+\]
+On utilise un pas $h=\frac14$ et les n\oe{}uds intérieurs
+\[
+x_1=\frac14,\qquad x_2=\frac12,\qquad x_3=\frac34.
+\]
+On note $u_i \approx u(x_i)$, avec $u_0=0$ et $u_4=1$.
+
+\begin{enumerate}
+    \item Rappeler l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$. \hfill (1 pt)
+    \item En déduire le système linéaire vérifié par $u_1$, $u_2$, $u_3$. \hfill (2 pts)
+    \item Résoudre ce système par la méthode de votre choix. \hfill (1,5 pt)
+    \item La solution exacte est $u(x)=-x^2+2x$. Comparer les valeurs exactes et les valeurs numériques aux n\oe{}uds. \hfill (0,5 pt)
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\underline{\ding{110}\, \bf{Exercice 3 : Schémas numériques pour une EDO} \bf{(7 points)}}
+\medskip
+
+On considère le problème de Cauchy
+\[
+y'(t)=2-y(t),\qquad y(0)=0.
+\]
+On admet que la solution exacte est
+\[
+y(t)=2\left(1-e^{-t}\right).
+\]
+On prend un pas de temps $h=0{,}5$ et on note $t_n=nh$.
+
+\medskip
+
+\textbf{1) Euler explicite}
+\begin{enumerate}
+    \item Écrire la formule de récurrence d'Euler explicite pour cette équation. \hfill (1 pt)
+    \item Calculer $y_1$ et $y_2$. \hfill (1 pt)
+\end{enumerate}
+
+\medskip
+
+\textbf{2) Euler implicite}
+\begin{enumerate}
+    \item En utilisant la pente au temps $t_{n+1}$, écrire le schéma implicite. \hfill (0,75 pt)
+    \item Isoler $y_{n+1}$ en fonction de $y_n$ et de $h$. \hfill (0,75 pt)
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
+\end{enumerate}
+
+\medskip
+
+\textbf{3) Crank--Nicolson}
+\begin{enumerate}
+    \item En utilisant la méthode des trapèzes sur l'intervalle $[t_n,t_{n+1}]$, montrer que
+    \[
+    y_{n+1}
+    =
+    \frac{\left(1-\frac h2\right)y_n+2h}{1+\frac h2}.
+    \]
+    \hfill (1 pt)
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
+\end{enumerate}
+
+\medskip
+
+\textbf{4) Runge--Kutta d'ordre 4}
+
+On rappelle la méthode de Runge--Kutta d'ordre 4 :
+\[
+k_1=f(t_n,y_n),\qquad
+k_2=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_1\right),
+\]
+\[
+k_3=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_2\right),\qquad
+k_4=f(t_n+h,\,y_n+h k_3),
+\]
+\[
+y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4).
+\]
+
+\begin{enumerate}
+    \item Calculer $y_1$ par la méthode de Runge--Kutta d'ordre 4. \hfill (1 pt)
+    \item Comparer les méthodes à l'instant $t=0{,}5$. Quelle méthode semble la plus précise ici ? \hfill (1 pt)
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/4}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\underline{\ding{110}\, \bf{Exercice 4 : Problème inverse et choix des outils numériques} \bf{(3 points)}}
+\medskip
+
+Une dalle de béton vient d'être coulée sur un chantier. On note $T(t)$ sa température, en degrés Celsius, au temps $t$ exprimé en minutes.
+On propose le modèle
+\[
+T'(t)=-k\bigl(T(t)-T_{\mathrm{amb}}\bigr),
+\qquad T(0)=45,
+\qquad T_{\mathrm{amb}}=15,
+\]
+où $k>0$ est un coefficient d'échange thermique inconnu.
+
+Un capteur donne les mesures suivantes :
+\[
+\begin{array}{c|ccccc}
+t\text{ (min)} & 0 & 30 & 60 & 90 & 120 \\
+\hline
+T_{\mathrm{mes}}(t)\text{ }(\degC) & 45 & 31{,}5 & 24{,}0 & 20{,}0 & 17{,}7
+\end{array}
+\]
+
+L'objectif du bureau d'études est d'estimer $k$, puis de prédire le moment où la dalle passe sous $18\degC$.
+
+\begin{enumerate}
+    \item Expliquer pourquoi ce problème est un \textbf{problème inverse}. Quelle est la différence avec le problème direct ? \hfill (0,75 pt)
+    \item Si l'on utilise seulement la mesure à $t=60$ min, proposer une équation $g(k)=0$ permettant d'identifier $k$. \hfill (0,75 pt)
+    \item Quelle méthode numérique peut-on utiliser pour résoudre $g(k)=0$ ? Comment approcher $g'(k)$ si l'on ne dispose pas d'une formule explicite pour $g$ ? \hfill (0,75 pt)
+    \item Si l'on souhaite utiliser toutes les mesures du tableau, expliquer pourquoi il est naturel d'introduire une fonction coût de type moindres carrés. Écrire une fonction coût possible. \hfill (0,75 pt)
+\end{enumerate}
+
+\end{document}

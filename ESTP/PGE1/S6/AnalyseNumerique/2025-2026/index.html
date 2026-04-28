@@ -44,6 +44,45 @@
             color: var(--text-color);
         }
 
+        .external-browser-notice {
+            background: var(--white);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 0 10px 30px;
+            padding: 18px 22px;
+        }
+
+        .external-browser-notice p {
+            margin-bottom: 10px;
+        }
+
+        .external-browser-link {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .external-browser-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-status {
+            border-radius: 8px;
+            margin-top: 12px;
+            padding: 12px 14px;
+        }
+
+        .copy-status.success {
+            background: #e8f5f1;
+            color: #245f53;
+        }
+
+        .copy-status.error {
+            background: #fff3cd;
+            color: #6b5200;
+        }
+
         .header h1 {
             font-family: var(--font-montserrat);
             font-size: 2.5rem;
@@ -238,6 +277,12 @@
 </head>
 <body>
     <div class="container">
+        <div class="external-browser-notice">
+            <p>Si les boutons ne fonctionnent pas dans le navigateur integre du LMS, ouvrez cette page dans votre navigateur habituel.</p>
+            <a class="external-browser-link" id="copy-page-url" href="https://maximeberger.github.io/slides/ESTP/PGE1/S6/AnalyseNumerique/2025-2026/index.html" target="_blank" rel="noopener noreferrer" data-url="https://maximeberger.github.io/slides/ESTP/PGE1/S6/AnalyseNumerique/2025-2026/index.html">Copier l'adresse de la page</a>
+            <div class="copy-status" id="copy-status" hidden></div>
+        </div>
+
         <div class="header">
             <h1 id="main-title">Chargement...</h1>
         </div>
@@ -252,6 +297,55 @@
     </div>
 
     <script>
+        const publicPageUrl = 'https://maximeberger.github.io/slides/ESTP/PGE1/S6/AnalyseNumerique/2025-2026/index.html';
+
+        function showCopyStatus(message, type) {
+            const status = document.getElementById('copy-status');
+            status.textContent = message;
+            status.className = `copy-status ${type}`;
+            status.hidden = false;
+        }
+
+        function copyWithFallback(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return copied;
+            } catch (error) {
+                document.body.removeChild(textarea);
+                return false;
+            }
+        }
+
+        async function copyPublicPageUrl(event) {
+            event.preventDefault();
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(publicPageUrl);
+                } else if (!copyWithFallback(publicPageUrl)) {
+                    throw new Error('Copie automatique impossible');
+                }
+
+                showCopyStatus('Adresse copiee. Collez-la maintenant dans votre navigateur habituel.', 'success');
+            } catch (error) {
+                showCopyStatus(`Copie automatique impossible. Copiez cette adresse : ${publicPageUrl}`, 'error');
+            }
+        }
+
+        function setupExternalBrowserNotice() {
+            const copyLink = document.getElementById('copy-page-url');
+            copyLink.addEventListener('click', copyPublicPageUrl);
+        }
+
         // Chargement des données JSON
         async function loadData() {
             try {
@@ -448,7 +542,10 @@
         }
 
         // Démarrage de l'application
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', function() {
+            setupExternalBrowserNotice();
+            init();
+        });
     </script>
 </body>
 </html>
