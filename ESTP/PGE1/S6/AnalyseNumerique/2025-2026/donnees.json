@@ -159,6 +159,31 @@
           "cible": "_blank"
         }
       ]
+    },
+    {
+      "id": "sec4",
+      "numero": 4,
+      "titre": "Partiel Blanc",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "Partiel Blanc",
+          "description": "",
+          "lien": "ExamBlanc/enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Partiel Blanc - Pistes de correction",
+          "description": "",
+          "lien": "ExamBlanc/corrige.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+      ]
     }
   ]
 }

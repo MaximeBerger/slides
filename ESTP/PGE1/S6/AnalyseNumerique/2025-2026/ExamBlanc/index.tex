@@ -2,6 +2,7 @@
 \usepackage{pifont}
 
 \newcommand{\degC}{\text{\textdegree C}}
+\newcommand{\piste}[1]{\begin{solution}\textbf{Piste de correction.} #1\end{solution}}
 
 \title{Analyse numérique : sujet blanc}
 \author{}
@@ -36,15 +37,14 @@
         \hline
         \textbf{Matière} & Analyse numérique \\
         \hline
-        \textbf{Durée de l'examen} & 3h00 \\
+        \textbf{Durée de l'examen} & 2h00 \\
         \hline
         \textbf{Consignes} &
         \vspace{0.5em}
         \begin{itemize}
             \item Calculatrice \textbf{NON} autorisée
             \item Aucun document n'est autorisé
-            \item Toute réponse doit être justifiée
-            \item Les résultats numériques peuvent être donnés sous forme exacte ou approchée \vspace{1em}
+            \item Toute réponse doit être justifiée \vspace{1em}
         \end{itemize}\\
         \hline
     \end{tabular}
@@ -52,23 +52,27 @@
 
 \vspace{1.5em}
 
-\underline{\ding{110}\, \bf{Exercice 1 : Interpolation et intégration numérique} \bf{(5 points)}}
+\underline{\ding{110}\, \bf{Exercice 1 : Interpolation et intégration numérique}}
 \medskip
 
 On mesure la hauteur $h(x)$, en mètres, d'un talus le long d'une coupe horizontale. Les mesures sont :
 \[
-\begin{array}{c|ccc}
-x \text{ (m)} & 0 & 1 & 2 \\
+\begin{array}{c|ccccc}
+x \text{ (m)} & 0 & 1 & 2 & 3 & 4 \\
 \hline
-h(x) \text{ (m)} & 2 & 3 & 2
+h(x) \text{ (m)} & 2 & 5 & 4 & 3 & 1
 \end{array}
 \]
 
 \begin{enumerate}
-    \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par ces trois points. \hfill (2 pts)
-    \item En déduire une estimation de la hauteur au point $x=1{,}5$. \hfill (1 pt)
-    \item Estimer l'aire comprise entre le profil et l'axe horizontal sur $[0,2]$ par la méthode des trapèzes. \hfill (1 pt)
-    \item Estimer cette même aire par la méthode de Simpson. Commenter la différence entre les deux valeurs obtenues. \hfill (1 pt)
+    \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par les trois premiers points.
+    \piste{Utiliser les points $(0,2)$, $(1,5)$ et $(2,4)$ et écrire $P_2(x)=\sum_{i=0}^2 y_i\ell_i(x)$ avec les polynômes de base de Lagrange. Développer puis réduire. Voir le \textbf{CM Interpolation} et \textbf{TD1, Exercice 1}.}
+    \item En déduire une estimation de la hauteur au point $x=1{,}5$.
+    \piste{Évaluer directement le polynôme obtenu à la question précédente en $x=1{,}5$. Vérifier la cohérence avec les valeurs voisines ($h(1)=5$ et $h(2)=4$). Voir \textbf{TD1, Exercice 2}.}
+    \item Estimer l'aire comprise entre le profil et l'axe horizontal sur $[0,4]$ par la méthode des trapèzes.
+    \piste{Pas uniforme $h=1$. Appliquer la formule composite des trapèzes : $\int_0^4 h(x)\,dx \approx h\left(\frac{h_0+h_4}{2}+h_1+h_2+h_3\right)$ avec les données du tableau. Voir \textbf{CM Intégration numérique} et \textbf{TD1, Exercice 3}.}
+    \item Proposer et discuter plusieurs idées permettant d'obtenir une estimation plus précise de l'aire sous la courbe.
+    \piste{Idées attendues : raffiner le maillage (plus de mesures), utiliser Simpson composite si le pas et le nombre de sous-intervalles conviennent, interpolation par morceaux (splines), et comparaison de plusieurs quadratures pour estimer l'erreur. Voir \textbf{TD1, Exercice 5} et \textbf{TD1, Exercice 6}.}
 \end{enumerate}
 
 \hfill\break
@@ -88,7 +92,7 @@ h(x) \text{ (m)} & 2 & 3 & 2
 
 \vspace{1em}
 
-\underline{\ding{110}\, \bf{Exercice 2 : Différences finies et système linéaire} \bf{(5 points)}}
+\underline{\ding{110}\, \bf{Exercice 2 : Différences finies et système linéaire}}
 \medskip
 
 On cherche à approcher la solution du problème aux limites
@@ -103,10 +107,53 @@ x_1=\frac14,\qquad x_2=\frac12,\qquad x_3=\frac34.
 On note $u_i \approx u(x_i)$, avec $u_0=1$ et $u_4=0$.
 
 \begin{enumerate}
-    \item Rappeler l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$. \hfill (1 pt)
-    \item En déduire le système linéaire vérifié par $u_1$, $u_2$, $u_3$. \hfill (2 pts)
-    \item Résoudre ce système par la méthode de votre choix. \hfill (1,5 pt)
-    \item La solution exacte est $u(x)=-2x^2+x+1$. Comparer les valeurs exactes et les valeurs numériques aux n\oe{}uds. \hfill (0,5 pt)
+    \item Rappeler l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$.
+    \piste{Partir du développement de Taylor centré (ou rappeler la formule du cours) : $u''(x_i)\approx\frac{u_{i-1}-2u_i+u_{i+1}}{h^2}$. Voir \textbf{CM Différences finies}.}
+    \item En déduire le système linéaire vérifié par $u_1$, $u_2$, $u_3$.
+    \piste{Écrire l'équation discrète $-\frac{u_{i-1}-2u_i+u_{i+1}}{h^2}=4$ pour $i=1,2,3$, puis intégrer les conditions aux bords $u_0=1$, $u_4=0$ dans le second membre.}
+    \item Résoudre ce système par la méthode de votre choix.
+    \piste{Méthodes possibles : pivot de Gauss, LU ou inversion explicite si vous préférez. Une résolution propre par élimination suffit. Référence : \textbf{TD2, Exercice 1}.}
+    \item La solution exacte est $u(x)=-2x^2+x+1$. Comparer les valeurs exactes et les valeurs numériques aux n\oe{}uds.
+    \piste{Calculer $u(x_1)$, $u(x_2)$, $u(x_3)$ avec la formule exacte, puis les écarts absolus $|u(x_i)-u_i|$. Commenter l'ordre de grandeur des erreurs.}
+\end{enumerate}
+
+\hfill\break
+\hrule
+\hfill\break
+
+\underline{\ding{110}\, \bf{Exercice 3 : Méthodes directes et itératives pour un système linéaire}}
+\medskip
+
+On considère le système suivant :
+\[
+\begin{cases}
+x_1+2x_2-2x_3 = 7,\\
+x_1+x_2+x_3 = 2,\\
+2x_1+2x_2+x_3 = 5.
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item Écrire ce système sous la forme $AX=b$, quelle caractéristique de la matrice $A$ permet d'affirmer l'existence et l'unicité de la solution ?
+    \piste{Identifier $A$ et $b$ directement depuis les coefficients. Pour l'unicité : vérifier que $\det(A)\neq0$ (ou rang plein).}
+    \item La matrice
+    \[
+    A=
+    \begin{pmatrix}
+    1 & 2 & -2\\
+    1 & 1 & 1\\
+    2 & 2 & 1
+    \end{pmatrix}
+    \]
+    est-elle décomposable sous forme $LU$ ? Si oui, donner sa décomposition.
+    \piste{Effectuer l'élimination de Gauss sans permutation de lignes. Si les pivots successifs sont non nuls, on obtient $A=LU$ avec $L$ triangulaire inférieure unitaire et $U$ triangulaire supérieure. Voir \textbf{TD2, Exercice 1}.}
+
+    \vspace{1em}
+
+    \item Décrivez grossièrement la méthode de Jacobi pour résoudre ce système.
+    \piste{Isoler chaque inconnue via la diagonale : $x_i^{(k+1)}=\frac1{a_{ii}}\left(b_i-\sum_{j\neq i}a_{ij}x_j^{(k)}\right)$. Donner aussi la forme matricielle $X^{(k+1)}=B_JX^{(k)}+c$. Voir \textbf{CM Méthodes itératives} et \textbf{TD3, Exercice 1}.}
+    \item Appliquer la méthode de Jacobi à ce système avec un vecteur initial $X^{(0)}=(0,0,0)^T$ et calculer les 3 premières itérations.
+    \piste{Écrire explicitement les trois formules de récurrence scalaire, puis calculer successivement $X^{(1)}$, $X^{(2)}$, $X^{(3)}$. Vérifier chaque étape avec les équations du système.}
 \end{enumerate}
 
 \newpage
@@ -122,7 +169,7 @@ On note $u_i \approx u(x_i)$, avec $u_0=1$ et $u_4=0$.
 
 \vspace{1em}
 
-\underline{\ding{110}\, \bf{Exercice 3 : Schémas numériques pour une EDO} \bf{(7 points)}}
+\underline{\ding{110}\, \bf{Exercice 4 : Schémas numériques pour une EDO}}
 \medskip
 
 On considère le problème de Cauchy
@@ -139,17 +186,22 @@ On prend un pas de temps $h=0{,}5$ et on note $t_n=nh$.
 
 \textbf{1) Euler explicite}
 \begin{enumerate}
-    \item Écrire la formule de récurrence d'Euler explicite pour cette équation. \hfill (1 pt)
-    \item Calculer $y_1$ et $y_2$. \hfill (1 pt)
+    \item Écrire la formule de récurrence d'Euler explicite pour cette équation.
+    \piste{Rappel : $y_{n+1}=y_n+h\,f(t_n,y_n)$ avec $f(t,y)=1-y$. Donc $y_{n+1}=y_n+h(1-y_n)$. Voir \textbf{CM EDO numériques} et \textbf{TD4, Exercice 1}.}
+    \item Calculer $y_1$ et $y_2$.
+    \piste{Partir de $y_0=0$ et appliquer deux fois la récurrence avec $h=0{,}5$. Garder les valeurs exactes et approchées.}
 \end{enumerate}
 
 \medskip
 
 \textbf{2) Euler implicite}
 \begin{enumerate}
-    \item Écrire le schéma d'Euler implicite associé à cette équation. \hfill (0,75 pt)
-    \item Isoler $y_{n+1}$ en fonction de $y_n$ et de $h$. \hfill (0,75 pt)
-    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
+    \item Écrire le schéma d'Euler implicite associé à cette équation.
+    \piste{Rappel : $y_{n+1}=y_n+h\,f(t_{n+1},y_{n+1})$. Ici cela donne une équation linéaire en $y_{n+1}$. Voir \textbf{TD4}.}
+    \item Isoler $y_{n+1}$ en fonction de $y_n$ et de $h$.
+    \piste{Regrouper les termes en $y_{n+1}$ au membre de gauche, puis factoriser.}
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$.
+    \piste{Utiliser la formule fermée obtenue juste avant, avec $y_0=0$, puis itérer une seconde fois.}
 \end{enumerate}
 
 \medskip
@@ -162,8 +214,9 @@ On prend un pas de temps $h=0{,}5$ et on note $t_n=nh$.
     =
     \frac{\left(1-\frac h2\right)y_n+h}{1+\frac h2}.
     \]
-    \hfill (1 pt)
-    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
+    \piste{Écrire $y_{n+1}=y_n+\frac h2\big(f(t_n,y_n)+f(t_{n+1},y_{n+1})\big)$, remplacer $f(t,y)=1-y$, puis isoler $y_{n+1}$.}
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$.
+    \piste{Appliquer la récurrence rationalisée avec $y_0=0$. Simplifier les fractions pour limiter les erreurs d'arrondi.}
 \end{enumerate}
 
 \medskip
@@ -184,8 +237,10 @@ y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4).
 \]
 
 \begin{enumerate}
-    \item Calculer $y_1$ par la méthode de Runge--Kutta d'ordre 4. \hfill (1 pt)
-    \item Comparer les méthodes à l'instant $t=0{,}5$. Quelle méthode semble la plus précise ici ? \hfill (1 pt)
+    \item Calculer $y_1$ par la méthode de Runge--Kutta d'ordre 4.
+    \piste{Calculer successivement $k_1,k_2,k_3,k_4$ pour $(t_0,y_0)=(0,0)$ et $h=0{,}5$, puis utiliser la formule d'agrégation. Voir \textbf{CM EDO numériques}.}
+    \item Comparer les méthodes à l'instant $t=0{,}5$. Quelle méthode semble la plus précise ici ?
+    \piste{Comparer chaque approximation à la valeur exacte $y(0{,}5)=1-e^{-0{,}5}$ via une erreur absolue. Conclure en classant les méthodes sur ce test.}
 \end{enumerate}
 
 \newpage
@@ -201,7 +256,7 @@ y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4).
 
 \vspace{1em}
 
-\underline{\ding{110}\, \bf{Exercice 4 : Problème inverse et choix des outils numériques} \bf{(3 points)}}
+\underline{\ding{110}\, \bf{Exercice 5 : Problème inverse et choix des outils numériques}}
 \medskip
 
 Une poutre métallique chaude refroidit dans un atelier. On note $T(t)$ sa température, en degrés Celsius, au temps $t$ exprimé en minutes.
@@ -225,10 +280,15 @@ T_{\mathrm{mes}}(t)\text{ }(\degC) & 70 & 40{,}3 & 28{,}3 & 23{,}4 & 21{,}4
 L'objectif est d'estimer $k$, puis de prédire le moment où la poutre passe sous $25\degC$.
 
 \begin{enumerate}
-    \item Expliquer pourquoi ce problème est un \textbf{problème inverse}. Quelle est la différence avec le problème direct ? \hfill (0,75 pt)
-    \item Si l'on utilise seulement la mesure à $t=60$ min, proposer une équation $g(k)=0$ permettant d'identifier $k$. \hfill (0,75 pt)
-    \item Quelle méthode numérique peut-on utiliser pour résoudre $g(k)=0$ ? Comment approcher $g'(k)$ si l'on ne dispose pas d'une formule explicite pour $g$ ? \hfill (0,75 pt)
-    \item Si l'on souhaite utiliser toutes les mesures du tableau, expliquer pourquoi il est naturel d'introduire une fonction coût de type moindres carrés. Écrire une fonction coût possible. \hfill (0,75 pt)
+    \item Expliquer pourquoi ce problème est un \textbf{problème inverse}. Quelle est la différence avec le problème direct ?
+    \piste{Direct : paramètre $k$ connu, on calcule $T(t)$. Inverse : mesures de $T(t)$ connues, on estime $k$. Mettre en avant le rôle des données expérimentales.}
+    \item Décrivez grossièrement les étapes permettant d'obtenir une solution approchée à ce problème. 
+    Vous pourrez préciser les étapes qui vous semblent introduire le plus d'erreurs numériques.
+    \piste{Chaîne attendue : choix d'un modèle, définition d'un critère d'ajustement, résolution numérique, validation sur les données, puis prédiction du temps de passage à $25\degC$. Discuter bruit de mesure, erreur de modèle et arrêt itératif.}
+    \item Si l'on utilise seulement la mesure à $t=60$ min, proposer une équation $g(k)=0$ permettant d'identifier $k$.
+    \piste{Utiliser la solution explicite du modèle : $T(t)=T_{\mathrm{amb}}+(T_0-T_{\mathrm{amb}})e^{-kt}$, puis imposer $T(60)=28{,}3$ pour définir $g(k)$.}
+    \item Quelle méthode numérique peut-on utiliser pour résoudre $g(k)=0$ ? Comment approcher $g'(k)$ si l'on ne dispose pas d'une formule explicite pour $g$ ?
+    \piste{Méthodes possibles : dichotomie (robuste), Newton (rapide si bon point initial), sécante. Pour $g'(k)$ : différence finie centrée $g'(k)\approx\frac{g(k+\delta)-g(k-\delta)}{2\delta}$.}
 \end{enumerate}
 
 \end{document}
