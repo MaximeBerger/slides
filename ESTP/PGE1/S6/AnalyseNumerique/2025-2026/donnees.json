@@ -180,6 +180,13 @@
           "description": "",
           "lien": "ExamBlanc/corrige.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "Partiel Blanc - Corrigé collaboratif",
+          "description": "",
+          "lien": "ExamBlanc/corrigeCollaboratif.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
