@@ -102,9 +102,17 @@
           "description": "Loi normale · Théorème central limite",
           "lien": "CM3-annote.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 3,
+          "titre": "CM 4 - Intervalles de confiance",
+          "description": "Intervalles de confiance",
+          "lien": "CM4-enonce.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
+        
       ]
     }
   ]

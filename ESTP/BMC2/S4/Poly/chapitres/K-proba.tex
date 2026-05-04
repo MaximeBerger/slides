@@ -66,7 +66,7 @@ f_X (t) dt.$$
 
 \exo[1]{Dé de 6}
 
-Soit l'expérience aléatoire consistant à jeter un dé jusqu'à ce qu'un six apparaisse pour la première fois et soit $X$ la v.a. «nombre de jets nécessaires». 
+Soit l'expérience aléatoire consistant à jeter un dé jusqu'à ce qu'un six apparaisse pour la première fois et soit $X$ la v.a. \og nombre de jets nécessaires\fg{} . 
 
 \begin{enumerate}
 \item Déterminer la fonction de probabilité de $X$.
@@ -422,13 +422,13 @@ On a $$\mathbb{E}(X) = p \text{ et } V (X) = p(1 - p).$$
 
 \begin{Rmq}$\,$
 
-$X$ prend la valeur $1$ si l'événement se produit et $0$ s'il ne se produit pas à l'issue de l'expérience. Dans ce contexte, $p$ représente la probabilité de l'événement considéré. La v.a. $X$ sera une variable de comptage lors de répétitions de l'expérience constituant le processus de Bernoulli décrit ci-après et conduisant notamment à la loi binomiale. Par convention, la réalisation de l'événement sera appelée «succès» et sera codée $1$, sa non-réalisation sera appelée «échec» et sera codée $0$.
+$X$ prend la valeur $1$ si l'événement se produit et $0$ s'il ne se produit pas à l'issue de l'expérience. Dans ce contexte, $p$ représente la probabilité de l'événement considéré. La v.a. $X$ sera une variable de comptage lors de répétitions de l'expérience constituant le processus de Bernoulli décrit ci-après et conduisant notamment à la loi binomiale. Par convention, la réalisation de l'événement sera appelée \og succès\fg{}  et sera codée $1$, sa non-réalisation sera appelée \og échec\fg{}  et sera codée $0$.
 \end{Rmq}
 
 
 La loi binomiale est la loi de la v.a. $X$ correspondant au nombre de succès au cours de $n$ répétitions du processus. Elle est omniprésente en statistique.
 L'application la plus fréquente se situe dans le domaine des sondages. Ayant
-sélectionné au hasard n individus dans une grande population  on peut «estimer» la proportion p d'individus ayant un caractère1 donné (succès).\\
+sélectionné au hasard n individus dans une grande population  on peut \og estimer\fg{}  la proportion p d'individus ayant un caractère1 donné (succès).\\
  Si le taux de sondage est faible, on a vu que l'on pouvait admettre que le tirage sans remise est très proche du tirage avec remise. Pour ce dernier la probabilité de succès à chaque tirage est $p$
 et il y a indépendance des tirages.\\
  La v.a. $X$ correspond au nombre d'individus ayant le caractère d'intérêt parmi $n$ individus sélectionnés.\\
@@ -469,7 +469,7 @@ Soit$ X \sim \mathcal{ B}(n, p)$, alors :\\
 \textbf{ Les lois g\' eom\' etrique $\mathcal{G}(p)$ et binomiale n\' egative $\mathcal{BN}(r,p)$}
 
 \begin{Def}\textbf{Loi géométrique}\\
-Soit un processus de Bernoulli de paramètre p. La loi géométrique $\mathcal{G}(p)$, ou loi de Pascal, est la loi de la v.a. $X$ «nombre d'échecs avant de parvenir au premier succès». L'ensemble des valeurs possibles est $\mathbb{N}$ et la fonction de probabilité est :
+Soit un processus de Bernoulli de paramètre p. La loi géométrique $\mathcal{G}(p)$, ou loi de Pascal, est la loi de la v.a. $X$ \og nombre d'échecs avant de parvenir au premier succès\fg{} . L'ensemble des valeurs possibles est $\mathbb{N}$ et la fonction de probabilité est :
 $$p(x) = p(1 - p)^x, x \in \mathbb{N} ,$$
 car il n'y a qu'une séquence possible : $x$ échecs suivis d'un succès.\\
 \end{Def}
@@ -481,7 +481,7 @@ $$\mathbb{E}(e^{tX}) =\dfrac{p}{1 - (1 - p)e^t}
 .$$
 \end{Prop}
 
-La loi binomiale négative est une généralisation de la loi géométrique où l'on considère $X$ «nombre d'échecs avant de parvenir au r-ième succès». Sa fonction de probabilité est :
+La loi binomiale négative est une généralisation de la loi géométrique où l'on considère $X$ \og nombre d'échecs avant de parvenir au r-ième succès\fg{} . Sa fonction de probabilité est :
 $$p(x) =\binom{r + x - 1}{x}p^r(1 - p)^x, x \in \mathbb{ N}.$$
 En effet pour toute séquence de $x$ échecs et $r$ succès la probabilité est $pr(1-p)x$.\\
 Sachant que le dernier résultat de la séquence doit être un succès, il reste à dénombrer les séquences avec $x$ échecs et $r-1$ succès ce qui revient à dénombrer les possibilités de choix de $x$ positions parmi $x + r - 1$ positions, soit
@@ -506,7 +506,7 @@ $$\phi_X(t) = \left[
 % \end{figure}
 
 \begin{Def}\textbf{Processus de Poisson}\\
-On considère un processus d'occurrences d'un événement donné sur l'échelle du temps, par exemple l'arrivée des appels à un standard téléphonique. Pour un temps $ t > 0$ fixé (à partir d'une certaine origine des temps) on définit la variable aléatoire $X(t)$ «nombre d'occurrences dans l'intervalle ]0, t]». Par commodité on pose :
+On considère un processus d'occurrences d'un événement donné sur l'échelle du temps, par exemple l'arrivée des appels à un standard téléphonique. Pour un temps $ t > 0$ fixé (à partir d'une certaine origine des temps) on définit la variable aléatoire $X(t)$ \og nombre d'occurrences dans l'intervalle ]0, t]\fg{} . Par commodité on pose :
 $$pk(t) = P(X(t) = k), \text{ où }k \in N.$$
 En bref, on dit qu'on a un processus de Poisson si :
 \begin{itemize} 
@@ -997,7 +997,7 @@ Le fonctionnement d'une machine est perturbé par des pannes. On considère les 
 
 \begin{enumerate}
 \item Quelle est la durée moyenne de fonctionnement entre deux pannes consécutives ?
-\item Soit $E$ l'événement : « chacune des 3 périodes de fonctionnement de la machine dure plus de 2 heures ». Calculer $P(E)$.
+\item Soit $E$ l'événement : \og  chacune des 3 périodes de fonctionnement de la machine dure plus de 2 heures \fg{} . Calculer $P(E)$.
 \item Soit $Y$ la variable aléatoire égale à la plus grande des 3 durées de fonctionnement de la machine sans interruption. 
 \begin{enumerate}
 \item Calculer $P(Y\leq t)$ pour tout $t\in\mathbb{R}$.

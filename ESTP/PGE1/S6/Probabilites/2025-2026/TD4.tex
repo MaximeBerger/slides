@@ -6,9 +6,6 @@
 \author{}
 \date{}
 
-\newenvironment{solution}
-    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\par}
-    {\end{mdframed}\par\vspace{0.5em}}
 
 \begin{document}
 \sffamily
@@ -358,9 +355,8 @@ $$
             $p$ appartient à l'intervalle \[\left[\frac{X_n}{n}-\frac{t_\alpha}{2\sqrt{n}};\,\frac{X_n}{n}+\frac{t_\alpha}{2\sqrt{n}}\right]\] avec une probabilité de $1-\alpha$.
         \end{solution}
     }{}
-    \ifthenelse{\boolean{showSolutions}}{}{
-        \newpage
-    }
+
+    \vspace{1em}
 
     \textbf{Application : }
     Lors d'une élection opposant 2 candidats, un sondage d'opinion réalisé sur un échantillon de 1000 personnes donne \(52\%\) des voix au candidat \(A\), et \(48\%\) au candidat \(B\).

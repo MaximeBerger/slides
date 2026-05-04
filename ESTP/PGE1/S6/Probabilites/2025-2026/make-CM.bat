@@ -1,8 +1,8 @@
 @echo off
 setlocal
 
-set "TEXINPUTS=c:\Users\mberge04\OneDrive - association E.S.T.P\Documents\Projets\slides\ESTP\Config;%TEXINPUTS%"
-set "BASE=CM3"
+set "TEXINPUTS=%USERPROFILE%\OneDrive - association E.S.T.P\Documents\Projets\slides\ESTP\Config;%TEXINPUTS%"
+set "BASE=CM4"
 
 echo Compilation du corrige...
 xelatex -jobname=corrige "%BASE%.tex"

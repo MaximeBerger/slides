@@ -75,8 +75,8 @@ Examen : prévu le 16/04/2026 d'une durée de 2 h
 \end{itemize}
 
 \section*{Introduction}
-« Les solutions analytiques exactes, qui sont rares en physique, sont élégantes, mais n'ont pas plus de valeur intrinsèque que les solutions numériques.\\
-On ne doit pas sous-estimer la facilité et la puissance des méthodes de calcul numérique »
+\og  Les solutions analytiques exactes, qui sont rares en physique, sont élégantes, mais n'ont pas plus de valeur intrinsèque que les solutions numériques.\\
+On ne doit pas sous-estimer la facilité et la puissance des méthodes de calcul numérique \fg{} 
 
 
 
@@ -2187,7 +2187,7 @@ La soustraction de ces deux relations donne :
 u_{i+1}-u_{i-1}=2 \Delta x\left(\frac{\partial u}{\partial x}\right)_{i}+\mathrm{O}\left(\Delta x^{3}\right)
 \]
 
-Ce qui permet d'obtenir le schéma d'ordre 2 dit «centré» pour approximer la dérivée première de \(u\) :
+Ce qui permet d'obtenir le schéma d'ordre 2 dit \og centré\fg{}  pour approximer la dérivée première de \(u\) :
 
 \[
 \left(\frac{\partial u}{\partial x}\right)_{i}=\frac{u_{i+1}-u_{i-1}}{2 \Delta x}+\mathrm{O}\left(\Delta x^{2}\right)
@@ -2219,7 +2219,7 @@ Ce qui permet d'obtenir le schéma d'ordre 2 dit centré
 \left(\frac{\partial^{2} u}{\partial x^{2}}\right)_{i}=\frac{u_{i+1}-2 u_{i}+u_{i-1}}{\Delta x^{2}}+\mathrm{O}\left(\Delta x^{2}\right)
 \]
 
-II existe aussi une formulation «avant» et «arrière» pour la dérivée seconde d'ordre 1
+II existe aussi une formulation \og avant\fg{}  et \og arrière\fg{}  pour la dérivée seconde d'ordre 1
 
 \[
 \begin{aligned}
@@ -2590,7 +2590,7 @@ A chaque itération, le vecteur des inconnues discrètes se détermine par la r�
 
 \section*{Résolution numérique des EDP}
 \section*{Théorème de Lax-Wendroff}
-Si un schéma numérique consistant converge lorsqu'on raffine le pas de temps et d'espace, c'est-à-dire lorsque \(\Delta t \rightarrow 0\) et \(\Delta x \rightarrow 0\), alors il converge vers une solution « faible » des équations.
+Si un schéma numérique consistant converge lorsqu'on raffine le pas de temps et d'espace, c'est-à-dire lorsque \(\Delta t \rightarrow 0\) et \(\Delta x \rightarrow 0\), alors il converge vers une solution \og  faible \fg{}  des équations.
 
 \section*{Condition de stabilité CFL}
 Pour des problèmes d'évolution temporelle, certains schémas sont stables à condition que le pas de temps soit inférieur à une certaine valeur critique fonction du pas d'espace.\\
