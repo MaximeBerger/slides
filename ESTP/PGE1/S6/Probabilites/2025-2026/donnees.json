@@ -109,6 +109,13 @@
           "description": "Intervalles de confiance",
           "lien": "CM4-enonce.pdf",
           "cible": "_blank"
+        },
+        {
+          "numero": 4,
+          "titre": "CM 4 - annoté",
+          "description": "Intervalles de confiance",
+          "lien": "CM4-annote.pdf",
+          "cible": "_blank"
         }
       ],
       "sexercer" : [
