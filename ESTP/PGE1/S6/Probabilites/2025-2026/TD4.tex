@@ -17,33 +17,19 @@ On note $\Phi$ la fonction de répartion de la loi normale centrée réduite et 
     \item Calculer $\Phi(1.96)$, $\Phi(2.58)$, $\Phi(-1.96)$, $\Phi(-2.58)$. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            On lit les valeurs dans la table. 
-            Pour la première valeur, on cherche $1.9$ en ligne et $0.06$ en colonne, on obtient $0.975$. 
-            $\Phi(1.96) = 0.975$, 
-            
-            
-            $\Phi(2.58) = 0.995$, $\Phi(-1.96) = 1- 0.975 = 0.025$, $\Phi(-2.58) = 1- 0.995 = 0.005$. 
+            Rappelez-vous comment lire la table de la loi normale (voir les exemples du CM4). Pour $\Phi(-x)$, quelle est la formule reliant $\Phi(-x)$ et $\Phi(x)$ à cause de la symétrie de la courbe ?
         \end{solution}
     }{}
     \item Donner la probabilité qu'une loi normale centrée réduite soit supérieure à 1.96, puis qu'elle soit supérieure à 2.58. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            La table donne aussi les valeurs : si $X$ suit une loi normale centrée réduite, alors 
-            \[
-            P(X < t) = \Phi(t)
-            \]
-            On en déduit que : 
-            $P(X > 1.96) = 1- \Phi(1.96) = 0.025$, 
-            
-            $P(X > 2.58) = 1- \Phi(2.58) = 0.005$. 
+            La table donne la probabilité $P(X \le t) = \Phi(t)$. Comment exprimer $P(X > t)$ en fonction de $P(X \le t)$ ? (Revoyez les propriétés de base des probabilités dans le CM4).
         \end{solution}
     }{}
     \item Donner la probabilité qu'une loi normale centrée réduite soit comprise dans l'intervalle $[-1.96, 1.96]$, puis dans l'intervalle $[-2.58, 2.58]$. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            $P(-1.96 < X < 1.96) = \Phi(1.96) - \Phi(-1.96) = 0.95$, 
-            
-            $P(-2.58 < X < 2.58) = \Phi(2.58) - \Phi(-2.58) = 0.99$. 
+            Comment exprimer la probabilité d'appartenir à un intervalle $P(a < X < b)$ à l'aide de la fonction de répartition $\Phi$ ? (Référez-vous aux exemples du CM4).
         \end{solution}
     }{}
 \end{enumerate}
@@ -54,17 +40,13 @@ On note $\Phi$ la fonction de répartion de la loi normale centrée réduite et 
     \item Calculer la probabilité que $X$ soit supérieure à 12. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            $P(X > 12) = 1 - P(X < 12) = 1 - P\left(\frac{X-10}{2} < \frac{12-10}{2}\right) = 1 - \Phi(1) = 1 - 0.8413 = 0.1587$. 
+            On sait que $X$ suit $\mathcal{N}(10, 4)$. Quelle est la variable centrée réduite $Z$ associée à $X$ ? Commencez par exprimer l'événement $\{X > 12\}$ en fonction de $Z$ pour pouvoir utiliser la table.
         \end{solution}
     }{}
     \item Calculer la probabilité que $X$ soit comprise dans l'intervalle $[8, 12]$, puis dans l'intervalle $[6, 14]$.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pour le premier intervalle, on a : 
-            \[P(8 < X < 12) = P\left(\frac{8-10}{2} < \frac{X-10}{2} < \frac{12-10}{2}\right) = \Phi(1) - \Phi(-1) = 0.8413 - 0.1587 = 0.6826.\] 
-        
-        Pour le second intervalle, on a : 
-        \[P(6 < X < 14) = P\left(\frac{6-10}{2} < \frac{X-10}{2} < \frac{14-10}{2}\right) = \Phi(2) - \Phi(-2) = 0.9772 - 0.0228 = 0.9544.\] 
+            Même principe qu'à la question précédente : transformez l'encadrement sur $X$ en un encadrement sur la variable centrée réduite $Z = \frac{X - 10}{2}$. Servez-vous des propriétés vues en CM4 pour calculer $P(a < Z < b)$.
         \end{solution}
     }{}
    \end{enumerate}
@@ -99,37 +81,13 @@ converge vers la loi normale centrée réduite.
     \item Donner une estimation de $\mu$ à partir de la table de fréquence. 
     \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        La somme des effectifs est $20 + 25 + 30 + 25 = 100$. On calcule la moyenne empirique : 
-        \[
-        \bar{X} = \frac{160 \times 20 + 170 \times 25 + 190 \times 30 + 210 \times 25}{100} = 184.
-        \] 
-        On en déduit une estimation de $\mu$ : $\hat{\mu} = 184$.
+        Comment estime-t-on l'espérance $\mu$ à partir d'un échantillon ? Calculez la moyenne empirique à l'aide de la table de fréquences.
     \end{solution}
     }{}
     \item En appliquant le théorème central limite, donner un intervalle de confiance à 95\% pour $\mu$ centré autour de l'estimation précédente. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Le théorème donne : 
-            \[
-            \frac{\sqrt{n}}{\sqrt{\sigma^2}} \, \big(\hat{\mu} - \mu\big) \sim \mathcal{N}(0, 1)
-            \]
-        D'après l'exercice précédent, on sait qu'une loi normale centrée réduite est comprise entre $-1.96$ et $1.96$ avec une probabilité de $0.95$:
-        \[
-        P\bigg(\frac{\sqrt{n}}{\sqrt{\sigma^2}} \, \big(\hat{\mu} - \mu\big) \in [-1.96, \, 1.96]\bigg) = 0.95
-        \] 
-        On en déduit un intervalle de confiance à 95\% pour $\mu$ : 
-        \[
-        P\bigg(\mu \in \left[\hat{\mu} - 1.96 \frac{\sigma}{\sqrt{n}},\,  \hat{\mu} + 1.96 \frac{\sigma}{\sqrt{n}}\right]\bigg) = 0.95
-        \] 
-        En remplaçant $n$ par $100$ et $\sigma$ par $40$, on obtient : 
-        \[
-        P\bigg(\mu \in \left[184 - 1.96 \frac{40}{\sqrt{100}}, 184 + 1.96 \frac{40}{\sqrt{100}}\right]\bigg) = 0.95
-        \] 
-        On en déduit que : 
-            \[
-            \mu \in \left[176.16,\,  191.84\right]
-            \] 
-            avec une probabilité de $0.95$. 
+            Utilisez le théorème central limite pour trouver une variable aléatoire qui suit approximativement une loi $\mathcal{N}(0, 1)$. En vous rappelant la valeur du quantile pour 95\% vu dans le premier exercice (et en CM4), isolez $\mu$ dans les inégalités pour trouver l'intervalle de confiance.
         \end{solution}
     }{}
     \item Le vendeur de graines annonçait une récolte suivant une loi $\mathcal{N}(210, 40^2)$. 
@@ -138,21 +96,13 @@ converge vers la loi normale centrée réduite.
     \textbf{Remarque : } Si $X_1$ et $X_2$ sont deux variables aléatoires indépendantes de loi $\mathcal{N}(m, \sigma^2)$, la variable aléatoire $\lambda X_1 + \mu X_2$ suit une loi $\mathcal{N}(\lambda m + \mu m, \lambda^2 \sigma^2 + \mu^2 \sigma^2)$. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Si l'hypothèse du vendeur est correcte, quelle loi devrait suivre la variable aléatoire $\hat{\mu}$ ? 
-            On a $\hat{\mu} = \frac{X_1 + X_2 + \cdots + X_n}{n}$ où les $X_i$ sont des variables aléatoires de loi $\mathcal{N}(210, 40^2)$. 
-
-            D'après la remarque, on en déduit que $\hat{\mu}$ suit une loi $\mathcal{N}\left(210, \frac{40^2}{n}\right)$. 
-            La probabilité que cette variable aléatoire prenne la valeur $184$ ou moins est : 
-            \[
-            P\big(\hat{\mu} < 184\big) = \Phi\left(\frac{184 - 210}{\frac{40}{\sqrt{n}}}\right) = \Phi(-6.5) = 0.
-            \] 
+            Commencez par déterminer la loi de $\hat{\mu}$ en utilisant la remarque, si l'on suppose que les variables $X_i$ suivent la loi annoncée par le vendeur. Calculez ensuite la probabilité $P(\hat{\mu} \le 184)$ en vous ramenant à une loi centrée réduite.
         \end{solution}
     }{}
     \item A quel point croyez-vous aux données du vendeur ? 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            La probabilité que $\hat{\mu}$ soit inférieure à $184$ est quasiment nulle $0$. Si l'hypothèse du vendeur était correcte, nous avons assisté à un événement très rare. 
-            Nous pouvons donc raisonnablement rejeter l'hypothèse du vendeur. 
+            Au vu de la probabilité obtenue à la question précédente, considérez-vous que le résultat que vous avez observé (une moyenne de 184) est plausible si le vendeur dit vrai ?
         \end{solution}
     }{}
    \end{enumerate}
@@ -167,64 +117,20 @@ Sur les $n = 1000$ électeurs interrogés, $X = 300$ personnes déclarent qu'ell
     \item Déterminer l'estimation ponctuelle $\hat{p}$ de la proportion de votes en faveur du candidat A.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Il suffit de faire le ratio du nombre de personnes qui ont voté pour $A$ sur le nombre total d'électeurs interrogés : 
-            \[
-            \hat{p} = \frac{X}{n} = \frac{300}{1000} = 0.3
-            \] 
+            Comment définit-on la proportion empirique (la fréquence observée) dans ce cas ? (Voir la construction de l'estimateur d'une proportion en CM4).
         \end{solution}
     }{}
     \item Calculer un intervalle de confiance à 95\% pour la proportion $p$. 
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Le théorème central limite donne : 
-            \[
-            \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} \sim \mathcal{N}(0, 1)
-            \]
-            
-            On prend le même intervalle que dans l'exercice précédent: $[-1.96, 1.96]$. 
-
-            
-            On en déduit que : 
-            \[
-                \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} \in [-1.96, 1.96] \text{ avec une probabilité de } 0.95
-            \]
-            
-            \[
-                \hat{p} - p \in [-1.96 \frac{\sqrt{p(1-p)}}{\sqrt{n}}, 1.96 \frac{\sqrt{p(1-p)}}{\sqrt{n}}] \text{ avec une probabilité de } 0.95
-            \]
-            Ici, on a plusieurs solutions pour gérer le $p$ dans l'intervalle : 
-            \begin{itemize}
-                \item On peut remplacer $p$ par $\hat{p}$ et faire comme si de rien n'était. Ce n'est pas très rigoureux mais c'est une approche courante. 
-                \item On peut majorer $p(1-p)$ par $\frac{1}{4}$. On obtiendra un intervalle un peu plus grand, mais on reste rigoureux mathématiquement. 
-            \end{itemize}
-
-            Quelle que soit l'option choisie, on obtient presque le même intervalle.  
-
-            Continuons avec la seconde option :
-            \[
-                \hat{p} - p \in [ \frac{-1.96}{\sqrt{4n}}, \frac{1.96}{\sqrt{4n}}] \text{ avec une probabilité de } 0.95
-            \]
-            et donc 
-            \[
-                p \in \left[\hat{p} - \frac{1.96}{\sqrt{4n}}, \hat{p} + \frac{1.96}{\sqrt{4n}}\right] \text{ avec une probabilité de } 0.95
-            \]
-        
-            On en déduit l'intervalle de confiance avec les valeurs numériques :
-            \[
-                p \in \left[0.3 - \frac{1.96}{\sqrt{4000}}, 0.3 + \frac{1.96}{\sqrt{4000}}\right] \text{ avec une probabilité de } 0.95
-            \]
-            On en déduit que : 
-            \[
-                p \in [0.269, 0.331] \text{ avec une probabilité de } 0.95
-            \]
+            Quel est l'intervalle de confiance type pour une proportion (revoyez la formule du CM4 qui utilise la majoration de $p(1-p)$ par $1/4$) ? Appliquez-le ici avec le niveau de confiance de 95\%.
         \end{solution}
     }{}
     \item L'intervalle contient-il la valeur correspondant à un partage égal des votes ? 
     Que signifie ce résultat en termes d'incertitude sur l'élection ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Non, l'intervalle de confiance ne contient pas $0.3333333$, 
-            il y a donc moins de $5\%$ de chances que la proportion de votes pour $A$ soit égale à $0.3333333$. 
+            Calculez d'abord la proportion correspondant à un partage parfaitement égal des votes entre les 3 candidats. Cette valeur appartient-elle à l'intervalle que vous venez de calculer ?
         \end{solution}
     }{}
 \end{enumerate}
@@ -254,33 +160,25 @@ On a relevé la durée de 60 appels pour chacun d'entre eux :
     \item Calculer la durée moyenne des appels pour chaque salarié.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pour Alice : \(\bar X_A = \frac{2\times15 + 5\times25 + 8\times12 + 12\times8}{60} = \frac{347}{60} = 5.78\text{ min}.\)
-            
-            \vspace{0.5cm}
-
-            Pour Bob : \(\bar X_B = \frac{2\times8 + 5\times14 + 8\times23 + 12\times15}{60} = \frac{450}{60} = 7.5\text{ min}.\)
+            Rappelez-vous la formule de la moyenne empirique calculée à partir d'un tableau d'effectifs (voir exercice 2).
         \end{solution}
     }{}
     \item Par quelle loi classique peut-on modéliser la durée d'un appel pour chaque salarié ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            La durée des appels est généralement modélisée par une loi exponentielle. 
+            Pensez aux lois continues vues en cours. Laquelle est souvent utilisée pour modéliser des durées ou des temps d'attente (voir les exemples du CM4) ?
         \end{solution}
     }{}
     \item Estimer les paramètres de ces lois à partir des données.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            On se rappelle que l'espérance d'une loi exponentielle est l'inverse de son paramètre. 
-            On en déduit : 
-            \[
-            \hat\lambda_A = \frac{1}{\bar X_A} \approx \frac{1}{5.78} \approx 0.173, \quad \hat\lambda_B = \frac{1}{\bar X_B} = \frac{1}{7.5} \approx 0.133.
-            \]
+            Quel est le lien entre l'espérance d'une loi exponentielle et son paramètre $\lambda$ ? Utilisez la moyenne empirique calculée plus haut comme estimation de cette espérance.
         \end{solution}
     }{}
     \item Le superviseur souhaite que la durée moyenne des appels soit inférieure à 6 minutes. L'un des deux salariés respecte-t-il cet objectif ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Alice a une moyenne \(\approx5.78<6\), elle respecte l'objectif. Bob a \(\bar X_B=7.5>6\), il ne le respecte pas.
+            Comparez simplement les moyennes obtenues à la question 1 avec l'objectif de 6 minutes.
         \end{solution}
     }{}
 \end{enumerate}
@@ -293,17 +191,13 @@ Soit $X$ une variable aléatoire suivant une loi normale centrée réduite.
     \[P\left(-t_\alpha < X < t_\alpha\right)=1-\alpha.\]
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            On trace la densité de la loi normale centrée réduite, symétrique par rapport à 0,
-            \begin{center} 
-                \includegraphics[width=0.5\textwidth]{normal.png}
-            \end{center}
-            et on repère les abscisses \(-t_\alpha\) et \(t_\alpha\) telles que l'aire bleue sous la courbe entre ces bornes vaut \(1-\alpha\).
+            Rappelez-vous l'allure de la courbe de la densité de la loi normale. Placez $-t_\alpha$ et $t_\alpha$ de manière symétrique par rapport à 0 et identifiez l'aire sous la courbe correspondant à cette probabilité. (Ce schéma a été discuté en CM4).
         \end{solution}
     }{}
     \item Donner une valeur approchée pour $t_{0,05}, t_{0,01}$.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            On a \(t_{0,05}\mathop{\sim}1.96\) et \(t_{0,01}\mathop{\sim}2.58\).
+            Il s'agit de trouver les quantiles pour des probabilités bien précises. Quelle surface sous la courbe correspondent-elles ? (Revoyez le tout premier exercice ou la table de la loi normale).
         \end{solution}
     }{}
 
@@ -314,7 +208,7 @@ Soit $X$ une variable aléatoire suivant une loi normale centrée réduite.
     \item Quelle est la loi de $X_n$ ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            \(X_n\) suit une loi binomiale de paramètres \((n,p)\).
+            On compte le nombre de succès (présence du caractère) parmi $n$ tirages indépendants. Quelle loi classique modélise cette situation (voir CM4) ?
         \end{solution}
     }{}
     \item On pose $Z_n=\frac{X_n-n p}{\sqrt{n p(1-p)}}$. Quel théorème permet d'affirmer que pour tous réels $a<b$, on a
@@ -323,7 +217,7 @@ P\Big(Z_n \in[a, b]\Big) \rightarrow \int_a^b \frac{1}{\sqrt{2 \pi}} e^{-t^2 / 2
 $$
 \ifthenelse{\boolean{showSolutions}}{
     \begin{solution}
-        Le théorème central limite.
+        De quel grand théorème probabiliste la formule de cette limite provient-elle ? (Revoir le début de ce TD ou le CM4).
     \end{solution}
 }{}
 
@@ -334,9 +228,7 @@ $$
     Déduire des questions précédentes que $\lim _{n \rightarrow+\infty} P\left(X_n / n \in I_n\right)=1-\alpha$.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            D'après la question précédente, \[\lim_{n\to\infty}P(Z_n\in[-t_\alpha,t_\alpha])=1-\alpha,\] 
-            
-            ce qui équivaut à \[\lim_{n\to\infty}P(X_n/n\in I_n)=1-\alpha.\]
+            Partez de l'événement $\{ -t_\alpha \le Z_n \le t_\alpha \}$. Remplacez $Z_n$ par son expression et montrez par équivalences que cet événement est le même que $\{ X_n/n \in I_n \} $.
         \end{solution}
     }{}
     \item Montrer que quel que soit $p\in]0,1[$, 
@@ -345,14 +237,13 @@ $$
     \]
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Comme \(p(1-p)\le\frac14\), on a \(\frac{\sqrt{p(1-p)}}{\sqrt{n}}\le\frac1{2\sqrt{n}}\), 
-            donc les bornes de \(I_n\) sont dans l'intervalle donné.
+            Étudiez la fonction $f(p) = p(1-p)$ sur l'intervalle $]0,1[$. Quel est son maximum ? Déduisez-en une majoration de la largeur de l'intervalle $I_n$.
         \end{solution}
     }{}
     \item En déduire un intervalle de confiance au niveau $1-\alpha$ pour $p$.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            $p$ appartient à l'intervalle \[\left[\frac{X_n}{n}-\frac{t_\alpha}{2\sqrt{n}};\,\frac{X_n}{n}+\frac{t_\alpha}{2\sqrt{n}}\right]\] avec une probabilité de $1-\alpha$.
+            L'événement $\{ X_n/n \in I_n \}$ peut aussi s'écrire sous la forme $\{ p \in J_n \}$. Déterminez cet intervalle $J_n$ en utilisant la question précédente.
         \end{solution}
     }{}
 
@@ -363,19 +254,13 @@ $$
     \item Donner un intervalle de confiance au niveau 0,95 des intentions de vote pour \(A\).
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pour le candidat $A$, $\frac{X_n}{n}=0.52$ et $\frac{t_{0.05}}{2\sqrt{n}}=\frac{1.96}{2\sqrt{1000}}\mathop{\sim}0.031$.
-            On en déduit l'intervalle de confiance : 
-            \[
-            \left[0.52-0.031, 0.52+0.031\right] \mathop{\sim} [0.489, 0.551].
-            \]
+            Appliquez la formule de l'intervalle de confiance que vous venez de démontrer avec les valeurs de l'énoncé ($n=1000$, proportion observée égale à 0.52).
         \end{solution}
     }{} 
     \item Combien de personnes suffirait-il d'interroger pour qu'il y ait moins de \(5\%\) de chances que \(B\) l'emporte, si \(A\) a recueilli \(52\%\) ?
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Il suffit que la borne gauche de l'intervalle de confiance soit supérieure à $0.5$.
-
-            Cela arrive si $0.52 - \frac{1.96}{2\sqrt{n}}>0.5$, soit $n>\frac{1.96^2}{2^2\times 0.02^2}\mathop{\sim}2401$.
+            Pour que $B$ ait très peu de chances de l'emporter (moins de 5\%), comment doit se situer la borne inférieure de l'intervalle de confiance par rapport à $0.5$ ? Résolvez ensuite l'inéquation en $n$.
         \end{solution}
     }{}
 \end{enumerate}

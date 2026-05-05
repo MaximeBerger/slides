@@ -36,7 +36,7 @@
         \hline
         \textbf{Matière} & Analyse numérique \\
         \hline
-        \textbf{Durée de l'examen} & 3h00 \\
+        \textbf{Durée de l'examen} & 2h00 \\
         \hline
         \textbf{Consignes} &
         \vspace{0.5em}
@@ -44,7 +44,6 @@
             \item Calculatrice \textbf{NON} autorisée
             \item Aucun document n'est autorisé
             \item Toute réponse doit être justifiée
-            \item Les résultats numériques peuvent être donnés sous forme exacte ou approchée \vspace{1em}
         \end{itemize}\\
         \hline
     \end{tabular}
@@ -55,15 +54,7 @@
 \underline{\ding{110}\, \bf{Exercice 1 : Interpolation et quadrature} \bf{(5 points)}}
 \medskip
 
-On relève la hauteur $h(x)$, en mètres, d'un profil de terrain le long d'un axe horizontal.
-Les mesures suivantes sont disponibles :
-\[
-\begin{array}{c|ccc}
-x \text{ (m)} & 0 & 2 & 4 \\
-\hline
-h(x) \text{ (m)} & 1 & 3 & 2
-\end{array}
-\]
+Faire un exo sur le campus de Troyes
 
 \begin{enumerate}
     \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par ces trois points. \hfill (2 pts)
@@ -87,28 +78,41 @@ h(x) \text{ (m)} & 1 & 3 & 2
     \end{tabular}
 \end{center}
 
-\vspace{1em}
-
-\underline{\ding{110}\, \bf{Exercice 2 : Différences finies et système linéaire} \bf{(5 points)}}
+\underline{\ding{110}\, \bf{Exercice 2 : Méthodes directes et itératives pour un système linéaire}}
 \medskip
 
-On cherche à approcher la solution du problème aux limites
+On considère le système suivant :
 \[
--u''(x)=2,\qquad x\in[0,1],
-\qquad u(0)=0,\qquad u(1)=1.
+\begin{cases}
+x_1+2x_2-2x_3 = 7,\\
+x_1+x_2+x_3 = 2,\\
+2x_1+2x_2+x_3 = 5.
+\end{cases}
 \]
-On utilise un pas $h=\frac14$ et les n\oe{}uds intérieurs
-\[
-x_1=\frac14,\qquad x_2=\frac12,\qquad x_3=\frac34.
-\]
-On note $u_i \approx u(x_i)$, avec $u_0=0$ et $u_4=1$.
 
 \begin{enumerate}
-    \item Rappeler l'approximation centrée de $u''(x_i)$ en fonction de $u_{i-1}$, $u_i$ et $u_{i+1}$. \hfill (1 pt)
-    \item En déduire le système linéaire vérifié par $u_1$, $u_2$, $u_3$. \hfill (2 pts)
-    \item Résoudre ce système par la méthode de votre choix. \hfill (1,5 pt)
-    \item La solution exacte est $u(x)=-x^2+2x$. Comparer les valeurs exactes et les valeurs numériques aux n\oe{}uds. \hfill (0,5 pt)
+    \item Écrire ce système sous la forme $AX=b$, quelle caractéristique de la matrice $A$ permet d'affirmer l'existence et l'unicité de la solution ?
+    \piste{Identifier $A$ et $b$ directement depuis les coefficients. Pour l'unicité : vérifier que $\det(A)\neq0$ (ou rang plein).}
+    \item La matrice
+    \[
+    A=
+    \begin{pmatrix}
+    1 & 2 & -2\\
+    1 & 1 & 1\\
+    2 & 2 & 1
+    \end{pmatrix}
+    \]
+    est-elle décomposable sous forme $LU$ ? Si oui, donner sa décomposition.
+    \piste{Effectuer l'élimination de Gauss sans permutation de lignes. Si les pivots successifs sont non nuls, on obtient $A=LU$ avec $L$ triangulaire inférieure unitaire et $U$ triangulaire supérieure. Voir \textbf{TD2, Exercice 1}.}
+
+    \vspace{1em}
+
+    \item Décrivez grossièrement la méthode de Jacobi pour résoudre ce système.
+    \piste{Isoler chaque inconnue via la diagonale : $x_i^{(k+1)}=\frac1{a_{ii}}\left(b_i-\sum_{j\neq i}a_{ij}x_j^{(k)}\right)$. Donner aussi la forme matricielle $X^{(k+1)}=B_JX^{(k)}+c$. Voir \textbf{CM Méthodes itératives} et \textbf{TD3, Exercice 1}.}
+    \item Appliquer la méthode de Jacobi à ce système avec un vecteur initial $X^{(0)}=(0,0,0)^T$ et calculer les 3 premières itérations.
+    \piste{Écrire explicitement les trois formules de récurrence scalaire, puis calculer successivement $X^{(1)}$, $X^{(2)}$, $X^{(3)}$. Vérifier chaque étape avec les équations du système.}
 \end{enumerate}
+
 
 \newpage
 

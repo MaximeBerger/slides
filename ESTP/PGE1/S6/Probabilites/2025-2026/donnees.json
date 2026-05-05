@@ -119,7 +119,16 @@
         }
       ],
       "sexercer" : [
-        
+        {
+          "titre": "TD4 - loi normale et intervalle de confiance",
+          "lien": "TD4-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD4 - pistes de solutions",
+          "lien": "TD4-corrige.pdf",
+          "cible": "_blank"
+        }
       ]
     }
   ]
