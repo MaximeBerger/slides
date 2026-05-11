@@ -156,6 +156,9 @@ On a relevé la durée de 60 appels pour chacun d'entre eux :
     \end{tabular}
 \end{table}
 
+On décide de modéliser la durée d'un appel par une \textbf{loi exponentielle}. 
+On rappelle qu'une variable aléatoire $X$ qui suit une loi exponentielle de paramètre $\lambda > 0$, notée $\mathcal{E}(\lambda)$, modélise souvent un temps d'attente ou une durée de vie. Son espérance est donnée par $E(X) = \frac{1}{\lambda}$ et sa variance par $V(X) = \frac{1}{\lambda^2}$.
+
 \begin{enumerate}
     \item Calculer la durée moyenne des appels pour chaque salarié.
     \ifthenelse{\boolean{showSolutions}}{
@@ -163,16 +166,10 @@ On a relevé la durée de 60 appels pour chacun d'entre eux :
             Rappelez-vous la formule de la moyenne empirique calculée à partir d'un tableau d'effectifs (voir exercice 2).
         \end{solution}
     }{}
-    \item Par quelle loi classique peut-on modéliser la durée d'un appel pour chaque salarié ?
+    \item Estimer le paramètre $\lambda$ de cette loi pour chaque salarié à partir des données.
     \ifthenelse{\boolean{showSolutions}}{
         \begin{solution}
-            Pensez aux lois continues vues en cours. Laquelle est souvent utilisée pour modéliser des durées ou des temps d'attente (voir les exemples du CM4) ?
-        \end{solution}
-    }{}
-    \item Estimer les paramètres de ces lois à partir des données.
-    \ifthenelse{\boolean{showSolutions}}{
-        \begin{solution}
-            Quel est le lien entre l'espérance d'une loi exponentielle et son paramètre $\lambda$ ? Utilisez la moyenne empirique calculée plus haut comme estimation de cette espérance.
+            Quel est le lien entre l'espérance d'une loi exponentielle et son paramètre $\lambda$ (donné dans le rappel) ? Utilisez la moyenne empirique calculée plus haut comme estimation de cette espérance.
         \end{solution}
     }{}
     \item Le superviseur souhaite que la durée moyenne des appels soit inférieure à 6 minutes. L'un des deux salariés respecte-t-il cet objectif ?
