@@ -340,6 +340,60 @@ $\text{p-value}_{\text{bilat}} = 2 \cdot \Phi(-3{,}53) \approx 4{,}2\cdot 10^{-4
 \end{tikzpicture}
 \end{center}
 
+\subsection*{5.3. Application : durée de vie d'une élingue de levage}
+
+\textbf{Cadre.} Une entreprise de BTP commande des \textbf{élingues d'acier} pour ses chantiers de levage. Le fabricant annonce une durée de vie moyenne avant rupture de $\mu_0 = 5000$ heures de service. La durée de vie d'une élingue est modélisée par une loi \textbf{exponentielle} de paramètre $\lambda$ (sans mémoire : si elle a tenu $t$ heures, sa durée de vie future a même loi qu'au début).
+
+Sur un échantillon de $n=50$ élingues testées jusqu'à la rupture, on observe une durée moyenne empirique $\Xbar = 4200$~heures.
+
+\medskip
+
+\textbf{Question 1.} Pour une loi exponentielle $\mathcal{E}(\lambda)$, rappeler $\E(X)$ et $\sigma(X)$ en fonction de $\lambda$. En déduire une propriété remarquable reliant $\sigma$ et $\mu$.
+
+\atrou[3cm]{%
+$\E(X) = 1/\lambda$ et $\Var(X) = 1/\lambda^2$, donc $\sigma(X) = 1/\lambda$. On en déduit la \textbf{propriété remarquable} de la loi exponentielle :
+\[
+  \boxed{\;\sigma = \mu.\;}
+\]
+Connaître la moyenne suffit à connaître l'écart-type --- très pratique pour les tests.
+}
+
+\textbf{Question 2.} Justifier que le test à mener est \emph{unilatéral} et formuler $H_0$ et $H_1$.
+
+\atrou[2.5cm]{%
+Le fabricant aurait intérêt à \emph{surestimer} la durée de vie (argument commercial). On ne suspecte que le dérapage vers le bas :
+\[ H_0 : \mu = 5000 \quad\text{contre}\quad H_1 : \mu < 5000. \]
+\textbf{Unilatéral à gauche.}
+}
+
+\textbf{Question 3.} Quelle loi suit approximativement $\Xbar$ sous $H_0$ ? Construire la statistique de test et calculer $Z_{\text{obs}}$.
+
+\atrou[4cm]{%
+Sous $H_0$, $\mu = 5000$ donc $\sigma = 5000$ (propriété de l'exponentielle). Par le TCL :
+\[
+  \Xbar \approx \mathcal{N}\!\left(5000,\;\dfrac{5000^2}{50}\right),
+  \qquad
+  Z = \dfrac{\Xbar - 5000}{5000/\sqrt{50}} \approx \mathcal{N}(0,1).
+\]
+\[
+  Z_{\text{obs}} = \dfrac{4200 - 5000}{5000/\sqrt{50}} = \dfrac{-800}{707{,}1} \approx -1{,}13.
+\]
+}
+
+\textbf{Question 4.} Calculer la p-value et conclure au seuil $5\,\%$.
+
+\atrou[3cm]{%
+Test unilatéral à gauche :
+\[
+  \text{p-value} = P(Z \le -1{,}13 \mid H_0) = \Phi(-1{,}13) = 1 - \Phi(1{,}13) \approx 0{,}129.
+\]
+$0{,}129 > 0{,}05$ : on \textbf{ne rejette pas} $H_0$. L'écart de $800$~h observé est compatible avec une simple fluctuation d'échantillonnage.
+}
+
+\medskip
+
+\textit{Moralité --- attention au piège.} \og Ne pas rejeter $H_0$ \fg{} ne veut \emph{pas} dire \og prouver que $H_0$ est vraie \fg. Cela veut dire : \og les données ne suffisent pas à prouver le contraire \fg. Pour trancher, soit on augmente la taille de l'échantillon, soit on accepte de rester sur l'annonce du fabricant par défaut. Si l'enjeu de sécurité est lourd (rupture d'une élingue $\Longrightarrow$ chute de charge), on peut préférer un seuil $\alpha$ \emph{plus grand} ($10\,\%$ par exemple) pour rejeter plus facilement.
+
 % ====================================================================
 \section*{6. Deux types d'erreurs}
 % ====================================================================
@@ -452,6 +506,81 @@ $\E(X) = p$, donc $\hat{p} = \Xbar$. C'est la \textbf{proportion observée} : on
 
 \atrou[2cm]{%
 $\E(X) = \lambda$, donc $\hat{\lambda} = \Xbar$. Pour la Poisson, le paramètre \emph{est} l'espérance.
+}
+
+\subsection*{7.1. Application : centre d'appels}
+
+Un centre d'appels modélise la durée d'un appel par une loi exponentielle $\mathcal{E}(\lambda)$. Sur $n=100$ appels, on observe une durée moyenne empirique $\Xbar = 4$ minutes.
+
+\medskip
+
+\textbf{Question 1.} Donner l'estimation ponctuelle $\hat{\lambda}$.
+
+\atrou[1.8cm]{%
+$\hat{\lambda} = 1/\Xbar = 1/4 = 0{,}25$ appel/minute.
+}
+
+\textbf{Question 2.} Construire un IC à $95\,\%$ pour $\mu = 1/\lambda$. On utilisera la propriété $\sigma = \mu$ de l'exponentielle et le plug-in $\hat{\sigma} = \Xbar$ (puisque $\sigma$ n'est pas connu, on l'estime par la même valeur).
+
+\atrou[3.5cm]{%
+La demi-largeur de l'IC est $1{,}96\,\dfrac{\hat{\sigma}}{\sqrt{n}} = 1{,}96\,\dfrac{4}{\sqrt{100}} = 0{,}784$. D'où
+\[
+  IC_{95\%}(\mu) = [4 - 0{,}784\,;\,4 + 0{,}784] = [3{,}22\,;\,4{,}78] \text{ min}.
+\]
+}
+
+\textbf{Question 3.} En déduire un IC à $95\,\%$ pour $\lambda$. (Indice : $\lambda \mapsto 1/\lambda$ est décroissante, donc inverser les bornes \emph{et} les permuter.)
+
+\atrou[2.5cm]{%
+\[
+  IC_{95\%}(\lambda) = \left[\dfrac{1}{4{,}78}\,;\,\dfrac{1}{3{,}22}\right] \approx [0{,}21\,;\,0{,}31] \text{ appel/min}.
+\]
+}
+
+\subsection*{7.2. Application : fiabilité d'une pompe de chantier}
+
+Une pompe de chantier subit une panne au bout d'un temps modélisé par une loi exponentielle $\mathcal{E}(\lambda)$ (propriété sans mémoire : l'usure n'est pas prise en compte). Le service maintenance relève les durées avant panne de $n=30$ pompes : moyenne empirique $\Xbar = 850$~heures.
+
+\medskip
+
+\textbf{Question 1.} Estimer $\mu$ et $\lambda$.
+
+\atrou[2cm]{%
+$\hat{\mu} = \Xbar = 850$~h ;\quad $\hat{\lambda} = 1/850 \approx 1{,}18\cdot 10^{-3}$~/h.
+}
+
+\textbf{Question 2.} Le fabricant annonce une durée de vie moyenne de $\mu_0 = 1000$~h. Tester cette annonce contre l'hypothèse \og les pompes durent moins \fg{} au seuil $5\,\%$.
+
+\atrou[4cm]{%
+Test unilatéral à gauche : $H_0 : \mu = 1000$, $H_1 : \mu < 1000$. Sous $H_0$, $\sigma = 1000$ (expo) :
+\[
+  Z_{\text{obs}} = \dfrac{850 - 1000}{1000/\sqrt{30}} = \dfrac{-150}{182{,}6} \approx -0{,}82.
+\]
+\[
+  \text{p-value} = \Phi(-0{,}82) \approx 1 - 0{,}794 = 0{,}206.
+\]
+$0{,}206 > 0{,}05$ : on \textbf{ne rejette pas}. L'annonce du fabricant reste plausible.
+}
+
+\textbf{Question 3.} En utilisant l'estimation $\hat{\lambda}$, calculer la probabilité qu'une nouvelle pompe fonctionne plus de $1500$ heures sans panne.
+
+\atrou[2.5cm]{%
+Pour une exponentielle de paramètre $\lambda$ :
+$P(X > t) = e^{-\lambda t}$. D'où
+\[
+  P(X > 1500) \approx e^{-1500/850} = e^{-1{,}765} \approx 0{,}171.
+\]
+Environ $17\,\%$ des pompes dépassent $1500$~heures.
+}
+
+\textbf{Question 4 --- Bonus.} Le chef de chantier veut être sûr à $90\,\%$ qu'une pompe tiendra au moins $T$ heures. Quelle valeur prendre pour $T$\,?
+
+\atrou[3cm]{%
+On cherche $T$ tel que $P(X > T) = 0{,}90$, soit $e^{-\hat{\lambda} T} = 0{,}90$ :
+\[
+  T = -\dfrac{\ln 0{,}90}{\hat{\lambda}} = 850 \cdot \ln(10/9) \approx 850 \cdot 0{,}105 \approx 90~\text{heures}.
+\]
+Sous nos hypothèses, on n'a que $90$~heures de \og garantie \fg{} à $90\,\%$. La loi exponentielle est très \emph{prudente} : elle suppose que la pompe peut tomber en panne à tout instant.
 }
 
 \medskip
