@@ -1,0 +1,487 @@
+\input{configTD}
+\usepackage{tikz}
+\usepackage{needspace}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Xbar}{\overline{X}_n}
+
+\title{\sffamily\bfseries Probabilités --- CM5\\[0.3em]
+  \Large Tests d'hypothèses : à partir de quand être surpris\,?}
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Un problème : faut-il être surpris\,?}
+% ====================================================================
+
+\textbf{Cadre.} Vous êtes au volant sur l'autoroute. Vous savez (statistiques constructeurs) qu'en France, environ $10\,\%$ des voitures sont \textbf{rouges}. Soudain, vous croisez \textbf{$4$ voitures rouges de suite}.
+
+\medskip
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+À partir de quand commence-t-on à douter du modèle\\
+\og les couleurs des voitures qui passent sont indépendantes,\\
+chacune rouge avec probabilité $0{,}10$\,\fg{}\,?
+\end{mdframed}
+\end{center}
+
+\textbf{Question 1.} Sous ce modèle, quelle est la probabilité de croiser $4$ voitures rouges \emph{exactement} d'affilée\,?
+
+\atrou[2.5cm]{%
+Les couleurs étant indépendantes :
+\[
+  P(\text{4 rouges de suite}) = 0{,}10^4 = 10^{-4} = 0{,}0001.
+\]
+C'est environ une chance sur $10\,000$. \emph{Rare}, mais pas impossible.
+}
+
+\textbf{Question 2.} Et pour $7$ voitures rouges d'affilée\,?
+
+\atrou[2cm]{%
+\[
+  P(\text{7 rouges de suite}) = 0{,}10^7 = 10^{-7} = 0{,}0000001.
+\]
+Une chance sur dix millions. À ce stade, on ne croit \emph{plus} au modèle.
+}
+
+\medskip
+
+\textbf{La logique du test d'hypothèse.}
+\begin{enumerate}
+  \item On part d'une \textbf{hypothèse de référence} (ici : indépendance + $p=0{,}10$).
+  \item On observe un résultat.
+  \item On calcule la probabilité d'observer un résultat \og au moins aussi extrême \fg{} sous cette hypothèse.
+  \item Si cette probabilité est \textbf{très petite}, on \textbf{rejette} l'hypothèse : elle est incompatible avec les données.
+\end{enumerate}
+
+\medskip
+
+\textit{Remarque.} On ne \og prouve \fg{} jamais qu'une hypothèse est vraie. On peut seulement décider qu'elle est trop incompatible avec les données pour être maintenue. Comme au tribunal : on rejette la présomption d'innocence (au-delà d'un doute raisonnable) ou bien on l'\textbf{accepte par défaut} --- ce n'est pas pareil que \og prouver que l'accusé est innocent \fg.
+
+% ====================================================================
+\section*{2. Formalisation : hypothèse, p-value, décision}
+% ====================================================================
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Vocabulaire.}
+\begin{itemize}
+  \item \textbf{Hypothèse nulle} $H_0$ : l'hypothèse \og par défaut \fg{} qu'on cherche à mettre à l'épreuve.
+  \item \textbf{Hypothèse alternative} $H_1$ : ce qui reste si $H_0$ est fausse.
+  \item \textbf{Statistique de test} : une quantité calculée sur l'échantillon, dont on connaît la loi \emph{sous} $H_0$.
+  \item \textbf{p-value} : probabilité, \emph{sous $H_0$}, d'observer un résultat au moins aussi extrême que celui qu'on a obtenu.
+  \item \textbf{Seuil} $\alpha$ : seuil de tolérance (typiquement $5\,\%$ ou $1\,\%$). On rejette $H_0$ si p-value $<\alpha$.
+\end{itemize}
+\end{mdframed}
+
+\medskip
+
+\textbf{Question 1.} Dans l'exemple des voitures, quelles sont $H_0$ et $H_1$\,? Quelle p-value obtient-on avec $4$ rouges d'affilée\,? Au seuil $\alpha = 0{,}05$, rejette-t-on $H_0$\,?
+
+\atrou[3.5cm]{%
+$H_0$ : \og les couleurs sont indépendantes et $p_{\text{rouge}} = 0{,}10$ \fg{}.\\
+$H_1$ : \og il y a un biais (dépendance ou $p$ plus grand) \fg{}.\\
+p-value $= P(\text{au moins 4 rouges de suite} \mid H_0) = 10^{-4}$.\\
+$10^{-4} < 0{,}05$, donc on \textbf{rejette} $H_0$.
+}
+
+\medskip
+
+\textit{Attention.} Le seuil $\alpha$ est arbitraire et doit être fixé \textbf{avant} l'expérience. Sinon, on est tenté de \og l'ajuster \fg{} pour faire dire aux données ce qu'on veut. C'est l'origine du célèbre \og $p$-hacking \fg{} en sciences.
+
+% ====================================================================
+\section*{3. Test sur une moyenne}
+% ====================================================================
+
+On revient sur l'exemple central du CM4 : une usine remplit des sacs de ciment de poids nominal $25$~kg, avec un écart-type de remplissage $\sigma = 0{,}5$~kg \emph{connu}. Le chef de production veut savoir si la machine est \textbf{déréglée}.
+
+Il pèse $n=100$ sacs et obtient une moyenne empirique $\Xbar = 24{,}8$~kg.
+
+\medskip
+
+\textbf{Question 1.} Quelles sont $H_0$ et $H_1$ dans ce problème\,?
+
+\atrou[2cm]{%
+$H_0$ : $\mu = 25$ (la machine est bien réglée).\\
+$H_1$ : $\mu \neq 25$ (la machine est déréglée).
+}
+
+\textbf{Question 2.} Sous $H_0$, donner la loi approximative de $\Xbar$ (TCL).
+
+\atrou[2cm]{%
+Sous $H_0$, les sacs sont i.i.d.\ d'espérance $25$ et d'écart-type $0{,}5$. Par le TCL,
+\[
+  \Xbar \;\approx\; \mathcal{N}\!\left(25,\;\dfrac{0{,}5^2}{100}\right),
+  \quad\text{d'écart-type}\quad \dfrac{\sigma}{\sqrt{n}} = 0{,}05.
+\]
+}
+
+\textbf{Question 3.} Construire la \textbf{statistique de test} $Z$ qui suit $\mathcal{N}(0,1)$ sous $H_0$. Calculer la valeur observée $Z_{\text{obs}}$.
+
+\atrou[3cm]{%
+On standardise sous $H_0$ :
+\[
+  Z = \dfrac{\Xbar - 25}{\sigma/\sqrt{n}} \;\approx\; \mathcal{N}(0,1).
+\]
+Valeur observée :
+\[
+  Z_{\text{obs}} = \dfrac{24{,}8 - 25}{0{,}05} = -4.
+\]
+}
+
+\textbf{Question 4.} L'écart $\Xbar - 25 = -0{,}2$ est-il \og du bon côté \fg{}\,? Plus précisément, le problème porte sur $\Xbar \neq 25$ (et non $\Xbar < 25$). Quelle est alors la p-value\,?
+
+\atrou[4cm]{%
+On teste $H_0: \mu = 25$ contre $H_1: \mu \neq 25$ (\textbf{test bilatéral}). On considère donc les écarts \emph{dans les deux sens}~:
+\[
+  \text{p-value} = P(|Z| \ge |Z_{\text{obs}}| \mid H_0)
+  = P(|Z| \ge 4) = 2\bigl(1-\Phi(4)\bigr).
+\]
+Or $1-\Phi(4) \approx 3{,}2\cdot 10^{-5}$, donc p-value $\approx 6{,}4\cdot 10^{-5}$.\\
+$6{,}4\cdot 10^{-5} \ll 0{,}05$ : on \textbf{rejette} $H_0$. La machine est déréglée.
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+  % bell curve
+  \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
+    plot (\x, {2.2*exp(-\x*\x/2)});
+  % shaded tails (z = -1.96 and 1.96)
+  \fill[ThemeLight, opacity=0.7, domain=-3.4:-1.96, smooth, samples=40]
+    plot (\x, {2.2*exp(-\x*\x/2)}) -- (-1.96,0) -- (-3.4,0) -- cycle;
+  \fill[ThemeLight, opacity=0.7, domain=1.96:3.4, smooth, samples=40]
+    plot (\x, {2.2*exp(-\x*\x/2)}) -- (3.4,0) -- (1.96,0) -- cycle;
+  \draw[thick,->] (-4,0) -- (4,0) node[right] {\small $z$};
+  \draw[dashed] (-1.96,0) -- (-1.96,1);
+  \draw[dashed] (1.96,0) -- (1.96,1);
+  \node at (-1.96,-0.35) {\small $-1{,}96$};
+  \node at (1.96,-0.35) {\small $1{,}96$};
+  \node at (0,-0.35) {\small $0$};
+  \node at (-2.8,0.4) {\small\bfseries $\alpha/2$};
+  \node at (2.8,0.4) {\small\bfseries $\alpha/2$};
+  \node at (0,2.6) {\small zone d'\textbf{acceptation} (on garde $H_0$)};
+\end{tikzpicture}
+\end{center}
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Recette du test bilatéral sur une moyenne ($\sigma$ connu).}
+\begin{enumerate}
+  \item $H_0 : \mu = \mu_0$ \quad contre \quad $H_1 : \mu \neq \mu_0$.
+  \item Statistique : $Z = \dfrac{\Xbar - \mu_0}{\sigma/\sqrt{n}}$, qui suit $\mathcal{N}(0,1)$ sous $H_0$.
+  \item Seuil $\alpha$ (souvent $0{,}05$) $\Longrightarrow$ valeur critique $t_\alpha$ (par exemple $t_{0{,}05}=1{,}96$).
+  \item \textbf{Décision} : \textbf{rejeter} $H_0$ si $|Z_{\text{obs}}| > t_\alpha$, sinon \textbf{ne pas rejeter}.
+\end{enumerate}
+\end{mdframed}
+
+% ====================================================================
+\section*{4. Dualité intervalle de confiance $\Longleftrightarrow$ test}
+% ====================================================================
+
+\textbf{Question 1.} Au CM4, on avait construit l'intervalle de confiance à $95\,\%$ pour $\mu$ dans le problème des sacs de ciment : $IC_{95\%} = [24{,}702\,;\,24{,}898]$. Cet intervalle contient-il $\mu_0 = 25$\,?
+
+\atrou[2cm]{%
+\textbf{Non.} La valeur $25$ est en dehors. C'est exactement la même conclusion que le test : la machine est déréglée.
+}
+
+\textbf{Question 2.} Montrer que les deux énoncés suivants sont \textbf{équivalents} :
+\begin{itemize}
+  \item[(a)] On rejette $H_0 : \mu = \mu_0$ au seuil $\alpha$.
+  \item[(b)] $\mu_0 \notin IC_{1-\alpha}$ (l'intervalle de confiance à $1-\alpha$).
+\end{itemize}
+
+\atrou[5cm]{%
+On a rejet $\Leftrightarrow$ $|Z_{\text{obs}}| > t_\alpha$ $\Leftrightarrow$
+$\left|\Xbar - \mu_0\right| > t_\alpha\,\dfrac{\sigma}{\sqrt{n}}$ $\Leftrightarrow$
+$\mu_0 \notin \left[\Xbar - t_\alpha\,\dfrac{\sigma}{\sqrt{n}}\,;\,\Xbar + t_\alpha\,\dfrac{\sigma}{\sqrt{n}}\right]$
+$\Leftrightarrow$ $\mu_0 \notin IC_{1-\alpha}$.
+
+\smallskip
+
+C'est exactement le même calcul, vu sous deux angles.
+}
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Dualité IC / test.} Au même seuil $\alpha$ :
+\[
+  \boxed{\;\text{Rejeter } H_0: \mu = \mu_0 \;\Longleftrightarrow\; \mu_0 \notin IC_{1-\alpha}.\;}
+\]
+L'intervalle de confiance est l'\textbf{ensemble des valeurs $\mu_0$ qu'on \emph{ne rejetterait pas}} au seuil $\alpha$.
+\end{mdframed}
+
+\textit{Conséquence pratique.} Si on a déjà calculé un IC à $95\,\%$, on a \emph{gratuitement} un test bilatéral au seuil $5\,\%$ pour n'importe quelle valeur $\mu_0$.
+
+% ====================================================================
+\section*{5. Tests bilatéral et unilatéral}
+% ====================================================================
+
+\subsection*{5.1. Le contexte change l'hypothèse alternative}
+
+Considérons deux situations à statistique de test identique :
+
+\begin{itemize}
+  \item \textbf{Sacs de ciment.} La machine peut être déréglée \emph{vers le haut} (perte de matière première) \emph{ou vers le bas} (sacs sous-remplis, fraude). On veut détecter tout dérèglement : $H_1 : \mu \neq 25$. \textbf{Bilatéral.}
+  \item \textbf{Ampoules du vendeur.} Le vendeur prétend $\mu_0 = 1000$~h. Si la durée moyenne réelle est \emph{supérieure} (les ampoules durent plus que prévu), c'est tout bénéfice : on n'a aucune raison de s'en plaindre. On ne suspecte que le dérapage \emph{vers le bas} : $H_1 : \mu < 1000$. \textbf{Unilatéral à gauche.}
+\end{itemize}
+
+\subsection*{5.2. Conséquence sur la valeur critique}
+
+\textbf{Question 1.} Au CM4, sur les ampoules ($n=50$, $\sigma=100$, $\Xbar=950$), on a calculé
+$Z_{\text{obs}} = (950-1000)/(100/\sqrt{50}) = -3{,}53$.
+Calculer la p-value \textbf{unilatérale} (test \og les ampoules durent moins \fg).
+
+\atrou[2.5cm]{%
+\[
+  \text{p-value} = P(Z \le -3{,}53 \mid H_0) = \Phi(-3{,}53) \approx 2{,}1\cdot 10^{-4}.
+\]
+\textbf{Très petite} : on rejette $H_0$. Le vendeur ment.
+}
+
+\medskip
+
+\textbf{Question 2.} Si on avait fait un test bilatéral, quelle aurait été la p-value\,?
+
+\atrou[2.2cm]{%
+$\text{p-value}_{\text{bilat}} = 2 \cdot \Phi(-3{,}53) \approx 4{,}2\cdot 10^{-4}$.
+
+\smallskip
+
+\textbf{Deux fois plus grande}, mais on rejette toujours.
+}
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{À retenir.}
+\begin{itemize}
+  \item \textbf{Bilatéral} ($H_1 : \mu \neq \mu_0$) : on coupe $\alpha$ en deux, rejet si $|Z_{\text{obs}}| > t_\alpha$ avec $t_{0{,}05}=1{,}96$.
+  \item \textbf{Unilatéral à gauche} ($H_1 : \mu < \mu_0$) : tout $\alpha$ à gauche, rejet si $Z_{\text{obs}} < -u_\alpha$ avec $u_{0{,}05}=1{,}645$.
+  \item \textbf{Unilatéral à droite} ($H_1 : \mu > \mu_0$) : tout $\alpha$ à droite, rejet si $Z_{\text{obs}} > u_\alpha$.
+\end{itemize}
+\end{mdframed}
+
+\medskip
+
+\textit{Important.} Le choix \og bilatéral / unilatéral \fg{} se fait \textbf{avant} de regarder les données, en fonction du \emph{contexte du problème}, jamais pour faire arranger la p-value.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.55]
+  % bilateral
+  \begin{scope}[xshift=-7cm]
+    \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
+      plot (\x, {2.2*exp(-\x*\x/2)});
+    \fill[Accent, opacity=0.6, domain=-3.4:-1.96, smooth, samples=40]
+      plot (\x, {2.2*exp(-\x*\x/2)}) -- (-1.96,0) -- (-3.4,0) -- cycle;
+    \fill[Accent, opacity=0.6, domain=1.96:3.4, smooth, samples=40]
+      plot (\x, {2.2*exp(-\x*\x/2)}) -- (3.4,0) -- (1.96,0) -- cycle;
+    \draw[thick,->] (-4,0) -- (4,0);
+    \node[below] at (-1.96,-0.05) {\scriptsize $-1{,}96$};
+    \node[below] at (1.96,-0.05) {\scriptsize $1{,}96$};
+    \node at (0,-1.4) {\small\bfseries Bilatéral};
+  \end{scope}
+  % unilateral droite
+  \begin{scope}[xshift=0cm]
+    \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
+      plot (\x, {2.2*exp(-\x*\x/2)});
+    \fill[Accent, opacity=0.6, domain=1.645:3.4, smooth, samples=40]
+      plot (\x, {2.2*exp(-\x*\x/2)}) -- (3.4,0) -- (1.645,0) -- cycle;
+    \draw[thick,->] (-4,0) -- (4,0);
+    \node[below] at (1.645,-0.05) {\scriptsize $1{,}645$};
+    \node at (0,-1.4) {\small\bfseries Unilatéral à droite};
+  \end{scope}
+  % unilateral gauche
+  \begin{scope}[xshift=7cm]
+    \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
+      plot (\x, {2.2*exp(-\x*\x/2)});
+    \fill[Accent, opacity=0.6, domain=-3.4:-1.645, smooth, samples=40]
+      plot (\x, {2.2*exp(-\x*\x/2)}) -- (-1.645,0) -- (-3.4,0) -- cycle;
+    \draw[thick,->] (-4,0) -- (4,0);
+    \node[below] at (-1.645,-0.05) {\scriptsize $-1{,}645$};
+    \node at (0,-1.4) {\small\bfseries Unilatéral à gauche};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+% ====================================================================
+\section*{6. Deux types d'erreurs}
+% ====================================================================
+
+Un test n'est \textbf{jamais} certain : il peut se tromper de deux façons.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|m{4cm}|c|c|}
+  \hline
+  & $H_0$ vraie en réalité & $H_0$ fausse en réalité \\
+  \hline
+  Décision : \emph{garder} $H_0$ & \checkmark\ bonne décision & \textbf{erreur de type II} ($\beta$) \\
+  \hline
+  Décision : \emph{rejeter} $H_0$ & \textbf{erreur de type I} ($\alpha$) & \checkmark\ bonne décision \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\begin{itemize}
+  \item \textbf{Erreur de type I} : on rejette $H_0$ alors qu'elle est vraie. Sa probabilité est précisément $\alpha$ (le seuil qu'on fixe).
+  \item \textbf{Erreur de type II} : on garde $H_0$ alors qu'elle est fausse. Sa probabilité $\beta$ dépend de la vraie valeur du paramètre (et n'est en général \emph{pas} égale à $1-\alpha$).
+\end{itemize}
+
+\medskip
+
+\textbf{Le compromis fondamental.}
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+À $n$ fixé : \;diminuer $\alpha$ $\Longrightarrow$ augmenter $\beta$. \;Diminuer les deux à la fois nécessite d'augmenter $n$.
+\end{mdframed}
+\end{center}
+
+\medskip
+
+\textbf{Analogie au tribunal.} $H_0$ = \og l'accusé est innocent \fg{}.
+\begin{itemize}
+  \item Type I : condamner un innocent. Très grave $\Longrightarrow$ on prend $\alpha$ \emph{petit}.
+  \item Type II : acquitter un coupable. Moins grave dans la philosophie du droit, mais pas négligeable.
+\end{itemize}
+
+\medskip
+
+\textbf{Question --- Application industrielle.}
+Une machine produit en moyenne $3\,\%$ de boulons défectueux. On prélève chaque jour $n=200$ boulons. On décide la règle \og \textbf{rejeter le lot et arrêter la machine si plus de $10$ défectueux} \fg.
+\begin{enumerate}
+  \item Sous $H_0$ (la machine est bien réglée, $p = 0{,}03$), quelle loi suit le nombre $X$ de défauts dans l'échantillon\,? Donner son espérance et son écart-type.
+  \item Par approximation normale (TCL), calculer le risque de type I, c'est-à-dire la probabilité d'arrêter la machine alors qu'elle est bien réglée.
+\end{enumerate}
+
+\atrou[6cm]{%
+\textbf{1.} $X \sim \mathcal{B}(200,\,0{,}03)$, donc
+\[
+  \E(X) = np = 6,\qquad \sigma(X) = \sqrt{np(1-p)} = \sqrt{200\cdot 0{,}03\cdot 0{,}97} \approx 2{,}41.
+\]
+
+\textbf{2.} Par le TCL, sous $H_0$, $X \approx \mathcal{N}(6,\,2{,}41^2)$.
+\[
+  P(X > 10 \mid H_0) = P\!\left(Z > \dfrac{10-6}{2{,}41}\right) = P(Z > 1{,}66) \approx 1-\Phi(1{,}66) \approx 0{,}049.
+\]
+Soit environ $5\,\%$ : c'est notre seuil $\alpha$. Une fois tous les vingt jours environ, on arrêtera la machine \emph{à tort}.
+}
+
+\medskip
+
+\textit{Et si on durcissait la règle\,?} Avec \og rejet si plus de $14$ défauts \fg{}, $\alpha$ tomberait à environ $0{,}05\,\%$... mais on laisserait passer beaucoup plus de lots vraiment défectueux ($\beta$ augmente). C'est le compromis.
+
+% ====================================================================
+\section*{7. Vers les estimateurs : préparer le CM6}
+% ====================================================================
+
+Tous nos tests ont supposé jusqu'ici que $\sigma$ (ou $p$) était \textbf{connu}. Et si on ne connaissait \emph{rien} de la loi des données --- juste l'échantillon\,?
+
+\medskip
+
+\textbf{La question.} Étant donné un échantillon $X_1,\dots,X_n$ supposé issu d'une loi \emph{paramétrique} (binomiale, exponentielle, normale\dots), comment \textbf{deviner} le paramètre\,?
+
+\medskip
+
+\textbf{Idée centrale : la méthode des moments.}
+Pour une loi paramétrée par $\theta$, l'espérance théorique $\E(X)$ s'exprime en fonction de $\theta$. On \textbf{remplace l'espérance par la moyenne empirique} :
+\[
+  \E(X) = g(\theta) \quad\xRightarrow{\text{remplace}}\quad \Xbar = g(\hat{\theta})
+  \quad\Longrightarrow\quad \hat{\theta} = g^{-1}(\Xbar).
+\]
+
+\medskip
+
+\textbf{Question 1.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi exponentielle $\mathcal{E}(\lambda)$. Donner $\E(X)$, puis déduire un estimateur $\hat{\lambda}$ par la méthode des moments.
+
+\atrou[2.5cm]{%
+$\E(X) = 1/\lambda$, donc en posant $\Xbar = 1/\hat{\lambda}$, on obtient
+\[
+  \boxed{\;\hat{\lambda} = \dfrac{1}{\Xbar}.\;}
+\]
+On retrouve l'estimateur du CM4 (durée des appels). \emph{Si la durée moyenne empirique est de $5$ min, on estime $\lambda = 0{,}2$ appel/min.}
+}
+
+\textbf{Question 2.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi de Bernoulli $\mathcal{B}(p)$ ($X_i \in \{0,1\}$). Estimer $p$.
+
+\atrou[2cm]{%
+$\E(X) = p$, donc $\hat{p} = \Xbar$. C'est la \textbf{proportion observée} : on retrouve l'estimateur déjà utilisé en CM3 (sondages) et CM4.
+}
+
+\textbf{Question 3.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi de Poisson $\mathcal{P}(\lambda)$. Estimer $\lambda$.
+
+\atrou[2cm]{%
+$\E(X) = \lambda$, donc $\hat{\lambda} = \Xbar$. Pour la Poisson, le paramètre \emph{est} l'espérance.
+}
+
+\medskip
+
+\textit{Au CM6 et au TD5}, on formalisera ce que \og bien estimer \fg{} veut dire (\textbf{biais}, \textbf{variance} d'un estimateur), et on construira des estimateurs par d'autres méthodes (moments d'ordre $2$, maximum de vraisemblance pour les motivés).
+
+% ====================================================================
+\needspace{20\baselineskip}
+\section*{8. Bilan}
+% ====================================================================
+
+\nopagebreak
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt, nobreak=true]
+\textbf{À retenir.}
+\begin{enumerate}
+  \item \textbf{Test d'hypothèse} : on confronte une hypothèse $H_0$ (modèle de référence) aux données. On rejette $H_0$ si l'observation est \og trop improbable \fg{} sous $H_0$.
+
+  \item \textbf{p-value} : $P(\text{observation au moins aussi extrême} \mid H_0)$. On rejette si $\text{p-value} < \alpha$.
+
+  \item \textbf{Recette test bilatéral sur la moyenne ($\sigma$ connu)} : statistique $Z = (\Xbar - \mu_0)/(\sigma/\sqrt{n})$, qui suit $\mathcal{N}(0,1)$ sous $H_0$. Rejet si $|Z_{\text{obs}}| > t_\alpha$ ($t_{0{,}05}=1{,}96$).
+
+  \item \textbf{Dualité IC $\Leftrightarrow$ test} : on rejette $H_0 : \mu = \mu_0$ au seuil $\alpha$ si et seulement si $\mu_0 \notin IC_{1-\alpha}$.
+
+  \item \textbf{Bilatéral vs unilatéral} : choisir d'après le contexte, \emph{avant} l'expérience.
+
+  \item \textbf{Deux types d'erreurs} : type I ($\alpha$, fixé) et type II ($\beta$, dépend de la vraie valeur). Pour diminuer les deux à la fois : augmenter $n$.
+
+  \item \textbf{Méthode des moments} : pour estimer un paramètre $\theta$, exprimer $\E(X) = g(\theta)$, puis poser $\Xbar = g(\hat{\theta})$ et résoudre.
+\end{enumerate}
+\end{mdframed}
+
+\end{document}
