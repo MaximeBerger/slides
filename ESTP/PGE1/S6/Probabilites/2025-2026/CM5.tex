@@ -80,17 +80,49 @@ Une chance sur dix millions. À ce stade, on ne croit \emph{plus} au modèle.
 
 \medskip
 
-\textbf{La logique du test d'hypothèse.}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\textbf{La logique du test d'hypothèse --- en quatre temps.}
 \begin{enumerate}
-  \item On part d'une \textbf{hypothèse de référence} (ici : indépendance + $p=0{,}10$).
-  \item On observe un résultat.
-  \item On calcule la probabilité d'observer un résultat \og au moins aussi extrême \fg{} sous cette hypothèse.
-  \item Si cette probabilité est \textbf{très petite}, on \textbf{rejette} l'hypothèse : elle est incompatible avec les données.
+  \item \textbf{Hypothèse de référence} ($H_0$). On pose un modèle \og par défaut \fg{} dont on veut éprouver la crédibilité (ici : indépendance + $p=0{,}10$).
+  \item \textbf{Observation}. On collecte des données (ici : $4$ rouges de suite).
+  \item \textbf{Probabilité sous $H_0$}. On calcule la probabilité, \emph{en supposant $H_0$ vraie}, d'observer un résultat \og au moins aussi extrême \fg{} que celui constaté. C'est la \textbf{p-value}.
+  \item \textbf{Décision}. Si cette probabilité est \emph{très petite} (sous un seuil $\alpha$ fixé à l'avance), on \textbf{rejette $H_0$} : les données sont incompatibles avec le modèle. Sinon, on \emph{conserve} $H_0$ par défaut.
 \end{enumerate}
+\end{mdframed}
 
 \medskip
 
 \textit{Remarque.} On ne \og prouve \fg{} jamais qu'une hypothèse est vraie. On peut seulement décider qu'elle est trop incompatible avec les données pour être maintenue. Comme au tribunal : on rejette la présomption d'innocence (au-delà d'un doute raisonnable) ou bien on l'\textbf{accepte par défaut} --- ce n'est pas pareil que \og prouver que l'accusé est innocent \fg.
+
+\subsection*{1.1. Deuxième exemple : un dé sans aucun \texorpdfstring{$6$}{6}}
+
+On lance un dé à $6$ faces $20$ fois de suite et, à notre grande surprise, on n'obtient \textbf{aucun $6$}. Doit-on suspecter que le dé est truqué\,?
+
+\textbf{Question 1.} Énoncer l'hypothèse $H_0$ (\og le dé n'est pas truqué \fg) et proposer une statistique de test naturelle. Quelle est sa loi sous $H_0$\,?
+
+\atrou[3.5cm]{%
+$H_0$ : \og le dé est équilibré \fg, c'est-à-dire $P(\text{face } 6) = 1/6$ et lancers indépendants.\\
+Statistique naturelle : $X$ = nombre de $6$ obtenus en $20$ lancers. Sous $H_0$,
+\[
+  X \sim \mathcal{B}\!\left(20,\,\tfrac{1}{6}\right),
+  \qquad \E(X) = \tfrac{20}{6} \approx 3{,}33.
+\]
+}
+
+\textbf{Question 2.} On observe $X_{\text{obs}} = 0$. Calculer la p-value et conclure au seuil $\alpha = 5\,\%$.
+
+\atrou[3.5cm]{%
+On observe une valeur \emph{anormalement basse}~; la p-value est la probabilité d'observer aussi peu de $6$ que cela sous $H_0$ :
+\[
+  \text{p-value} = P(X \le 0 \mid H_0) = P(X = 0) = \left(\tfrac{5}{6}\right)^{20} \approx 0{,}026.
+\]
+$0{,}026 < 0{,}05$ : on \textbf{rejette} $H_0$. Le dé semble truqué (manque de $6$).
+
+\smallskip
+
+\emph{Anecdote.} Au seuil $\alpha = 1\,\%$, on ne rejetterait \emph{pas} : la conclusion dépend du seuil choisi --- d'où l'importance de le fixer avant l'expérience.
+}
 
 % ====================================================================
 \section*{2. Formalisation : hypothèse, p-value, décision}
@@ -121,7 +153,66 @@ $10^{-4} < 0{,}05$, donc on \textbf{rejette} $H_0$.
 
 \medskip
 
-\textit{Attention.} Le seuil $\alpha$ est arbitraire et doit être fixé \textbf{avant} l'expérience. Sinon, on est tenté de \og l'ajuster \fg{} pour faire dire aux données ce qu'on veut. C'est l'origine du célèbre \og $p$-hacking \fg{} en sciences.
+\textbf{Le test d'hypothèse, c'est partout.} Le même squelette \og hypothèse de référence \textrightarrow{} statistique \textrightarrow{} p-value \textrightarrow{} décision \fg{} se retrouve dans une foule de domaines très différents. Pour chacun des contextes ci-dessous, à toi de proposer l'hypothèse $H_0$.
+
+\smallskip
+
+\textbf{Exemple 1 --- Médecine.} On veut tester un nouveau traitement contre l'hypertension. On recrute deux groupes de $200$ patients : l'un reçoit le médicament, l'autre un placebo. Au bout de $3$ mois, la baisse moyenne de tension est de $9$~mmHg dans le premier groupe contre $7$~mmHg dans le second. Cette différence est-elle réelle, ou s'explique-t-elle par le simple hasard de l'échantillonnage\,?
+
+\atrou[2cm]{%
+$H_0$ : \og le traitement n'a aucun effet \fg{}, soit $\mu_{\text{traitement}} = \mu_{\text{placebo}}$. La différence de $2$~mmHg n'est qu'une fluctuation due aux échantillons.
+}
+
+\textbf{Exemple 2 --- Contrôle qualité.} Une chaîne de production garantit au plus $1\,\%$ de boulons défectueux. Un client effectue une réception~: il prélève $500$ boulons et en trouve $11$ défectueux ($2{,}2\,\%$). Le lot doit-il être refusé\,?
+
+\atrou[2cm]{%
+$H_0$ : \og la chaîne respecte sa spécification \fg, soit $p_{\text{défaut}} \le 0{,}01$. Le test met à l'épreuve l'hypothèse que la fréquence observée ($2{,}2\,\%$) est compatible avec un vrai $p$ inférieur à $1\,\%$.
+}
+
+\textbf{Exemple 3 --- A/B testing.} Le service marketing d'un site marchand teste deux versions de la page d'accueil. La version~A est montrée à $10\,000$ visiteurs ($320$ achats), la version~B à $10\,000$ autres ($360$ achats). Faut-il déployer la version~B partout\,?
+
+\atrou[2cm]{%
+$H_0$ : \og les deux versions ont le même taux de conversion \fg, soit $p_A = p_B$. La différence observée ($3{,}2\,\%$ vs $3{,}6\,\%$) pourrait n'être qu'un effet du hasard.
+}
+
+\textbf{Exemple 4 --- Sondage électoral.} À $48\,\%$ d'intentions de vote sur un échantillon de $1000$ personnes, le candidat peut-il être assuré qu'il franchira la barre des $50\,\%$ au second tour\,?
+
+\atrou[2cm]{%
+$H_0$ : \og le candidat est sous la barre \fg, soit $p \le 0{,}50$. Tant qu'on ne rejette pas $H_0$, on ne peut pas conclure qu'il est majoritaire dans la population.
+}
+
+\textbf{Exemple 5 --- Détection de fraude.} Dans une comptabilité \og naturelle \fg, le \emph{premier chiffre} d'un montant suit la \textbf{loi de Benford} ($1 \to 30\,\%$, $2 \to 18\,\%$, \ldots, $9 \to 4{,}5\,\%$). Un enquêteur compare la distribution des premiers chiffres d'une déclaration suspecte à cette loi.
+
+\atrou[2cm]{%
+$H_0$ : \og les premiers chiffres suivent la loi de Benford \fg{} (donc pas de manipulation). Un écart \og trop grand \fg{} fait rejeter l'hypothèse, et plaide pour des chiffres fabriqués (les humains tirent uniformément quand ils inventent).
+}
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\textbf{Quelques seuils $\alpha$ \og publics \fg{}.} Le seuil dépend des conséquences d'une fausse découverte~:
+\begin{itemize}\setlength{\itemsep}{0.15em}
+  \item \textbf{Sciences sociales, médecine usuelle}~: $\alpha = 5\,\%$ (par convention).
+  \item \textbf{Essais cliniques de phase~III (FDA, EMA)}~: typiquement $\alpha = 5\,\%$, mais on demande \emph{deux études indépendantes positives} avant de mettre un médicament sur le marché.
+  \item \textbf{Études génomiques (GWAS)}~: $\alpha \approx 5 \cdot 10^{-8}$, pour corriger les ${\sim}10^6$ tests menés simultanément sur le génome.
+  \item \textbf{Physique des particules (CERN)}~: pour annoncer une \og découverte \fg{} (boson de Higgs, $2012$), il faut $5\sigma$, soit p-value $< 3 \cdot 10^{-7}$.
+\end{itemize}
+Plus l'enjeu est lourd (autoriser un médicament, annoncer une particule fondamentale), plus le seuil est sévère.
+\end{mdframed}
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Accent,
+  linewidth=1.5pt, innertopmargin=8pt, innerbottommargin=8pt]
+\textbf{Attention au $p$-hacking.} Pour que la p-value ait du sens, le seuil $\alpha$ \emph{et} la statistique de test doivent être fixés \textbf{avant} de regarder les données. Sinon, on tombe dans des pratiques qui fabriquent artificiellement des résultats \og significatifs \fg{} :
+\begin{itemize}\setlength{\itemsep}{0.15em}
+  \item \textbf{Tester $20$ hypothèses, garder celle qui marche.} Au seuil $5\,\%$, on s'attend à $1$ résultat \og positif \fg{} par pur hasard sur $20$, même quand tout est faux.
+  \item \textbf{Stopper la collecte dès que p $<\,0{,}05$.} En continuant à observer juste assez, on finit toujours par franchir le seuil.
+  \item \textbf{Découper en sous-groupes après coup.} \og Le médicament ne marche pas en moyenne, mais marche \emph{chez les femmes de plus de $50$ ans} \fg{} : avec assez de découpages, une catégorie sera \og positive \fg{} par hasard.
+\end{itemize}
+C'est l'une des causes de la \emph{crise de reproductibilité} en sciences (beaucoup de résultats publiés ne se confirment pas en répétant l'expérience).
+\end{mdframed}
 
 % ====================================================================
 \section*{3. Test sur une moyenne}
@@ -140,35 +231,27 @@ $H_0$ : $\mu = 25$ (la machine est bien réglée).\\
 $H_1$ : $\mu \neq 25$ (la machine est déréglée).
 }
 
-\textbf{Question 2.} Sous $H_0$, donner la loi approximative de $\Xbar$ (TCL).
-
-\atrou[2cm]{%
-Sous $H_0$, les sacs sont i.i.d.\ d'espérance $25$ et d'écart-type $0{,}5$. Par le TCL,
-\[
-  \Xbar \;\approx\; \mathcal{N}\!\left(25,\;\dfrac{0{,}5^2}{100}\right),
-  \quad\text{d'écart-type}\quad \dfrac{\sigma}{\sqrt{n}} = 0{,}05.
-\]
-}
-
-\textbf{Question 3.} Construire la \textbf{statistique de test} $Z$ qui suit $\mathcal{N}(0,1)$ sous $H_0$. Calculer la valeur observée $Z_{\text{obs}}$.
-
-\atrou[3cm]{%
-On standardise sous $H_0$ :
-\[
-  Z = \dfrac{\Xbar - 25}{\sigma/\sqrt{n}} \;\approx\; \mathcal{N}(0,1).
-\]
-Valeur observée :
-\[
-  Z_{\text{obs}} = \dfrac{24{,}8 - 25}{0{,}05} = -4.
-\]
-}
-
-\textbf{Question 4.} L'écart $\Xbar - 25 = -0{,}2$ est-il \og du bon côté \fg{}\,? Plus précisément, le problème porte sur $\Xbar \neq 25$ (et non $\Xbar < 25$). Quelle est alors la p-value\,?
+\textbf{Question 2.} En utilisant le TCL, construire une \textbf{statistique de test} $Z$ qui suit $\mathcal{N}(0,1)$ sous $H_0$. Calculer la valeur observée $Z_{\text{obs}}$.
 
 \atrou[4cm]{%
-On teste $H_0: \mu = 25$ contre $H_1: \mu \neq 25$ (\textbf{test bilatéral}). On considère donc les écarts \emph{dans les deux sens}~:
+Sous $H_0$, les sacs sont i.i.d.\ d'espérance $25$ et d'écart-type $0{,}5$. Par le TCL,
 \[
-  \text{p-value} = P(|Z| \ge |Z_{\text{obs}}| \mid H_0)
+  \Xbar \;\approx\; \mathcal{N}\!\left(25,\;\dfrac{0{,}5^2}{100}\right).
+\]
+On standardise pour obtenir une loi $\mathcal{N}(0,1)$ :
+\[
+  Z = \dfrac{\Xbar - 25}{\sigma/\sqrt{n}} \;\approx\; \mathcal{N}(0,1),
+  \qquad
+  Z_{\text{obs}} = \dfrac{24{,}8 - 25}{0{,}5/\sqrt{100}} = \dfrac{-0{,}2}{0{,}05} = -4.
+\]
+}
+
+\textbf{Question 3.} Quelle est la p-value\,? Conclure au seuil $\alpha = 5\,\%$.
+
+\atrou[4.5cm]{%
+La machine peut se dérégler vers le haut ou vers le bas : on s'intéresse à l'écart \emph{dans les deux sens}.
+\[
+  \text{p-value} = P\bigl(|Z| \ge |Z_{\text{obs}}| \;\big|\; H_0\bigr)
   = P(|Z| \ge 4) = 2\bigl(1-\Phi(4)\bigr).
 \]
 Or $1-\Phi(4) \approx 3{,}2\cdot 10^{-5}$, donc p-value $\approx 6{,}4\cdot 10^{-5}$.\\
@@ -201,7 +284,7 @@ $6{,}4\cdot 10^{-5} \ll 0{,}05$ : on \textbf{rejette} $H_0$. La machine est dér
 
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
   linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{Recette du test bilatéral sur une moyenne ($\sigma$ connu).}
+\textbf{Recette du test sur une moyenne ($\sigma$ connu).}
 \begin{enumerate}
   \item $H_0 : \mu = \mu_0$ \quad contre \quad $H_1 : \mu \neq \mu_0$.
   \item Statistique : $Z = \dfrac{\Xbar - \mu_0}{\sigma/\sqrt{n}}$, qui suit $\mathcal{N}(0,1)$ sous $H_0$.
@@ -209,6 +292,128 @@ $6{,}4\cdot 10^{-5} \ll 0{,}05$ : on \textbf{rejette} $H_0$. La machine est dér
   \item \textbf{Décision} : \textbf{rejeter} $H_0$ si $|Z_{\text{obs}}| > t_\alpha$, sinon \textbf{ne pas rejeter}.
 \end{enumerate}
 \end{mdframed}
+
+\subsection*{3.1. Exercice : ce dé est-il pipé\,? (test du \texorpdfstring{$\chi^2$}{khi-deux})}
+
+\textbf{Au-delà de la moyenne.} Le test précédent compare une moyenne empirique à une valeur attendue. On veut souvent tester quelque chose de plus riche : \og les fréquences observées d'un phénomène réparti en plusieurs catégories sont-elles compatibles avec celles attendues sous un modèle de référence\,? \fg{} C'est le rôle du \textbf{test du khi-deux d'adéquation} (Karl Pearson, $1900$).
+
+\smallskip
+
+\textbf{Quelques applications classiques.}
+\begin{itemize}\setlength{\itemsep}{0.15em}
+  \item \textbf{Adéquation à une loi de référence}~: un dé est-il équilibré\,? les premiers chiffres d'une comptabilité suivent-ils la loi de Benford\,?
+  \item \textbf{Indépendance entre deux variables qualitatives}~: la couleur des yeux dépend-elle du sexe\,? le secteur d'activité dépend-il de la région\,?
+  \item \textbf{Homogénéité entre populations}~: la répartition des opinions est-elle la même chez les $\le 30$~ans et les $\ge 60$~ans\,?
+\end{itemize}
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\textbf{La loi du khi-deux $\chi^2(k)$.} Si $U_1, \dots, U_k$ sont $k$ variables \emph{indépendantes} de loi $\mathcal{N}(0,1)$, alors par définition
+\[
+  U_1^2 + U_2^2 + \dots + U_k^2 \;\sim\; \chi^2(k).
+\]
+On l'appelle \og loi du khi-deux à $k$ degrés de liberté \fg{}. Elle ne prend que des valeurs positives, son espérance vaut $k$, son écart-type $\sqrt{2k}$. Plus la valeur observée s'éloigne de $k$ vers la droite, plus elle est \emph{suspecte}.
+
+\begin{center}
+\begin{tikzpicture}[xscale=0.4, yscale=12]
+  % chi²(5) density: f(x) = (1/(2^{5/2} Gamma(5/2))) * x^{3/2} * exp(-x/2)
+  % ≈ 0.0884 * x^{1.5} * exp(-x/2). Mode at x=3, peak ≈ 0.154.
+  \draw[thick, Theme, smooth, samples=80, domain=0.05:22]
+    plot (\x, {0.0884 * pow(\x,1.5) * exp(-\x/2)});
+  \fill[Accent, opacity=0.5, smooth, samples=40, domain=11.07:22]
+    plot (\x, {0.0884 * pow(\x,1.5) * exp(-\x/2)})
+      -- (22,0) -- (11.07,0) -- cycle;
+  \draw[thick,->] (-0.3,0) -- (23,0) node[right] {\scriptsize $x$};
+  \draw[dashed, thin] (5,0) -- (5,0.16);
+  \draw[dashed, thin] (11.07,0) -- (11.07,0.05);
+  \node[below=1pt] at (5,0) {\scriptsize $\E = k = 5$};
+  \node[below=1pt] at (11.07,0) {\scriptsize $11{,}07$};
+  \node[font=\scriptsize, Accent] at (15.5,0.025) {\bfseries $\alpha = 5\,\%$};
+  \node[font=\scriptsize] at (3,0.18) {\itshape densité de $\chi^2(5)$};
+\end{tikzpicture}
+\end{center}
+
+\smallskip
+
+\textbf{Statistique du test d'adéquation.} On dispose d'un échantillon de taille $n$ réparti en $r$ catégories d'effectifs observés $O_1, \dots, O_r$. Sous $H_0$ (\og les données suivent telle loi de référence \fg), on calcule les effectifs \emph{attendus} $E_1, \dots, E_r$, puis
+\[
+  \boxed{\;\chi^2_{\text{obs}} = \sum_{i=1}^{r} \dfrac{(O_i - E_i)^2}{E_i}.\;}
+\]
+On admet (théorème de Pearson) que sous $H_0$ et pour $n$ grand, $\chi^2_{\text{obs}}$ suit approximativement une loi $\chi^2(r-1)$. La p-value est $P\!\bigl(\chi^2(r-1) \ge \chi^2_{\text{obs}}\bigr)$ : on rejette si elle est petite, c'est-à-dire si l'écart entre observé et attendu est \emph{trop grand} pour être imputé au hasard.
+\end{mdframed}
+
+\medskip
+
+\textbf{Énoncé.} Un joueur soupçonne son dé à $6$ faces d'être pipé. Il le lance $n=600$ fois et observe :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  Face $i$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\
+  \hline
+  Effectif observé $O_i$ & $75$ & $90$ & $100$ & $110$ & $100$ & $125$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Question 1.} Quelles sont $H_0$ et $H_1$\,? Sous $H_0$, donner les effectifs attendus $E_i$ pour chaque face.
+
+\atrou[3cm]{%
+$H_0$ : \og le dé est équilibré \fg, c'est-à-dire $P(\text{face } i) = \frac{1}{6}$ pour tout $i$.\\
+$H_1$ : \og le dé est pipé \fg{} (au moins une face n'a pas la probabilité $\frac{1}{6}$).\\
+Sous $H_0$, chaque face est attendue $E_i = n \times \frac{1}{6} = \frac{600}{6} = 100$ fois.
+}
+
+\textbf{Question 2.} Calculer la statistique $\chi^2_{\text{obs}}$.
+
+\atrou[4.5cm]{%
+\begin{align*}
+  \chi^2_{\text{obs}} &= \dfrac{(75-100)^2}{100} + \dfrac{(90-100)^2}{100} + \dfrac{(100-100)^2}{100} \\
+  &\quad + \dfrac{(110-100)^2}{100} + \dfrac{(100-100)^2}{100} + \dfrac{(125-100)^2}{100} \\
+  &= \dfrac{625 + 100 + 0 + 100 + 0 + 625}{100} = \dfrac{1450}{100} = 14{,}5.
+\end{align*}
+}
+
+\textbf{Question 3.} Quel est le nombre de degrés de liberté\,? Comparer $\chi^2_{\text{obs}}$ à l'espérance d'une loi $\chi^2(k)$ sous $H_0$. Cela paraît-il \og normal \fg{} ou \og suspect \fg{}\,?
+
+\atrou[3cm]{%
+Il y a $r=6$ catégories, donc $r-1 = 5$ degrés de liberté. Sous $H_0$, $\chi^2_{\text{obs}}$ suit approximativement $\chi^2(5)$, d'espérance $5$ et d'écart-type $\sqrt{10} \approx 3{,}16$. Or on observe $14{,}5$, soit environ $3$ écarts-types au-dessus de la moyenne attendue : c'est \textbf{très suspect}.
+}
+
+\textbf{Question 4.} À l'aide de l'extrait de table de la fonction de répartition de $\chi^2(5)$ ci-dessous, en déduire la p-value, puis conclure aux seuils $\alpha = 5\,\%$ et $\alpha = 1\,\%$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  $x$ & $9$ & $10$ & $11$ & $12$ & $13$ & $14$ & $14{,}5$ & $15$ & $16$ \\
+  \hline
+  $F(x) = P\!\bigl(\chi^2(5) \le x\bigr)$ & $0{,}891$ & $0{,}925$ & $0{,}949$ & $0{,}965$ & $0{,}977$ & $0{,}984$ & $0{,}987$ & $0{,}990$ & $0{,}993$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\atrou[4.5cm]{%
+La p-value est la probabilité d'observer un $\chi^2$ \emph{au moins aussi grand} que $14{,}5$ sous $H_0$ :
+\[
+  \text{p-value} = P\!\bigl(\chi^2(5) \ge 14{,}5\bigr) = 1 - F(14{,}5) = 1 - 0{,}987 = 0{,}013.
+\]
+\begin{itemize}
+  \item Au seuil $\alpha = 5\,\%$ : $0{,}013 < 0{,}05$, on \textbf{rejette} $H_0$. Le dé semble pipé.
+  \item Au seuil $\alpha = 1\,\%$ : $0{,}013 > 0{,}01$, on \textbf{ne rejette pas} $H_0$ : les données sont à la limite, on ne peut pas conclure formellement à $1\,\%$.
+\end{itemize}
+La conclusion dépend du seuil choisi --- ce qui rappelle l'importance de fixer $\alpha$ \emph{avant} l'expérience.
+}
+
+\medskip
+
+\textit{Pour aller plus loin.} Le test du $\chi^2$ s'étend (avec quelques modifications) à de nombreux contextes : indépendance entre deux variables (tableau de contingence), homogénéité entre populations, qualité d'ajustement à une loi continue (après regroupement en classes). On pourra y revenir en TD.
 
 % ====================================================================
 \section*{4. Dualité intervalle de confiance $\Longleftrightarrow$ test}
@@ -252,55 +457,46 @@ L'intervalle de confiance est l'\textbf{ensemble des valeurs $\mu_0$ qu'on \emph
 \section*{5. Tests bilatéral et unilatéral}
 % ====================================================================
 
-\subsection*{5.1. Le contexte change l'hypothèse alternative}
+\subsection*{5.1. Définition : trois façons de formuler $H_0$}
 
-Considérons deux situations à statistique de test identique :
-
-\begin{itemize}
-  \item \textbf{Sacs de ciment.} La machine peut être déréglée \emph{vers le haut} (perte de matière première) \emph{ou vers le bas} (sacs sous-remplis, fraude). On veut détecter tout dérèglement : $H_1 : \mu \neq 25$. \textbf{Bilatéral.}
-  \item \textbf{Ampoules du vendeur.} Le vendeur prétend $\mu_0 = 1000$~h. Si la durée moyenne réelle est \emph{supérieure} (les ampoules durent plus que prévu), c'est tout bénéfice : on n'a aucune raison de s'en plaindre. On ne suspecte que le dérapage \emph{vers le bas} : $H_1 : \mu < 1000$. \textbf{Unilatéral à gauche.}
-\end{itemize}
-
-\subsection*{5.2. Conséquence sur la valeur critique}
-
-\textbf{Question 1.} Au CM4, sur les ampoules ($n=50$, $\sigma=100$, $\Xbar=950$), on a calculé
-$Z_{\text{obs}} = (950-1000)/(100/\sqrt{50}) = -3{,}53$.
-Calculer la p-value \textbf{unilatérale} (test \og les ampoules durent moins \fg).
-
-\atrou[2.5cm]{%
-\[
-  \text{p-value} = P(Z \le -3{,}53 \mid H_0) = \Phi(-3{,}53) \approx 2{,}1\cdot 10^{-4}.
-\]
-\textbf{Très petite} : on rejette $H_0$. Le vendeur ment.
-}
-
-\medskip
-
-\textbf{Question 2.} Si on avait fait un test bilatéral, quelle aurait été la p-value\,?
-
-\atrou[2.2cm]{%
-$\text{p-value}_{\text{bilat}} = 2 \cdot \Phi(-3{,}53) \approx 4{,}2\cdot 10^{-4}$.
-
-\smallskip
-
-\textbf{Deux fois plus grande}, mais on rejette toujours.
-}
-
-\medskip
+Jusqu'ici, on a posé $H_0 : \mu = \mu_0$ contre $H_1 : \mu \neq \mu_0$~: \emph{n'importe quel} écart à $\mu_0$ amène à rejeter. Mais selon la question pratique qu'on se pose, on peut vouloir \textbf{cibler le sens de l'écart} qu'on cherche à détecter. L'hypothèse $H_0$ (et son alternative $H_1$) peut alors prendre trois formes :
 
 \begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
-  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
-\textbf{À retenir.}
-\begin{itemize}
-  \item \textbf{Bilatéral} ($H_1 : \mu \neq \mu_0$) : on coupe $\alpha$ en deux, rejet si $|Z_{\text{obs}}| > t_\alpha$ avec $t_{0{,}05}=1{,}96$.
-  \item \textbf{Unilatéral à gauche} ($H_1 : \mu < \mu_0$) : tout $\alpha$ à gauche, rejet si $Z_{\text{obs}} < -u_\alpha$ avec $u_{0{,}05}=1{,}645$.
-  \item \textbf{Unilatéral à droite} ($H_1 : \mu > \mu_0$) : tout $\alpha$ à droite, rejet si $Z_{\text{obs}} > u_\alpha$.
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\begin{itemize}\setlength{\itemsep}{0.3em}
+  \item \textbf{Test bilatéral} : \quad $H_0 : \mu = \mu_0$ \;\;contre\;\; $H_1 : \mu \neq \mu_0$. \\
+  On suspecte un écart \emph{dans n'importe quel sens}.
+  \item \textbf{Test unilatéral à gauche} : \quad $H_0 : \mu \ge \mu_0$ \;\;contre\;\; $H_1 : \mu < \mu_0$. \\
+  On veut seulement détecter un écart \emph{vers le bas} : $H_0$ couvre toutes les valeurs \og acceptables \fg{} ($\mu_0$ et au-dessus).
+  \item \textbf{Test unilatéral à droite} : \quad $H_0 : \mu \le \mu_0$ \;\;contre\;\; $H_1 : \mu > \mu_0$. \\
+  On veut seulement détecter un écart \emph{vers le haut}.
 \end{itemize}
 \end{mdframed}
 
-\medskip
+\smallskip
 
-\textit{Important.} Le choix \og bilatéral / unilatéral \fg{} se fait \textbf{avant} de regarder les données, en fonction du \emph{contexte du problème}, jamais pour faire arranger la p-value.
+\textit{Remarque.} Pour les calculs, le cas \og pire \fg{} (le plus défavorable au rejet) sous une $H_0$ unilatérale est toujours $\mu = \mu_0$ (la frontière). On garde donc la même statistique $Z = (\Xbar - \mu_0)/(\sigma/\sqrt n) \approx \mathcal{N}(0,1)$ : seule la zone de rejet change.
+
+\smallskip
+
+\textbf{Le contexte dicte le choix.} Le sens de $H_0$ se déduit \emph{toujours} de la situation à analyser, jamais des données observées. Trois exemples :
+
+\begin{itemize}\setlength{\itemsep}{0.2em}
+  \item \textbf{Sacs de ciment (CM4).} La machine peut se dérégler \emph{vers le haut} (perte de matière première) ou \emph{vers le bas} (sacs sous-remplis, fraude). On veut détecter \emph{tout} dérèglement~:
+  $H_0 : \mu = 25$. \textbf{Bilatéral.}
+  \item \textbf{Ampoules du vendeur (CM4).} Le vendeur annonce $\mu_0 = 1000$~h. Si la durée réelle est \emph{supérieure}, c'est tout bénéfice pour l'acheteur, qui n'a aucune raison de se plaindre~: cette situation reste compatible avec $H_0$. On veut seulement attraper le dérapage \emph{vers le bas}~:
+  $H_0 : \mu \ge 1000$. \textbf{Unilatéral à gauche.}
+  \item \textbf{Nouveau béton.} Un industriel propose un béton qu'il prétend \emph{plus résistant} que le standard à $\mu_0 = 30$~MPa. Le client cherche à valider que le nouveau produit est vraiment meilleur~:
+  $H_0 : \mu \le 30$. \textbf{Unilatéral à droite.}
+\end{itemize}
+
+\smallskip
+
+\textit{Important.} Le choix \og bilatéral / unilatéral \fg{} se fait \textbf{avant} de regarder les données, jamais pour faire arranger la p-value.
+
+\subsection*{5.2. Conséquence sur la zone de rejet et la p-value}
+
+L'idée est la même dans les trois cas : on rejette $H_0$ si $Z_{\text{obs}}$ tombe \og loin \fg{} dans le(s) sens prévu(s) par $H_1$. La différence est où l'on place les $\alpha$ \% de probabilité \og extrême \fg{} sous $H_0$ :
 
 \begin{center}
 \begin{tikzpicture}[scale=0.55]
@@ -315,61 +511,102 @@ $\text{p-value}_{\text{bilat}} = 2 \cdot \Phi(-3{,}53) \approx 4{,}2\cdot 10^{-4
     \draw[thick,->] (-4,0) -- (4,0);
     \node[below] at (-1.96,-0.05) {\scriptsize $-1{,}96$};
     \node[below] at (1.96,-0.05) {\scriptsize $1{,}96$};
+    \node at (-2.6,1.1) {\scriptsize $\alpha/2$};
+    \node at (2.6,1.1) {\scriptsize $\alpha/2$};
     \node at (0,-1.4) {\small\bfseries Bilatéral};
   \end{scope}
-  % unilateral droite
-  \begin{scope}[xshift=0cm]
-    \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
-      plot (\x, {2.2*exp(-\x*\x/2)});
-    \fill[Accent, opacity=0.6, domain=1.645:3.4, smooth, samples=40]
-      plot (\x, {2.2*exp(-\x*\x/2)}) -- (3.4,0) -- (1.645,0) -- cycle;
-    \draw[thick,->] (-4,0) -- (4,0);
-    \node[below] at (1.645,-0.05) {\scriptsize $1{,}645$};
-    \node at (0,-1.4) {\small\bfseries Unilatéral à droite};
-  \end{scope}
   % unilateral gauche
-  \begin{scope}[xshift=7cm]
+  \begin{scope}[xshift=0cm]
     \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
       plot (\x, {2.2*exp(-\x*\x/2)});
     \fill[Accent, opacity=0.6, domain=-3.4:-1.645, smooth, samples=40]
       plot (\x, {2.2*exp(-\x*\x/2)}) -- (-1.645,0) -- (-3.4,0) -- cycle;
     \draw[thick,->] (-4,0) -- (4,0);
     \node[below] at (-1.645,-0.05) {\scriptsize $-1{,}645$};
+    \node at (-2.4,1.1) {\scriptsize $\alpha$};
     \node at (0,-1.4) {\small\bfseries Unilatéral à gauche};
+  \end{scope}
+  % unilateral droite
+  \begin{scope}[xshift=7cm]
+    \draw[thick, Theme, domain=-3.4:3.4, smooth, samples=100]
+      plot (\x, {2.2*exp(-\x*\x/2)});
+    \fill[Accent, opacity=0.6, domain=1.645:3.4, smooth, samples=40]
+      plot (\x, {2.2*exp(-\x*\x/2)}) -- (3.4,0) -- (1.645,0) -- cycle;
+    \draw[thick,->] (-4,0) -- (4,0);
+    \node[below] at (1.645,-0.05) {\scriptsize $1{,}645$};
+    \node at (2.4,1.1) {\scriptsize $\alpha$};
+    \node at (0,-1.4) {\small\bfseries Unilatéral à droite};
   \end{scope}
 \end{tikzpicture}
 \end{center}
 
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{À retenir --- valeurs critiques au seuil $\alpha = 5\,\%$.}
+\begin{itemize}\setlength{\itemsep}{0.2em}
+  \item \textbf{Bilatéral} ($H_0 : \mu = \mu_0$)~: $\alpha$ se répartit en deux moitiés. \\
+  Rejet si $|Z_{\text{obs}}| > 1{,}96$. \quad p-value $= 2\bigl(1-\Phi(|Z_{\text{obs}}|)\bigr)$.
+  \item \textbf{Unilatéral à gauche} ($H_0 : \mu \ge \mu_0$)~: tout $\alpha$ dans la queue de gauche. \\
+  Rejet si $Z_{\text{obs}} < -1{,}645$. \quad p-value $= \Phi(Z_{\text{obs}})$.
+  \item \textbf{Unilatéral à droite} ($H_0 : \mu \le \mu_0$)~: tout $\alpha$ dans la queue de droite. \\
+  Rejet si $Z_{\text{obs}} > 1{,}645$. \quad p-value $= 1-\Phi(Z_{\text{obs}})$.
+\end{itemize}
+\end{mdframed}
+
+\medskip
+
+\textbf{Question 1 (revisite des ampoules, CM4).} Au CM4, on avait $n=50$, $\sigma=100$, $\Xbar=950$, soit
+$Z_{\text{obs}} = (950-1000)/(100/\sqrt{50}) = -3{,}53$. Justifier le choix d'un test \emph{unilatéral à gauche}, calculer la p-value associée, et conclure.
+
+\atrou[3.5cm]{%
+Le vendeur tire avantage d'une durée \emph{annoncée trop longue} : on ne s'inquiète que du sens \og durent moins \fg, soit $H_0 : \mu \ge 1000$.
+\[
+  \text{p-value} = \Phi(-3{,}53) \approx 2{,}1\cdot 10^{-4}.
+\]
+$2{,}1\cdot 10^{-4} \ll 0{,}05$ : on \textbf{rejette} $H_0$. Le vendeur ment.
+}
+
+\textbf{Question 2.} Si on avait choisi (à tort) un test bilatéral, quelle aurait été la p-value\,?
+
+\atrou[2.2cm]{%
+$\text{p-value}_{\text{bilat}} = 2 \cdot \Phi(-3{,}53) \approx 4{,}2\cdot 10^{-4}$.
+
+\smallskip
+
+\textbf{Deux fois plus grande}, mais on rejette toujours. C'est une règle générale : en passant de bilatéral à unilatéral (du bon côté), la p-value est divisée par deux.
+}
+
 \subsection*{5.3. Application : durée de vie d'une élingue de levage}
 
-\textbf{Cadre.} Une entreprise de BTP commande des \textbf{élingues d'acier} pour ses chantiers de levage. Le fabricant annonce une durée de vie moyenne avant rupture de $\mu_0 = 5000$ heures de service. La durée de vie d'une élingue est modélisée par une loi \textbf{exponentielle} de paramètre $\lambda$ (sans mémoire : si elle a tenu $t$ heures, sa durée de vie future a même loi qu'au début).
+\textbf{Un mot sur la loi exponentielle.} Pour modéliser une \og durée de vie \fg{} (durée avant panne d'un composant, durée d'un appel, intervalle entre deux clients dans une file d'attente), on utilise très souvent la \textbf{loi exponentielle} $\mathcal{E}(\lambda)$, de densité $f(x) = \lambda e^{-\lambda x}$ pour $x \ge 0$. Ses caractéristiques :
+\begin{itemize}\setlength{\itemsep}{0.15em}
+  \item $\E(X) = 1/\lambda$ et $\Var(X) = 1/\lambda^2$, donc $\boxed{\sigma = \mu = 1/\lambda}$ : \emph{l'écart-type est égal à la moyenne}. C'est très pratique pour les tests : connaître $\mu$ suffit à connaître $\sigma$.
+  \item \textbf{Propriété sans mémoire} : $P(X > s+t \mid X > s) = P(X > t)$. Le composant \og oublie \fg{} son passé : qu'il ait déjà fonctionné $1$~h ou $1000$~h, sa durée de vie résiduelle a la même loi.
+  \item Probabilité de survie : $P(X > t) = e^{-\lambda t}$.
+\end{itemize}
+
+\smallskip
+
+\textbf{Cadre.} Une entreprise de BTP commande des \textbf{élingues d'acier} pour ses chantiers de levage. Le fabricant annonce une durée de vie moyenne avant rupture de $\mu_0 = 5000$ heures de service. On modélise la durée de vie d'une élingue par une loi $\mathcal{E}(\lambda)$.
 
 Sur un échantillon de $n=50$ élingues testées jusqu'à la rupture, on observe une durée moyenne empirique $\Xbar = 4200$~heures.
 
 \medskip
 
-\textbf{Question 1.} Pour une loi exponentielle $\mathcal{E}(\lambda)$, rappeler $\E(X)$ et $\sigma(X)$ en fonction de $\lambda$. En déduire une propriété remarquable reliant $\sigma$ et $\mu$.
-
-\atrou[3cm]{%
-$\E(X) = 1/\lambda$ et $\Var(X) = 1/\lambda^2$, donc $\sigma(X) = 1/\lambda$. On en déduit la \textbf{propriété remarquable} de la loi exponentielle :
-\[
-  \boxed{\;\sigma = \mu.\;}
-\]
-Connaître la moyenne suffit à connaître l'écart-type --- très pratique pour les tests.
-}
-
-\textbf{Question 2.} Justifier que le test à mener est \emph{unilatéral} et formuler $H_0$ et $H_1$.
+\textbf{Question 1.} Justifier que le test à mener est \emph{unilatéral} et formuler $H_0$ et $H_1$.
 
 \atrou[2.5cm]{%
-Le fabricant aurait intérêt à \emph{surestimer} la durée de vie (argument commercial). On ne suspecte que le dérapage vers le bas :
-\[ H_0 : \mu = 5000 \quad\text{contre}\quad H_1 : \mu < 5000. \]
+Le fabricant aurait intérêt à \emph{surestimer} la durée de vie (argument commercial). Du côté du client, on ne s'inquiète que du dérapage vers le bas :
+\[ H_0 : \mu \ge 5000 \quad\text{contre}\quad H_1 : \mu < 5000. \]
 \textbf{Unilatéral à gauche.}
 }
 
-\textbf{Question 3.} Quelle loi suit approximativement $\Xbar$ sous $H_0$ ? Construire la statistique de test et calculer $Z_{\text{obs}}$.
+\textbf{Question 2.} En utilisant le TCL et la propriété $\sigma = \mu$ de la loi exponentielle, construire la statistique de test et calculer $Z_{\text{obs}}$.
 
 \atrou[4cm]{%
-Sous $H_0$, $\mu = 5000$ donc $\sigma = 5000$ (propriété de l'exponentielle). Par le TCL :
+Sous $H_0$, $\mu = 5000$ donc $\sigma = 5000$. Par le TCL :
 \[
   \Xbar \approx \mathcal{N}\!\left(5000,\;\dfrac{5000^2}{50}\right),
   \qquad
@@ -380,7 +617,7 @@ Sous $H_0$, $\mu = 5000$ donc $\sigma = 5000$ (propriété de l'exponentielle). 
 \]
 }
 
-\textbf{Question 4.} Calculer la p-value et conclure au seuil $5\,\%$.
+\textbf{Question 3.} Calculer la p-value et conclure au seuil $5\,\%$.
 
 \atrou[3cm]{%
 Test unilatéral à gauche :
@@ -466,130 +703,8 @@ Soit environ $5\,\%$ : c'est notre seuil $\alpha$. Une fois tous les vingt jours
 \textit{Et si on durcissait la règle\,?} Avec \og rejet si plus de $14$ défauts \fg{}, $\alpha$ tomberait à environ $0{,}05\,\%$... mais on laisserait passer beaucoup plus de lots vraiment défectueux ($\beta$ augmente). C'est le compromis.
 
 % ====================================================================
-\section*{7. Vers les estimateurs : préparer le CM6}
-% ====================================================================
-
-Tous nos tests ont supposé jusqu'ici que $\sigma$ (ou $p$) était \textbf{connu}. Et si on ne connaissait \emph{rien} de la loi des données --- juste l'échantillon\,?
-
-\medskip
-
-\textbf{La question.} Étant donné un échantillon $X_1,\dots,X_n$ supposé issu d'une loi \emph{paramétrique} (binomiale, exponentielle, normale\dots), comment \textbf{deviner} le paramètre\,?
-
-\medskip
-
-\textbf{Idée centrale : la méthode des moments.}
-Pour une loi paramétrée par $\theta$, l'espérance théorique $\E(X)$ s'exprime en fonction de $\theta$. On \textbf{remplace l'espérance par la moyenne empirique} :
-\[
-  \E(X) = g(\theta) \quad\xRightarrow{\text{remplace}}\quad \Xbar = g(\hat{\theta})
-  \quad\Longrightarrow\quad \hat{\theta} = g^{-1}(\Xbar).
-\]
-
-\medskip
-
-\textbf{Question 1.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi exponentielle $\mathcal{E}(\lambda)$. Donner $\E(X)$, puis déduire un estimateur $\hat{\lambda}$ par la méthode des moments.
-
-\atrou[2.5cm]{%
-$\E(X) = 1/\lambda$, donc en posant $\Xbar = 1/\hat{\lambda}$, on obtient
-\[
-  \boxed{\;\hat{\lambda} = \dfrac{1}{\Xbar}.\;}
-\]
-On retrouve l'estimateur du CM4 (durée des appels). \emph{Si la durée moyenne empirique est de $5$ min, on estime $\lambda = 0{,}2$ appel/min.}
-}
-
-\textbf{Question 2.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi de Bernoulli $\mathcal{B}(p)$ ($X_i \in \{0,1\}$). Estimer $p$.
-
-\atrou[2cm]{%
-$\E(X) = p$, donc $\hat{p} = \Xbar$. C'est la \textbf{proportion observée} : on retrouve l'estimateur déjà utilisé en CM3 (sondages) et CM4.
-}
-
-\textbf{Question 3.} Soit $X_1,\dots,X_n$ i.i.d.\ de loi de Poisson $\mathcal{P}(\lambda)$. Estimer $\lambda$.
-
-\atrou[2cm]{%
-$\E(X) = \lambda$, donc $\hat{\lambda} = \Xbar$. Pour la Poisson, le paramètre \emph{est} l'espérance.
-}
-
-\subsection*{7.1. Application : centre d'appels}
-
-Un centre d'appels modélise la durée d'un appel par une loi exponentielle $\mathcal{E}(\lambda)$. Sur $n=100$ appels, on observe une durée moyenne empirique $\Xbar = 4$ minutes.
-
-\medskip
-
-\textbf{Question 1.} Donner l'estimation ponctuelle $\hat{\lambda}$.
-
-\atrou[1.8cm]{%
-$\hat{\lambda} = 1/\Xbar = 1/4 = 0{,}25$ appel/minute.
-}
-
-\textbf{Question 2.} Construire un IC à $95\,\%$ pour $\mu = 1/\lambda$. On utilisera la propriété $\sigma = \mu$ de l'exponentielle et le plug-in $\hat{\sigma} = \Xbar$ (puisque $\sigma$ n'est pas connu, on l'estime par la même valeur).
-
-\atrou[3.5cm]{%
-La demi-largeur de l'IC est $1{,}96\,\dfrac{\hat{\sigma}}{\sqrt{n}} = 1{,}96\,\dfrac{4}{\sqrt{100}} = 0{,}784$. D'où
-\[
-  IC_{95\%}(\mu) = [4 - 0{,}784\,;\,4 + 0{,}784] = [3{,}22\,;\,4{,}78] \text{ min}.
-\]
-}
-
-\textbf{Question 3.} En déduire un IC à $95\,\%$ pour $\lambda$. (Indice : $\lambda \mapsto 1/\lambda$ est décroissante, donc inverser les bornes \emph{et} les permuter.)
-
-\atrou[2.5cm]{%
-\[
-  IC_{95\%}(\lambda) = \left[\dfrac{1}{4{,}78}\,;\,\dfrac{1}{3{,}22}\right] \approx [0{,}21\,;\,0{,}31] \text{ appel/min}.
-\]
-}
-
-\subsection*{7.2. Application : fiabilité d'une pompe de chantier}
-
-Une pompe de chantier subit une panne au bout d'un temps modélisé par une loi exponentielle $\mathcal{E}(\lambda)$ (propriété sans mémoire : l'usure n'est pas prise en compte). Le service maintenance relève les durées avant panne de $n=30$ pompes : moyenne empirique $\Xbar = 850$~heures.
-
-\medskip
-
-\textbf{Question 1.} Estimer $\mu$ et $\lambda$.
-
-\atrou[2cm]{%
-$\hat{\mu} = \Xbar = 850$~h ;\quad $\hat{\lambda} = 1/850 \approx 1{,}18\cdot 10^{-3}$~/h.
-}
-
-\textbf{Question 2.} Le fabricant annonce une durée de vie moyenne de $\mu_0 = 1000$~h. Tester cette annonce contre l'hypothèse \og les pompes durent moins \fg{} au seuil $5\,\%$.
-
-\atrou[4cm]{%
-Test unilatéral à gauche : $H_0 : \mu = 1000$, $H_1 : \mu < 1000$. Sous $H_0$, $\sigma = 1000$ (expo) :
-\[
-  Z_{\text{obs}} = \dfrac{850 - 1000}{1000/\sqrt{30}} = \dfrac{-150}{182{,}6} \approx -0{,}82.
-\]
-\[
-  \text{p-value} = \Phi(-0{,}82) \approx 1 - 0{,}794 = 0{,}206.
-\]
-$0{,}206 > 0{,}05$ : on \textbf{ne rejette pas}. L'annonce du fabricant reste plausible.
-}
-
-\textbf{Question 3.} En utilisant l'estimation $\hat{\lambda}$, calculer la probabilité qu'une nouvelle pompe fonctionne plus de $1500$ heures sans panne.
-
-\atrou[2.5cm]{%
-Pour une exponentielle de paramètre $\lambda$ :
-$P(X > t) = e^{-\lambda t}$. D'où
-\[
-  P(X > 1500) \approx e^{-1500/850} = e^{-1{,}765} \approx 0{,}171.
-\]
-Environ $17\,\%$ des pompes dépassent $1500$~heures.
-}
-
-\textbf{Question 4 --- Bonus.} Le chef de chantier veut être sûr à $90\,\%$ qu'une pompe tiendra au moins $T$ heures. Quelle valeur prendre pour $T$\,?
-
-\atrou[3cm]{%
-On cherche $T$ tel que $P(X > T) = 0{,}90$, soit $e^{-\hat{\lambda} T} = 0{,}90$ :
-\[
-  T = -\dfrac{\ln 0{,}90}{\hat{\lambda}} = 850 \cdot \ln(10/9) \approx 850 \cdot 0{,}105 \approx 90~\text{heures}.
-\]
-Sous nos hypothèses, on n'a que $90$~heures de \og garantie \fg{} à $90\,\%$. La loi exponentielle est très \emph{prudente} : elle suppose que la pompe peut tomber en panne à tout instant.
-}
-
-\medskip
-
-\textit{Au CM6 et au TD5}, on formalisera ce que \og bien estimer \fg{} veut dire (\textbf{biais}, \textbf{variance} d'un estimateur), et on construira des estimateurs par d'autres méthodes (moments d'ordre $2$, maximum de vraisemblance pour les motivés).
-
-% ====================================================================
 \needspace{20\baselineskip}
-\section*{8. Bilan}
+\section*{7. Bilan}
 % ====================================================================
 
 \nopagebreak
@@ -601,15 +716,15 @@ Sous nos hypothèses, on n'a que $90$~heures de \og garantie \fg{} à $90\,\%$. 
 
   \item \textbf{p-value} : $P(\text{observation au moins aussi extrême} \mid H_0)$. On rejette si $\text{p-value} < \alpha$.
 
-  \item \textbf{Recette test bilatéral sur la moyenne ($\sigma$ connu)} : statistique $Z = (\Xbar - \mu_0)/(\sigma/\sqrt{n})$, qui suit $\mathcal{N}(0,1)$ sous $H_0$. Rejet si $|Z_{\text{obs}}| > t_\alpha$ ($t_{0{,}05}=1{,}96$).
+  \item \textbf{Recette d'un test sur la moyenne ($\sigma$ connu)} : statistique $Z = (\Xbar - \mu_0)/(\sigma/\sqrt{n})$, qui suit $\mathcal{N}(0,1)$ sous $H_0$. Rejet bilatéral si $|Z_{\text{obs}}| > t_\alpha$ ($t_{0{,}05}=1{,}96$) ; rejet unilatéral si $Z_{\text{obs}}$ franchit $\pm u_\alpha$ ($u_{0{,}05}=1{,}645$).
+
+  \item \textbf{Test du khi-deux d'adéquation} : $\chi^2_{\text{obs}} = \sum (O_i - E_i)^2/E_i$, distribué $\chi^2(r-1)$ sous $H_0$. Rejet si $\chi^2_{\text{obs}}$ \og trop grand \fg.
 
   \item \textbf{Dualité IC $\Leftrightarrow$ test} : on rejette $H_0 : \mu = \mu_0$ au seuil $\alpha$ si et seulement si $\mu_0 \notin IC_{1-\alpha}$.
 
   \item \textbf{Bilatéral vs unilatéral} : choisir d'après le contexte, \emph{avant} l'expérience.
 
   \item \textbf{Deux types d'erreurs} : type I ($\alpha$, fixé) et type II ($\beta$, dépend de la vraie valeur). Pour diminuer les deux à la fois : augmenter $n$.
-
-  \item \textbf{Méthode des moments} : pour estimer un paramètre $\theta$, exprimer $\E(X) = g(\theta)$, puis poser $\Xbar = g(\hat{\theta})$ et résoudre.
 \end{enumerate}
 \end{mdframed}
 
