@@ -130,6 +130,32 @@
           "cible": "_blank"
         }
       ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 4,
+      "titre": "Tests d'hypothèses",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 5 - Les tests d'hypothèses",
+          "description": "Loi te",
+          "lien": "CM5-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 5 - annoté",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM5-annote.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        
+      ]
     }
   ]
 }
