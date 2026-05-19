@@ -3,7 +3,7 @@
   "chapitres": [
     {
       "id": "sec1",
-      "numero": 1,
+      "numero": 0,
       "titre": "Rappels",
       "description": "Motivation · Illustration",
       "lien": "#",
@@ -49,7 +49,7 @@
     }, 
     {
       "id": "sec2",
-      "numero": 2,
+      "numero": 1,
       "titre": "Variables aléatoires continues",
       "description": "Densité · Fonction de répartition",
       "lien": "#",
@@ -84,7 +84,7 @@
     }, 
     {
       "id": "sec3",
-      "numero": 3,
+      "numero": 2,
       "titre": "La loi normale",
       "description": "Théorème central limite",
       "lien": "#",
@@ -138,7 +138,7 @@
     }, 
     {
       "id": "sec3",
-      "numero": 4,
+      "numero": 3,
       "titre": "Tests d'hypothèses",
       "description": "Théorème central limite",
       "lien": "#",
@@ -159,7 +159,39 @@
         }
       ],
       "sexercer" : [
+        {
+          "titre": "TD5 - tests d'hypothèse",
+          "lien": "TD5-tests-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD5 - tests d'hypothèse -  corrigé",
+          "lien": "TD5-tests-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 4,
+      "titre": "Attendus à l'examen",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
         
+      ],
+      "sexercer" : [
+
+        {
+          "titre": "Attendus à l'examen",
+          "lien": "cm6-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Attendus à l'examen - corrigé collaboratif",
+          "lien": "cm6-annote.pdf",
+          "cible": "_blank"
+        }
       ]
     }
   ]
