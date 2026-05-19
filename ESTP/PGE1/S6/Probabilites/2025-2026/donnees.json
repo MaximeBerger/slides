@@ -128,7 +128,12 @@
           "titre": "TD4 - pistes de solutions",
           "lien": "TD4-corrige.pdf",
           "cible": "_blank"
-        }
+        },
+        {
+          "titre": "Attendus à l'examen",
+          "lien": "cm6-enonce.pdf",
+          "cible": "_blank"
+        }, 
       ]
     }, 
     {

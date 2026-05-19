@@ -1,0 +1,374 @@
+\input{configTD}
+
+\title{Probabilités TD5 --- Tests d'hypothèses}
+\author{}
+\date{}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Xbar}{\overline{X}_n}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\noindent\textit{Objectif du TD.} Mettre en pratique tout ce qu'on a vu au CM5 sur les tests d'hypothèses : savoir \textbf{formuler} $H_0$ et $H_1$ à partir d'une situation, choisir entre bilatéral et unilatéral, calculer la statistique de test et la p-value, et \textbf{conclure} en français.
+
+\medskip
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\textbf{Recette d'un test sur une moyenne (\boldmath$\sigma$ connu).}
+\begin{enumerate}\setlength{\itemsep}{0.1em}\setlength{\topsep}{0.1em}
+  \item Choisir $H_0$ et $H_1$ d'après le contexte (\emph{avant} de regarder les données).
+  \item Statistique : $Z = \dfrac{\Xbar - \mu_0}{\sigma/\sqrt{n}} \approx \mathcal{N}(0,1)$ sous $H_0$.
+  \item Seuil $\alpha$ (souvent $5\,\%$) $\Longrightarrow$ valeur critique : $1{,}96$ bilatéral, $1{,}645$ unilatéral.
+  \item Calculer la p-value sous $H_0$ et conclure (rejet si p-value $<\alpha$).
+  \item Rédiger une phrase d'ingénieur.
+\end{enumerate}
+\end{mdframed}
+
+\medskip
+
+\textit{Valeurs utiles de la table normale}~: $\Phi(1{,}28) \approx 0{,}90$ \quad $\Phi(1{,}645) \approx 0{,}95$ \quad $\Phi(1{,}96) \approx 0{,}975$ \quad $\Phi(2{,}33) \approx 0{,}99$ \quad $\Phi(2{,}58) \approx 0{,}995$ \quad $\Phi(3) \approx 0{,}9987$.
+
+\vspace{0.8cm}
+
+% --------------------------------------------------------------------
+\section*{Exercice 1 --- Formuler $H_0$ et $H_1$ (échauffement)}
+% --------------------------------------------------------------------
+
+Pour chaque situation, écrire l'hypothèse $H_0$, l'hypothèse alternative $H_1$, et préciser si le test est \textbf{bilatéral}, \textbf{unilatéral à gauche} ou \textbf{unilatéral à droite}. \emph{Aucun calcul n'est demandé.}
+
+\begin{enumerate}
+  \item Une caisse enregistreuse est censée rendre en moyenne $0{,}20$~euro de monnaie par client. Un audit interne soupçonne une fraude (sous-rendu systématique au profit du caissier).
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      L'auditeur ne s'inquiète que si la moyenne est \emph{plus petite} que $0{,}20$ (rendre \emph{plus} ne lésait personne, sauf l'entreprise, mais ce n'est pas la fraude soupçonnée). Donc
+      \[
+        H_0 : \mu \ge 0{,}20 \quad \text{contre} \quad H_1 : \mu < 0{,}20.
+      \]
+      \textbf{Unilatéral à gauche.}
+    \end{solution}
+  }{}
+
+  \item Un fabricant d'isolant annonce une conductivité thermique de $\lambda = 0{,}035$~W/(m$\cdot$K). Le bureau d'études d'une entreprise du BTP veut vérifier que la valeur est correcte (dans un sens comme dans l'autre).
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Tout écart compte (un isolant moins performant que prévu pose problème, mais un isolant \emph{trop} performant pourrait aussi cacher une erreur de mesure ou un défaut de produit). Donc
+      \[
+        H_0 : \lambda = 0{,}035 \quad \text{contre} \quad H_1 : \lambda \neq 0{,}035.
+      \]
+      \textbf{Bilatéral.}
+    \end{solution}
+  }{}
+
+  \item Une nouvelle formulation de béton est annoncée comme \emph{plus résistante} que la formulation classique, dont la résistance moyenne vaut $30$~MPa. Le client veut valider l'amélioration avant de signer.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Le client n'achète le nouveau béton que s'il est \emph{vraiment meilleur} : il faut accumuler des preuves d'un dépassement.
+      \[
+        H_0 : \mu \le 30 \quad \text{contre} \quad H_1 : \mu > 30.
+      \]
+      \textbf{Unilatéral à droite.}
+    \end{solution}
+  }{}
+
+  \item Un panneau de signalisation indique une vitesse moyenne autorisée. Une étude de trafic veut savoir si la vitesse moyenne pratiquée par les véhicules diffère significativement de la limite, sans préjuger du sens.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \[
+        H_0 : \mu = v_{\text{limite}} \quad \text{contre} \quad H_1 : \mu \neq v_{\text{limite}}.
+      \]
+      \textbf{Bilatéral.}
+    \end{solution}
+  }{}
+
+  \item Un fournisseur d'élingues d'acier annonce une durée de vie moyenne \emph{d'au moins} $5000$~heures. Une entreprise de levage doute de cette annonce après plusieurs ruptures précoces.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      L'enjeu est de détecter une durée de vie \emph{plus courte} que celle annoncée (problème de sécurité). Une durée plus longue serait, elle, compatible avec l'annonce.
+      \[
+        H_0 : \mu \ge 5000 \quad \text{contre} \quad H_1 : \mu < 5000.
+      \]
+      \textbf{Unilatéral à gauche.}
+    \end{solution}
+  }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+% --------------------------------------------------------------------
+\section*{Exercice 2 --- Sacs de ciment, test bilatéral}
+% --------------------------------------------------------------------
+
+Une usine remplit des sacs de ciment de poids nominal $25$~kg, avec un écart-type de remplissage $\sigma = 0{,}5$~kg supposé connu et constant. Le service maintenance veut savoir si la machine est \textbf{déréglée} (dans un sens ou dans l'autre).
+
+Sur un échantillon de $n=100$ sacs prélevés au hasard, on obtient une moyenne empirique $\Xbar = 24{,}88$~kg.
+
+\begin{enumerate}
+  \item Écrire $H_0$ et $H_1$. Justifier le choix bilatéral.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Sur-remplir abîme la rentabilité ; sous-remplir abîme la conformité. Les deux sens sont indésirables, donc on teste tout écart.
+      \[
+        H_0 : \mu = 25 \quad \text{contre} \quad H_1 : \mu \neq 25.
+      \]
+    \end{solution}
+  }{}
+
+  \item Construire la statistique de test $Z$ et donner sa loi sous $H_0$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Sous $H_0$, les $100$ sacs sont i.i.d.\ d'espérance $25$ et d'écart-type $0{,}5$. Par le TCL,
+      \[
+        \Xbar \approx \mathcal{N}\!\left(25,\;\dfrac{0{,}5^2}{100}\right) = \mathcal{N}(25,\;0{,}05^2).
+      \]
+      D'où
+      \[
+        Z = \dfrac{\Xbar - 25}{0{,}5/\sqrt{100}} = \dfrac{\Xbar - 25}{0{,}05} \approx \mathcal{N}(0,1) \text{ sous } H_0.
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer $Z_{\text{obs}}$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \[
+        Z_{\text{obs}} = \dfrac{24{,}88 - 25}{0{,}05} = \dfrac{-0{,}12}{0{,}05} = -2{,}4.
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer la p-value et conclure au seuil $\alpha = 5\,\%$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Test bilatéral :
+      \[
+        \text{p-value} = P(|Z| \ge 2{,}4) = 2\,(1 - \Phi(2{,}4)) \approx 2 \times (1 - 0{,}9918) \approx 0{,}0164.
+      \]
+      $0{,}0164 < 0{,}05$ : on \textbf{rejette} $H_0$. La machine est déréglée (vers le bas).
+    \end{solution}
+  }{}
+
+  \item \emph{Question annexe.} Si à la place on avait observé $\Xbar = 24{,}95$~kg, la conclusion changerait-elle\,? (donner $Z_{\text{obs}}$ et la nouvelle p-value)
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \[
+        Z_{\text{obs}} = \dfrac{24{,}95 - 25}{0{,}05} = -1.
+      \]
+      \[
+        \text{p-value} = 2(1 - \Phi(1)) \approx 2 \times (1 - 0{,}8413) \approx 0{,}317.
+      \]
+      $0{,}317 \gg 0{,}05$ : on \textbf{ne rejette pas} $H_0$. Un écart de $50$~g sur $25$~kg, observé sur $100$ sacs, est parfaitement compatible avec une simple fluctuation d'échantillonnage.
+    \end{solution}
+  }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+% --------------------------------------------------------------------
+\section*{Exercice 3 --- Contrôle qualité d'un lot, test sur une proportion}
+% --------------------------------------------------------------------
+
+Une chaîne de production de boulons \emph{garantit} un taux de défauts inférieur ou égal à $1\,\%$. À la réception d'un lot, un client prélève $n=500$ boulons au hasard et en trouve $11$ défectueux, soit une proportion empirique $\widehat{p} = 0{,}022$ (soit $2{,}2\,\%$).
+
+\begin{enumerate}
+  \item Justifier l'utilisation d'une approximation normale pour la proportion empirique.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On vérifie les conditions usuelles d'approximation : $n\widehat{p} = 11$ et $n(1-\widehat{p}) = 489$, tous deux $\ge 5$ (en pratique $\ge 10$ recommandé : on est largement au-dessus). Donc, par le TCL,
+      \[
+        \widehat{p} \approx \mathcal{N}\!\left(p,\;\dfrac{p(1-p)}{n}\right).
+      \]
+    \end{solution}
+  }{}
+
+  \item Écrire $H_0$ et $H_1$, et préciser le sens du test.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      La chaîne \emph{garantit} $p \le 0{,}01$ : le client cherche à attraper un dépassement (un \emph{plus grand} taux de défauts). Donc
+      \[
+        H_0 : p \le 0{,}01 \quad \text{contre} \quad H_1 : p > 0{,}01.
+      \]
+      \textbf{Unilatéral à droite.}
+    \end{solution}
+  }{}
+
+  \item Construire la statistique de test et calculer sa valeur observée.
+
+  \emph{Indication.} Sous $H_0$ (cas limite $p_0 = 0{,}01$), on a $\sigma(\widehat{p}) = \sqrt{p_0(1-p_0)/n}$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Sous $H_0$,
+      \[
+        \sigma_0 = \sqrt{\dfrac{0{,}01 \times 0{,}99}{500}} = \sqrt{1{,}98 \cdot 10^{-5}} \approx 0{,}00445.
+      \]
+      Donc
+      \[
+        Z = \dfrac{\widehat{p} - 0{,}01}{\sigma_0} \approx \mathcal{N}(0,1),
+        \quad
+        Z_{\text{obs}} = \dfrac{0{,}022 - 0{,}01}{0{,}00445} \approx 2{,}70.
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer la p-value et conclure au seuil $\alpha = 5\,\%$, puis $\alpha = 1\,\%$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Test unilatéral à droite :
+      \[
+        \text{p-value} = P(Z \ge 2{,}70 \mid H_0) = 1 - \Phi(2{,}70) \approx 1 - 0{,}9965 = 0{,}0035.
+      \]
+      Au seuil $5\,\%$~: $0{,}0035 < 0{,}05$, on \textbf{rejette} $H_0$. Le lot ne respecte pas la garantie.\\
+      Au seuil $1\,\%$~: $0{,}0035 < 0{,}01$, on \textbf{rejette encore} $H_0$. La conclusion est robuste.
+    \end{solution}
+  }{}
+
+  \item Rédiger en une phrase la recommandation du client à son fournisseur.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Les observations sont statistiquement incompatibles avec un taux de défauts inférieur à $1\,\%$, même en étant prudent (seuil $1\,\%$). Le client est fondé à refuser le lot et à demander un nouveau contrôle ou une réfaction commerciale.
+    \end{solution}
+  }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+% --------------------------------------------------------------------
+\section*{Exercice 4 --- Dualité intervalle de confiance / test}
+% --------------------------------------------------------------------
+
+Sur $n=64$ mesures de l'épaisseur d'un revêtement, on a obtenu un intervalle de confiance à $95\,\%$ pour la moyenne $\mu$ :
+\[
+  IC_{95\%}(\mu) = [22{,}8\,;\,23{,}4] \text{ mm}.
+\]
+
+Sans aucun calcul supplémentaire (en se servant uniquement de la dualité IC $\Leftrightarrow$ test), répondre aux questions suivantes au seuil $\alpha = 5\,\%$.
+
+\begin{enumerate}
+  \item Si le cahier des charges annonce $\mu_0 = 23$~mm, peut-on rejeter cette annonce\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $23 \in [22{,}8 ; 23{,}4]$ : on \textbf{ne rejette pas} $H_0 : \mu = 23$. L'annonce est compatible avec les données.
+    \end{solution}
+  }{}
+
+  \item Si le cahier des charges annonce $\mu_0 = 24$~mm, peut-on rejeter cette annonce\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $24 \notin [22{,}8 ; 23{,}4]$ : on \textbf{rejette} $H_0 : \mu = 24$ au seuil $5\,\%$.
+    \end{solution}
+  }{}
+
+  \item Quelles sont \emph{toutes} les valeurs $\mu_0$ qui, en test bilatéral au seuil $5\,\%$, seraient compatibles avec les données\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Exactement les valeurs de l'IC à $95\,\%$ : $\mu_0 \in [22{,}8\,;\,23{,}4]$. C'est la \emph{définition même} de la dualité IC / test : l'intervalle de confiance est l'ensemble des valeurs $\mu_0$ qu'on \emph{ne rejetterait pas} au seuil $\alpha$.
+    \end{solution}
+  }{}
+
+  \item Si on avait calculé un IC à $99\,\%$ à la place, serait-il plus large ou plus étroit\,? Conséquence pour le test associé\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Plus large (couvrir $99\,\%$ au lieu de $95\,\%$ demande une marge plus grande). Côté test, on rejette donc \emph{moins facilement} (seuil $\alpha = 1\,\%$ : on est plus exigeant pour conclure). C'est cohérent avec le compromis erreur de type I / type II.
+    \end{solution}
+  }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+% --------------------------------------------------------------------
+\section*{Exercice 5 --- Adéquation à une loi : test du khi-deux}
+% --------------------------------------------------------------------
+
+Un opérateur de chantier consigne, pendant un mois, le \emph{type de défaut} signalé sur ses livraisons de béton prêt à l'emploi. Cinq catégories sont possibles. La répartition \og standard \fg{} de la filière (issue d'un retour d'expérience national) est donnée ci-dessous, ainsi que les effectifs effectivement observés sur les $200$ livraisons du mois.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  Type de défaut & A & B & C & D & E \\
+  \hline
+  Fréquence théorique standard & $0{,}40$ & $0{,}25$ & $0{,}15$ & $0{,}12$ & $0{,}08$ \\
+  \hline
+  Effectif observé sur le mois $O_i$ & $70$ & $42$ & $38$ & $32$ & $18$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+L'opérateur se demande si la répartition observée chez son fournisseur est compatible avec le standard national.
+
+\begin{enumerate}
+  \item Écrire $H_0$ et $H_1$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $H_0$ : la répartition observée suit la loi standard nationale (les fréquences théoriques données dans le tableau).\\
+      $H_1$ : la répartition observée s'écarte de la loi standard.
+    \end{solution}
+  }{}
+
+  \item Calculer les effectifs attendus $E_i$ sous $H_0$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $E_i = n \times p_i^{\text{théo}}$ avec $n = 200$ :
+      \[
+        E_A = 80, \quad E_B = 50, \quad E_C = 30, \quad E_D = 24, \quad E_E = 16.
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer la statistique $\chi^2_{\text{obs}} = \sum_{i} (O_i - E_i)^2/E_i$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \begin{align*}
+        \chi^2_{\text{obs}}
+        &= \dfrac{(70-80)^2}{80} + \dfrac{(42-50)^2}{50} + \dfrac{(38-30)^2}{30} + \dfrac{(32-24)^2}{24} + \dfrac{(18-16)^2}{16} \\
+        &= \dfrac{100}{80} + \dfrac{64}{50} + \dfrac{64}{30} + \dfrac{64}{24} + \dfrac{4}{16} \\
+        &\approx 1{,}25 + 1{,}28 + 2{,}13 + 2{,}67 + 0{,}25 \\
+        &\approx 7{,}58.
+      \end{align*}
+    \end{solution}
+  }{}
+
+  \item Donner le nombre de degrés de liberté. À l'aide de l'extrait de table ci-dessous de la fonction de répartition de $\chi^2(4)$, en déduire la p-value et conclure au seuil $\alpha = 5\,\%$.
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \small
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+      \hline
+      $x$ & $5$ & $6$ & $7$ & $7{,}58$ & $8$ & $9{,}49$ & $11$ \\
+      \hline
+      $F(x) = P(\chi^2(4) \le x)$ & $0{,}713$ & $0{,}801$ & $0{,}864$ & $0{,}892$ & $0{,}908$ & $0{,}950$ & $0{,}974$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Il y a $r = 5$ catégories, donc $r - 1 = 4$ degrés de liberté. Sous $H_0$, $\chi^2_{\text{obs}}$ suit approximativement $\chi^2(4)$.
+      \[
+        \text{p-value} = P(\chi^2(4) \ge 7{,}58) = 1 - F(7{,}58) = 1 - 0{,}892 = 0{,}108.
+      \]
+      $0{,}108 > 0{,}05$ : on \textbf{ne rejette pas} $H_0$. La répartition observée chez le fournisseur est compatible avec le standard national (au seuil $5\,\%$).
+    \end{solution}
+  }{}
+
+  \item Si l'opérateur avait observé exactement les mêmes proportions mais sur $n = 1000$ livraisons (donc $O_A = 350$, $O_B = 210$, $O_C = 190$, $O_D = 160$, $O_E = 90$), comment évoluerait la conclusion\,? \emph{Indication~: refaire un seul calcul.}
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Avec $n = 1000$, les écarts relatifs restent identiques mais le $\chi^2$ est multiplié par $1000/200 = 5$ :
+      \[
+        \widetilde{\chi}^2_{\text{obs}} = 5 \times 7{,}58 = 37{,}9.
+      \]
+      Cette valeur est largement au-delà des quantiles d'une $\chi^2(4)$ (le quantile à $99\,\%$ vaut environ $13{,}3$) : on \textbf{rejette franchement} $H_0$.
+
+      \medskip
+
+      \textit{Moralité.} Plus l'échantillon est grand, plus on détecte facilement des écarts \emph{réels}, même petits. À $n = 200$, l'écart \og semblait \fg{} pouvoir être expliqué par le hasard ; à $n = 1000$, on est sûr qu'il est structurel. \og Significatif \fg{} et \og important en pratique \fg{} ne sont pas la même chose.
+    \end{solution}
+  }{}
+\end{enumerate}
+
+\end{document}
