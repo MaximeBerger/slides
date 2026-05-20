@@ -184,12 +184,12 @@
 
         {
           "titre": "Attendus à l'examen",
-          "lien": "cm6-enonce.pdf",
+          "lien": "CM6-enonce.pdf",
           "cible": "_blank"
         },
         {
           "titre": "Attendus à l'examen - corrigé collaboratif",
-          "lien": "cm6-annote.pdf",
+          "lien": "CM6-annote.pdf",
           "cible": "_blank"
         }
       ]
