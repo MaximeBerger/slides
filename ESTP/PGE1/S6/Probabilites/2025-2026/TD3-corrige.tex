@@ -1,0 +1,594 @@
+\input{configTD}
+
+
+\title{\sffamily\bfseries Probabilités --- TD3\\[0.3em]
+  \Large Variables aléatoires continues}
+\author{}
+\date{22 avril 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+
+% \textit{L'objectif de ce TD est d'appliquer, \emph{sur des densités
+% données explicitement}, les outils introduits au CM2 : calculs de
+% probabilités à partir d'une densité, fonction de répartition,
+% espérance, variance, et densité d'une fonction de variable aléatoire.
+% Aucune \og loi classique \fg{} n'est supposée connue : toutes les
+% densités dont vous avez besoin sont fournies dans l'énoncé.}
+
+% ====================================================================
+\section*{1 -- Une densité à apprivoiser}
+% ====================================================================
+
+Sur un ouvrage de génie civil, on mesure la longueur (en mm) d'une
+micro-fissure apparue au bout de quelques mois.
+On modélise cette longueur par une variable continue $X$ de densité
+\[
+  f(x)=
+  \begin{cases}
+    c\,x(3-x) & \text{si } x\in[0,3],\\
+    0 & \text{sinon.}
+  \end{cases}
+\]
+
+\begin{enumerate}
+  \item Tracer rapidement l'allure de $f$ sur $[0,3]$.
+  Où semble concentrée la masse de probabilité ?
+  \begin{solution}
+    $f$ est une parabole renversée qui s'annule en $x=0$ et $x=3$
+    et atteint son maximum en $x=3/2$ (par symétrie).
+    La masse est donc concentrée autour de $1{,}5$~mm ;
+    les valeurs très petites ou très proches de $3$~mm sont rares.
+  \end{solution}
+
+  \item Déterminer la constante $c$ pour que $f$ soit une densité.
+  \begin{solution}
+    $f\ge 0$ sur $[0,3]$ ssi $c\ge 0$. Il reste à imposer
+    que l'intégrale vaut $1$ :
+    \[
+      \int_0^3 c\,x(3-x)\,dx
+      =c\left[\frac{3x^2}{2}-\frac{x^3}{3}\right]_0^3
+      =c\left(\frac{27}{2}-9\right)=\frac{9c}{2}=1,
+    \]
+    d'où $c=\dfrac{2}{9}$.
+  \end{solution}
+
+  \item Rappeler ce que représente l'aire sous
+  la courbe de $f$ entre $a$ et $b$.
+  \begin{solution}
+    L'aire $\int_a^b f(x)\,dx$ est la probabilité
+    $P(a\le X\le b)$ que la longueur de la fissure soit comprise
+    entre $a$ et $b$.
+  \end{solution}
+
+  \item Quelle est la probabilité que la fissure mesure moins
+  de $1$~mm ? Plus de $2$~mm ?
+  \begin{solution}
+    Avec $F(x)=\int_0^x\tfrac{2}{9}t(3-t)\,dt
+    =\tfrac{2}{9}\!\left[\tfrac{3t^2}{2}-\tfrac{t^3}{3}\right]_0^x
+    =\tfrac{x^2}{3}-\tfrac{2x^3}{27}$ sur $[0,3]$,
+    \[
+      P(X\le 1)=F(1)=\tfrac{1}{3}-\tfrac{2}{27}=\tfrac{7}{27}\approx 0{,}259,
+    \]
+    \[
+      P(X>2)=1-F(2)=1-\left(\tfrac{4}{3}-\tfrac{16}{27}\right)
+      =1-\tfrac{20}{27}=\tfrac{7}{27}\approx 0{,}259.
+    \]
+    \textit{(La symétrie de $f$ par rapport à $x=3/2$ explique
+    que ces deux probabilités sont égales.)}
+  \end{solution}
+
+  \item Comparer, sans calcul, les deux probabilités
+  $P(X\in[1{,}4\,;\,1{,}6])$ et $P(X\in[0{,}1\,;\,0{,}3])$.
+  Que dit ce résultat sur l'information qu'apporte la densité ?
+  \begin{solution}
+    Les deux intervalles ont même longueur ($0{,}2$~mm), mais le premier
+    est autour du maximum de $f$ et le second vers un bord où $f$ est
+    très petite. Donc $P(X\in[1{,}4\,;\,1{,}6])$ est beaucoup plus
+    grand que $P(X\in[0{,}1\,;\,0{,}3])$.
+
+    La densité en un point est une \textbf{densité} (comme une
+    densité massique) : elle indique où la probabilité est plus
+    \og concentrée \fg. La probabilité d'être dans un petit intervalle
+    de longueur $\varepsilon$ autour de $x_0$ vaut approximativement
+    $f(x_0)\,\varepsilon$.
+  \end{solution}
+
+  \item Calculer $E[X]$ et interpréter.
+  \begin{solution}
+    \[
+      E[X]=\int_0^3 x\cdot\tfrac{2}{9}x(3-x)\,dx
+      =\tfrac{2}{9}\int_0^3 (3x^2-x^3)\,dx
+      =\tfrac{2}{9}\left[x^3-\tfrac{x^4}{4}\right]_0^3
+      =\tfrac{2}{9}\cdot\tfrac{27}{4}=\tfrac{3}{2}.
+    \]
+    La longueur \emph{moyenne} d'une fissure vaut $1{,}5$~mm.
+    Ce résultat était prévisible par symétrie
+    (la densité est symétrique par rapport à $3/2$).
+  \end{solution}
+\end{enumerate}
+
+% ====================================================================
+\section*{2 -- Fonction de répartition : aller-retour avec la densité}
+% ====================================================================
+
+On rappelle que
+\[
+  F_X(x)=P(X\le x)=\int_{-\infty}^x f_X(t)\,dt
+  \qquad\text{et}\qquad
+  f_X=F_X'\text{ là où }F_X\text{ est dérivable.}
+\]
+
+\begin{enumerate}
+  \item Exprimer $P(X>x)$ puis $P(a\le X\le b)$ en fonction de $F_X$.
+  Pourquoi la continuité de $X$ permet-elle d'ignorer la différence
+  entre inégalités strictes et larges ?
+  \begin{solution}
+    $P(X>x)=1-F_X(x)$ et $P(a\le X\le b)=F_X(b)-F_X(a)$.
+
+    Pour une variable continue, $P(X=a)=\int_a^a f=0$,
+    donc $P(X\le a)=P(X<a)$ et $P(X\ge a)=P(X>a)$.
+  \end{solution}
+
+  \item \textbf{De $f$ vers $F$.}
+  On considère la densité
+  $f(x)=\tfrac{3}{8}x^2$ pour $x\in[0,2]$, et $0$ sinon
+  (par exemple la loi d'une variable qui se concentre vers les
+  grandes valeurs).
+  \begin{enumerate}
+    \item Vérifier que $f$ est une densité.
+    \item Déterminer $F$ sur $\mathbb R$.
+    \item Calculer $P(X\le 1)$ et $P(X>1{,}5)$.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item $f\ge 0$, et
+    $\int_0^2 \tfrac{3}{8}x^2\,dx=\tfrac{3}{8}\cdot\tfrac{8}{3}=1.$ \checkmark
+
+    \item Sur $[0,2]$,
+    $F(x)=\int_0^x\tfrac{3}{8}t^2\,dt=\tfrac{x^3}{8}.$
+    Donc
+    \[
+      F(x)=\begin{cases}
+        0 & \text{si } x<0,\\
+        x^3/8 & \text{si } x\in[0,2],\\
+        1 & \text{si } x>2.
+      \end{cases}
+    \]
+
+    \item $P(X\le 1)=F(1)=1/8=0{,}125$ ;
+    $P(X>1{,}5)=1-F(1{,}5)=1-27/64=37/64\approx 0{,}578.$
+    \end{enumerate}
+  \end{solution}
+  \newpage
+
+  \item \textbf{De $F$ vers $f$.}
+  On donne maintenant la fonction de répartition
+  du délai $D$ (en jours) d'une livraison~:
+  \[
+    F_D(t)=
+    \begin{cases}
+      0 & \text{si } t<0,\\
+      1-\bigl(1-t/5\bigr)^3 & \text{si } t\in[0,5],\\
+      1 & \text{si } t>5.
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item Vérifier que $F_D$ a bien les propriétés attendues
+    d'une fonction de répartition (positivité, croissance, limites).
+    \item En déduire la densité $f_D$.
+    \item Calculer $P(D>2)$, $P(1\le D\le 3)$,
+    puis la \og médiane \fg, c'est-à-dire l'instant $t_{1/2}$ pour lequel
+    $P(D\le t_{1/2})=1/2$.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item $F_D$ est continue, vaut $0$ en $0$ et $1$ en $5$ ;
+    $F_D'(t)=\tfrac{3}{5}(1-t/5)^2\ge 0$ : donc elle est croissante.
+    Et $F_D(t)\to 0$ en $-\infty$, $F_D(t)\to 1$ en $+\infty$. \checkmark
+
+    \item Sur $[0,5]$ :
+    $f_D(t)=F_D'(t)=\tfrac{3}{5}(1-t/5)^2$, et $0$ ailleurs.
+
+    \item $P(D>2)=1-F_D(2)=(1-2/5)^3=(3/5)^3=27/125=0{,}216$.
+
+    $P(1\le D\le 3)=F_D(3)-F_D(1)=(4/5)^3-(2/5)^3
+    =\tfrac{64-8}{125}=\tfrac{56}{125}\approx 0{,}448.$
+
+    Médiane : $1-(1-t_{1/2}/5)^3=\tfrac{1}{2}
+    \Rightarrow (1-t_{1/2}/5)^3=\tfrac{1}{2}
+    \Rightarrow t_{1/2}=5\,(1-2^{-1/3})\approx 1{,}03$ jour.
+
+    \textit{Interprétation.} La moitié des livraisons arrivent
+    en moins d'une journée, et pourtant certaines mettent jusqu'à
+    $5$ jours : la densité $f_D$ est nettement décroissante,
+    les retards importants sont rares mais possibles.
+    \end{enumerate}
+  \end{solution}
+
+  \item 
+  Peut-on avoir une fonction de répartition $F$ telle que $F(3)=0{,}8$
+  et $F(2)=0{,}9$ ?
+  \begin{solution}
+    Non : $F$ est toujours croissante (car c'est une accumulation
+    d'aires positives sous la densité). Or ici $F(3)<F(2)$.
+  \end{solution}
+\end{enumerate}
+
+% ====================================================================
+\section*{3 -- Espérance, variance, propriétés}
+% ====================================================================
+
+On rappelle :
+\[
+  E[X]=\int_{-\infty}^{+\infty}\!x\,f_X(x)\,dx,\qquad
+  E[g(X)]=\int_{-\infty}^{+\infty}\!g(x)\,f_X(x)\,dx,
+\]
+\[
+  \text{Var}(X)=E\bigl[(X-E[X])^2\bigr]=E[X^2]-E[X]^2.
+\]
+
+\begin{enumerate}
+  \item \textbf{Une densité constante.}
+  Soit $X$ dont la densité est constante
+  sur $[a,b]$, et $0$ sinon (on \og tire au hasard uniformément \fg{}
+  une valeur dans $[a,b]$).
+  \begin{enumerate}
+    \item Explicitez la fonction de densité de $X$. L'ecrire avec une fonction indicatrice. 
+    \item Calculer $E[X]$.
+    \item Calculer $E[X^2]$, puis $\text{Var}(X)$.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item C'est la fonction $f(x) = \frac{1}{b-a}$ sur $[a,b]$ et $0$ sinon.
+    On peut l'écrire avec une fonction indicatrice : $f(x) = \frac{1}{b-a} \mathbf{1}_{[a,b]}(x)$.
+    \item 
+    \[
+      E[X]=\frac{1}{b-a}\int_a^b x\,dx
+      =\frac{1}{b-a}\cdot\frac{b^2-a^2}{2}=\frac{a+b}{2}.
+    \]
+    C'est bien le \og milieu \fg{} de l'intervalle, ce qu'on attend
+    d'une densité symétrique et constante.
+
+    \item
+    \[
+      E[X^2]=\frac{1}{b-a}\int_a^b x^2\,dx
+      =\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}.
+    \]
+    D'où
+    \[
+      \text{Var}(X)=\frac{a^2+ab+b^2}{3}-\left(\frac{a+b}{2}\right)^2
+      =\frac{(b-a)^2}{12}.
+    \]
+    \end{enumerate}
+  \end{solution}
+
+  \item Reprenons la densité parabolique $f(x)=\tfrac{2}{9}x(3-x)$
+  sur $[0,3]$ de l'exercice~1. On a déjà montré que $E[X]=3/2$.
+  Calculer $\text{Var}(X)$ et l'écart-type $\sigma(X)$.
+  Comparer avec la variance d'une densité constante sur $[0,3]$ ;
+  commenter.
+  \begin{solution}
+    \[
+      E[X^2]=\int_0^3 x^2\cdot\tfrac{2}{9}x(3-x)\,dx
+      =\tfrac{2}{9}\int_0^3(3x^3-x^4)\,dx
+      =\tfrac{2}{9}\left[\tfrac{3x^4}{4}-\tfrac{x^5}{5}\right]_0^3
+      =\tfrac{2}{9}\cdot\tfrac{3^5\cdot (5-4)}{20}
+      =\tfrac{2}{9}\cdot\tfrac{243}{20}=\tfrac{27}{10}.
+    \]
+    Donc $\text{Var}(X)=\tfrac{27}{10}-\tfrac{9}{4}
+    =\tfrac{54-45}{20}=\tfrac{9}{20}=0{,}45$ et
+    $\sigma(X)=\sqrt{9/20}\approx 0{,}671$.
+
+    Pour la densité constante sur $[0,3]$ :
+    $\text{Var}=\frac{3^2}{12}=0{,}75$.
+
+    \textit{Commentaire.} La densité parabolique est plus
+    \og concentrée \fg{} autour de $3/2$ que la densité
+    constante : cela se traduit par une variance plus petite
+    ($0{,}45<0{,}75$).
+  \end{solution}
+
+  \item \textbf{Théorème de transfert.}
+  Reprenons la même densité $f(x)=\tfrac{2}{9}x(3-x)$ sur $[0,3]$.
+  On définit $Y=X(3-X)$ (par exemple, une énergie proportionnelle
+  à $X(3-X)$).
+  Calculer $E[Y]$ \emph{sans} déterminer la loi de~$Y$.
+  \begin{solution}
+    Par le théorème de transfert,
+    \[
+      E[Y]=E[X(3-X)]=\int_0^3 x(3-x)\cdot\tfrac{2}{9}x(3-x)\,dx
+      =\tfrac{2}{9}\int_0^3 \bigl(x(3-x)\bigr)^2\,dx.
+    \]
+    On développe $(x(3-x))^2=x^2(3-x)^2=x^2(9-6x+x^2)=9x^2-6x^3+x^4$,
+    \[
+      \int_0^3(9x^2-6x^3+x^4)\,dx
+      =\bigl[3x^3-\tfrac{3x^4}{2}+\tfrac{x^5}{5}\bigr]_0^3
+      =81-\tfrac{243}{2}+\tfrac{243}{5}
+      =\tfrac{810-1215+486}{10}=\tfrac{81}{10}.
+    \]
+    Donc $E[Y]=\tfrac{2}{9}\cdot\tfrac{81}{10}=\tfrac{9}{5}=1{,}8$.
+
+    \textit{Remarque.} Calculer la loi de $Y$ directement
+    serait beaucoup plus long : le théorème de transfert
+    est souvent le chemin le plus court.
+  \end{solution}
+
+  \item \textbf{Propriété sur les transformations affines.}
+  On suppose que $E[X]=\mu$ et $\text{Var}(X)=\sigma^2$,
+  et on pose $Y=aX+b$ avec $a\in\mathbb R$, $b\in\mathbb R$.
+  Exprimer $E[Y]$, $\text{Var}(Y)$ et $\sigma(Y)$.
+  Que se passe-t-il si $a<0$ ?
+  \begin{solution}
+    Par linéarité de l'espérance, $E[Y]=aE[X]+b=a\mu+b$. Ensuite,
+    \[
+      \text{Var}(Y)=E\bigl[(aX+b-(a\mu+b))^2\bigr]
+      =E[a^2(X-\mu)^2]=a^2\text{Var}(X)=a^2\sigma^2.
+    \]
+    Donc $\sigma(Y)=|a|\sigma$.
+    Le signe de $a$ ne joue aucun rôle sur la dispersion :
+    seule sa \textbf{valeur absolue} compte (multiplier $X$ par $-1$
+    ne change pas l'écart-type).
+
+    \textit{Application.} Si $X$ est en mètres, $Y=100X$ est en cm :
+    $E[Y]=100\mu$ et $\sigma(Y)=100\sigma$. Les deux quantités
+    doivent se redimensionner \emph{de la même façon} que l'unité,
+    ce qui est cohérent avec le fait qu'on les compare à la variable
+    elle-même.
+  \end{solution}
+\end{enumerate}
+\newpage
+
+% ====================================================================
+\section*{4 -- Densité d'une fonction de variable aléatoire}
+% ====================================================================
+
+Dans cet exercice, on appliquera les
+méthodes du CM2 pour obtenir la densité
+de $Y=g(X)$ 
+
+\subsection*{4.a -- Transformation affine : $Y=aX+b$}
+
+Soit $X$ une variable continue de densité $f_X$ et de fonction
+de répartition $F_X$. On pose $Y=aX+b$ avec $a>0$.
+
+\begin{enumerate}
+  \item Exprimer $F_Y(y)$ en fonction de $F_X$.
+  \begin{solution}
+    \[
+      F_Y(y)=P(aX+b\le y)
+      =P\!\left(X\le\tfrac{y-b}{a}\right)
+      =F_X\!\left(\tfrac{y-b}{a}\right).
+    \]
+  \end{solution}
+
+  \item En déduire la densité $f_Y$.
+  \begin{solution}
+    Par la règle de la chaîne,
+    \[
+      \boxed{\,f_Y(y)=\tfrac{1}{a}\,f_X\!\left(\tfrac{y-b}{a}\right).\,}
+    \]
+    \textit{Cas général $a\ne 0$} (la démonstration est analogue
+    en étudiant les deux cas $a>0$ et $a<0$) :
+    $f_Y(y)=\dfrac{1}{|a|}f_X\!\left(\dfrac{y-b}{a}\right)$.
+  \end{solution}
+
+  \item \textbf{Application numérique.}
+  La longueur d'une pièce (en mm) est modélisée par $X$ de densité
+  $f_X(x)=\tfrac{3}{8}x^2$ sur $[0,2]$. On choisit de l'exprimer en cm :
+  $Y=X/10$. Déterminer la densité de $Y$.
+  \begin{solution}
+    Ici $a=1/10$, $b=0$, donc
+    $f_Y(y)=\tfrac{1}{1/10}f_X(10y)=10\cdot\tfrac{3}{8}(10y)^2
+    =\tfrac{3000}{8}\,y^2=375\,y^2$, sur l'intervalle $[0,\,0{,}2]$ cm,
+    et $0$ ailleurs.
+
+    \textit{Vérification.}
+    $\int_0^{0{,}2}375\,y^2\,dy=375\cdot\tfrac{(0{,}2)^3}{3}
+    =375\cdot\tfrac{0{,}008}{3}=1$. \checkmark
+  \end{solution}
+\end{enumerate}
+
+\subsection*{4.b -- Passage au carré : $Y=X^2$}
+
+Soit $X$ de densité
+\[
+  f_X(x)=x\,e^{-x^2/2}\quad\text{pour }x\ge 0,\qquad
+  f_X(x)=0\quad\text{sinon.}
+\]
+
+\begin{enumerate}
+  \item Vérifier que $f_X$ est bien une densité.
+  \begin{solution}
+    $f_X\ge 0$. On reconnaît la dérivée de $-e^{-x^2/2}$ :
+    \[
+      \int_0^{+\infty}x\,e^{-x^2/2}\,dx
+      =\bigl[-e^{-x^2/2}\bigr]_0^{+\infty}=1.\;\checkmark
+    \]
+  \end{solution}
+
+  \item On pose $Y=X^2$. Quel intervalle de valeurs prend $Y$ ?
+  Pour $y\ge 0$, écrire $\{Y\le y\}$ comme un événement portant
+  sur $X$.
+  \begin{solution}
+    $X$ prend ses valeurs dans $[0,+\infty[$, donc $Y=X^2$ aussi.
+    Pour $y\ge 0$, comme $X\ge 0$ :
+    \[
+      \{Y\le y\}=\{X^2\le y\}=\{0\le X\le\sqrt{y}\}.
+    \]
+  \end{solution}
+
+  \item En déduire $F_Y(y)$ sous forme d'intégrale.
+  \begin{solution}
+    Pour $y\ge 0$,
+    \[
+      F_Y(y)=P(0\le X\le\sqrt{y})
+      =\int_0^{\sqrt{y}}x\,e^{-x^2/2}\,dx,
+    \]
+    et $F_Y(y)=0$ pour $y<0$.
+  \end{solution}
+
+  \item Effectuer le \textbf{changement de variable} $u=x^2$
+  dans cette intégrale (de sorte que $du=2x\,dx$) et en déduire
+  l'expression de $F_Y$, puis de $f_Y$.
+  \begin{solution}
+    Avec $u=x^2$, les bornes deviennent $u=0$ et $u=y$, et
+    $x\,dx=\tfrac{1}{2}du$ :
+    \[
+      F_Y(y)=\int_0^{y}\tfrac{1}{2}\,e^{-u/2}\,du
+      =1-e^{-y/2}\qquad(y\ge 0).
+    \]
+    En dérivant,
+    \[
+      \boxed{\,f_Y(y)=\tfrac{1}{2}\,e^{-y/2}\quad\text{pour }y\ge 0,\quad
+      0\text{ sinon.}\,}
+    \]
+    Cette densité est \emph{bien} une densité : elle est positive
+    et son intégrale sur $[0,+\infty[$ vaut~$1$.
+  \end{solution}
+
+  \item Calculer $E[Y]$ de deux manières différentes~:
+  \begin{enumerate}
+    \item directement avec la densité $f_Y$ trouvée ci-dessus ;
+    \item avec le théorème de transfert appliqué à $X$,
+  sous la forme $E[Y]=E[X^2]$.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item Avec $f_Y$ et une intégration par parties :
+    \[
+      E[Y]=\int_0^{+\infty}y\cdot\tfrac{1}{2}e^{-y/2}\,dy
+      =\bigl[-y\,e^{-y/2}\bigr]_0^{+\infty}
+      +\int_0^{+\infty}e^{-y/2}\,dy
+      =0+2=2.
+    \]
+
+    \item Via le transfert :
+    \[
+      E[X^2]=\int_0^{+\infty}x^2\cdot x\,e^{-x^2/2}\,dx
+      =\int_0^{+\infty}x^3\,e^{-x^2/2}\,dx.
+    \]
+    On pose $u=x^2/2$ ($du=x\,dx$), d'où $x^2=2u$ :
+    \[
+      E[X^2]=\int_0^{+\infty}2u\,e^{-u}\,du=2\cdot 1=2.\;\checkmark
+    \]
+    Les deux méthodes donnent bien le même résultat.
+    \end{enumerate}
+  \end{solution}
+\end{enumerate}
+
+\subsection*{4.c -- Transformation logarithmique : $Y=-\ln X$}
+
+Soit $X$ de densité constante $f_X(x)=1$ sur $[0,1]$, et $0$ sinon.
+On pose $Y=-\ln X$.
+
+\begin{enumerate}
+  \item Justifier que $Y$ prend ses valeurs dans $[0,+\infty[$.
+  \begin{solution}
+    Pour $x\in\,]0,1]$, $\ln x\le 0$, donc $Y=-\ln x\ge 0$.
+    En $x=1$, $Y=0$ ; quand $x$ se rapproche de $0$, $Y\to +\infty$.
+  \end{solution}
+
+  \item Pour $y\ge 0$, écrire $\{Y\le y\}$ comme un événement portant
+  sur $X$, puis en déduire $F_Y(y)$.
+  \begin{solution}
+    \[
+      \{Y\le y\}=\{-\ln X\le y\}=\{\ln X\ge -y\}=\{X\ge e^{-y}\}.
+    \]
+    Comme $X$ a une densité constante égale à $1$ sur $[0,1]$ :
+    \[
+      F_Y(y)=P(X\ge e^{-y})=\int_{e^{-y}}^{1}1\,dx=1-e^{-y}.
+    \]
+    \textit{Variante par changement de variable.}
+    Pour $0\le a\le b$,
+    \(
+      P(Y\in[a,b])=\int_{e^{-b}}^{e^{-a}}1\,dx.
+    \)
+    Avec $u=-\ln x$, $du=-dx/x=-e^{u}\,du$ donc $dx=-e^{-u}du$,
+    et les bornes s'échangent :
+    \(
+      P(Y\in[a,b])=\int_a^b e^{-u}\,du.
+    \)
+    On retrouve bien que $F_Y(y)=1-e^{-y}$.
+  \end{solution}
+
+  \item En déduire la densité de $Y$.
+  \begin{solution}
+    $f_Y(y)=F_Y'(y)=e^{-y}$ sur $[0,+\infty[$, $0$ sinon.
+
+    \textit{Remarque pratique.}
+    C'est exactement le principe de simulation utilisé
+    par la plupart des langages de programmation : si votre générateur
+    vous donne un nombre uniforme dans $[0,1]$, alors $-\ln X$ vous
+    fournit directement une variable continue à valeurs dans
+    $\mathbb R_+$ de densité $e^{-y}$ (celle des temps d'attente
+    \og sans mémoire \fg).
+  \end{solution}
+
+  \item Calculer $E[Y]$ par deux méthodes~:
+  \begin{enumerate}
+    \item via la densité $f_Y$ ;
+    \item via le théorème de transfert
+    $E[Y]=E[-\ln X]=\int_0^1(-\ln x)\,dx$.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item Par IPP,
+    \[
+      E[Y]=\int_0^{+\infty}y\,e^{-y}\,dy
+      =\bigl[-y\,e^{-y}\bigr]_0^{+\infty}+\int_0^{+\infty}e^{-y}\,dy
+      =0+1=1.
+    \]
+
+    \item Par IPP également,
+    \[
+      \int_0^1(-\ln x)\,dx
+      =\bigl[-x\ln x+x\bigr]_0^1=1.\;\checkmark
+    \]
+    (On utilise $\lim_{x\to 0^+}x\ln x=0$.)
+    Les deux approches donnent $E[Y]=1$.
+    \end{enumerate}
+  \end{solution}
+\end{enumerate}
+\newpage 
+
+\vspace{1cm}
+\section*{5 -- Application}
+Dans une station-service, la demande hebdomadaire en essence, en milliers de litres, est une variable aléatoire $X$ de densité $f(x)=c(1-x)^4 \mathbf{1}_{[0,1]}$.
+\begin{enumerate}
+  \item Déterminer $c$.
+
+  \item La station est réapprovisionnée chaque lundi à 20 h . Quelle doit être la capacité du réservoir d'essence pour que la probabilité d'épuiser ce réservoir soit inférieure à $10^{-5}$ ?
+
+\end{enumerate}
+
+\vspace{2em}
+\section*{6 -- Manipulation de densités}
+Soit $f$ la fonction de $\mathbb{R}$ dans $\mathbb{R}$ définie par
+
+$$
+f(x)=\frac{e^{-x}}{\left(1+e^{-x}\right)^2}
+$$
+
+\begin{enumerate}
+  \item Montrer que $f$ est une densité de probabilité. Déterminer la fonction de répartition d'une variable aléatoire $\boldsymbol{X}$ ayant $\boldsymbol{f}$ pour densité.
+
+  \item Soit $\varphi$ la fonction de $\mathbb{R}$ dans $\mathbb{R}$ définie par:
+
+$$
+\varphi(x)=\frac{e^x-1}{e^x+1}
+$$
+
+
+Etudier les variations de $\varphi$. Montrer que $\varphi$ réalise une bjjection de $\mathbb{R}$ sur ] - 1,1 [, et déterminer sa bjjection réciproque.
+  \item On définit une variable aléatoire $Y$ par:
+
+$$
+Y=\varphi(X)=\frac{e^X-1}{e^X+1} .
+$$
+
+
+Déterminer la fonction de répartition et une densité de $\boldsymbol{Y}$.
+  \end{enumerate}
+\end{document}

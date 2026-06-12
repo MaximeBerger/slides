@@ -1,0 +1,493 @@
+\input{configTD}
+
+\title{Probabilités TD1 - Evénements et probabilités}
+
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\section*{1 - Manipulation d'événements}
+On contrôle successivement une suite de pièces utilisées sur un chantier. Pour $n \geq 1$, on note $A_n$ l'événement "la $n$-ième pièce contrôlée est conforme".
+\begin{enumerate}
+    \item Comment écrire à partir des $A_i$ les événements :
+    \begin{itemize}
+        \item Les 3 premières pièces contrôlées sont conformes
+        \item Parmi les 2 premières pièces contrôlées, la première est conforme et la seconde ne l'est pas.
+        \item Parmi les 2 premières pièces contrôlées, 1 est conforme et 1 ne l'est pas.
+    \end{itemize}
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    \begin{itemize}
+        \item $A_1 \cap A_2 \cap A_3$
+        \item $A_1 \cap \bar{A_2}$
+        \item $(A_1\cap \bar{A_2}) \cup (\bar{A_1}\cap A_2)$
+    \end{itemize}
+\end{solution}
+    }{}
+    \item Décrire par une phrase les événements suivants:
+    $$
+B=\bigcap_{i=5}^{+\infty} A_i,\qquad  C=\bigcup_{i=5}^{+\infty} A_i
+$$
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    $B$ signifie qu'à partir du cinquième contrôle, toutes les pièces contrôlées sont conformes. $C$ signifie qu'au moins une pièce contrôlée à partir du cinquième contrôle est conforme. On peut décrire $D$ par la formule
+        \end{solution}
+    }{}
+
+
+\item  Écrire à l'aide de $A_i$ l'événement $D$ "À partir d'un certain contrôle, toutes les pièces contrôlées sont conformes".
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Si on avait voulu l'évennement $D_{10}$: "A partir du 10eme contrôle, toutes les pièces sont conformes", on écrirait 
+$$
+D_{10}=\bigcap_{i=10}^{+\infty} A_i
+$$
+Pour écrire $D$, il faut considérer que c'est :
+\begin{enumerate}
+    \item soit à partir du premier, toutes sont conformes,
+    \item soit à partir du deuxième, toutes sont conformes, 
+    \item etc .. 
+    \item soit à partir du dixième toutes sont conformes, 
+    \item etc ...
+\end{enumerate}
+
+C'est donc la réunion de tous ces évennements: 
+
+$$
+D=\bigcup_{n=1}^{+\infty} \bigcap_{i \geq n} A_i\,.
+$$
+
+    \end{solution}
+}{}
+
+\item On suppose que chaque pièce a une probabilité $\frac{1}{2}$ d'être conforme, indépendamment des autres. Calculer la probabilité que, parmi les deux premières pièces contrôlées, l'une au moins soit conforme.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On note $A_1$ l'événement "la première pièce est conforme" et $A_2$ l'événement "la deuxième pièce est conforme". On cherche
+
+$$
+P(A_1 \cup A_2)=1-P(\bar{A_1}\cap \bar{A_2}).
+$$
+
+Par indépendance,
+
+$$
+P(\bar{A_1}\cap \bar{A_2})=P(\bar{A_1})P(\bar{A_2})=\frac{1}{2}\times \frac{1}{2}=\frac{1}{4}.
+$$
+
+Donc
+
+$$
+P(A_1 \cup A_2)=1-\frac{1}{4}=\frac{3}{4}.
+$$
+    \end{solution}
+}{}
+
+\item Quelle est la probabilité que la deuxième pièce soit conforme sachant que la première l'est ?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Comme les contrôles sont indépendants,
+
+$$
+P(A_2 \mid A_1)=P(A_2)=\frac{1}{2}.
+$$
+
+Autrement dit, savoir que la première pièce est conforme ne change pas la probabilité que la deuxième le soit.
+    \end{solution}
+}{}
+
+\item Sachant qu'une des deux premières pièces est conforme, quelle est la probabilité que l'autre le soit aussi ?
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+L'information "une des deux premières pièces est conforme" correspond à l'événement $A_1 \cup A_2$. Dire que l'autre l'est aussi signifie alors que les deux sont conformes, c'est-à-dire l'événement $A_1 \cap A_2$.
+
+On cherche donc
+
+$$
+P(A_1 \cap A_2 \mid A_1 \cup A_2)=\frac{P(A_1 \cap A_2)}{P(A_1 \cup A_2)}.
+$$
+
+Or, par indépendance,
+
+$$
+P(A_1 \cap A_2)=\frac{1}{2}\times \frac{1}{2}=\frac{1}{4}
+$$
+
+et, d'après la question précédente,
+
+$$
+P(A_1 \cup A_2)=\frac{3}{4}.
+$$
+
+Ainsi,
+
+$$
+P(A_1 \cap A_2 \mid A_1 \cup A_2)=\frac{\frac{1}{4}}{\frac{3}{4}}=\frac{1}{3}.
+$$
+    \end{solution}
+}{}
+\end{enumerate}
+\vspace{2em}
+
+\section*{2 - Mesure de Probabilité}
+Soit $a \in] 0,1[$.
+
+Sur $\mathbb{N}$, une mesure de probabilité est entièrement déterminée par les poids $P(\{k\})$ pour $k \in \mathbb{N}$, avec
+\[
+P(\{k\}) \geq 0
+\qquad \text{et} \qquad
+\sum_{k=0}^{+\infty} P(\{k\}) = 1.
+\]
+Pour toute partie $A \subset \mathbb{N}$, on a alors
+\[
+P(A)=\sum_{k \in A} P(\{k\}).
+\]
+\begin{enumerate}
+
+\item Déterminer $a$ tel que la fonction $P$, qui à tout $n \in \mathbb{N}$ associe $P(\{n\})=(1-a) a^n$ soit une mesure de probabilité sur $\mathbb{N}$. 
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+ Il suffit de vérifier que, pour tout $\left.n \in \mathbb{N}, a^n(1-a) \in\right] 0,1[$ - ce qui est clair puisque $a \in] 0,1[$, donc $\left.\left.a^n \in\right] 0,1\right]$ ( $n$ peut être égal à 0 ) et $\left.1-a \in\right] 0,1[$ - et que
+
+$$
+\sum_{n=0}^{+\infty}(1-a) a^n=\frac{1-a}{1-a}=1
+$$
+    \end{solution}
+}{}
+
+\item On considère les deux événements $A=\{2 k: k \in \mathbb{N}\}$ et $B=\{2 k+1: k \in \mathbb{N}\}$. Calculer $P(A)$ et $P(B)$. Les événements $A$ et $B$ sont-ils incompatibles ? sont-ils indépendants ?
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On a 
+
+$$
+P(A)=\sum_{k=0}^{+\infty}(1-a) a^{2 k}=\frac{1-a}{1-a^2}=\frac{1}{1+a}
+$$
+
+
+Comme $B=\bar{A}$, on a
+
+$$
+P(B)=1-P(A)=\frac{a}{1+a}
+$$
+
+
+Puisque $A \cap B=\varnothing$, les événements $A$ et $B$ sont incompatibles. Puisque $P(A \cap B)=P(\varnothing)=0$ et $P(A) P(B) \neq 0$, les événements $A$ et $B$ ne sont pas indépendants.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{3 - Indépendance d'événements}
+\begin{enumerate}
+\item Un atelier fabrique $12$ pièces numérotées de $1$ à $12$. On en prélève une au hasard pour contrôle, et on considère les événements
+
+$$
+\begin{aligned}
+& A=\text { "la pièce prélevée porte un numéro pair", } \\
+& B=\text { "la pièce prélevée porte un numéro multiple de } 3 \text { ". }
+\end{aligned}
+$$
+
+
+Les événements $A$ et $B$ sont-ils indépendants?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On a :
+
+$$
+\begin{gathered}
+A=\{2,4,6,8,10,12\} \\
+B=\{3,6,9,12\} \\
+A \cap B=\{6,12\}
+\end{gathered}
+$$
+On a donc $P(A)=1 / 2, P(B)=1 / 3$ et $P(A \cap B)=1 / 6=P(A) P(B)$. Les événements $A$ et $B$ sont indépendants.
+
+\end{solution}
+}{}
+
+\item  Reprendre la question avec un atelier fabriquant $13$ pièces numérotées.
+\end{enumerate} 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Les événements $A, B$ et $A \cap B$ s'écrivent encore exactement de la même façon. Mais cette fois, on a : $P(A)=6 / 13, P(B)=4 / 13$ et $P(A \cap B)=2 / 13 \neq 24 / 169$. Les événements $A$ et $B$ ne sont pas indépendants. C'est conforme à l'intuition. It n'y a plus la même répartition de boules paires et de boules impaires, et dans les multiples de 3 compris entre 1 et 13 , la répartition des nombres pairs et impairs est restée inchangée.
+    \end{solution}
+}{}
+\vspace{2em}
+
+\section*{4 - Lois discrètes classiques}
+Dans cet exercice, on cherche \`a reconna\^itre dans quelles situations les lois discr\`etes classiques fournissent un mod\`ele adapt\'e.
+
+\begin{enumerate}
+    \item Relier chaque loi discr\`ete de la colonne de gauche \`a la situation correspondante de la colonne de droite. On justifiera bri\`evement chaque choix.
+    
+    \medskip
+    \noindent
+    \begin{minipage}[t]{0.33\textwidth}
+    \textbf{Colonne A -- Lois}\vspace{1em}
+    
+    Loi binomiale $B(n, p)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi de Poisson $P(\lambda)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi g\'eom\'etrique $G(p)$ \hfill \rule{1.2ex}{1.2ex}
+    
+    \medskip
+    Loi uniforme discr\`ete $U(a, b)$ \hfill \rule{1.2ex}{1.2ex}
+    \end{minipage}
+    \hspace{0.14\textwidth}
+    \begin{minipage}[t]{0.43\textwidth}
+    \textbf{Colonne B -- Situations}\vspace{1em}
+    
+    \rule{1.2ex}{1.2ex}\quad Nombre de reprises parmi $20$ interventions.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Nombre d'incidents rares en une journ\'ee.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Rang du premier contr\^ole concluant.
+    
+    \medskip
+    \rule{1.2ex}{1.2ex}\quad Choix al\'eatoire d'un cr\'eneau entre $t_1$ et $t_2$.
+    \end{minipage}
+    
+    \vspace{2em}
+
+    \item Pour chacune des variables al\'eatoires suivantes, dire quelle loi discr\`ete permet de la mod\'eliser et pr\'eciser ses param\`etres.
+    \begin{enumerate}
+        \item $X$ d\'esigne le nombre d'\'el\'ements non conformes parmi $12$ \'el\'ements contr\^ol\'es, chaque \'el\'ement ayant une probabilit\'e $0{,}03$ d'\^etre non conforme ;
+        \item $Y$ d\'esigne le nombre de jours de pluie pendant une semaine de $7$ jours, chaque jour ayant une probabilit\'e $0{,}3$ d'\^etre pluvieux, ind\'ependamment des autres ;
+        \item $Z$ d\'esigne le nombre d'incidents mineurs observ\'es pendant une semaine sur un chantier, sachant qu'on en observe en moyenne $1{,}2$ par semaine ;
+        \item $T$ d\'esigne le rang du premier essai concluant lors d'une s\'erie d'essais ind\'ependants, chaque essai ayant une probabilit\'e $0{,}75$ de r\'eussir ;
+        \item $U$ d\'esigne le num\'ero du quai de d\'echargement attribu\'e au hasard \`a un camion parmi les quais num\'erot\'es de $1$ \`a $6$ ;
+        \item $V$ d\'esigne le nombre d'appels de maintenance re\c cus en une journ\'ee, sachant que ce nombre vaut en moyenne $3$ par jour.
+    \end{enumerate}
+    
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}
+{
+    \begin{solution}
+        \begin{enumerate}
+            \item Correspondances :
+            \[
+            1 \leftrightarrow A,
+            \qquad
+            2 \leftrightarrow B,
+            \qquad
+            3 \leftrightarrow C,
+            \qquad
+            4 \leftrightarrow D.
+            \]
+            En effet, $A$ correspond \`a un nombre de succ\`es dans un nombre fix\'e d'essais ind\'ependants, $B$ \`a un nombre d'\'ev\'enements rares sur une dur\'ee donn\'ee, $C$ au rang du premier succ\`es, et $D$ \`a un choix \'equiprobable parmi des entiers.
+            
+            \item Mod\'elisation des variables al\'eatoires :
+            \begin{enumerate}
+                \item $X \sim B(12,0{,}03)$ ;
+                \item $Y \sim B(7,0{,}3)$ ;
+                \item $Z \sim P(1{,}2)$ ;
+                \item $T \sim G(0{,}75)$ ;
+                \item $U \sim U(1,6)$ ;
+                \item $V \sim P(3)$.
+            \end{enumerate}
+            
+        \end{enumerate}
+    \end{solution}
+}{}
+
+\newpage
+
+\section*{5 - Rebuts}
+Une fabrication automatique de pièces embouties donne un pourcentage de rebuts s'élevant à $5 \%$. On considère un échantillon de $10$ pièces issues de cette fabrication. Calculer la probabilité de trouver dans cet échantillon au plus $2$ rebuts.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+Soit $X$ le nombre de rebuts parmi les $10$ pièces. Chaque pièce est défectueuse indépendamment avec probabilité $0{,}05$, donc $X \sim B(10;\, 0{,}05)$.
+
+On cherche $P(X \leq 2) = P(X=0)+P(X=1)+P(X=2)$. Par la formule binomiale :
+\begin{align*}
+P(X=0) &= 0{,}95^{10} \approx 0{,}5987\,,\\
+P(X=1) &= \binom{10}{1}\times 0{,}05 \times 0{,}95^{9} \approx 0{,}3151\,,\\
+P(X=2) &= \binom{10}{2}\times 0{,}05^{2} \times 0{,}95^{8} \approx 0{,}0746\,.
+\end{align*}
+Donc $P(X \leq 2) \approx 0{,}9884$.
+    \end{solution}
+}{}
+
+\vspace{1em}
+
+\section*{6 - Un dé}
+
+Combien de fois faut-il lancer un dé pour faire au moins un six avec une probabilité supérieure ou égale à $0{,}95$ ?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+L'événement contraire est "aucun six en $n$ lancers", de probabilité $\left(\tfrac{5}{6}\right)^n$. On cherche le plus petit entier $n$ tel que
+$$
+1 - \left(\frac{5}{6}\right)^n \geq 0{,}95
+\iff
+\left(\frac{5}{6}\right)^n \leq 0{,}05.
+$$
+En passant au logarithme (en base $e$) :
+$$
+n \geq \frac{\ln(0{,}05)}{\ln\!\left(\tfrac{5}{6}\right)} = \frac{\ln(0{,}05)}{\ln 5 - \ln 6} \approx \frac{-2{,}996}{-0{,}182} \approx 16{,}4\,.
+$$
+Il faut donc au moins $\mathbf{17}$ lancers.
+    \end{solution}
+}{}
+
+\vspace{1em}
+
+\section*{7 - Formule des probabilités totales}
+Dans une entreprise deux ateliers fabriquent les mêmes pièces. 
+L'atelier 1 fabrique en une journée deux fois plus de pièces que l'atelier 2. 
+Le pourcentage de pièces défectueuses est $3 \%$ pour l'atelier 1 et $4 \%$ pour l'atelier 2. 
+On prélève une pièce au hasard dans l'ensemble de la production d'une journée. 
+
+Déterminer (\textit{On pourra représenter un arbre de probabilités})
+\begin{enumerate}
+    \item la probabilité que cette pièce provienne de l'atelier 1 ;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Notons $A$ l'événement " la pièce provient de l'atelier 1 ", $B$ l'événement " la pièce provient de l'atelier 2" et $D$ l'événement " la pièce est défectueuse".
+    
+            L'énoncé nous dit que les $2 / 3$ des pièces produites proviennent de l'atelier 1. Donc $P(A)=2 / 3$
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette pièce provienne de l'atelier 1 et est défectueuse;
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+    On cherche $P(A \cap D)=P_A(D) P(A)=0,03 \times \frac{2}{3}=\frac{1}{50}$.
+        \end{solution}
+    }{}
+
+    \item  la probabilité que cette pièce provienne de l'atelier 1 sachant qu'elle est défectueuse.
+\end{enumerate}
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+On démontre de même que $P(B \cap D)=\frac{1}{75}$ et donc que
+
+$$
+P(D)=P(A \cap D)+P(B \cap D)=\frac{1}{30}
+$$
+
+
+Ainsi, on a
+
+$$
+P_D(A)=\frac{P(A \cap D)}{P(D)}=\frac{3}{5}
+$$
+
+    \end{solution}
+}{}
+\vspace{1em}
+
+\section*{8 - Loi de variables aléatoires}
+Soit $X$ une variable aléatoire suivant une loi uniforme sur $\{1, \ldots, 20\}$. Déterminer la loi de $\lfloor\sqrt{X}\rfloor$.
+
+Vous pourrez vérifier vos calculs en montrant que la loi de $\sqrt{X}$ est bien une mesure de probabilité, sur quel ensemble ?
+
+Calculer l'espérance de $X$ et l'espérance de $\lfloor\sqrt{X}\rfloor$.
+
+On donne la formule pour calculer l'espérance : si une variable aléatoire $X$ peut prendre les valeurs $x_1, x_2, \cdots$, alors
+\[
+E(X) =  \sum_{k\geq 1}x_k P(X=x_k)\,. 
+\]
+En français, l'espérance est la moyenne des valeurs que peut prendre $X$, pondérée par les probabilités que $X$ prenne ces valeurs. 
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Pour simplifier les notations, posons $Y=\lfloor\sqrt{X}\rfloor$. Alors, $Y$ peut prendre les valeurs $1,2,3,4$. Plus précisément,
+
+    \begin{itemize}
+
+\item  si $X=1, X=2$ ou $X=3$, alors $Y=1$. En particulier,
+
+$$
+P(Y=1)=P(X=1)+P(X=2)+P(X=3)=\frac{3}{20}
+$$
+
+\item  si $X=4, X=5, X=6, X=7$ ou $X=8$, alors $Y=2$. En particulier,
+
+$$
+P(Y=2)=\frac{5}{20}
+$$
+
+\item si $X=9, X=10, X=11, X=12, X=13, X=14$ ou $X=15$, alors $Y=3$. En particulier,
+
+$$
+P(Y=3)=\frac{7}{20}
+$$
+
+\item si $X=16,17,18,19$ ou 20 , alors $Y=4$. En particulier,
+
+$$
+P(Y=4)=\frac{5}{20}
+$$
+    \end{itemize}
+
+Pour calculer l'espérance, on utilise la formule : $X$ peut prendre toutes les valeurs entre $1$ et $20$, chacune avec probabilité $1/20$, l'espérance de $X$ est donc : 
+\begin{align*}
+E(X) &=  1 \times  \frac{1}{20} +  2 \times  \frac{1}{20}  +  3 \times  \frac{1}{20}  + \cdots +  20 \times  \frac{1}{20} \\
+    & = \frac{1}{20} \sum_{k=1}^{20} k \\
+    & = \frac{1}{20} \frac{20\times 21}{2} \\ 
+    & = \frac{21}{2}\,.
+\end{align*}
+
+Calculons maintenant l'espérance de $Y$ : on multiplie les valeurs que peut prendre $Y$ par les probabilités qu'on a calculé : 
+\[
+E(Y) = 1 \times \frac{3}{20} + 2 \times \frac{5}{20} + 3\times \frac{7}{20} + 4 \times \frac{5}{20}
+\]
+
+
+    \end{solution}
+}{}
+
+\newpage
+
+\section*{9 - Un avant-goût de statistiques}
+Un étang contient des brochets et des truites. On note $p$ la proportion de truites dans l'étang. On souhaite évaluer $p$, on prélève 20 poissons au hasard. On suppose que le nombre de poissons est suffisamment grand pour que ce prélèvement s'apparente à 20 tirages indépendants avec remise. 
+On note $X$ le nombre de truites obtenues.
+\begin{enumerate}
+\item Quelle est la loi de $X$ ?
+\item Le prélèvement a donné 8 truites. Pour quelle valeur de $p$ la quantité $P(X=8)$ est-elle maximale?
+\item On réalise un deuxième prélèvement de $20$ poissons qui a donné $9$ truites, comment modifier votre estimation pour $p$ ?
+\item On réalise $n$ prélèvements de $20$ poissons, comment obtenir une bonne estimation de $p$ ?
+\end{enumerate}
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        1. On reconnait le principe d'un schéma de Bernoulli, avec 20 épreuves indépendantes et une probabilité $p$ de succès. $X$ suit donc une loi binomiale $\mathcal{B}(20, p)$.
+
+        2. On a $P(X=8)=\binom{20}{8} p^8(1-p)^{12}$. On va étudier cette fonction de $p$ de sorte de trouver son maximum. Il suffit en réalité d'étudier, sur $[0,1]$, la fonction $g(p)=p^8(1-p)^{12} . g$ est dérivable et sa dérivée est
+
+$$
+\begin{aligned}
+g^{\prime}(p) & =8 p^7(1-p)^{12}-12 p^8(1-p)^{11} \\
+& =(8(1-p)-12 p) p^7(1-p)^{11} \\
+& =(8-20 p) p^7(1-p)^{11}
+\end{aligned}
+$$
+
+
+On en déduit que $g^{\prime}(p) \geq 0$ sur $[0,2 / 5]$ et $g^{\prime}(p) \leq 0$ sur $[2 / 5,1]$. La probabilité $P(X=8)$ est maximale pour $p=2 / 5$.
+    \end{solution}
+}{}
+\vspace{2em}
+
+
+\end{document}

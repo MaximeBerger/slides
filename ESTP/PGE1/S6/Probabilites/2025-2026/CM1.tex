@@ -1,0 +1,524 @@
+\input{configTD}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\title{\sffamily\bfseries Probabilités --- CM1\\[0.3em]
+  \Large Espérance et variance des variables discrètes}
+\author{}
+\date{30 mars 2026}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Le problème}
+% ====================================================================
+
+Commençons par un problème qui n'a rien à voir
+--- a priori --- avec les probabilités.
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+\og Trois charges ponctuelles sont posées sur une poutre.\\[0.3em]
+Où placer l'appui pour que le système soit en équilibre\,?\fg{}
+\end{mdframed}
+\end{center}
+
+Considérons une poutre rigide sans masse, graduée en mètres,
+sur laquelle on place trois charges :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+  \hline
+  \textbf{Charge} & $A$ & $B$ & $C$ \\
+  \hline
+  Position $x_i$ (m) & $1$ & $3$ & $7$ \\
+  Masse $m_i$ (kg)   & $2$ & $5$ & $3$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{Question.}
+Où faut-il placer l'appui pour que la poutre soit en équilibre ?
+
+\atrou[3.6cm]{%
+On calcule le \textbf{centre de gravité},
+c'est-à-dire la moyenne des positions pondérée par les masses :
+\[
+  \bar{x}
+  = \frac{m_A \, x_A + m_B \, x_B + m_C \, x_C}
+         {m_A + m_B + m_C}
+  = \frac{2 \times 1 + 5 \times 3 + 3 \times 7}{2+5+3}
+  = \frac{38}{10}
+  = 3{,}8\;\text{m}.
+\]
+}
+
+\textbf{Question.}
+La formule se simplifie si la masse totale vaut~$1$.
+Que devient-elle ?
+
+\atrou[2cm]{%
+\[
+  \bar{x} = \sum_{i} m_i \, x_i.
+\]
+}
+
+% ====================================================================
+\section*{2. Du centre de gravité à l'espérance}
+% ====================================================================
+
+Imaginons maintenant que les \og masses \fg{} ne soient plus
+des kilogrammes, mais des \textbf{probabilités} :
+elles sont positives et leur somme vaut~$1$.
+
+\medskip
+
+Soit $X$ une variable aléatoire discrète prenant les valeurs
+$x_1, x_2, \dots, x_n$ avec les probabilités
+$p_i = P(X = x_i)$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|}
+  \hline
+  & \textbf{Mécanique} & \textbf{Probabilités} \\
+  \hline
+  Positions
+    & $x_i$
+    & valeurs prises par $X$ \\
+  Poids
+    & masses $m_i$ \;($\sum m_i = 1$)
+    & probabilités $p_i$ \;($\sum p_i = 1$) \\
+  Barycentre
+    & $\displaystyle\bar{x} = \sum m_i\, x_i$
+    & $\displaystyle E[X] = \sum_i x_i\, P(X = x_i)$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\needspace{5\baselineskip}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt,
+  nobreak=true]
+\textbf{Définition.}
+L'\textbf{espérance} d'une variable aléatoire discrète $X$ est
+\[
+  \boxed{E[X] = \sum_{i} x_i \, P(X = x_i).}
+\]
+C'est le \textbf{centre de gravité} de la loi de $X$.
+\end{mdframed}
+
+\medskip
+
+\textbf{Application.}
+Soit $X$ le résultat d'un lancer de dé équilibré à~$6$ faces.
+
+\atrou[2.5cm]{%
+\[
+  E[X]
+  = 1 \times \tfrac16 + 2 \times \tfrac16
+  + 3 \times \tfrac16 + 4 \times \tfrac16
+  + 5 \times \tfrac16 + 6 \times \tfrac16
+  = \frac{21}{6} = 3{,}5.
+\]
+L'espérance n'est pas forcément une valeur possible de $X$.
+}
+
+% ====================================================================
+\section*{3. Du moment d'inertie à la variance}
+% ====================================================================
+
+Revenons à notre poutre.
+On sait \emph{où} se trouve le centre de gravité,
+mais les charges sont-elles \textbf{regroupées}
+autour de ce point ou \textbf{dispersées}
+le long de la poutre ?
+
+\medskip
+
+En mécanique, cette dispersion est mesurée par le
+\textbf{moment d'inertie} par rapport au centre de gravité :
+\[
+  I_G = \sum_{i} m_i \,(x_i - \bar{x})^2.
+\]
+
+En probabilités, la même idée donne :
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\textbf{Définition.}
+La \textbf{variance} de $X$ est
+\[
+  \boxed{\text{Var}(X)
+  = E\!\Big[\,(X - E[X])^2\,\Big]
+  = \sum_i \bigl(x_i - E[X]\bigr)^2 \, P(X = x_i).}
+\]
+L'\textbf{écart-type} est $\sigma(X) = \sqrt{\text{Var}(X)}$.
+\end{mdframed}
+
+\medskip
+
+\textbf{Application.}
+Reprenons notre poutre, avec les poids normalisés
+$0{,}2$, $0{,}5$, $0{,}3$ aux positions $1$, $3$, $7$
+($\bar{x} = 3{,}8$).
+
+\atrou[3.6cm]{%
+\begin{align*}
+  \text{Var}
+  &= 0{,}2 \times (1-3{,}8)^2
+   + 0{,}5 \times (3-3{,}8)^2
+   + 0{,}3 \times (7-3{,}8)^2 \\
+  &= 0{,}2 \times 7{,}84
+   + 0{,}5 \times 0{,}64
+   + 0{,}3 \times 10{,}24 \\
+  &= 1{,}568 + 0{,}32 + 3{,}072 = 4{,}96.
+\end{align*}
+}
+
+% ====================================================================
+\section*{4. Le théorème de Huygens}
+% ====================================================================
+
+En mécanique, le \textbf{théorème de Huygens}
+permet de calculer le moment d'inertie
+sans repasser par le barycentre :
+\[
+  I_G = \sum m_i \, x_i^2 \;-\; M\,\bar{x}^{\,2}
+  \qquad (M = \text{masse totale}).
+\]
+
+Avec $M = 1$ (probabilités), on obtient la formule pratique :
+
+\atrou[4cm]{%
+\[
+  \boxed{\text{Var}(X) = E[X^2] - \bigl(E[X]\bigr)^2.}
+\]
+\textbf{Preuve.} On développe le carré dans la définition :
+\begin{align*}
+  \text{Var}(X)
+  &= E\bigl[(X-E[X])^2\bigr]
+   = E\bigl[X^2 - 2X\,E[X] + E[X]^2\bigr] \\
+  &= E[X^2] - 2\,E[X]\cdot E[X] + E[X]^2
+   = E[X^2] - E[X]^2.
+\end{align*}
+}
+
+\textbf{Vérification sur l'exemple.}
+
+\atrou[2.5cm]{%
+$E[X^2] = 0{,}2 \times 1^2 + 0{,}5 \times 3^2
+          + 0{,}3 \times 7^2
+= 0{,}2 + 4{,}5 + 14{,}7 = 19{,}4.$
+
+$\text{Var}(X) = 19{,}4 - 3{,}8^2 = 19{,}4 - 14{,}44
+= 4{,}96.\;\checkmark$
+}
+
+% ====================================================================
+\section*{5. Propriétés de l'espérance et de la variance}
+% ====================================================================
+
+\textbf{Linéarité de l'espérance.}
+Pour $a,b \in \mathbb{R}$ :
+\[
+  E[aX+b] = a\,E[X] + b.
+\]
+
+\textbf{Additivité}
+(toujours vraie, même sans indépendance) :
+\[
+  E[X+Y] = E[X] + E[Y].
+\]
+
+\medskip
+
+\textbf{Variance et transformation affine :}
+
+\atrou[2cm]{%
+\[
+  \text{Var}(aX+b) = a^2\,\text{Var}(X).
+\]
+Translater ne change pas la dispersion ;
+dilater multiplie la variance par~$a^2$.
+}
+
+\textbf{Variance d'une somme}
+(sous hypothèse d'indépendance) :
+
+Si $X$ et $Y$ sont \textbf{indépendantes},
+$\;\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y).$
+
+\smallskip
+
+\textit{Interprétation mécanique :
+si deux systèmes de masses indépendants sont réunis,
+les moments d'inertie s'additionnent.}
+
+% ====================================================================
+\section*{6. Espérance et variance des lois classiques}
+% ====================================================================
+
+Considérons une seule situation de chantier :
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt]
+\centering\itshape
+Un contrôleur qualité inspecte des pièces sur un chantier.\\
+Chaque pièce, indépendamment, a une probabilité $p$ d'être défectueuse.
+\end{mdframed}
+\end{center}
+
+Selon la \textbf{question posée}, on obtient une loi différente :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|m{6.5cm}|l|}
+  \hline
+  \textbf{Question} & \textbf{Loi} \\
+  \hline
+  \og Cette pièce est-elle défectueuse ?\fg{}
+    & Bernoulli \\
+  \hline
+  \og Sur $n$ pièces, combien sont défectueuses ?\fg{}
+    & Binomiale \\
+  \hline
+  \og Quand apparaît le premier défaut ?\fg{}
+    & Géométrique \\
+  \hline
+  \og Combien de défauts sur une très longue série ?\fg{}
+    & Poisson \\
+  \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Loi de Bernoulli $\mathcal{B}(p)$ --- \og est-ce défectueux ?\fg{}}
+
+Un seul essai, deux issues.
+$X$ vaut $1$ (défaut) avec probabilité $p$
+et $0$ (conforme) avec probabilité $1-p$.
+
+\atrou[3cm]{%
+\[
+  E[X] = 0 \cdot (1-p) + 1 \cdot p = p.
+\]
+\[
+  E[X^2] = 0^2 \cdot (1-p) + 1^2 \cdot p = p
+  \;\;\implies\;\;
+  \text{Var}(X) = p - p^2 = p(1-p).
+\]
+}
+
+\subsection*{Loi binomiale $\mathcal{B}(n,p)$ --- \og combien sur $n$ pièces ?\fg{}}
+
+On répète $n$ essais de Bernoulli indépendants
+et on \textbf{compte} le nombre de succès.
+
+\medskip
+
+\textbf{Idée clé :}
+$X = X_1 + X_2 + \cdots + X_n$
+avec $X_i \sim \mathcal{B}(p)$ indépendantes.
+
+\atrou[3cm]{%
+Par linéarité de l'espérance :
+$\;E[X] = E[X_1] + \cdots + E[X_n] = np.$
+
+\medskip
+
+Par additivité des variances (indépendance) :
+$\;\text{Var}(X) = \text{Var}(X_1) + \cdots + \text{Var}(X_n)
+= np(1-p).$
+}
+
+\subsection*{Loi géométrique $\mathcal{G}(p)$
+  --- \og quand le premier défaut ?\fg{}}
+
+On ne compte plus \emph{combien} de défauts,
+mais \emph{quand} apparaît le premier.
+$T$ est le rang du premier défaut :
+
+\medskip
+
+\textbf{Exemple.}
+Les 4 premières pièces sont conformes,
+la 5\up{e} est défectueuse : $T = 5$.
+
+\medskip
+
+Pour que $T = k$, il faut $k-1$ conformes puis $1$ défaut :
+
+\atrou[2.5cm]{%
+\[
+  P(T = k) = \underbrace{(1-p)^{k-1}}_{\text{$k-1$ conformes}}
+  \times\; p,
+  \qquad k \geq 1.
+\]
+}
+
+\textbf{Espérance} (admis, démontré en TD) :
+
+\atrou[2cm]{%
+\[
+  E[T] = \frac{1}{p},
+  \qquad
+  \text{Var}(T) = \frac{1-p}{p^2}.
+\]
+\textit{Si $p = 5\,\%$, on attend en moyenne $1/0{,}05 = 20$ pièces
+avant le premier défaut.}
+}
+
+\textbf{Question.} Les 10 premières pièces sont conformes.
+Combien de pièces supplémentaires faut-il attendre
+en moyenne avant le premier défaut ?
+
+\atrou[2.5cm]{%
+\textbf{Réponse :} encore $1/p = 20$ pièces.
+Le passé n'influence pas l'attente future :
+c'est la \textbf{propriété sans mémoire}
+de la loi géométrique.
+(Preuve : $P(T > n+k \mid T > n) = P(T > k)$.)
+}
+
+\subsection*{Loi de Poisson $\mathcal{P}(\lambda)$
+  --- \og combien sur une grande série ?\fg{}}
+
+Quand $n$ est très grand et $p$ très petit (événements rares),
+la loi $\mathcal{B}(n,p)$ est difficile à calculer.
+On la remplace par un modèle plus simple :
+la loi de Poisson de paramètre $\lambda = np$.
+
+\medskip
+
+$P(X=k)=e^{-\lambda}\dfrac{\lambda^k}{k!}$, \; $k\in\mathbb{N}$.
+
+\[
+  E[X] = \lambda,
+  \qquad
+  \text{Var}(X) = \lambda.
+\]
+
+\textit{Propriété remarquable : pour une Poisson,
+moyenne et variance sont égales.}
+
+\medskip
+
+\textbf{D'où vient cette formule ?}
+
+\atrou[3cm]{%
+On divise une grande zone en $n$ petits morceaux,
+chacun ayant une probabilité $\lambda/n$ de contenir un défaut.
+Le nombre total suit $\mathcal{B}(n, \lambda/n)$.
+Quand $n \to \infty$, on obtient la loi de Poisson.
+
+\textit{(Démonstration complète en TD.)}
+}
+
+\subsection*{Tableau récapitulatif}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Loi} & \textbf{Paramètre(s)}
+    & $\boldsymbol{E[X]}$
+    & \textbf{Var}$\boldsymbol{(X)}$ \\
+  \hline
+  Bernoulli $\mathcal{B}(p)$
+    & $p \in [0,1]$
+    & \val{$p$} & \val{$p(1-p)$} \\
+  \hline
+  Binomiale $\mathcal{B}(n,p)$
+    & $n \in \mathbb{N}^*,\; p \in [0,1]$
+    & \val{$np$} & \val{$np(1-p)$} \\
+  \hline
+  Géométrique $\mathcal{G}(p)$
+    & $p \in \,]0,1]$
+    & \val{$\dfrac{1}{p}$}
+    & \val{$\dfrac{1-p}{p^2}$} \\
+  \hline
+  Poisson $\mathcal{P}(\lambda)$
+    & $\lambda > 0$
+    & \val{$\lambda$}
+    & \val{$\lambda$} \\
+  \hline
+\end{tabular}
+\end{center}
+
+% ====================================================================
+\section*{7. Questions ouvertes pour le TD}
+% ====================================================================
+
+\begin{enumerate}
+  \item \textbf{Attente du $r$-ème défaut.}
+    La loi géométrique donne le rang du premier défaut.
+    Et si le chantier s'arrêtait au 3\up{e} défaut,
+    combien de pièces faudrait-il inspecter ?
+    Quelle loi intervient ?
+
+  \item \textbf{D'où vient la loi de Poisson ?}
+    On a affirmé que $\mathcal{B}(n, \lambda/n)$
+    tend vers $\mathcal{P}(\lambda)$ quand $n \to \infty$.
+    Peut-on le démontrer ?
+
+  \item \textbf{Surbooking aérien.}
+    Une compagnie vend $176$ billets pour $174$ places.
+    Chaque passager ne se présente pas avec probabilité $3\,\%$.
+    La stratégie est-elle rentable ?
+\end{enumerate}
+
+% ====================================================================
+\section*{8. Bilan}
+% ====================================================================
+
+\atrou[6cm]{%
+\begin{enumerate}
+  \item L'espérance est un \textbf{centre de gravité} :
+    $\displaystyle E[X] = \sum_i x_i\,P(X=x_i).$
+  \item La variance est un \textbf{moment d'inertie}
+    qui mesure la dispersion :
+    $\text{Var}(X) = E[X^2] - E[X]^2.$
+  \item La \textbf{linéarité} de l'espérance
+    et l'\textbf{additivité} des variances (sous indépendance)
+    permettent de retrouver $E$ et $\text{Var}$
+    des lois composées
+    (binomiale = somme de Bernoulli).
+  \item Une même situation de chantier produit
+    des lois différentes selon la \textbf{question posée} :
+    combien ? $\to$ binomiale ;
+    quand ? $\to$ géométrique ;
+    combien sur une grande échelle ? $\to$ Poisson.
+\end{enumerate}
+}
+
+\end{document}

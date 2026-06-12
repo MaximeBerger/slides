@@ -1,0 +1,236 @@
+\input{configTD}
+\usepackage{tikz}
+
+% ── Poly à trous : commandes spécifiques ──────────────────────────
+\newcommand{\atrou}[2][3cm]{%
+  \ifthenelse{\boolean{showSolutions}}{%
+    \par\vspace{0.5em}%
+    \begin{mdframed}[backgroundcolor=ThemeLight, linewidth=0pt,
+      skipabove=0pt, skipbelow=0pt,
+      innertopmargin=8pt, innerbottommargin=8pt]%
+    #2%
+    \end{mdframed}%
+    \par\vspace{0.5em}%
+  }{%
+    \par\vspace{0.5em}%
+    \noindent\fbox{\begin{minipage}[c][#1]%
+      {\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}%
+      \color{white}\rule{0pt}{0pt}%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+  }%
+}
+
+\newcommand{\val}[1]{%
+  \ifthenelse{\boolean{showSolutions}}{#1}{\phantom{#1}}%
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Xbar}{\overline{X}_n}
+
+\title{\sffamily\bfseries Probabilités --- CM4\\[0.3em]
+  \Large Intervalles de confiance, applications et extensions}
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+\maketitle
+\thispagestyle{empty}
+
+% ====================================================================
+\section*{1. Un problème concret : le contrôle qualité}
+% ====================================================================
+
+\textbf{Cadre.} Une usine produit des sacs de ciment dont le poids nominal est de $25$ kg.
+La machine de remplissage a une variabilité connue et son écart-type est $\sigma = 0{,}5$ kg. 
+Le chef de production veut s'assurer que la machine n'est pas déréglée (c'est-à-dire que l'espérance $\mu$ du poids des sacs est bien de $25$ kg).
+
+\medskip
+
+Comment faire ? 
+\atrou[2.5cm]{%
+Il pèse un échantillon de $n = 100$ sacs pris au hasard sur la chaîne de production et obtient un poids moyen empirique $\Xbar = 24{,}8$ kg.
+}
+
+\medskip
+
+\textbf{Question 1.} La moyenne obtenue n'est pas exactement $25$ kg. Que peut-on affirmer\,?
+
+\atrou[2.5cm]{%
+Non. Le remplissage est un phénomène aléatoire. Même si la machine est parfaitement réglée sur $\mu = 25$ kg, la moyenne empirique $\Xbar$ d'un échantillon de $100$ sacs va fluctuer autour de $25$ kg. 
+Tout l'enjeu est de savoir si l'écart observé ($0{,}2$ kg) est "normal" (dû aux fluctuations d'échantillonnage) ou "anormalement grand" (preuve d'un dérèglement).
+}
+
+\begin{center}
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1.5pt, innertopmargin=10pt, innerbottommargin=10pt]
+\centering\large\itshape
+Plutôt que de donner une simple estimation ponctuelle ($\mu \approx 24{,}8$), on veut construire un \textbf{intervalle} qui contient la vraie valeur $\mu$ avec une probabilité très grande (par exemple $95\,\%$). 
+C'est ce qu'on appelle un \textbf{intervalle de confiance}.
+\end{mdframed}
+\end{center}
+
+% ====================================================================
+\section*{2. Construction d'un intervalle de confiance}
+% ====================================================================
+
+Cadre général : un échantillon $X_1, \dots, X_n$ de variables i.i.d. d'espérance $\mu$ (inconnue) et d'écart-type $\sigma$ (supposé connu). 
+
+D'après le TCL, pour $n$ assez grand, la variable aléatoire :
+\[
+  Z_n = \dfrac{\Xbar - \mu}{\sigma / \sqrt{n}}
+\]
+suit approximativement une loi normale centrée réduite $\mathcal{N}(0,1)$.
+
+\medskip
+Qu'est-ce que cela signifie ? 
+
+\atrou[2.5cm]{
+
+
+}
+
+\textbf{Question 1.} Soit un niveau de confiance $1 - \alpha$ (par exemple $0{,}95$ pour $\alpha = 0{,}05$). Justifier à l'aide d'un dessin qu'il existe un unique réel $t_\alpha > 0$ tel que pour $Z \sim \mathcal{N}(0,1)$, on ait :
+\[ P(-t_\alpha \le Z \le t_\alpha) = 1 - \alpha \]
+
+\atrou[5cm]{%
+La densité de la loi normale centrée réduite est une cloche symétrique par rapport à 0. L'aire totale sous la courbe vaut $1$.
+On cherche un intervalle $[-t_\alpha, t_\alpha]$ centré en 0 tel que l'aire sous la courbe entre ces deux bornes vaille $1-\alpha$. Par symétrie, il y a une aire de $\alpha/2$ à gauche de $-t_\alpha$ et une aire de $\alpha/2$ à droite de $t_\alpha$.
+}
+
+\textbf{Question 2.} À partir de la table de la loi normale, trouver $t_{0{,}05}$ (pour un niveau de confiance de $95\,\%$) et $t_{0{,}01}$ (pour $99\,\%$).
+
+\atrou[5cm]{%
+Si l'aire centrale est de $1 - \alpha$, l'aire totale à gauche de $t_\alpha$ est $\Phi(t_\alpha) = (1 - \alpha) + \alpha/2 = 1 - \alpha/2$.
+\begin{itemize}
+    \item Pour $95\,\%$ ($\alpha=0{,}05$) : $\Phi(t) = 1 - 0{,}025 = 0{,}975$. La table donne $\mathbf{t_{0{,}05} = 1{,}96}$.
+    \item Pour $99\,\%$ ($\alpha=0{,}01$) : $\Phi(t) = 1 - 0{,}005 = 0{,}995$. La table donne $\mathbf{t_{0{,}01} \approx 2{,}58}$.
+\end{itemize}
+}
+
+\textbf{Question 3.} En remplaçant $Z$ par l'expression du TCL $Z_n$, isoler $\mu$ dans l'inégalité $-t_\alpha \le Z_n \le t_\alpha$ pour aboutir à un encadrement de $\mu$.
+
+\atrou[5cm]{%
+On part de : 
+\[ -t_\alpha \le \dfrac{\Xbar - \mu}{\sigma / \sqrt{n}} \le t_\alpha \]
+On multiplie par $\sigma/\sqrt{n}$ : 
+\[ -t_\alpha \dfrac{\sigma}{\sqrt{n}} \le \Xbar - \mu \le t_\alpha \dfrac{\sigma}{\sqrt{n}} \]
+On multiplie par $-1$ (ce qui inverse le sens des inégalités, mais l'encadrement reste symétrique) et on ajoute $\Xbar$ :
+\[ \Xbar - t_\alpha \dfrac{\sigma}{\sqrt{n}} \le \mu \le \Xbar + t_\alpha \dfrac{\sigma}{\sqrt{n}} \]
+}
+
+\begin{mdframed}[backgroundcolor=ThemeLight, linecolor=Theme,
+  linewidth=1pt, innertopmargin=8pt, innerbottommargin=8pt, nobreak=true]
+\textbf{Formule de l'intervalle de confiance (IC) pour la moyenne.}
+Avec une probabilité de $1-\alpha$, la vraie moyenne $\mu$ appartient à l'intervalle :
+\[
+  \boxed{\,IC_{1-\alpha} = \left[ \Xbar - t_\alpha \dfrac{\sigma}{\sqrt{n}} \,;\, \Xbar + t_\alpha \dfrac{\sigma}{\sqrt{n}} \right]\,}
+\]
+\end{mdframed}
+
+\textbf{Question 4.} Retour au problème initial de l'usine : calculer l'intervalle de confiance à $95\,\%$ pour la vraie moyenne $\mu$ produite par la machine. La machine est-elle déréglée\,?
+
+\atrou[3.5cm]{%
+On applique la formule avec $t_{0{,}05} = 1{,}96$ :
+\[ \mu \in \left[ 24{,}8 - 1{,}96 \dfrac{0{,}5}{10} \,;\, 24{,}8 + 1{,}96 \dfrac{0{,}5}{10} \right] \]
+\[ \mu \in [ 24{,}8 - 0{,}098 \,;\, 24{,}8 + 0{,}098 ] = [ 24{,}702 \,;\, 24{,}898 ] \]
+L'intervalle à $95\,\%$ de confiance ne contient pas la valeur $25$. Il est donc très improbable (moins de $5\,\%$ de chances) que la machine soit bien réglée. On conclut qu'elle est \textbf{déréglée}.
+}
+
+% ====================================================================
+\section*{3. Application : Estimation d'une proportion}
+% ====================================================================
+
+On souhaite estimer une proportion $p$ dans une population (ex: intentions de vote, proportion de pièces défectueuses). On observe une proportion empirique $\hat{p} = \Xbar$ sur un échantillon de taille $n$.
+On se rappelle que $\mu = p$ et $\sigma = \sqrt{p(1-p)}$.
+
+\medskip
+
+\textbf{Question 1.} Appliquer la formule de l'intervalle de confiance de la partie 2 pour donner l'intervalle de confiance à un niveau $1-\alpha$ pour la proportion $p$.
+
+\atrou[2cm]{%
+En remplaçant $\Xbar$ par $\hat{p}$ et $\sigma$ par $\sqrt{p(1-p)}$, on obtient :
+\[ p \in \left[ \hat{p} - t_\alpha \dfrac{\sqrt{p(1-p)}}{\sqrt{n}} \,;\, \hat{p} + t_\alpha \dfrac{\sqrt{p(1-p)}}{\sqrt{n}} \right] \]
+}
+
+\textbf{Le problème :} Les bornes de cet intervalle dépendent de $p$, qui est justement ce qu'on cherche à estimer ! On ne peut donc pas le calculer.
+
+\medskip
+
+\textbf{Question 2.} Proposer deux méthodes pour contourner ce problème. 
+
+\atrou[4.5cm]{%
+\textbf{Méthode 1 (optimiste)} : On remplace le $p$ inconnu dans l'écart-type par son estimation $\hat{p}$. L'intervalle devient :
+\[ \left[ \hat{p} - t_\alpha \dfrac{\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}} \,;\, \hat{p} + t_\alpha \dfrac{\sqrt{\hat{p}(1-\hat{p})}}{\sqrt{n}} \right] \]
+
+\textbf{Méthode 2 (pessimiste/rigoureuse)} : On majore $\sqrt{p(1-p)}$. La fonction $x \mapsto x(1-x)$ atteint son maximum en $1/2$ et vaut au maximum $1/4$. Donc $\sqrt{p(1-p)} \le 1/2$. L'intervalle, légèrement élargi, devient :
+\[ \left[ \hat{p} - \dfrac{t_\alpha}{2\sqrt{n}} \,;\, \hat{p} + \dfrac{t_\alpha}{2\sqrt{n}} \right] \]
+}
+
+\textbf{Question 3.} Lors d'un sondage sur 1000 personnes, 520 déclarent vouloir voter pour le candidat A. Donner l'intervalle de confiance à $95\,\%$ rigoureux. A-t-on la garantie à $95\,\%$ qu'il va gagner ?
+\atrou[3.5cm]{%
+Ici $n = 1000$ et $\hat{p} = 0{,}52$. Pour $95\,\%$, $t_\alpha = 1{,}96$.
+La demi-largeur de l'intervalle est $\dfrac{1{,}96}{2\sqrt{1000}} \approx 0{,}031$ ($3{,}1\,\%$).
+L'intervalle est donc $[0{,}52 - 0{,}031 \,;\, 0{,}52 + 0{,}031] = [0{,}489 \,;\, 0{,}551]$.
+L'intervalle contient $0{,}50$. On ne peut donc pas garantir la victoire du candidat A à $95\,\%$.
+}
+
+% ====================================================================
+\section*{4. Début d'extensions : Tests et autres lois}
+% ====================================================================
+
+\subsection*{4.1. Principe d'un test d'hypothèse}
+
+Un vendeur d'ampoules prétend que la durée de vie moyenne de ses ampoules est de $1000$ heures, avec un écart-type de $100$ heures. Vous testez $50$ ampoules et obtenez une durée de vie moyenne de $950$ heures.
+
+\medskip
+
+\textbf{Question 1.} Si le vendeur dit la vérité, quelle est la loi approximative suivie par la moyenne $\Xbar$ sur $50$ ampoules\,?
+
+\atrou[2cm]{%
+D'après le TCL, si $\mu = 1000$ et $\sigma = 100$, alors :
+\[ \Xbar \approx \mathcal{N}\left(1000, \dfrac{100^2}{50}\right) \]
+L'écart-type de $\Xbar$ est $\sigma/\sqrt{n} = 100/\sqrt{50} \approx 14{,}14$ heures.
+}
+
+\textbf{Question 2.} Calculer la probabilité d'obtenir une moyenne inférieure ou égale à $950$ heures si le vendeur dit vrai. Que concluez-vous\,?
+
+\atrou[3.5cm]{%
+On cherche $P(\Xbar \le 950)$. On standardise :
+\[ P\left(Z \le \dfrac{950 - 1000}{14{,}14}\right) = P(Z \le -3{,}53) \]
+D'après la table de la loi normale, $\Phi(-3{,}53) \approx 0$.
+Il est quasiment impossible d'obtenir une telle moyenne si le vendeur dit vrai. On rejette donc l'hypothèse du vendeur : ses ampoules durent moins longtemps qu'annoncé.
+}
+
+\subsection*{4.2. La loi exponentielle}
+
+La loi exponentielle de paramètre $\lambda > 0$, notée $\mathcal{E}(\lambda)$, modélise souvent un temps d'attente ou une durée de fonctionnement continue. 
+Elle prend ses valeurs dans $[0, +\infty[$ et sa densité de probabilité est :
+\[ f(x) = \lambda e^{-\lambda x} \]
+
+\medskip
+
+\textbf{Question 3.} Calculer l'espérance et la variance d'une variable aléatoire $X \sim \mathcal{E}(\lambda)$.
+
+\atrou[2.5cm]{%
+On a vu (ou on admet) que pour une loi exponentielle :
+\[ \mu = \E(X) = \dfrac{1}{\lambda} \qquad \text{et} \qquad \sigma^2 = \Var(X) = \dfrac{1}{\lambda^2} \]
+}
+
+\subsection*{4.3. Estimer le paramètre d'une loi}
+
+Le TCL s'applique indépendamment de la loi d'origine des données. Supposons qu'un centre d'appels veuille modéliser la durée de ses appels. On fait l'hypothèse que cette durée suit une loi exponentielle $\mathcal{E}(\lambda)$.
+
+\medskip
+
+\textbf{Question 4.} Si on observe une durée moyenne empirique $\Xbar = 5$ minutes sur un grand nombre d'appels, quel estimateur $\hat{\lambda}$ naturel pouvez-vous proposer pour le paramètre $\lambda$\,?
+
+\atrou[2.5cm]{%
+Puisque l'espérance est $\mu = \dfrac{1}{\lambda}$ et que $\Xbar$ est un bon estimateur de l'espérance $\mu$, on peut estimer $\lambda$ en prenant l'inverse de la moyenne empirique :
+\[ \hat{\lambda} = \dfrac{1}{\Xbar} = \dfrac{1}{5} = 0{,}2 \text{ appel/minute} \]
+}
+
+\end{document}

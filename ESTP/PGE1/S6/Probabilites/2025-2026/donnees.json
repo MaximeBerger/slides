@@ -1,0 +1,198 @@
+{
+  "titre": "Probabilités et Statistiques",
+  "chapitres": [
+    {
+      "id": "sec1",
+      "numero": 0,
+      "titre": "Rappels",
+      "description": "Motivation · Illustration",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 1 - Espérance et variance",
+          "description": "Espérance · Variance",
+          "lien": "CM1-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 1 - annoté",
+          "description": "Espérance · Variance",
+          "lien": "CM1-annote.pdf",
+          "cible": "_blank"
+        }
+        
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD1 - Evénements et probabilités",
+          "lien": "TD1-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD1 - Corrigé",
+          "lien": "TD1-corrige.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD2 - Modélisation",
+          "lien": "TD2-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD2 - Corrigé",
+          "lien": "TD2-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }, 
+    {
+      "id": "sec2",
+      "numero": 1,
+      "titre": "Variables aléatoires continues",
+      "description": "Densité · Fonction de répartition",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 2 - Densité et fonction de répartition",
+          "description": "Densité · Fonction de répartition",
+          "lien": "CM2-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 2 - annoté",
+          "description": "Densité · Fonction de répartition",
+          "lien": "CM2-annote.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD3 - Variables aléatoires continues",
+          "lien": "TD3-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD3 - pistes de solutions",
+          "lien": "TD3-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 2,
+      "titre": "La loi normale",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 3 - Loi normale et Théorème central limite",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM3-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 3 - annoté",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM3-annote.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 3,
+          "titre": "CM 4 - Intervalles de confiance",
+          "description": "Intervalles de confiance",
+          "lien": "CM4-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 4,
+          "titre": "CM 4 - annoté",
+          "description": "Intervalles de confiance",
+          "lien": "CM4-annote.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD4 - loi normale et intervalle de confiance",
+          "lien": "TD4-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD4 - pistes de solutions",
+          "lien": "TD4-corrige.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Attendus à l'examen",
+          "lien": "cm6-enonce.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 3,
+      "titre": "Tests d'hypothèses",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
+        {
+          "numero": 1,
+          "titre": "CM 5 - Les tests d'hypothèses",
+          "description": "Loi te",
+          "lien": "CM5-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "numero": 2,
+          "titre": "CM 5 - annoté",
+          "description": "Loi normale · Théorème central limite",
+          "lien": "CM5-annote.pdf",
+          "cible": "_blank"
+        }
+      ],
+      "sexercer" : [
+        {
+          "titre": "TD5 - tests d'hypothèse",
+          "lien": "TD5-tests-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "TD5 - tests d'hypothèse -  corrigé",
+          "lien": "TD5-tests-corrige.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }, 
+    {
+      "id": "sec3",
+      "numero": 4,
+      "titre": "Attendus à l'examen",
+      "description": "Théorème central limite",
+      "lien": "#",
+      "sousParties": [
+        
+      ],
+      "sexercer" : [
+
+        {
+          "titre": "Attendus à l'examen",
+          "lien": "CM6-enonce.pdf",
+          "cible": "_blank"
+        },
+        {
+          "titre": "Attendus à l'examen - corrigé collaboratif",
+          "lien": "CM6-annote.pdf",
+          "cible": "_blank"
+        }
+      ]
+    }
+  ]
+}

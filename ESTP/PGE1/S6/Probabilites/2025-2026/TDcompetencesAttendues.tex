@@ -1,0 +1,382 @@
+\documentclass[10pt]{article}
+
+% Packages pour les marges
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=2cm,
+    right=2cm
+]{geometry}
+
+% Police sans serif
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
+
+% Packages existants
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{graphicx}
+
+\usepackage{mdframed}
+\usepackage[sf]{titlesec}
+% Définition de la variable pour afficher les corrections
+\newboolean{showSolutions}
+% Décommentez la ligne suivante pour afficher les solutions
+\setboolean{showSolutions}{true}
+% \setboolean{showSolutions}{false}
+
+\title{TD 5 Probabilités : pour l'examen}
+
+\author{}
+\date{}
+
+\newenvironment{solution}
+    {\par\vspace{0.5em}\begin{mdframed}[linewidth=0.5pt]\noindent\textbf{Solution :}\par}
+    {\end{mdframed}\par\vspace{0.5em}}
+
+\begin{document}
+\sffamily
+\maketitle
+
+\textbf{Compétences attendues à l'examen :}
+\begin{itemize}
+    \item[$\bullet$] Manipuler des réunions / intersections d'événements et les interpréter dans un contexte. \dotfill TD 1, exo 1
+    \vspace{0.5em}
+    \item[$\bullet$] Caractériser l'indépendance de deux événements, de deux variables aléatoires. \dotfill TD 1, exo 2 et 3
+    \vspace{0.5em}
+    \item[$\bullet$] Calculer des probabilités par dénombrement simple. \dotfill TD 1, exo 1. TD 3 exo 1, 2, 3
+    \vspace{0.5em}
+    \item[$\bullet$] Déterminer une loi discrète, potentiellement conditionnée à un autre événement. \dotfill TD 2, exo 3
+    \vspace{0.5em}
+    \item[$\bullet$] Exprimer l'espérance d'une variable aléatoire. \dotfill TD 1, exo 5. TD 2, exo 1. TD 3 exo 1, 2, 3. 
+    \vspace{0.5em}
+    \item[$\bullet$] Construire un arbre de probabilités et interpréter les probabilités de chaque branche. \dotfill TD 1, exo 4
+    \vspace{0.5em}
+    \item[$\bullet$] Manipuler les lois classiques discrètes : binomiale, géométrique, uniforme, de Poisson. \dotfill TD 3, exo 1, 2, 3
+    \vspace{0.5em}
+    \item[$\bullet$] Savoir reconnaître les densités des lois continues de référence : uniforme, exponentielle, normale.\dotfill TD 2, exo 5
+    \vspace{0.5em}
+    \item[$\bullet$] Manipuler la fonction de répartition et lire les valeurs de $\Phi$ dans une table donnée. \dotfill TD 2, exo 2, 3. TD 4, exo 1
+    \vspace{0.5em}
+    \item[$\bullet$] Déterminer si une fonction est une densité de probabilité. \dotfill TD 1, exo 8. TD 2, exo 5
+    \vspace{0.5em}
+    \item[$\bullet$] Calculer la loi d'une variable aléatoire définie comme fonction d'une autre variable aléatoire. \dotfill TD 2, exo 5, 6, 7
+    \vspace{0.5em}
+    \item[$\bullet$] Appliquer le théorème central limite pour déterminer un intervalle de confiance sur un paramètre inconnu. \dotfill TD 4, exo 2, 3, 5
+\end{itemize}
+
+\vspace{1cm}
+
+\section*{Exercice 1}
+$A, B, C$ sont trois événements d'un univers $\Omega$. Exprimer à l'aide de $A, B, C$, les événements suivants :
+\begin{enumerate}
+    \item $A, B, C$ se produisent simultanément.
+    \item Au moins un des trois événements se produit.
+    \item Parmi $A, B, C$, seul $C$ se produit.
+    \item Aucun des trois événements ne se produit.
+    \item $A$ ou $B$ se réalisent mais pas ensemble.
+    \item Un seul de ces trois événements se produit.
+    \item Deux et pas plus de deux, se produisent.
+    \item Pas plus de deux se produisent.
+\end{enumerate}
+\vspace{1cm}
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        \begin{enumerate}
+            \item $A \cap B \cap C$
+            \item $A \cup B \cup C$
+            \item $\bar{A} \cap \bar{B} \cap C$
+            \item $\bar{A} \cap \bar{B} \cap \bar{C}$ qui s'écrit aussi $\bar{A \cup B \cup C}$
+            \item $(A \cup B) \cap \bar{A \cap B}$ ou aussi $(A \cap \bar{B}) \cup (B \cap \bar{A})$
+            \item $(A \cap \bar{B} \cap \bar{C}) \cup (\bar{A} \cap B \cap \bar{C}) \cup (\bar{A} \cap \bar{B} \cap C)$
+            \item $(A \cap B \cap \bar{C}) \cup (A \cap \bar{B} \cap C) \cup (\bar{A} \cap B \cap C)$
+            \item $\bar{A \cap B \cap C}$ on pourrait aussi faire la liste : ce serait la réunion des questions 4, 6 et 7. 
+        \end{enumerate}
+    \end{solution}
+}{}
+
+\section*{Exercice 2}
+Pour chaque fonction $f$ suivante, déterminer $\lambda$ pour que $f$ soit une densité de probabilité.
+\[
+f(x)=
+\begin{cases}
+    \lambda x e^{-x} & \text{si } x \in [0, +\infty[ \\
+    0 & \text{sinon}
+    \end{cases}, 
+\qquad \qquad 
+f_\lambda(t)=\lambda t^{-2} \mathbf{1}_{[1,10]}(t).
+\]
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Une densité est une fonction positive, continue presque partout et d'intégrale $1$ sur $\mathbb{R}$.
+
+        Les deux fonctions vérifient les deux premières conditions. Calculons leur intégrale sur $\mathbb{R}$ :
+        \begin{align*}
+            \int_0^{+\infty} \lambda x e^{-x} \mathrm{d}x &=  \lambda \left[ -x e^{-x} \right]_0^{+\infty} + \lambda \int_0^{+\infty} e^{-x} \mathrm{d}x \\
+            &= \lambda \left[ -e^{-x} \right]_0^{+\infty} = \lambda\,. 
+        \end{align*}
+        Donc $\lambda$ doit être égal à $1$ pour que la première fonction soit une densité.
+
+        Pour la seconde fonction, on a :
+        \begin{align*}
+            \int_1^{10} \lambda t^{-2} \mathrm{d}t &= \lambda \left[ -t^{-1} \right]_1^{10} = \lambda \left( -10^{-1} + 1 \right) = \lambda \left( 1 - 10^{-1} \right) = \lambda \left( 1 - \frac{1}{10} \right) = \frac{9}{10} \lambda\,. 
+        \end{align*}
+        On doit donc choisir $\lambda =\frac{10}{9}$.
+    \end{solution}
+}{}
+\vspace{0.8cm}
+
+\section*{Exercice 3}
+Soit la fonction $f(x)=a x^2+b$ si $x \in[0,1]$ et $f(x)=0$ sinon.
+\begin{enumerate}
+    \item Quelles sont les conditions sur $a$ et $b$ pour que la fonction $f$ soit une densité de probabilité ?\newline 
+
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Comme dans l'exercice précédent, il faut que l'intégrale de la fonction soit égale à $1$. Or,
+            \begin{align*}
+                \int_0^1 (a x^2 + b) \mathrm{d}x &= a \left[ \frac{x^3}{3} \right]_0^1 + b \left[ x \right]_0^1 = a \frac{1}{3} + b \,. 
+            \end{align*}
+
+            Ls nombres $a$ et $b$ doivent donc vérifier l'équation $a + 3b = 3$.
+            
+        \end{solution}
+    }{}
+    On suppose dans la suite que $a$ et $b$ vérifient ces conditions.
+
+    \item Exprimer la fonction de répartition $F$ de la loi associée à la densité $f$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            La fonction de répartition est donnée par :
+            \begin{align*}
+                F(x) = \int_{-\infty}^x f(t) \mathrm{d}t\,. 
+            \end{align*}
+            On distingue trois cas :
+            \begin{itemize}
+                \item Si $x \in ]-\infty, 0[$, alors $F(x) = 0$.
+                \item Si $x \in [0,1]$, alors $F(x) = \int_0^x (a t^2 + b) \mathrm{d}t = a \left[ \frac{t^3}{3} \right]_0^x + b \left[ t \right]_0^x = a \frac{x^3}{3} + b x$.
+                \item Si $x \in [1, +\infty[$, alors $F(x) = \int_0^1 (a t^2 + b) \mathrm{d}t + \int_1^x 0 \mathrm{d}t = 1$.
+            \end{itemize}
+        \end{solution}
+    }{}
+    \item Soit $X$ une variable aléatoire de densité $f$. On suppose que $P(X \geq 0.5)=\frac{7}{8}$. En déduire $a$ et $b$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On a $P(X \geq 0.5) = 1 - P(X < 0.5) = 1 - F(0.5) = \frac{7}{8}$. Donc $F(0.5) = 1 - \frac{7}{8} = \frac{1}{8}$.
+
+            On en déduit que $F(1/2) = 1/8$, Or
+            \begin{align*}
+                F(1/2) = a \frac{(1/2)^3}{3} + b \frac{1}{2} = a \frac{1}{24} + b \frac{1}{2}.
+            \end{align*}
+            En multipliant par $24$, on obtient :
+            \begin{align*}
+                a + 12 b = 3\,.
+            \end{align*}
+            On avait déjà $a + 3b = 3$. On peut donc résoudre pour obtenir $a = 3$ et $b = 0$.
+
+        \end{solution}
+    }{}
+    \item Calculer l'espérance et la variance de $X$.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On peut exprimer l'espérance de $X$ comme l'intégrale de $x$ fois la densité :
+            \begin{align*}
+                \mathbb{E}[X] = \int_0^1 x (a x^2 + b) \mathrm{d}x = 3 \int_0^1 x^3 \mathrm{d}x = \frac{3}{4}.
+            \end{align*}
+
+            Pour la variance, on sait que :
+            \begin{align*}
+                \mathbb{V}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2.
+            \end{align*}
+            On peut calculer $\mathbb{E}[X^2]$ comme l'intégrale de $x^2$ fois la densité :
+            \begin{align*}
+                \mathbb{E}[X^2] = \int_0^1 x^2 (a x^2 + b) \mathrm{d}x = 3 \int_0^1 x^4 \mathrm{d}x = \frac{3}{5}.
+            \end{align*}
+            On en déduit que :
+            \begin{align*}
+                \mathbb{V}[X] = \frac{3}{5} - \left( \frac{3}{4} \right)^2 = \frac{3}{5} - \frac{9}{16} = \frac{3}{80}.
+            \end{align*}
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+\section*{Exercice 4}
+On considère une usine qui fabrique des pièces en série. À la sortie de l'usine, on effectue des tests de qualité. On note :
+\begin{itemize}
+    \item $p$ la probabilité qu'une pièce choisie au hasard soit bonne.
+    \item $b$ la probabilité pour que le test indique bonne une pièce qui est en réalité bonne.
+    \item $d$ la probabilité pour que le test indique bonne une pièce qui est en réalité défectueuse.
+\end{itemize}
+
+Calculer la probabilité pour qu'une pièce indiquée bonne par le test soit réellement une pièce bonne en fonction de $p, b$ et $d$.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On note $B$ l'événement "la pièce est bonne" et $T$ l'événement "le test indique bon".
+
+        Les probabilités données sont $P(B) = p$, $P(T|B) = b$ et $P(T|\bar{B}) = d$.
+        On nous demande de calculer $P(B|T)$.
+
+        On doit donc "renverser" le conditionnement, pour cela, on utilise souvent la formule de Bayes :
+        \begin{align*}
+            P(B|T) = \frac{P(T|B) P(B)}{P(T)}.
+        \end{align*}
+
+        (Si on ne se souvient plus de la formule, on peut aussi la retrouver en utilisant la définition de la probabilité conditionnelle.)
+
+        Pour calculer le dénominateur, on utilise la formule des probabilités totales :
+        \begin{align*}
+            P(T) = P(T \cap B) + P(T \cap \bar{B}) = P(T|B) P(B) + P(T|\bar{B}) P(\bar{B}).
+        \end{align*}
+        On en déduit que :
+        \begin{align*}
+            P(B|T) = \frac{P(T|B) P(B)}{P(T|B) P(B) + P(T|\bar{B}) P(\bar{B})} = \frac{b p}{b p + d (1-p)}.
+        \end{align*}
+        
+    \end{solution}
+}{}
+
+\vspace{0.8cm}
+
+\section*{Exercice 5}
+La force de compression d'un type de béton est modélisée par une variable gaussienne d'espérance $\mu$ et de variance~$\sigma^2$. 
+L'unité de mesure est le psi (pound per square inch). 
+
+On supposera la variance $\sigma^2$ connue et égale à $1000$.\newline 
+Sur un échantillon de $12$ mesures, on a observé une moyenne empirique de $3250$ psi.
+\begin{enumerate}
+    \item Donner un intervalle de confiance de niveau $0.95$ pour $\mu$.
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        On applique le théorème central limite : 
+        \[
+            \frac{\sqrt{n}}{\sigma} (\bar{X_n} - \mu) \sim \mathcal{N}(0, 1).
+        \]
+
+        On se souvient qu'une loi normale centrée réduite $Z$ vérifie $P(-1.96 \leq Z \leq 1.96) = 0.95$. Pour le retrouver, on cherche un nombre $t$ tel que 
+        \[P(-t \leq Z \leq t) = 0.95.\]
+        Or, nous avions montré au TD 4 que 
+        \[P(Z \in [a, b]) = P(Z \leq b) - P(Z \leq a) = \Phi(b) - \Phi(a)\]
+        Donc, on cherche $t$ tel que :
+        \[
+            \Phi(t) - \Phi(-t) = 0.95.
+        \]
+        Comme $\Phi(-t) = 1 - \Phi(t)$, on en déduit que :
+        \[
+            2 \Phi(t) - 1 = 0.95 \quad \text{soit} \quad \Phi(t) = 0.975.
+        \]
+        On lit dans la table que $t = 1.96$.
+
+
+        On en déduit que
+        \begin{align*}
+            P\left( \frac{\sqrt{n}}{\sigma} (\bar{X_n} - \mu) \in [-1.96, 1.96] \right) = 0.95.
+        \end{align*}
+        Et donc
+        \begin{align*}
+            P\left( \mu \in \left[ \bar{X_n} - 1.96 \frac{\sigma}{\sqrt{n}}, \bar{X_n} + 1.96 \frac{\sigma}{\sqrt{n}} \right] \right) = 0.95.
+        \end{align*}
+        
+    \end{solution}
+}{}
+    \item Donner un intervalle de confiance de niveau $0.99$ pour $\mu$. Comparer sa largeur avec celle de l'intervalle précédent.
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On procède de la même façon. On cherche $t$ tel que :
+            \[
+                \Phi(t) - \Phi(-t) = 0.99.
+            \]
+            On obtient $t = 2.58$.
+
+            On en déduit que :
+            \begin{align*}
+                P\left( \mu \in \left[ \bar{X} - 2.58 \frac{\sigma}{\sqrt{n}}, \bar{X} + 2.58 \frac{\sigma}{\sqrt{n}} \right] \right) = 0.99.
+            \end{align*}
+
+            Cet intervalle de confiance est plus large. Plus un intervalle est large, plus la probabilité de tomber à l'intérieur est grande.
+            
+        \end{solution}
+    }{}
+    \item Si avec le même échantillon on donnait un intervalle de confiance de largeur 30 psi, quel serait son niveau de confiance?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            On cherche $t$ tel que l'intervalle de confiance de largeur $2t \frac{\sigma}{\sqrt{n}}$ soit égal à $30$, ce qui implique
+            \[
+                t = \frac{30\sqrt{n}}{2 \sigma} 
+            \]
+
+            Pour calculer la probabilité de tomber dans cet intervalle, on lit alors dans la table la valeur de $\Phi(t)$ correspondante.
+        \end{solution}
+    }{}
+
+    \item On souhaite maintenant estimer $\mu$ avec une précision de $\pm 15 \mathrm{psi}$, avec un niveau de confiance de 0.95. Quelle taille minimum doit avoir l'échantillon?
+    \ifthenelse{\boolean{showSolutions}}{
+        \begin{solution}
+            Cette fois, la taille de l'intervalle et le niveau de confiance sont fixés, et on cherche $n$ tel que :
+            \[
+                 1.96 * \frac{\sigma}{\sqrt{n}} = 15.
+            \]
+            On en déduit que :
+            \[
+                \sqrt{n} = \frac{1.96 * \sigma}{15}
+            \]
+        \end{solution}
+    }{}
+\end{enumerate}
+
+\vspace{0.8cm}
+
+\section*{Exercice 6}
+Dans une usine d'emballage, un automate remplit des paquets de café de $250$ g. 
+
+L'automate verse une quantité de café variable, régie par une loi normale de moyenne réglable et d'écart-type $3$. 
+Quelle doit-être la moyenne choisie pour que $90 \%$ des clients achètent bien au moins $250$ g de café?
+
+\ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+        Notons $X$ la variable aléatoire qui donne la quantité de café dans un paquet. \newline 
+        $X$ suit une loi normale de moyenne $\mu$ et d'écart-type $3$.
+        
+        On cherche $\mu$ tel que :
+        \[
+            P(X \geq 250) = 0.9\,.
+        \]
+        Ce qui équivaut à 
+        \[
+            P(X \leq 250) = 0.1\,.
+        \]
+        On se ramène à une loi normale centrée réduite pour pouvoir utiliser le tableau de la fonction $\Phi$ :
+        \[
+            P\left( \frac{X - \mu}{3} \leq \frac{250 - \mu}{3} \right) = 0.1\,.
+        \]
+
+        Il faut donc que $\mu$ vérifie $\Phi\left( \frac{250 - \mu}{3} \right) = 0.1$.
+
+        Pour lire la valeur dans la table, on l'écrit plutôt sous la forme : 
+        \[
+            \Phi\left( - \frac{250 - \mu}{3} \right) = 0.9.
+        \]
+        On lit dans la table que $- \frac{250 - \mu}{3} = 1.29$. 
+        On en déduit finalement que :
+        \[
+            \mu = 250 + 3 * 1.29 = 253.87.
+        \]
+        
+    \end{solution}
+}{}
+
+\end{document}
