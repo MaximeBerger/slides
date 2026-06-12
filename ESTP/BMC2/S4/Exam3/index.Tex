@@ -1,0 +1,169 @@
+\input{configTD}
+\usepackage{pifont}
+
+
+\title{Mathématiques : Examen}
+
+\author{}
+\date{}
+
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline 
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  & 
+        \textbf{Contrôle de connaissances et de compétences} & 
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{04/06/2026}  &  & \textbf{Page 1/3} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline 
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 4}} \\
+        \hline 
+        \textbf{Nom de l'enseignant} & Rémi Blanquet \& Karine Serier\\
+        \hline 
+        \textbf{Promotion} & BMC2 - S4 \\
+        \hline 
+        \textbf{Matière} & Mathématiques  \\
+        \hline 
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline 
+        \textbf{Consignes} & 
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\section*{Exercice 1 \hfill \normalfont\itshape (4 points)}
+On considère la matrice dans la base canonique:
+$$A=\begin{pmatrix}
+    1&4&-2\\
+    0&6&-3\\
+    -1&4&0
+\end{pmatrix}$$
+\begin{enumerate}
+    \item Montrer que le polynôme caractéristique de $A$ est :
+    $$\chi_A= \lambda^3-7\lambda^2+16\lambda -12$$
+    \item Montrer que $2$ est valeur propre de $A$.
+    \item Déterminer toutes les valeurs propres de $A$. $A$ est-elle trigonalisable ? Pourquoi ?
+    \item Déterminer des bases des sous espaces propres associés à chaque valeur propre. $A$ est-elle diagonalisable ? Pourquoi ?
+    \item Trigonaliser $A$ en précisant la matrice de passage $P$.
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\section*{Exercice 2 \hfill \normalfont\itshape (5 points)}
+Soient $(x_n), (y_n), (z_n)$ les suites réelles définies par :
+$$\begin{cases}
+    x_0=y_0=z_0=1\\
+    x_{n+1}=x_n-3y_n+4z_n\\
+    y_{n+1}=4x_n-7y_n+8z_n\\
+    z_{n+1}=6x_n-7y_n+7z_n
+\end{cases}$$
+\begin{enumerate}
+\item Donner la matrice $A$ qui vérifie :
+$$\begin{pmatrix}
+ x_{n+1}\\
+    y_{n+1}\\
+    z_{n+1}  
+\end{pmatrix}=A\begin{pmatrix}
+ x_{n}\\
+    y_{n}\\
+    z_{n}  
+\end{pmatrix}$$
+    \item Montrer que $-1$ est valeur propre de multiplicité $2$ et que $3$ est aussi valeur propre de $A$.
+    \item Trigonaliser $A$ et déterminer $P$ matrice de passage. 
+    \item Donner une expression de $A^n$.
+    \item En déduire les expressions explicites de $(x_n), (y_n), (z_n)$ en fonction de $n$.
+\end{enumerate}
+
+\vspace{2em}
+
+\section*{Exercice 3 \hfill \normalfont\itshape (5 points)}
+Soient $a$ et $b$ deux réels avec $b>0$.
+\begin{enumerate}
+    \item Vérifier que la fonction $f$ définie par :
+    $$f:x \rightarrow \begin{cases}
+        0 \text{ si } x<a\\
+        \frac{1}{b} \exp \left (\frac{a-x}{b}\right ) \text{ sinon }
+    \end{cases}$$
+    est une densité de probabilité. On note $L(a;b)$ cette loi de probabilité.
+    \item Soit $X$ une variable aléatoire suivant la loi $L(a;b)$. Montrer que $\frac{X-a}{b}$ suit une loi exponentielle de paramètre $1$. En déduire $E(X)$ et $V(X)$.
+    \item Déterminer la fonction de répartition $F_X$ de $X$.
+    \item Soit $(X_i)$ une suite de variables aléatoires indépendantes et toutes de même loi $L(a;b)$. Pour tout entier $n>0$, on pose $T_n= \min (X_1;\dots;X_n)$. À l'aide des fonctions de répartition, montrer que $T_n$ suit la loi $L\!\left(a;\dfrac{b}{n}\right)$.
+    \item Montrer que :
+    $$\lim_{n\rightarrow + \infty} E(T_n)=a$$
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\section*{Exercice 4 \hfill \normalfont\itshape (6 points)}
+Un joueur dispose d'une pièce de monnaie équilibrée qui a une probabilité $\frac{1}{2}$ de tomber sur pile et $\frac{1}{2}$ de tomber sur face.\\
+Soit $n\geq 3$ un entier. Le joueur procède à $n$ lancers indépendants de la pièce.\\
+On s'intéresse, au sein d'une succession de lancers, aux séries ayant donné le même côté de la pièce. \\
+Par exemple, si $n=12$ et si $\omega =FFPPPPFFPPPF$ un tirage, on dit qu'il y a eu 5 séries : une série de $F$ de longueur 2, puis une série de $P$ de longueur 4, etc.\ pour terminer avec une série de $F$ de longueur 1.\\
+On s'intéresse alors au nombre, noté $N_k$, de séries obtenues après $k$ lancers, ce nombre compte les séries en cours.\\
+Dans l'exemple précédent, on a donc :
+\begin{gather*}
+N_1(\omega)=N_2(\omega)=1,\quad N_3(\omega)=\dots=N_6(\omega)=2,\quad N_7(\omega)=N_8(\omega)=3,\\
+N_9(\omega)=\dots=N_{11}(\omega)=4,\quad N_{12}(\omega)=5
+\end{gather*}
+On admet que $N_k$ est une variable aléatoire pour $1\leq k\leq n$ entier.\\
+Pour $1\leq i\leq n$ entier, on introduit les évènements :
+$$F_i \text{ : le i-ème lancer a donné } F \qquad\qquad P_i \text{ : le i-ème lancer a donné } P$$
+\begin{enumerate}
+    \item Donner la loi et l'espérance de $N_1$ et $N_2$.
+    \item Préciser l'ensemble des valeurs prises par $N_n$. Montrer que :
+    $$P(N_n=1)=P(N_n=n)=\frac{1}{2^{n-1}}$$
+    \item Pour $1\leq k \leq n$ et pour $t$ réel, on pose :
+    $$G_k(t)=\sum_{i=1}^k P(N_k=i)t^i$$
+    Montrer que pour tout $k$, $G'_k(1)=E(N_k)$.
+    \item Pour $2\leq k \leq n$, pour tout $i$ entier inférieur ou égal à $k$, montrer que :
+    $$P\big((N_k=i)\cap P_k\big)=\frac{1}{2}P\big((N_{k-1}=i)\cap P_{k-1}\big)+\frac{1}{2}P\big((N_{k-1}=i-1)\cap F_{k-1}\big)$$
+    On admet de façon symétrique que :
+    $$P\big((N_k=i)\cap F_k\big)=\frac{1}{2}P\big((N_{k-1}=i)\cap F_{k-1}\big)+\frac{1}{2}P\big((N_{k-1}=i-1)\cap P_{k-1}\big)$$
+    \item On admet désormais que l'une des deux expressions suivantes est correcte pour $G_k(t)$ :
+    \begin{center}
+        \textbf{(a)} \quad $G_k(t)=t\left(\dfrac{t+1}{2}\right)^{k-1}$ \qquad\qquad
+        \textbf{(b)} \quad $G_k(t)=\left(\dfrac{t+1}{2}\right)^{k}$
+    \end{center}
+    En utilisant la valeur de $G_1(t)$, déterminer laquelle est correcte.
+    \item À l'aide de la formule précédente, déterminer l'espérance de $N_k$.
+    \item Déterminer la loi de $N_k$.
+\end{enumerate}
+\end{document}

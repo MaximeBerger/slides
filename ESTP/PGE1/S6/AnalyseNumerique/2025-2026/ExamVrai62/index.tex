@@ -1,7 +1,8 @@
-\input{configTD}
+﻿\input{configTD}
 \usepackage{pifont}
 
 \newcommand{\degC}{\text{\textdegree C}}
+\newcommand{\piste}[1]{\begin{solution}\textbf{Piste de correction.} #1\end{solution}}
 
 \title{Analyse numérique : Examen}
 \author{}
@@ -18,7 +19,7 @@
         \textbf{Contrôle de connaissances et de compétences} &
         \textbf{FO-002-VLA-XX-001} \\
         \hline
-        \textbf{26/05/2026}  &  & \textbf{Page 1/4} \\
+        \textbf{26/05/2026}  &  & \textbf{Page 1/3} \\
         \hline
     \end{tabular}
 \end{center}
@@ -44,6 +45,7 @@
             \item Calculatrice \textbf{NON} autorisée
             \item Aucun document n'est autorisé
             \item Toute réponse doit être justifiée
+            \item Les résultats numériques peuvent être donnés sous forme littérale ou approchée
         \end{itemize}\\
         \hline
     \end{tabular}
@@ -52,15 +54,59 @@
 \vspace{1.5em}
 
 \underline{\ding{110}\, \bf{Exercice 1 : Interpolation et quadrature} \bf{(5 points)}}
-\medskip
+\bigskip
 
-Faire un exo sur le campus de Troyes
+Lors d'une étude topographique préliminaire, on relève la hauteur $h(x)$, en mètres, d'un profil de terrain le long d'un axe horizontal. Les mesures suivantes sont disponibles :
+\[
+\begin{array}{c|ccc}
+x \text{ (m)} & 3 & 5 & 7 \\
+\hline
+h(x) \text{ (m)} & 1 & 3 & 2
+\end{array}
+\]
 
 \begin{enumerate}
-    \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par ces trois points. \hfill (2 pts)
-    \item En déduire une estimation de la hauteur au point $x=3$. \hfill (1 pt)
-    \item Estimer l'aire comprise entre le profil et l'axe horizontal sur $[0,4]$ par la méthode des trapèzes. \hfill (1 pt)
-    \item Estimer cette même aire par la méthode de Simpson. Commenter la différence entre les deux valeurs obtenues. \hfill (1 pt)
+    \item Construire le polynôme d'interpolation de Lagrange $P_2$ de degré au plus $2$ passant par ces trois points.
+    \piste{Écrire $P_2(x)=\sum_{i=0}^{2} y_i \ell_i(x)$ avec les polynômes de base de Lagrange associés aux nœuds $x_0=3$, $x_1=5$, $x_2=7$ :
+    \[
+    \ell_0(x)=\dfrac{(x-5)(x-7)}{8},\qquad
+    \ell_1(x)=-\dfrac{(x-3)(x-7)}{4},\qquad
+    \ell_2(x)=\dfrac{(x-3)(x-5)}{8}.
+    \]
+    Après calcul et réduction : $P_2(x)=\dfrac{-3x^2+32x-61}{8}$. Vérifier $P_2(3)=1$, $P_2(5)=3$, $P_2(7)=2$. Voir \textbf{CM Interpolation} et \textbf{TD1, Exercice 1}.}
+    \item En déduire une estimation de la hauteur au point $x=4$.
+    \piste{Évaluer $P_2$ en $x=4$ : $P_2(4)=\dfrac{-48+128-61}{8}=\dfrac{19}{8}\approx 2{,}375$~m. Cohérent avec les valeurs voisines ($h(3)=1$, $h(5)=3$). Voir \textbf{TD1, Exercice 2}.}
+    \item Le point $x=2$ se situe en dehors de l'intervalle des mesures. À quelle valeur estimeriez-vous \emph{intuitivement} (sans calcul) la hauteur $h(2)$ en regardant simplement les trois mesures du tableau ? Calculer ensuite la valeur exacte $P_2(2)$ donnée par le polynôme d'interpolation. Le résultat obtenu est-il physiquement satisfaisant ? Que peut-on en conclure sur l'\emph{extrapolation} avec un polynôme d'interpolation ?
+
+    \textit{Indications de calcul (à partir de $P_2(x)=\dfrac{-3x^2+32x-61}{8}$) :}
+    $-3\times 4=-12$,\quad $32\times 2=64$,\quad $-12+64-61=-9$.
+    \piste{\textbf{Estimation intuitive.} Entre les nœuds $(3,1)$ et $(5,3)$, la tendance entre $x=3$ et $x=5$ est croissante ($+2$ en $\Delta x=2$). Extrapoler linéairement à gauche depuis $(3,1)$ avec cette même pente donnerait $h(2)\approx 1-1=0$~m. Une estimation \og prudente \fg{} attendue est donc proche de $0$ ou très légèrement négative.
+
+    \medskip
+
+    \textbf{Calcul du polynôme.} En utilisant les indications :
+    \[
+    P_2(2)=\dfrac{-3\times 2^2+32\times 2-61}{8}=\dfrac{-12+64-61}{8}=\dfrac{-9}{8}=-1{,}125~\text{m}.
+    \]
+
+    \medskip
+
+    \textbf{Conclusion.} Le polynôme prédit une hauteur \emph{négative}, ce qui n'a pas de sens physique pour un profil de terrain. C'est l'illustration typique du danger de l'\textbf{extrapolation} avec un polynôme d'interpolation : la courbe est contrainte à passer par les points donnés mais peut diverger très rapidement hors de l'intervalle des nœuds (effet accentué si le degré est élevé : c'est aussi le phénomène de Runge). Un polynôme d'interpolation est fiable à l'intérieur de la plage des données, pas à l'extérieur. Pour extrapoler, on préfère un modèle physique adapté.}
+
+    \item Illustrer avec des schémas les différentes façons d'estimer l'aire comprise entre le profil et l'axe horizontal.
+    \piste{Schémas attendus : (i)~rectangles (à gauche, à droite ou au milieu) qui empilent des rectangles de hauteurs $h(x_i)$ ; (ii)~trapèzes, qui relient les points $(x_i,h_i)$ et $(x_{i+1},h_{i+1})$ par des segments et calculent l'aire des trapèzes obtenus ; (iii)~Simpson, qui remplace chaque paire de sous-intervalles consécutifs par un arc de parabole passant par trois points. Plus le maillage est fin et plus la méthode est d'ordre élevé, plus l'estimation est précise.}
+    \item Estimer l'aire comprise entre le profil et l'axe horizontal sur $[3,7]$ par la méthode des trapèzes.
+    \piste{Pas uniforme $h=2$ avec les trois nœuds $x_0=3,\ x_1=5,\ x_2=7$. Formule composite des trapèzes :
+    \[
+    \int_3^7 h(x)\,dx \approx h\left(\dfrac{h_0+h_2}{2}+h_1\right) = 2\left(\dfrac{1+2}{2}+3\right) = 9~\mathrm{m}^2.
+    \]
+    Voir \textbf{CM Intégration numérique} et \textbf{TD1, Exercice 3}.}
+    \item Estimer cette même aire par la méthode de Simpson. Commenter la différence entre les deux valeurs obtenues.
+    \piste{Simpson sur $[3,7]$ avec $h=2$ :
+    \[
+    \int_3^7 h(x)\,dx \approx \dfrac{h}{3}(h_0+4h_1+h_2) = \dfrac{2}{3}(1+12+2) = \dfrac{30}{3} = 10~\mathrm{m}^2.
+    \]
+    La différence ($9$ vs $10$) s'explique par l'ordre de précision supérieur de Simpson : Simpson est exact pour les polynômes de degré $\le 3$, alors que les trapèzes ne le sont que pour le degré $\le 1$. Comme le profil est ici interpolé exactement par un polynôme de degré $2$, la valeur de Simpson coïncide avec $\int_3^7 P_2(x)\,dx$.}
 \end{enumerate}
 
 \hfill\break
@@ -73,140 +119,84 @@ Faire un exo sur le campus de Troyes
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
         \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/4}\\
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/3}\\
             \hline
     \end{tabular}
 \end{center}
 
-\underline{\ding{110}\, \bf{Exercice 2 : Méthodes directes et itératives pour un système linéaire}}
+\underline{\ding{110}\, \bf{Exercice 2 : Décomposition LU et résolution de système} \bf{(5 points)}}
 \medskip
 
-On considère le système suivant :
+On considère la matrice
 \[
-\begin{cases}
-x_1+2x_2-2x_3 = 7,\\
-x_1+x_2+x_3 = 2,\\
-2x_1+2x_2+x_3 = 5.
-\end{cases}
+A=
+\begin{pmatrix}
+2 & 1 & 1\\
+4 & 3 & 3\\
+8 & 7 & 9
+\end{pmatrix}
+\qquad \text{et le second membre} \qquad
+b=
+\begin{pmatrix}
+5\\13\\33
+\end{pmatrix}.
 \]
+On cherche à résoudre le système linéaire $A X = b$ en passant par une décomposition $A = L U$, où $L$ est triangulaire inférieure à diagonale unité et $U$ est triangulaire supérieure.
 
 \begin{enumerate}
-    \item Écrire ce système sous la forme $AX=b$, quelle caractéristique de la matrice $A$ permet d'affirmer l'existence et l'unicité de la solution ?
-    \piste{Identifier $A$ et $b$ directement depuis les coefficients. Pour l'unicité : vérifier que $\det(A)\neq0$ (ou rang plein).}
-    \item La matrice
+    \item Justifier brièvement, sans calculer la décomposition, que la matrice $A$ admet une décomposition $LU$ (sans permutation de lignes).
+    \piste{Critère du cours : $A$ admet une décomposition $LU$ ssi ses mineurs principaux dominants sont non nuls. Ici, $\det(2)=2\neq 0$, $\det\begin{pmatrix}2&1\\4&3\end{pmatrix}=6-4=2\neq 0$ et $\det(A)=4\neq 0$ (calcul direct ou par récurrence sur les pivots). Voir \textbf{CM Décomposition LU} et \textbf{TD2, Exercice 1}.}
+
+    \item Déterminer la décomposition $LU$ de $A$ par l'algorithme de Gauss (sans pivot). Donner explicitement les matrices $L$ et $U$.
+    \piste{Élimination de Gauss en mémorisant les multiplicateurs.
+    \begin{itemize}\setlength{\itemsep}{0.1em}
+      \item Étape 1 (colonne 1) : $\ell_{21}=4/2=2$ et $\ell_{31}=8/2=4$. Après $L_2\leftarrow L_2-2L_1$ et $L_3\leftarrow L_3-4L_1$, la matrice devient
+      $\begin{pmatrix}2&1&1\\0&1&1\\0&3&5\end{pmatrix}$.
+      \item Étape 2 (colonne 2) : $\ell_{32}=3/1=3$. Après $L_3\leftarrow L_3-3L_2$ on obtient
+      $\begin{pmatrix}2&1&1\\0&1&1\\0&0&2\end{pmatrix}=U$.
+    \end{itemize}
+    D'où
     \[
-    A=
-    \begin{pmatrix}
-    1 & 2 & -2\\
-    1 & 1 & 1\\
-    2 & 2 & 1
-    \end{pmatrix}
-    \]
-    est-elle décomposable sous forme $LU$ ? Si oui, donner sa décomposition.
-    \piste{Effectuer l'élimination de Gauss sans permutation de lignes. Si les pivots successifs sont non nuls, on obtient $A=LU$ avec $L$ triangulaire inférieure unitaire et $U$ triangulaire supérieure. Voir \textbf{TD2, Exercice 1}.}
+    L=\begin{pmatrix}1&0&0\\2&1&0\\4&3&1\end{pmatrix},
+    \qquad
+    U=\begin{pmatrix}2&1&1\\0&1&1\\0&0&2\end{pmatrix}.
+    \]}
 
-    \vspace{1em}
+    \item Vérifier en calculant le produit $LU$ que l'on retrouve bien $A$.
+    \piste{Calcul direct ligne par ligne : ligne 1 de $LU$ = ligne 1 de $U$ = $(2,1,1)$ ; ligne 2 = $2\cdot L_1^U+L_2^U=(4,3,3)$ ; ligne 3 = $4\cdot L_1^U+3\cdot L_2^U+L_3^U=(8,7,9)$. On retrouve $A$.}
 
-    \item Décrivez grossièrement la méthode de Jacobi pour résoudre ce système.
-    \piste{Isoler chaque inconnue via la diagonale : $x_i^{(k+1)}=\frac1{a_{ii}}\left(b_i-\sum_{j\neq i}a_{ij}x_j^{(k)}\right)$. Donner aussi la forme matricielle $X^{(k+1)}=B_JX^{(k)}+c$. Voir \textbf{CM Méthodes itératives} et \textbf{TD3, Exercice 1}.}
-    \item Appliquer la méthode de Jacobi à ce système avec un vecteur initial $X^{(0)}=(0,0,0)^T$ et calculer les 3 premières itérations.
-    \piste{Écrire explicitement les trois formules de récurrence scalaire, puis calculer successivement $X^{(1)}$, $X^{(2)}$, $X^{(3)}$. Vérifier chaque étape avec les équations du système.}
-\end{enumerate}
-
-
-\newpage
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/4}\\
-            \hline
-    \end{tabular}
-\end{center}
-
-\vspace{1em}
-
-\underline{\ding{110}\, \bf{Exercice 3 : Schémas numériques pour une EDO} \bf{(7 points)}}
-\medskip
-
-On considère le problème de Cauchy
-\[
-y'(t)=2-y(t),\qquad y(0)=0.
-\]
-On admet que la solution exacte est
-\[
-y(t)=2\left(1-e^{-t}\right).
-\]
-On prend un pas de temps $h=0{,}5$ et on note $t_n=nh$.
-
-\medskip
-
-\textbf{1) Euler explicite}
-\begin{enumerate}
-    \item Écrire la formule de récurrence d'Euler explicite pour cette équation. \hfill (1 pt)
-    \item Calculer $y_1$ et $y_2$. \hfill (1 pt)
-\end{enumerate}
-
-\medskip
-
-\textbf{2) Euler implicite}
-\begin{enumerate}
-    \item En utilisant la pente au temps $t_{n+1}$, écrire le schéma implicite. \hfill (0,75 pt)
-    \item Isoler $y_{n+1}$ en fonction de $y_n$ et de $h$. \hfill (0,75 pt)
-    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
-\end{enumerate}
-
-\medskip
-
-\textbf{3) Crank--Nicolson}
-\begin{enumerate}
-    \item En utilisant la méthode des trapèzes sur l'intervalle $[t_n,t_{n+1}]$, montrer que
+    \item En posant $Y=UX$, résoudre successivement les deux systèmes triangulaires $LY=b$ (descente), puis $UX=Y$ (remontée). En déduire la solution $X$ de $AX=b$.
+    \piste{\textbf{Descente.} $LY=b$ s'écrit
     \[
-    y_{n+1}
-    =
-    \frac{\left(1-\frac h2\right)y_n+2h}{1+\frac h2}.
+    \begin{cases}
+    y_1=5,\\
+    2y_1+y_2=13,\\
+    4y_1+3y_2+y_3=33.
+    \end{cases}
+    \quad\Longrightarrow\quad
+    y_1=5,\ y_2=3,\ y_3=4.
     \]
-    \hfill (1 pt)
-    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$. \hfill (0,75 pt)
+    \textbf{Remontée.} $UX=Y$ s'écrit
+    \[
+    \begin{cases}
+    2x_1+x_2+x_3=5,\\
+    x_2+x_3=3,\\
+    2x_3=4.
+    \end{cases}
+    \quad\Longrightarrow\quad
+    x_3=2,\ x_2=1,\ x_1=1.
+    \]
+    Vérification : $AX=(2+1+2,\ 4+3+6,\ 8+7+18)^T=(5,13,33)^T=b$. \checkmark}
+
+    \item En une ou deux phrases, expliquer avec vos propres mots l'intérêt principal de la décomposition $LU$ par rapport à un calcul d'inverse direct $X=A^{-1}b$, en particulier lorsqu'on doit résoudre $AX=b$ pour plusieurs seconds membres $b$ différents.
+    \piste{Une fois $L$ et $U$ obtenus (coût en $O(n^3)$, une seule fois), chaque nouveau second membre se résout par deux systèmes triangulaires (coût en $O(n^2)$), ce qui est bien moins cher que de recalculer ou stocker $A^{-1}$ et bien plus stable numériquement. C'est exactement le scénario d'un calcul de structure où l'on change le chargement mais pas la rigidité.}
 \end{enumerate}
 
-\medskip
+\hfill\break
+\hrule
+\hfill\break
 
-\textbf{4) Runge--Kutta d'ordre 4}
-
-On rappelle la méthode de Runge--Kutta d'ordre 4 :
-\[
-k_1=f(t_n,y_n),\qquad
-k_2=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_1\right),
-\]
-\[
-k_3=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_2\right),\qquad
-k_4=f(t_n+h,\,y_n+h k_3),
-\]
-\[
-y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4).
-\]
-
-\begin{enumerate}
-    \item Calculer $y_1$ par la méthode de Runge--Kutta d'ordre 4. \hfill (1 pt)
-    \item Comparer les méthodes à l'instant $t=0{,}5$. Quelle méthode semble la plus précise ici ? \hfill (1 pt)
-\end{enumerate}
-
-\newpage
-
-\begin{center}
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
-        \hline
-            \hspace{4cm}&\hspace{6cm} & \textbf{Page 4/4}\\
-            \hline
-    \end{tabular}
-\end{center}
-
-\vspace{1em}
-
-\underline{\ding{110}\, \bf{Exercice 4 : Problème inverse et choix des outils numériques} \bf{(3 points)}}
+\underline{\ding{110}\, \bf{Exercice 3 : Problème inverse et choix des outils numériques} \bf{(4 points)}}
 \medskip
 
 Une dalle de béton vient d'être coulée sur un chantier. On note $T(t)$ sa température, en degrés Celsius, au temps $t$ exprimé en minutes.
@@ -230,10 +220,122 @@ T_{\mathrm{mes}}(t)\text{ }(\degC) & 45 & 31{,}5 & 24{,}0 & 20{,}0 & 17{,}7
 L'objectif du bureau d'études est d'estimer $k$, puis de prédire le moment où la dalle passe sous $18\degC$.
 
 \begin{enumerate}
-    \item Expliquer pourquoi ce problème est un \textbf{problème inverse}. Quelle est la différence avec le problème direct ? \hfill (0,75 pt)
-    \item Si l'on utilise seulement la mesure à $t=60$ min, proposer une équation $g(k)=0$ permettant d'identifier $k$. \hfill (0,75 pt)
-    \item Quelle méthode numérique peut-on utiliser pour résoudre $g(k)=0$ ? Comment approcher $g'(k)$ si l'on ne dispose pas d'une formule explicite pour $g$ ? \hfill (0,75 pt)
-    \item Si l'on souhaite utiliser toutes les mesures du tableau, expliquer pourquoi il est naturel d'introduire une fonction coût de type moindres carrés. Écrire une fonction coût possible. \hfill (0,75 pt)
+    \item Expliquer pourquoi ce problème est un \textbf{problème inverse}. Quelle est la différence avec le problème direct ?
+    \piste{Direct : paramètre $k$ connu, on calcule $T(t)$. Inverse : mesures de $T(t)$ connues, on estime $k$. Mettre en avant le rôle des données expérimentales.}
+    \item Si l'on utilise seulement la mesure à $t=60$ min, proposer une équation $g(k)=0$ permettant d'identifier~$k$.
+    \piste{La solution explicite du modèle est $T(t)=T_{\mathrm{amb}}+(T_0-T_{\mathrm{amb}})e^{-kt}=15+30e^{-kt}$. En imposant $T(60)=24{,}0$, on définit $g(k)=15+30e^{-60k}-24=30e^{-60k}-9$ (ou équivalent $g(k)=e^{-60k}-0{,}3$).}
+    \item Quelle méthode numérique peut-on utiliser pour résoudre $g(k)=0$ ? Comment approcher $g'(k)$ si l'on ne dispose pas d'une formule explicite pour $g$ ?
+    \piste{Méthodes possibles : dichotomie (robuste), Newton (rapide si bon point initial), sécante. Pour $g'(k)$ : différence finie centrée $g'(k)\approx\dfrac{g(k+\delta)-g(k-\delta)}{2\delta}$ avec $\delta$ petit.}
+    \item Donner, avec vos mots, des idées pour exploiter toutes les mesures du tableau et améliorer la précision du paramètre $k$.
+    \piste{Une seule mesure est sensible au bruit ; utiliser toutes les mesures rend l'estimation plus robuste. Fonction coût classique : $J(k)=\sum_{i=1}^{5}\bigl(T_{\mathrm{mes}}(t_i)-T(t_i;k)\bigr)^2=\sum_{i=1}^{5}\bigl(T_{\mathrm{mes}}(t_i)-15-30e^{-kt_i}\bigr)^2$. On minimise $J$ pour trouver $\hat k$.}
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 3/3}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\underline{\ding{110}\, \bf{Exercice 4 : Schémas numériques pour une EDO} \bf{(6 points)}}
+\medskip
+
+On considère le problème de Cauchy
+\[
+y'(t)=2-y(t),\qquad y(0)=0.
+\]
+On admet que la solution exacte est
+\[
+y(t)=2\left(1-e^{-t}\right).
+\]
+On prend un pas de temps $h=0{,}5$ et on note $t_n=nh$.
+
+\medskip
+
+\textit{Valeur utile :} $e^{-1/2}\approx 0{,}607$, donc $y(0{,}5)\approx 0{,}787$.
+
+\medskip
+
+\textbf{1) Euler explicite}
+\begin{enumerate}
+    \item Écrire la formule de récurrence d'Euler explicite pour cette équation.
+    \piste{Rappel : $y_{n+1}=y_n+h\,f(t_n,y_n)$ avec $f(t,y)=2-y$. Donc $y_{n+1}=y_n+h(2-y_n)=(1-h)y_n+2h$. Voir \textbf{CM EDO numériques} et \textbf{TD4, Exercice 1}.}
+    \item Calculer $y_1$ et $y_2$.
+    \piste{Avec $h=0{,}5$ : $y_{n+1}=0{,}5\,y_n+1$. Partant de $y_0=0$ : $y_1=1$, $y_2=0{,}5\times 1+1=1{,}5$.}
+    \item Expliquer avec vos propres mots l'idée géométrique du schéma d'Euler explicite (en une ou deux phrases, en s'aidant éventuellement d'un dessin).
+    \piste{À chaque pas, on prolonge la courbe par sa tangente au point courant $(t_n,y_n)$ pendant la durée $h$. L'erreur croît dès que la solution s'éloigne de cette tangente (courbure forte ou pas trop grand).}
+\end{enumerate}
+
+\medskip
+
+\textbf{2) Euler implicite}
+\begin{enumerate}
+    \item En utilisant la pente au temps $t_{n+1}$, écrire le schéma implicite.
+    \piste{Rappel : $y_{n+1}=y_n+h\,f(t_{n+1},y_{n+1})=y_n+h(2-y_{n+1})$. Voir \textbf{TD4}.}
+    \item Isoler $y_{n+1}$ en fonction de $y_n$ et de $h$.
+    \piste{Regrouper les termes en $y_{n+1}$ : $(1+h)y_{n+1}=y_n+2h$, d'où $y_{n+1}=\dfrac{y_n+2h}{1+h}$.}
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$.
+    \piste{Avec $h=0{,}5$ : $y_{n+1}=\dfrac{y_n+1}{1{,}5}=\dfrac{2y_n+2}{3}$. Partant de $y_0=0$ : $y_1=\dfrac{2}{3}\approx 0{,}667$, $y_2=\dfrac{2\times 2/3+2}{3}=\dfrac{10}{9}\approx 1{,}111$.}
+\end{enumerate}
+
+\medskip
+
+\textbf{3) Crank--Nicolson}
+\begin{enumerate}
+    \item En utilisant la méthode des trapèzes sur l'intervalle $[t_n,t_{n+1}]$, montrer que
+    \[
+    y_{n+1}
+    =
+    \frac{\left(1-\frac h2\right)y_n+2h}{1+\frac h2}.
+    \]
+   
+    \piste{Écrire $y_{n+1}=y_n+\dfrac h2\big(f(t_n,y_n)+f(t_{n+1},y_{n+1})\big)$ avec $f(t,y)=2-y$ : $y_{n+1}=y_n+\dfrac h2\big((2-y_n)+(2-y_{n+1})\big)=y_n+2h-\dfrac h2 y_n-\dfrac h2 y_{n+1}$. Regrouper et isoler $y_{n+1}$.}
+    \item Calculer $y_1$ et $y_2$ pour $h=0{,}5$.
+    \piste{Avec $h=0{,}5$ : $y_{n+1}=\dfrac{0{,}75\,y_n+1}{1{,}25}=\dfrac{3y_n+4}{5}$. Partant de $y_0=0$ : $y_1=\dfrac{4}{5}=0{,}8$, $y_2=\dfrac{3\times 0{,}8+4}{5}=\dfrac{6{,}4}{5}=1{,}28$.}
+    \item Avec vos propres mots, expliquer en quoi Crank--Nicolson combine les deux schémas d'Euler précédents, et pourquoi on le qualifie parfois de \og schéma des trapèzes \fg.
+    \piste{Crank--Nicolson moyenne la pente en $t_n$ (Euler explicite) et la pente en $t_{n+1}$ (Euler implicite) : $y_{n+1}=y_n+\frac h2(f_n+f_{n+1})$. C'est exactement la quadrature des trapèzes appliquée à $\int_{t_n}^{t_{n+1}} y'(s)\,ds$.}
+\end{enumerate}
+
+\medskip
+
+\textbf{4) Runge--Kutta d'ordre 4}
+
+On rappelle la méthode de Runge--Kutta d'ordre 4 :
+\[
+k_1=f(t_n,y_n),\qquad
+k_2=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_1\right),
+\]
+\[
+k_3=f\!\left(t_n+\frac h2,\,y_n+\frac h2 k_2\right),\qquad
+k_4=f(t_n+h,\,y_n+h k_3),
+\]
+\[
+y_{n+1}=y_n+\frac h6(k_1+2k_2+2k_3+k_4).
+\]
+
+\begin{enumerate}
+    \item Expliquer avec vos propres mots ce que représentent les quantités $k_1$, $k_2$, $k_3$, $k_4$ et l'intérêt de la moyenne pondérée $(k_1+2k_2+2k_3+k_4)/6$.
+    \piste{Chaque $k_i$ est une pente évaluée à un endroit différent de l'intervalle $[t_n,t_{n+1}]$ : $k_1$ au début, $k_2$ et $k_3$ deux pentes au milieu (chacune basée sur une prédiction différente), $k_4$ à la fin. La moyenne pondérée $\frac{k_1+2k_2+2k_3+k_4}{6}$ donne plus de poids aux pentes du milieu : c'est exactement la formule de Simpson appliquée à $\int_{t_n}^{t_{n+1}} y'\,ds$. C'est ce qui permet d'atteindre l'ordre $4$ avec seulement $4$ évaluations de $f$ par pas.}
+    \item Calculer $y_1$ par la méthode de Runge--Kutta d'ordre 4.
+    \piste{Pour $(t_0,y_0)=(0,0)$ et $h=0{,}5$, avec $f(t,y)=2-y$ :
+    \[
+    k_1=2,\quad k_2=2-\tfrac{0{,}5\times 2}{2}=\tfrac32,\quad k_3=2-\tfrac{0{,}5\times 3/2}{2}=\tfrac{13}{8},\quad k_4=2-0{,}5\times\tfrac{13}{8}=\tfrac{19}{16}.
+    \]
+    Puis $y_1=0+\dfrac{0{,}5}{6}\bigl(2+2\times \tfrac32+2\times\tfrac{13}{8}+\tfrac{19}{16}\bigr)=\dfrac{1}{12}\times\dfrac{151}{16}=\dfrac{151}{192}\approx 0{,}7865$.}
+\end{enumerate}
+
+\medskip
+
+\textbf{5) Comparaison des quatre schémas}
+\begin{enumerate}
+    \item Pour chacun des quatre schémas précédents, donner l'erreur absolue $|y_1-y(0{,}5)|$. Quelle méthode semble la plus précise ici ? Le classement obtenu est-il cohérent avec l'ordre théorique de chaque schéma ?
+    \piste{Valeur exacte : $y(0{,}5)=2(1-e^{-0{,}5})\approx 0{,}787$. Erreurs absolues : Euler explicite $|1-0{,}787|\approx 0{,}213$ ; Euler implicite $|0{,}667-0{,}787|\approx 0{,}120$ ; Crank--Nicolson $|0{,}8-0{,}787|\approx 0{,}013$ ; RK4 $|0{,}7865-0{,}787|\approx 0{,}0005$. Classement cohérent avec les ordres théoriques : RK4 (ordre $4$) $\prec$ Crank--Nicolson (ordre $2$) $\prec$ Euler implicite/explicite (ordre $1$).}
 \end{enumerate}
 
 \end{document}

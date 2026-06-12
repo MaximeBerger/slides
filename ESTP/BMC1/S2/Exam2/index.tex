@@ -1,0 +1,135 @@
+\input{configTD}
+\usepackage{pifont}
+
+
+\title{Mathématiques : Examen}
+
+\author{}
+\date{}
+
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5} % Ajuste l'espacement vertical des lignes
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  &
+        \textbf{Contrôle de connaissances et de compétences} &
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{17/06/2026}  &  & \textbf{Page 1/2} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 2}} \\
+        \hline
+        \textbf{Nom de l'enseignant} & Maxime Berger \\
+        \hline
+        \textbf{Promotion} & BMC1 - S2 \\
+        \hline
+        \textbf{Matière} & Mathématiques  \\
+        \hline
+        \textbf{Durée de l'examen} & 3h00 \\
+        \hline
+        \textbf{Consignes} &
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé \vspace{1em}
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|c|c||c|}
+        \hline
+        \textbf{Exercice} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{Total} \\
+        \hline
+        \textbf{Barème} & 4 pts & 4 pts & 6 pts & 6 pts & \textbf{20 pts} \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1.5em}
+
+\section*{Exercice 1 : Équation différentielle d'ordre 1 \hfill \normalfont\itshape (4 points)}
+On considère l'équation différentielle :
+$$y'-\left(2x-\frac{1}{x}\right)y=1 \qquad (E)$$
+sur l'intervalle $]0\,;\,+\infty[$.
+\begin{enumerate}[itemsep=0.4em]
+    \item \textit{(1 pt)} Résoudre l'équation homogène associée :
+    $$y'-\left(2x-\frac{1}{x}\right)y=0$$
+    \item \textit{(1{,}5 pt)} Trouver une solution particulière de $(E)$ à l'aide de la méthode de variation de la constante.
+    \item \textit{(1{,}5 pt)} En déduire la solution générale de $(E)$.
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{Exercice 2 : Équations différentielles d'ordre 2 \hfill \normalfont\itshape (4 points)}
+Résoudre les équations différentielles suivantes :
+\begin{enumerate}[itemsep=0.4em]
+    \item \textit{(2 pts)} $y''+4y'+4y=e^x$
+    \item \textit{(2 pts)} $y''-y=e^{2x}-e^x$
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+            \hspace{4cm}&\hspace{6cm} & \textbf{Page 2/2}\\
+            \hline
+    \end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\section*{Exercice 3 : Étude d'une suite récurrente \hfill \normalfont\itshape (6 points)}
+On définit la suite $(u_n)$ par :
+$$\begin{cases}
+    u_0=1\\
+    u_{n+1}=f(u_n)
+\end{cases}$$
+avec $f(x)=4-\dfrac{1}{4} \ln x$.\\[0.3em]
+On donne les valeurs approchées suivantes :
+$$\ln 2 \approx 0{,}69 \qquad \text{et} \qquad \ln 3 \approx 1{,}1$$
+\begin{enumerate}[itemsep=0.4em]
+    \item \textit{(1 pt)} Montrer que l'image de l'intervalle $I=[3\,;\,4]$ par $f$ est incluse dans $I$.
+    \item \textit{(1 pt)} En déduire que $u_n \in I$ pour tout entier $n \geq 1$.
+    \item \textit{(1 pt)} Montrer que pour tout $x\in I$ :
+    $$|f'(x)|\leq \frac{1}{12}$$
+    \item \textit{(1{,}5 pt)} En étudiant la fonction $g:x\mapsto f(x)-x$, montrer qu'il existe une unique valeur $\alpha \in I$ telle que $f(\alpha)=\alpha$.
+    \item \textit{(1{,}5 pt)} Montrer que pour tout entier $n \geq 1$ :
+    $$|u_{n+1}-\alpha| \leq \frac{1}{12}\, |u_n-\alpha|$$
+    puis que :
+    $$|u_n- \alpha |\leq \left( \frac{1}{12} \right)^{n-1}$$
+    En déduire la limite de la suite $(u_n)$.
+\end{enumerate}
+
+\vspace{1em}
+
+\section*{Exercice 4 : Intégrales doubles \hfill \normalfont\itshape (6 points)}
+\begin{enumerate}[itemsep=0.6em]
+    \item \textit{(2 pts)} Soit $D$ le triangle de sommets $O(0\,;\,0)$, $A(1\,;\,0)$ et $B(0\,;\,1)$. Calculer :
+    $$\iint_D \ln(x+y+1)\, \mathrm{d}x\, \mathrm{d}y$$
+    \item \textit{(2 pts)} Soit $D$ le domaine délimité par les courbes d'équation $y=\dfrac{1}{x}$ et $y=-4x+5$. Calculer :
+    $$\iint_D x^2 y\, \mathrm{d}x\, \mathrm{d}y$$
+    \item \textit{(2 pts)} Soit $D$ le domaine défini par :
+    $$D=\left\{(x,y)\in \mathbb{R}^2 \;\Big|\; 0<x<\dfrac{\pi}{2}\,;\; \sin x<y<x \right\}$$
+    Calculer l'aire de $D$.
+\end{enumerate}
+
+\end{document}

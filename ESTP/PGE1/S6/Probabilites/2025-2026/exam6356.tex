@@ -1,0 +1,542 @@
+\input{configTD}
+\usepackage{pifont}
+\usepackage{needspace}
+
+\newcommand{\degC}{\text{\textdegree C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Xbar}{\overline{X}_n}
+
+\title{Probabilités : Examen}
+\author{}
+\date{}
+
+\begin{document}
+\sffamily
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{6cm}|>{\centering\arraybackslash}m{4cm}|}
+        \hline
+        \vspace{5mm} \hspace{5mm}\raisebox{-0.2\height}{\includegraphics[width=3cm]{Logo-ESTP.png}} \vspace{5mm}  &
+        \textbf{Contrôle de connaissances et de compétences} &
+        \textbf{FO-002-VLA-XX-001} \\
+        \hline
+        \textbf{27/05/2026}  &  & \textbf{Page 1/4} \\
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.5em}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|m{10cm}|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{ANNÉE SCOLAIRE 2025-2026 -- Semestre 6}} \\
+        \hline
+        \textbf{Nom de l'enseignant} & Maxime Berger \& Karine Serier\\
+        \hline
+        \textbf{Promotion} & PGE1 - S6 \\
+        \hline
+        \textbf{Matière} & Probabilités et Statistiques \\
+        \hline
+        \textbf{Durée de l'examen} & 2h00 \\
+        \hline
+        \textbf{Consignes} &
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Calculatrice \textbf{NON} autorisée
+            \item Aucun document n'est autorisé
+            \item Toute réponse doit être justifiée
+            \item Une table de la loi $\mathcal{N}(0,1)$ est fournie en dernière page
+        \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\bigskip
+
+% ====================================================================
+\section*{Exercice 1 --- Diagnostic amiante avant travaux \hfill {\normalfont \itshape (4 points)}}
+% ====================================================================
+
+Avant la rénovation d'un quartier de logements anciens, un bureau d'études doit identifier les bâtiments contenant de l'amiante. D'après les recensements préfectoraux, $12\,\%$ des bâtiments du quartier construits avant 1997 contiennent encore de l'amiante.
+
+Pour gagner du temps, le bureau utilise un \emph{kit de pré-diagnostic rapide} avant l'analyse en laboratoire. Sa fiabilité, mesurée par le constructeur, est la suivante~:
+\begin{itemize}\setlength{\itemsep}{0.1em}
+  \item si le bâtiment contient de l'amiante, le kit déclenche une alerte dans $90\,\%$ des cas ;
+  \item si le bâtiment n'en contient pas, le kit déclenche \emph{quand même} une alerte dans $5\,\%$ des cas (fausse alerte).
+\end{itemize}
+
+On note $A$ : \og le bâtiment contient de l'amiante \fg{} et $T$ : \og le kit déclenche une alerte \fg.
+
+\smallskip
+
+\textit{Valeurs utiles (sans calculatrice)~:} \quad $0{,}108 / 0{,}152 \approx 0{,}711$ \quad ; \quad $0{,}0972 / 0{,}0994 \approx 0{,}978$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondéré associé.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Premier niveau : $P(A) = 0{,}12$ et $P(\overline{A}) = 0{,}88$.\\
+      Deuxième niveau : $P(T \mid A) = 0{,}90$, $P(\overline{T} \mid A) = 0{,}10$, $P(T \mid \overline{A}) = 0{,}05$, $P(\overline{T} \mid \overline{A}) = 0{,}95$.
+    \end{solution}
+  }{}
+
+  \item Calculer la probabilité $P(T)$ qu'un bâtiment tiré au hasard dans le quartier déclenche une alerte.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Par la formule des probabilités totales :
+      \[
+        P(T) = P(T \mid A)\,P(A) + P(T \mid \overline{A})\,P(\overline{A})
+        = 0{,}90 \times 0{,}12 + 0{,}05 \times 0{,}88 = 0{,}108 + 0{,}044 = 0{,}152.
+      \]
+      Environ $15{,}2\,\%$ des bâtiments du quartier déclenchent une alerte.
+    \end{solution}
+  }{}
+
+  \item Un bâtiment vient de déclencher une alerte. Quelle est la probabilité qu'il contienne réellement de l'amiante\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On applique la formule de Bayes :
+      \[
+        P(A \mid T) = \dfrac{P(T \mid A)\,P(A)}{P(T)} = \dfrac{0{,}108}{0{,}152} \approx 0{,}711.
+      \]
+      Environ $71\,\%$ des alertes correspondent à un bâtiment réellement amianté.
+    \end{solution}
+  }{}
+
+  \item Expliquer ce résultat en une ou deux phrases à l'attention du chef de projet rénovation.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Sur dix bâtiments mis en alerte par le kit, environ trois ne contiennent en réalité pas d'amiante. Le kit est utile pour cibler les bâtiments à analyser en laboratoire, mais une alerte ne peut pas servir seule à déclencher des travaux de désamiantage (coûteux et invasifs)~: une analyse complémentaire en laboratoire reste nécessaire avant décision.
+    \end{solution}
+  }{}
+
+  \item Pour limiter le risque de fausse alerte, le bureau d'études réalise un \emph{second} test indépendant sur les bâtiments ayant déclenché une première alerte. Le second test a la même fiabilité que le premier. Calculer la probabilité qu'un bâtiment ayant déclenché \emph{deux} alertes successives contienne réellement de l'amiante.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \emph{Technique~: mise à jour bayésienne itérée.} Les deux tests étant indépendants conditionnellement à l'état réel du bâtiment, on a~:
+      \[
+        P(T_1 \cap T_2 \mid A) = P(T \mid A)^2 = 0{,}81,
+        \qquad
+        P(T_1 \cap T_2 \mid \overline{A}) = P(T \mid \overline{A})^2 = 0{,}0025.
+      \]
+      D'où, par probabilités totales~:
+      \[
+        P(T_1 \cap T_2) = 0{,}81 \times 0{,}12 + 0{,}0025 \times 0{,}88 = 0{,}0972 + 0{,}0022 = 0{,}0994.
+      \]
+      Bayes donne enfin~:
+      \[
+        P(A \mid T_1 \cap T_2) = \dfrac{P(T_1 \cap T_2 \mid A)\,P(A)}{P(T_1 \cap T_2)} = \dfrac{0{,}0972}{0{,}0994} \approx 0{,}978.
+      \]
+      Avec une seule alerte, on n'a que $71\,\%$ de chances d'être face à un bâtiment réellement amianté ; avec \emph{deux} alertes concordantes, la quasi-certitude est atteinte ($\approx 98\,\%$). C'est le principe du \og diagnostic en cascade \fg{} couramment utilisé pour les tests imparfaits (médecine, sécurité industrielle, contrôle qualité).
+    \end{solution}
+  }{}
+
+\end{enumerate}
+
+\bigskip
+
+% ====================================================================
+\needspace{8\baselineskip}
+\section*{Exercice 2 --- Pavés préfabriqués : choix d'un fournisseur \hfill {\normalfont \itshape (5 points)}}
+% ====================================================================
+
+Une commune commande des pavés en béton préfabriqués pour la réfection d'une place piétonne. Les pavés sont livrés par lots de $n = 40$. Avec le fournisseur historique (\textbf{stratégie A}), chaque pavé arrive cassé à la livraison avec probabilité $p_A = 0{,}05$, indépendamment des autres. Chaque pavé cassé entraîne un coût de remplacement de $10$~euros (pavé + main d'\oe uvre).
+
+Un fournisseur concurrent propose une livraison avec emballage renforcé (\textbf{stratégie B}) qui abaisse la probabilité de casse à $p_B = 0{,}01$, mais ajoute $25$~euros de surcoût fixe par lot.
+
+\medskip
+
+\textit{Calculs utiles.} $0{,}95^{40} \approx 0{,}13$ \quad ; \quad $0{,}99^{40} \approx 0{,}67$ \quad ; \quad $e^{-0{,}4} \approx 0{,}670$.
+
+\begin{enumerate}
+  \item Soit $X$ le nombre de pavés cassés dans un lot. Déterminer la loi de $X$ et préciser ses paramètres dans chacune des deux stratégies. Justifier brièvement.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $n = 40$ pavés indépendants, chacun étant \og cassé ou non \fg{} avec une probabilité constante~: c'est exactement le cadre de la loi binomiale.
+      \[
+        \text{Stratégie A :}\quad X_A \sim \mathcal{B}(40,\,0{,}05),
+        \qquad
+        \text{Stratégie B :}\quad X_B \sim \mathcal{B}(40,\,0{,}01).
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer le coût moyen total $\E(C_A)$ d'un lot sous la stratégie A.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $\E(X_A) = n p_A = 40 \times 0{,}05 = 2$. \\
+      Le coût total d'un lot vaut $C_A = 10\,X_A$, donc par linéarité de l'espérance :
+      \[
+        \E(C_A) = 10 \times \E(X_A) = 10 \times 2 = 20 \text{ euros par lot.}
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer le coût moyen total $\E(C_B)$ d'un lot sous la stratégie B.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $\E(X_B) = 40 \times 0{,}01 = 0{,}4$. \\
+      Avec le surcoût fixe de $25$~euros et le coût $10$~euros par pavé cassé :
+      \[
+        \E(C_B) = 25 + 10 \times \E(X_B) = 25 + 10 \times 0{,}4 = 25 + 4 = 29 \text{ euros par lot.}
+      \]
+    \end{solution}
+  }{}
+
+  \item Calculer, sous chacune des deux stratégies, la probabilité qu'un lot contienne \emph{au moins un} pavé cassé.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \[
+        P(X_A \ge 1) = 1 - P(X_A = 0) = 1 - 0{,}95^{40} \approx 1 - 0{,}13 = 0{,}87.
+      \]
+      \[
+        P(X_B \ge 1) = 1 - P(X_B = 0) = 1 - 0{,}99^{40} \approx 1 - 0{,}67 = 0{,}33.
+      \]
+      La stratégie B divise par environ $2{,}6$ le risque qu'un lot contienne au moins un pavé cassé ($33\,\%$ contre $87\,\%$).
+    \end{solution}
+  }{}
+
+  \item Sous la stratégie B, on souhaite estimer la probabilité d'avoir \emph{au moins deux} pavés cassés dans un lot. Justifier qu'on peut approcher la loi $\mathcal{B}(40,\,0{,}01)$ par une loi de Poisson de paramètre $\lambda = n p_B$, puis calculer la probabilité demandée.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \emph{Technique~: approximation poissonnienne de la binomiale.} Quand $n$ est \og grand \fg{} ($n \ge 30$) et $p$ \og petit \fg{} ($np \le 10$), la loi $\mathcal{B}(n, p)$ est bien approchée par la loi de Poisson $\mathcal{P}(\lambda)$ avec $\lambda = np$. Ici $n = 40$, $p = 0{,}01$ et $\lambda = 0{,}4$~: les conditions sont satisfaites.
+
+      \medskip
+
+      Pour $Y \sim \mathcal{P}(0{,}4)$~:
+      \[
+        P(Y \ge 2) = 1 - P(Y = 0) - P(Y = 1) = 1 - e^{-0{,}4} - 0{,}4\,e^{-0{,}4} = 1 - 1{,}4\,e^{-0{,}4}.
+      \]
+      Avec $e^{-0{,}4} \approx 0{,}670$~:
+      \[
+        P(Y \ge 2) \approx 1 - 1{,}4 \times 0{,}670 = 1 - 0{,}938 = 0{,}062.
+      \]
+      Environ $6\,\%$ des lots livrés en stratégie B contiennent au moins deux pavés cassés. L'approximation évite de calculer la somme binomiale $\binom{40}{k}\,p^k(1-p)^{40-k}$ à la main~: c'est l'outil de référence quand on compte des événements \og rares \fg.
+    \end{solution}
+  }{}
+
+  \item \emph{Seuil de rentabilité.} En pratique, le coût unitaire $c$ de remplacement d'un pavé cassé (transport, main d'\oe uvre, immobilisation du chantier) varie d'un chantier à l'autre. On garde ici la valeur $c = 10$~euros par défaut, mais on souhaite étudier la décision en fonction de $c$.
+  \begin{enumerate}
+    \item[(a)] Exprimer $\E(C_A)$ et $\E(C_B)$ en fonction du coût unitaire $c$.
+    \item[(b)] À partir de quelle valeur de $c$ la stratégie B devient-elle, \emph{en moyenne}, plus économique que la stratégie A\,? Pour le chantier considéré ($c = 10$~euros), quel choix dicte ce critère\,?
+    \item[(c)] Donner un argument, mobilisant la question 4, qui pourrait néanmoins justifier de retenir la stratégie B même lorsque $c < $~seuil.
+  \end{enumerate}
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \textbf{(a)} Par linéarité de l'espérance (et $C_A = c\,X_A$, $C_B = 25 + c\,X_B$) :
+      \[
+        \E(C_A) = c\,\E(X_A) = 2c
+        \qquad\text{et}\qquad
+        \E(C_B) = 25 + c\,\E(X_B) = 25 + 0{,}4\,c.
+      \]
+
+      \textbf{(b)} La stratégie B est plus économique en moyenne ssi $\E(C_B) < \E(C_A)$~:
+      \[
+        25 + 0{,}4\,c < 2\,c
+        \quad\Longleftrightarrow\quad
+        1{,}6\,c > 25
+        \quad\Longleftrightarrow\quad
+        c > \dfrac{25}{1{,}6} = 15{,}625 \text{ euros.}
+      \]
+      Sur ce chantier, $c = 10 < 15{,}625$~: le critère du coût moyen retient la stratégie A. C'est le \textbf{seuil de rentabilité} de l'emballage renforcé~: tant que le remplacement coûte moins de $\approx 15{,}6$~euros, l'investissement préventif ne se paie pas en moyenne.
+
+      \medskip
+
+      \textbf{(c)} La question 4 a montré que la stratégie B divise par environ $2{,}6$ la probabilité qu'un lot contienne au moins un pavé cassé ($33\,\%$ contre $87\,\%$). Le critère du coût \emph{moyen} ignore cette dispersion~: il suppose qu'on peut \og lisser \fg{} le risque sur un grand nombre de lots. Sur une commande limitée, ou pour un commanditaire qui veut éviter à tout prix une intervention de remplacement sur chantier (gêne pour les piétons, image de marque, retards en cascade), B reste préférable malgré le surcoût moyen. \emph{Technique~: le coût moyen ne suffit pas à arbitrer~; il faut le compléter par une mesure du risque (variance, probabilités de queue).}
+    \end{solution}
+  }{}
+
+\end{enumerate}
+
+\bigskip
+
+% ====================================================================
+\needspace{8\baselineskip}
+\section*{Exercice 3 --- Vitesse du vent sur un parc éolien \hfill {\normalfont \itshape (5 points)}}
+% ====================================================================
+
+Sur un parc éolien terrestre, la vitesse $V$ du vent (en m/s) mesurée à hauteur de moyeu sur une période d'observation suit une loi normale de moyenne $\mu = 8$~m/s et d'écart-type $\sigma = 1{,}5$~m/s.
+
+\medskip
+
+D'après le constructeur des éoliennes :
+\begin{itemize}\setlength{\itemsep}{0.1em}
+  \item en dessous de $4$~m/s, l'éolienne ne tourne pas (vent trop faible) ;
+  \item entre $6$ et $12$~m/s, la production est optimale ;
+  \item au-dessus de $25$~m/s, l'éolienne est arrêtée par sécurité (vent trop fort).
+\end{itemize}
+
+\begin{enumerate}
+  \item Quelle est la probabilité que l'éolienne ne tourne pas (vent insuffisant) sur une mesure prise au hasard\,? Donner le résultat à $10^{-3}$ près.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On centre-réduit $Z = (V - 8)/1{,}5$, qui suit $\mathcal{N}(0,1)$.
+      \[
+        P(V < 4) = P\!\left(Z < \dfrac{4 - 8}{1{,}5}\right) = P(Z < -2{,}67) = 1 - \Phi(2{,}67) \approx 1 - 0{,}9962 = 0{,}0038.
+      \]
+      Environ $0{,}4\,\%$ des observations correspondent à un vent trop faible.
+    \end{solution}
+  }{}
+
+  \item Quelle est la probabilité que l'éolienne soit dans son régime de production optimale ($6 \le V \le 12$)\,?
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On standardise les deux bornes :
+      \[
+        P(6 \le V \le 12) = P\!\left(\dfrac{6-8}{1{,}5} \le Z \le \dfrac{12-8}{1{,}5}\right) = P(-1{,}33 \le Z \le 2{,}67).
+      \]
+      D'où :
+      \[
+        P(6 \le V \le 12) = \Phi(2{,}67) - \Phi(-1{,}33) = \Phi(2{,}67) - (1 - \Phi(1{,}33)) \approx 0{,}9962 - (1 - 0{,}9082) = 0{,}904.
+      \]
+      L'éolienne est en régime optimal environ $90\,\%$ du temps observé.
+    \end{solution}
+  }{}
+
+  \item Déterminer la vitesse $v_0$ telle que $95\,\%$ des observations dépassent $v_0$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      On cherche $v_0$ tel que $P(V > v_0) = 0{,}95$, soit $P(V \le v_0) = 0{,}05$. Si $z_0 = (v_0 - 8)/1{,}5$, alors $\Phi(z_0) = 0{,}05$. Par symétrie, $z_0 = -\Phi^{-1}(0{,}95) = -1{,}645$. D'où
+      \[
+        v_0 = 8 + 1{,}5 \times (-1{,}645) \approx 8 - 2{,}47 = 5{,}53 \text{ m/s.}
+      \]
+    \end{solution}
+  }{}
+
+  \item Interpréter en une phrase ce que représente $v_0$ pour l'exploitant du parc.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $v_0 \approx 5{,}5$~m/s est la \og vitesse minimale garantie à $95\,\%$ \fg{}~: l'exploitant peut compter sur un vent d'au moins $5{,}5$~m/s dans $95\,\%$ des mesures, ce qui sert de référence pour estimer la production minimale du parc et dimensionner les engagements contractuels de fourniture d'électricité.
+    \end{solution}
+  }{}
+
+  \item La probabilité que l'éolienne soit arrêtée par sécurité ($V > 25$~m/s) est-elle quantifiable avec la table fournie\,? Justifier sans chercher à calculer.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      $V > 25$ correspond à $Z > (25 - 8)/1{,}5 = 11{,}33$. La table de la loi normale fournie ne va que jusqu'à $z = 3{,}9$. Cette probabilité est donc \emph{extrêmement faible} (de l'ordre de $10^{-29}$ pour information) et est traitée par la table comme essentiellement nulle.
+
+      \medskip
+
+      \emph{Critique du modèle.} En pratique, les tempêtes ne sont \emph{pas} bien modélisées par la queue d'une loi normale centrée sur la moyenne de fonctionnement courante~: ce sont des événements rares qui relèvent d'autres lois (lois à queues lourdes, théorie des valeurs extrêmes). Le modèle gaussien est correct pour l'usage \og production courante \fg, pas pour les épisodes de sécurité.
+    \end{solution}
+  }{}
+
+\end{enumerate}
+
+\bigskip
+
+% ====================================================================
+\needspace{8\baselineskip}
+\section*{Exercice 4 --- Délai de prise du béton : test sur une moyenne \hfill {\normalfont \itshape (6 points)}}
+% ====================================================================
+
+Une usine d'éléments préfabriqués livre du béton à un chantier en flux tendu. Le client impose un \textbf{délai de prise} (en heures) de \textbf{moyenne $\mu_0 = 6$~h} (valeur cible pour synchroniser la chaîne de transport avec la chaîne de pose). Un délai trop court ou trop long désorganise la chaîne~: il faut détecter tout écart à la valeur cible.
+
+\medskip
+
+L'écart-type historique de la mesure, jugé stable sur les dernières années, vaut $\sigma = 0{,}8$~h (\emph{supposé connu}). Sur un échantillon de $n = 64$ gâchées prélevées au hasard durant le mois écoulé, on a obtenu un délai moyen empirique $\Xbar = 6{,}30$~h.
+
+\medskip
+
+\begin{enumerate}
+  \item Justifier qu'on peut appliquer une approximation normale à la moyenne empirique $\Xbar$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Les $n = 64$ gâchées sont supposées indépendantes et identiquement distribuées d'espérance $\mu$ et d'écart-type $\sigma = 0{,}8$. Comme $n \ge 30$, le théorème central limite donne~:
+      \[
+        \Xbar \approx \mathcal{N}\!\left(\mu,\;\dfrac{\sigma^2}{n}\right) = \mathcal{N}\!\left(\mu,\;\dfrac{0{,}64}{64}\right) = \mathcal{N}(\mu,\,0{,}1^2).
+      \]
+    \end{solution}
+  }{}
+
+  \item Écrire les hypothèses $H_0$ et $H_1$. Justifier brièvement le choix bilatéral.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Le client souhaite détecter tout écart à la cible (un délai trop court \emph{ou} trop long pose problème). On teste donc bilatéralement :
+      \[
+        H_0 : \mu = 6 \quad \text{contre} \quad H_1 : \mu \neq 6.
+      \]
+    \end{solution}
+  }{}
+
+  \item Donner la statistique de test $Z$ et sa loi sous $H_0$. Calculer ensuite sa valeur observée $Z_{\text{obs}}$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Sous $H_0$ ($\mu = 6$), d'après la question 1 :
+      \[
+        Z = \dfrac{\Xbar - 6}{\sigma/\sqrt{n}} = \dfrac{\Xbar - 6}{0{,}8/8} = \dfrac{\Xbar - 6}{0{,}1} \approx \mathcal{N}(0,1) \text{ sous } H_0.
+      \]
+      Avec $\Xbar = 6{,}30$ :
+      \[
+        Z_{\text{obs}} = \dfrac{6{,}30 - 6}{0{,}1} = 3.
+      \]
+      C'est une valeur très extrême pour une variable censée suivre $\mathcal{N}(0,1)$.
+    \end{solution}
+  }{}
+
+  \item Calculer la p-value et conclure au seuil $\alpha = 5\,\%$.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Le test étant bilatéral, on regarde les deux queues de la loi normale~:
+      \[
+        \text{p-value} = P(|Z| \ge 3 \mid H_0) = 2\,(1 - \Phi(3)) \approx 2 \times (1 - 0{,}9987) = 0{,}0026.
+      \]
+      $0{,}0026 \ll 0{,}05$ : on \textbf{rejette} $H_0$. Si la cible $\mu = 6$~h était réellement respectée, on n'aurait observé un écart aussi grand que dans $0{,}26\,\%$ des cas environ~: ce n'est pas crédible. La cible n'est pas tenue (le délai semble \emph{trop long}, vu le signe de $Z_{\text{obs}}$).
+    \end{solution}
+  }{}
+
+  \item Construire un intervalle de confiance à $95\,\%$ pour le délai moyen $\mu$. Vérifier la cohérence avec la conclusion de la question 4 grâce à la dualité \og IC $\Leftrightarrow$ test \fg.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      \[
+        IC_{95\%}(\mu) = \Xbar \pm 1{,}96 \times \dfrac{\sigma}{\sqrt{n}}
+        = 6{,}30 \pm 1{,}96 \times 0{,}1
+        = [6{,}104\,;\,6{,}496] \text{ heures.}
+      \]
+      La valeur $\mu_0 = 6$ est \emph{en dehors} de l'IC à $95\,\%$. Par dualité IC $\Leftrightarrow$ test, cela confirme le rejet de $H_0 : \mu = 6$ au seuil $5\,\%$. Les deux approches sont cohérentes.
+    \end{solution}
+  }{}
+
+  \item \emph{Question annexe.} Si à la place on avait observé $\Xbar = 6{,}10$~h sur le même échantillon de $n = 64$ gâchées, la conclusion changerait-elle\,? (donner $Z_{\text{obs}}$ et la nouvelle p-value)
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Mêmes formules, nouvelle valeur~:
+      \[
+        Z_{\text{obs}} = \dfrac{6{,}10 - 6}{0{,}1} = 1,
+        \qquad
+        \text{p-value} = 2(1 - \Phi(1)) \approx 2 \times (1 - 0{,}8413) \approx 0{,}317.
+      \]
+      $0{,}317 \gg 0{,}05$ : on \textbf{ne rejette pas} $H_0$. Un écart de $6$~minutes sur un délai cible de $6$~heures, observé sur $64$ gâchées, est parfaitement compatible avec une simple fluctuation d'échantillonnage.
+
+      \medskip
+
+      \textit{Attention au piège.} \og Ne pas rejeter $H_0$ \fg{} n'est pas équivalent à \og prouver que $H_0$ est vraie \fg{}~: on n'a juste pas assez de preuves pour conclure le contraire.
+    \end{solution}
+  }{}
+
+  \item \emph{Effet de la taille d'échantillon.} On reprend la situation initiale, mais en supposant que l'on n'a relevé que $n = 16$ gâchées (au lieu de $64$), avec exactement le même écart empirique observé $\Xbar - \mu_0 = 0{,}30$~h. Recalculer $Z_{\text{obs}}$ et la p-value du test bilatéral, conclure au seuil $\alpha = 5\,\%$, et expliquer en une phrase pourquoi le même écart absolu ne reçoit pas le même \og verdict statistique \fg{} selon le nombre de gâchées contrôlées.
+  \ifthenelse{\boolean{showSolutions}}{
+    \begin{solution}
+      Avec $n = 16$, l'erreur-type devient $\sigma/\sqrt{n} = 0{,}8/4 = 0{,}2$, et donc
+      \[
+        Z_{\text{obs}} = \dfrac{0{,}30}{0{,}2} = 1{,}5,
+        \qquad
+        \text{p-value} = 2(1 - \Phi(1{,}5)) \approx 2 \times (1 - 0{,}9332) = 0{,}1336.
+      \]
+      $0{,}1336 > 0{,}05$ : on \textbf{ne rejette pas} $H_0$. Le même écart \emph{absolu} qui était hautement significatif sur $64$ gâchées (p-value $0{,}0026$, question 4) ne suffit plus, sur $16$ gâchées, à écarter l'hypothèse \og la machine est bien réglée \fg.
+
+      \medskip
+
+      \textit{Technique~: significativité statistique et taille d'échantillon.} La statistique $Z$ compare l'écart $\Xbar - \mu_0$ à \emph{l'erreur d'échantillonnage} $\sigma/\sqrt{n}$. Quand $n$ augmente, $\sigma/\sqrt{n}$ \emph{diminue} en $1/\sqrt{n}$, et le même écart absolu devient relativement plus grand. C'est pourquoi en contrôle qualité, \textbf{augmenter le nombre de mesures est le levier qui permet de détecter des déréglages de plus en plus faibles}~: la statistique n'a pas la même \og acuité \fg{} selon la quantité de données qui la nourrit.
+    \end{solution}
+  }{}
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}\large\textbf{Table de la loi normale centrée réduite}\end{center}
+
+
+\vspace{0.2cm}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.05}
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{|r|r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }r@{\ }|}
+    \hline
+    \multicolumn{11}{|c|}{ Fonction de répartition de la loi $\mathcal{N}(0,1)$}\\
+    \hline
+    \hline
+    $x$&0.00&0.01&0.02&0.03&0.04&0.05&0.06&0.07&0.08&0.09\\
+    \hline
+    0.0&0.5000&0.5040&0.5080&0.5120&0.5160&0.5199&0.5239&0.5279&0.5319&0.5359\\
+    \hline
+    0.1&0.5398&0.5438&0.5478&0.5517&0.5557&0.5596&0.5636&0.5675&0.5714&0.5753\\
+    \hline
+    0.2&0.5793&0.5832&0.5871&0.5910&0.5948&0.5987&0.6026&0.6064&0.6103&0.6141\\
+    \hline
+    0.3&0.6179&0.6217&0.6255&0.6293&0.6331&0.6368&0.6406&0.6443&0.6480&0.6517\\
+    \hline
+    0.4&0.6554&0.6591&0.6628&0.6664&0.6700&0.6736&0.6772&0.6808&0.6844&0.6879\\
+    \hline
+    0.5&0.6915&0.6950&0.6985&0.7019&0.7054&0.7088&0.7123&0.7157&0.7190&0.7224\\
+    \hline
+    0.6&0.7257&0.7291&0.7324&0.7357&0.7389&0.7422&0.7454&0.7486&0.7517&0.7549\\
+    \hline
+    0.7&0.7580&0.7611&0.7642&0.7673&0.7703&0.7734&0.7764&0.7794&0.7823&0.7852\\
+    \hline
+    0.8&0.7881&0.7910&0.7939&0.7967&0.7995&0.8023&0.8051&0.8078&0.8106&0.8133\\
+    \hline
+    0.9&0.8159&0.8186&0.8212&0.8238&0.8264&0.8289&0.8315&0.8340&0.8365&0.8389\\
+    \hline
+    1.0&0.8413&0.8438&0.8461&0.8485&0.8508&0.8531&0.8554&0.8577&0.8599&0.8621\\
+    \hline
+    1.1&0.8643&0.8665&0.8686&0.8708&0.8729&0.8749&0.8770&0.8790&0.8810&0.8830\\
+    \hline
+    1.2&0.8849&0.8869&0.8888&0.8907&0.8925&0.8944&0.8962&0.8980&0.8997&0.9015\\
+    \hline
+    1.3&0.9032&0.9049&0.9066&0.9082&0.9099&0.9115&0.9131&0.9147&0.9162&0.9177\\
+    \hline
+    1.4&0.9192&0.9207&0.9222&0.9236&0.9251&0.9265&0.9279&0.9292&0.9306&0.9319\\
+    \hline
+    1.5&0.9332&0.9345&0.9357&0.9370&0.9382&0.9394&0.9406&0.9418&0.9429&0.9441\\
+    \hline
+    1.6&0.9452&0.9463&0.9474&0.9484&0.9495&0.9505&0.9515&0.9525&0.9535&0.9545\\
+    \hline
+    1.7&0.9554&0.9564&0.9573&0.9582&0.9591&0.9599&0.9608&0.9616&0.9625&0.9633\\
+    \hline
+    1.8&0.9641&0.9649&0.9656&0.9664&0.9671&0.9678&0.9686&0.9693&0.9699&0.9706\\
+    \hline
+    1.9&0.9713&0.9719&0.9726&0.9732&0.9738&0.9744&0.9750&0.9756&0.9761&0.9767\\
+    \hline
+    2.0&0.9772&0.9778&0.9783&0.9788&0.9793&0.9798&0.9803&0.9808&0.9812&0.9817\\
+    \hline
+    2.1&0.9821&0.9826&0.9830&0.9834&0.9838&0.9842&0.9846&0.9850&0.9854&0.9857\\
+    \hline
+    2.2&0.9861&0.9864&0.9868&0.9871&0.9875&0.9878&0.9881&0.9884&0.9887&0.9890\\
+    \hline
+    2.3&0.9893&0.9896&0.9898&0.9901&0.9904&0.9906&0.9909&0.9911&0.9913&0.9916\\
+    \hline
+    2.4&0.9918&0.9920&0.9922&0.9925&0.9927&0.9929&0.9931&0.9932&0.9934&0.9936\\
+    \hline
+    2.5&0.9938&0.9940&0.9941&0.9943&0.9945&0.9946&0.9948&0.9949&0.9951&0.9952\\
+    \hline
+    2.6&0.9953&0.9955&0.9956&0.9957&0.9959&0.9960&0.9961&0.9962&0.9963&0.9964\\
+    \hline
+    2.7&0.9965&0.9966&0.9967&0.9968&0.9969&0.9970&0.9971&0.9972&0.9973&0.9974\\
+    \hline
+    2.8&0.9974&0.9975&0.9976&0.9977&0.9977&0.9978&0.9979&0.9979&0.9980&0.9981\\
+    \hline
+    2.9&0.9981&0.9982&0.9982&0.9983&0.9984&0.9984&0.9985&0.9985&0.9986&0.9986\\
+    \hline
+    3.0&0.9987&0.9987&0.9987&0.9988&0.9988&0.9989&0.9989&0.9989&0.9990&0.9990\\
+    \hline
+    3.1&0.9990&0.9991&0.9991&0.9991&0.9992&0.9992&0.9992&0.9992&0.9993&0.9993\\
+    \hline
+    3.2&0.9993&0.9993&0.9994&0.9994&0.9994&0.9994&0.9994&0.9995&0.9995&0.9995\\
+    \hline
+    3.3&0.9995&0.9995&0.9995&0.9996&0.9996&0.9996&0.9996&0.9996&0.9996&0.9997\\
+    \hline
+    3.4&0.9997&0.9997&0.9997&0.9997&0.9997&0.9997&0.9997&0.9997&0.9997&0.9998\\
+    \hline
+    3.5&0.9998&0.9998&0.9998&0.9998&0.9998&0.9998&0.9998&0.9998&0.9998&0.9998\\
+    \hline
+    3.6&0.9998&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999\\
+    \hline
+    3.7&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999\\
+    \hline
+    3.8&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999&0.9999\\
+    \hline
+    3.9&1.0000&1.0000&1.0000&1.0000&1.0000&1.0000&1.0000&1.0000&1.0000&1.0000\\
+    \hline
+    \end{tabular}
+\end{center}
+
+\end{document}
